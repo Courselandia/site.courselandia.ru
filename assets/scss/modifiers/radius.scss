@@ -1,0 +1,87 @@
+@import "./../vars/modifiers/main";
+
+.radius {
+  &--aside {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--top-right {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-top-right-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--bottom-right {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-bottom-right-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--bottom-left {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-bottom-left-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--top-left {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-top-left-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--pill {
+    border-radius: 9999px;
+  }
+
+  &--circle {
+    border-radius: 50%;
+  }
+
+  &--top {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-top-left-radius: #{$i}px;
+        border-top-right-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--right {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-top-right-radius: #{$i}px;
+        border-bottom-right-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--bottom {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-bottom-right-radius: #{$i}px;
+        border-bottom-left-radius: #{$i}px;
+      }
+    }
+  }
+
+  &--left {
+    @for $i from 0 through 20 {
+      &-#{$i} {
+        border-top-left-radius: #{$i}px;
+        border-bottom-left-radius: #{$i}px;
+      }
+    }
+  }
+}

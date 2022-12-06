@@ -1,0 +1,39 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.float {
+  &--left {
+    float: left;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          float: left;
+        }
+      }
+    }
+  }
+
+  &--right {
+    float: right;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          float: right;
+        }
+      }
+    }
+  }
+
+  &--none {
+    float: none;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          float: none;
+        }
+      }
+    }
+  }
+}

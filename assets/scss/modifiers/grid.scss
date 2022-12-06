@@ -1,0 +1,33 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__cell {
+    &--size {
+      @for $i from 0 through 12 {
+        &-#{$i} {
+          width: 8.33333% * $i;
+        }
+      }
+
+      @each $name, $resolution in $resolutions {
+        @media all and (max-width: #{$resolution}px) {
+          @for $i from 1 through 12 {
+            &-#{$i}-#{$resolution} {
+              width: 8.33333% * $i !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

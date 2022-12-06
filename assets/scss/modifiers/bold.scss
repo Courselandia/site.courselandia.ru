@@ -1,0 +1,9 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.bold {
+  @for $i from 0 through 10 {
+    &--#{$i * 100} {
+      font-weight: $i * 100;
+    }
+  }
+}

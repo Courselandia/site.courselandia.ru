@@ -1,0 +1,99 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.display {
+  &--inline {
+    display: inline !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: inline !important;
+        }
+      }
+    }
+  }
+
+  &--inline-block {
+    display: inline-block !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: inline-block !important;
+        }
+      }
+    }
+  }
+
+  &--block {
+    display: block !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: block !important;
+        }
+      }
+    }
+  }
+
+  &--table {
+    display: table !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: table !important;
+        }
+      }
+    }
+  }
+
+  &--table-cell {
+    display: table-cell !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: table-cell !important;
+        }
+      }
+    }
+  }
+
+  &--table-row {
+    display: table-row !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: table-row !important;
+        }
+      }
+    }
+  }
+
+  &--flex {
+    display: flex !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: flex !important;
+        }
+      }
+    }
+  }
+
+  &--inline-flex {
+    display: inline-flex !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          display: inline-flex !important;
+        }
+      }
+    }
+  }
+}

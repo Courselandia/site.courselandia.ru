@@ -1,0 +1,27 @@
+@import "./../vars/modifiers/main";
+
+.width {
+  &--wide {
+    width: 100%;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+
+  &--auto {
+    width: auto !important;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          width: auto !important;
+        }
+      }
+    }
+  }
+}

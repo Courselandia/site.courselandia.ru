@@ -1,0 +1,13 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.hide {
+  display: none !important;
+
+  @each $name, $resolution in $resolutions {
+    @media all and (max-width: #{$resolution}px) {
+      &--#{$resolution} {
+        display: none !important;
+      }
+    }
+  }
+}

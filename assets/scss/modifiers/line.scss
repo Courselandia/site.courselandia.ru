@@ -1,0 +1,7 @@
+.line {
+  @for $i from 0 through 30 {
+    &--#{$i} {
+      line-height: #{calc($i / 10)}rem !important;
+    }
+  }
+}

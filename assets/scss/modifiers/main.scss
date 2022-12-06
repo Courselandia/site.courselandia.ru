@@ -1,0 +1,12 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.main {
+  font-family: nth($font, 1), nth($font, 2);
+  color: $color;
+  font-size: $font_size;
+  line-height: $line_height;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 300px;
+}

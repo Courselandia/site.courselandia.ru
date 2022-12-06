@@ -1,0 +1,51 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.align {
+  &--left {
+    text-align: left;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  &--center {
+    text-align: center;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          text-align: left;
+        }
+      }
+    }
+
+    &-element {
+      margin: 0 auto;
+
+      @each $name, $resolution in $resolutions {
+        @media all and (max-width: #{$resolution}px) {
+          &-#{$name} {
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
+
+  &--right {
+    text-align: right;
+
+    @each $name, $resolution in $resolutions {
+      @media all and (max-width: #{$resolution}px) {
+        &-#{$name} {
+          text-align: right;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.size {
+  @for $i from 0 through 30 {
+    &--#{$i} {
+      font-size: #{calc($i / 10)}rem !important;
+      line-height: #{calc($i / 10 + 0.2)}rem !important;
+    }
+  }
+
+  @each $name, $resolution in $resolutions {
+    @media all and (max-width: #{$resolution}px) {
+      @for $i from 0 through 30 {
+        &--#{$i}-#{$resolution} {
+          font-size: #{calc($i / 10)}rem !important;
+          line-height: #{calc($i / 10 + 0.2)}rem !important;
+        }
+      }
+    }
+  }
+}
