@@ -1,0 +1,11 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.color {
+  &--white {
+    color: $white;
+  }
+
+  &--black {
+    color: $black;
+  }
+}

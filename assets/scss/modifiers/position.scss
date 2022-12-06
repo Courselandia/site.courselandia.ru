@@ -1,0 +1,61 @@
+.position {
+  &--absolute {
+    position: absolute;
+  }
+
+  &--relative {
+    position: relative;
+  }
+
+  &--sticky {
+    position: sticky;
+
+    &-top {
+      top: 0;
+    }
+
+    &-left {
+      left: 0;
+    }
+
+    &-right {
+      right: 0;
+    }
+
+    &-bottom {
+      bottom: 0;
+    }
+  }
+
+  &--static {
+    position: static;
+  }
+
+  &--fixed {
+    position: fixed;
+  }
+
+  &--unset {
+    position: unset;
+  }
+
+  &--inherit {
+    position: inherit;
+  }
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+
+  &--top {
+    top: 0;
+  }
+
+  &--bottom {
+    top: 0;
+  }
+}

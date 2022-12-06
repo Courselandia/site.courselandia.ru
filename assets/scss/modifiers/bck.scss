@@ -1,0 +1,15 @@
+@import "/assets/scss/vars/modifiers/main";
+
+.bck {
+  &--transparent {
+    background-color: transparent;
+  }
+
+  &--white {
+    background-color: $white;
+  }
+
+  &--black {
+    background-color: $black;
+  }
+}

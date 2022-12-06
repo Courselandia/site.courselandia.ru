@@ -1,0 +1,7 @@
+.index {
+  @for $i from 0 through 50 {
+    &--#{$i} {
+      z-index: $i;
+    }
+  }
+}

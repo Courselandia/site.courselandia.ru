@@ -1,0 +1,11 @@
+.elevation {
+  &--0 {
+    box-shadow: none;
+  }
+
+  @for $i from 1 through 24 {
+    &--#{$i} {
+      box-shadow: 0 #{$i}px #{$i * 2.5}px rgba(0, 0, 0, 0.08);
+    }
+  }
+}
