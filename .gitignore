@@ -15,6 +15,12 @@
 # production
 /build
 
+# nuxt.js build output
+.nuxt
+
+# Nuxt generate
+dist
+
 # misc
 .DS_Store
 *.pem

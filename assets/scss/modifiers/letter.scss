@@ -1,7 +1,7 @@
 .letter {
   @for $i from 1 through 10 {
     &--#{$i} {
-      letter-spacing: #{$i / 10}rem !important;
+      letter-spacing: #{calc($i / 10)}rem !important;
     }
   }
 }
