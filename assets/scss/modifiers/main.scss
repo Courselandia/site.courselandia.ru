@@ -1,8 +1,8 @@
 @import "/assets/scss/vars/modifiers/main";
 
 .main {
-  font-family: nth($font, 1), nth($font, 2);
-  color: $color;
+  font-family: nth($fonts, 1), nth($fonts, 2);
+  color: $primary;
   font-size: $font_size;
   line-height: $line_height;
   display: flex;

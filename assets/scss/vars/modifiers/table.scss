@@ -1,4 +1,4 @@
 @import "/assets/scss/vars/modifiers/main";
 
-$table_striped_bck_color: nth($primary, 1);
+$table_striped_bck_color: $primary;
 $table_border_color: $black;

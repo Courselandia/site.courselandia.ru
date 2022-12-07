@@ -2,6 +2,7 @@
 
 BODY {
   overflow-x: hidden;
+  font-family: nth($fonts, 1), nth($fonts, 2), nth($fonts, 3);
 }
 
 DIV, SPAN, OBJECT, H1, H2,
@@ -15,8 +16,8 @@ MENU, NAV, SECTION {
 }
 
 TD {
-  font-family: nth($font, 1), nth($font, 2);
-  color: $color;
+  font-family: nth($fonts, 1), nth($fonts, 2), nth($fonts, 3);
+  color: $primary;
 }
 
 P {

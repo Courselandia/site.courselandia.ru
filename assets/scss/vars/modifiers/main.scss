@@ -1,7 +1,11 @@
-$color: #000000;
+$primary: #000000;
 $white: #ffffff;
 $black: #000000;
-$font: ("Arial", "Montserrat", "sans-serif");
+$fonts: (
+  "Arial",
+  "Montserrat",
+  "sans-serif"
+);
 $font_size: 1rem;
 $line_height: 1.2rem;
 
@@ -40,7 +44,7 @@ $ranges: (
   30
 );
 
-$ranges-minus: (
+$ranges_minus: (
   1,
   2,
   3,
@@ -70,9 +74,4 @@ $images: (
   1400,
   1800,
   2100
-);
-
-$primary: (
-  #000000,
-  #000000,
 );

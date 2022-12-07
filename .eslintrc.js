@@ -20,6 +20,14 @@ module.exports = {
   plugins: [
     'simple-import-sort',
   ],
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [['@', './']],
+        extensions: ['.ts', '.js', '.tsx', '.vue'],
+      },
+    },
+  },
   rules: {
     'import/extensions': [
       'error',

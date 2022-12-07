@@ -1,7 +1,7 @@
 @import "/assets/scss/vars/modifiers/main";
 
 .m {
-  @each $range in $ranges-minus {
+  @each $range in $ranges_minus {
     &a-m-#{$range * 1} {
       margin: #{-$range * $step}rem;
     }
