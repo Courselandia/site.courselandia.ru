@@ -9,4 +9,4 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
   ],
-});
+}); // Test 1
