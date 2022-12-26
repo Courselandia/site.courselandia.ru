@@ -20,6 +20,18 @@ module.exports = {
   plugins: [
     'simple-import-sort',
   ],
+  globals: {
+    $fetch: true,
+    useRuntimeConfig: true,
+    defineNuxtConfig: true,
+    defineEventHandler: true,
+    useAsyncData: true,
+    defineNuxtRouteMiddleware: true,
+    addRouteMiddleware: true,
+    definePageMeta: true,
+    abortNavigation: true,
+    useCookie: true,
+  },
   settings: {
     'import/resolver': {
       alias: {

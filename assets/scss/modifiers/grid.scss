@@ -1,4 +1,4 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .grid {
   display: flex;
@@ -20,7 +20,7 @@
       }
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           @for $i from 1 through 12 {
             &-#{$i}-#{$resolution} {
               width: 8.33333% * $i !important;

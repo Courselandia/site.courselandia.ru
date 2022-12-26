@@ -1,0 +1,52 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.button {
+  padding: 1.25rem 2.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all $speedPrimary $functionPrimary;
+  display: inline-block;
+  text-decoration: none;
+
+  &:active:not(.button--disabled) {
+    transform: scale(0.97);
+  }
+
+  &--primary {
+
+    color: $white;
+
+    &:hover {
+
+    }
+  }
+
+  &--secondary {
+
+    &:hover {
+
+    }
+  }
+
+  &--tertiary {
+
+  }
+
+  &--disabled {
+    cursor: default;
+  }
+
+  &--wide {
+    width: 100%;
+  }
+
+  &__label {
+    font-weight: 650;
+    font-size: 0.831rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.004rem;
+    font-variation-settings: 'slnt' 0;
+    text-align: center;
+  }
+}

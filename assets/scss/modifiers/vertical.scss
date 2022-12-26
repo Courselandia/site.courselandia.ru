@@ -1,11 +1,11 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .vertical {
   &--middle {
     vertical-align: middle;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           vertical-align: middle;
         }
@@ -17,7 +17,7 @@
     vertical-align: bottom;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           vertical-align: bottom;
         }
@@ -29,7 +29,7 @@
     vertical-align: top;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           vertical-align: top;
         }

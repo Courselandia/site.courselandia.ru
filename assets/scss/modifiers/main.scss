@@ -1,12 +1,11 @@
-@import "/assets/scss/vars/modifiers/main";
-
 .main {
-  font-family: nth($fonts, 1), nth($fonts, 2);
-  color: $primary;
-  font-size: $font_size;
-  line-height: $line_height;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  min-width: 300px;
+  width: 100%;
+
+  &--with-aside {
+    width: calc(100% - 248px - 2.5rem);
+
+    @media all and (max-width: 768px) {
+      width: 100%;
+    }
+  }
 }

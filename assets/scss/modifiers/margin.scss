@@ -1,7 +1,8 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/ranges";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .m {
-  @each $range in $ranges_minus {
+  @each $range in $rangesMinus {
     &a-m-#{$range * 1} {
       margin: #{-$range * $step}rem;
     }
@@ -46,7 +47,7 @@
   }
 
   @each $name, $resolution in $resolutions {
-    @media all and (max-width: #{$resolution}px) {
+    @media all and (max-width: #{$resolution}) {
       @each $range in $ranges {
         &a-#{$range}-#{$name} {
           margin: #{$range * $step}rem !important;

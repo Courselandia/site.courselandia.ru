@@ -1,0 +1,29 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.icon {
+  mask-size: auto 100%;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  display: inline-block;
+  line-height: 0;
+
+  &--name {
+    &-close {
+      mask-image: url("~/assets/images/icons/close.svg");
+    }
+  }
+
+  &--color {
+    &-primary {
+      background-color: $primary;
+    }
+  }
+
+  &--color-hover {
+    &-primary {
+      &:hover {
+        background-color: $primary;
+      }
+    }
+  }
+}

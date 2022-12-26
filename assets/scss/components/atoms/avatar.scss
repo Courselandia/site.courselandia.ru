@@ -1,0 +1,24 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.avatar {
+  text-align: center;
+  line-height: 0;
+  border-radius: 100%;
+  padding: 0.5rem;
+
+  &--haf-round {
+    border-radius: 0.25rem 4.5rem 4.5rem 0.25rem;
+    padding: 0.922rem 1.125rem 0.922rem 0.875rem;
+  }
+
+  &--with-letter {
+    padding: 0.6rem 0.825rem;
+  }
+
+  &__letter {
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.001rem;
+  }
+}

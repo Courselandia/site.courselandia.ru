@@ -1,0 +1,23 @@
+.slide-left {
+  &-enter-active,
+  &-leave-active {
+    transition: 500ms cubic-bezier(.25, .8, .5, 1);
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter {
+    transform: translateX(-330px);
+  }
+
+  &-enter-to {
+    transform: translateX(0);
+  }
+
+  &-leave-to {
+    transform: translateX(-310px);
+  }
+}

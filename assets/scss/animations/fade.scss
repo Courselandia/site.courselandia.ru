@@ -1,0 +1,11 @@
+@import "@/assets/scss/vars/animations/transition";
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $speedPrimary $functionPrimary;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

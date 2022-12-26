@@ -1,7 +1,7 @@
 <template>
-  <header class="footer">
+  <footer class="footer">
     Footer
-  </header>
+  </footer>
 </template>
 
 <style lang="scss">

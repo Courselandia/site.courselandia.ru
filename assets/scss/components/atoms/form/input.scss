@@ -1,0 +1,49 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.input {
+  display: flex;
+  background-color: $white;
+  border-radius: 0.5rem;
+  align-items: center;
+  transition: all $speedPrimary $functionPrimary;
+
+  &--hover,
+  &--focus {
+    box-shadow: 0 0 6px rgb(54 78 101 / 16%);
+  }
+
+  &__before:empty,
+  &__after:empty {
+    display: none;
+  }
+
+  &__before {
+    padding-left: 1.5rem;
+    line-height: 0;
+  }
+
+  &__after {
+    padding-right: 1.5rem;
+    line-height: 0;
+  }
+
+  &--border {
+  }
+
+  &__place {
+    padding: 1.25rem 1.5rem;
+    flex-grow: 1;
+  }
+
+  &__element {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+
+    &::placeholder {
+      opacity: 0.52;
+    }
+  }
+}

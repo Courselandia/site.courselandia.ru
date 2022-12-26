@@ -1,5 +1,13 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .show {
   display: block !important;
+
+  @each $name, $resolution in $resolutions {
+    @media all and (max-width: #{$resolution}) {
+      &--#{$resolution} {
+        display: block !important;
+      }
+    }
+  }
 }

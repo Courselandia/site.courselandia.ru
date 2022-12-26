@@ -1,8 +1,10 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/fonts";
+@import "@/assets/scss/vars/modifiers/colors";
 
 BODY {
   overflow-x: hidden;
-  font-family: nth($fonts, 1), nth($fonts, 2), nth($fonts, 3);
+  font-family: $fontPrimary, $fontSecondary;
+  color: $primary;
 }
 
 DIV, SPAN, OBJECT, H1, H2,
@@ -16,7 +18,7 @@ MENU, NAV, SECTION {
 }
 
 TD {
-  font-family: nth($fonts, 1), nth($fonts, 2), nth($fonts, 3);
+  font-family: $fontPrimary, $fontSecondary;
   color: $primary;
 }
 

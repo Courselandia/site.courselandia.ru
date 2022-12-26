@@ -1,4 +1,4 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .flex {
   display: flex;
@@ -8,7 +8,7 @@
       flex-direction: row !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             flex-direction: row !important;
           }
@@ -20,7 +20,7 @@
       flex-direction: row-reverse !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             flex-direction: row-reverse !important;
           }
@@ -32,7 +32,7 @@
       flex-direction: column !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             flex-direction: column !important;
           }
@@ -44,7 +44,7 @@
       flex-direction: column-reverse !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             flex-direction: column-reverse !important;
           }
@@ -58,7 +58,7 @@
       justify-content: start;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             justify-content: start !important;
           }
@@ -70,7 +70,7 @@
       justify-content: end;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             justify-content: end !important;
           }
@@ -82,7 +82,7 @@
       justify-content: center;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             justify-content: center !important;
           }
@@ -94,7 +94,7 @@
       justify-content: space-between !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             justify-content: space-between !important;
           }
@@ -106,7 +106,7 @@
       justify-content: space-around !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             justify-content: space-around !important;
           }
@@ -118,7 +118,7 @@
       justify-content: flex-end !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             justify-content: flex-end !important;
           }
@@ -130,7 +130,7 @@
       justify-content: flex-start !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             justify-content: flex-start !important;
           }
@@ -144,7 +144,7 @@
       align-items: start !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-items: start !important;
           }
@@ -156,7 +156,7 @@
       align-items: end !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-items: end !important;
           }
@@ -168,7 +168,7 @@
       align-items: center !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-items: center !important;
           }
@@ -180,7 +180,7 @@
       align-items: baseline !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-items: baseline !important;
           }
@@ -192,7 +192,7 @@
       align-items: stretch !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-items: stretch !important;
           }
@@ -206,7 +206,7 @@
       align-self: start !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-self: start !important;
           }
@@ -218,7 +218,7 @@
       align-self: end !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-self: end !important;
           }
@@ -230,7 +230,7 @@
       align-self: center !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-self: center !important;
           }
@@ -242,7 +242,7 @@
       align-self: baseline !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-self: baseline !important;
           }
@@ -254,7 +254,7 @@
       align-self: auto !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-self: auto !important;
           }
@@ -266,7 +266,7 @@
       align-self: stretch !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-self: stretch !important;
           }
@@ -279,7 +279,7 @@
     flex-wrap: wrap;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           flex-wrap: wrap !important;
         }
@@ -291,7 +291,7 @@
     flex-wrap: nowrap !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           flex-wrap: nowrap !important;
         }
@@ -303,7 +303,7 @@
     flex-wrap: wrap-reverse !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           flex-wrap: wrap-reverse !important;
         }
@@ -319,7 +319,7 @@
     }
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         @for $i from 0 through 12 {
           &-#{$i}-#{$resolution} {
             order: $i !important;
@@ -337,7 +337,7 @@
     }
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         @for $i from 0 through 12 {
           &-#{$i}-#{$resolution} {
             flex-grow: $i !important;
@@ -352,7 +352,7 @@
       align-content: start !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-content: start !important;
           }
@@ -364,7 +364,7 @@
       align-content: end;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-content: end !important;
           }
@@ -376,7 +376,7 @@
       align-content: center !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-content: center !important;
           }
@@ -388,7 +388,7 @@
       align-content: space-between !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-content: space-between !important;
           }
@@ -400,7 +400,7 @@
       align-content: space-around !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-content: space-around !important;
           }
@@ -412,7 +412,7 @@
       align-content: stretch !important;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             align-content: stretch !important;
           }

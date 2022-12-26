@@ -1,11 +1,11 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .display {
   &--inline {
     display: inline !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: inline !important;
         }
@@ -17,7 +17,7 @@
     display: inline-block !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: inline-block !important;
         }
@@ -29,7 +29,7 @@
     display: block !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: block !important;
         }
@@ -41,7 +41,7 @@
     display: table !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: table !important;
         }
@@ -53,7 +53,7 @@
     display: table-cell !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: table-cell !important;
         }
@@ -65,7 +65,7 @@
     display: table-row !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: table-row !important;
         }
@@ -77,7 +77,7 @@
     display: flex !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: flex !important;
         }
@@ -89,7 +89,7 @@
     display: inline-flex !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           display: inline-flex !important;
         }

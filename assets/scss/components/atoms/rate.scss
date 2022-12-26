@@ -1,0 +1,30 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.rate {
+  display: flex;
+  align-items: center;
+
+  &__star {
+    mask-image: url("~/assets/images/star.svg");
+    mask-size: 100% auto;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+    background-color: #F4CC40;
+    width: 18px;
+    height: 18px;
+    margin-right: 0.25rem;
+
+    &--grey {
+      background-color: #DFDFEB;
+    }
+  }
+
+  &__amount {
+    font-weight: 650;
+    font-size: 0.831rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.004rem;
+    font-variation-settings: 'slnt' 0;
+    margin-right: 0.375rem;
+  }
+}

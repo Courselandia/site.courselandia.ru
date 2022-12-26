@@ -1,11 +1,11 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .align {
   &--left {
     text-align: left;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           text-align: left;
         }
@@ -17,7 +17,7 @@
     text-align: center;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           text-align: left;
         }
@@ -28,7 +28,7 @@
       margin: 0 auto;
 
       @each $name, $resolution in $resolutions {
-        @media all and (max-width: #{$resolution}px) {
+        @media all and (max-width: #{$resolution}) {
           &-#{$name} {
             margin: 0 auto;
           }
@@ -41,7 +41,7 @@
     text-align: right;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           text-align: right;
         }

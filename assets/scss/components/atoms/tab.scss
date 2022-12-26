@@ -1,0 +1,18 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.tab {
+  font-weight: 400;
+  font-size: 0.831rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.004rem;
+  padding: 0.5rem 1rem;
+  margin-right: 0.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &--active {
+    color: $white;
+    transition: all $speedPrimary $functionPrimary;
+  }
+}

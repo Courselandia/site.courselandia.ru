@@ -1,0 +1,100 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/animations/fade";
+@import "@/assets/scss/vars/animations/transition";
+
+.select {
+  width: 100%;
+  position: relative;
+
+  &--border {
+    .select {
+      &__header {
+
+      }
+    }
+  }
+
+  &--dropped {
+    .select {
+      &__header {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  &--dropped,
+  &--hover {
+    .select {
+      &__header {
+        box-shadow: 0 0 6px rgb(54 78 101 / 16%);
+      }
+    }
+
+    &.select {
+      &--simple {
+        .select {
+          &__header {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+
+  &--simple {
+    width: auto;
+    display: inline-block;
+
+    .select {
+      &__header {
+        background-color: transparent;
+        padding: 0.5rem;
+      }
+
+      &__title {
+        padding-right: 0.25rem;
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    background-color: $white;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+    transition: all $speedPrimary $functionPrimary;
+  }
+
+  &__arrow {
+    transition: all $speedPrimary $functionPrimary;
+  }
+
+  &--dropped {
+    .select {
+      &__arrow {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__title {
+    flex-grow: 1;
+    padding-right: 1rem;
+    font-weight: 400;
+    font-size: 0.835rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.004rem;
+
+    &--placeholder {
+      opacity: 0.52;
+    }
+  }
+
+  &__arrow {
+    flex-grow: 0;
+    line-height: 0;
+  }
+}

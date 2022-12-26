@@ -1,0 +1,11 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.aside {
+  min-width: 248px;
+  max-width: 248px;
+  margin-right: 2.5rem;
+
+  @media all and (max-width: 768px) {
+    display: none;
+  }
+}

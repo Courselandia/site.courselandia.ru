@@ -1,0 +1,58 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.short {
+  &--mobile {
+    .short {
+      &__text {
+        @media all and (max-width: 992px) {
+          overflow: hidden;
+          height: 13.5rem;
+        }
+      }
+
+      &__more {
+        display: none;
+
+        @media all and (max-width: 992px) {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  &--desktop {
+    .short {
+      &__text {
+        overflow: hidden;
+        height: 13.5rem;
+      }
+    }
+  }
+
+  &--opened {
+    .short {
+      &__text {
+        height: auto !important;
+      }
+    }
+  }
+
+  &__more {
+    margin-top: 1.5rem;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+  }
+
+  &__link {
+    font-weight: 400;
+    font-size: 0.831rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.004rem;
+  }
+
+  &__arrow {
+    margin-left: 0.25rem;
+    line-height: 0;
+  }
+}

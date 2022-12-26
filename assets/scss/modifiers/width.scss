@@ -1,11 +1,11 @@
-@import "/assets/scss/vars/modifiers/main";
+@import "@/assets/scss/vars/modifiers/resolutions";
 
 .width {
   &--wide {
     width: 100%;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           width: 100% !important;
         }
@@ -17,7 +17,7 @@
     width: auto !important;
 
     @each $name, $resolution in $resolutions {
-      @media all and (max-width: #{$resolution}px) {
+      @media all and (max-width: #{$resolution}) {
         &-#{$name} {
           width: auto !important;
         }

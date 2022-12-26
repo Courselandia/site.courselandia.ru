@@ -1,0 +1,29 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+
+  &__item,
+  &__separator {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  &__item {
+    text-decoration: none;
+
+    &.link--active {
+
+    }
+  }
+
+  &__separator {
+    &:after {
+      content: ">";
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+}
