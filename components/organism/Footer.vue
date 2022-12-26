@@ -1,7 +1,9 @@
 <template>
-  <footer class="footer">
-    Footer
-  </footer>
+  <div class="content">
+    <footer class="footer">
+      Footer
+    </footer>
+  </div>
 </template>
 
 <style lang="scss">

@@ -1,7 +1,9 @@
 <template>
-  <header class="header">
-    Header
-  </header>
+  <div class="content">
+    <header class="header">
+      Header
+    </header>
+  </div>
 </template>
 
 <style lang="scss">
