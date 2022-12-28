@@ -1,10 +1,16 @@
 .logo {
-  width: 127px;
-  height: 23px;
   line-height: 0;
   display: block;
-  background-image: none;
+  background-image: url("~/assets/images/logo.svg");
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: center center;
+  width: 147px;
+  height: 27px;
+
+  &--light {
+    background-image: url("~/assets/images/logo-light.svg");
+    width: 200px;
+    height: 31px;
+  }
 }

@@ -11,11 +11,19 @@
     &-close {
       mask-image: url("~/assets/images/icons/close.svg");
     }
+
+    &-heart {
+      mask-image: url("~/assets/images/icons/heart.svg");
+    }
   }
 
   &--color {
     &-primary {
       background-color: $primary;
+    }
+
+    &-blue {
+      background-color: $blue;
     }
   }
 

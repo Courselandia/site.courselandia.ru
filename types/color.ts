@@ -1,4 +1,5 @@
 type TColor =
-  'primary';
+  'primary' |
+  'blue';
 
 export default TColor;

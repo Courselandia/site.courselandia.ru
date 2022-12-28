@@ -1,5 +1,17 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .header {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
+  &__logo {
+    margin-right: 8rem;
+  }
+
+  &__favorite {
+    text-align: right;
+    flex-grow: 1;
+  }
 }

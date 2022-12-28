@@ -1,5 +1,35 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .footer {
+  background-color: $black;
+  color: $white;
+  padding-top: 7.25rem;
+  padding-bottom: 10.5rem;
 
+  &__logo {
+    margin-bottom: 2.3rem;
+  }
+
+  &__info {
+    color: $grey;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  &__sides {
+    display: flex;
+  }
+
+  &__side {
+    &--left {
+      width: 30%;
+      padding-right: 2rem;
+    }
+
+    &--right {
+      width: 70%;
+      padding-left: 2rem;
+    }
+  }
 }

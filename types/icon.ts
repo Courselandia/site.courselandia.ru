@@ -1,4 +1,5 @@
 type TIcon =
-  'close';
+  'close' |
+  'heart';
 
 export default TIcon;
