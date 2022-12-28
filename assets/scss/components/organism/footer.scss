@@ -32,4 +32,21 @@
       padding-left: 2rem;
     }
   }
+
+  &__menus {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__menu {
+    width: 25%;
+  }
+
+  &__section {
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.563rem;
+    color: $white;
+    margin-bottom: 1.9rem;
+  }
 }
