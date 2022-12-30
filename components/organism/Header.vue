@@ -8,7 +8,7 @@
         <MenuTop />
       </div>
       <div class="header__search">
-
+        <Search />
       </div>
       <div class="header__favorite">
         <Favorite />
@@ -21,6 +21,7 @@
 import Logo from '@/components/atoms/Logo.vue';
 import Favorite from '@/components/organism/Favorite.vue';
 import MenuTop from '@/components/organism/MenuTop.vue';
+import Search from '@/components/organism/Search.vue';
 </script>
 
 <style lang="scss">

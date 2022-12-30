@@ -1,5 +1,7 @@
 type TIcon =
   'close' |
-  'heart';
+  'heart' |
+  'loop' |
+  'link-to';
 
 export default TIcon;

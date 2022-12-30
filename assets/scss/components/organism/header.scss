@@ -10,8 +10,13 @@
     margin-right: 8rem;
   }
 
-  &__favorite {
+  &__search {
     text-align: right;
     flex-grow: 1;
+  }
+
+  &__favorite {
+    text-align: right;
+    width: 165px;
   }
 }

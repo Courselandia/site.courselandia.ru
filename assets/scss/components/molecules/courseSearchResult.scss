@@ -1,0 +1,47 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.course-search-result {
+  display: flex;
+  text-decoration: none;
+  background-color: $white;
+
+  &__media {
+    width: 115px;
+    line-height: 0;
+    margin-right: 1rem;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    line-height: 0;
+    border-radius: 0.625rem;
+  }
+
+  &__info {
+    width: calc(100% - 115px - 1rem);
+  }
+
+  &__direction {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.313rem;
+    color: $black;
+    margin-bottom: 0.25rem;
+  }
+
+  &__name {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.313rem;
+    color: $black;
+    margin-bottom: 0.25rem;
+  }
+
+  &__price {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.313rem;
+    color: $black;
+  }
+}

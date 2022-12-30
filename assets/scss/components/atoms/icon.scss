@@ -15,6 +15,14 @@
     &-heart {
       mask-image: url("~/assets/images/icons/heart.svg");
     }
+
+    &-loop {
+      mask-image: url("~/assets/images/icons/loop.svg");
+    }
+
+    &-link-to {
+      mask-image: url("~/assets/images/icons/link-to.svg");
+    }
   }
 
   &--color {
@@ -22,8 +30,24 @@
       background-color: $primary;
     }
 
-    &-blue {
-      background-color: $blue;
+    &-blue1 {
+      background-color: $blue1;
+    }
+
+    &-blue2 {
+      background-color: $blue2;
+    }
+
+    &-grey1 {
+      background-color: $grey1;
+    }
+
+    &-grey2 {
+      background-color: $grey2;
+    }
+
+    &-grey3 {
+      background-color: $grey3;
     }
   }
 

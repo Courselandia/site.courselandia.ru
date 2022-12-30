@@ -4,7 +4,7 @@
       <Icon
         name="heart"
         :size="[20, 18]"
-        color="blue"
+        color="blue2"
       />
     </div>
     <div class="favorite__text">
