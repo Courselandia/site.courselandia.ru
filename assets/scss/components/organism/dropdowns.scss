@@ -1,0 +1,132 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.dropdowns {
+  position: absolute;
+  z-index: 5;
+  background-color: $white;
+  width: 100%;
+  left: 0;
+  top: 82px;
+
+  &__side {
+    &--left {
+      min-width: 260px;
+    }
+
+    &--right {
+      background-color: $white;
+      flex-grow: 1;
+      padding: 3.6rem 2.2rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 635px;
+
+      &::-webkit-scrollbar
+      {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track
+      {
+        background-color: $grey1;
+      }
+
+      &::-webkit-scrollbar-thumb
+      {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  &__item {
+    position: relative;
+    background-color: $white;
+
+    &--courses {
+      height: 670px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    position: relative;
+    height: 100%;
+  }
+
+  &__bck {
+    background-color: $black;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 308px;
+    transform: translateX(-100%);
+  }
+
+  &__directions {
+    position: relative;
+    z-index: 3;
+    padding-top: 3.6rem;
+    padding-bottom: 3.6rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__direction {
+    padding: 1.313rem 1.8rem 1.313rem 1.5rem;
+    font-weight: 800;
+    font-size: 1.125rem;
+    line-height: 1.563rem;
+    color: $white;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    text-decoration: none;
+    transition: all $speedPrimary $functionPrimary;
+    cursor: pointer;
+
+    &.link--active,
+    &--current {
+      color: $black;
+      background-color: $white;
+
+      &:hover {
+        background-color: $white !important;
+      }
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  &__boxes {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3.6rem 2.6rem;
+    margin-right: -1.5rem;
+  }
+
+  &__dim {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__actions {
+    margin-bottom: 2rem;
+  }
+
+  &__action {
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $blue2;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+
+    .icon {
+      margin-left: 0.75rem;
+    }
+  }
+}

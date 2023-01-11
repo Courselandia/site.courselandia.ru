@@ -1,5 +1,6 @@
 <template>
   <div
+    v-click-outside="onClickOutside"
     :class="`search ${nameClass}`"
     @mouseenter="onMouseOver"
     @mouseleave="onMouseLeave"
@@ -26,6 +27,16 @@
           @focusout="onFocusOut"
         >
       </div>
+      <div class="search__loader">
+        <transition name="fade">
+          <Loader
+            v-if="loading"
+            :active="loading"
+            :color="focus ? 'blue2' : 'grey3'"
+            size="tiny"
+          />
+        </transition>
+      </div>
       <div class="search__icon search__icon--clean">
         <transition name="fade">
           <Icon
@@ -38,7 +49,10 @@
         </transition>
       </div>
     </div>
-    <div class="search__results">
+    <div
+      v-if="query && searching"
+      class="search__results"
+    >
       <div class="search__amount">
         Найдено 120 курсов
       </div>
@@ -73,11 +87,14 @@ import {
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
+import Loader from '@/components/atoms/Loader.vue';
 import CourseSearchResult from '@/components/molecules/CourseSearchResult.vue';
 
 const query = ref<string>();
 const hover = ref(false);
 const focus = ref(false);
+const searching = ref(false);
+const loading = ref(false);
 
 const nameClass = computed(() => {
   const classes = [];
@@ -111,6 +128,10 @@ const onFocusOut = (): void => {
 
 const onClean = (): void => {
   query.value = '';
+};
+
+const onClickOutside = (): void => {
+  searching.value = false;
 };
 </script>
 

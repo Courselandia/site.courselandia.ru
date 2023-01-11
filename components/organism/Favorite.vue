@@ -1,5 +1,10 @@
 <template>
-  <nuxt-link to="/favorites" class="favorite">
+  <nuxt-link
+    to="/favorites"
+    class="favorite"
+    @mouseenter="onMouseOver"
+    @mouseleave="onMouseLeave"
+  >
     <div class="favorite__icon">
       <Icon
         name="heart"
@@ -17,7 +22,19 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+
 import Icon from '@/components/atoms/Icon.vue';
+
+const hover = ref(false);
+
+const onMouseOver = (): void => {
+  hover.value = true;
+};
+
+const onMouseLeave = (): void => {
+  hover.value = false;
+};
 </script>
 
 <style lang="scss">

@@ -1,7 +1,10 @@
 <template>
   <div class="page">
     <div class="page__header">
-      <Header />
+      <Header v-model:menu="menu" />
+    </div>
+    <div class="page__dropdown">
+      <Dropdowns v-model:menu="menu" />
     </div>
     <div class="page__body">
       <slot />
@@ -13,8 +16,13 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+
+import Dropdowns from '@/components/organism/Dropdowns.vue';
 import Footer from '@/components/organism/Footer.vue';
 import Header from '@/components/organism/Header.vue';
+
+const menu = ref('');
 </script>
 
 <style lang="scss">
