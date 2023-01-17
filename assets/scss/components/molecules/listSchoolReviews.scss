@@ -1,0 +1,51 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.list-school-reviews {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &__item {
+    width: 33.33%;
+    padding-right: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $black;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      .list-school-reviews {
+        &__label {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &__icon {
+    margin-right: 0.25rem;
+    line-height: 0;
+  }
+
+  &__rating {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $black;
+    margin-right: 0.75rem;
+    border-right: 1px solid $grey2;
+    padding-right: 0.75rem;
+    width: 40px;
+  }
+
+  &__label {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $black;
+  }
+}

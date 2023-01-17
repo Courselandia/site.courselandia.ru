@@ -4,6 +4,8 @@
     class="favorite"
     @mouseenter="onMouseOver"
     @mouseleave="onMouseLeave"
+    @focusin="onMouseOver"
+    @focusout="onMouseOver"
   >
     <div class="favorite__icon">
       <Icon

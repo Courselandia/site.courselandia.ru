@@ -10,8 +10,18 @@
       <div class="header__search">
         <Search />
       </div>
+      <div class="header__loop">
+        <SearchMobile />
+      </div>
       <div class="header__favorite">
         <Favorite />
+      </div>
+      <div class="header__burger">
+        <SlideMenu
+          v-model:show="show"
+        >
+          Here
+        </SlideMenu>
       </div>
     </header>
   </div>
@@ -25,9 +35,11 @@ import {
 } from 'vue';
 
 import Logo from '@/components/atoms/Logo.vue';
+import SlideMenu from '@/components/molecules/SlideMenu.vue';
 import Favorite from '@/components/organism/Favorite.vue';
 import MenuTop from '@/components/organism/MenuTop.vue';
 import Search from '@/components/organism/Search.vue';
+import SearchMobile from '@/components/organism/SearchMobile.vue';
 
 const props = defineProps({
   menu: {
@@ -54,6 +66,12 @@ watch(menuValue, () => {
 watch(menu, () => {
   menuValue.value = menu.value;
 });
+
+const show = ref(false);
+
+const onClick = (): void => {
+  show.value = false;
+};
 </script>
 
 <style lang="scss">

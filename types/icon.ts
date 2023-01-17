@@ -2,6 +2,11 @@ type TIcon =
   'close' |
   'heart' |
   'loop' |
-  'link-to';
+  'link-to' |
+  'arrow-up' |
+  'arrow-down' |
+  'rhombus' |
+  'star' |
+  'burger';
 
 export default TIcon;

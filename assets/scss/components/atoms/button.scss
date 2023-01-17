@@ -14,11 +14,13 @@
   }
 
   &--primary {
-
     color: $white;
+    background-color: $blue2;
+    text-align: center;
+    padding: 1rem 3.2rem;
 
     &:hover {
-
+      background-color: $blue3;
     }
   }
 
@@ -42,11 +44,9 @@
   }
 
   &__label {
-    font-weight: 650;
-    font-size: 0.831rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.004rem;
-    font-variation-settings: 'slnt' 0;
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.563rem;
     text-align: center;
   }
 }

@@ -12,6 +12,7 @@
   &__side {
     &--left {
       min-width: 260px;
+      max-width: 260px;
     }
 
     &--right {
@@ -42,10 +43,7 @@
   &__item {
     position: relative;
     background-color: $white;
-
-    &--courses {
-      height: 670px;
-    }
+    height: 670px;
   }
 
   &__content {
@@ -100,13 +98,6 @@
     }
   }
 
-  &__boxes {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 3.6rem 2.6rem;
-    margin-right: -1.5rem;
-  }
-
   &__dim {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
@@ -128,5 +119,64 @@
     .icon {
       margin-left: 0.75rem;
     }
+  }
+
+  &__info-block {
+    position: relative;
+    z-index: 3;
+    padding-top: 3.6rem;
+    padding-bottom: 3.6rem;
+    padding-right: 3.2rem;
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.563rem;
+    color: $white;
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.313rem;
+    color: $grey3;
+    margin-bottom: 1rem;
+  }
+
+  &__statistics {
+    color: $white;
+    margin-bottom: 2rem;
+  }
+
+  &__statistics-item {
+    display: flex;
+    margin-bottom: 0.5rem;
+    align-items: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__statistics-icon {
+    line-height: 0;
+    margin-right: 0.75rem;
+  }
+
+  &__statistics-label {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.313rem;
+    color: $white;
+    margin-right: 0.5rem;
+  }
+
+  &__statistics-amount {
+    font-weight: 800;
+    font-size: 0.875rem;
+    line-height: 1.313rem;
+    color: $white;
   }
 }

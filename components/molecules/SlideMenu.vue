@@ -7,24 +7,13 @@
     >
       <Icon
         name="burger"
-        color="blueGrey8"
-        :size="[24, 24]"
+        color="blue2"
+        :size="[27, 21]"
       />
     </div>
     <transition name="slide-right">
-      <template v-if="opened">
+      <template v-if="showValue">
         <div class="slide-menu__content">
-          <div
-            class="slide-menu__close"
-            @click="onClick"
-            @keyup="onClick"
-          >
-            <Icon
-              name="close"
-              color="blueGrey8"
-              :size="[20, 20]"
-            />
-          </div>
           <slot />
         </div>
       </template>
@@ -35,25 +24,47 @@
 <script lang="ts" setup>
 import {
   onDeactivated,
-  ref,
+  ref, toRefs,
   watch,
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
 
-const opened = ref(false);
+const props = defineProps({
+  show: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+});
 
-const onClick = (): void => {
-  opened.value = !opened.value;
-};
+const {
+  show,
+} = toRefs(props);
 
-watch(opened, (val): void => {
-  if (val) {
+const emit = defineEmits({
+  'update:show': (_: Boolean) => true,
+});
+
+const showValue = ref(show.value);
+
+watch(showValue, () => {
+  emit('update:show', showValue.value);
+});
+
+watch(show, () => {
+  showValue.value = show.value;
+
+  if (show.value) {
     document.body.classList.add('scroll--no-scroll');
   } else {
     document.body.classList.remove('scroll--no-scroll');
   }
 });
+
+const onClick = (): void => {
+  showValue.value = !showValue.value;
+};
 
 onDeactivated(() => {
   document.body.classList.remove('scroll--no-scroll');

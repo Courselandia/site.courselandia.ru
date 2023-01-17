@@ -1,5 +1,7 @@
 type TColor =
   'primary' |
+  'black' |
+  'white' |
   'blue1' |
   'blue2' |
   'grey1' |

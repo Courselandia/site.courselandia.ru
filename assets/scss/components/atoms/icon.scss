@@ -23,11 +23,40 @@
     &-link-to {
       mask-image: url("~/assets/images/icons/link-to.svg");
     }
+
+    &-arrow-up {
+      mask-image: url("~/assets/images/icons/arrow.svg");
+    }
+
+    &-arrow-down {
+      mask-image: url("~/assets/images/icons/arrow.svg");
+      transform: rotate(180deg);
+    }
+
+    &-rhombus {
+      mask-image: url("~/assets/images/icons/rhombus.svg");
+    }
+
+    &-star {
+      mask-image: url("~/assets/images/icons/star.svg");
+    }
+
+    &-burger {
+      mask-image: url("~/assets/images/icons/burger.svg");
+    }
   }
 
   &--color {
     &-primary {
       background-color: $primary;
+    }
+
+    &-black {
+      background-color: $black;
+    }
+
+    &-white {
+      background-color: $white;
     }
 
     &-blue1 {
@@ -43,11 +72,11 @@
     }
 
     &-grey2 {
-      background-color: $grey2;
+      background-color: $grey3;
     }
 
     &-grey3 {
-      background-color: $grey3;
+      background-color: $grey4;
     }
   }
 

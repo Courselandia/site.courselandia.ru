@@ -4,28 +4,63 @@
   >
     <div class="menu-top__item">
       <div
-        :class="`menu-top__link ${menuValue === 'courses' ? 'link--active' : ''}`"
+        :class="`menu-top__link ${hover === 'courses' ? 'menu-top__link--hover' : ''} ${menuValue === 'courses' ? 'link--active' : ''}`"
         @click="onClick('courses')"
         @keydown="onClick('courses')"
+        @mouseenter="onMouseEnter('courses')"
+        @focusin="onMouseEnter('courses')"
+        @mouseleave="onMouseLeave()"
+        @focusout="onMouseLeave()"
       >
-        Курсы
+        <div>
+          Курсы
+        </div>
+        <Icon
+          :name="menuValue === 'courses' ? 'arrow-up' : 'arrow-down'"
+          :color="(hover === 'courses' || menuValue === 'courses') ? 'white' : 'black'"
+          :size="[8, 8]"
+        />
       </div>
     </div>
     <div class="menu-top__item">
-      <nuxt-link
-        to="/schools"
-        class="menu-top__link"
+      <div
+        :class="`menu-top__link ${hover === 'schools' ? 'menu-top__link--hover' : ''} ${menuValue === 'schools' ? 'link--active' : ''}`"
+        @click="onClick('schools')"
+        @keydown="onClick('schools')"
+        @mouseenter="onMouseEnter('schools')"
+        @focusin="onMouseEnter('schools')"
+        @mouseleave="onMouseLeave()"
+        @focusout="onMouseLeave()"
       >
-        Школы
-      </nuxt-link>
+        <div>
+          Школы
+        </div>
+        <Icon
+          :name="menuValue === 'schools' ? 'arrow-up' : 'arrow-down'"
+          :color="(hover === 'schools' || menuValue === 'schools') ? 'white' : 'black'"
+          :size="[8, 8]"
+        />
+      </div>
     </div>
     <div class="menu-top__item">
-      <nuxt-link
-        to="/reviews"
-        class="menu-top__link"
+      <div
+        :class="`menu-top__link ${hover === 'reviews' ? 'menu-top__link--hover' : ''} ${menuValue === 'reviews' ? 'link--active' : ''}`"
+        @click="onClick('reviews')"
+        @keydown="onClick('reviews')"
+        @mouseenter="onMouseEnter('reviews')"
+        @focusin="onMouseEnter('reviews')"
+        @mouseleave="onMouseLeave()"
+        @focusout="onMouseLeave()"
       >
-        Отзывы о школах
-      </nuxt-link>
+        <div>
+          Отзывы о школах
+        </div>
+        <Icon
+          :name="menuValue === 'reviews' ? 'arrow-up' : 'arrow-down'"
+          :color="(hover === 'reviews' || menuValue === 'reviews') ? 'white' : 'black'"
+          :size="[8, 8]"
+        />
+      </div>
     </div>
     <div class="menu-top__item">
       <nuxt-link
@@ -44,6 +79,8 @@ import {
   toRefs,
   watch,
 } from 'vue';
+
+import Icon from '@/components/atoms/Icon.vue';
 
 const props = defineProps({
   menu: {
@@ -71,8 +108,18 @@ watch(menu, () => {
   menuValue.value = menu.value;
 });
 
+const hover = ref();
+
 const onClick = (name: string): void => {
   menuValue.value = menuValue.value !== name ? name : null;
+};
+
+const onMouseEnter = (name: string): void => {
+  hover.value = name;
+};
+
+const onMouseLeave = (): void => {
+  hover.value = null;
 };
 </script>
 

@@ -8,6 +8,11 @@
   width: 147px;
   height: 27px;
 
+  @media all and (max-width: 420px) {
+    width: 120px;
+    height: 18.5px;
+  }
+
   &--light {
     background-image: url("~/assets/images/logo-light.svg");
     width: 200px;

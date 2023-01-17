@@ -10,9 +10,7 @@
           class="dropdowns__item dropdowns__item--courses"
         >
           <div class="dropdowns__content content">
-            <div
-              class="dropdowns__side dropdowns__side--left"
-            >
+            <div class="dropdowns__side dropdowns__side--left">
               <div class="dropdowns__bck" />
               <div class="dropdowns__directions">
                 <div
@@ -26,9 +24,7 @@
                 </div>
               </div>
             </div>
-            <div
-              class="dropdowns__side dropdowns__side--right"
-            >
+            <div class="dropdowns__side dropdowns__side--right">
               <template
                 v-if="index === 0"
               >
@@ -73,6 +69,128 @@
             </div>
           </div>
         </div>
+        <div
+          v-else-if="menu === 'schools'"
+          class="dropdowns__item dropdowns__item--schools"
+        >
+          <div class="dropdowns__content content">
+            <div class="dropdowns__side dropdowns__side--left">
+              <div class="dropdowns__bck" />
+              <div class="dropdowns__info-block">
+                <div class="dropdowns__title">
+                  Все школы
+                </div>
+                <div class="dropdowns__description">
+                  Ознакомьтесь с реальными отзывами тех, кто уже прошел обучение в онлайн-школах,
+                  сравните курсы между собой и выберите то, что подходит именно вам!
+                </div>
+                <div class="dropdowns__statistics">
+                  <div class="dropdowns__statistics-item">
+                    <div class="dropdowns__statistics-icon">
+                      <Icon
+                        name="rhombus"
+                        color="blue2"
+                        :size="[26, 9]"
+                      />
+                    </div>
+                    <div class="dropdowns__statistics-label">
+                      Курсов
+                    </div>
+                    <div class="dropdowns__statistics-amount">
+                      2163
+                    </div>
+                  </div>
+                  <div class="dropdowns__statistics-item">
+                    <div class="dropdowns__statistics-icon">
+                      <Icon
+                        name="rhombus"
+                        color="blue2"
+                        :size="[26, 9]"
+                      />
+                    </div>
+                    <div class="dropdowns__statistics-label">
+                      Преподавателей
+                    </div>
+                    <div class="dropdowns__statistics-amount">
+                      863
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdowns__button">
+                  <Button to="/schools">
+                    Все школы
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div class="dropdowns__side dropdowns__side--right">
+              <ListSchools
+                :schools="listSchools"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          v-else-if="menu === 'reviews'"
+          class="dropdowns__item dropdowns__item--reviews"
+        >
+          <div class="dropdowns__content content">
+            <div class="dropdowns__side dropdowns__side--left">
+              <div class="dropdowns__bck" />
+              <div class="dropdowns__info-block">
+                <div class="dropdowns__title">
+                  Все школы
+                </div>
+                <div class="dropdowns__description">
+                  Ознакомьтесь с реальными отзывами тех, кто уже прошел обучение в онлайн-школах,
+                  сравните курсы между собой и выберите то, что подходит именно вам!
+                </div>
+                <div class="dropdowns__statistics">
+                  <div class="dropdowns__statistics-item">
+                    <div class="dropdowns__statistics-icon">
+                      <Icon
+                        name="rhombus"
+                        color="blue2"
+                        :size="[26, 9]"
+                      />
+                    </div>
+                    <div class="dropdowns__statistics-label">
+                      Отзывов
+                    </div>
+                    <div class="dropdowns__statistics-amount">
+                      2163
+                    </div>
+                  </div>
+                  <div class="dropdowns__statistics-item">
+                    <div class="dropdowns__statistics-icon">
+                      <Icon
+                        name="rhombus"
+                        color="blue2"
+                        :size="[26, 9]"
+                      />
+                    </div>
+                    <div class="dropdowns__statistics-label">
+                      Школ
+                    </div>
+                    <div class="dropdowns__statistics-amount">
+                      863
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdowns__button">
+                  <Button to="/reviews">
+                    Все отзывы
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div class="dropdowns__side dropdowns__side--right">
+              <ListSchoolReviews
+                :schools="listSchoolReviews"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </transition>
@@ -85,10 +203,14 @@ import {
   watch,
 } from 'vue';
 
+import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import AlphabeticList from '@/components/molecules/AlphabeticList.vue';
 import Direction from '@/components/molecules/Direction.vue';
 import Directions from '@/components/molecules/Directions.vue';
+import ListSchoolReviews from '@/components/molecules/ListSchoolReviews.vue';
+import ListSchools from '@/components/molecules/ListSchools.vue';
+import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
 
 const props = defineProps({
@@ -352,6 +474,166 @@ const menuCourses = ref<IMenu[]>(
           link: '/courses',
         },
       ],
+    },
+  ],
+);
+
+const listSchools = ref<IMenu[]>(
+  [
+    {
+      label: 'Skillbox',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'XYZ School',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'Среда обучения',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'Level One',
+      link: '/courses/level-one',
+    },
+    {
+      label: 'Нетология',
+      link: '/courses/level-one',
+    },
+    {
+      label: 'Skillbox',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'XYZ School',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'Среда обучения',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'Level One',
+      link: '/courses/level-one',
+    },
+    {
+      label: 'Нетология',
+      link: '/courses/level-one',
+    },
+    {
+      label: 'Skillbox',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'XYZ School',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'Среда обучения',
+      link: '/courses/skillbox',
+    },
+    {
+      label: 'Level One',
+      link: '/courses/level-one',
+    },
+    {
+      label: 'Нетология',
+      link: '/courses/level-one',
+    },
+  ],
+);
+
+const listSchoolReviews = ref<IListSchoolReview[]>(
+  [
+    {
+      label: 'Skillbox',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4.5,
+    },
+    {
+      label: 'XYZ School',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Среда обучения',
+      link: '/courses/skillbox',
+      reviews: 3000,
+      rating: 3.5,
+    },
+    {
+      label: 'Level One',
+      link: '/courses/level-one',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Нетология',
+      link: '/courses/level-one',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Skillbox',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'XYZ School',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Среда обучения',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Level One',
+      link: '/courses/level-one',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Нетология',
+      link: '/courses/level-one',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Skillbox',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'XYZ School',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Среда обучения',
+      link: '/courses/skillbox',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Level One',
+      link: '/courses/level-one',
+      reviews: 2000,
+      rating: 4,
+    },
+    {
+      label: 'Нетология',
+      link: '/courses/level-one',
+      reviews: 2000,
+      rating: 4,
     },
   ],
 );

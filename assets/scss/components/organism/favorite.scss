@@ -33,7 +33,10 @@
     line-height: 1.375rem;
     color: $black;
     margin-left: 0.95rem;
-    padding-right: 22px;
+
+    @media all and (max-width: 1350px) {
+      display: none;
+    }
   }
 
   &__amount {

@@ -1,0 +1,18 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.list-schools {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    width: 25%;
+    padding-right: 2rem;
+    margin-bottom: 1.5rem;
+    color: $black;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
