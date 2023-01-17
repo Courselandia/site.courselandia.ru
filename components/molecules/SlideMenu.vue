@@ -5,11 +5,15 @@
       @click="onClick"
       @keyup="onClick"
     >
-      <Icon
-        name="burger"
-        color="blue2"
-        :size="[27, 21]"
-      />
+      <div
+        :class="`slide-menu__icon ${showValue ? 'slide-menu__icon--active' : ''}`"
+      >
+        <Icon
+          :name="showValue ? 'close' : 'burger'"
+          :color="showValue ? 'white' : 'blue2'"
+          :size="showValue ? [22, 22] : [27, 21]"
+        />
+      </div>
     </div>
     <transition name="slide-right">
       <template v-if="showValue">

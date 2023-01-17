@@ -7,6 +7,8 @@ type TIcon =
   'arrow-down' |
   'rhombus' |
   'star' |
-  'burger';
+  'burger' |
+  'arrow-thin-right' |
+  'arrow-long-left';
 
 export default TIcon;

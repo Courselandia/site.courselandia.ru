@@ -44,6 +44,15 @@
     &-burger {
       mask-image: url("~/assets/images/icons/burger.svg");
     }
+
+    &-arrow-thin-right {
+      mask-image: url("~/assets/images/icons/arrow-thin.svg");
+    }
+
+    &-arrow-long-left {
+      mask-image: url("~/assets/images/icons/arrow-long.svg");
+      mask-size: 100% auto;
+    }
   }
 
   &--color {

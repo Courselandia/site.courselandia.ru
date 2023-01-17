@@ -1,0 +1,42 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.menu-top-mobile {
+  &__item {
+    padding: 1rem 1rem 1rem 5.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: $black;
+
+    .icon {
+      flex-grow: 0;
+    }
+
+    &--back {
+      padding: 1rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      line-height: 1.688rem;
+      border-bottom: 1px solid $grey2;
+
+      .menu-top-mobile {
+        &__label {
+          padding-left: 2.6rem;
+        }
+      }
+    }
+  }
+
+  &__label {
+    flex-grow: 1;
+  }
+
+  &__star {
+    padding-right: 0.25rem;
+  }
+
+  &__rating {
+    width: 40px;
+  }
+}

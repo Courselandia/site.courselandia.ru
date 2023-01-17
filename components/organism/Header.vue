@@ -20,7 +20,7 @@
         <SlideMenu
           v-model:show="show"
         >
-          Here
+          <MenuTopMobile v-model:show="show" />
         </SlideMenu>
       </div>
     </header>
@@ -38,6 +38,7 @@ import Logo from '@/components/atoms/Logo.vue';
 import SlideMenu from '@/components/molecules/SlideMenu.vue';
 import Favorite from '@/components/organism/Favorite.vue';
 import MenuTop from '@/components/organism/MenuTop.vue';
+import MenuTopMobile from '@/components/organism/MenuTopMobile.vue';
 import Search from '@/components/organism/Search.vue';
 import SearchMobile from '@/components/organism/SearchMobile.vue';
 
