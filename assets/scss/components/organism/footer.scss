@@ -6,8 +6,17 @@
   padding-top: 7.25rem;
   padding-bottom: 10.5rem;
 
+  @media all and (max-width: 900px) {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
   &__logo {
     margin-bottom: 2.3rem;
+
+    @media all and (max-width: 900px) {
+      text-align: center;
+    }
   }
 
   &__info {
@@ -15,31 +24,72 @@
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.5rem;
+
+    @media all and (max-width: 900px) {
+      text-align: center;
+    }
   }
 
   &__sides {
     display: flex;
+
+    @media all and (max-width: 900px) {
+      flex-direction: column;
+    }
   }
 
   &__side {
     &--left {
       width: 30%;
       padding-right: 2rem;
+
+      @media all and (max-width: 900px) {
+        order: 2;
+        padding-right: 0;
+        width: 100%;
+      }
     }
 
     &--right {
       width: 70%;
       padding-left: 2rem;
+
+      @media all and (max-width: 900px) {
+        order: 1;
+        padding-left: 0;
+        width: 100%;
+      }
     }
   }
 
   &__menus {
     display: flex;
     justify-content: flex-end;
+
+    @media all and (max-width: 900px) {
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 4.25rem;
+    }
   }
 
   &__menu {
     width: 25%;
+    padding-right: 1.5rem;
+
+    @media all and (max-width: 1200px) {
+      width: 33.33%;
+    }
+
+    @media all and (max-width: 900px) {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 2.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__section {
@@ -48,5 +98,9 @@
     line-height: 1.563rem;
     color: $white;
     margin-bottom: 1.9rem;
+
+    @media all and (max-width: 900px) {
+      margin-bottom: 1.5rem;
+    }
   }
 }
