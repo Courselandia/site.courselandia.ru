@@ -4,16 +4,22 @@
   text-decoration: none;
 
   &:hover {
+    text-decoration: underline;
+  }
+
+  &--no-line {
+    &:hover {
+      text-decoration: none !important;
+    }
   }
 }
 
 .links {
   A {
-
     text-decoration: none;
 
     &:hover {
-
+      text-decoration: underline;
     }
   }
 }

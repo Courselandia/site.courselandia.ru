@@ -2,12 +2,11 @@
 @import "@/assets/scss/vars/animations/transition";
 
 .button {
-  padding: 1.25rem 2.25rem;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all $speedPrimary $functionPrimary;
-  display: inline-block;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 
   &:active:not(.button--disabled) {
     transform: scale(0.97);
@@ -17,15 +16,30 @@
     color: $white;
     background-color: $blue2;
     text-align: center;
-    padding: 1rem 3.2rem;
 
     &:hover {
       background-color: $blue3;
     }
+
+    .button {
+      &__label {
+        padding: 1rem 3.2rem;
+      }
+
+      &--icon {
+        padding-left: 1.75rem;
+        padding-right: 1.75rem;
+
+        .button {
+          &__label {
+            padding: 1rem 1.75rem 1rem 3.2rem;
+          }
+        }
+      }
+    }
   }
 
   &--secondary {
-
     &:hover {
 
     }
@@ -48,5 +62,26 @@
     font-size: 1.125rem;
     line-height: 1.563rem;
     text-align: center;
+    padding: 1rem 3.2rem;
+  }
+
+  &--icon {
+    line-height: 0;
+
+    .button {
+      &__label {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 1rem 1.75rem 1rem 3.2rem;
+      }
+    }
+  }
+
+  &__icon {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+
+    &:empty {
+      display: none;
+    }
   }
 }

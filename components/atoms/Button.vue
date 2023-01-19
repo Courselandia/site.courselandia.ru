@@ -1,14 +1,15 @@
 <template>
-  <component
-    :is="to ? 'a' : 'button'"
+  <button
     :class="`button ${nameClass}`"
     :href="to"
     @click.prevent="onClick"
+    @keydown.prevent="onClick"
   >
     <div class="button__label">
       <slot />
     </div>
-  </component>
+    <div class="button__icon"><slot name="icon" /></div>
+  </button>
 </template>
 
 <script lang="ts" setup>
@@ -32,6 +33,11 @@ const props = defineProps({
     default: null,
   },
   wide: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  icon: {
     type: Boolean,
     required: false,
     default: false,
@@ -63,12 +69,20 @@ const nameClass = computed(() => {
     classes.push('button--wide');
   }
 
+  if (props.icon) {
+    classes.push('button--icon');
+  }
+
   return classes.join(' ');
 });
 
 const onClick = (): boolean => {
   if (props.disabled === false) {
-    router.push(props.to);
+    if (props.to) {
+      router.push(props.to);
+    }
+
+    return true;
   }
 
   return false;
