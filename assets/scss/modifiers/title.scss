@@ -1,21 +1,19 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .title {
-  &--padding-left {
-    padding-left: 2.25rem;
-
-    @media all and (max-width: 768px) {
-      padding-left: 0;
-    }
-  }
-
   &--1 {
-    font-weight: 650;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    letter-spacing: 0.004rem;
-    font-variation-settings: 'slnt' 0;
-    margin-bottom: 1.5rem;
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 4rem;
+    color: $black;
+    margin-bottom: 5rem;
+
+    @media all and (max-width: 576px) {
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 2rem;
+      margin-bottom: 2.5rem;
+    }
   }
 
   &--2 {
@@ -25,5 +23,11 @@
     letter-spacing: 0.004rem;
     font-variation-settings: 'slnt' 0;
     margin-bottom: 1.5rem;
+  }
+
+  &--center-mobil {
+    @media all and (max-width: 576px) {
+      text-align: center;
+    }
   }
 }

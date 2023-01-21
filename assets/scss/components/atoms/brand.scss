@@ -4,7 +4,7 @@
   margin-bottom: 1rem;
   display: inline-block;
 
-  @media all and (max-width: 500px) {
+  @media all and (max-width: 576px) {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     width: calc(33.33% - 1rem);
@@ -15,7 +15,7 @@
     height: auto;
     max-width: 200px;
 
-    @media all and (max-width: 500px) {
+    @media all and (max-width: 576px) {
       max-width: none;
     }
   }
