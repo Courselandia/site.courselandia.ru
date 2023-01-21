@@ -1,0 +1,22 @@
+.brand {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+
+  @media all and (max-width: 500px) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    width: calc(33.33% - 1rem);
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+
+    @media all and (max-width: 500px) {
+      max-width: none;
+    }
+  }
+}

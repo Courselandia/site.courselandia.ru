@@ -1,7 +1,6 @@
 .page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 
   &__header {
     flex-grow: 0;
@@ -9,6 +8,5 @@
 
   &__body {
     flex-grow: 1;
-    min-height: 1000px;
   }
 }

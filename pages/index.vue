@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <Hero class="mt-15">
+    <Hero class="mt-15 mb-30 mb-15-sm">
       <template #title>
         С нами находить курсы легче
       </template>
@@ -48,9 +48,7 @@
         <img src="@/assets/images/hero/1.svg" alt="С нами находить курсы легче" />
       </template>
     </Hero>
-    <div>
-      Content
-    </div>
+    <Brands />
   </div>
 </template>
 
@@ -60,4 +58,5 @@ import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import Hero from '@/components/molecules/Hero.vue';
 import Tags from '@/components/molecules/Tags.vue';
+import Brands from '@/components/organism/Brands.vue';
 </script>
