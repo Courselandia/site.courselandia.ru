@@ -1,6 +1,12 @@
 .directions {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -1.5rem;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
   margin-bottom: -1.5rem;
+
+  @media all and (max-width: 576px) {
+    margin-right: -0.5rem;
+    margin-bottom: -0.5rem;
+  }
 }
