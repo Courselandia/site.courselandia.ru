@@ -1,6 +1,7 @@
-import IMenu from '@/interfaces/menu';
+import TId from '@/types/id';
 
 export default interface IListSchoolReview {
+  id: TId,
   label: string
   link: string,
   reviews: number,
