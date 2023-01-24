@@ -1,0 +1,10 @@
+.favorite-course {
+  cursor: pointer;
+
+  @media all and (max-width: 600px) {
+    .icon {
+      width: 15px !important;
+      height: 13px !important;
+    }
+  }
+}

@@ -4,6 +4,12 @@
   margin-bottom: 1rem;
   display: inline-block;
 
+  @media all and (max-width: 768px) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: calc(33.33% - 2rem);
+  }
+
   @media all and (max-width: 576px) {
     margin-left: 0.5rem;
     margin-right: 0.5rem;

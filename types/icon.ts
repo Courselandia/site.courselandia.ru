@@ -1,6 +1,7 @@
 type TIcon =
   'close' |
   'heart' |
+  'heart-full' |
   'loop' |
   'link-to' |
   'arrow-up' |
