@@ -1,22 +1,66 @@
 <template>
-  <button
-    :class="`button ${nameClass}`"
-    :href="to"
-    @click.prevent="onClick"
-    @keydown.prevent="onClick"
-  >
-    <div class="button__label">
-      <slot />
-    </div>
-    <div class="button__icon"><slot name="icon" /></div>
-  </button>
+  <template v-if="link === 'nuxt-link'">
+    <nuxt-link
+      :class="`button ${nameClass}`"
+      :to="to"
+      :disabled="disabled"
+    >
+      <div class="button__label">
+        <slot />
+      </div>
+      <template v-if="hasSlot('icon')">
+        <div class="button__icon">
+          <slot name="icon" />
+        </div>
+      </template>
+    </nuxt-link>
+  </template>
+  <template v-else-if="link === 'link'">
+    <a
+      :class="`button ${nameClass}`"
+      :href="to"
+      :disabled="disabled"
+      :target="target"
+    >
+      <div class="button__label">
+        <slot />
+      </div>
+      <template v-if="hasSlot('icon')">
+        <div class="button__icon">
+          <slot name="icon" />
+        </div>
+      </template>
+    </a>
+  </template>
+  <template v-else-if="link === 'button'">
+    <button
+      :class="`button ${nameClass}`"
+      :disabled="disabled"
+      @click.prevent="onClick"
+      @keydown.prevent="onClick"
+    >
+      <div class="button__label">
+        <slot />
+      </div>
+      <template v-if="hasSlot('icon')">
+        <div class="button__icon">
+          <slot name="icon" />
+        </div>
+      </template>
+    </button>
+  </template>
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
+import {
+  computed,
+  PropType,
+  useSlots,
+} from 'vue';
 import { useRouter } from 'vue-router';
 
 import TButton from '@/types/button';
+import TLink from '@/types/link';
 
 const props = defineProps({
   type: {
@@ -41,6 +85,16 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  target: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  link: {
+    type: String as PropType<TLink>,
+    required: false,
+    default: 'button',
   },
 });
 
@@ -75,6 +129,12 @@ const nameClass = computed(() => {
 
   return classes.join(' ');
 });
+
+const slots = useSlots();
+
+const hasSlot = (name: string) => {
+  return !!slots[name];
+};
 
 const onClick = (): boolean => {
   if (props.disabled === false) {

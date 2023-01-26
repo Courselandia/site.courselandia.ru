@@ -10,6 +10,7 @@ type TIcon =
   'star' |
   'burger' |
   'arrow-thin-right' |
-  'arrow-long-left';
+  'arrow-long-left' |
+  'user';
 
 export default TIcon;

@@ -57,6 +57,11 @@
       mask-image: url("~/assets/images/icons/arrow-long.svg");
       mask-size: 100% auto;
     }
+
+    &-user {
+      mask-image: url("~/assets/images/icons/user.svg");
+      mask-size: 100% auto;
+    }
   }
 
   &--color {

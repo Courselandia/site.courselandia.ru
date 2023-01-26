@@ -20,6 +20,24 @@
     padding-bottom: 2.5rem;
   }
 
+  &--image {
+    @media all and (max-width: 1000px) {
+      .catalog-header {
+        &__side {
+          &--left {
+            order: 2;
+            margin-bottom: 0;
+          }
+
+          &--right {
+            order: 1;
+            margin-bottom: 2.125rem;
+          }
+        }
+      }
+    }
+  }
+
   &__description {
     font-weight: 400;
     font-size: 1.25rem;
@@ -62,8 +80,17 @@
     display: flex;
     margin-bottom: 2.125rem;
 
+    @media all and (max-width: 576px) {
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+
     .title {
       margin-bottom: 0;
+
+      @media all and (max-width: 576px) {
+        margin-bottom: 1rem;
+      }
     }
   }
 
@@ -73,20 +100,47 @@
     padding-left: 2.625rem;
     flex-grow: 0;
     border-left: 1px solid #DFE0E6;
+
+    @media all and (max-width: 576px) {
+      border-left: none;
+      padding-left: 0;
+      flex-direction: row;
+      align-items: center;
+    }
   }
 
   &__rating {
+    display: flex;
+    align-items: center;
+  }
+
+  &__rating_amount {
     white-space: nowrap;
     font-weight: 800;
     font-size: 2.25rem;
     line-height: 2.8125rem;
     display: flex;
     align-items: center;
+
+    @media all and (max-width: 576px) {
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
   }
 
   &__star {
     line-height: 0;
     margin-left: 0.5rem;
+
+    @media all and (max-width: 576px) {
+      margin-right: 1rem;
+
+      .icon {
+        width: 18px !important;
+        height: 18px !important;
+      }
+    }
   }
 
   &__reviews {
@@ -148,6 +202,37 @@
 
       filter: drop-shadow(0px 16px 54px rgba(0, 0, 0, 0.08));
     }
+  }
+
+  &__teachers {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  &__teacher_icon {
+    margin-right: 0.75rem;
+  }
+
+  &__teacher_icon {
+    line-height: 0;
+  }
+
+  &__teacher_label {
+    margin-right: 0.5rem;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+  }
+
+  &__teacher_amount {
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+  }
+
+  &__action {
+    margin-top: 2rem;
   }
 
   &__content {

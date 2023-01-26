@@ -84,6 +84,18 @@
     <template #image>
       <img src="https://loc-api.courselandia.ru/storage/uploaded/images/schools/1.png" alt="" title="" />
     </template>
+    <template #teachers>
+      2300
+    </template>
+    <template #action>
+      <Button
+        to="/"
+        link="link"
+        target="_blank"
+      >
+        Перейти на сайт
+      </Button>
+    </template>
   </CatalogHeader>
 
   <div class="catalog">
@@ -105,6 +117,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+import Button from '@/components/atoms/Button.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import Courses from '@/components/molecules/Courses.vue';
