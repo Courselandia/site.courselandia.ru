@@ -108,10 +108,18 @@
           </div>
         </div>
         <div class="catalog__items">
-          <Courses
-            :courses="courses"
-            :columns="3"
-          />
+          <div class="catalog__tools">
+            <CatalogTools
+              v-model:sort="sort"
+              v-model:type="type"
+            />
+          </div>
+          <div class="catalog__courses">
+            <Courses
+              :courses="courses"
+              :columns="3"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -120,15 +128,24 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 import Button from '@/components/atoms/Button.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
+import CatalogTools from '@/components/molecules/CatalogTools.vue';
 import Courses from '@/components/molecules/Courses.vue';
 import Tags from '@/components/molecules/Tags.vue';
+import ECourseSort from '@/enums/components/molecules/courseSort';
+import ECourseType from '@/enums/components/molecules/courseType';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
+import TValue from '@/types/value';
+
+const route = useRoute();
+const sort = ref<TValue>(route.query.sort as TValue || ECourseSort.DATE);
+const type = ref<TValue>(ECourseType.TILE);
 
 const courses = ref<ICourse[]>([
   {

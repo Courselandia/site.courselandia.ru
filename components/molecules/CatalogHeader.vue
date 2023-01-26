@@ -84,9 +84,7 @@ import Icon from '@/components/atoms/Icon.vue';
 
 const slots = useSlots();
 
-const hasSlot = (name: string) => {
-  return !!slots[name];
-};
+const hasSlot = (name: string) => !!slots[name];
 </script>
 
 <style lang="scss">

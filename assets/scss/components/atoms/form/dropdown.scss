@@ -1,4 +1,5 @@
 @import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
 
 .dropdown {
   background-color: $white;
@@ -10,42 +11,14 @@
   width: 100%;
   z-index: 3;
 
-  &--border {
-
-  }
-
-  &--dropped,
-  &--hover {
-    box-shadow: 0 0 6px rgb(54 78 101 / 16%);
-
-    &.dropdown {
-      &--simple {
-        box-shadow: none;
-      }
-    }
-  }
-
   &--simple {
     width: auto;
 
     .dropdown {
-      &__weld {
-        display: none;
-      }
-
       &__option {
         padding: 0.5rem;
       }
     }
-  }
-
-  &__weld {
-    position: absolute;
-    z-index: 3;
-    background-color: $white;
-    width: 100%;
-    height: 5px;
-    top: -5px;
   }
 
   &__label {
@@ -61,20 +34,33 @@
     width: 16px;
   }
 
-  &__option {
+  &__list {
+    border: 1px solid #DFE0E6;
+    border-top: none;
 
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+
+  &__option {
     font-weight: 400;
     font-size: 0.875rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.001rem;
-    padding: 0.688rem 1.5rem;
+    line-height: 1.3125rem;
+    padding: 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     text-align: left;
+    transition: all $speedPrimary $functionPrimary;
 
-    &:hover {
+    &:hover,
+    &--selected {
+      background-color: $blue1;
+    }
 
+    &:last-child {
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
     }
   }
 }

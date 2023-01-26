@@ -11,6 +11,7 @@ type TIcon =
   'burger' |
   'arrow-thin-right' |
   'arrow-long-left' |
-  'user';
+  'user' |
+  'angle-down';
 
 export default TIcon;

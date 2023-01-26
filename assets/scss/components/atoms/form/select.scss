@@ -6,38 +6,11 @@
   width: 100%;
   position: relative;
 
-  &--border {
-    .select {
-      &__header {
-
-      }
-    }
-  }
-
   &--dropped {
     .select {
       &__header {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-      }
-    }
-  }
-
-  &--dropped,
-  &--hover {
-    .select {
-      &__header {
-        box-shadow: 0 0 6px rgb(54 78 101 / 16%);
-      }
-    }
-
-    &.select {
-      &--simple {
-        .select {
-          &__header {
-            box-shadow: none;
-          }
-        }
       }
     }
   }
@@ -61,11 +34,12 @@
   &__header {
     display: flex;
     background-color: $white;
-    padding: 1.25rem 1.5rem;
+    padding: 1rem;
     border-radius: 0.5rem;
     align-items: center;
     cursor: pointer;
     transition: all $speedPrimary $functionPrimary;
+    border: 1px solid #DFE0E6;
   }
 
   &__arrow {
@@ -84,9 +58,8 @@
     flex-grow: 1;
     padding-right: 1rem;
     font-weight: 400;
-    font-size: 0.835rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.004rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
 
     &--placeholder {
       opacity: 0.52;

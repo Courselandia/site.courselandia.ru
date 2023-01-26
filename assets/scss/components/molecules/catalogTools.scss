@@ -1,0 +1,11 @@
+.catalog-tools {
+  margin-bottom: 2rem;
+
+  &__field {
+    width: 240px;
+
+    .form-item {
+      margin-bottom: 0;
+    }
+  }
+}

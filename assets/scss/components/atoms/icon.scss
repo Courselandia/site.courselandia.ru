@@ -62,6 +62,11 @@
       mask-image: url("~/assets/images/icons/user.svg");
       mask-size: 100% auto;
     }
+
+    &-angle-down {
+      mask-image: url("~/assets/images/icons/angle.svg");
+      mask-size: 100% auto;
+    }
   }
 
   &--color {

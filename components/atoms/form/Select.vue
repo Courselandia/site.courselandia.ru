@@ -18,9 +18,9 @@
       </div>
       <div class="select__arrow">
         <Icon
-          name="arrow-down"
-          color="blueGrey8"
-          :size="simple ? [16, 16] : [22, 22]"
+          name="angle-down"
+          color="blue2"
+          :size="[12, 6]"
         />
       </div>
     </div>
@@ -34,25 +34,16 @@
           ref="dropdownRef"
           :class="`dropdown ${nameClassDropdown}`"
         >
-          <div class="dropdown__weld" />
           <div class="dropdown__list">
             <div
               v-for="(option) in options"
               :key="option.value"
-              class="dropdown__option"
+              :class="`dropdown__option ${option.value === value ? 'dropdown__option--selected' : ''}`"
               @keydown="onSelect(option.value)"
               @click="onSelect(option.value)"
             >
               <div class="dropdown__label">
                 {{ option.label }}
-              </div>
-              <div class="dropdown__check">
-                <Icon
-                  v-if="option.value === value"
-                  name="checkmark"
-                  color="blueGrey8"
-                  :size="simple ? [16, 16] : [20, 20]"
-                />
               </div>
             </div>
           </div>
@@ -177,6 +168,7 @@ const onClick = (): void => {
 
 const setDropdownPosition = (): void => {
   if (dropdownRef.value && headerRef.value) {
+    const bodyRect = document.body.getBoundingClientRect()
     const rectHeader = headerRef.value.getBoundingClientRect();
 
     if (!props.simple) {
@@ -186,7 +178,7 @@ const setDropdownPosition = (): void => {
     const rectDropdown = dropdownRef.value.getBoundingClientRect();
 
     dropdownRef.value.style.left = `${rectHeader.left}px`;
-    dropdownRef.value.style.top = `${rectHeader.top + rectHeader.height}px`;
+    dropdownRef.value.style.top = `${rectHeader.top - bodyRect.top + rectHeader.height}px`;
 
     if ((rectHeader.left + rectDropdown.width) > window.screen.availWidth) {
       const ratio = rectDropdown.width - rectHeader.width;
