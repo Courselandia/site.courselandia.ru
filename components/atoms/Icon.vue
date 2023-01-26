@@ -27,7 +27,7 @@ const props = defineProps({
   },
   color: {
     type: String as PropType<TColor>,
-    default: 'primary',
+    default: null,
   },
   colorHover: {
     type: String as PropType<TColor>,

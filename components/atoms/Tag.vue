@@ -2,7 +2,7 @@
   <template v-if="to">
     <nuxt-link
       :to="to"
-      class="tag"
+      :class="`tag ${nameClass}`"
     >
       <slot />
     </nuxt-link>
@@ -15,12 +15,70 @@
 </template>
 
 <script lang="ts" setup>
+import {
+  computed,
+  PropType,
+} from 'vue';
+
+import TColor from '@/types/color';
+
 const props = defineProps({
   to: {
     type: String,
     required: false,
     default: null,
   },
+  border: {
+    type: String as PropType<TColor>,
+    required: false,
+    default: null,
+  },
+  bck: {
+    type: String as PropType<TColor>,
+    required: false,
+    default: null,
+  },
+  color: {
+    type: String as PropType<TColor>,
+    required: false,
+    default: 'blue2',
+  },
+  bckHover: {
+    type: String as PropType<TColor>,
+    required: false,
+    default: null,
+  },
+  shadow: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+});
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (props.border) {
+    classes.push(`tag--border-${props.border}`);
+  }
+
+  if (props.bck) {
+    classes.push(`tag--bck-${props.bck}`);
+  }
+
+  if (props.color) {
+    classes.push(`tag--color-${props.color}`);
+  }
+
+  if (props.bckHover) {
+    classes.push(`tag--bck-hover-${props.bckHover}`);
+  }
+
+  if (props.shadow) {
+    classes.push('tag--shadow');
+  }
+
+  return classes.join(' ');
 });
 </script>
 

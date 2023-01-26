@@ -7,13 +7,48 @@
   line-height: 1.375rem;
   color: $blue2;
   padding: 0.75rem 1rem;
-  border: 1px solid $grey2;
   border-radius: 10px;
   transition: all $speedPrimary $functionPrimary;
   cursor: pointer;
   text-decoration: none;
 
-  &:hover {
-    background-color: $blue1;
+  @media all and (max-width: 576px) {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.1875rem;
+  }
+
+  &--color {
+    &-blue2 {
+      color: $blue2;
+    }
+
+    &-black {
+      color: $black;
+    }
+  }
+
+  &--border {
+    &-grey2 {
+      border: 1px solid $grey2;
+    }
+  }
+
+  &--bck {
+    &-white {
+      background-color: $white;
+    }
+
+    &-hover {
+      &-blue1 {
+        &:hover {
+          background-color: $blue1;
+        }
+      }
+    }
+  }
+
+  &--shadow {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
   }
 }

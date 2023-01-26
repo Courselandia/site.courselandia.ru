@@ -1,113 +1,101 @@
 <template>
-  <div>
-    <div class="content">
-      <Hero class="mt-15 mb-30 mb-15-sm">
-        <template #title>
-          С нами находить курсы легче
-        </template>
-        <template #description>
-          Интересные подборки, отзывы и рейтинги в одном месте
-        </template>
-        <template #tags>
-          <Tags>
-            <Tag
-              to="/courses/programmer"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Программирование
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Маркетинг
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Дизайн
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Бизнес и управление
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Аналитика
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Игры
-            </Tag>
-          </Tags>
-        </template>
-        <template #actions>
-          <Button
-            to="/courses"
-            icon
-          >
-            Каталог курсов
-            <template #icon>
-              <Icon
-                name="link-to"
-                color="white"
-                :size="[13, 13]"
-              />
-            </template>
-          </Button>
-        </template>
-        <template #media>
-          <img src="@/assets/images/hero/1.svg" alt="С нами находить курсы легче" />
-        </template>
-      </Hero>
-
-      <Brands class="mb-50 mb-15-sm" />
-
-      <h1 class="title title--big title--center-mobil">
-        Популярные направления
-      </h1>
-      <Directions class="mb-50 mb-15-sm">
-        <template
-          v-for="(item, key) in directions"
-          :key="key"
+  <CatalogHeader>
+    <template #title>
+      Онлайн курсы по Дизайну
+    </template>
+    <template #description>
+      Пройдя курсы от лучших онлайн-школ, вы научитесь моделировать и
+      визуализировать 3D-объекты, создавать дизайн одежды, интерьеров
+      или даже проектировать дизайны различных торговых центров,
+      скверов и парков, анимировать картинки, разрабатывать UX/UI-дизайн
+      и дизайн мобильных приложений, а также многое другое.
+    </template>
+    <template #section>
+      <div class="catalog-header__fire"></div>
+      <div class="catalog-header__label">
+        Сейчас в тренде
+      </div>
+    </template>
+    <template #tags>
+      <Tags>
+        <Tag
+          to="/courses/programmer"
+          bck="white"
+          shadow
         >
-          <Direction
-            :image="item.image.default"
-            :amount="item.amount"
-            :label="item.label"
-            :link="item.link"
+          Программирование
+        </Tag>
+        <Tag
+          to="/courses/marketing"
+          bck="white"
+          shadow
+        >
+          Маркетинг
+        </Tag>
+        <Tag
+          to="/courses/marketing"
+          bck="white"
+          shadow
+        >
+          Дизайн
+        </Tag>
+        <Tag
+          to="/courses/marketing"
+          bck="white"
+          shadow
+        >
+          Бизнес и управление
+        </Tag>
+        <Tag
+          to="/courses/marketing"
+          bck="white"
+          shadow
+        >
+          Аналитика
+        </Tag>
+        <Tag
+          to="/courses/marketing"
+          bck="white"
+          shadow
+        >
+          Игры
+        </Tag>
+      </Tags>
+    </template>
+  </CatalogHeader>
+
+  <CatalogHeader>
+    <template #title>
+      Онлайн курсы школы Skillbox
+    </template>
+    <template #description>
+      Skillbox — это одна из крупнейших образовательных платформ на российском рынке.
+      Она предоставляет более 500 образовательных курсов по различным тематикам,
+      начиная с программирования и аналитики и заканчивая модой и флористикой.
+    </template>
+    <template #rating>
+      4.5
+    </template>
+    <template #reviews>
+      <nuxt-link to="/">
+        1236 отзывов
+      </nuxt-link>
+    </template>
+    <template #image>
+      <img src="https://loc-api.courselandia.ru/storage/uploaded/images/schools/1.png" alt="" title="" />
+    </template>
+  </CatalogHeader>
+
+  <div class="catalog">
+    <div class="content">
+      <div class="catalog__content">
+        <div class="catalog__filter">
+          HERE
+        </div>
+        <div class="catalog__items">
+          <Courses
+            :courses="courses"
           />
-        </template>
-      </Directions>
-    </div>
-
-    <div class="bck--blue-1 pt-50 pb-50 pt-15-sm pb-15-sm">
-      <div class="content">
-        <h1 class="title title--big title--center-mobil">
-          Лучшие курсы
-        </h1>
-
-        <Courses
-          :courses="courses"
-          class="mb-10"
-        />
-        <div class="align--center">
-          <Button>
-            Весь каталог
-          </Button>
         </div>
       </div>
     </div>
@@ -115,76 +103,15 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-} from 'vue';
+import { ref } from 'vue';
 
-import Button from '@/components/atoms/Button.vue';
-import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
+import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import Courses from '@/components/molecules/Courses.vue';
-import Direction from '@/components/molecules/Direction.vue';
-import Directions from '@/components/molecules/Directions.vue';
-import Hero from '@/components/molecules/Hero.vue';
 import Tags from '@/components/molecules/Tags.vue';
-import Brands from '@/components/organism/Brands.vue';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
-import IMenu from '@/interfaces/menu';
-
-const directions = ref<IMenu[]>(
-  [
-    {
-      label: 'Все курсы',
-      link: '/courses',
-      amount: 10,
-      image: await import('@/assets/images/directions/all.svg'),
-    },
-    {
-      label: 'Программирование',
-      link: '/courses/programmirovanie',
-      amount: 20,
-      image: await import('@/assets/images/directions/programmirovanie.svg'),
-    },
-    {
-      label: 'Маркетинг',
-      link: '/marketings',
-      amount: 30,
-      image: await import('@/assets/images/directions/marketing.svg'),
-    },
-    {
-      label: 'Дизайн',
-      link: '/marketings',
-      amount: 8,
-      image: await import('@/assets/images/directions/dizayn.svg'),
-    },
-    {
-      label: 'Бизнес и управление',
-      link: '/buisness',
-      amount: 4,
-      image: await import('@/assets/images/directions/biznes-i-upravlenie.svg'),
-    },
-    {
-      label: 'Аналитика',
-      link: '/analitics',
-      amount: 6,
-      image: await import('@/assets/images/directions/analitika.svg'),
-    },
-    {
-      label: 'Игры',
-      link: '/analitics',
-      amount: 7,
-      image: await import('@/assets/images/directions/igri.svg'),
-    },
-    {
-      label: 'Другие профессии',
-      link: '/others',
-      amount: 9,
-      image: await import('@/assets/images/directions/drugie-professii.svg'),
-    },
-  ],
-);
 
 const courses = ref<ICourse[]>([
   {
@@ -351,5 +278,5 @@ const courses = ref<ICourse[]>([
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/pages/index.scss";
+@import "@/assets/scss/components/organism/catalog.scss";
 </style>

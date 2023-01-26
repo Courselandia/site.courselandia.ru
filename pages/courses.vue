@@ -1,12 +1,7 @@
 <template>
-  <div class="content">
-    <div class="content__flex">
-      <aside class="aside">
-        Courses.
-      </aside>
-      <main class="main main--with-aside">
-        Courses.
-      </main>
-    </div>
-  </div>
+  <Catalog />
 </template>
+
+<script lang="ts" setup>
+import Catalog from '@/components/organism/Catalog.vue';
+</script>
