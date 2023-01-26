@@ -1,8 +1,19 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .catalog {
-  &__filter {
+  &__content {
+    display: flex;
+  }
 
+  &__filter {
+    width: 320px;
+    min-width: 320px;
+    padding-right: 2.5rem;
+    box-sizing: content-box;
+
+    @media all and (max-width: 1050px) {
+      display: none;
+    }
   }
 
   &__items {

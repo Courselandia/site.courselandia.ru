@@ -103,10 +103,14 @@
       <div class="catalog__content">
         <div class="catalog__filter">
           HERE
+          <div>
+            52
+          </div>
         </div>
         <div class="catalog__items">
           <Courses
             :courses="courses"
+            :columns="3"
           />
         </div>
       </div>
