@@ -1,7 +1,7 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .icon {
-  mask-size: auto 100%;
+  mask-size: 100% auto;
   mask-position: center;
   mask-repeat: no-repeat;
   display: inline-block;
@@ -55,17 +55,34 @@
 
     &-arrow-long-left {
       mask-image: url("~/assets/images/icons/arrow-long.svg");
-      mask-size: 100% auto;
     }
 
     &-user {
       mask-image: url("~/assets/images/icons/user.svg");
-      mask-size: 100% auto;
     }
 
     &-angle-down {
       mask-image: url("~/assets/images/icons/angle.svg");
-      mask-size: 100% auto;
+    }
+
+    &-angle-down {
+      mask-image: url("~/assets/images/icons/angle.svg");
+    }
+
+    &-tile {
+      mask-image: url("~/assets/images/icons/tile.svg");
+    }
+
+    &-row {
+      mask-image: url("~/assets/images/icons/row.svg");
+    }
+
+    &-box {
+      mask-image: url("~/assets/images/icons/box.svg");
+    }
+
+    &-checked {
+      mask-image: url("~/assets/images/icons/checked.svg");
     }
   }
 

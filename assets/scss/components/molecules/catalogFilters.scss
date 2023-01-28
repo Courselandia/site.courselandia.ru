@@ -1,0 +1,29 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.catalog-filters {
+  &__directions {
+    margin-bottom: 2.5rem;
+  }
+
+  &__panel {
+    background-color: $white;
+    box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+  }
+
+  &__block {
+    border-bottom: 1px solid $grey2;
+    padding: 1.5rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-bottom: 1.15625rem;
+  }
+}

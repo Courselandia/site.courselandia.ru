@@ -11,7 +11,7 @@
       и дизайн мобильных приложений, а также многое другое.
     </template>
     <template #section>
-      <div class="catalog-header__fire"></div>
+      <div class="catalog-header__fire" />
       <div class="catalog-header__label">
         Сейчас в тренде
       </div>
@@ -102,10 +102,12 @@
     <div class="content">
       <div class="catalog__content">
         <div class="catalog__filter">
-          HERE
-          <div>
-            52
-          </div>
+          <CatalogFilters
+            v-model:selected-direction="selectedDirection"
+            v-model:selected-rating="selectedRating"
+            :directions="directions"
+            :ratings="ratings"
+          />
         </div>
         <div class="catalog__items">
           <div class="catalog__tools">
@@ -132,6 +134,7 @@ import { useRoute } from 'vue-router';
 
 import Button from '@/components/atoms/Button.vue';
 import Tag from '@/components/atoms/Tag.vue';
+import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import CatalogTools from '@/components/molecules/CatalogTools.vue';
 import Courses from '@/components/molecules/Courses.vue';
@@ -141,6 +144,8 @@ import ECourseType from '@/enums/components/molecules/courseType';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
+import IDirection from '@/interfaces/components/molecules/direction';
+import IRating from '@/interfaces/components/molecules/rating';
 import TValue from '@/types/value';
 
 const route = useRoute();
@@ -309,6 +314,70 @@ const courses = ref<ICourse[]>([
     },
   },
 ]);
+
+//
+
+const directions = ref<IDirection[]>([
+  {
+    id: 1,
+    name: 'Программирование',
+    link: 'programming',
+  },
+  {
+    id: 2,
+    name: 'Маркетинг',
+    link: 'marketing',
+  },
+  {
+    id: 3,
+    name: 'Дизайн',
+    link: 'design',
+  },
+  {
+    id: 4,
+    name: 'Бизнес управление',
+    link: 'business',
+  },
+  {
+    id: 5,
+    name: 'Аналитика',
+    link: 'analitics',
+  },
+  {
+    id: 6,
+    name: 'Игры',
+    link: 'games',
+  },
+  {
+    id: 7,
+    name: 'Другие профессии',
+    link: 'other',
+  },
+]);
+const selectedDirection = ref<IDirection | null>();
+
+//
+
+const ratings = ref<IRating[]>([
+  {
+    label: '4.5 и выше',
+    value: 4.5,
+  },
+  {
+    label: '4.0 и выше',
+    value: 4,
+  },
+  {
+    label: '3.5 и выше',
+    value: 3.5,
+  },
+  {
+    label: '3.0 и выше',
+    value: 3,
+  },
+]);
+
+const selectedRating = ref<IRating | null>();
 </script>
 
 <style lang="scss">

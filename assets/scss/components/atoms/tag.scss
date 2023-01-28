@@ -32,6 +32,18 @@
     &-grey2 {
       border: 1px solid $grey2;
     }
+
+    &-blue2 {
+      border: 1px solid $blue2;
+    }
+
+    &-hover {
+      &-blue2 {
+        &:hover {
+          border: 1px solid $blue2;
+        }
+      }
+    }
   }
 
   &--bck {

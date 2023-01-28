@@ -12,6 +12,10 @@ type TIcon =
   'arrow-thin-right' |
   'arrow-long-left' |
   'user' |
-  'angle-down';
+  'angle-down' |
+  'tile' |
+  'row' |
+  'box' |
+  'checked';
 
 export default TIcon;

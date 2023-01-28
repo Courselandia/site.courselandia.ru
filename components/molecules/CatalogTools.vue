@@ -1,7 +1,7 @@
 <template>
   <div class="catalog-tools">
     <div class="catalog-tools__side catalog-tools__side--left">
-      <div class="catalog-tools__field">
+      <div class="catalog-tools__field catalog-tools__field--sort">
         <Item>
           <Select
             v-model:value="sortValue"
@@ -11,14 +11,15 @@
           />
         </Item>
       </div>
-      <div class="catalog-tools__field">
-        <Item>
-          <CatalogToolType />
-        </Item>
-      </div>
     </div>
     <div class="catalog-tools__side catalog-tools__side--right">
-
+      <div class="catalog-tools__field">
+        <Item>
+          <CatalogToolType
+            v-model:value="typeValue"
+          />
+        </Item>
+      </div>
     </div>
   </div>
 </template>
@@ -36,7 +37,6 @@ import Item from '@/components/atoms/form/Item.vue';
 import Select from '@/components/atoms/form/Select.vue';
 import CatalogToolType from '@/components/molecules/CatalogToolType.vue';
 import ECourseSort from '@/enums/components/molecules/courseSort';
-import ECourseType from '@/enums/components/molecules/courseType';
 import IOption from '@/interfaces/components/atoms/option';
 import TValue from '@/types/value';
 
@@ -63,7 +63,7 @@ const emit = defineEmits({
 
 const route = useRoute();
 
-const sortValue = ref<TValue>(route.query.sort as TValue || ECourseSort.DATE);
+const sortValue = ref<TValue>(sort.value);
 
 watch(sortValue, () => {
   emit('update:sort', sortValue.value);
@@ -98,7 +98,7 @@ watch(route, (): void => {
 
 //
 
-const typeValue = ref<TValue>(ECourseType.TILE);
+const typeValue = ref<TValue>(type.value);
 
 watch(typeValue, () => {
   emit('update:type', typeValue.value);

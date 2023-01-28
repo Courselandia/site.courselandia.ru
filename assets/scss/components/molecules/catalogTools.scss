@@ -1,8 +1,26 @@
 .catalog-tools {
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+
+  &__side {
+    display: flex;
+    align-items: center;
+    width: 50%;
+
+    &--left {
+
+    }
+
+    &--right {
+      justify-content: flex-end;
+    }
+  }
 
   &__field {
-    width: 240px;
+    &--sort {
+      width: 240px;
+    }
 
     .form-item {
       margin-bottom: 0;

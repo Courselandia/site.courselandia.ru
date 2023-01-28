@@ -1,3 +1,28 @@
 .catalog-tool-type {
+  border: 1px solid #DFE0E6;
+  border-radius: 10px;
+  display: inline-flex;
 
+  &__item {
+    line-height: 0;
+    padding: 1.25rem;
+    cursor: pointer;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      border-right: 1px solid #DFE0E5;
+      height: 18px;
+      width: 1px;
+      right: 0;
+      top: calc((100% / 2 - 18px / 2))
+    }
+
+    &:last-child {
+      &:after {
+        border-right: none;
+      }
+    }
+  }
 }

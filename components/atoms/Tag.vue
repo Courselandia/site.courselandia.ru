@@ -8,7 +8,9 @@
     </nuxt-link>
   </template>
   <template v-else>
-    <div class="tag">
+    <div
+      :class="`tag ${nameClass}`"
+    >
       <slot />
     </div>
   </template>
@@ -33,7 +35,17 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  borderHover: {
+    type: String as PropType<TColor>,
+    required: false,
+    default: null,
+  },
   bck: {
+    type: String as PropType<TColor>,
+    required: false,
+    default: null,
+  },
+  bckHover: {
     type: String as PropType<TColor>,
     required: false,
     default: null,
@@ -42,11 +54,6 @@ const props = defineProps({
     type: String as PropType<TColor>,
     required: false,
     default: 'blue2',
-  },
-  bckHover: {
-    type: String as PropType<TColor>,
-    required: false,
-    default: null,
   },
   shadow: {
     type: Boolean,
@@ -60,6 +67,10 @@ const nameClass = computed(() => {
 
   if (props.border) {
     classes.push(`tag--border-${props.border}`);
+  }
+
+  if (props.borderHover) {
+    classes.push(`tag--border-hover-${props.borderHover}`);
   }
 
   if (props.bck) {
