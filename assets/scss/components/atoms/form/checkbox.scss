@@ -1,0 +1,36 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__box {
+    background-color: $white;
+    border: 1px solid $grey2;
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+    border-radius: 4px;
+  }
+
+  &__checked {
+    width: 10px;
+    height: 10px;
+    line-height: 0;
+    background-color: $blue2;
+    margin: auto;
+    margin-top: 3px;
+  }
+
+  &__label {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+  }
+
+  &__element {
+    display: none;
+  }
+}

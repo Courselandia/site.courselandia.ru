@@ -1,19 +1,23 @@
 <template>
-  <div class="form-item">
+  <div
+    :class="`form-item ${nameClass}`"
+  >
     <div
       v-if="label"
       class="form-item__label"
     >
       {{ label }}
     </div>
-    <div class="form-item__label__input">
+    <div class="form-item__input">
       <slot />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   label: {
     type: String,
     required: false,
@@ -23,6 +27,20 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  horizontal: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (props.horizontal) {
+    classes.push('form-item--horizontal');
+  }
+
+  return classes.join(' ');
 });
 </script>
 

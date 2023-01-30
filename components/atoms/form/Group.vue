@@ -38,7 +38,20 @@ watch(value, () => {
 });
 
 const onChangeValue = (val: string | number): void => {
-  input.value = val;
+  if (Array.isArray(input.value)) {
+    if (input.value.indexOf(val) !== -1) {
+      const index = input.value?.indexOf(val);
+
+      if (index > -1) {
+        input.value.splice(index, 1);
+      }
+    } else {
+      console.log('HERE 2')
+      input.value?.push(val);
+    }
+  } else {
+    input.value = val;
+  }
 };
 
 defineExpose({

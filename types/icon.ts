@@ -12,6 +12,7 @@ type TIcon =
   'arrow-thin-right' |
   'arrow-long-left' |
   'user' |
+  'angle-up' |
   'angle-down' |
   'tile' |
   'row' |

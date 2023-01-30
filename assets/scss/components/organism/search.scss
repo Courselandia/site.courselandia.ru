@@ -104,11 +104,13 @@
     &::-webkit-scrollbar-track
     {
       background-color: $grey1;
+      border-radius: 9px;
     }
 
     &::-webkit-scrollbar-thumb
     {
       background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 9px;
     }
 
     .course-search-result {

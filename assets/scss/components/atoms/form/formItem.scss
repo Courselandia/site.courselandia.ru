@@ -1,3 +1,23 @@
 .form-item {
   margin-bottom: 2rem;
+  width: 100%;
+
+  &--horizontal {
+    display: flex;
+    align-items: center;
+
+    .form-item {
+      &__label {
+        flex-grow: 1;
+      }
+
+      &__input {
+        width: auto;
+      }
+    }
+  }
+
+  &__input {
+    width: 100%;
+  }
 }

@@ -105,8 +105,10 @@
           <CatalogFilters
             v-model:selected-direction="selectedDirection"
             v-model:selected-rating="selectedRating"
+            v-model:selected-schools="selectedSchools"
             :directions="directions"
             :ratings="ratings"
+            :schools="schools"
           />
         </div>
         <div class="catalog__items">
@@ -145,6 +147,7 @@ import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
 import IDirection from '@/interfaces/components/molecules/direction';
+import ISchool from '@/interfaces/components/molecules/schoolFilter';
 import IRating from '@/interfaces/components/molecules/rating';
 import TValue from '@/types/value';
 
@@ -355,6 +358,68 @@ const directions = ref<IDirection[]>([
   },
 ]);
 const selectedDirection = ref<IDirection | null>();
+const schools = ref<ISchool[]>([
+  {
+    id: 1,
+    label: 'Нетология',
+    link: 'netology',
+  },
+  {
+    id: 2,
+    label: 'GeekBrains',
+    link: 'GeekBrains',
+  },
+  {
+    id: 3,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 5,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 6,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 7,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 8,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+  {
+    id: 9,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 10,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 11,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 12,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 13,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+]);
 
 //
 
@@ -378,6 +443,8 @@ const ratings = ref<IRating[]>([
 ]);
 
 const selectedRating = ref<IRating | null>();
+
+const selectedSchools = ref<Array<ISchool>>();
 </script>
 
 <style lang="scss">

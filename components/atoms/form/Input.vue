@@ -52,10 +52,6 @@ const props = defineProps({
     type: String,
     default: 'text',
   },
-  border: {
-    type: Boolean,
-    default: true,
-  },
 });
 
 const {
@@ -80,10 +76,6 @@ watch(value, () => {
 
 const nameClass = computed(() => {
   const classes = [];
-
-  if (props.border) {
-    classes.push('input--border');
-  }
 
   if (hover.value) {
     classes.push('input--hover');

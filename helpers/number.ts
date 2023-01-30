@@ -25,7 +25,7 @@ const format = (number: number, decimals: number = 0, thousandsSep: string = ' '
 
 export const number = (value: number, decimals: number = 0): string => format(value, decimals);
 
-export const money = (value: number, digits: number = 0, label: string|null, separate: string = ' '): string => {
+export const money = (value: number, digits: number = 0, label: string|null = null, separate: string = ' '): string => {
   if (value === 0) {
     if (label) {
       return `${0} ${label}`;

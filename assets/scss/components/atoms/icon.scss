@@ -61,8 +61,9 @@
       mask-image: url("~/assets/images/icons/user.svg");
     }
 
-    &-angle-down {
+    &-angle-up {
       mask-image: url("~/assets/images/icons/angle.svg");
+      transform: rotate(180deg);
     }
 
     &-angle-down {
