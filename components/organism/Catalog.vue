@@ -1,143 +1,145 @@
 <template>
-  <CatalogHeader>
-    <template #title>
-      Онлайн курсы по Дизайну
-    </template>
-    <template #description>
-      Пройдя курсы от лучших онлайн-школ, вы научитесь моделировать и
-      визуализировать 3D-объекты, создавать дизайн одежды, интерьеров
-      или даже проектировать дизайны различных торговых центров,
-      скверов и парков, анимировать картинки, разрабатывать UX/UI-дизайн
-      и дизайн мобильных приложений, а также многое другое.
-    </template>
-    <template #section>
-      <div class="catalog-header__fire" />
-      <div class="catalog-header__label">
-        Сейчас в тренде
-      </div>
-    </template>
-    <template #tags>
-      <Tags>
-        <Tag
-          to="/courses/programmer"
-          bck="white"
-          shadow
-        >
-          Программирование
-        </Tag>
-        <Tag
-          to="/courses/marketing"
-          bck="white"
-          shadow
-        >
-          Маркетинг
-        </Tag>
-        <Tag
-          to="/courses/marketing"
-          bck="white"
-          shadow
-        >
-          Дизайн
-        </Tag>
-        <Tag
-          to="/courses/marketing"
-          bck="white"
-          shadow
-        >
-          Бизнес и управление
-        </Tag>
-        <Tag
-          to="/courses/marketing"
-          bck="white"
-          shadow
-        >
-          Аналитика
-        </Tag>
-        <Tag
-          to="/courses/marketing"
-          bck="white"
-          shadow
-        >
-          Игры
-        </Tag>
-      </Tags>
-    </template>
-  </CatalogHeader>
-
-  <CatalogHeader>
-    <template #title>
-      Онлайн курсы школы Skillbox
-    </template>
-    <template #description>
-      Skillbox — это одна из крупнейших образовательных платформ на российском рынке.
-      Она предоставляет более 500 образовательных курсов по различным тематикам,
-      начиная с программирования и аналитики и заканчивая модой и флористикой.
-    </template>
-    <template #rating>
-      4.5
-    </template>
-    <template #reviews>
-      <nuxt-link to="/">
-        1236 отзывов
-      </nuxt-link>
-    </template>
-    <template #image>
-      <img src="https://loc-api.courselandia.ru/storage/uploaded/images/schools/1.png" alt="" title="" />
-    </template>
-    <template #teachers>
-      2300
-    </template>
-    <template #action>
-      <Button
-        to="/"
-        link="link"
-        target="_blank"
-      >
-        Перейти на сайт
-      </Button>
-    </template>
-  </CatalogHeader>
-
-  <div class="catalog">
-    <div class="content">
-      <div class="catalog__content">
-        <div class="catalog__filter">
-          <CatalogFilters
-            v-model:selected-direction="selectedDirection"
-            v-model:selected-rating="selectedRating"
-            v-model:selected-schools="selectedSchools"
-            v-model:selected-categories="selectedCategories"
-            v-model:selected-professions="selectedProfessions"
-            v-model:selected-teachers="selectedTeachers"
-            v-model:selected-skills="selectedSkills"
-            v-model:selected-tools="selectedTools"
-            v-model:selected-format="selectedFormat"
-            v-model:selected-levels="selectedLevels"
-            :directions="directions"
-            :ratings="ratings"
-            :schools="schools"
-            :categories="categories"
-            :professions="professions"
-            :teachers="teachers"
-            :skills="skills"
-            :tools="tools"
-            :formats="formats"
-            :levels="levels"
-            @load-items="onLoadItems"
-          />
+  <div>
+    <CatalogHeader>
+      <template #title>
+        Онлайн курсы по Дизайну
+      </template>
+      <template #description>
+        Пройдя курсы от лучших онлайн-школ, вы научитесь моделировать и
+        визуализировать 3D-объекты, создавать дизайн одежды, интерьеров
+        или даже проектировать дизайны различных торговых центров,
+        скверов и парков, анимировать картинки, разрабатывать UX/UI-дизайн
+        и дизайн мобильных приложений, а также многое другое.
+      </template>
+      <template #section>
+        <div class="catalog-header__fire" />
+        <div class="catalog-header__label">
+          Сейчас в тренде
         </div>
-        <div class="catalog__items">
-          <div class="catalog__tools">
-            <CatalogTools
-              v-model:sort="sort"
-              v-model:type="type"
+      </template>
+      <template #tags>
+        <Tags>
+          <Tag
+            to="/courses/programmer"
+            bck="white"
+            shadow
+          >
+            Программирование
+          </Tag>
+          <Tag
+            to="/courses/marketing"
+            bck="white"
+            shadow
+          >
+            Маркетинг
+          </Tag>
+          <Tag
+            to="/courses/marketing"
+            bck="white"
+            shadow
+          >
+            Дизайн
+          </Tag>
+          <Tag
+            to="/courses/marketing"
+            bck="white"
+            shadow
+          >
+            Бизнес и управление
+          </Tag>
+          <Tag
+            to="/courses/marketing"
+            bck="white"
+            shadow
+          >
+            Аналитика
+          </Tag>
+          <Tag
+            to="/courses/marketing"
+            bck="white"
+            shadow
+          >
+            Игры
+          </Tag>
+        </Tags>
+      </template>
+    </CatalogHeader>
+
+    <CatalogHeader>
+      <template #title>
+        Онлайн курсы школы Skillbox
+      </template>
+      <template #description>
+        Skillbox — это одна из крупнейших образовательных платформ на российском рынке.
+        Она предоставляет более 500 образовательных курсов по различным тематикам,
+        начиная с программирования и аналитики и заканчивая модой и флористикой.
+      </template>
+      <template #rating>
+        4.5
+      </template>
+      <template #reviews>
+        <nuxt-link to="/">
+          1236 отзывов
+        </nuxt-link>
+      </template>
+      <template #image>
+        <img src="https://loc-api.courselandia.ru/storage/uploaded/images/schools/1.png" alt="" title="" />
+      </template>
+      <template #teachers>
+        2300
+      </template>
+      <template #action>
+        <Button
+          to="/"
+          link="link"
+          target="_blank"
+        >
+          Перейти на сайт
+        </Button>
+      </template>
+    </CatalogHeader>
+
+    <div class="catalog">
+      <div class="content">
+        <div class="catalog__content">
+          <div class="catalog__filter">
+            <CatalogFilters
+              v-model:selected-direction="selectedDirection"
+              v-model:selected-rating="selectedRating"
+              v-model:selected-schools="selectedSchools"
+              v-model:selected-categories="selectedCategories"
+              v-model:selected-professions="selectedProfessions"
+              v-model:selected-teachers="selectedTeachers"
+              v-model:selected-skills="selectedSkills"
+              v-model:selected-tools="selectedTools"
+              v-model:selected-format="selectedFormat"
+              v-model:selected-levels="selectedLevels"
+              :directions="directions"
+              :ratings="ratings"
+              :schools="schools"
+              :categories="categories"
+              :professions="professions"
+              :teachers="teachers"
+              :skills="skills"
+              :tools="tools"
+              :formats="formats"
+              :levels="levels"
+              @load-items="onLoadItems"
             />
           </div>
-          <div class="catalog__courses">
-            <Courses
-              :courses="courses"
-              :columns="3"
-            />
+          <div class="catalog__items">
+            <div class="catalog__tools">
+              <CatalogTools
+                v-model:sort="sort"
+                v-model:type="type"
+              />
+            </div>
+            <div class="catalog__courses">
+              <Courses
+                :courses="courses"
+                :columns="3"
+              />
+            </div>
           </div>
         </div>
       </div>
