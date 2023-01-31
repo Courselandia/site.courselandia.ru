@@ -54,10 +54,10 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedPrice[0] !== priceMin || selectedPrice[1] !== priceMax"
+            v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
             class="catalog-filters__reset"
-            @click="onClickResetPrice"
-            @keyup="onClickResetPrice"
+            @click="onClickResetPrices"
+            @keyup="onClickResetPrices"
           >
             <Icon
               name="close"
@@ -68,7 +68,7 @@
         </transition>
         <div class="catalog-filters__selection">
           <RangeSlider
-            v-model:value="selectedPrice"
+            v-model:value="selectedPricesValue"
             :min="priceMin"
             :max="priceMax"
             :step="priceStep"
@@ -84,7 +84,7 @@
           horizontal
         >
           <Switch
-            v-model:value="loan"
+            v-model:value="selectedLoanValue"
             name="loan"
           />
         </Item>
@@ -96,7 +96,7 @@
           horizontal
         >
           <Switch
-            v-model:value="free"
+            v-model:value="selectedFreeValue"
             name="free"
           />
         </Item>
@@ -108,10 +108,10 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedDuration[0] !== durationMin || selectedDuration[1] !== durationMax"
+            v-if="selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax"
             class="catalog-filters__reset"
-            @click="onClickResetDuration"
-            @keyup="onClickResetDuration"
+            @click="onClickResetDurations"
+            @keyup="onClickResetDurations"
           >
             <Icon
               name="close"
@@ -122,7 +122,7 @@
         </transition>
         <div class="catalog-filters__selection">
           <RangeSlider
-            v-model:value="selectedDuration"
+            v-model:value="selectedDurationsValue"
             :min="durationMin"
             :max="durationMax"
             :step="durationStep"
@@ -380,6 +380,7 @@ import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogFilterSelect from '@/components/molecules/CatalogFilterSelect.vue';
 import Tags from '@/components/molecules/Tags.vue';
+import ELevel from '@/enums/components/molecules/level';
 import ICategory from '@/interfaces/components/molecules/category';
 import IDirection from '@/interfaces/components/molecules/direction';
 import IFormat from '@/interfaces/components/molecules/format';
@@ -393,6 +394,38 @@ import ITool from '@/interfaces/components/molecules/tool';
 import TId from '@/types/id';
 
 const props = defineProps({
+  priceMin: {
+    type: Number,
+    required: true,
+  },
+  priceMax: {
+    type: Number,
+    required: true,
+  },
+  priceStep: {
+    type: Number,
+    required: true,
+  },
+  selectedPrices: {
+    type: Array as PropType<Array<number>>,
+    required: true,
+  },
+  durationMin: {
+    type: Number,
+    required: true,
+  },
+  durationMax: {
+    type: Number,
+    required: true,
+  },
+  durationStep: {
+    type: Number,
+    required: true,
+  },
+  selectedDurations: {
+    type: Array as PropType<Array<number>>,
+    required: true,
+  },
   directions: {
     type: Array as PropType<Array<IDirection>>,
     required: true,
@@ -405,6 +438,16 @@ const props = defineProps({
   ratings: {
     type: Array as PropType<Array<IRating>>,
     required: true,
+  },
+  selectedLoan: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  selectedFree: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
   selectedRating: {
     type: Object as PropType<IRating>,
@@ -498,6 +541,10 @@ const {
   selectedTools,
   selectedFormat,
   selectedLevels,
+  selectedPrices,
+  selectedDurations,
+  selectedLoan,
+  selectedFree,
 } = toRefs(props);
 
 const emit = defineEmits({
@@ -511,7 +558,11 @@ const emit = defineEmits({
   'update:selected-skills': (_: Array<ISkill>) => true,
   'update:selected-tools': (_: Array<ITool>) => true,
   'update:selected-format': (_: IFormat) => true,
-  'update:selected-levels': (_: ILevel) => true,
+  'update:selected-levels': (_: Array<ILevel>) => true,
+  'update:selected-prices': (_: Array<number>) => true,
+  'update:selected-durations': (_: Array<number>) => true,
+  'update:selected-loan': (_: Boolean) => true,
+  'update:selected-free': (_: Boolean) => true,
 });
 
 //
@@ -562,34 +613,60 @@ const onClickResetRating = (): void => {
 
 //
 
-const priceMin = ref(0);
-const priceMax = ref(350000);
-const priceStep = ref(1000);
-const selectedPrice = ref([priceMin.value, priceMax.value]);
+const selectedPricesValue = ref(selectedPrices.value);
 
-const onClickResetPrice = (): void => {
-  selectedPrice.value = [priceMin.value, priceMax.value];
+watch(selectedPricesValue, () => {
+  emit('update:selected-prices', selectedPricesValue.value);
+});
+
+watch(selectedPrices, () => {
+  selectedPricesValue.value = selectedPrices.value;
+});
+
+const onClickResetPrices = (): void => {
+  selectedPrices.value = [props.priceMin, props.priceMax];
 };
 
 const getLabelPrice = () => '₽';
 
 //
 
-const loan = ref(false);
+const selectedLoanValue = ref(selectedLoan.value);
+
+watch(selectedLoanValue, () => {
+  emit('update:selected-loan', selectedLoanValue.value);
+});
+
+watch(selectedLoan, () => {
+  selectedLoanValue.value = selectedLoan.value;
+});
 
 //
 
-const free = ref(false);
+const selectedFreeValue = ref(selectedFree.value);
+
+watch(selectedFreeValue, () => {
+  emit('update:selected-free', selectedFreeValue.value);
+});
+
+watch(selectedFree, () => {
+  selectedFreeValue.value = selectedFree.value;
+});
 
 //
 
-const durationMin = ref(0);
-const durationMax = ref(60);
-const durationStep = ref(1);
-const selectedDuration = ref([durationMin.value, durationMax.value]);
+const selectedDurationsValue = ref(selectedDurations.value);
 
-const onClickResetDuration = (): void => {
-  selectedDuration.value = [durationMin.value, durationMax.value];
+watch(selectedDurationsValue, () => {
+  emit('update:selected-durations', selectedDurationsValue.value);
+});
+
+watch(selectedDurations, () => {
+  selectedDurationsValue.value = selectedDurations.value;
+});
+
+const onClickResetDurations = (): void => {
+  selectedDurations.value = [props.durationMin, props.durationMax];
 };
 
 const getLabelDuration = (val: number) => {
@@ -709,7 +786,6 @@ const onClickResetTools = (): void => {
 const selectedFormatValue = ref<boolean | null>(selectedFormat.value?.value);
 
 watch(selectedFormatValue, () => {
-  console.log('HERE!');
   const selectedFormatValueFound = props.formats.find(
     (itm) => itm.value === selectedFormatValue.value,
   );
@@ -729,7 +805,7 @@ const onClickResetFormat = (): void => {
 
 //
 
-const selectedLevelsValue = ref<Array<ILevel> | null>(
+const selectedLevelsValue = ref<Array<ELevel> | null>(
   selectedLevels.value?.map((itm) => itm.value),
 );
 
@@ -746,7 +822,7 @@ watch(selectedLevelsValue, () => {
 });
 
 watch(selectedLevels, () => {
-  const newValue = selectedLevels.value?.map((itm) => itm.value);
+  const newValue: Array<ELevel> = selectedLevels.value?.map((itm) => itm.value);
 
   if (!isEqual(selectedLevelsValue.value, newValue)) {
     selectedLevelsValue.value = newValue;

@@ -114,6 +114,16 @@
               v-model:selected-tools="selectedTools"
               v-model:selected-format="selectedFormat"
               v-model:selected-levels="selectedLevels"
+              v-model:selected-prices="selectedPrices"
+              v-model:selected-durations="selectedDurations"
+              v-model:selected-loan="selectedLoan"
+              v-model:selected-free="selectedFree"
+              :price-min="priceMin"
+              :price-max="priceMax"
+              :price-step="priceStep"
+              :duration-min="durationMin"
+              :duration-max="durationMax"
+              :duration-step="durationStep"
               :directions="directions"
               :ratings="ratings"
               :schools="schools"
@@ -133,6 +143,9 @@
                 v-model:sort="sort"
                 v-model:type="type"
               />
+            </div>
+            <div class="catalog__tags">
+
             </div>
             <div class="catalog__courses">
               <Courses
@@ -155,6 +168,7 @@ import Button from '@/components/atoms/Button.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
+import CatalogTags from '@/components/molecules/CatalogTags.vue';
 import CatalogTools from '@/components/molecules/CatalogTools.vue';
 import Courses from '@/components/molecules/Courses.vue';
 import Tags from '@/components/molecules/Tags.vue';
@@ -346,6 +360,25 @@ const courses = ref<ICourse[]>([
 const onLoadItems = (name: string): void => {
   console.log(`Loading ${name}...`);
 };
+
+//
+
+const selectedLoan = ref(false);
+const selectedFree = ref(false);
+
+//
+
+const priceMin = ref(0);
+const priceMax = ref(350000);
+const priceStep = ref(1000);
+const selectedPrices = ref<Array<number>>([priceMin.value, priceMax.value]);
+
+//
+
+const durationMin = ref(0);
+const durationMax = ref(62);
+const durationStep = ref(1);
+const selectedDurations = ref<Array<number>>([durationMin.value, durationMax.value]);
 
 //
 
