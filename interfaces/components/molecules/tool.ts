@@ -1,7 +1,4 @@
-import TId from '@/types/id';
+import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
-export default interface ITool {
-  id: TId,
-  label: string,
-  value: number,
+export default interface ITool extends ICatalogFilterSelectItem {
 }

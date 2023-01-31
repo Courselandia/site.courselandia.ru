@@ -10,6 +10,7 @@
         <Input
           v-model:value="search"
           name="search"
+          @focus="onLoadItems"
         >
           <template #before>
             <Icon
@@ -53,6 +54,7 @@
 </template>
 
 <script lang="ts" setup>
+import { isEqual } from 'lodash';
 import {
   computed,
   PropType,
@@ -66,16 +68,16 @@ import Group from '@/components/atoms/form/Group.vue';
 import Input from '@/components/atoms/form/Input.vue';
 import Item from '@/components/atoms/form/Item.vue';
 import Icon from '@/components/atoms/Icon.vue';
-import ISchool from '@/interfaces/components/molecules/schoolFilter';
+import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
 const props = defineProps({
   items: {
-    type: Object as PropType<Array<ISchool>>,
+    type: Object as PropType<Array<ICatalogFilterSelectItem>>,
     required: false,
     default: null,
   },
   value: {
-    type: Object as PropType<Array<ISchool>>,
+    type: Object as PropType<Array<ICatalogFilterSelectItem>>,
     required: false,
     default: null,
   },
@@ -104,14 +106,15 @@ const nameClass = computed(() => {
 });
 
 const emit = defineEmits({
-  'update:value': (_: Array<ISchool>) => true,
+  'update:value': (_: Array<ICatalogFilterSelectItem>) => true,
+  'load-items': () => true,
 });
 
 const selects = ref(value.value?.map((item) => item.id) || []);
 
-const activeItems = computed((): Array<ISchool> => props.items?.filter(
+const activeItems = computed((): Array<ICatalogFilterSelectItem> => props.items?.filter(
   (itm) => itm.label.toLowerCase().indexOf(search.value.toLowerCase()) !== -1 || search.value === '',
-).sort((a: ISchool, b: ISchool): number => {
+).sort((a: ICatalogFilterSelectItem, b: ICatalogFilterSelectItem): number => {
   if (selects.value.indexOf(a.id) !== -1 && selects.value.indexOf(b.id) !== -1) {
     if (a.label > b.label) {
       return 1;
@@ -136,20 +139,32 @@ const activeItems = computed((): Array<ISchool> => props.items?.filter(
 }));
 
 watch(selects, () => {
-  const selected = props.items.filter((itm) => selects.value.indexOf(itm.id));
+  const selected = props.items.filter((itm) => selects.value.indexOf(itm.id) !== -1);
 
   emit('update:value', selected);
+}, {
+  deep: true,
 });
 
 watch(value, () => {
-  selects.value = value.value?.map((item) => item.id);
+  const newValues = value.value?.map((item) => item.id);
+
+  if (!isEqual(newValues, selects.value)) {
+    selects.value = value.value?.map((item) => item.id);
+  }
 });
 
 const onclickMore = (): void => {
   more.value = !more.value;
+
+  emit('load-items');
+};
+
+const onLoadItems = (): void => {
+  emit('load-items');
 };
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/molecules/catalogFilterSelect.scss";
+@import "assets/scss/components/molecules/catalogFilterSelect.scss";
 </style>

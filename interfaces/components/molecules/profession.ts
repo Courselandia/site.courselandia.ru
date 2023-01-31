@@ -1,4 +1,4 @@
 import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
-export default interface ISchool extends ICatalogFilterSelectItem {
+export default interface IProfession extends ICatalogFilterSelectItem {
 }

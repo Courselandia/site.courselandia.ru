@@ -60,6 +60,7 @@ const {
 
 const emit = defineEmits({
   'update:value': (_: String | Number) => true,
+  'focus': () => true,
 });
 
 const input = ref(value.value);
@@ -98,6 +99,8 @@ const onMouseLeave = (): void => {
 
 const onFocus = (): void => {
   focus.value = true;
+
+  emit('focus');
 };
 
 const onBlur = (): void => {

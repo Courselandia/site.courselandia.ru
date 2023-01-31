@@ -106,9 +106,24 @@
             v-model:selected-direction="selectedDirection"
             v-model:selected-rating="selectedRating"
             v-model:selected-schools="selectedSchools"
+            v-model:selected-categories="selectedCategories"
+            v-model:selected-professions="selectedProfessions"
+            v-model:selected-teachers="selectedTeachers"
+            v-model:selected-skills="selectedSkills"
+            v-model:selected-tools="selectedTools"
+            v-model:selected-format="selectedFormat"
+            v-model:selected-levels="selectedLevels"
             :directions="directions"
             :ratings="ratings"
             :schools="schools"
+            :categories="categories"
+            :professions="professions"
+            :teachers="teachers"
+            :skills="skills"
+            :tools="tools"
+            :formats="formats"
+            :levels="levels"
+            @load-items="onLoadItems"
           />
         </div>
         <div class="catalog__items">
@@ -145,10 +160,18 @@ import ECourseSort from '@/enums/components/molecules/courseSort';
 import ECourseType from '@/enums/components/molecules/courseType';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
+import ELevel from '@/enums/components/molecules/level';
+import ICategory from '@/interfaces/components/molecules/category';
 import ICourse from '@/interfaces/components/molecules/course';
 import IDirection from '@/interfaces/components/molecules/direction';
-import ISchool from '@/interfaces/components/molecules/schoolFilter';
+import IFormat from '@/interfaces/components/molecules/format';
+import ILevel from '@/interfaces/components/molecules/level';
+import IProfession from '@/interfaces/components/molecules/profession';
 import IRating from '@/interfaces/components/molecules/rating';
+import ISchool from '@/interfaces/components/molecules/schoolFilter';
+import ISkill from '@/interfaces/components/molecules/skill';
+import ITeacher from '@/interfaces/components/molecules/teacher';
+import ITool from '@/interfaces/components/molecules/tool';
 import TValue from '@/types/value';
 
 const route = useRoute();
@@ -318,6 +341,10 @@ const courses = ref<ICourse[]>([
   },
 ]);
 
+const onLoadItems = (name: string): void => {
+  console.log(`Loading ${name}...`);
+};
+
 //
 
 const directions = ref<IDirection[]>([
@@ -420,6 +447,346 @@ const schools = ref<ISchool[]>([
     link: 'iKit',
   },
 ]);
+const categories = ref<ICategory[]>([
+  {
+    id: 1,
+    label: 'Нетология',
+    link: 'netology',
+  },
+  {
+    id: 2,
+    label: 'GeekBrains',
+    link: 'GeekBrains',
+  },
+  {
+    id: 3,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 5,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 6,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 7,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 8,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+  {
+    id: 9,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 10,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 11,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 12,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 13,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+]);
+const professions = ref<IProfession[]>([
+  {
+    id: 1,
+    label: 'Нетология',
+    link: 'netology',
+  },
+  {
+    id: 2,
+    label: 'GeekBrains',
+    link: 'GeekBrains',
+  },
+  {
+    id: 3,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 5,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 6,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 7,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 8,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+  {
+    id: 9,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 10,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 11,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 12,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 13,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+]);
+const teachers = ref<ITeacher[]>([
+  {
+    id: 1,
+    label: 'Нетология',
+    link: 'netology',
+  },
+  {
+    id: 2,
+    label: 'GeekBrains',
+    link: 'GeekBrains',
+  },
+  {
+    id: 3,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 5,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 6,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 7,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 8,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+  {
+    id: 9,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 10,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 11,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 12,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 13,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+]);
+const skills = ref<ISkill[]>([
+  {
+    id: 1,
+    label: 'Нетология',
+    link: 'netology',
+  },
+  {
+    id: 2,
+    label: 'GeekBrains',
+    link: 'GeekBrains',
+  },
+  {
+    id: 3,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 5,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 6,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 7,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 8,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+  {
+    id: 9,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 10,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 11,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 12,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 13,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+]);
+const tools = ref<ITool[]>([
+  {
+    id: 1,
+    label: 'Нетология',
+    link: 'netology',
+  },
+  {
+    id: 2,
+    label: 'GeekBrains',
+    link: 'GeekBrains',
+  },
+  {
+    id: 3,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 5,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 6,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 7,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 8,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+  {
+    id: 9,
+    label: 'Skillbox',
+    link: 'Skillbox',
+  },
+  {
+    id: 10,
+    label: 'XYZ',
+    link: 'xyz',
+  },
+  {
+    id: 11,
+    label: 'Яндекс Практикум',
+    link: 'yandex',
+  },
+  {
+    id: 12,
+    label: 'Otus',
+    link: 'Otus',
+  },
+  {
+    id: 13,
+    label: 'iKit.pro',
+    link: 'iKit',
+  },
+]);
+
+const selectedFormat = ref<IFormat | null>();
+const formats = ref<IFormat[]>([
+  {
+    label: 'Онлайн',
+    value: true,
+  },
+  {
+    label: 'Офлайн',
+    value: false,
+  },
+]);
+
+//
+
+const selectedLevels = ref<Array<ILevel>>([]);
+const levels = ref<ILevel[]>([
+  {
+    label: 'Для начинающих',
+    value: ELevel.JUNIOR,
+  },
+  {
+    label: 'Для продвинутых',
+    value: ELevel.MIDDLE,
+  },
+  {
+    label: 'Для профессионалов',
+    value: ELevel.SENIOR,
+  },
+]);
 
 //
 
@@ -445,6 +812,16 @@ const ratings = ref<IRating[]>([
 const selectedRating = ref<IRating | null>();
 
 const selectedSchools = ref<Array<ISchool>>();
+
+const selectedCategories = ref<Array<ICategory>>();
+
+const selectedProfessions = ref<Array<IProfession>>();
+
+const selectedTeachers = ref<Array<ITeacher>>();
+
+const selectedSkills = ref<Array<ISkill>>();
+
+const selectedTools = ref<Array<ITool>>();
 </script>
 
 <style lang="scss">
