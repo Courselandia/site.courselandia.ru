@@ -1,14 +1,19 @@
 <template>
-  <div>
-    {{ selectedSchoolsValue }}
-  </div>
   <div
     v-if="selectedDirectionValue
       || selectedRatingValue
       || (selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax)
       || selectedLoanValue
       || selectedFreeValue
-      || (selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax)"
+      || (selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax)
+      || selectedSchoolsValue?.length
+      || selectedCategoriesValue?.length
+      || selectedProfessionsValue?.length
+      || selectedTeachersValue?.length
+      || selectedSkillsValue?.length
+      || selectedToolsValue?.length
+      || selectedFormat !== null
+      || selectedLevelsValue?.length"
     class="catalog-tags"
   >
     <Tags>
@@ -29,6 +34,7 @@
             />
           </template>
         </Tag>
+
         <Tag
           v-if="selectedRatingValue"
           :bck="'blue1'"
@@ -45,6 +51,7 @@
             />
           </template>
         </Tag>
+
         <Tag
           v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
           :bck="'blue1'"
@@ -66,6 +73,7 @@
             />
           </template>
         </Tag>
+
         <Tag
           v-if="selectedLoanValue"
           :bck="'blue1'"
@@ -82,6 +90,7 @@
             />
           </template>
         </Tag>
+
         <Tag
           v-if="selectedFreeValue"
           :bck="'blue1'"
@@ -98,6 +107,7 @@
             />
           </template>
         </Tag>
+
         <Tag
           v-if="selectedDurationsValue[0] !== durationMin
             || selectedDurationsValue[1] !== durationMax"
@@ -122,13 +132,173 @@
             />
           </template>
         </Tag>
+
+        <template v-if="selectedSchoolsValue?.length">
+          <Tag
+            v-for="(school, key) in selectedSchoolsValue"
+            :key="key"
+            :bck="'blue1'"
+          >
+            {{ school.label }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetSchool(key)"
+                @keyup="onClickResetSchool(key)"
+              />
+            </template>
+          </Tag>
+        </template>
+
+        <template v-if="selectedCategoriesValue?.length">
+          <Tag
+            v-for="(category, key) in selectedCategoriesValue"
+            :key="key"
+            :bck="'blue1'"
+          >
+            {{ category.label }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetCategory(key)"
+                @keyup="onClickResetCategory(key)"
+              />
+            </template>
+          </Tag>
+        </template>
+
+        <template v-if="selectedProfessionsValue?.length">
+          <Tag
+            v-for="(profession, key) in selectedProfessionsValue"
+            :key="key"
+            :bck="'blue1'"
+          >
+            {{ profession.label }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetProfession(key)"
+                @keyup="onClickResetProfession(key)"
+              />
+            </template>
+          </Tag>
+        </template>
+
+        <template v-if="selectedTeachersValue?.length">
+          <Tag
+            v-for="(teacher, key) in selectedTeachersValue"
+            :key="key"
+            :bck="'blue1'"
+          >
+            {{ teacher.label }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetTeacher(key)"
+                @keyup="onClickResetTeacher(key)"
+              />
+            </template>
+          </Tag>
+        </template>
+
+        <template v-if="selectedSkillsValue?.length">
+          <Tag
+            v-for="(skill, key) in selectedSkillsValue"
+            :key="key"
+            :bck="'blue1'"
+          >
+            {{ skill.label }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetSkill(key)"
+                @keyup="onClickResetSkill(key)"
+              />
+            </template>
+          </Tag>
+        </template>
+
+        <template v-if="selectedToolsValue?.length">
+          <Tag
+            v-for="(tool, key) in selectedToolsValue"
+            :key="key"
+            :bck="'blue1'"
+          >
+            {{ tool.label }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetTool(key)"
+                @keyup="onClickResetTool(key)"
+              />
+            </template>
+          </Tag>
+        </template>
+
+        <Tag
+          v-if="selectedFormat"
+          :bck="'blue1'"
+        >
+          {{ selectedFormat.label }}
+          <template #after>
+            <Icon
+              name="close"
+              color="grey2"
+              :size="[15, 15]"
+              class="cursor--pointer"
+              @click="onClickResetFormat"
+              @keyup="onClickResetFormat"
+            />
+          </template>
+        </Tag>
+
+        <template v-if="selectedLevelsValue?.length">
+          <Tag
+            v-for="(level, key) in selectedLevelsValue"
+            :key="key"
+            :bck="'blue1'"
+          >
+            {{ getSelectedLevelLabel(level) }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetLevel(key)"
+                @keyup="onClickResetLevel(key)"
+              />
+            </template>
+          </Tag>
+        </template>
       </transition-group>
     </Tags>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { isEqual } from 'lodash';
+import {
+  cloneDeep,
+  isEqual,
+} from 'lodash';
 import {
   PropType,
   ref,
@@ -184,11 +354,6 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
-  directions: {
-    type: Array as PropType<Array<IDirection>>,
-    required: false,
-    default: () => [],
-  },
   selectedDirection: {
     type: Object as PropType<IDirection>,
     required: false,
@@ -214,18 +379,8 @@ const props = defineProps({
     required: false,
     default: null,
   },
-  schools: {
-    type: Array as PropType<Array<ISchool>>,
-    required: false,
-    default: () => [],
-  },
   selectedSchools: {
     type: Array as PropType<Array<ISchool>>,
-    required: false,
-    default: () => [],
-  },
-  categories: {
-    type: Array as PropType<Array<ICategory>>,
     required: false,
     default: () => [],
   },
@@ -234,18 +389,8 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
-  professions: {
-    type: Array as PropType<Array<IProfession>>,
-    required: false,
-    default: () => [],
-  },
   selectedProfessions: {
     type: Array as PropType<Array<IProfession>>,
-    required: false,
-    default: () => [],
-  },
-  teachers: {
-    type: Array as PropType<Array<ITeacher>>,
     required: false,
     default: () => [],
   },
@@ -254,18 +399,8 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
-  skills: {
-    type: Array as PropType<Array<ISkill>>,
-    required: false,
-    default: () => [],
-  },
   selectedSkills: {
     type: Array as PropType<Array<ISkill>>,
-    required: false,
-    default: () => [],
-  },
-  tools: {
-    type: Array as PropType<Array<ITool>>,
     required: false,
     default: () => [],
   },
@@ -324,7 +459,7 @@ const emit = defineEmits({
   'update:selected-teachers': (_: Array<ITeacher>) => true,
   'update:selected-skills': (_: Array<ISkill>) => true,
   'update:selected-tools': (_: Array<ITool>) => true,
-  'update:selected-format': (_: IFormat) => true,
+  'update:selected-format': (_: IFormat | null) => true,
   'update:selected-levels': (_: Array<ILevel>) => true,
   'update:selected-prices': (_: Array<number>) => true,
   'update:selected-durations': (_: Array<number>) => true,
@@ -436,7 +571,7 @@ watch(selectedDurations, () => {
   selectedDurationsValue.value = selectedDurations.value;
 });
 
-const onClickResetDurations = (): void => {
+const onClickResetDuration = (): void => {
   selectedDurations.value = [props.durationMin, props.durationMax];
 };
 
@@ -468,8 +603,9 @@ watch(selectedSchools, () => {
   selectedSchoolsValue.value = selectedSchools.value;
 });
 
-const onClickResetSchools = (): void => {
-  selectedSchoolsValue.value = [];
+const onClickResetSchool = (index: number): void => {
+  selectedSchoolsValue.value.splice(index, 1);
+  selectedSchoolsValue.value = cloneDeep(selectedSchoolsValue.value);
 };
 
 //
@@ -484,8 +620,9 @@ watch(selectedCategories, () => {
   selectedCategoriesValue.value = selectedCategories.value;
 });
 
-const onClickResetCategories = (): void => {
-  selectedCategoriesValue.value = [];
+const onClickResetCategory = (index: number): void => {
+  selectedCategoriesValue.value.splice(index, 1);
+  selectedCategoriesValue.value = cloneDeep(selectedCategoriesValue.value);
 };
 
 //
@@ -500,8 +637,9 @@ watch(selectedProfessions, () => {
   selectedProfessionsValue.value = selectedProfessions.value;
 });
 
-const onClickResetProfessions = (): void => {
-  selectedProfessionsValue.value = [];
+const onClickResetProfession = (index: number): void => {
+  selectedProfessionsValue.value.splice(index, 1);
+  selectedProfessionsValue.value = cloneDeep(selectedProfessionsValue.value);
 };
 
 //
@@ -516,8 +654,9 @@ watch(selectedTeachers, () => {
   selectedTeachersValue.value = selectedTeachers.value;
 });
 
-const onClickResetTeachers = (): void => {
-  selectedTeachersValue.value = [];
+const onClickResetTeacher = (index: number): void => {
+  selectedTeachersValue.value.splice(index, 1);
+  selectedTeachersValue.value = cloneDeep(selectedTeachersValue.value);
 };
 
 //
@@ -532,8 +671,9 @@ watch(selectedSkills, () => {
   selectedSkillsValue.value = selectedSkills.value;
 });
 
-const onClickResetSkills = (): void => {
-  selectedSkillsValue.value = [];
+const onClickResetSkill = (index: number): void => {
+  selectedSkillsValue.value.splice(index, 1);
+  selectedSkillsValue.value = cloneDeep(selectedSkillsValue.value);
 };
 
 //
@@ -548,8 +688,9 @@ watch(selectedTools, () => {
   selectedToolsValue.value = selectedTools.value;
 });
 
-const onClickResetTools = (): void => {
-  selectedToolsValue.value = [];
+const onClickResetTool = (index: number): void => {
+  selectedToolsValue.value.splice(index, 1);
+  selectedToolsValue.value = cloneDeep(selectedToolsValue.value);
 };
 
 //
@@ -561,13 +702,11 @@ watch(selectedFormatValue, () => {
     (itm) => itm.value === selectedFormatValue.value,
   );
 
-  if (selectedFormatValueFound) {
-    emit('update:selected-format', selectedFormatValueFound);
-  }
+  emit('update:selected-format', selectedFormatValueFound || null);
 });
 
 watch(selectedFormat, () => {
-  selectedFormatValue.value = selectedFormat.value.value;
+  selectedFormatValue.value = selectedFormat.value?.value;
 });
 
 const onClickResetFormat = (): void => {
@@ -600,8 +739,17 @@ watch(selectedLevels, () => {
   }
 });
 
-const onClickResetLevels = (): void => {
-  selectedLevelsValue.value = [];
+const onClickResetLevel = (index: number): void => {
+  selectedLevelsValue.value?.splice(index, 1);
+  selectedLevelsValue.value = cloneDeep(selectedLevelsValue.value);
+};
+
+const getSelectedLevelLabel = (level: ELevel): string | null => {
+  const selectedLevelValueFound = props.levels.find(
+    (itm) => itm.value === level,
+  );
+
+  return selectedLevelValueFound ? selectedLevelValueFound.label : null;
 };
 </script>
 

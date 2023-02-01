@@ -632,7 +632,7 @@ const emit = defineEmits({
   'update:selected-teachers': (_: Array<ITeacher>) => true,
   'update:selected-skills': (_: Array<ISkill>) => true,
   'update:selected-tools': (_: Array<ITool>) => true,
-  'update:selected-format': (_: IFormat) => true,
+  'update:selected-format': (_: IFormat | null) => true,
   'update:selected-levels': (_: Array<ILevel>) => true,
   'update:selected-prices': (_: Array<number>) => true,
   'update:selected-durations': (_: Array<number>) => true,
@@ -863,13 +863,11 @@ watch(selectedFormatValue, () => {
     (itm) => itm.value === selectedFormatValue.value,
   );
 
-  if (selectedFormatValueFound) {
-    emit('update:selected-format', selectedFormatValueFound);
-  }
+  emit('update:selected-format', selectedFormatValueFound || null);
 });
 
 watch(selectedFormat, () => {
-  selectedFormatValue.value = selectedFormat.value.value;
+  selectedFormatValue.value = selectedFormat.value?.value;
 });
 
 const onClickResetFormat = (): void => {
