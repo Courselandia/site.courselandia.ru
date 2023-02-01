@@ -20,7 +20,7 @@
       <transition-group name="fade">
         <Tag
           v-if="selectedDirectionValue"
-          :bck="'blue1'"
+          bck="blue1"
         >
           {{ selectedDirectionValue.name }}
           <template #after>
@@ -37,7 +37,7 @@
 
         <Tag
           v-if="selectedRatingValue"
-          :bck="'blue1'"
+          bck="blue1"
         >
           {{ getSelectedRatingLabel() }}
           <template #after>
@@ -54,7 +54,7 @@
 
         <Tag
           v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
-          :bck="'blue1'"
+          bck="blue1"
         >
           <template v-if="selectedPricesValue[0] === selectedPricesValue[1]">
             {{ money(selectedPricesValue[0]) }} ₽
@@ -76,7 +76,7 @@
 
         <Tag
           v-if="selectedLoanValue"
-          :bck="'blue1'"
+          bck="blue1"
         >
           Рассрочка
           <template #after>
@@ -93,7 +93,7 @@
 
         <Tag
           v-if="selectedFreeValue"
-          :bck="'blue1'"
+          bck="blue1"
         >
           Только бесплатные
           <template #after>
@@ -111,7 +111,7 @@
         <Tag
           v-if="selectedDurationsValue[0] !== durationMin
             || selectedDurationsValue[1] !== durationMax"
-          :bck="'blue1'"
+          bck="blue1"
         >
           <template v-if="selectedDurationsValue[0] === selectedDurationsValue[1]">
             {{ selectedDurationsValue[0] }} {{ getLabelDuration(selectedDurationsValue[0]) }}
@@ -137,7 +137,7 @@
           <Tag
             v-for="(school, key) in selectedSchoolsValue"
             :key="key"
-            :bck="'blue1'"
+            bck="blue1"
           >
             {{ school.label }}
             <template #after>
@@ -157,7 +157,7 @@
           <Tag
             v-for="(category, key) in selectedCategoriesValue"
             :key="key"
-            :bck="'blue1'"
+            bck="blue1"
           >
             {{ category.label }}
             <template #after>
@@ -177,7 +177,7 @@
           <Tag
             v-for="(profession, key) in selectedProfessionsValue"
             :key="key"
-            :bck="'blue1'"
+            bck="blue1"
           >
             {{ profession.label }}
             <template #after>
@@ -197,7 +197,7 @@
           <Tag
             v-for="(teacher, key) in selectedTeachersValue"
             :key="key"
-            :bck="'blue1'"
+            bck="blue1"
           >
             {{ teacher.label }}
             <template #after>
@@ -217,7 +217,7 @@
           <Tag
             v-for="(skill, key) in selectedSkillsValue"
             :key="key"
-            :bck="'blue1'"
+            bck="blue1"
           >
             {{ skill.label }}
             <template #after>
@@ -237,7 +237,7 @@
           <Tag
             v-for="(tool, key) in selectedToolsValue"
             :key="key"
-            :bck="'blue1'"
+            bck="blue1"
           >
             {{ tool.label }}
             <template #after>
@@ -255,7 +255,7 @@
 
         <Tag
           v-if="selectedFormat"
-          :bck="'blue1'"
+          bck="blue1"
         >
           {{ selectedFormat.label }}
           <template #after>
@@ -274,7 +274,7 @@
           <Tag
             v-for="(level, key) in selectedLevelsValue"
             :key="key"
-            :bck="'blue1'"
+            bck="blue1"
           >
             {{ getSelectedLevelLabel(level) }}
             <template #after>
@@ -289,6 +289,16 @@
             </template>
           </Tag>
         </template>
+
+        <Tag
+          v-if="resetAll"
+          bck="black"
+          color="white"
+          cursor
+          @click="onClickResetAll"
+        >
+          Очистить все
+        </Tag>
       </transition-group>
     </Tags>
   </div>
@@ -428,6 +438,11 @@ const props = defineProps({
     type: Array as PropType<Array<ILevel>>,
     required: false,
     default: () => [],
+  },
+  resetAll: {
+    type: Boolean,
+    required: false,
+    default: true,
   },
 });
 
@@ -571,8 +586,8 @@ watch(selectedDurations, () => {
   selectedDurationsValue.value = selectedDurations.value;
 });
 
-const onClickResetDuration = (): void => {
-  selectedDurations.value = [props.durationMin, props.durationMax];
+const onClickResetDurations = (): void => {
+  selectedDurationsValue.value = [props.durationMin, props.durationMax];
 };
 
 const getLabelDuration = (val: number) => {
@@ -750,6 +765,23 @@ const getSelectedLevelLabel = (level: ELevel): string | null => {
   );
 
   return selectedLevelValueFound ? selectedLevelValueFound.label : null;
+};
+
+const onClickResetAll = (): void => {
+  onClickResetDirection();
+  onClickResetRating();
+  onClickResetPrices();
+  onClickResetLoan();
+  onClickResetFree();
+  onClickResetDurations();
+  selectedSchoolsValue.value = [];
+  selectedCategoriesValue.value = [];
+  selectedProfessionsValue.value = [];
+  selectedTeachersValue.value = [];
+  selectedSkillsValue.value = [];
+  selectedToolsValue.value = [];
+  onClickResetFormat();
+  selectedLevelsValue.value = [];
 };
 </script>
 
