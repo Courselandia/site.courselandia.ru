@@ -5,8 +5,25 @@
 </template>
 
 <script lang="ts" setup>
-import {PropType, ref, toRefs, watch} from 'vue';
+import { isEqual } from 'lodash';
+import {
+  PropType,
+  ref,
+  toRefs,
+  watch,
+} from 'vue';
 
+import Checkbox from '@/components/atoms/form/Checkbox.vue';
+import Group from '@/components/atoms/form/Group.vue';
+import Item from '@/components/atoms/form/Item.vue';
+import Radio from '@/components/atoms/form/Radio.vue';
+import RangeSlider from '@/components/atoms/form/RangeSlider.vue';
+import Switch from '@/components/atoms/form/Switch.vue';
+import Icon from '@/components/atoms/Icon.vue';
+import Tag from '@/components/atoms/Tag.vue';
+import CatalogFilterSelect from '@/components/molecules/CatalogFilterSelect.vue';
+import Tags from '@/components/molecules/Tags.vue';
+import ELevel from '@/enums/components/molecules/level';
 import ICategory from '@/interfaces/components/molecules/category';
 import IDirection from '@/interfaces/components/molecules/direction';
 import IFormat from '@/interfaces/components/molecules/format';
@@ -17,11 +34,33 @@ import ISchool from '@/interfaces/components/molecules/schoolFilter';
 import ISkill from '@/interfaces/components/molecules/skill';
 import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
-import TId from "~/types/id";
-import ELevel from "~/enums/components/molecules/level";
-import {isEqual} from "lodash";
+import TId from '@/types/id';
 
 const props = defineProps({
+  priceMin: {
+    type: Number,
+    required: true,
+  },
+  priceMax: {
+    type: Number,
+    required: true,
+  },
+  selectedPrices: {
+    type: Array as PropType<Array<number>>,
+    required: true,
+  },
+  durationMin: {
+    type: Number,
+    required: true,
+  },
+  durationMax: {
+    type: Number,
+    required: true,
+  },
+  selectedDurations: {
+    type: Array as PropType<Array<number>>,
+    required: true,
+  },
   directions: {
     type: Array as PropType<Array<IDirection>>,
     required: true,
@@ -34,6 +73,16 @@ const props = defineProps({
   ratings: {
     type: Array as PropType<Array<IRating>>,
     required: true,
+  },
+  selectedLoan: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  selectedFree: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
   selectedRating: {
     type: Object as PropType<IRating>,
@@ -127,6 +176,10 @@ const {
   selectedTools,
   selectedFormat,
   selectedLevels,
+  selectedPrices,
+  selectedDurations,
+  selectedLoan,
+  selectedFree,
 } = toRefs(props);
 
 const emit = defineEmits({
@@ -140,6 +193,10 @@ const emit = defineEmits({
   'update:selected-tools': (_: Array<ITool>) => true,
   'update:selected-format': (_: IFormat) => true,
   'update:selected-levels': (_: Array<ILevel>) => true,
+  'update:selected-prices': (_: Array<number>) => true,
+  'update:selected-durations': (_: Array<number>) => true,
+  'update:selected-loan': (_: Boolean) => true,
+  'update:selected-free': (_: Boolean) => true,
 });
 
 //
@@ -174,48 +231,64 @@ watch(selectedRating, () => {
 
 //
 
-
-const selectedPrice = ref([priceMin.value, priceMax.value]);
-
-const onClickResetPrice = (): void => {
-  selectedPrice.value = [priceMin.value, priceMax.value];
+const onClickResetRating = (): void => {
+  selectedRatingValue.value = null;
 };
 
-const getLabelPrice = () => '₽';
-
 //
 
-const loan = ref(false);
+const selectedPricesValue = ref(selectedPrices.value);
 
-//
+watch(selectedPricesValue, () => {
+  emit('update:selected-prices', selectedPricesValue.value);
+});
 
-const free = ref(false);
+watch(selectedPrices, () => {
+  selectedPricesValue.value = selectedPrices.value;
+});
 
-//
-
-const durationMin = ref(0);
-const durationMax = ref(60);
-const durationStep = ref(1);
-const selectedDuration = ref([durationMin.value, durationMax.value]);
-
-const onClickResetDuration = (): void => {
-  selectedDuration.value = [durationMin.value, durationMax.value];
+const onClickResetPrices = (): void => {
+  selectedPrices.value = [props.priceMin, props.priceMax];
 };
 
-const getLabelDuration = (val: number) => {
-  if (val === 0) {
-    return 'месяцев';
-  }
+//
 
-  if (val === 1) {
-    return 'месяц';
-  }
+const selectedLoanValue = ref(selectedLoan.value);
 
-  if (val >= 2 && val <= 4) {
-    return 'месяца';
-  }
+watch(selectedLoanValue, () => {
+  emit('update:selected-loan', selectedLoanValue.value);
+});
 
-  return 'месяцев';
+watch(selectedLoan, () => {
+  selectedLoanValue.value = selectedLoan.value;
+});
+
+//
+
+const selectedFreeValue = ref(selectedFree.value);
+
+watch(selectedFreeValue, () => {
+  emit('update:selected-free', selectedFreeValue.value);
+});
+
+watch(selectedFree, () => {
+  selectedFreeValue.value = selectedFree.value;
+});
+
+//
+
+const selectedDurationsValue = ref(selectedDurations.value);
+
+watch(selectedDurationsValue, () => {
+  emit('update:selected-durations', selectedDurationsValue.value);
+});
+
+watch(selectedDurations, () => {
+  selectedDurationsValue.value = selectedDurations.value;
+});
+
+const onClickResetDurations = (): void => {
+  selectedDurations.value = [props.durationMin, props.durationMax];
 };
 
 //
@@ -366,3 +439,7 @@ const onClickResetLevels = (): void => {
   selectedLevelsValue.value = [];
 };
 </script>
+
+<style lang="scss">
+@import "@/assets/scss/components/molecules/catalogTags.scss";
+</style>
