@@ -875,17 +875,17 @@ const ratings = ref<IRating[]>([
 
 const selectedRating = ref<IRating | null>();
 
-const selectedSchools = ref<Array<ISchool>>();
+const selectedSchools = ref<Array<ISchool>>([]);
 
-const selectedCategories = ref<Array<ICategory>>();
+const selectedCategories = ref<Array<ICategory>>([]);
 
-const selectedProfessions = ref<Array<IProfession>>();
+const selectedProfessions = ref<Array<IProfession>>([]);
 
-const selectedTeachers = ref<Array<ITeacher>>();
+const selectedTeachers = ref<Array<ITeacher>>([]);
 
-const selectedSkills = ref<Array<ISkill>>();
+const selectedSkills = ref<Array<ISkill>>([]);
 
-const selectedTools = ref<Array<ITool>>();
+const selectedTools = ref<Array<ITool>>([]);
 </script>
 
 <style lang="scss">

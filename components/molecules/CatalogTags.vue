@@ -1,6 +1,129 @@
 <template>
-  <div class="catalog-tags">
-    HERE
+  <div>
+    {{ selectedSchoolsValue }}
+  </div>
+  <div
+    v-if="selectedDirectionValue
+      || selectedRatingValue
+      || (selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax)
+      || selectedLoanValue
+      || selectedFreeValue
+      || (selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax)"
+    class="catalog-tags"
+  >
+    <Tags>
+      <transition-group name="fade">
+        <Tag
+          v-if="selectedDirectionValue"
+          :bck="'blue1'"
+        >
+          {{ selectedDirectionValue.name }}
+          <template #after>
+            <Icon
+              name="close"
+              color="grey2"
+              :size="[15, 15]"
+              class="cursor--pointer"
+              @click="onClickResetDirection"
+              @keyup="onClickResetDirection"
+            />
+          </template>
+        </Tag>
+        <Tag
+          v-if="selectedRatingValue"
+          :bck="'blue1'"
+        >
+          {{ getSelectedRatingLabel() }}
+          <template #after>
+            <Icon
+              name="close"
+              color="grey2"
+              :size="[15, 15]"
+              class="cursor--pointer"
+              @click="onClickResetRating"
+              @keyup="onClickResetRating"
+            />
+          </template>
+        </Tag>
+        <Tag
+          v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
+          :bck="'blue1'"
+        >
+          <template v-if="selectedPricesValue[0] === selectedPricesValue[1]">
+            {{ money(selectedPricesValue[0]) }} ₽
+          </template>
+          <template v-else>
+            {{ money(selectedPricesValue[0]) }} ₽ – {{ money(selectedPricesValue[1]) }} ₽
+          </template>
+          <template #after>
+            <Icon
+              name="close"
+              color="grey2"
+              :size="[15, 15]"
+              class="cursor--pointer"
+              @click="onClickResetPrices"
+              @keyup="onClickResetPrices"
+            />
+          </template>
+        </Tag>
+        <Tag
+          v-if="selectedLoanValue"
+          :bck="'blue1'"
+        >
+          Рассрочка
+          <template #after>
+            <Icon
+              name="close"
+              color="grey2"
+              :size="[15, 15]"
+              class="cursor--pointer"
+              @click="onClickResetLoan"
+              @keyup="onClickResetLoan"
+            />
+          </template>
+        </Tag>
+        <Tag
+          v-if="selectedFreeValue"
+          :bck="'blue1'"
+        >
+          Только бесплатные
+          <template #after>
+            <Icon
+              name="close"
+              color="grey2"
+              :size="[15, 15]"
+              class="cursor--pointer"
+              @click="onClickResetFree"
+              @keyup="onClickResetFree"
+            />
+          </template>
+        </Tag>
+        <Tag
+          v-if="selectedDurationsValue[0] !== durationMin
+            || selectedDurationsValue[1] !== durationMax"
+          :bck="'blue1'"
+        >
+          <template v-if="selectedDurationsValue[0] === selectedDurationsValue[1]">
+            {{ selectedDurationsValue[0] }} {{ getLabelDuration(selectedDurationsValue[0]) }}
+          </template>
+          <template v-else>
+            {{ selectedDurationsValue[0] }} {{ getLabelDuration(selectedDurationsValue[0]) }}
+            –
+            {{ money(selectedDurationsValue[1]) }} {{ getLabelDuration(selectedDurationsValue[1]) }}
+          </template>
+          <template #after>
+            <Icon
+              name="close"
+              color="grey2"
+              :size="[15, 15]"
+              class="cursor--pointer"
+              @click="onClickResetDurations"
+              @keyup="onClickResetDurations"
+            />
+          </template>
+        </Tag>
+      </transition-group>
+    </Tags>
   </div>
 </template>
 
@@ -13,17 +136,11 @@ import {
   watch,
 } from 'vue';
 
-import Checkbox from '@/components/atoms/form/Checkbox.vue';
-import Group from '@/components/atoms/form/Group.vue';
-import Item from '@/components/atoms/form/Item.vue';
-import Radio from '@/components/atoms/form/Radio.vue';
-import RangeSlider from '@/components/atoms/form/RangeSlider.vue';
-import Switch from '@/components/atoms/form/Switch.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
-import CatalogFilterSelect from '@/components/molecules/CatalogFilterSelect.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import ELevel from '@/enums/components/molecules/level';
+import { money } from '@/helpers/number';
 import ICategory from '@/interfaces/components/molecules/category';
 import IDirection from '@/interfaces/components/molecules/direction';
 import IFormat from '@/interfaces/components/molecules/format';
@@ -39,31 +156,38 @@ import TId from '@/types/id';
 const props = defineProps({
   priceMin: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   priceMax: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   selectedPrices: {
     type: Array as PropType<Array<number>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   durationMin: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   durationMax: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   selectedDurations: {
     type: Array as PropType<Array<number>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   directions: {
     type: Array as PropType<Array<IDirection>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedDirection: {
     type: Object as PropType<IDirection>,
@@ -72,7 +196,8 @@ const props = defineProps({
   },
   ratings: {
     type: Array as PropType<Array<IRating>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedLoan: {
     type: Boolean,
@@ -91,61 +216,68 @@ const props = defineProps({
   },
   schools: {
     type: Array as PropType<Array<ISchool>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedSchools: {
-    type: Object as PropType<Array<ISchool>>,
+    type: Array as PropType<Array<ISchool>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   categories: {
     type: Array as PropType<Array<ICategory>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedCategories: {
-    type: Object as PropType<Array<ICategory>>,
+    type: Array as PropType<Array<ICategory>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   professions: {
     type: Array as PropType<Array<IProfession>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedProfessions: {
-    type: Object as PropType<Array<IProfession>>,
+    type: Array as PropType<Array<IProfession>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   teachers: {
     type: Array as PropType<Array<ITeacher>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedTeachers: {
-    type: Object as PropType<Array<ITeacher>>,
+    type: Array as PropType<Array<ITeacher>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   skills: {
     type: Array as PropType<Array<ISkill>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedSkills: {
-    type: Object as PropType<Array<ISkill>>,
+    type: Array as PropType<Array<ISkill>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   tools: {
     type: Array as PropType<Array<ITool>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedTools: {
-    type: Object as PropType<Array<ITool>>,
+    type: Array as PropType<Array<ITool>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   formats: {
     type: Array as PropType<Array<IFormat>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedFormat: {
     type: Object as PropType<IFormat>,
@@ -154,12 +286,13 @@ const props = defineProps({
   },
   levels: {
     type: Array as PropType<Array<ILevel>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedLevels: {
-    type: Object as PropType<Array<ILevel>>,
+    type: Array as PropType<Array<ILevel>>,
     required: false,
-    default: null,
+    default: () => [],
   },
 });
 
@@ -183,8 +316,8 @@ const {
 } = toRefs(props);
 
 const emit = defineEmits({
-  'update:selected-direction': (_: IDirection) => true,
-  'update:selected-rating': (_: IRating) => true,
+  'update:selected-direction': (_: IDirection | null) => true,
+  'update:selected-rating': (_: IRating | null) => true,
   'update:selected-schools': (_: Array<ISchool>) => true,
   'update:selected-categories': (_: Array<ICategory>) => true,
   'update:selected-professions': (_: Array<IProfession>) => true,
@@ -201,7 +334,7 @@ const emit = defineEmits({
 
 //
 
-const selectedDirectionValue = ref(selectedDirection.value);
+const selectedDirectionValue = ref<IDirection | null>(selectedDirection.value);
 
 watch(selectedDirectionValue, () => {
   emit('update:selected-direction', selectedDirectionValue.value);
@@ -210,6 +343,10 @@ watch(selectedDirectionValue, () => {
 watch(selectedDirection, () => {
   selectedDirectionValue.value = selectedDirection.value;
 });
+
+const onClickResetDirection = (): void => {
+  selectedDirectionValue.value = null;
+};
 
 //
 
@@ -220,16 +357,20 @@ watch(selectedRatingValue, () => {
     (itm) => itm.value === selectedRatingValue.value,
   );
 
-  if (selectedRatingValueFound) {
-    emit('update:selected-rating', selectedRatingValueFound);
-  }
+  emit('update:selected-rating', selectedRatingValueFound || null);
 });
 
 watch(selectedRating, () => {
-  selectedRatingValue.value = selectedRating.value.value;
+  selectedRatingValue.value = selectedRating.value?.value;
 });
 
-//
+const getSelectedRatingLabel = (): string | null => {
+  const selectedRatingValueFound = props.ratings.find(
+    (itm) => itm.value === selectedRatingValue.value,
+  );
+
+  return selectedRatingValueFound ? selectedRatingValueFound.label : null;
+};
 
 const onClickResetRating = (): void => {
   selectedRatingValue.value = null;
@@ -248,7 +389,7 @@ watch(selectedPrices, () => {
 });
 
 const onClickResetPrices = (): void => {
-  selectedPrices.value = [props.priceMin, props.priceMax];
+  selectedPricesValue.value = [props.priceMin, props.priceMax];
 };
 
 //
@@ -263,6 +404,10 @@ watch(selectedLoan, () => {
   selectedLoanValue.value = selectedLoan.value;
 });
 
+const onClickResetLoan = (): void => {
+  selectedLoanValue.value = false;
+};
+
 //
 
 const selectedFreeValue = ref(selectedFree.value);
@@ -274,6 +419,10 @@ watch(selectedFreeValue, () => {
 watch(selectedFree, () => {
   selectedFreeValue.value = selectedFree.value;
 });
+
+const onClickResetFree = (): void => {
+  selectedFreeValue.value = false;
+};
 
 //
 
@@ -289,6 +438,22 @@ watch(selectedDurations, () => {
 
 const onClickResetDurations = (): void => {
   selectedDurations.value = [props.durationMin, props.durationMax];
+};
+
+const getLabelDuration = (val: number) => {
+  if (val === 0) {
+    return 'месяцев';
+  }
+
+  if (val === 1) {
+    return 'месяц';
+  }
+
+  if (val >= 2 && val <= 4) {
+    return 'месяца';
+  }
+
+  return 'месяцев';
 };
 
 //

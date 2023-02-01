@@ -4,14 +4,42 @@
       :to="to"
       :class="`tag ${nameClass}`"
     >
-      <slot />
+      <div
+        v-if="hasSlot('before')"
+        class="tag__before"
+      >
+        <slot name="before" />
+      </div>
+      <div class="tag__label">
+        <slot />
+      </div>
+      <div
+        v-if="hasSlot('after')"
+        class="tag__after"
+      >
+        <slot name="after" />
+      </div>
     </nuxt-link>
   </template>
   <template v-else>
     <div
       :class="`tag ${nameClass}`"
     >
-      <slot />
+      <div
+        v-if="hasSlot('before')"
+        class="tag__before"
+      >
+        <slot name="before" />
+      </div>
+      <div class="tag__label">
+        <slot />
+      </div>
+      <div
+        v-if="hasSlot('after')"
+        class="tag__after"
+      >
+        <slot name="after" />
+      </div>
     </div>
   </template>
 </template>
@@ -20,6 +48,7 @@
 import {
   computed,
   PropType,
+  useSlots,
 } from 'vue';
 
 import TColor from '@/types/color';
@@ -60,6 +89,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  cursor: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const nameClass = computed(() => {
@@ -89,8 +123,16 @@ const nameClass = computed(() => {
     classes.push('tag--shadow');
   }
 
+  if (props.to || props.cursor) {
+    classes.push('tag--cursor');
+  }
+
   return classes.join(' ');
 });
+
+const slots = useSlots();
+
+const hasSlot = (name: string) => !!slots[name];
 </script>
 
 <style lang="scss">

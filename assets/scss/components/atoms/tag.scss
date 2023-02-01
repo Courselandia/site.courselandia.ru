@@ -2,15 +2,13 @@
 @import "@/assets/scss/vars/animations/transition";
 
 .tag {
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.375rem;
   color: $blue2;
   padding: 0.75rem 1rem;
   border-radius: 10px;
   transition: all $speedPrimary $functionPrimary;
-  cursor: pointer;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 
   @media all and (max-width: 576px) {
     padding: 0.625rem 0.75rem;
@@ -18,7 +16,15 @@
     line-height: 1.1875rem;
   }
 
+  &--cursor {
+    cursor: pointer;
+  }
+
   &--color {
+    &-blue1 {
+      color: $blue1;
+    }
+
     &-blue2 {
       color: $blue2;
     }
@@ -47,6 +53,10 @@
   }
 
   &--bck {
+    &-blue1 {
+      background-color: $blue1;
+    }
+
     &-white {
       background-color: $white;
     }
@@ -62,5 +72,27 @@
 
   &--shadow {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  }
+
+  &__label {
+    flex-grow: 1;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.375rem;
+    text-decoration: none;
+  }
+
+  &__before,
+  &__after {
+    flex-grow: 0;
+    line-height: 0;
+  }
+
+  &__before {
+    padding-right: 0.5rem;
+  }
+
+  &__after {
+    padding-left: 0.5rem;
   }
 }

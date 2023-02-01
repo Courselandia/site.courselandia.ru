@@ -1,6 +1,9 @@
 <template>
   <div class="catalog-filters">
-    <div class="catalog-filters__directions">
+    <div
+      v-if="directions?.length"
+      class="catalog-filters__directions"
+    >
       <Tags>
         <Tag
           v-for="(direction, key) in directions"
@@ -9,6 +12,7 @@
           border-hover="blue2"
           bck="white"
           color="black"
+          cursor
           @click="onClickDirection(direction)"
           @keyup="onClickDirection(direction)"
         >
@@ -17,346 +21,399 @@
       </Tags>
     </div>
     <div class="catalog-filters__panel">
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Рейтинг
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedRatingValue"
-            class="catalog-filters__reset"
-            @click="onClickResetRating"
-            @keyup="onClickResetRating"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
-            />
-          </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <Group v-model:value="selectedRatingValue">
-            <Radio
-              v-for="(rating, key) in ratings"
-              :key="key"
-              :value="rating.value"
-              :label="rating.label"
-              name="rating"
-            />
-          </Group>
-        </div>
-      </div>
-
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Цена
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
-            class="catalog-filters__reset"
-            @click="onClickResetPrices"
-            @keyup="onClickResetPrices"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
-            />
-          </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <RangeSlider
-            v-model:value="selectedPricesValue"
-            :min="priceMin"
-            :max="priceMax"
-            :step="priceStep"
-            :label="getLabelPrice"
-            money
-          />
-        </div>
-      </div>
-
-      <div class="catalog-filters__block">
-        <Item
-          label="Рассрочка"
-          horizontal
+      <transition-group name="fade">
+        <div
+          v-if="ratings.length"
+          key="ratings"
+          class="catalog-filters__block"
         >
-          <Switch
-            v-model:value="selectedLoanValue"
-            name="loan"
-          />
-        </Item>
-      </div>
+          <div class="catalog-filters__title">
+            Рейтинг
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedRatingValue"
+              class="catalog-filters__reset"
+              @click="onClickResetRating"
+              @keyup="onClickResetRating"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <Group v-model:value="selectedRatingValue">
+              <Radio
+                v-for="(rating, key) in ratings"
+                :key="key"
+                :value="rating.value"
+                :label="rating.label"
+                name="rating"
+              />
+            </Group>
+          </div>
+        </div>
 
-      <div class="catalog-filters__block">
-        <Item
-          label="Только бесплатные"
-          horizontal
+        <div
+          v-if="priceMax"
+          key="price"
+          class="catalog-filters__block"
         >
-          <Switch
-            v-model:value="selectedFreeValue"
-            name="free"
-          />
-        </Item>
-      </div>
-
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Длительность
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax"
-            class="catalog-filters__reset"
-            @click="onClickResetDurations"
-            @keyup="onClickResetDurations"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+          <div class="catalog-filters__title">
+            Цена
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
+              class="catalog-filters__reset"
+              @click="onClickResetPrices"
+              @keyup="onClickResetPrices"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <RangeSlider
+              v-model:value="selectedPricesValue"
+              :min="priceMin"
+              :max="priceMax"
+              :step="priceStep"
+              :label="getLabelPrice"
+              money
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <RangeSlider
-            v-model:value="selectedDurationsValue"
-            :min="durationMin"
-            :max="durationMax"
-            :step="durationStep"
-            :label="getLabelDuration"
-            money
-          />
         </div>
-      </div>
 
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Школы
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedSchoolsValue?.length"
-            class="catalog-filters__reset"
-            @click="onClickResetSchools"
-            @keyup="onClickResetSchools"
+        <div
+          key="loan"
+          class="catalog-filters__block"
+        >
+          <Item
+            label="Рассрочка"
+            horizontal
           >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+            <Switch
+              v-model:value="selectedLoanValue"
+              name="loan"
+            />
+          </Item>
+        </div>
+
+        <div
+          key="free"
+          class="catalog-filters__block"
+        >
+          <Item
+            label="Только бесплатные"
+            horizontal
+          >
+            <Switch
+              v-model:value="selectedFreeValue"
+              name="free"
+            />
+          </Item>
+        </div>
+
+        <div
+          v-if="durationMax"
+          key="duration"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Длительность
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedDurationsValue[0] !== durationMin
+                || selectedDurationsValue[1] !== durationMax"
+              class="catalog-filters__reset"
+              @click="onClickResetDurations"
+              @keyup="onClickResetDurations"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <RangeSlider
+              v-model:value="selectedDurationsValue"
+              :min="durationMin"
+              :max="durationMax"
+              :step="durationStep"
+              :label="getLabelDuration"
+              money
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <CatalogFilterSelect
-            v-model:value="selectedSchoolsValue"
-            :items="schools"
-            @load-items="onLoadItems('schools')"
-          />
         </div>
-      </div>
 
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Категории
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedCategoriesValue?.length"
-            class="catalog-filters__reset"
-            @click="onClickResetCategories"
-            @keyup="onClickResetCategories"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+        <div
+          v-if="schools?.length"
+          key="schools"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Школы
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedSchoolsValue?.length"
+              class="catalog-filters__reset"
+              @click="onClickResetSchools"
+              @keyup="onClickResetSchools"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <CatalogFilterSelect
+              v-model:value="selectedSchoolsValue"
+              :items="schools"
+              @load-items="onLoadItems('schools')"
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <CatalogFilterSelect
-            v-model:value="selectedCategoriesValue"
-            :items="categories"
-            @load-items="onLoadItems('categories')"
-          />
         </div>
-      </div>
 
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Профессии
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedProfessionsValue?.length"
-            class="catalog-filters__reset"
-            @click="onClickResetProfessions"
-            @keyup="onClickResetProfessions"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+        <div
+          v-if="categories?.length"
+          key="categories"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Категории
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedCategoriesValue?.length"
+              class="catalog-filters__reset"
+              @click="onClickResetCategories"
+              @keyup="onClickResetCategories"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <CatalogFilterSelect
+              v-model:value="selectedCategoriesValue"
+              :items="categories"
+              @load-items="onLoadItems('categories')"
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <CatalogFilterSelect
-            v-model:value="selectedProfessionsValue"
-            :items="professions"
-            @load-items="onLoadItems('professions')"
-          />
         </div>
-      </div>
 
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Учителя
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedTeachersValue?.length"
-            class="catalog-filters__reset"
-            @click="onClickResetTeachers"
-            @keyup="onClickResetTeachers"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+        <div
+          v-if="professions?.length"
+          key="professions"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Профессии
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedProfessionsValue?.length"
+              class="catalog-filters__reset"
+              @click="onClickResetProfessions"
+              @keyup="onClickResetProfessions"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <CatalogFilterSelect
+              v-model:value="selectedProfessionsValue"
+              :items="professions"
+              @load-items="onLoadItems('professions')"
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <CatalogFilterSelect
-            v-model:value="selectedTeachersValue"
-            :items="teachers"
-            @load-items="onLoadItems('teachers')"
-          />
         </div>
-      </div>
 
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Навыки
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedSkillsValue?.length"
-            class="catalog-filters__reset"
-            @click="onClickResetSkills"
-            @keyup="onClickResetSkills"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+        <div
+          v-if="teachers?.length"
+          key="teachers"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Учителя
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedTeachersValue?.length"
+              class="catalog-filters__reset"
+              @click="onClickResetTeachers"
+              @keyup="onClickResetTeachers"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <CatalogFilterSelect
+              v-model:value="selectedTeachersValue"
+              :items="teachers"
+              @load-items="onLoadItems('teachers')"
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <CatalogFilterSelect
-            v-model:value="selectedSkillsValue"
-            :items="skills"
-            @load-items="onLoadItems('skills')"
-          />
         </div>
-      </div>
 
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Инструменты
-        </div>
-        <transition name="fade">
-          <div
-            v-if="selectedToolsValue?.length"
-            class="catalog-filters__reset"
-            @click="onClickResetTools"
-            @keyup="onClickResetTools"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+        <div
+          v-if="skills?.length"
+          key="skills"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Навыки
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedSkillsValue?.length"
+              class="catalog-filters__reset"
+              @click="onClickResetSkills"
+              @keyup="onClickResetSkills"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <CatalogFilterSelect
+              v-model:value="selectedSkillsValue"
+              :items="skills"
+              @load-items="onLoadItems('skills')"
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <CatalogFilterSelect
-            v-model:value="selectedToolsValue"
-            :items="tools"
-            @load-items="onLoadItems('tools')"
-          />
-        </div>
-      </div>
-
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Форма обучения
         </div>
 
-        <transition name="fade">
-          <div
-            v-if="selectedFormatValue !== null && selectedFormatValue !== undefined"
-            class="catalog-filters__reset"
-            @click="onClickResetFormat"
-            @keyup="onClickResetFormat"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
+        <div
+          v-if="tools?.length"
+          key="tools"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Инструменты
+          </div>
+          <transition name="fade">
+            <div
+              v-if="selectedToolsValue?.length"
+              class="catalog-filters__reset"
+              @click="onClickResetTools"
+              @keyup="onClickResetTools"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <CatalogFilterSelect
+              v-model:value="selectedToolsValue"
+              :items="tools"
+              @load-items="onLoadItems('tools')"
             />
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <Group v-model:value="selectedFormatValue">
-            <Radio
-              v-for="(format, key) in formats"
-              :key="key"
-              :value="format.value"
-              :label="format.label"
-              name="format"
-            />
-          </Group>
-        </div>
-      </div>
-
-      <div class="catalog-filters__block">
-        <div class="catalog-filters__title">
-          Уровни курса
         </div>
 
-        <transition name="fade">
-          <div
-            v-if="selectedLevelsValue?.length"
-            class="catalog-filters__reset"
-            @click="onClickResetLevels"
-            @keyup="onClickResetLevels"
-          >
-            <Icon
-              name="close"
-              color="white"
-              :size="[15, 15]"
-            />
+        <div
+          v-if="formats?.length"
+          key="formats"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Форма обучения
           </div>
-        </transition>
-        <div class="catalog-filters__selection">
-          <Group v-model:value="selectedLevelsValue">
-            <Checkbox
-              v-for="(level, key) in levels"
-              :key="key"
-              :value="level.value"
-              :label="level.label"
-              name="level"
-            />
-          </Group>
+
+          <transition name="fade">
+            <div
+              v-if="selectedFormatValue !== null && selectedFormatValue !== undefined"
+              class="catalog-filters__reset"
+              @click="onClickResetFormat"
+              @keyup="onClickResetFormat"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <Group v-model:value="selectedFormatValue">
+              <Radio
+                v-for="(format, key) in formats"
+                :key="key"
+                :value="format.value"
+                :label="format.label"
+                name="format"
+              />
+            </Group>
+          </div>
         </div>
-      </div>
+
+        <div
+          v-if="levels?.length"
+          key="levels"
+          class="catalog-filters__block"
+        >
+          <div class="catalog-filters__title">
+            Уровни курса
+          </div>
+
+          <transition name="fade">
+            <div
+              v-if="selectedLevelsValue?.length"
+              class="catalog-filters__reset"
+              @click="onClickResetLevels"
+              @keyup="onClickResetLevels"
+            >
+              <Icon
+                name="close"
+                color="white"
+                :size="[15, 15]"
+              />
+            </div>
+          </transition>
+          <div class="catalog-filters__selection">
+            <Group v-model:value="selectedLevelsValue">
+              <Checkbox
+                v-for="(level, key) in levels"
+                :key="key"
+                :value="level.value"
+                :label="level.label"
+                name="level"
+              />
+            </Group>
+          </div>
+        </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -396,39 +453,48 @@ import TId from '@/types/id';
 const props = defineProps({
   priceMin: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
   priceMax: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   priceStep: {
     type: Number,
-    required: true,
+    required: false,
+    default: 1000,
   },
   selectedPrices: {
     type: Array as PropType<Array<number>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   durationMin: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
   durationMax: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   durationStep: {
     type: Number,
-    required: true,
+    required: false,
+    default: 1,
   },
   selectedDurations: {
     type: Array as PropType<Array<number>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   directions: {
     type: Array as PropType<Array<IDirection>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedDirection: {
     type: Object as PropType<IDirection>,
@@ -437,7 +503,8 @@ const props = defineProps({
   },
   ratings: {
     type: Array as PropType<Array<IRating>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedLoan: {
     type: Boolean,
@@ -456,61 +523,68 @@ const props = defineProps({
   },
   schools: {
     type: Array as PropType<Array<ISchool>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedSchools: {
-    type: Object as PropType<Array<ISchool>>,
+    type: Array as PropType<Array<ISchool>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   categories: {
     type: Array as PropType<Array<ICategory>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedCategories: {
-    type: Object as PropType<Array<ICategory>>,
+    type: Array as PropType<Array<ICategory>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   professions: {
     type: Array as PropType<Array<IProfession>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedProfessions: {
-    type: Object as PropType<Array<IProfession>>,
+    type: Array as PropType<Array<IProfession>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   teachers: {
     type: Array as PropType<Array<ITeacher>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedTeachers: {
-    type: Object as PropType<Array<ITeacher>>,
+    type: Array as PropType<Array<ITeacher>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   skills: {
     type: Array as PropType<Array<ISkill>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedSkills: {
-    type: Object as PropType<Array<ISkill>>,
+    type: Array as PropType<Array<ISkill>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   tools: {
     type: Array as PropType<Array<ITool>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedTools: {
-    type: Object as PropType<Array<ITool>>,
+    type: Array as PropType<Array<ITool>>,
     required: false,
-    default: null,
+    default: () => [],
   },
   formats: {
     type: Array as PropType<Array<IFormat>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedFormat: {
     type: Object as PropType<IFormat>,
@@ -519,12 +593,13 @@ const props = defineProps({
   },
   levels: {
     type: Array as PropType<Array<ILevel>>,
-    required: true,
+    required: false,
+    default: () => [],
   },
   selectedLevels: {
-    type: Object as PropType<Array<ILevel>>,
+    type: Array as PropType<Array<ILevel>>,
     required: false,
-    default: null,
+    default: () => [],
   },
 });
 
@@ -549,8 +624,8 @@ const {
 
 const emit = defineEmits({
   'load-items': (_: string) => true,
-  'update:selected-direction': (_: IDirection) => true,
-  'update:selected-rating': (_: IRating) => true,
+  'update:selected-direction': (_: IDirection | null) => true,
+  'update:selected-rating': (_: IRating | null) => true,
   'update:selected-schools': (_: Array<ISchool>) => true,
   'update:selected-categories': (_: Array<ICategory>) => true,
   'update:selected-professions': (_: Array<IProfession>) => true,
@@ -573,7 +648,7 @@ const onLoadItems = (name: string): void => {
 
 //
 
-const selectedDirectionValue = ref(selectedDirection.value);
+const selectedDirectionValue = ref<IDirection | null>(selectedDirection.value);
 
 watch(selectedDirectionValue, () => {
   emit('update:selected-direction', selectedDirectionValue.value);
@@ -596,13 +671,11 @@ watch(selectedRatingValue, () => {
     (itm) => itm.value === selectedRatingValue.value,
   );
 
-  if (selectedRatingValueFound) {
-    emit('update:selected-rating', selectedRatingValueFound);
-  }
+  emit('update:selected-rating', selectedRatingValueFound || null);
 });
 
 watch(selectedRating, () => {
-  selectedRatingValue.value = selectedRating.value.value;
+  selectedRatingValue.value = selectedRating.value?.value;
 });
 
 //
@@ -624,7 +697,7 @@ watch(selectedPrices, () => {
 });
 
 const onClickResetPrices = (): void => {
-  selectedPrices.value = [props.priceMin, props.priceMax];
+  selectedPricesValue.value = [props.priceMin, props.priceMax];
 };
 
 const getLabelPrice = () => '₽';
@@ -666,7 +739,7 @@ watch(selectedDurations, () => {
 });
 
 const onClickResetDurations = (): void => {
-  selectedDurations.value = [props.durationMin, props.durationMax];
+  selectedDurationsValue.value = [props.durationMin, props.durationMax];
 };
 
 const getLabelDuration = (val: number) => {
