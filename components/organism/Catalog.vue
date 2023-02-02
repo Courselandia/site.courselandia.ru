@@ -179,7 +179,7 @@
               <Pagination
                 :total="1000"
                 :size="18"
-                :page="1"
+                :page="20"
                 :link="getLinkPagination"
               />
             </div>

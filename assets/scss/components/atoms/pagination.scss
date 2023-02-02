@@ -1,4 +1,5 @@
 @import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
 
 .pagination {
   display: flex;
@@ -8,12 +9,35 @@
   flex-wrap: wrap;
 
   &__item {
-    padding: 1rem;
+    width: 56px;
+    height: 56px;
+    text-align: center;
     border: 2px solid $blue2;
     color: $blue2;
     border-radius: 1rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.375rem;
+    transition: all $speedPrimary $functionPrimary;
+
+    &:hover {
+      background-color: $blue1;
+    }
+
+    &--current {
+      background-color: $blue2;
+      color: $white;
+
+      &:hover {
+        background-color: $blue2;
+      }
+    }
   }
 }
