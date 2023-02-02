@@ -60,7 +60,7 @@ const {
 
 const emit = defineEmits({
   'update:value': (_: String | Number) => true,
-  'focus': () => true,
+  focus: () => true,
 });
 
 const input = ref(value.value);

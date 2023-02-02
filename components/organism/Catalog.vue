@@ -175,6 +175,14 @@
                 :columns="3"
               />
             </div>
+            <div class="catalog__pagination">
+              <Pagination
+                :total="1000"
+                :size="18"
+                :page="1"
+                :link="getLinkPagination"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -187,6 +195,7 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import Button from '@/components/atoms/Button.vue';
+import Pagination from '@/components/atoms/Pagination.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
@@ -879,6 +888,10 @@ const selectedTeachers = ref<Array<ITeacher>>([]);
 const selectedSkills = ref<Array<ISkill>>([]);
 
 const selectedTools = ref<Array<ITool>>([]);
+
+const getLinkPagination = (page: number): string => {
+  return `/courses/?page=${page}`;
+};
 </script>
 
 <style lang="scss">
