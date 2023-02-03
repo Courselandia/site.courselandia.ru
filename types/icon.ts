@@ -17,6 +17,7 @@ type TIcon =
   'tile' |
   'row' |
   'box' |
-  'checked';
+  'checked' |
+  'configs';
 
 export default TIcon;

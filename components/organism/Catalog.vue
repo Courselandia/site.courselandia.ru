@@ -142,7 +142,43 @@
               <CatalogTools
                 v-model:sort="sort"
                 v-model:type="type"
-              />
+              >
+                <template #filtersMobile>
+                  <CatalogFiltersMobile
+                    v-model:selected-direction="selectedDirection"
+                    v-model:selected-rating="selectedRating"
+                    v-model:selected-schools="selectedSchools"
+                    v-model:selected-categories="selectedCategories"
+                    v-model:selected-professions="selectedProfessions"
+                    v-model:selected-teachers="selectedTeachers"
+                    v-model:selected-skills="selectedSkills"
+                    v-model:selected-tools="selectedTools"
+                    v-model:selected-format="selectedFormat"
+                    v-model:selected-levels="selectedLevels"
+                    v-model:selected-prices="selectedPrices"
+                    v-model:selected-durations="selectedDurations"
+                    v-model:selected-loan="selectedLoan"
+                    v-model:selected-free="selectedFree"
+                    :price-min="priceMin"
+                    :price-max="priceMax"
+                    :price-step="priceStep"
+                    :duration-min="durationMin"
+                    :duration-max="durationMax"
+                    :duration-step="durationStep"
+                    :directions="directions"
+                    :ratings="ratings"
+                    :schools="schools"
+                    :categories="categories"
+                    :professions="professions"
+                    :teachers="teachers"
+                    :skills="skills"
+                    :tools="tools"
+                    :formats="formats"
+                    :levels="levels"
+                    @load-items="onLoadItems"
+                  />
+                </template>
+              </CatalogTools>
             </div>
             <div class="catalog__tags">
               <CatalogTags
@@ -198,6 +234,7 @@ import Button from '@/components/atoms/Button.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
+import CatalogFiltersMobile from '@/components/molecules/CatalogFiltersMobile.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import CatalogTags from '@/components/molecules/CatalogTags.vue';
 import CatalogTools from '@/components/molecules/CatalogTools.vue';

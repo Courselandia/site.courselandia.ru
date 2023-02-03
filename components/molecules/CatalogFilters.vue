@@ -1,26 +1,53 @@
 <template>
-  <div class="catalog-filters">
-    <div
-      v-if="directions?.length"
-      class="catalog-filters__directions"
-    >
-      <Tags>
-        <Tag
-          v-for="(direction, key) in directions"
-          :key="key"
-          :border="selectedDirectionValue?.id === direction.id ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          bck="white"
-          color="black"
-          cursor
-          @click="onClickDirection(direction)"
-          @keyup="onClickDirection(direction)"
-        >
-          {{ direction.name }}
-        </Tag>
-      </Tags>
-    </div>
+  <div
+    :class="`catalog-filters ${nameClass}`"
+  >
+    <transition-group name="fade">
+      <div
+        v-if="directions?.length && !mobile"
+        class="catalog-filters__directions"
+      >
+        <Tags>
+          <Tag
+            v-for="(direction, key) in directions"
+            :key="key"
+            :border="selectedDirectionValue?.id === direction.id ? 'blue2' : 'grey2'"
+            border-hover="blue2"
+            bck="white"
+            color="black"
+            cursor
+            @click="onClickDirection(direction)"
+            @keyup="onClickDirection(direction)"
+          >
+            {{ direction.name }}
+          </Tag>
+        </Tags>
+      </div>
+    </transition-group>
     <div class="catalog-filters__panel">
+      <transition-group name="fade">
+        <div
+          v-if="directions?.length && mobile"
+          class="catalog-filters__block"
+        >
+          <Tags>
+            <Tag
+              v-for="(direction, key) in directions"
+              :key="key"
+              :border="selectedDirectionValue?.id === direction.id ? 'blue2' : 'grey2'"
+              border-hover="blue2"
+              bck="white"
+              color="black"
+              cursor
+              @click="onClickDirection(direction)"
+              @keyup="onClickDirection(direction)"
+            >
+              {{ direction.name }}
+            </Tag>
+          </Tags>
+        </div>
+      </transition-group>
+
       <transition-group name="fade">
         <div
           v-if="ratings.length"
@@ -421,6 +448,7 @@
 <script lang="ts" setup>
 import { isEqual } from 'lodash';
 import {
+  computed,
   PropType,
   ref,
   toRefs,
@@ -601,6 +629,11 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
+  mobile: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 //
@@ -638,6 +671,18 @@ const emit = defineEmits({
   'update:selected-durations': (_: Array<number>) => true,
   'update:selected-loan': (_: Boolean) => true,
   'update:selected-free': (_: Boolean) => true,
+});
+
+//
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (props.mobile) {
+    classes.push('catalog-filters--mobile');
+  }
+
+  return classes.join(' ');
 });
 
 //

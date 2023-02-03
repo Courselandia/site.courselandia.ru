@@ -5,13 +5,13 @@
   &__side {
     display: flex;
     align-items: center;
-    width: 50%;
 
     &--left {
-
+      flex-grow: 1;
     }
 
     &--right {
+      flex-grow: 0;
       justify-content: flex-end;
     }
   }
@@ -19,6 +19,10 @@
   &__field {
     &--sort {
       width: 240px;
+    }
+
+    &--filters-mobile {
+      margin-left: 0.5rem;
     }
 
     .form-item {

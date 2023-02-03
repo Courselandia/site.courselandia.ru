@@ -13,12 +13,17 @@
       </div>
     </div>
     <div class="catalog-tools__side catalog-tools__side--right">
+      <!--
       <div class="catalog-tools__field">
         <Item>
           <CatalogToolType
             v-model:value="typeValue"
           />
         </Item>
+      </div>
+      -->
+      <div class="catalog-tools__field catalog-tools__field--filters-mobile">
+        <slot name="filtersMobile" />
       </div>
     </div>
   </div>
