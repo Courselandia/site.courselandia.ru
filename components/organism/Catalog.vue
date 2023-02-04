@@ -102,41 +102,6 @@
     <div class="catalog">
       <div class="content">
         <div class="catalog__content">
-          <div class="catalog__filter">
-            <CatalogFilters
-              v-model:selected-direction="selectedDirection"
-              v-model:selected-rating="selectedRating"
-              v-model:selected-schools="selectedSchools"
-              v-model:selected-categories="selectedCategories"
-              v-model:selected-professions="selectedProfessions"
-              v-model:selected-teachers="selectedTeachers"
-              v-model:selected-skills="selectedSkills"
-              v-model:selected-tools="selectedTools"
-              v-model:selected-format="selectedFormat"
-              v-model:selected-levels="selectedLevels"
-              v-model:selected-prices="selectedPrices"
-              v-model:selected-durations="selectedDurations"
-              v-model:selected-loan="selectedLoan"
-              v-model:selected-free="selectedFree"
-              :price-min="priceMin"
-              :price-max="priceMax"
-              :price-step="priceStep"
-              :duration-min="durationMin"
-              :duration-max="durationMax"
-              :duration-step="durationStep"
-              :directions="directions"
-              :ratings="ratings"
-              :schools="schools"
-              :categories="categories"
-              :professions="professions"
-              :teachers="teachers"
-              :skills="skills"
-              :tools="tools"
-              :formats="formats"
-              :levels="levels"
-              @load-items="onLoadItems"
-            />
-          </div>
           <div class="catalog__items">
             <div class="catalog__tools">
               <CatalogTools
@@ -188,6 +153,41 @@
                 :link="getLinkPagination"
               />
             </div>
+          </div>
+          <div class="catalog__filter">
+            <CatalogFilters
+              v-model:selected-direction="selectedDirection"
+              v-model:selected-rating="selectedRating"
+              v-model:selected-schools="selectedSchools"
+              v-model:selected-categories="selectedCategories"
+              v-model:selected-professions="selectedProfessions"
+              v-model:selected-teachers="selectedTeachers"
+              v-model:selected-skills="selectedSkills"
+              v-model:selected-tools="selectedTools"
+              v-model:selected-format="selectedFormat"
+              v-model:selected-levels="selectedLevels"
+              v-model:selected-prices="selectedPrices"
+              v-model:selected-durations="selectedDurations"
+              v-model:selected-loan="selectedLoan"
+              v-model:selected-free="selectedFree"
+              :price-min="priceMin"
+              :price-max="priceMax"
+              :price-step="priceStep"
+              :duration-min="durationMin"
+              :duration-max="durationMax"
+              :duration-step="durationStep"
+              :directions="directions"
+              :ratings="ratings"
+              :schools="schools"
+              :categories="categories"
+              :professions="professions"
+              :teachers="teachers"
+              :skills="skills"
+              :tools="tools"
+              :formats="formats"
+              :levels="levels"
+              @load-items="onLoadItems"
+            />
           </div>
         </div>
       </div>

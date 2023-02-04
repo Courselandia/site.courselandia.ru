@@ -5,7 +5,12 @@
     display: flex;
   }
 
+  &__items {
+    order: 2;
+  }
+
   &__filter {
+    order: 1;
     width: 320px;
     min-width: 320px;
     padding-right: 2.5rem;
