@@ -40,7 +40,6 @@ import { useRoute } from 'vue-router';
 
 import Item from '@/components/atoms/form/Item.vue';
 import Select from '@/components/atoms/form/Select.vue';
-import CatalogToolType from '@/components/molecules/CatalogToolType.vue';
 import ECourseSort from '@/enums/components/molecules/courseSort';
 import IOption from '@/interfaces/components/atoms/option';
 import TValue from '@/types/value';

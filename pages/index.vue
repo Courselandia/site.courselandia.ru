@@ -70,7 +70,7 @@
           </Button>
         </template>
         <template #media>
-          <img src="@/assets/images/hero/1.svg" alt="С нами находить курсы легче" />
+          <img src="@/assets/images/hero/1.webp" alt="С нами находить курсы легче" />
         </template>
       </Hero>
 

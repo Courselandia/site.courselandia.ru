@@ -53,4 +53,7 @@ export default defineNuxtConfig({
   webpack: {
     extractCSS: true,
   },
+  experimental: {
+    inlineSSRStyles: false,
+  },
 });
