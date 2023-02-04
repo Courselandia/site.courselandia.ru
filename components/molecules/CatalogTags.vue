@@ -16,291 +16,316 @@
       || selectedLevelsValue?.length"
     class="catalog-tags"
   >
-    <Tags>
-      <transition-group name="fade">
-        <Tag
-          v-if="selectedDirectionValue"
-          bck="blue1"
-        >
-          {{ selectedDirectionValue.name }}
-          <template #after>
-            <Icon
-              name="close"
-              color="grey2"
-              :size="[15, 15]"
-              class="cursor--pointer"
-              @click="onClickResetDirection"
-              @keyup="onClickResetDirection"
-            />
-          </template>
-        </Tag>
-
-        <Tag
-          v-if="selectedRatingValue"
-          bck="blue1"
-        >
-          {{ getSelectedRatingLabel() }}
-          <template #after>
-            <Icon
-              name="close"
-              color="grey2"
-              :size="[15, 15]"
-              class="cursor--pointer"
-              @click="onClickResetRating"
-              @keyup="onClickResetRating"
-            />
-          </template>
-        </Tag>
-
-        <Tag
-          v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
-          bck="blue1"
-        >
-          <template v-if="selectedPricesValue[0] === selectedPricesValue[1]">
-            {{ money(selectedPricesValue[0]) }} ₽
-          </template>
-          <template v-else>
-            {{ money(selectedPricesValue[0]) }} ₽ – {{ money(selectedPricesValue[1]) }} ₽
-          </template>
-          <template #after>
-            <Icon
-              name="close"
-              color="grey2"
-              :size="[15, 15]"
-              class="cursor--pointer"
-              @click="onClickResetPrices"
-              @keyup="onClickResetPrices"
-            />
-          </template>
-        </Tag>
-
-        <Tag
-          v-if="selectedLoanValue"
-          bck="blue1"
-        >
-          Рассрочка
-          <template #after>
-            <Icon
-              name="close"
-              color="grey2"
-              :size="[15, 15]"
-              class="cursor--pointer"
-              @click="onClickResetLoan"
-              @keyup="onClickResetLoan"
-            />
-          </template>
-        </Tag>
-
-        <Tag
-          v-if="selectedFreeValue"
-          bck="blue1"
-        >
-          Только бесплатные
-          <template #after>
-            <Icon
-              name="close"
-              color="grey2"
-              :size="[15, 15]"
-              class="cursor--pointer"
-              @click="onClickResetFree"
-              @keyup="onClickResetFree"
-            />
-          </template>
-        </Tag>
-
-        <Tag
-          v-if="selectedDurationsValue[0] !== durationMin
-            || selectedDurationsValue[1] !== durationMax"
-          bck="blue1"
-        >
-          <template v-if="selectedDurationsValue[0] === selectedDurationsValue[1]">
-            {{ selectedDurationsValue[0] }} {{ getLabelDuration(selectedDurationsValue[0]) }}
-          </template>
-          <template v-else>
-            {{ selectedDurationsValue[0] }} {{ getLabelDuration(selectedDurationsValue[0]) }}
-            –
-            {{ money(selectedDurationsValue[1]) }} {{ getLabelDuration(selectedDurationsValue[1]) }}
-          </template>
-          <template #after>
-            <Icon
-              name="close"
-              color="grey2"
-              :size="[15, 15]"
-              class="cursor--pointer"
-              @click="onClickResetDurations"
-              @keyup="onClickResetDurations"
-            />
-          </template>
-        </Tag>
-
-        <template v-if="selectedSchoolsValue?.length">
+    <transition name="fade">
+      <div
+        v-if="!resetAll && countFilters"
+        class="catalog-tags__header"
+      >
+        <div class="catalog-tags__total">
+          Активные фильтры ({{ countFilters }})
+        </div>
+        <div class="catalog-tags__reset">
           <Tag
-            v-for="(school, key) in selectedSchoolsValue"
-            :key="key"
+            bck="black"
+            color="white"
+            cursor
+            @click="onClickResetAll"
+          >
+            Очистить все
+          </Tag>
+        </div>
+      </div>
+    </transition>
+
+    <div class="catalog-tags__items">
+      <Tags>
+        <transition-group name="fade">
+          <Tag
+            v-if="selectedDirectionValue"
             bck="blue1"
           >
-            {{ school.label }}
+            {{ selectedDirectionValue.name }}
             <template #after>
               <Icon
                 name="close"
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetSchool(key)"
-                @keyup="onClickResetSchool(key)"
+                @click="onClickResetDirection"
+                @keyup="onClickResetDirection"
               />
             </template>
           </Tag>
-        </template>
 
-        <template v-if="selectedCategoriesValue?.length">
           <Tag
-            v-for="(category, key) in selectedCategoriesValue"
-            :key="key"
+            v-if="selectedRatingValue"
             bck="blue1"
           >
-            {{ category.label }}
+            {{ getSelectedRatingLabel() }}
             <template #after>
               <Icon
                 name="close"
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetCategory(key)"
-                @keyup="onClickResetCategory(key)"
+                @click="onClickResetRating"
+                @keyup="onClickResetRating"
               />
             </template>
           </Tag>
-        </template>
 
-        <template v-if="selectedProfessionsValue?.length">
           <Tag
-            v-for="(profession, key) in selectedProfessionsValue"
-            :key="key"
+            v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
             bck="blue1"
           >
-            {{ profession.label }}
+            <template v-if="selectedPricesValue[0] === selectedPricesValue[1]">
+              {{ money(selectedPricesValue[0]) }} ₽
+            </template>
+            <template v-else>
+              {{ money(selectedPricesValue[0]) }} ₽ – {{ money(selectedPricesValue[1]) }} ₽
+            </template>
             <template #after>
               <Icon
                 name="close"
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetProfession(key)"
-                @keyup="onClickResetProfession(key)"
+                @click="onClickResetPrices"
+                @keyup="onClickResetPrices"
               />
             </template>
           </Tag>
-        </template>
 
-        <template v-if="selectedTeachersValue?.length">
           <Tag
-            v-for="(teacher, key) in selectedTeachersValue"
-            :key="key"
+            v-if="selectedLoanValue"
             bck="blue1"
           >
-            {{ teacher.label }}
+            Рассрочка
             <template #after>
               <Icon
                 name="close"
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetTeacher(key)"
-                @keyup="onClickResetTeacher(key)"
+                @click="onClickResetLoan"
+                @keyup="onClickResetLoan"
               />
             </template>
           </Tag>
-        </template>
 
-        <template v-if="selectedSkillsValue?.length">
           <Tag
-            v-for="(skill, key) in selectedSkillsValue"
-            :key="key"
+            v-if="selectedFreeValue"
             bck="blue1"
           >
-            {{ skill.label }}
+            Только бесплатные
             <template #after>
               <Icon
                 name="close"
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetSkill(key)"
-                @keyup="onClickResetSkill(key)"
+                @click="onClickResetFree"
+                @keyup="onClickResetFree"
               />
             </template>
           </Tag>
-        </template>
 
-        <template v-if="selectedToolsValue?.length">
           <Tag
-            v-for="(tool, key) in selectedToolsValue"
-            :key="key"
+            v-if="selectedDurationsValue[0] !== durationMin
+              || selectedDurationsValue[1] !== durationMax"
             bck="blue1"
           >
-            {{ tool.label }}
+            <template v-if="selectedDurationsValue[0] === selectedDurationsValue[1]">
+              {{ selectedDurationsValue[0] }} {{ getLabelDuration(selectedDurationsValue[0]) }}
+            </template>
+            <template v-else>
+              {{ selectedDurationsValue[0] }}
+              {{ getLabelDuration(selectedDurationsValue[0]) }}
+              –
+              {{ money(selectedDurationsValue[1]) }}
+              {{ getLabelDuration(selectedDurationsValue[1]) }}
+            </template>
             <template #after>
               <Icon
                 name="close"
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetTool(key)"
-                @keyup="onClickResetTool(key)"
+                @click="onClickResetDurations"
+                @keyup="onClickResetDurations"
               />
             </template>
           </Tag>
-        </template>
 
-        <Tag
-          v-if="selectedFormat"
-          bck="blue1"
-        >
-          {{ selectedFormat.label }}
-          <template #after>
-            <Icon
-              name="close"
-              color="grey2"
-              :size="[15, 15]"
-              class="cursor--pointer"
-              @click="onClickResetFormat"
-              @keyup="onClickResetFormat"
-            />
+          <template v-if="selectedSchoolsValue?.length">
+            <Tag
+              v-for="(school, key) in selectedSchoolsValue"
+              :key="key"
+              bck="blue1"
+            >
+              {{ school.label }}
+              <template #after>
+                <Icon
+                  name="close"
+                  color="grey2"
+                  :size="[15, 15]"
+                  class="cursor--pointer"
+                  @click="onClickResetSchool(key)"
+                  @keyup="onClickResetSchool(key)"
+                />
+              </template>
+            </Tag>
           </template>
-        </Tag>
 
-        <template v-if="selectedLevelsValue?.length">
+          <template v-if="selectedCategoriesValue?.length">
+            <Tag
+              v-for="(category, key) in selectedCategoriesValue"
+              :key="key"
+              bck="blue1"
+            >
+              {{ category.label }}
+              <template #after>
+                <Icon
+                  name="close"
+                  color="grey2"
+                  :size="[15, 15]"
+                  class="cursor--pointer"
+                  @click="onClickResetCategory(key)"
+                  @keyup="onClickResetCategory(key)"
+                />
+              </template>
+            </Tag>
+          </template>
+
+          <template v-if="selectedProfessionsValue?.length">
+            <Tag
+              v-for="(profession, key) in selectedProfessionsValue"
+              :key="key"
+              bck="blue1"
+            >
+              {{ profession.label }}
+              <template #after>
+                <Icon
+                  name="close"
+                  color="grey2"
+                  :size="[15, 15]"
+                  class="cursor--pointer"
+                  @click="onClickResetProfession(key)"
+                  @keyup="onClickResetProfession(key)"
+                />
+              </template>
+            </Tag>
+          </template>
+
+          <template v-if="selectedTeachersValue?.length">
+            <Tag
+              v-for="(teacher, key) in selectedTeachersValue"
+              :key="key"
+              bck="blue1"
+            >
+              {{ teacher.label }}
+              <template #after>
+                <Icon
+                  name="close"
+                  color="grey2"
+                  :size="[15, 15]"
+                  class="cursor--pointer"
+                  @click="onClickResetTeacher(key)"
+                  @keyup="onClickResetTeacher(key)"
+                />
+              </template>
+            </Tag>
+          </template>
+
+          <template v-if="selectedSkillsValue?.length">
+            <Tag
+              v-for="(skill, key) in selectedSkillsValue"
+              :key="key"
+              bck="blue1"
+            >
+              {{ skill.label }}
+              <template #after>
+                <Icon
+                  name="close"
+                  color="grey2"
+                  :size="[15, 15]"
+                  class="cursor--pointer"
+                  @click="onClickResetSkill(key)"
+                  @keyup="onClickResetSkill(key)"
+                />
+              </template>
+            </Tag>
+          </template>
+
+          <template v-if="selectedToolsValue?.length">
+            <Tag
+              v-for="(tool, key) in selectedToolsValue"
+              :key="key"
+              bck="blue1"
+            >
+              {{ tool.label }}
+              <template #after>
+                <Icon
+                  name="close"
+                  color="grey2"
+                  :size="[15, 15]"
+                  class="cursor--pointer"
+                  @click="onClickResetTool(key)"
+                  @keyup="onClickResetTool(key)"
+                />
+              </template>
+            </Tag>
+          </template>
+
           <Tag
-            v-for="(level, key) in selectedLevelsValue"
-            :key="key"
+            v-if="selectedFormat"
             bck="blue1"
           >
-            {{ getSelectedLevelLabel(level) }}
+            {{ selectedFormat.label }}
             <template #after>
               <Icon
                 name="close"
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetLevel(key)"
-                @keyup="onClickResetLevel(key)"
+                @click="onClickResetFormat"
+                @keyup="onClickResetFormat"
               />
             </template>
           </Tag>
-        </template>
 
-        <Tag
-          v-if="resetAll"
-          bck="black"
-          color="white"
-          cursor
-          @click="onClickResetAll"
-        >
-          Очистить все
-        </Tag>
-      </transition-group>
-    </Tags>
+          <template v-if="selectedLevelsValue?.length">
+            <Tag
+              v-for="(level, key) in selectedLevelsValue"
+              :key="key"
+              bck="blue1"
+            >
+              {{ getSelectedLevelLabel(level) }}
+              <template #after>
+                <Icon
+                  name="close"
+                  color="grey2"
+                  :size="[15, 15]"
+                  class="cursor--pointer"
+                  @click="onClickResetLevel(key)"
+                  @keyup="onClickResetLevel(key)"
+                />
+              </template>
+            </Tag>
+          </template>
+
+          <Tag
+            v-if="resetAll"
+            bck="black"
+            color="white"
+            cursor
+            @click="onClickResetAll"
+          >
+            Очистить все
+          </Tag>
+        </transition-group>
+      </Tags>
+    </div>
   </div>
 </template>
 
@@ -310,6 +335,7 @@ import {
   isEqual,
 } from 'lodash';
 import {
+  computed,
   PropType,
   ref,
   toRefs,
@@ -442,7 +468,7 @@ const props = defineProps({
   resetAll: {
     type: Boolean,
     required: false,
-    default: true,
+    default: false,
   },
 });
 
@@ -783,6 +809,78 @@ const onClickResetAll = (): void => {
   onClickResetFormat();
   selectedLevelsValue.value = [];
 };
+
+const countFilters = computed((): number => {
+  let total = 0;
+
+  if (selectedDirectionValue.value) {
+    total++;
+  }
+
+  if (selectedRatingValue.value) {
+    total++;
+  }
+
+  if (
+    selectedPricesValue.value[0] !== props.priceMin
+    || selectedPricesValue.value[1] !== props.priceMax
+  ) {
+    total++;
+  }
+
+  if (selectedLoanValue.value) {
+    total++;
+  }
+
+  if (selectedFreeValue.value) {
+    total++;
+  }
+
+  if (
+    selectedDurationsValue.value[0] !== props.durationMin
+    || selectedDurationsValue.value[1] !== props.durationMax
+  ) {
+    total++;
+  }
+
+  if (selectedSchoolsValue.value?.length) {
+    total += selectedSchoolsValue.value.length;
+  }
+
+  if (selectedCategoriesValue.value?.length) {
+    total += selectedCategoriesValue.value.length;
+  }
+
+  if (selectedProfessionsValue.value?.length) {
+    total += selectedProfessionsValue.value.length;
+  }
+
+  if (selectedTeachersValue.value?.length) {
+    total += selectedTeachersValue.value.length;
+  }
+
+  if (selectedSkillsValue.value?.length) {
+    total += selectedSkillsValue.value.length;
+  }
+
+  if (selectedToolsValue.value?.length) {
+    total += selectedToolsValue.value.length;
+  }
+
+  if (selectedToolsValue.value?.length) {
+    total += selectedToolsValue.value.length;
+  }
+
+  if (selectedFormat.value) {
+    total++;
+  }
+
+  if (selectedLevelsValue.value?.length) {
+    total += selectedLevelsValue.value.length;
+  }
+
+  return total;
+});
 </script>
 
 <style lang="scss">

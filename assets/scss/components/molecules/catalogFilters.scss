@@ -14,6 +14,11 @@
     margin-bottom: 2.5rem;
   }
 
+  &__tags {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   &__panel {
     background-color: $white;
     box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
@@ -27,6 +32,10 @@
 
     &:last-child {
       border-bottom: none;
+    }
+
+    &--directions {
+      display: none;
     }
 
     .form-item {

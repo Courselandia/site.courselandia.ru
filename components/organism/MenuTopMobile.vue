@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-top-mobile-mobile">
+  <div class="menu-top-mobile">
     <template v-if="!menu">
       <div
         class="menu-top-mobile__item"

@@ -1,4 +1,5 @@
 @import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/animations/slideRight";
 
 .catalog-filters-mobile {
   &__icon {
@@ -22,7 +23,7 @@
   }
 
   &__content {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     width: 100%;
     height: 100vh;
@@ -36,6 +37,22 @@
 
   &__elements {
     position: relative;
+    padding-bottom: 5rem;
+  }
+
+  &__action {
+    position: fixed;
+    bottom: 1rem;
+    z-index: 10;
+
+    left: 50%;
+    transform: translate(-50%);
+
+    .button {
+      &__label {
+        white-space: nowrap;
+      }
+    }
   }
 
   &__header {
@@ -45,5 +62,19 @@
     line-height: 1.25rem;
     padding-top: 1.5rem;
     padding-bottom: 1.8rem;
+  }
+
+  &__filters {
+    .catalog-filters {
+      &__block {
+        &--directions {
+          display: block;
+        }
+      }
+
+      &__panel {
+        box-shadow: none;
+      }
+    }
   }
 }

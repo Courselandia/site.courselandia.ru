@@ -144,39 +144,7 @@
                 v-model:type="type"
               >
                 <template #filtersMobile>
-                  <CatalogFiltersMobile
-                    v-model:selected-direction="selectedDirection"
-                    v-model:selected-rating="selectedRating"
-                    v-model:selected-schools="selectedSchools"
-                    v-model:selected-categories="selectedCategories"
-                    v-model:selected-professions="selectedProfessions"
-                    v-model:selected-teachers="selectedTeachers"
-                    v-model:selected-skills="selectedSkills"
-                    v-model:selected-tools="selectedTools"
-                    v-model:selected-format="selectedFormat"
-                    v-model:selected-levels="selectedLevels"
-                    v-model:selected-prices="selectedPrices"
-                    v-model:selected-durations="selectedDurations"
-                    v-model:selected-loan="selectedLoan"
-                    v-model:selected-free="selectedFree"
-                    :price-min="priceMin"
-                    :price-max="priceMax"
-                    :price-step="priceStep"
-                    :duration-min="durationMin"
-                    :duration-max="durationMax"
-                    :duration-step="durationStep"
-                    :directions="directions"
-                    :ratings="ratings"
-                    :schools="schools"
-                    :categories="categories"
-                    :professions="professions"
-                    :teachers="teachers"
-                    :skills="skills"
-                    :tools="tools"
-                    :formats="formats"
-                    :levels="levels"
-                    @load-items="onLoadItems"
-                  />
+                  <CatalogFiltersMobile :total="total" />
                 </template>
               </CatalogTools>
             </div>
@@ -203,6 +171,7 @@
                 :ratings="ratings"
                 :formats="formats"
                 :levels="levels"
+                reset-all
               />
             </div>
             <div class="catalog__courses">
@@ -223,6 +192,71 @@
         </div>
       </div>
     </div>
+
+    <LazyClientOnly>
+      <teleport to="#catalog-filters-mobile">
+        <CatalogFilters
+          v-model:selected-direction="selectedDirection"
+          v-model:selected-rating="selectedRating"
+          v-model:selected-schools="selectedSchools"
+          v-model:selected-categories="selectedCategories"
+          v-model:selected-professions="selectedProfessions"
+          v-model:selected-teachers="selectedTeachers"
+          v-model:selected-skills="selectedSkills"
+          v-model:selected-tools="selectedTools"
+          v-model:selected-format="selectedFormat"
+          v-model:selected-levels="selectedLevels"
+          v-model:selected-prices="selectedPrices"
+          v-model:selected-durations="selectedDurations"
+          v-model:selected-loan="selectedLoan"
+          v-model:selected-free="selectedFree"
+          :price-min="priceMin"
+          :price-max="priceMax"
+          :price-step="priceStep"
+          :duration-min="durationMin"
+          :duration-max="durationMax"
+          :duration-step="durationStep"
+          :directions="directions"
+          :ratings="ratings"
+          :schools="schools"
+          :categories="categories"
+          :professions="professions"
+          :teachers="teachers"
+          :skills="skills"
+          :tools="tools"
+          :formats="formats"
+          :levels="levels"
+          mobile
+          @load-items="onLoadItems"
+        />
+      </teleport>
+
+      <teleport to="#catalog-filters-mobile-tags">
+        <CatalogTags
+          v-model:selected-direction="selectedDirection"
+          v-model:selected-rating="selectedRating"
+          v-model:selected-schools="selectedSchools"
+          v-model:selected-categories="selectedCategories"
+          v-model:selected-professions="selectedProfessions"
+          v-model:selected-teachers="selectedTeachers"
+          v-model:selected-skills="selectedSkills"
+          v-model:selected-tools="selectedTools"
+          v-model:selected-format="selectedFormat"
+          v-model:selected-levels="selectedLevels"
+          v-model:selected-prices="selectedPrices"
+          v-model:selected-durations="selectedDurations"
+          v-model:selected-loan="selectedLoan"
+          v-model:selected-free="selectedFree"
+          :price-min="priceMin"
+          :price-max="priceMax"
+          :duration-min="durationMin"
+          :duration-max="durationMax"
+          :ratings="ratings"
+          :formats="formats"
+          :levels="levels"
+        />
+      </teleport>
+    </LazyClientOnly>
   </div>
 </template>
 
@@ -423,11 +457,173 @@ const courses = ref<ICourse[]>([
       link: 'netology',
     },
   },
+  {
+    id: 12,
+    name: 'Контекстная реклама с нуля',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/1.webp',
+    price: 90000,
+    price_old: 130000,
+    price_recurrent_price: 4000,
+    currency: ECurrency.RUB,
+    duration: 24,
+    duration_unit: EDuration.MONTH,
+    lessons_amount: 90,
+    school: {
+      name: 'Нетология',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
+  {
+    id: 14,
+    name: 'Разработчик',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 4.5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/2.webp',
+    price: 50000,
+    price_old: 160000,
+    price_recurrent_price: 6000,
+    currency: ECurrency.RUB,
+    duration: 12,
+    duration_unit: EDuration.MONTH,
+    lessons_amount: 70,
+    school: {
+      name: 'GeekBrains',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
+  {
+    id: 13,
+    name: 'Геймификатор',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 4.5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
+    price: 70000,
+    price_old: 160000,
+    price_recurrent_price: null,
+    currency: ECurrency.RUB,
+    duration: 12,
+    duration_unit: EDuration.MONTH,
+    lessons_amount: 70,
+    school: {
+      name: 'GeekBrains',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
+  {
+    id: 13,
+    name: 'Дизайнер упаковки',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 3.5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/5.webp',
+    price: 120000,
+    price_old: null,
+    price_recurrent_price: null,
+    currency: ECurrency.RUB,
+    duration: 12,
+    duration_unit: EDuration.MONTH,
+    lessons_amount: 70,
+    school: {
+      name: 'GeekBrains',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
+  {
+    id: 18,
+    name: 'Продвижение на Wildberries и OZON',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 3.5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/6.webp',
+    price: 120000,
+    price_old: null,
+    price_recurrent_price: 6000,
+    currency: ECurrency.RUB,
+    duration: 12,
+    duration_unit: EDuration.MONTH,
+    lessons_amount: 70,
+    school: {
+      name: 'GeekBrains',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
+  {
+    id: 12,
+    name: 'Контекстная реклама с нуля',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/1.webp',
+    price: 90000,
+    price_old: 130000,
+    price_recurrent_price: 4000,
+    currency: ECurrency.RUB,
+    duration: 24,
+    duration_unit: EDuration.MONTH,
+    lessons_amount: 90,
+    school: {
+      name: 'Нетология',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
+  {
+    id: 20,
+    name: 'Эмоциональный интеллект и лидерство',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
+    price: 50000,
+    price_old: null,
+    price_recurrent_price: null,
+    currency: ECurrency.RUB,
+    duration: null,
+    duration_unit: null,
+    lessons_amount: null,
+    school: {
+      name: 'Нетология',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
+  {
+    id: 20,
+    name: 'Эмоциональный интеллект и лидерство',
+    link: 'context',
+    url: 'http//:yandex.ru/',
+    rating: 5,
+    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
+    price: 50000,
+    price_old: null,
+    price_recurrent_price: null,
+    currency: ECurrency.RUB,
+    duration: null,
+    duration_unit: null,
+    lessons_amount: null,
+    school: {
+      name: 'Нетология',
+      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
+      link: 'netology',
+    },
+  },
 ]);
 
 const onLoadItems = (name: string): void => {
   console.log(`Loading ${name}...`);
 };
+
+const total = 10;
 
 //
 
@@ -451,6 +647,11 @@ const selectedDurations = ref<Array<number>>([durationMin.value, durationMax.val
 //
 
 const directions = ref<IDirection[]>([
+  {
+    id: 999,
+    name: 'Все направления',
+    link: '',
+  },
   {
     id: 1,
     name: 'Программирование',
@@ -926,9 +1127,7 @@ const selectedSkills = ref<Array<ISkill>>([]);
 
 const selectedTools = ref<Array<ITool>>([]);
 
-const getLinkPagination = (page: number): string => {
-  return `/courses/?page=${page}`;
-};
+const getLinkPagination = (page: number): string => `/courses/?page=${page}`;
 </script>
 
 <style lang="scss">

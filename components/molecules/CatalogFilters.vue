@@ -24,11 +24,16 @@
         </Tags>
       </div>
     </transition-group>
+    <div
+      v-if="mobile"
+      id="catalog-filters-mobile-tags"
+      class="catalog-filters__tags"
+    />
     <div class="catalog-filters__panel">
       <transition-group name="fade">
         <div
-          v-if="directions?.length && mobile"
-          class="catalog-filters__block"
+          v-if="directions?.length"
+          class="catalog-filters__block catalog-filters__block--directions"
         >
           <Tags>
             <Tag

@@ -23,6 +23,11 @@
 
     &--filters-mobile {
       margin-left: 0.5rem;
+      display: none;
+
+      @media all and (max-width: 1050px) {
+        display: block;
+      }
     }
 
     .form-item {

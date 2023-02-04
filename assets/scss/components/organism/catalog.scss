@@ -14,6 +14,18 @@
     @media all and (max-width: 1050px) {
       display: none;
     }
+
+    .catalog-filters {
+      &__block {
+        &--directions {
+          display: none;
+        }
+      }
+
+      &__tags {
+        display: none;
+      }
+    }
   }
 
   &__tools,
