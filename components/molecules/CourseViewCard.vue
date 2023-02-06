@@ -1,5 +1,5 @@
 <template>
-  <div class="course-view-card">
+  <div :class="`course-view-card ${nameClass}`">
     <div class="course-view-card__image" :style="`background-image: url('${course.image}')`">
       <div
         v-if="course.rating"
@@ -119,7 +119,10 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import {
+  computed,
+  PropType,
+} from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -133,6 +136,21 @@ const props = defineProps({
     type: Object as PropType<ICourse>,
     required: true,
   },
+  scroll: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+});
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (props.scroll) {
+    classes.push('course-view-card--scroll');
+  }
+
+  return classes.join(' ');
 });
 </script>
 

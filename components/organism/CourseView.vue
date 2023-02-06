@@ -59,19 +59,55 @@
               </Fact>
             </Facts>
           </div>
-          <div class="course-view__side course-view__side--right">
-            <CourseViewCard
-              :course="course"
-            />
-          </div>
         </div>
       </div>
     </Bubbles>
+    <div
+      ref="contentRef"
+      class="course-view__content content"
+    >
+      <div
+        :class="`course-view__course-view-card ${scroll ? 'course-view__course-view-card--scroll' : ''}`"
+      >
+        <CourseViewCard
+          :course="course"
+          :scroll="scroll"
+        />
+      </div>
+
+      <div class="course-view__info">
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import {
+  onMounted,
+  ref,
+} from 'vue';
 
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import Fact from '@/components/atoms/Fact.vue';
@@ -80,6 +116,26 @@ import Facts from '@/components/molecules/Facts.vue';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
+
+const scroll = ref(true);
+const contentRef = ref<HTMLElement | null>(null);
+
+const setScroll = (): void => {
+  const rect = contentRef.value?.getBoundingClientRect();
+
+  if (rect) {
+    const lineBottom = rect.top + rect.height;
+    scroll.value = window.scrollY <= lineBottom;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    setScroll();
+  });
+
+  setScroll();
+});
 
 const course = ref<ICourse>({
   id: 12,
@@ -100,7 +156,7 @@ const course = ref<ICourse>({
     image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
     link: 'netology',
   },
-},);
+});
 </script>
 
 <style lang="scss">

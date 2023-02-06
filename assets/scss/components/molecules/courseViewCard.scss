@@ -1,12 +1,19 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .course-view-card {
-  position: sticky;
   z-index: 5;
-  top: 4px;
   border-radius: 1rem;
   box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
   width: 400px;
+  position: absolute;
+  background-color: $white;
+  bottom: 0;
+
+  &--scroll {
+    position: fixed;
+    top: 150px;
+    bottom: auto;
+  }
 
   &__image {
     height: 180px;
@@ -75,10 +82,6 @@
     line-height: 1.875rem;
   }
 
-  &__prices {
-
-  }
-
   &__price {
     color: $black;
     margin-bottom: 0.5rem;
@@ -119,14 +122,6 @@
     margin-bottom: 2rem;
   }
 
-  &__feature {
-
-  }
-
-  &__feature {
-
-  }
-
   &__feature-header {
     position: relative;
     margin-bottom: 1.5rem;
@@ -151,10 +146,6 @@
     left: 0;
     width: 100%;
     z-index: 1;
-  }
-
-  &__feature-items {
-
   }
 
   &__feature-item {

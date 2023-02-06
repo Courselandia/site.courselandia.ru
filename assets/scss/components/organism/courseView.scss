@@ -13,4 +13,25 @@
   &__side {
     width: 670px;
   }
+
+  &__content {
+    position: relative;
+    padding-right: 400px;
+  }
+
+  &__course-view-card {
+    position: absolute;
+    right: 0;
+    width: 400px;
+    bottom: 0;
+
+    &--scroll {
+      top: 0;
+      bottom: auto;
+    }
+  }
+
+  &__info {
+    padding-right: 420px;
+  }
 }
