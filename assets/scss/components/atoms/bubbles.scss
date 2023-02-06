@@ -1,0 +1,21 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.bubbles {
+  background-color: $blue1;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  background-image: url("~/assets/images/round.svg"), url("~/assets/images/round.svg");
+  background-size: 425px auto, 894px auto;
+  background-repeat: no-repeat;
+  background-position: -230px -170px, calc(100% + 171px) 55px;
+
+  @media all and (max-width: 900px) {
+    background-image: url("~/assets/images/round.svg");
+  }
+
+  @media all and (max-width: 576px) {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}

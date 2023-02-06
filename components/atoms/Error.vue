@@ -12,10 +12,20 @@
     >
       {{ message }}
     </div>
+    <div class="error__action">
+      <Button
+        to="/"
+        link="nuxt-link"
+      >
+        Вернуться на главную
+      </Button>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import Button from '@/components/atoms/Button.vue';
+
 const props = defineProps({
   code: {
     type: [Number, String],

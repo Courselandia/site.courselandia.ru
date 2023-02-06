@@ -21,6 +21,7 @@
       :href="to"
       :disabled="disabled"
       :target="target"
+      :rel="rel"
     >
       <div class="button__label">
         <slot />
@@ -95,6 +96,11 @@ const props = defineProps({
     type: String as PropType<TLink>,
     required: false,
     default: 'button',
+  },
+  rel: {
+    type: String,
+    required: false,
+    default: null,
   },
 });
 

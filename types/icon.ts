@@ -18,6 +18,8 @@ type TIcon =
   'row' |
   'box' |
   'checked' |
-  'configs';
+  'configs' |
+  'video' |
+  'certificate';
 
 export default TIcon;
