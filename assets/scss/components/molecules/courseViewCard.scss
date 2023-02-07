@@ -1,25 +1,54 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .course-view-card {
-  z-index: 5;
-  border-radius: 1rem;
-  box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
-  width: 400px;
   position: absolute;
-  background-color: $white;
+  right: 0;
+  width: 400px;
   bottom: 0;
 
   @media all and (max-width: 1200px) {
+    position: static;
+    width: auto;
+  }
+
+  @media all and (max-width: 576px) {
     display: none;
   }
 
   &--scroll {
-    position: fixed;
-    top: 150px;
+    top: 0;
     bottom: auto;
+
+    @media all and (max-width: 1600px) {
+      right: 50px;
+    }
 
     @media all and (max-width: 1200px) {
       display: none;
+    }
+  }
+
+  &__box {
+    z-index: 5;
+    border-radius: 1rem;
+    box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
+    width: 400px;
+    position: absolute;
+    background-color: $white;
+    bottom: 0;
+
+    @media all and (max-width: 1200px) {
+      display: none;
+    }
+
+    &--scroll {
+      position: fixed;
+      top: 150px;
+      bottom: auto;
+
+      @media all and (max-width: 1200px) {
+        display: none;
+      }
     }
   }
 

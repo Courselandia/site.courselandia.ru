@@ -183,7 +183,6 @@
               :max="durationMax"
               :step="durationStep"
               :label="getLabelDuration"
-              money
             />
           </div>
         </div>

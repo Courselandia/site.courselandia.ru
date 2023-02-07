@@ -1,6 +1,9 @@
 <template>
   <div class="range-slider">
-    <div class="range-slider__values">
+    <div
+      v-if="showValues"
+      class="range-slider__values"
+    >
       <template v-if="typeof input === 'object'">
         <template v-if="money">
           {{ toMoney(input[0]) }} {{ getLabel(input[0]) }}
@@ -61,6 +64,11 @@ const props = defineProps({
     type: Function,
     required: false,
     default: () => {},
+  },
+  showValues: {
+    type: Boolean,
+    required: false,
+    default: true,
   },
 });
 
