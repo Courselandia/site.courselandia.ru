@@ -5,7 +5,7 @@
         <div class="course-view__header">
           <div class="course-view__side course-view__side--left">
             <h1 class="title title--1">
-              Houdini c нуля до PRO — курс по созданию визуальных эффектов от Skillbox
+              Houdini c нуля до PRO
             </h1>
 
             <div class="course-view__description">
@@ -76,30 +76,31 @@
       </div>
 
       <div class="course-view__info">
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
+        <h2 class="title title--1">
+          Чему вы научитесь
+        </h2>
+        <Numerics>
+          <Numeric number="1">
+            Создавать анимированные изображения
+          </Numeric>
+          <Numeric number="2">
+            Моделировать с помощью скриптов на Python
+          </Numeric>
+          <Numeric number="3">
+            Анимировать природные явления
+          </Numeric>
+          <Numeric number="4">
+            Работать в Houdini
+          </Numeric>
+          <Numeric number="5">
+            Настраивать рендеринг
+          </Numeric>
+        </Numerics>
       </div>
     </div>
+    <CourseViewFollow
+      :course="course"
+    />
   </div>
 </template>
 
@@ -111,8 +112,11 @@ import {
 
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import Fact from '@/components/atoms/Fact.vue';
+import Numeric from '@/components/atoms/Numeric.vue';
 import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
+import CourseViewFollow from '@/components/molecules/CourseViewFollow.vue';
 import Facts from '@/components/molecules/Facts.vue';
+import Numerics from '@/components/molecules/Numerics.vue';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
@@ -139,7 +143,7 @@ onMounted(() => {
 
 const course = ref<ICourse>({
   id: 12,
-  name: 'Houdini c нуля до PRO — курс по созданию визуальных эффектов',
+  name: 'Houdini c нуля до PRO',
   link: 'context',
   url: 'http//:yandex.ru/',
   rating: 5,

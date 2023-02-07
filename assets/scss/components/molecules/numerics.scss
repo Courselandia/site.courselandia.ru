@@ -1,0 +1,24 @@
+.numerics {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.9rem;
+  margin-right: -0.9rem;
+
+  @media all and (max-width: 576px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .numeric {
+    width: calc(50% - 1.8rem);
+    margin-left: 0.9rem;
+    margin-right: 0.9rem;
+    margin-bottom: 1.8rem;
+
+    @media all and (max-width: 576px) {
+      width: calc(100%);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

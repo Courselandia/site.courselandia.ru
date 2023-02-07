@@ -68,17 +68,15 @@
     </div>
     <div class="course-view-card__footer">
       <div class="course-view-card__action">
-        <noindex>
-          <Button
-            to="https://ya.ru/"
-            link="link"
-            target="_blank"
-            rel="nofollow"
-            wide
-          >
-            На сайт курса
-          </Button>
-        </noindex>
+        <Button
+          to="https://ya.ru/"
+          link="link"
+          target="_blank"
+          rel="nofollow"
+          wide
+        >
+          На сайт курса
+        </Button>
       </div>
       <div class="course-view-card__feature">
         <div class="course-view-card__feature-header">

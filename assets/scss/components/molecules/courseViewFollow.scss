@@ -1,0 +1,59 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.course-view-follow {
+  position: fixed;
+  bottom: 0;
+  background-color: #000628;
+  color: $white;
+  width: 100%;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  display: none;
+
+  @media all and (max-width: 1200px) {
+    display: block;
+  }
+
+  &__side {
+    &--left {
+      flex-grow: 1;
+      padding-right: 1rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  &__price {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+  }
+
+  &__price_additional {
+    display: flex;
+    align-items: center;
+  }
+
+  &__price_current,
+  &__price_old {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
+
+  &__price_current {
+    margin-right: 0.5rem;
+  }
+
+  &__price_old {
+    text-decoration: line-through;
+  }
+}

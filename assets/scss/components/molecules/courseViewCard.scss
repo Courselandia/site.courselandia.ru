@@ -9,10 +9,18 @@
   background-color: $white;
   bottom: 0;
 
+  @media all and (max-width: 1200px) {
+    display: none;
+  }
+
   &--scroll {
     position: fixed;
     top: 150px;
     bottom: auto;
+
+    @media all and (max-width: 1200px) {
+      display: none;
+    }
   }
 
   &__image {

@@ -12,11 +12,19 @@
 
   &__side {
     width: 670px;
+
+    @media all and (max-width: 1200px) {
+      width: auto;
+    }
   }
 
   &__content {
     position: relative;
     padding-right: 400px;
+
+    @media all and (max-width: 1200px) {
+      padding-right: 0;
+    }
   }
 
   &__course-view-card {
@@ -25,13 +33,39 @@
     width: 400px;
     bottom: 0;
 
+    @media all and (max-width: 1200px) {
+      position: static;
+      width: auto;
+    }
+
+    @media all and (max-width: 576px) {
+      display: none;
+    }
+
     &--scroll {
       top: 0;
       bottom: auto;
+
+      @media all and (max-width: 1600px) {
+        right: 50px;
+      }
+
+      @media all and (max-width: 1200px) {
+        display: none;
+      }
     }
   }
 
   &__info {
     padding-right: 420px;
+    padding-top: 7.5rem;
+
+    @media all and (max-width: 1200px) {
+      padding-right: 0;
+    }
+
+    @media all and (max-width: 576px) {
+      padding-top: 3.5rem;
+    }
   }
 }
