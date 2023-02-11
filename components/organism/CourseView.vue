@@ -11,10 +11,12 @@
       ref="contentRef"
       class="course-view__content content"
     >
-      <CourseViewCard
-        :course="course"
-        :scroll="scroll"
-      />
+      <div ref="cardRef">
+        <CourseViewCard
+          :course="course"
+          :scroll="scroll"
+        />
+      </div>
 
       <div class="course-view__info">
         <div class="mb-50 mb-15-md">
@@ -73,7 +75,7 @@
           />
         </div>
 
-        <div class="mb-50 mb-15-md">
+        <div>
           <h2 class="title title--1">
             Часто задаваемые вопросы
           </h2>
@@ -115,10 +117,15 @@ const scroll = ref(true);
 const contentRef = ref<HTMLElement | null>(null);
 
 const setScroll = (): void => {
-  const rect = contentRef.value?.getBoundingClientRect();
+  const card = document.querySelector('#course-view-card');
 
-  if (rect) {
-    const lineBottom = rect.top + rect.height;
+  if (contentRef.value && card) {
+    const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 150;
+    const height = contentRef.value.offsetHeight;
+    const top = contentRef.value.offsetTop;
+    const screenHeight = window.screen.availHeight;
+    const lineBottom = height + top - screenHeight + gapHeight;
+
     scroll.value = window.scrollY <= lineBottom;
   }
 };

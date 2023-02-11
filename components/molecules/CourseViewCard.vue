@@ -3,6 +3,7 @@
     :class="`course-view-card ${props.scroll ? 'course-view-card--scroll' : ''}`"
   >
     <div
+      id="course-view-card"
       :class="`course-view-card__box ${props.scroll ? 'course-view-card__box--scroll' : ''}`"
     >
       <div class="course-view-card__image" :style="`background-image: url('${course.image}')`">
@@ -44,8 +45,8 @@
             class="course-view-card__price"
           >
             {{ course.price_recurrent_price
-            ? money(course.price_recurrent_price)
-            : money(course.price)
+              ? money(course.price_recurrent_price)
+              : money(course.price)
             }}
             {{ currency(course.currency) }}
             <template v-if="course.price_recurrent_price">
