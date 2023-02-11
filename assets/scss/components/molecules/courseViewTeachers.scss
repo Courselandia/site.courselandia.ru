@@ -12,21 +12,53 @@
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 2rem;
+
+    @media all and (max-width: 1500px) {
+      width: calc(33.33% - 2rem);
+    }
+
+    @media all and (max-width: 1200px) {
+      width: calc(25% - 2rem);
+    }
+
+    @media all and (max-width: 1000px) {
+      width: calc(33.33% - 2rem);
+    }
+
+    @media all and (max-width: 850px) {
+      width: calc(50% - 2rem);
+    }
+
+    @media all and (max-width: 576px) {
+      flex-direction: column;
+    }
   }
 
   &__picture {
     margin-right: 1.5rem;
+
+    @media all and (max-width: 576px) {
+      margin-right: 0;
+    }
   }
 
   &__name {
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.5rem;
+
+    @media all and (max-width: 576px) {
+      text-align: center;
+    }
   }
 
   &__position {
     font-weight: 400;
     font-size: 0.875rem;
     line-height: 1.3125rem;
+
+    @media all and (max-width: 576px) {
+      text-align: center;
+    }
   }
 }

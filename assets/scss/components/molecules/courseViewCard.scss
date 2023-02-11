@@ -6,6 +6,10 @@
   width: 400px;
   bottom: 0;
 
+  @media all and (max-width: 1600px) {
+    right: 50px;
+  }
+
   @media all and (max-width: 1200px) {
     position: static;
     width: auto;
@@ -18,10 +22,6 @@
   &--scroll {
     top: 0;
     bottom: auto;
-
-    @media all and (max-width: 1600px) {
-      right: 50px;
-    }
 
     @media all and (max-width: 1200px) {
       display: none;

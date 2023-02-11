@@ -7,10 +7,20 @@
   box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
   position: relative;
 
+  @media all and (max-width: 576px) {
+    padding: 1.5rem 1rem;
+  }
+
   &__question {
     font-weight: 800;
     font-size: 1.25rem;
     line-height: 1.5625rem;
+    padding-right: 3rem;
+
+    @media all and (max-width: 576px) {
+      font-size: 1rem;
+      line-height: 1.125rem;
+    }
   }
 
   &__answer {
@@ -18,6 +28,11 @@
     font-size: 1rem;
     line-height: 1.5rem;
     margin-top: 1rem;
+
+    @media all and (max-width: 576px) {
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
+    }
   }
 
   &__action {
