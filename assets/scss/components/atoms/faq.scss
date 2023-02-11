@@ -1,0 +1,30 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.faq {
+  background-color: $white;
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
+  position: relative;
+
+  &__question {
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.5625rem;
+  }
+
+  &__answer {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  &__action {
+    line-height: 0;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    cursor: pointer;
+  }
+}

@@ -97,6 +97,18 @@
     &-certificate {
       mask-image: url("~/assets/images/icons/certificate.svg");
     }
+
+    &-checked-circle {
+      mask-image: url("~/assets/images/icons/checked-circle.svg");
+    }
+
+    &-plus-circle {
+      mask-image: url("~/assets/images/icons/plus-circle.svg");
+    }
+
+    &-minus-circle {
+      mask-image: url("~/assets/images/icons/minus-circle.svg");
+    }
   }
 
   &--color {

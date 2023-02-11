@@ -20,6 +20,9 @@ type TIcon =
   'checked' |
   'configs' |
   'video' |
-  'certificate';
+  'certificate' |
+  'checked-circle' |
+  'plus-circle' |
+  'minus-circle';
 
 export default TIcon;

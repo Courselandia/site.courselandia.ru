@@ -1,0 +1,14 @@
+.course-view-employments {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3.5rem;
+  margin-right: -3.5rem;
+  margin-bottom: -7rem;
+
+  .block-check {
+    width: calc(50% - 7rem);
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+    margin-bottom: 7rem;
+  }
+}

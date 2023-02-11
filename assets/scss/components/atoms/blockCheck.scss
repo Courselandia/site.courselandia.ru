@@ -1,0 +1,19 @@
+.block-check {
+  &__icon {
+    line-height: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.55rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}

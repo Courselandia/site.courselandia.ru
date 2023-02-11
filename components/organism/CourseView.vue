@@ -17,12 +17,71 @@
       />
 
       <div class="course-view__info">
-        <CourseViewLearn
-          :course="course"
-        />
-        <CourseViewSalaries
-          :course="course"
-        />
+        <div class="mb-50 mb-15-md">
+          <h2 class="title title--1">
+            Чему вы научитесь
+          </h2>
+
+          <CourseViewLearn
+            :course="course"
+          />
+        </div>
+
+        <div class="mb-50 mb-15-md">
+          <CourseViewSalaries
+            :course="course"
+          />
+        </div>
+
+        <div class="mb-50 mb-15-md">
+          <h2 class="title title--1">
+            Как проходит обучение
+          </h2>
+
+          <CourseViewProcesses
+            :course="course"
+          />
+        </div>
+
+        <div class="mb-50 mb-15-md">
+          <h2 class="title title--1">
+            Преподаватели
+          </h2>
+
+          <CourseViewTeachers
+            :course="course"
+          />
+        </div>
+
+        <div class="mb-50 mb-15-md">
+          <h2 class="title title--1">
+            Помощь с трудоустройством
+          </h2>
+
+          <CourseViewEmployments
+            :course="course"
+          />
+        </div>
+
+        <div class="mb-50 mb-15-md">
+          <h2 class="title title--1">
+            Информация
+          </h2>
+
+          <CourseViewInfo
+            :course="course"
+          />
+        </div>
+
+        <div class="mb-50 mb-15-md">
+          <h2 class="title title--1">
+            Часто задаваемые вопросы
+          </h2>
+
+          <CourseViewFaqs
+            :course="course"
+          />
+        </div>
       </div>
     </div>
     <CourseViewFollow
@@ -39,10 +98,15 @@ import {
 
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
+import CourseViewEmployments from '@/components/molecules/CourseViewEmployments.vue';
+import CourseViewFaqs from '@/components/molecules/CourseViewFaqs.vue';
 import CourseViewFollow from '@/components/molecules/CourseViewFollow.vue';
 import CourseViewHeader from '@/components/molecules/CourseViewHeader.vue';
+import CourseViewInfo from '@/components/molecules/CourseViewInfo.vue';
 import CourseViewLearn from '@/components/molecules/CourseViewLearn.vue';
+import CourseViewProcesses from '@/components/molecules/CourseViewProcesses.vue';
 import CourseViewSalaries from '@/components/molecules/CourseViewSalaries.vue';
+import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';

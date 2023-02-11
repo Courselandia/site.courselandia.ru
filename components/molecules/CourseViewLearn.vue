@@ -1,27 +1,21 @@
 <template>
-  <div class="mb-50 mb-15-md">
-    <h2 class="title title--1">
-      Чему вы научитесь
-    </h2>
-
-    <Numerics>
-      <Numeric number="1">
-        Создавать анимированные изображения
-      </Numeric>
-      <Numeric number="2">
-        Моделировать с помощью скриптов на Python
-      </Numeric>
-      <Numeric number="3">
-        Анимировать природные явления
-      </Numeric>
-      <Numeric number="4">
-        Работать в Houdini
-      </Numeric>
-      <Numeric number="5">
-        Настраивать рендеринг
-      </Numeric>
-    </Numerics>
-  </div>
+  <Numerics>
+    <Numeric number="1">
+      Создавать анимированные изображения
+    </Numeric>
+    <Numeric number="2">
+      Моделировать с помощью скриптов на Python
+    </Numeric>
+    <Numeric number="3">
+      Анимировать природные явления
+    </Numeric>
+    <Numeric number="4">
+      Работать в Houdini
+    </Numeric>
+    <Numeric number="5">
+      Настраивать рендеринг
+    </Numeric>
+  </Numerics>
 </template>
 
 <script lang="ts" setup>

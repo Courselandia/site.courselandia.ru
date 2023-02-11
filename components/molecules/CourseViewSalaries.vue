@@ -21,17 +21,7 @@
         <div class="course-view-salaries__name">
           Зарплата VFX-художника: 35 000 ₽ — 250 000 ₽
         </div>
-        <div class="course-view-salaries__slider">
-          <RangeSlider
-            v-model:value="salary"
-            :min="min"
-            :max="max"
-            :step="step"
-            :label="getLabelPrice"
-            money
-            :show-values="false"
-          />
-        </div>
+        <div class="course-view-salaries__slider" />
       </div>
     </div>
   </div>
@@ -43,7 +33,6 @@ import {
   ref,
 } from 'vue';
 
-import RangeSlider from '@/components/atoms/form/RangeSlider.vue';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
