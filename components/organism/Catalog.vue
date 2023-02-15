@@ -109,7 +109,10 @@
                 v-model:type="type"
               >
                 <template #filtersMobile>
-                  <CatalogFiltersMobile :total="total" />
+                  <CatalogFiltersMobile
+                    :total="total"
+                    :total-filters="totalFilters"
+                  />
                 </template>
               </CatalogTools>
             </div>
@@ -261,7 +264,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import {
+  computed,
+  ref,
+} from 'vue';
 import { useRoute } from 'vue-router';
 
 import Button from '@/components/atoms/Button.vue';
@@ -1128,6 +1134,55 @@ const selectedSkills = ref<Array<ISkill>>([]);
 const selectedTools = ref<Array<ITool>>([]);
 
 const getLinkPagination = (page: number): string => `/courses/?page=${page}`;
+
+const totalFilters = computed((): number => {
+  let count = 0;
+
+  if (selectedDirection.value) {
+    count++;
+  }
+
+  if (selectedRating.value) {
+    count++;
+  }
+
+  if (selectedFormat.value) {
+    count++;
+  }
+
+  if (selectedLoan.value) {
+    count++;
+  }
+
+  if (selectedFree.value) {
+    count++;
+  }
+
+  if (
+    selectedPrices.value[0] !== priceMin.value
+    || selectedPrices.value[1] !== priceMax.value
+  ) {
+    count++;
+  }
+
+  if (
+    selectedDurations.value[0] !== durationMin.value
+    || selectedDurations.value[1] !== durationMax.value
+  ) {
+    count++;
+  }
+
+  count += selectedSchools.value.length;
+  count += selectedCategories.value.length;
+  count += selectedProfessions.value.length;
+  count += selectedTeachers.value.length;
+  count += selectedSkills.value.length;
+  count += selectedTools.value.length;
+  count += selectedTools.value.length;
+  count += selectedLevels.value.length;
+
+  return count;
+});
 </script>
 
 <style lang="scss">

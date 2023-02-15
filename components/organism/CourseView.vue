@@ -86,9 +86,14 @@
         </div>
       </div>
     </div>
-    <CourseViewFollow
-      :course="course"
-    />
+
+    <LazyClientOnly>
+      <teleport to=".page">
+        <CourseViewFollow
+          :course="course"
+        />
+      </teleport>
+    </LazyClientOnly>
   </div>
 </template>
 

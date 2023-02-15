@@ -1,15 +1,21 @@
 <template>
   <div class="catalog-filters-mobile">
     <div
-      :class="`catalog-filters-mobile__icon ${show ? 'catalog-filters-mobile__icon--active' : ''}`"
+      :class="`catalog-filters-mobile__icon ${totalFilters > 0 ? 'catalog-filters-mobile__icon--active' : ''}`"
       @click="onClickShow"
       @keyup="onClickShow"
     >
       <Icon
         name="configs"
-        :color="show ? 'white' : 'blue2'"
+        :color="totalFilters > 0 ? 'white' : 'blue2'"
         :size="[20, 20]"
       />
+      <div
+        v-if="totalFilters"
+        class="catalog-filters-mobile__total"
+      >
+        {{ totalFilters }}
+      </div>
     </div>
     <transition name="slide-right">
       <div
@@ -72,6 +78,11 @@ import Icon from '@/components/atoms/Icon.vue';
 
 const props = defineProps({
   total: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  totalFilters: {
     type: Number,
     required: false,
     default: 0,

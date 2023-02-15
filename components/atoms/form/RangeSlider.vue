@@ -101,7 +101,7 @@ const format = (val: number): string => {
     return `${toMoney(val)} ${getLabel(val)}`;
   }
 
-  return String(val);
+  return String(Math.round(val));
 };
 </script>
 
