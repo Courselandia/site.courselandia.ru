@@ -14,6 +14,7 @@
           :key="key"
           :to="item.link"
           class="alphabetic-list__item"
+          @click="onClick"
         >
           {{ item.label }}
         </nuxt-link>
@@ -38,6 +39,10 @@ const props = defineProps({
     type: Array as PropType<Array<IMenu>>,
     required: true,
   },
+});
+
+const emit = defineEmits({
+  click: () => true,
 });
 
 const {
@@ -77,6 +82,10 @@ const options = ref(toAlphabetic(items.value));
 watch(items, () => {
   options.value = toAlphabetic(items.value);
 });
+
+const onClick = (): void => {
+  emit('click');
+};
 </script>
 
 <style lang="scss">

@@ -5,6 +5,7 @@
       :key="key"
       :to="school.link"
       class="list-schools__item"
+      @click="onClick"
     >
       {{ school.label }}
     </nuxt-link>
@@ -22,6 +23,14 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits({
+  click: () => true,
+});
+
+const onClick = (): void => {
+  emit('click');
+};
 </script>
 
 <style lang="scss">

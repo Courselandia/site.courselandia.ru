@@ -8,6 +8,7 @@
       <nuxt-link
         :to="school.link"
         class="list-school-reviews__link"
+        @click="onClick"
       >
         <div class="list-school-reviews__icon">
           <Icon
@@ -48,6 +49,14 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits({
+  click: () => true,
+});
+
+const onClick = (): void => {
+  emit('click');
+};
 </script>
 
 <style lang="scss">

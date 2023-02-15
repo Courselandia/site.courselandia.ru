@@ -2,6 +2,7 @@
   <nuxt-link
     :to="link"
     class="direction"
+    @click="onClick"
   >
     <div class="direction__info">
       <div class="direction__label">
@@ -53,6 +54,14 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits({
+  click: () => true,
+});
+
+const onClick = (): void => {
+  emit('click');
+};
 </script>
 
 <style lang="scss">

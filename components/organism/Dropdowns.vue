@@ -38,6 +38,7 @@
                       :amount="item.amount"
                       :label="item.label"
                       :link="item.link"
+                      @click="onClick"
                     />
                   </template>
                 </Directions>
@@ -49,6 +50,7 @@
                   <nuxt-link
                     :to="menuCourses[index].link"
                     class="dropdowns__action"
+                    @click="onClick"
                   >
                     <div>
                       Все курсы направления
@@ -63,6 +65,7 @@
                 <div class="dropdowns__list">
                   <AlphabeticList
                     :items="menuCourses[index].children"
+                    @click="onClick"
                   />
                 </div>
               </template>
@@ -117,7 +120,10 @@
                   </div>
                 </div>
                 <div class="dropdowns__button">
-                  <Button to="/schools">
+                  <Button
+                    to="/schools"
+                    @click="onClick"
+                  >
                     Все школы
                   </Button>
                 </div>
@@ -126,6 +132,7 @@
             <div class="dropdowns__side dropdowns__side--right">
               <ListSchools
                 :schools="listSchools"
+                @click="onClick"
               />
             </div>
           </div>
@@ -178,7 +185,10 @@
                   </div>
                 </div>
                 <div class="dropdowns__button">
-                  <Button to="/reviews">
+                  <Button
+                    to="/reviews"
+                    @click="onClick"
+                  >
                     Все отзывы
                   </Button>
                 </div>
@@ -187,6 +197,7 @@
             <div class="dropdowns__side dropdowns__side--right">
               <ListSchoolReviews
                 :schools="listSchoolReviews"
+                @click="onClick"
               />
             </div>
           </div>
@@ -640,6 +651,10 @@ const listSchoolReviews = ref<IListSchoolReview[]>(
 
 const onClickDirection = (indx: number): void => {
   index.value = indx;
+};
+
+const onClick = (): void => {
+  menuValue.value = null;
 };
 </script>
 
