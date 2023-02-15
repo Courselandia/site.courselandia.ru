@@ -1,8 +1,14 @@
 <template>
-  <div class="course">
+  <div
+    :class="`course ${nameClass}`"
+  >
     <nuxt-link
       :to="`/courses/show/${course.link}`"
       class="course__box"
+      @mousedown="onClickActive"
+      @mouseup="onClickDisable"
+      @mouseleave="onClickDisable"
+      @focusout="onClickDisable"
     >
       <div class="course__image" :style="`background-image: url('${course.image}')`">
         <div
@@ -99,6 +105,10 @@
         target="_blank"
         rel="noopener noreferrer"
         class="course__link"
+        @mousedown="onClickActive"
+        @mouseup="onClickDisable"
+        @mouseleave="onClickDisable"
+        @focusout="onClickDisable"
       >
         Перейти на сайт
       </a>
@@ -114,7 +124,11 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import {
+  computed,
+  PropType,
+  ref,
+} from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
@@ -130,6 +144,27 @@ const props = defineProps({
     required: true,
   },
 });
+
+const active = ref(false);
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (active.value) {
+    classes.push('course--active');
+  }
+
+  return classes.join(' ');
+});
+
+const onClickActive = (): void => {
+  active.value = true;
+};
+
+const onClickDisable = (): void => {
+  console.log('HERE 2');
+  active.value = false;
+};
 </script>
 
 <style lang="scss">
