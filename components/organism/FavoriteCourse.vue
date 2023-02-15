@@ -6,7 +6,7 @@
     @mouseleave="onMouseLeave"
     @focusout="onMouseLeave"
   >
-    <transition name="fade" mode="out-in">
+    <transition name="fade-fast" mode="out-in">
       <Icon
         v-if="hover"
         name="heart-full"
