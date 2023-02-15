@@ -9,6 +9,7 @@
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   display: none;
+  z-index: 5;
 
   @media all and (max-width: 1200px) {
     display: block;

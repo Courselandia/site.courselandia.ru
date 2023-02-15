@@ -19,9 +19,16 @@
     <div class="course-view-salaries__professions">
       <div class="course-view-salaries__profession">
         <div class="course-view-salaries__name">
-          Зарплата VFX-художника: 35 000 ₽ — 250 000 ₽
+          Зарплата VFX-художника: {{ money(junior) }} ₽ — {{ money(senior) }} ₽
         </div>
-        <div class="course-view-salaries__slider" />
+        <div class="course-view-salaries__slider">
+          <SliderSalary
+            v-model:value="salary"
+            :junior="junior"
+            :middle="middle"
+            :senior="senior"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -33,6 +40,8 @@ import {
   ref,
 } from 'vue';
 
+import SliderSalary from '@/components/molecules/SliderSalary.vue';
+import { money } from '@/helpers/number';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
@@ -42,14 +51,16 @@ const props = defineProps({
   },
 });
 
-const min = 40000;
-const max = 120000;
-const step = 1000;
-const salary = ref(min);
-
-const getLabelPrice = () => '₽';
+const junior = 45000;
+const middle = 150000;
+const senior = 320000;
+const salary = ref(45000);
 </script>
 
 <style lang="scss">
 @import "@/assets/scss/components/molecules/courseViewSalaries.scss";
+</style>
+
+<style lang="css">
+@import "@vueform/slider/themes/default.css";
 </style>
