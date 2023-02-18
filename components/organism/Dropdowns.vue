@@ -282,7 +282,7 @@ const loadDirections = async ():
   Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl, true, true);
 
 try {
-  const resultDirections = await useAsyncData('directions', async () => loadDirections());
+  const resultDirections = await useAsyncData('directionsWithCategoriesAndCount', async () => loadDirections());
   const result = resultDirections.data.value?.data;
   directions.value = await directionsToMenu(result, true);
   directionsWithCategories.value = await directionsToMenu(result);

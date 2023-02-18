@@ -7,10 +7,11 @@
             <Logo light />
           </div>
           <div class="footer__info">
-            <p>Сравниваем онлайн-курсы по digital и IT.</p>
+            <p>Ищем и сравниваем курсы IT сферы.</p>
             <p>
-              Мы — каталог-отзовик курсов. Выбирайте курсы по отзывам,
-              цене, продолжительности и другим критериям!
+              Мы - каталог курсов IT сферы.
+              Ищите и сравнивайте курсы по различным параметрам:
+              цена, продолжительность и много других критериев.
             </p>
             <p>2023 Courcesalndia ©</p>
           </div>
@@ -49,53 +50,48 @@ import {
 
 import Logo from '@/components/atoms/Logo.vue';
 import MenuBottom from '@/components/atoms/MenuBottom.vue';
+import schoolsToMenu from '@/converts/schoolsToMenu';
 import IMenu from '@/interfaces/menu';
+import { IResponseItems } from '@/interfaces/response';
+import ISchool from '@/interfaces/stores/school/school';
+import course from '@/stores/course';
+import school from '@/stores/school';
+import IDirection from "~/interfaces/stores/course/direction";
+import directionsToMenu from "~/converts/directionsToMenu";
 
-const menuSchools = ref<IMenu[]>([
-  {
-    label: 'Skillbox',
-    link: '/school/skillbox',
-  },
-  {
-    label: 'Нетология',
-    link: '/school/netology',
-  },
-  {
-    label: 'GeekBrains',
-    link: '/school/geek-brains',
-  },
-]);
+const config = useRuntimeConfig();
 
-const menuDirections = ref<IMenu[]>([
-  {
-    label: 'Программирование',
-    link: '/directions/programmirovanie',
-  },
-  {
-    label: 'Маркетинг',
-    link: '/directions/marketing',
-  },
-  {
-    label: 'Дизайн',
-    link: '/directions/dizayn',
-  },
-  {
-    label: 'Бизнес и управление',
-    link: '/directions/biznes-i-upravlenie',
-  },
-  {
-    label: 'Аналитика',
-    link: '/directions/analitika',
-  },
-  {
-    label: 'Игры',
-    link: '/directions/igri',
-  },
-  {
-    label: 'Другие профессии',
-    link: '/directions/drugie-professii',
-  },
-]);
+const menuSchools = ref<IMenu[]>([]);
+
+const {
+  readSchools,
+} = school();
+
+const loadSchools = async ():
+  Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
+
+try {
+  const resultSchools = await useAsyncData('schools', async () => loadSchools());
+  menuSchools.value = schoolsToMenu(resultSchools.data.value?.data);
+} catch (error: any) {
+  console.error(error.message);
+}
+
+const menuDirections = ref<IMenu[]>([]);
+
+const {
+  readDirections,
+} = course();
+
+const loadDirections = async ():
+  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl);
+
+try {
+  const resultDirections = await useAsyncData('directions', async () => loadDirections());
+  menuDirections.value = await directionsToMenu(resultDirections.data.value?.data);
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const menuInfo = ref<IMenu[]>([
   {
@@ -111,6 +107,7 @@ const menuInfo = ref<IMenu[]>([
     link: '/privacy-policy',
   },
 ]);
+
 </script>
 
 <style lang="scss">
