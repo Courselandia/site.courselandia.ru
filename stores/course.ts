@@ -11,15 +11,13 @@ export default defineStore('direction', {
   actions: {
     async readDirections(
       baseUrl: string,
-      withCategories: boolean | null = null,
-      withCount: boolean | null = null,
     ): Promise<IResponseItems<IDirection>> {
       try {
         const response = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
           baseURL: baseUrl,
           params: {
-            withCategories: withCategories ? 1 : 0,
-            withCount: withCount ? 1 : 0,
+            withCategories: 1,
+            withCount: 1,
           },
         });
 

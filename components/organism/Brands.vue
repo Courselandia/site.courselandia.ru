@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   ref,
 } from 'vue';
@@ -36,11 +37,17 @@ const {
 const loadSchools = async ():
   Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
 
-try {
-  const resultSchools = await useAsyncData('schools', async () => loadSchools());
-  brands.value = schoolsToBrand(resultSchools.data.value?.data);
-} catch (error: any) {
-  console.error(error.message);
+const { schools } = storeToRefs(school());
+
+if (schools.value) {
+  brands.value = schoolsToBrand(schools.value);
+} else {
+  try {
+    const resultSchools = await useAsyncData('schools', async () => loadSchools());
+    brands.value = schoolsToBrand(resultSchools.data.value?.data);
+  } catch (error: any) {
+    console.error(error.message);
+  }
 }
 </script>
 

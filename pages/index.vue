@@ -11,7 +11,7 @@
         <template #tags>
           <Tags>
             <Tag
-              v-for="(item, key) in directions"
+              v-for="(item, key) in listDirections"
               :key="key"
               :to="item.link"
               border="grey2"
@@ -48,7 +48,7 @@
       </h1>
       <Directions class="mb-50 mb-15-sm">
         <template
-          v-for="(item, key) in directions"
+          v-for="(item, key) in listDirections"
           :key="key"
         >
           <Direction
@@ -82,6 +82,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   ref,
 } from 'vue';
@@ -110,17 +111,23 @@ const {
   readDirections,
 } = course();
 
-const directions = ref<IMenu[]>();
+const listDirections = ref<IMenu[]>();
 
 const loadDirections = async ():
-  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl, true, true);
+  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl);
 
-try {
-  const resultDirections = await useAsyncData('directionsWithCategoriesAndCount', async () => loadDirections());
-  const result = resultDirections.data.value?.data;
-  directions.value = await directionsToMenu(result, true);
-} catch (error: any) {
-  console.error(error.message);
+const { directions } = storeToRefs(course());
+
+if (directions.value) {
+  listDirections.value = await directionsToMenu(directions.value, true);
+} else {
+  try {
+    const resultDirections = await useAsyncData('directions', async () => loadDirections());
+    const result = resultDirections.data.value?.data;
+    listDirections.value = await directionsToMenu(result, true);
+  } catch (error: any) {
+    console.error(error.message);
+  }
 }
 
 const courses = ref<ICourse[]>([
