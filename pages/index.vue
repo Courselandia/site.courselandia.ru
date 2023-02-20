@@ -119,8 +119,6 @@ try {
   const resultDirections = await useAsyncData('directionsWithCategoriesAndCount', async () => loadDirections());
   const result = resultDirections.data.value?.data;
   directions.value = await directionsToMenu(result, true);
-
-  console.dir(directions.value);
 } catch (error: any) {
   console.error(error.message);
 }
