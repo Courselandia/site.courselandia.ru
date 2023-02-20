@@ -11,46 +11,13 @@
         <template #tags>
           <Tags>
             <Tag
-              to="/courses/programmer"
+              v-for="(item, key) in directions"
+              :key="key"
+              :to="item.link"
               border="grey2"
               bck-hover="blue1"
             >
-              Программирование
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Маркетинг
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Дизайн
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Бизнес и управление
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Аналитика
-            </Tag>
-            <Tag
-              to="/courses/marketing"
-              border="grey2"
-              bck-hover="blue1"
-            >
-              Игры
+              {{ item.label }}
             </Tag>
           </Tags>
         </template>
@@ -136,17 +103,12 @@ import IMenu from '@/interfaces/menu';
 import { IResponseItems } from '@/interfaces/response';
 import IDirection from '@/interfaces/stores/course/direction';
 import course from '@/stores/course';
-import school from '@/stores/school';
 
 const config = useRuntimeConfig();
 
 const {
   readDirections,
 } = course();
-
-const {
-  readSchools,
-} = school();
 
 const directions = ref<IMenu[]>();
 
@@ -157,6 +119,8 @@ try {
   const resultDirections = await useAsyncData('directionsWithCategoriesAndCount', async () => loadDirections());
   const result = resultDirections.data.value?.data;
   directions.value = await directionsToMenu(result, true);
+
+  console.dir(directions.value);
 } catch (error: any) {
   console.error(error.message);
 }
