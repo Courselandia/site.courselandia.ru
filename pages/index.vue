@@ -128,63 +128,38 @@ import Directions from '@/components/molecules/Directions.vue';
 import Hero from '@/components/molecules/Hero.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import Brands from '@/components/organism/Brands.vue';
+import directionsToMenu from '@/converts/directionsToMenu';
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
+import { IResponseItems } from '@/interfaces/response';
+import IDirection from '@/interfaces/stores/course/direction';
+import course from '@/stores/course';
+import school from '@/stores/school';
 
-const directions = ref<IMenu[]>(
-  [
-    {
-      label: 'Все курсы',
-      link: '/courses',
-      amount: 10,
-      image: await import('@/assets/images/directions/all.svg'),
-    },
-    {
-      label: 'Программирование',
-      link: '/courses/programmirovanie',
-      amount: 20,
-      image: await import('@/assets/images/directions/programmirovanie.svg'),
-    },
-    {
-      label: 'Маркетинг',
-      link: '/marketings',
-      amount: 30,
-      image: await import('@/assets/images/directions/marketing.svg'),
-    },
-    {
-      label: 'Дизайн',
-      link: '/marketings',
-      amount: 8,
-      image: await import('@/assets/images/directions/dizayn.svg'),
-    },
-    {
-      label: 'Бизнес и управление',
-      link: '/buisness',
-      amount: 4,
-      image: await import('@/assets/images/directions/biznes-i-upravlenie.svg'),
-    },
-    {
-      label: 'Аналитика',
-      link: '/analitics',
-      amount: 6,
-      image: await import('@/assets/images/directions/analitika.svg'),
-    },
-    {
-      label: 'Игры',
-      link: '/analitics',
-      amount: 7,
-      image: await import('@/assets/images/directions/igri.svg'),
-    },
-    {
-      label: 'Другие профессии',
-      link: '/others',
-      amount: 9,
-      image: await import('@/assets/images/directions/drugie-professii.svg'),
-    },
-  ],
-);
+const config = useRuntimeConfig();
+
+const {
+  readDirections,
+} = course();
+
+const {
+  readSchools,
+} = school();
+
+const directions = ref<IMenu[]>();
+
+const loadDirections = async ():
+  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl, true, true);
+
+try {
+  const resultDirections = await useAsyncData('directionsWithCategoriesAndCount', async () => loadDirections());
+  const result = resultDirections.data.value?.data;
+  directions.value = await directionsToMenu(result, true);
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const courses = ref<ICourse[]>([
   {

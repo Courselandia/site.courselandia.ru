@@ -1,12 +1,16 @@
 <template>
   <div class="brands">
-    <Brand
+    <template
       v-for="(brand, key) in brands"
-      :key="key"
-      :label="brand.label"
-      :url="brand.url"
-      :image="brand.image"
-    />
+    >
+      <Brand
+        v-if="brand.image"
+        :key="key"
+        :label="brand.label"
+        :url="brand.url"
+        :image="brand.image"
+      />
+    </template>
   </div>
 </template>
 
@@ -16,70 +20,28 @@ import {
 } from 'vue';
 
 import Brand from '@/components/atoms/Brand.vue';
+import schoolsToBrand from '@/converts/schoolsToBrand';
 import IBrand from '@/interfaces/components/organism/brands';
+import { IResponseItems } from '@/interfaces/response';
+import ISchool from '@/interfaces/stores/school/school';
+import school from '@/stores/school';
 
-const brands = ref<Array<IBrand>>([
-  {
-    label: 'Нетология',
-    url: 'courses/schools/netology',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/1.png',
-  },
-  {
-    label: 'Skillbox',
-    url: 'courses/schools/skillbox',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/2.png',
-  },
-  {
-    label: 'GeekBrains',
-    url: 'courses/schools/gb',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/3.png',
-  },
-  {
-    label: 'Нетология',
-    url: 'courses/schools/netology',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/1.png',
-  },
-  {
-    label: 'Нетология',
-    url: 'courses/schools/netology',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/1.png',
-  },
-  {
-    label: 'Skillbox',
-    url: 'courses/schools/skillbox',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/2.png',
-  },
-  {
-    label: 'GeekBrains',
-    url: 'courses/schools/gb',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/3.png',
-  },
-  {
-    label: 'Skillbox',
-    url: 'courses/schools/skillbox',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/2.png',
-  },
-  {
-    label: 'Нетология',
-    url: 'courses/schools/netology',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/1.png',
-  },
-  {
-    label: 'GeekBrains',
-    url: 'courses/schools/gb',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/3.png',
-  },
-  {
-    label: 'Skillbox',
-    url: 'courses/schools/skillbox',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/2.png',
-  },
-  {
-    label: 'GeekBrains',
-    url: 'courses/schools/gb',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/3.png',
-  },
-]);
+const config = useRuntimeConfig();
+const brands = ref<Array<IBrand>>([]);
+
+const {
+  readSchools,
+} = school();
+
+const loadSchools = async ():
+  Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
+
+try {
+  const resultSchools = await useAsyncData('schools', async () => loadSchools());
+  brands.value = schoolsToBrand(resultSchools.data.value?.data);
+} catch (error: any) {
+  console.error(error.message);
+}
 </script>
 
 <style lang="scss">
