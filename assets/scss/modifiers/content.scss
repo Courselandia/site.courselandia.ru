@@ -6,6 +6,10 @@
   padding-right: 3rem;
   margin: 0 auto;
 
+  &--small {
+    max-width: 800px;
+  }
+
   &__flex {
     display: flex;
   }

@@ -31,6 +31,7 @@ module.exports = {
     definePageMeta: true,
     abortNavigation: true,
     useCookie: true,
+    useHead: true,
   },
   settings: {
     'import/resolver': {
