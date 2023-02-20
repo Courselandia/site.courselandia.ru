@@ -30,6 +30,7 @@
         />
       </div>
       <div
+        style="display: none"
         class="menu-top-mobile__item"
         @click="onClick('reviews')"
         @keydown="onClick('reviews')"
@@ -44,6 +45,7 @@
         />
       </div>
       <nuxt-link
+        style="display: none"
         class="menu-top-mobile__item"
         to="/reviews"
       >
@@ -176,12 +178,24 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs, watch } from 'vue';
+import {
+  computed,
+  ref,
+  toRefs,
+  watch,
+} from 'vue';
 import { useRouter } from 'vue-router';
 
 import Icon from '@/components/atoms/Icon.vue';
+import directionsToMenu from '@/converts/directionsToMenu';
+import schoolsToMenu from '@/converts/schoolsToMenu';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
+import { IResponseItems } from '@/interfaces/response';
+import IDirection from '@/interfaces/stores/course/direction';
+import ISchool from '@/interfaces/stores/school/school';
+import course from '@/stores/course';
+import school from '@/stores/school';
 
 const props = defineProps({
   show: {
@@ -195,6 +209,15 @@ const {
   show,
 } = toRefs(props);
 
+const {
+  readDirections,
+} = course();
+
+const {
+  readSchools,
+} = school();
+
+const config = useRuntimeConfig();
 const showValue = ref(show.value);
 
 const emit = defineEmits({
@@ -225,394 +248,52 @@ const onClickBackRemoveDirection = (): void => {
   direction.value = null;
 };
 
-const menuCourses = ref<IMenu[]>(
-  [
-    {
-      label: 'Полный каталог',
-      link: '/courses',
-      children: [
-        {
-          label: 'Все курсы',
-          link: '/courses',
-          amount: 10,
-          image: await import('@/assets/images/directions/all.svg'),
-        },
-        {
-          label: 'Программирование',
-          link: '/courses/programmirovanie',
-          amount: 20,
-          image: await import('@/assets/images/directions/programmirovanie.svg'),
-        },
-        {
-          label: 'Маркетинг',
-          link: '/marketings',
-          amount: 30,
-          image: await import('@/assets/images/directions/marketing.svg'),
-        },
-        {
-          label: 'Дизайн',
-          link: '/marketings',
-          amount: 8,
-          image: await import('@/assets/images/directions/dizayn.svg'),
-        },
-        {
-          label: 'Бизнес и управление',
-          link: '/buisness',
-          amount: 4,
-          image: await import('@/assets/images/directions/biznes-i-upravlenie.svg'),
-        },
-        {
-          label: 'Аналитика',
-          link: '/analitics',
-          amount: 6,
-          image: await import('@/assets/images/directions/analitika.svg'),
-        },
-        {
-          label: 'Игры',
-          link: '/analitics',
-          amount: 7,
-          image: await import('@/assets/images/directions/igri.svg'),
-        },
-        {
-          label: 'Другие профессии',
-          link: '/others',
-          amount: 9,
-          image: await import('@/assets/images/directions/drugie-professii.svg'),
-        },
-      ],
-    },
-    {
-      label: 'Программирование',
-      link: '/courses/programmirovanie',
-      children: [
-        {
-          label: '1C разработка',
-          link: '/courses',
-        },
-        {
-          label: 'С# - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'Data Engineering',
-          link: '/courses',
-        },
-        {
-          label: 'Data Science',
-          link: '/courses',
-        },
-        {
-          label: 'DevOps Engineering',
-          link: '/courses',
-        },
-        {
-          label: 'Frontend-разработка',
-          link: '/courses',
-        },
-        {
-          label: 'IT - рекрутинг',
-          link: '/courses',
-        },
-        {
-          label: 'Java - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'JavaScript - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'Python - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'Performance-маркетинг',
-          link: '/courses',
-        },
-        {
-          label: 'Fashion-дизайн',
-          link: '/courses',
-        },
-        {
-          label: 'Деловым переговорам и коммуникация',
-          link: '/courses',
-        },
-        {
-          label: 'ETL development',
-          link: '/courses',
-        },
-        {
-          label: 'Data Engineering',
-          link: '/courses',
-        },
-      ],
-    },
-    {
-      label: 'Маркетинг',
-      link: '/courses',
-      children: [
-        {
-          label: '1C разработка',
-          link: '/courses',
-        },
-        {
-          label: 'С# - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'Data Engineering',
-          link: '/courses',
-        },
-        {
-          label: 'Data Science',
-          link: '/courses',
-        },
-        {
-          label: 'DevOps Engineering',
-          link: '/courses',
-        },
-        {
-          label: 'Frontend-разработка',
-          link: '/courses',
-        },
-        {
-          label: 'IT - рекрутинг',
-          link: '/courses',
-        },
-        {
-          label: 'Java - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'JavaScript - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'Python - разработка',
-          link: '/courses',
-        },
-      ],
-    },
-    {
-      label: 'Дизайн',
-      link: '/courses',
-      children: [
-        {
-          label: '1C разработка',
-          link: '/courses',
-        },
-        {
-          label: 'С# - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'Data Engineering',
-          link: '/courses',
-        },
-        {
-          label: 'Data Science',
-          link: '/courses',
-        },
-        {
-          label: 'DevOps Engineering',
-          link: '/courses',
-        },
-        {
-          label: 'Frontend-разработка',
-          link: '/courses',
-        },
-        {
-          label: 'IT - рекрутинг',
-          link: '/courses',
-        },
-        {
-          label: 'Java - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'JavaScript - разработка',
-          link: '/courses',
-        },
-        {
-          label: 'Python - разработка',
-          link: '/courses',
-        },
-      ],
-    },
-    {
-      label: 'Бизнес и управление',
-      link: '/courses',
-      children: [
-        {
-          label: '1C разработка',
-          link: '/courses',
-        },
-        {
-          label: 'С# - разработка',
-          link: '/courses',
-        },
-      ],
-    },
-  ],
-);
+const directions = ref<IMenu[]>();
+const directionsWithCategories = ref<IMenu[]>([]);
 
-const listSchools = ref<IMenu[]>(
-  [
-    {
-      label: 'Skillbox',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'XYZ School',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'Среда обучения',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'Level One',
-      link: '/courses/level-one',
-    },
-    {
-      label: 'Нетология',
-      link: '/courses/level-one',
-    },
-    {
-      label: 'Skillbox',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'XYZ School',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'Среда обучения',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'Level One',
-      link: '/courses/level-one',
-    },
-    {
-      label: 'Нетология',
-      link: '/courses/level-one',
-    },
-    {
-      label: 'Skillbox',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'XYZ School',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'Среда обучения',
-      link: '/courses/skillbox',
-    },
-    {
-      label: 'Level One',
-      link: '/courses/level-one',
-    },
-    {
-      label: 'Нетология',
-      link: '/courses/level-one',
-    },
-  ],
-);
+const menuCourses = computed<IMenu[]>(() => [
+  {
+    label: 'Полный каталог',
+    link: '/courses',
+    children: directions.value,
+  },
+  ...directionsWithCategories.value,
+]);
+
+const loadDirections = async ():
+  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl, true, true);
+
+try {
+  const resultDirections = await useAsyncData('directionsWithCategoriesAndCount', async () => loadDirections());
+  const result = resultDirections.data.value?.data;
+  directions.value = await directionsToMenu(result, true);
+  directionsWithCategories.value = await directionsToMenu(result);
+} catch (error: any) {
+  console.error(error.message);
+}
+
+const listSchools = ref<IMenu[]>([]);
+
+const loadSchools = async ():
+  Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
+
+try {
+  const resultSchools = await useAsyncData('schools', async () => loadSchools());
+  listSchools.value = schoolsToMenu(resultSchools.data.value?.data);
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const listSchoolReviews = ref<IListSchoolReview[]>(
   [
+    /*
     {
       label: 'Skillbox',
       link: '/courses/skillbox',
       reviews: 2000,
       rating: 4.5,
     },
-    {
-      label: 'XYZ School',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Среда обучения',
-      link: '/courses/skillbox',
-      reviews: 3000,
-      rating: 3.5,
-    },
-    {
-      label: 'Level One',
-      link: '/courses/level-one',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Нетология',
-      link: '/courses/level-one',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Skillbox',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'XYZ School',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Среда обучения',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Level One',
-      link: '/courses/level-one',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Нетология',
-      link: '/courses/level-one',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Skillbox',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'XYZ School',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Среда обучения',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Level One',
-      link: '/courses/level-one',
-      reviews: 2000,
-      rating: 4,
-    },
-    {
-      label: 'Нетология',
-      link: '/courses/level-one',
-      reviews: 2000,
-      rating: 4,
-    },
+     */
   ],
 );
 
