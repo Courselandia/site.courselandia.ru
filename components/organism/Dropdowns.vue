@@ -133,8 +133,7 @@
                 <div class="dropdowns__title">
                   Все школы
                 </div>
-                <div class="dropdowns__description">
-                </div>
+                <div class="dropdowns__description" />
                 <div class="dropdowns__statistics">
                   <div class="dropdowns__statistics-item">
                     <div class="dropdowns__statistics-icon">
@@ -147,8 +146,7 @@
                     <div class="dropdowns__statistics-label">
                       Отзывов
                     </div>
-                    <div class="dropdowns__statistics-amount">
-                    </div>
+                    <div class="dropdowns__statistics-amount" />
                   </div>
                   <div class="dropdowns__statistics-item">
                     <div class="dropdowns__statistics-icon">
@@ -161,8 +159,7 @@
                     <div class="dropdowns__statistics-label">
                       Школ
                     </div>
-                    <div class="dropdowns__statistics-amount">
-                    </div>
+                    <div class="dropdowns__statistics-amount" />
                   </div>
                 </div>
                 <div class="dropdowns__button">
@@ -189,7 +186,6 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
@@ -197,6 +193,8 @@ import {
   watch,
 } from 'vue';
 
+import { apiReadDirections } from '@/api/course';
+import { apiReadSchools } from '@/api/school';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import AlphabeticList from '@/components/molecules/AlphabeticList.vue';
@@ -205,15 +203,9 @@ import Directions from '@/components/molecules/Directions.vue';
 import ListSchoolReviews from '@/components/molecules/ListSchoolReviews.vue';
 import ListSchools from '@/components/molecules/ListSchools.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
-import schoolsToBrand from '@/converts/schoolsToBrand';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
-import { IResponseItems } from '@/interfaces/response';
-import IDirection from '@/interfaces/stores/course/direction';
-import ISchool from '@/interfaces/stores/school/school';
-import course from '@/stores/course';
-import school from '@/stores/school';
 
 const props = defineProps({
   menu: {
@@ -226,14 +218,6 @@ const props = defineProps({
 const {
   menu,
 } = toRefs(props);
-
-const {
-  readDirections,
-} = course();
-
-const {
-  readSchools,
-} = school();
 
 const emit = defineEmits({
   'update:menu': (_: string | null) => true,
@@ -258,8 +242,13 @@ watch(menu, () => {
 
 const index = ref(0);
 
-const listDirections = ref<IMenu[]>();
-const listDirectionsWithCategories = ref<IMenu[]>([]);
+const listDirections = ref<IMenu[]>(
+  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
+);
+
+const listDirectionsWithCategories = ref<IMenu[]>(
+  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
+);
 
 const menuCourses = computed<IMenu[]>(() => [
   {
@@ -270,52 +259,7 @@ const menuCourses = computed<IMenu[]>(() => [
   ...listDirectionsWithCategories.value,
 ]);
 
-const totalCourses = computed<number>(() => {
-  let total = 0;
-
-  menuCourses.value.forEach((item) => {
-    total += item?.amount || 0;
-  });
-
-  return total;
-});
-
-const loadDirections = async ():
-  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl);
-
-const { directions } = storeToRefs(course());
-
-if (directions.value) {
-  listDirections.value = await directionsToMenu(directions.value);
-  listDirectionsWithCategories.value = await directionsToMenu(directions.value);
-} else {
-  try {
-    const resultDirections = await useAsyncData('directions', async () => loadDirections());
-    const result = resultDirections.data.value?.data;
-    listDirections.value = await directionsToMenu(result, true);
-    listDirectionsWithCategories.value = await directionsToMenu(result);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
-
-const listSchools = ref<IMenu[]>([]);
-
-const loadSchools = async ():
-  Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
-
-const { schools } = storeToRefs(school());
-
-if (schools.value) {
-  listSchools.value = schoolsToMenu(schools.value);
-} else {
-  try {
-    const resultSchools = await useAsyncData('schools', async () => loadSchools());
-    listSchools.value = schoolsToMenu(resultSchools.data.value?.data);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
+const listSchools = ref<IMenu[]>(schoolsToMenu(await apiReadSchools(config.public.apiUrl)));
 
 const listSchoolReviews = ref<IListSchoolReview[]>(
   [

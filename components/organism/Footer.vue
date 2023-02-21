@@ -44,67 +44,25 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import {
   ref,
 } from 'vue';
 
+import { apiReadDirections } from '@/api/course';
+import { apiReadSchools } from '@/api/school';
 import Logo from '@/components/atoms/Logo.vue';
 import MenuBottom from '@/components/atoms/MenuBottom.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IMenu from '@/interfaces/menu';
-import { IResponseItems } from '@/interfaces/response';
-import IDirection from '@/interfaces/stores/course/direction';
-import ISchool from '@/interfaces/stores/school/school';
-import course from '@/stores/course';
-import school from '@/stores/school';
 
 const config = useRuntimeConfig();
 
-const menuSchools = ref<IMenu[]>([]);
+const menuSchools = ref<IMenu[]>(schoolsToMenu(await apiReadSchools(config.public.apiUrl)));
 
-const {
-  readSchools,
-} = school();
-
-const loadSchools = async ():
-  Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
-
-const { schools } = storeToRefs(school());
-
-if (schools.value) {
-  menuSchools.value = schoolsToMenu(schools.value);
-} else {
-  try {
-    const resultSchools = await useAsyncData('schools', async () => loadSchools());
-    menuSchools.value = schoolsToMenu(resultSchools.data.value?.data);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
-
-const menuDirections = ref<IMenu[]>([]);
-
-const {
-  readDirections,
-} = course();
-
-const loadDirections = async ():
-  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl);
-
-const { directions } = storeToRefs(course());
-
-if (directions.value) {
-  menuDirections.value = await directionsToMenu(directions.value);
-} else {
-  try {
-    const resultDirections = await useAsyncData('directions', async () => loadDirections());
-    menuDirections.value = await directionsToMenu(resultDirections.data.value?.data);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
+const menuDirections = ref<IMenu[]>(
+  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
+);
 
 const menuInfo = ref<IMenu[]>([
   {

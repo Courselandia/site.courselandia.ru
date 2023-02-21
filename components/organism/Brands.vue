@@ -15,40 +15,17 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import {
   ref,
 } from 'vue';
 
+import { apiReadSchools } from '@/api/school';
 import Brand from '@/components/atoms/Brand.vue';
 import schoolsToBrand from '@/converts/schoolsToBrand';
 import IBrand from '@/interfaces/components/organism/brands';
-import { IResponseItems } from '@/interfaces/response';
-import ISchool from '@/interfaces/stores/school/school';
-import school from '@/stores/school';
 
 const config = useRuntimeConfig();
-const brands = ref<Array<IBrand>>([]);
-
-const {
-  readSchools,
-} = school();
-
-const loadSchools = async ():
-  Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
-
-const { schools } = storeToRefs(school());
-
-if (schools.value) {
-  brands.value = schoolsToBrand(schools.value);
-} else {
-  try {
-    const resultSchools = await useAsyncData('schools', async () => loadSchools());
-    brands.value = schoolsToBrand(resultSchools.data.value?.data);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
+const brands = ref<Array<IBrand>>(schoolsToBrand(await apiReadSchools(config.public.apiUrl)));
 </script>
 
 <style lang="scss">

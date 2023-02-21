@@ -178,7 +178,6 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
@@ -187,16 +186,13 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { apiReadDirections } from '@/api/course';
+import { apiReadSchools } from '@/api/school';
 import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
-import { IResponseItems } from '@/interfaces/response';
-import IDirection from '@/interfaces/stores/course/direction';
-import ISchool from '@/interfaces/stores/school/school';
-import course from '@/stores/course';
-import school from '@/stores/school';
 
 const props = defineProps({
   show: {
@@ -209,14 +205,6 @@ const props = defineProps({
 const {
   show,
 } = toRefs(props);
-
-const {
-  readDirections,
-} = course();
-
-const {
-  readSchools,
-} = school();
 
 const config = useRuntimeConfig();
 const showValue = ref(show.value);
@@ -249,8 +237,13 @@ const onClickBackRemoveDirection = (): void => {
   direction.value = null;
 };
 
-const listDirections = ref<IMenu[]>();
-const listDirectionsWithCategories = ref<IMenu[]>([]);
+const listDirections = ref<IMenu[]>(
+  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
+);
+
+const listDirectionsWithCategories = ref<IMenu[]>(
+  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
+);
 
 const menuCourses = computed<IMenu[]>(() => [
   {
@@ -261,42 +254,8 @@ const menuCourses = computed<IMenu[]>(() => [
   ...listDirectionsWithCategories.value,
 ]);
 
-const loadDirections = async ():
-  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl);
+const listSchools = ref<IMenu[]>(schoolsToMenu(await apiReadSchools(config.public.apiUrl)));
 
-const { directions } = storeToRefs(course());
-
-if (directions.value) {
-  listDirections.value = await directionsToMenu(directions.value);
-  listDirectionsWithCategories.value = await directionsToMenu(directions.value);
-} else {
-  try {
-    const resultDirections = await useAsyncData('directions', async () => loadDirections());
-    const result = resultDirections.data.value?.data;
-    listDirections.value = await directionsToMenu(result, true);
-    listDirectionsWithCategories.value = await directionsToMenu(result);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
-
-const listSchools = ref<IMenu[]>([]);
-
-const loadSchools = async ():
-  Promise<IResponseItems<ISchool>> => readSchools(config.public.apiUrl);
-
-const { schools } = storeToRefs(school());
-
-if (schools.value) {
-  listSchools.value = schoolsToMenu(schools.value);
-} else {
-  try {
-    const resultSchools = await useAsyncData('schools', async () => loadSchools());
-    listSchools.value = schoolsToMenu(resultSchools.data.value?.data);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
 const listSchoolReviews = ref<IListSchoolReview[]>(
   [
     /*

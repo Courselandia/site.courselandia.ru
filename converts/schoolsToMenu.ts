@@ -1,8 +1,8 @@
 import IMenu from '@/interfaces/menu';
-import IDirection from '@/interfaces/stores/school/school';
+import ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToMenu = (
-  schools: Array<IDirection>,
+  schools: Array<ISchool>,
 ): Array<IMenu> => {
   const result: Array<IMenu> = [];
 

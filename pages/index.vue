@@ -82,11 +82,11 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import {
   ref,
 } from 'vue';
 
+import { apiReadDirections } from '@/api/course';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
@@ -101,34 +101,11 @@ import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
-import { IResponseItems } from '@/interfaces/response';
-import IDirection from '@/interfaces/stores/course/direction';
-import course from '@/stores/course';
 
 const config = useRuntimeConfig();
-
-const {
-  readDirections,
-} = course();
-
-const listDirections = ref<IMenu[]>();
-
-const loadDirections = async ():
-  Promise<IResponseItems<IDirection>> => readDirections(config.public.apiUrl);
-
-const { directions } = storeToRefs(course());
-
-if (directions.value) {
-  listDirections.value = await directionsToMenu(directions.value, true);
-} else {
-  try {
-    const resultDirections = await useAsyncData('directions', async () => loadDirections());
-    const result = resultDirections.data.value?.data;
-    listDirections.value = await directionsToMenu(result, true);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-}
+const listDirections = ref<IMenu[]>(
+  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
+);
 
 const courses = ref<ICourse[]>([
   {

@@ -68,6 +68,7 @@ module.exports = {
     'simple-import-sort/exports': 'error',
     'vue/no-v-text-v-html-on-component': 'off',
     'vue/no-v-html': 'off',
+    'no-return-await': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? ['error', { allow: ['warn', 'error'] }] : ['error', { allow: ['warn', 'error', 'log', 'dir'] }],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
