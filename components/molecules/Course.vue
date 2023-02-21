@@ -3,14 +3,14 @@
     :class="`course ${nameClass}`"
   >
     <nuxt-link
-      :to="`/courses/show/${course.link}`"
+      :to="course.link"
       class="course__box"
       @mousedown="onClickActive"
       @mouseup="onClickDisable"
       @mouseleave="onClickDisable"
       @focusout="onClickDisable"
     >
-      <div class="course__image" :style="`background-image: url('${course.image}')`">
+      <div class="course__image" :style="`background-image: url('${course.image || holder.default}')`">
         <div
           v-if="course.rating"
           class="course__rating"
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div
-          v-if="course.school.image"
+          v-if="course.school?.image"
           class="course__brand"
         >
           <LazyImage
@@ -146,6 +146,7 @@ const props = defineProps({
 });
 
 const active = ref(false);
+const holder = await import('@/assets/images/holder.svg');
 
 const nameClass = computed(() => {
   const classes = [];
@@ -162,7 +163,6 @@ const onClickActive = (): void => {
 };
 
 const onClickDisable = (): void => {
-  console.log('HERE 2');
   active.value = false;
 };
 </script>

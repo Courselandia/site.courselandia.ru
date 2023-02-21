@@ -8,7 +8,7 @@ export default interface ICourse {
     name: string,
     link: string,
     url: string,
-    rating: number,
+    rating: number | null,
     image: string | null,
     price: number | null;
     price_old: number | null;
@@ -17,5 +17,5 @@ export default interface ICourse {
     duration: number | null;
     duration_unit: EDuration | null;
     lessons_amount: number | null;
-    school: ISchool,
+    school: ISchool | null,
 }
