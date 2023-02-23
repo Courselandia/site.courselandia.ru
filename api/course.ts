@@ -4,6 +4,8 @@ import { IResponseItems } from '@/interfaces/response';
 import ICourse from '@/interfaces/stores/course/course';
 import IDirection from '@/interfaces/stores/course/direction';
 import course from '@/stores/course';
+import ISorts from '@/interfaces/sorts';
+import IFilters from '@/interfaces/filters';
 
 export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirection>> => {
   const {
@@ -38,8 +40,16 @@ export const apiReadRatedCourses = async (
     readRatedCourses,
   } = course();
 
+  const sorts: ISorts = {
+    rating: 'DESC',
+  };
+
+  const filters: IFilters = {
+    price: [70000, 220000],
+  };
+
   const loadRatedCourses = async ():
-    Promise<IResponseItems<ICourse>> => readRatedCourses(apiUrl, limit);
+    Promise<IResponseItems<ICourse>> => readRatedCourses(apiUrl, limit, sorts, filters);
 
   const { ratedCourses } = storeToRefs(course());
 

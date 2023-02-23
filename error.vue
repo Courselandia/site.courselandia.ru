@@ -49,6 +49,10 @@ const props = defineProps({
 const menu = ref('');
 
 const { error } = toRefs(props);
+
+useHead({
+  title: `Ошибка ${error.value.statusCode}`,
+});
 </script>
 
 <style lang="scss">

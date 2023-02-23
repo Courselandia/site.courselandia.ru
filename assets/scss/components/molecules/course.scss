@@ -161,11 +161,14 @@
   }
 
   &__duration {
-    padding-right: calc(0.5rem + 4px);
-    margin-right: 0.5rem;
-    background-image: url("~/assets/images/point.svg");
-    background-position: right center;
-    background-repeat: no-repeat;
+    &--point {
+      padding-right: calc(0.5rem + 4px);
+      margin-right: 0.5rem;
+
+      background-image: url("~/assets/images/point.svg");
+      background-position: right center;
+      background-repeat: no-repeat;
+    }
   }
 
   &__prices {

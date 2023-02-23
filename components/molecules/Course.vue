@@ -10,7 +10,10 @@
       @mouseleave="onClickDisable"
       @focusout="onClickDisable"
     >
-      <div class="course__image" :style="`background-image: url('${course.image || holder.default}')`">
+      <div
+        class="course__image"
+        :style="`background-image: url('${course.image || holder.default}')`"
+      >
         <div
           v-if="course.rating"
           class="course__rating"
@@ -45,7 +48,7 @@
         <div class="course__info">
           <div
             v-if="course.duration"
-            class="course__duration"
+            :class="`course__duration ${course.lessons_amount ? 'course__duration--point' : ''}`"
           >
             {{ duration(course.duration, course.duration_unit) }}
           </div>

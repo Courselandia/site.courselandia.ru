@@ -110,7 +110,7 @@ const listDirections = ref<IMenu[]>(
 );
 
 const courses = ref<ICourse[]>(
-  courseStoreToCourseComponent(await apiReadRatedCourses(config.public.apiUrl, 12)),
+  courseStoreToCourseComponent(await apiReadRatedCourses(config.public.apiUrl, 16)),
 );
 </script>
 

@@ -168,7 +168,7 @@ const onClick = (): void => {
 
 const setDropdownPosition = (): void => {
   if (dropdownRef.value && headerRef.value) {
-    const bodyRect = document.body.getBoundingClientRect()
+    const bodyRect = document.body.getBoundingClientRect();
     const rectHeader = headerRef.value.getBoundingClientRect();
 
     if (!props.simple) {
