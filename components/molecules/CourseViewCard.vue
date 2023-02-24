@@ -75,7 +75,7 @@
       <div class="course-view-card__footer">
         <div class="course-view-card__action">
           <Button
-            to="https://ya.ru/"
+            :to="course.url"
             link="link"
             target="_blank"
             rel="nofollow"
@@ -84,7 +84,10 @@
             На сайт курса
           </Button>
         </div>
-        <div class="course-view-card__feature">
+        <div
+          v-if="course.features?.length"
+          class="course-view-card__feature"
+        >
           <div class="course-view-card__feature-header">
             <div class="course-view-card__feature-header-label">
               Кратко о курсе
@@ -92,28 +95,20 @@
             <div class="course-view-card__feature-header-line" />
           </div>
           <div class="course-view-card__feature-items">
-            <div class="course-view-card__feature-item">
+            <div
+              v-for="(feature, key) in course.features"
+              :key="key"
+              class="course-view-card__feature-item"
+            >
               <div class="course-view-card__feature-icon">
                 <Icon
-                  name="video"
+                  :name="feature.icon"
                   color="black"
                   :size="[22, 22]"
                 />
               </div>
               <div class="course-view-card__feature-value">
-                79 онлайн-уроков
-              </div>
-            </div>
-            <div class="course-view-card__feature-item">
-              <div class="course-view-card__feature-icon">
-                <Icon
-                  name="certificate"
-                  color="black"
-                  :size="[22, 22]"
-                />
-              </div>
-              <div class="course-view-card__feature-value">
-                Сертификат о прохождении курса
+                {{ feature.text }}
               </div>
             </div>
           </div>
