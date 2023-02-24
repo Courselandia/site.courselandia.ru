@@ -1,30 +1,80 @@
 <template>
   <nuxt-link
-    to="/courses/first"
+    :to="course.link"
     class="course-search-result"
   >
     <div class="course-search-result__media">
       <LazyImage
-        src="https://api.academy-market.com/storage/images/cache/desktop_65f7846966d5f4a06083cc5e6c35fb9e7606107e16293612233471-w600_crop.png"
+        :src="course.image || holder.default"
         class="course-search-result__image"
+        :alt="course.name"
+        :title="course.name"
       />
     </div>
     <div class="course-search-result__info">
-      <div class="course-search-result__direction">
-        Маркетинг
+      <div
+        v-if="course.directions?.length"
+        class="course-search-result__direction"
+      >
+        {{ course.directions[0].name }}
       </div>
       <div class="course-search-result__name">
-        Houdini c нуля до PRO — курс по созданию визуальных эффектов
+        {{ course.name }}
       </div>
-      <div class="course-search-result__price">
-        4 700 ₽
+      <div
+        class="course-search-result__prices"
+      >
+        <div
+          v-if="course.price || course.price_recurrent_price"
+          class="course-search-result__price"
+        >
+          {{ course.price_recurrent_price
+            ? money(course.price_recurrent_price)
+            : money(course.price)
+          }}
+          {{ currency(course.currency) }}
+          <template v-if="course.price_recurrent_price">
+            в месяц
+          </template>
+        </div>
+        <div
+          v-if="(course.price_recurrent_price && course.price) || course.price_old"
+          class="course-search-result__price_additional"
+        >
+          <div
+            v-if="course.price_recurrent_price && course.price"
+            class="course-search-result__price_current"
+          >
+            {{ money(course.price) }} {{ currency(course.currency) }}
+          </div>
+          <div
+            v-if="course.price_old"
+            class="course-search-result__price_old"
+          >
+            {{ money(course.price_old) }} {{ currency(course.currency) }}
+          </div>
+        </div>
       </div>
     </div>
   </nuxt-link>
 </template>
 
 <script lang="ts" setup>
+import { PropType } from 'vue';
+
 import LazyImage from '@/components/atoms/LazyImage.vue';
+import currency from '@/helpers/currency';
+import { money } from '@/helpers/number';
+import ICourse from '@/interfaces/components/molecules/course';
+
+const props = defineProps({
+  course: {
+    type: Object as PropType<ICourse>,
+    required: true,
+  },
+});
+
+const holder = await import('@/assets/images/holder.svg');
 </script>
 
 <style lang="scss">

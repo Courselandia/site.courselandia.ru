@@ -78,7 +78,7 @@
     position: absolute;
     box-shadow: 0 16px 54px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
-    z-index: 5;
+    z-index: 10;
     width: 100%;
     padding: 1rem;
     top: calc(51px + 0.5rem);
@@ -132,6 +132,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    text-decoration: none;
 
     font-weight: 800;
     font-size: 1rem;

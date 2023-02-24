@@ -44,4 +44,25 @@
     line-height: 1.313rem;
     color: $black;
   }
+
+  &__price_additional {
+    display: flex;
+    align-items: center;
+  }
+
+  &__price_current {
+    margin-right: 0.625rem;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $black;
+  }
+
+  &__price_old {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $grey4;
+    text-decoration: line-through;
+  }
 }

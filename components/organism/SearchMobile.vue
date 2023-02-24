@@ -26,12 +26,14 @@
           </div>
           <div class="search-mobile__input">
             <input
+              ref="inputRef"
               v-model="query"
               type="text"
               name="query"
               class="search-mobile__element"
               placeholder="Чему вы хотите научиться?"
               autocomplete="off"
+              @input="onInput"
             >
           </div>
           <div class="search-mobile__loader">
@@ -55,20 +57,22 @@
         </div>
         <div class="search-mobile__result">
           <div class="search-mobile__amount">
-            Найдено 120 курсов
+            Найдено {{ total }} курсов
           </div>
           <div class="search-mobile__courses">
-            <CourseSearchResult />
-            <CourseSearchResult />
-            <CourseSearchResult />
-            <CourseSearchResult />
-            <CourseSearchResult />
-            <CourseSearchResult />
-            <CourseSearchResult />
-            <CourseSearchResult />
+            <CourseSearchResult
+              v-for="(course, index) in courses"
+              :key="index"
+              :course="course"
+              @click="onClickResult"
+            />
           </div>
           <div class="search-mobile__action">
-            <div class="search-mobile__link">
+            <nuxt-link
+              :to="`/courses/?search=${encodeURIComponent(query)}&sort=relevance`"
+              class="search-mobile__link"
+              @click="onClickResult"
+            >
               <div>
                 Смотреть все
               </div>
@@ -77,7 +81,7 @@
                 color="blue2"
                 :size="[9, 9]"
               />
-            </div>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -92,17 +96,28 @@ import {
   watch,
 } from 'vue';
 
+import { apiReadSearchedCourses } from '@/api/course';
 import Icon from '@/components/atoms/Icon.vue';
 import Loader from '@/components/atoms/Loader.vue';
 import CourseSearchResult from '@/components/molecules/CourseSearchResult.vue';
+import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
+import ICourse from '@/interfaces/components/molecules/course';
 
+const courses = ref<ICourse[]>([]);
+const total = ref(0);
+const config = useRuntimeConfig();
 const active = ref(false);
 const query = ref<string>();
-const loading = ref(true);
+const loading = ref(false);
+const inputRef = ref<HTMLElement | null>(null);
 
 watch(active, () => {
   if (active.value) {
     document.body.classList.add('scroll--no-scroll');
+
+    window.setTimeout(() => {
+      inputRef.value?.focus();
+    }, 100);
   } else {
     document.body.classList.remove('scroll--no-scroll');
   }
@@ -115,6 +130,40 @@ const onClick = (): void => {
 const onClean = (): void => {
   query.value = '';
   active.value = false;
+};
+
+let timer: ReturnType<typeof setTimeout>;
+const onInput = (): void => {
+  if (timer) {
+    clearTimeout(timer);
+  }
+
+  if (query.value) {
+    timer = setTimeout(async () => {
+      loading.value = true;
+      const result = await apiReadSearchedCourses(config.public.apiUrl, query.value || '', 10);
+
+      if (result?.courses) {
+        courses.value = courseStoreToCourseComponent(result?.courses);
+        total.value = result.total || 0;
+      } else {
+        courses.value = [];
+      }
+
+      loading.value = false;
+    }, 350);
+  } else {
+    courses.value = [];
+    total.value = 0;
+  }
+};
+
+const onClickResult = (): void => {
+  active.value = false;
+  courses.value = [];
+  total.value = 0;
+  query.value = '';
+  loading.value = false;
 };
 
 onDeactivated(() => {

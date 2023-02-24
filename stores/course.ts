@@ -12,6 +12,8 @@ export default defineStore('direction', {
   state: () => ({
     directions: null as IDirection[] | null,
     ratedCourses: null as ICourse[] | null,
+    searchedCourses: null as ICourse[] | null,
+    searchedTotal: null as number | null,
   }),
   actions: {
     async readDirections(
@@ -38,10 +40,16 @@ export default defineStore('direction', {
     async readRatedCourses(
       baseUrl: string,
       limit: number = 12,
-      sorts: ISorts | null = null,
-      filters: IFilters | null = null,
     ): Promise<IResponseItems<ICourse>> {
       try {
+        const sorts: ISorts = {
+          rating: 'DESC',
+        };
+
+        const filters: IFilters = {
+          price: [70000, 220000],
+        };
+
         const query = toQuery(null, limit, sorts, filters);
         const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
           baseURL: baseUrl,
@@ -55,6 +63,39 @@ export default defineStore('direction', {
 
         throw error;
       }
+    },
+    async readSearchedCourses(
+      baseUrl: string,
+      search: string,
+      limit: number = 12,
+    ): Promise<IResponseItems<ICourse> | null> {
+      if (search) {
+        try {
+          const filters: IFilters = {
+            search,
+          };
+
+          const sorts: ISorts = {
+            relevance: 'DESC',
+          };
+
+          const query = toQuery(null, limit, sorts, filters);
+          const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
+            baseURL: baseUrl,
+          });
+
+          this.searchedCourses = response.data.data.courses;
+          this.searchedTotal = response.data.data.total;
+
+          return response.data;
+        } catch (error) {
+          this.searchedCourses = null;
+
+          throw error;
+        }
+      }
+
+      return null;
     },
   },
 });

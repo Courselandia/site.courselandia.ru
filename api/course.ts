@@ -1,11 +1,10 @@
 import { storeToRefs } from 'pinia';
 
+import IApiReadSearchedCourses from '@/interfaces/api/course/apiReadSearchedCourses';
 import { IResponseItems } from '@/interfaces/response';
 import ICourse from '@/interfaces/stores/course/course';
 import IDirection from '@/interfaces/stores/course/direction';
 import course from '@/stores/course';
-import ISorts from '@/interfaces/sorts';
-import IFilters from '@/interfaces/filters';
 
 export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirection>> => {
   const {
@@ -40,16 +39,8 @@ export const apiReadRatedCourses = async (
     readRatedCourses,
   } = course();
 
-  const sorts: ISorts = {
-    rating: 'DESC',
-  };
-
-  const filters: IFilters = {
-    price: [70000, 220000],
-  };
-
   const loadRatedCourses = async ():
-    Promise<IResponseItems<ICourse>> => readRatedCourses(apiUrl, limit, sorts, filters);
+    Promise<IResponseItems<ICourse>> => readRatedCourses(apiUrl, limit);
 
   const { ratedCourses } = storeToRefs(course());
 
@@ -66,4 +57,40 @@ export const apiReadRatedCourses = async (
   }
 
   return [];
+};
+
+export const apiReadSearchedCourses = async (
+  apiUrl: string,
+  search: string,
+  limit: number = 12,
+): Promise<IApiReadSearchedCourses | null> => {
+  if (search) {
+    const {
+      readSearchedCourses,
+    } = course();
+
+    const loadReadSearchedCourses = async ():
+      Promise<IResponseItems<ICourse> | null> => readSearchedCourses(apiUrl, search, limit);
+
+    const {
+      searchedTotal,
+    } = storeToRefs(course());
+
+    let response: IApiReadSearchedCourses;
+
+    try {
+      const resultCourses = await useAsyncData('searchedCourses', async () => loadReadSearchedCourses());
+
+      response = {
+        courses: resultCourses.data.value?.data.courses,
+        total: searchedTotal.value,
+      };
+
+      return response;
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  }
+
+  return null;
 };

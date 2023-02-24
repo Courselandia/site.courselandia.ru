@@ -25,6 +25,7 @@
           autocomplete="off"
           @focusin="onFocusIn"
           @focusout="onFocusOut"
+          @input="onInput"
         >
       </div>
       <div class="search__loader">
@@ -54,18 +55,22 @@
       class="search__results"
     >
       <div class="search__amount">
-        Найдено 120 курсов
+        Найдено {{ total }} курсов
       </div>
       <div class="search__courses">
-        <CourseSearchResult />
-        <CourseSearchResult />
-        <CourseSearchResult />
-        <CourseSearchResult />
-        <CourseSearchResult />
-        <CourseSearchResult />
+        <CourseSearchResult
+          v-for="(course, index) in courses"
+          :key="index"
+          :course="course"
+          @click="onClickResult"
+        />
       </div>
       <div class="search__action">
-        <div class="search__link">
+        <nuxt-link
+          :to="`/courses/?search=${encodeURIComponent(query)}&sort=relevance`"
+          class="search__link"
+          @click="onClickResult"
+        >
           <div>
             Смотреть все
           </div>
@@ -74,7 +79,7 @@
             color="blue2"
             :size="[9, 9]"
           />
-        </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -86,10 +91,16 @@ import {
   ref,
 } from 'vue';
 
+import { apiReadSearchedCourses } from '@/api/course';
 import Icon from '@/components/atoms/Icon.vue';
 import Loader from '@/components/atoms/Loader.vue';
 import CourseSearchResult from '@/components/molecules/CourseSearchResult.vue';
+import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
+import ICourse from '@/interfaces/components/molecules/course';
 
+const courses = ref<ICourse[]>([]);
+const total = ref(0);
+const config = useRuntimeConfig();
 const query = ref<string>();
 const hover = ref(false);
 const focus = ref(false);
@@ -131,6 +142,44 @@ const onClean = (): void => {
 };
 
 const onClickOutside = (): void => {
+  searching.value = false;
+  total.value = 0;
+  courses.value = [];
+  query.value = '';
+};
+
+let timer: ReturnType<typeof setTimeout>;
+const onInput = (): void => {
+  if (timer) {
+    clearTimeout(timer);
+  }
+
+  if (query.value) {
+    timer = setTimeout(async () => {
+      searching.value = true;
+      loading.value = true;
+      const result = await apiReadSearchedCourses(config.public.apiUrl, query.value || '', 10);
+
+      if (result?.courses) {
+        courses.value = courseStoreToCourseComponent(result?.courses);
+        total.value = result.total || 0;
+      } else {
+        courses.value = [];
+      }
+
+      loading.value = false;
+    }, 350);
+  } else {
+    courses.value = [];
+    total.value = 0;
+  }
+};
+
+const onClickResult = (): void => {
+  courses.value = [];
+  total.value = 0;
+  query.value = '';
+  loading.value = false;
   searching.value = false;
 };
 </script>

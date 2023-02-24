@@ -6,7 +6,7 @@ const duration = (value: number, unit: EDuration): string => {
       return `${value} день`;
     }
 
-    if (value >= 2 && value >= 4) {
+    if (value >= 2 && value <= 4) {
       return `${value} дня`;
     }
 
@@ -20,7 +20,7 @@ const duration = (value: number, unit: EDuration): string => {
       return `${value} неделя`;
     }
 
-    if (value >= 2 && value >= 4) {
+    if (value >= 2 && value <= 4) {
       return `${value} недели`;
     }
 
@@ -34,7 +34,7 @@ const duration = (value: number, unit: EDuration): string => {
       return `${value} месяц`;
     }
 
-    if (value >= 2 && value >= 4) {
+    if (value >= 2 && value <= 4) {
       return `${value} месяца`;
     }
 
@@ -48,7 +48,7 @@ const duration = (value: number, unit: EDuration): string => {
       return `${value} год`;
     }
 
-    if (value >= 2 && value >= 4) {
+    if (value >= 2 && value <= 4) {
       return `${value} года`;
     }
 
