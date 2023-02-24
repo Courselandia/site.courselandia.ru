@@ -27,7 +27,7 @@ export const courseStoreToCourseComponent = (
   school: course.school ? {
     name: course.school.name,
     image: course.school.image_logo_id?.path || null,
-    link: `courses/school/${course.school?.link}`,
+    link: `/courses/school/${course.school?.link}`,
   } : null,
   metatag: course.metatag ? {
     description: course.metatag.description,

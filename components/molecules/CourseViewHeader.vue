@@ -12,44 +12,74 @@
       />
 
       <Facts>
-        <Fact>
+        <Fact
+          v-if="course.directions?.length"
+        >
           <template #title>
             Направление
           </template>
           <template #value>
-            <nuxt-link to="/4" class="link">
-              Дизайн
-            </nuxt-link>
+            <template
+              v-for="(direction, key) in course.directions"
+              :key="key"
+            >
+              <nuxt-link
+                :to="direction.link"
+                class="link"
+              >
+                {{ direction.name }}
+              </nuxt-link>{{ key !== (course.directions.length - 1) ? ', ' : '' }}
+            </template>
           </template>
         </Fact>
-        <Fact>
+        <Fact
+          v-if="course.professions?.length"
+        >
           <template #title>
             Профессия
           </template>
           <template #value>
-            <nuxt-link to="/3" class="link">
-              Арт Директор
-            </nuxt-link>
+            <template
+              v-for="(profession, key) in course.professions"
+              :key="key"
+            >
+              <nuxt-link
+                :to="profession.link"
+                class="link"
+              >
+                {{ profession.label }}
+              </nuxt-link>{{ key !== (course.professions.length - 1) ? ', ' : '' }}
+            </template>
           </template>
         </Fact>
-        <Fact>
+        <Fact
+          v-if="course.categories?.length"
+        >
           <template #title>
             Категория
           </template>
           <template #value>
-            <nuxt-link to="/1" class="link">
-              Графический дизайн
-            </nuxt-link>
+            <template
+              v-for="(category, key) in course.categories"
+              :key="key"
+            >
+              <nuxt-link
+                :to="category.link"
+                class="link"
+              >
+                {{ category.label }}
+              </nuxt-link>{{ key !== (course.categories.length - 1) ? ', ' : '' }}
+            </template>
           </template>
         </Fact>
-        <Fact>
+        <Fact
+          v-if="course.language"
+        >
           <template #title>
             Язык
           </template>
           <template #value>
-            <nuxt-link to="/2" class="link">
-              Русский
-            </nuxt-link>
+            {{ language(course.language) }}
           </template>
         </Fact>
       </Facts>
@@ -62,6 +92,7 @@ import { PropType } from 'vue';
 
 import Fact from '@/components/atoms/Fact.vue';
 import Facts from '@/components/molecules/Facts.vue';
+import language from '@/helpers/language';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({

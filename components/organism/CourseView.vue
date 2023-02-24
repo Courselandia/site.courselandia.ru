@@ -157,6 +157,7 @@ try {
   const courseStore = await apiGetCourse(config.public.apiUrl, school as string, course as string);
 
   if (courseStore) {
+    console.dir(courseStore);
     courseItem.value = courseStoreToCourseComponent(courseStore);
   }
 } catch (error: any) {
