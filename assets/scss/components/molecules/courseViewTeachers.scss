@@ -6,16 +6,12 @@
   margin-bottom: -2rem;
 
   &__item {
-    width: calc(25% - 2rem);
+    width: calc(33.33% - 2rem);
     display: flex;
     align-items: center;
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 2rem;
-
-    @media all and (max-width: 1500px) {
-      width: calc(33.33% - 2rem);
-    }
 
     @media all and (max-width: 1200px) {
       width: calc(25% - 2rem);
