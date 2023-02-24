@@ -2,16 +2,14 @@
   <div class="course-view-header">
     <div class="course-view-header__side course-view-header__side--left">
       <h1 class="title title--1">
-        Houdini c нуля до PRO
+        {{ course.name }}
       </h1>
 
-      <div class="course-view-header__description">
-        Курс рассчитан на 2 месяца, на протяжении которых вы овладеете навыками
-        работы с трехмерной графикой в Houdini. Программа составлена таким образом,
-        что подойдет и новичкам, и опытным аниматорам. Так, в рамках курса вы
-        научитесь создавать анимированные разрушения и взрывы, дым, смерч, облака, которые
-        в последствии могут быть использованы в играх, кино, рекламных роликах.
-      </div>
+      <div
+        v-if="course.text"
+        class="course-view-header__description"
+        v-html="course.text"
+      />
 
       <Facts>
         <Fact>

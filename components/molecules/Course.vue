@@ -12,7 +12,7 @@
     >
       <div
         class="course__image"
-        :style="`background-image: url('${course.image || holder.default}')`"
+        :style="`background-image: url('${course.image || holder?.default}')`"
       >
         <div
           v-if="course.rating"

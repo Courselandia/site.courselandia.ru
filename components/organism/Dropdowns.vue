@@ -34,7 +34,7 @@
                     :key="key"
                   >
                     <Direction
-                      :image="item.image.default"
+                      :image="item.image?.default"
                       :amount="item.amount"
                       :label="item.label"
                       :link="item.link"
@@ -241,14 +241,23 @@ watch(menu, () => {
 });
 
 const index = ref(0);
+const listDirections = ref<IMenu[]>();
 
-const listDirections = ref<IMenu[]>(
-  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
-);
+try {
+  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
+} catch (error: any) {
+  console.error(error.message);
+}
 
-const listDirectionsWithCategories = ref<IMenu[]>(
-  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
-);
+const listDirectionsWithCategories = ref<IMenu[]>([]);
+
+try {
+  listDirectionsWithCategories.value = await directionsToMenu(
+    await apiReadDirections(config.public.apiUrl),
+  );
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const menuCourses = computed<IMenu[]>(() => [
   {

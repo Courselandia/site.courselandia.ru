@@ -9,7 +9,7 @@
     <div class="page__body">
       <div class="content mt-30 mb-30">
         <Error
-          v-if="error.statusCode === 404"
+          v-if="error.statusCode === 404 || error.statusCode === '404'"
           :code="error.statusCode"
           title="Упс, страница не найдена!"
           message="Так уж получилось, что из множества страниц нашего сайта Вы оказались как раз на той, которая уже не существует..."

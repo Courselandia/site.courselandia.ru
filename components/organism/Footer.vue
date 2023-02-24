@@ -58,11 +58,21 @@ import IMenu from '@/interfaces/menu';
 
 const config = useRuntimeConfig();
 
-const menuSchools = ref<IMenu[]>(schoolsToMenu(await apiReadSchools(config.public.apiUrl)));
+const menuSchools = ref<IMenu[]>();
 
-const menuDirections = ref<IMenu[]>(
-  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
-);
+try {
+  menuSchools.value = schoolsToMenu(await apiReadSchools(config.public.apiUrl));
+} catch (error: any) {
+  console.error(error.message);
+}
+
+const menuDirections = ref<IMenu[]>();
+
+try {
+  menuDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const menuInfo = ref<IMenu[]>([
   {

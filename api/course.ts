@@ -1,7 +1,10 @@
 import { storeToRefs } from 'pinia';
 
 import IApiReadSearchedCourses from '@/interfaces/api/course/apiReadSearchedCourses';
-import { IResponseItems } from '@/interfaces/response';
+import {
+  IResponseItem,
+  IResponseItems,
+} from '@/interfaces/response';
 import ICourse from '@/interfaces/stores/course/course';
 import IDirection from '@/interfaces/stores/course/direction';
 import course from '@/stores/course';
@@ -20,15 +23,9 @@ export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirectio
     return directions.value;
   }
 
-  try {
-    const resultDirections = await useAsyncData('directions', async () => loadDirections());
+  const resultDirections = await useAsyncData('directions', async () => loadDirections());
 
-    return resultDirections.data.value?.data;
-  } catch (error: any) {
-    console.error(error.message);
-  }
-
-  return [];
+  return resultDirections.data.value?.data;
 };
 
 export const apiReadRatedCourses = async (
@@ -48,15 +45,9 @@ export const apiReadRatedCourses = async (
     return ratedCourses.value;
   }
 
-  try {
-    const resultCourses = await useAsyncData('ratedCourses', async () => loadRatedCourses());
+  const resultCourses = await useAsyncData('ratedCourses', async () => loadRatedCourses());
 
-    return resultCourses.data.value?.data.courses;
-  } catch (error: any) {
-    console.error(error.message);
-  }
-
-  return [];
+  return resultCourses.data.value?.data.courses;
 };
 
 export const apiReadSearchedCourses = async (
@@ -78,19 +69,30 @@ export const apiReadSearchedCourses = async (
 
     let response: IApiReadSearchedCourses;
 
-    try {
-      const resultCourses = await useAsyncData('searchedCourses', async () => loadReadSearchedCourses());
+    const resultCourses = await useAsyncData('searchedCourses', async () => loadReadSearchedCourses());
 
-      response = {
-        courses: resultCourses.data.value?.data.courses,
-        total: searchedTotal.value,
-      };
-
-      return response;
-    } catch (error: any) {
-      console.error(error.message);
-    }
+    return {
+      courses: resultCourses.data.value?.data.courses,
+      total: searchedTotal.value,
+    };
   }
 
   return null;
+};
+
+export const apiGetCourse = async (
+  apiUrl: string,
+  schoolLink: string,
+  courseLink: string,
+): Promise<ICourse | null> => {
+  const {
+    readCourse,
+  } = course();
+
+  const loadGetCourse = async ():
+    Promise<IResponseItem<ICourse> | null> => await readCourse(apiUrl, schoolLink, courseLink);
+
+  const resultCourse = await useAsyncData('course', async () => loadGetCourse());
+
+  return resultCourse.data.value?.data || null;
 };

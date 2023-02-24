@@ -100,7 +100,7 @@ import { apiReadSearchedCourses } from '@/api/course';
 import Icon from '@/components/atoms/Icon.vue';
 import Loader from '@/components/atoms/Loader.vue';
 import CourseSearchResult from '@/components/molecules/CourseSearchResult.vue';
-import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
+import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const courses = ref<ICourse[]>([]);
@@ -141,13 +141,21 @@ const onInput = (): void => {
   if (query.value) {
     timer = setTimeout(async () => {
       loading.value = true;
-      const result = await apiReadSearchedCourses(config.public.apiUrl, query.value || '', 10);
 
-      if (result?.courses) {
-        courses.value = courseStoreToCourseComponent(result?.courses);
-        total.value = result.total || 0;
-      } else {
+      try {
+        const result = await apiReadSearchedCourses(config.public.apiUrl, query.value || '', 10);
+
+        if (result?.courses) {
+          courses.value = coursesStoreToCoursesComponent(result?.courses);
+          total.value = result.total || 0;
+        } else {
+          courses.value = [];
+        }
+      } catch (error: any) {
         courses.value = [];
+        total.value = 0;
+
+        console.error(error.message);
       }
 
       loading.value = false;

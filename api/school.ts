@@ -19,13 +19,7 @@ export const apiReadSchools = async (apiUrl: string): Promise<Array<ISchool>> =>
     return schools.value;
   }
 
-  try {
-    const resultSchools = await useAsyncData('schools', async () => loadSchools());
+  const resultSchools = await useAsyncData('schools', async () => loadSchools());
 
-    return resultSchools.data.value?.data;
-  } catch (error: any) {
-    console.error(error.message);
-  }
-
-  return [];
+  return resultSchools.data.value?.data;
 };

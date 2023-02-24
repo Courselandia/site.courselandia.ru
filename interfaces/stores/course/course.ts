@@ -1,9 +1,14 @@
 import ECurrency from '@/enums/stores/course/currency';
 import EDuration from '@/enums/stores/course/duration';
 import ELanguage from '@/enums/stores/course/language';
+import IEmployment from '@/interfaces/stores/course/employment';
+import IFeature from '@/interfaces/stores/course/feature';
+import ILearn from '@/interfaces/stores/course/learn';
 import ILevel from '@/interfaces/stores/course/level';
+import IProcess from '@/interfaces/stores/course/process';
 import IProperty from '@/interfaces/stores/course/property';
 import IImage from '@/interfaces/stores/image/image';
+import IMetatag from '@/interfaces/stores/metatag/metatag';
 import ISchool from '@/interfaces/stores/school/school';
 import TId from '@/types/id';
 
@@ -45,4 +50,9 @@ export default interface ICourse {
   teachers: Array<IProperty> | null,
   tools: Array<IProperty> | null,
   levels: Array<ILevel> | null,
+  metatag?: IMetatag | null,
+  processes: Array<IProcess>,
+  learns: Array<ILearn>,
+  employments?: Array<IEmployment>,
+  features?: Array<IFeature>,
 }

@@ -5,7 +5,7 @@
   >
     <div class="course-search-result__media">
       <LazyImage
-        :src="course.image || holder.default"
+        :src="course.image || holder?.default"
         class="course-search-result__image"
         :alt="course.name"
         :title="course.name"

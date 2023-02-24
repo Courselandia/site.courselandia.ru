@@ -4,4 +4,10 @@
 
 <script lang="ts" setup>
 import CourseView from '@/components/organism/CourseView.vue';
+
+definePageMeta({
+  middleware: [
+    'course',
+  ],
+});
 </script>

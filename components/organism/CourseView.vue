@@ -3,7 +3,7 @@
     <Bubbles>
       <div class="content">
         <CourseViewHeader
-          :course="course"
+          :course="courseItem"
         />
       </div>
     </Bubbles>
@@ -13,7 +13,7 @@
     >
       <div ref="cardRef">
         <CourseViewCard
-          :course="course"
+          :course="courseItem"
           :scroll="scroll"
         />
       </div>
@@ -25,13 +25,13 @@
           </h2>
 
           <CourseViewLearn
-            :course="course"
+            :course="courseItem"
           />
         </div>
 
         <div class="mb-50 mb-15-md">
           <CourseViewSalaries
-            :course="course"
+            :course="courseItem"
           />
         </div>
 
@@ -41,7 +41,7 @@
           </h2>
 
           <CourseViewProcesses
-            :course="course"
+            :course="courseItem"
           />
         </div>
 
@@ -51,7 +51,7 @@
           </h2>
 
           <CourseViewTeachers
-            :course="course"
+            :course="courseItem"
           />
         </div>
 
@@ -61,7 +61,7 @@
           </h2>
 
           <CourseViewEmployments
-            :course="course"
+            :course="courseItem"
           />
         </div>
 
@@ -71,7 +71,7 @@
           </h2>
 
           <CourseViewInfo
-            :course="course"
+            :course="courseItem"
           />
         </div>
 
@@ -81,7 +81,7 @@
           </h2>
 
           <CourseViewFaqs
-            :course="course"
+            :course="courseItem"
           />
         </div>
       </div>
@@ -90,7 +90,7 @@
     <LazyClientOnly>
       <teleport to=".page">
         <CourseViewFollow
-          :course="course"
+          :course="courseItem"
         />
       </teleport>
     </LazyClientOnly>
@@ -102,7 +102,9 @@ import {
   onMounted,
   ref,
 } from 'vue';
+import { useRoute } from 'vue-router';
 
+import { apiGetCourse } from '@/api/course';
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
 import CourseViewEmployments from '@/components/molecules/CourseViewEmployments.vue';
@@ -114,10 +116,10 @@ import CourseViewLearn from '@/components/molecules/CourseViewLearn.vue';
 import CourseViewProcesses from '@/components/molecules/CourseViewProcesses.vue';
 import CourseViewSalaries from '@/components/molecules/CourseViewSalaries.vue';
 import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
-import ECurrency from '@/enums/components/molecules/currency';
-import EDuration from '@/enums/components/molecules/duration';
+import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
 import ICourse from '@/interfaces/components/molecules/course';
 
+const config = useRuntimeConfig();
 const scroll = ref(true);
 const contentRef = ref<HTMLElement | null>(null);
 
@@ -143,26 +145,23 @@ onMounted(() => {
   setScroll();
 });
 
-const course = ref<ICourse>({
-  id: 12,
-  name: 'Houdini c нуля до PRO',
-  link: 'context',
-  url: 'http//:yandex.ru/',
-  rating: 5,
-  image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/1.webp',
-  price: 90000,
-  price_old: 130000,
-  price_recurrent_price: 4000,
-  currency: ECurrency.RUB,
-  duration: 24,
-  duration_unit: EDuration.MONTH,
-  lessons_amount: 90,
-  school: {
-    name: 'Нетология',
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-    link: 'netology',
-  },
-});
+const route = useRoute();
+const {
+  school,
+  course,
+} = route.params;
+
+const courseItem = ref<ICourse>();
+
+try {
+  const courseStore = await apiGetCourse(config.public.apiUrl, school as string, course as string);
+
+  if (courseStore) {
+    courseItem.value = courseStoreToCourseComponent(courseStore);
+  }
+} catch (error: any) {
+  console.error(error.message);
+}
 </script>
 
 <style lang="scss">

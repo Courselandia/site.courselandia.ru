@@ -3,7 +3,10 @@ import { defineStore } from 'pinia';
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import IFilters from '@/interfaces/filters';
-import { IResponseItems } from '@/interfaces/response';
+import {
+  IResponseItem,
+  IResponseItems,
+} from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
 import ICourse from '@/interfaces/stores/course/course';
 import IDirection from '@/interfaces/stores/course/direction';
@@ -14,6 +17,7 @@ export default defineStore('direction', {
     ratedCourses: null as ICourse[] | null,
     searchedCourses: null as ICourse[] | null,
     searchedTotal: null as number | null,
+    course: null as ICourse | null,
   }),
   actions: {
     async readDirections(
@@ -96,6 +100,25 @@ export default defineStore('direction', {
       }
 
       return null;
+    },
+    async readCourse(
+      baseUrl: string,
+      school: string,
+      course: string,
+    ): Promise<IResponseItem<ICourse> | null> {
+      try {
+        const response = await axios.get<IResponseItem<ICourse>>(`/api/private/site/course/get/${school}/${course}`, {
+          baseURL: baseUrl,
+        });
+
+        this.course = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.course = null;
+
+        throw error;
+      }
     },
   },
 });

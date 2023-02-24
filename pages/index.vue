@@ -52,7 +52,7 @@
           :key="key"
         >
           <Direction
-            :image="item.image.default"
+            :image="item.image?.default"
             :amount="item.amount"
             :label="item.label"
             :link="item.link"
@@ -99,19 +99,29 @@ import Directions from '@/components/molecules/Directions.vue';
 import Hero from '@/components/molecules/Hero.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import Brands from '@/components/organism/Brands.vue';
-import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
+import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import directionsToMenu from '@/converts/directionsToMenu';
 import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
 
 const config = useRuntimeConfig();
-const listDirections = ref<IMenu[]>(
-  await directionsToMenu(await apiReadDirections(config.public.apiUrl)),
-);
+const listDirections = ref<IMenu[]>();
 
-const courses = ref<ICourse[]>(
-  courseStoreToCourseComponent(await apiReadRatedCourses(config.public.apiUrl, 16)),
-);
+try {
+  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
+} catch (error: any) {
+  console.error(error.message);
+}
+
+const courses = ref<ICourse[]>();
+
+try {
+  courses.value = coursesStoreToCoursesComponent(
+    await apiReadRatedCourses(config.public.apiUrl, 16),
+  );
+} catch (error: any) {
+  console.error(error.message);
+}
 </script>
 
 <style lang="scss">
