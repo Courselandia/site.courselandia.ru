@@ -1,3 +1,4 @@
+import level from '@/helpers/level';
 import ICourseComponent from '@/interfaces/components/molecules/course';
 import ICourseStore from '@/interfaces/stores/course/course';
 
@@ -7,7 +8,7 @@ export const courseStoreToCourseComponent = (
 ): ICourseComponent => ({
   id: course.id,
   name: course.header,
-  link: `courses/course/${course.school?.link}/${course.link}`,
+  link: `/courses/course/${course.school?.link}/${course.link}`,
   url: course.url,
   rating: course.rating,
   image: course.image_middle_id?.path || null,
@@ -18,11 +19,68 @@ export const courseStoreToCourseComponent = (
   duration: course.duration,
   duration_unit: course.duration_unit,
   lessons_amount: course.lessons_amount,
+  text: course.text,
+  language: course.language,
+  online: course.online,
+  employment: course.employment,
+  modules_amount: course.modules_amount,
   school: course.school ? {
     name: course.school.name,
     image: course.school.image_logo_id?.path || null,
     link: `courses/school/${course.school?.link}`,
   } : null,
-
-  text: course.text,
+  metatag: course.metatag ? {
+    description: course.metatag.description,
+    keywords: course.metatag.keywords,
+    title: course.metatag.title,
+  } : null,
+  directions: course.directions ? course.directions.map((direction) => ({
+    id: direction.id,
+    name: direction.name,
+    link: `/courses/directions/${direction.link}`,
+  })) : null,
+  professions: course.professions ? course.professions.map((profession) => ({
+    id: profession.id,
+    label: profession.name,
+    link: `/courses/professions/${profession.link}`,
+  })) : null,
+  categories: course.categories ? course.categories.map((category) => ({
+    id: category.id,
+    label: category.name,
+    link: `/courses/categories/${category.link}`,
+  })) : null,
+  skills: course.skills ? course.skills.map((skill) => ({
+    id: skill.id,
+    label: skill.name,
+    link: `/courses/skills/${skill.link}`,
+  })) : null,
+  teachers: course.teachers ? course.teachers.map((teacher) => ({
+    id: teacher.id,
+    label: teacher.name,
+    link: `/courses/teachers/${teacher.link}`,
+  })) : null,
+  tools: course.tools ? course.tools.map((tool) => ({
+    id: tool.id,
+    label: tool.name,
+    link: `/courses/tools/${tool.link}`,
+  })) : null,
+  processes: course.processes ? course.processes.map((process) => ({
+    name: process.name,
+    text: process.text,
+  })) : null,
+  levels: course.levels ? course.levels.map((itm) => ({
+    label: level(itm.level) || '',
+    value: itm.level,
+  })) : null,
+  learns: course.learns ? course.learns.map((learn) => ({
+    text: learn.text,
+  })) : null,
+  employments: course.employments ? course.employments.map((employment) => ({
+    name: employment.name,
+    text: employment.text,
+  })) : null,
+  features: course.features ? course.features.map((feature) => ({
+    icon: feature.icon,
+    text: feature.text,
+  })) : null,
 });

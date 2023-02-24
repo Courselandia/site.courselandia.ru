@@ -80,6 +80,8 @@ export const apiReadSearchedCourses = async (
   return null;
 };
 
+const courseItems: Record<string, ICourse> = {};
+
 export const apiGetCourse = async (
   apiUrl: string,
   schoolLink: string,
@@ -89,10 +91,22 @@ export const apiGetCourse = async (
     readCourse,
   } = course();
 
+  const index = `${schoolLink}-${courseLink}`;
+
+  if (courseItems[index]) {
+    return courseItems[index];
+  }
+
   const loadGetCourse = async ():
     Promise<IResponseItem<ICourse> | null> => await readCourse(apiUrl, schoolLink, courseLink);
 
   const resultCourse = await useAsyncData('course', async () => loadGetCourse());
 
-  return resultCourse.data.value?.data || null;
+  if (resultCourse.data.value?.data) {
+    courseItems[index] = resultCourse.data.value?.data;
+
+    return resultCourse.data.value?.data;
+  }
+
+  return null;
 };
