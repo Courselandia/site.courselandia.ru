@@ -87,7 +87,9 @@
           />
         </div>
 
-        <div>
+        <div
+          v-if="faqItems?.length"
+        >
           <h2 class="title title--1">
             Часто задаваемые вопросы
           </h2>
