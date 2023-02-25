@@ -4,7 +4,6 @@ import { IResponseItems } from '@/interfaces/response';
 import ISchool from '@/interfaces/stores/school/school';
 import school from '@/stores/school';
 
-// eslint-disable-next-line import/prefer-default-export
 export const apiReadSchools = async (apiUrl: string): Promise<Array<ISchool>> => {
   const {
     readSchools,

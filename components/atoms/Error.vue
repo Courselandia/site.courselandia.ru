@@ -12,6 +12,22 @@
     >
       {{ message }}
     </div>
+    <div
+      v-if="config.public.development && error || stack"
+      class="error__dev"
+    >
+      <div
+        v-if="error"
+        class="error__error"
+      >
+        {{ error }}
+      </div>
+      <div
+        v-if="stack"
+        class="error__stack"
+        v-html="stack"
+      />
+    </div>
     <div class="error__action">
       <Button
         to="/"
@@ -40,7 +56,19 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  stack: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  error: {
+    type: String,
+    required: false,
+    default: null,
+  },
 });
+
+const config = useRuntimeConfig();
 </script>
 
 <style lang="scss">

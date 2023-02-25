@@ -1,19 +1,11 @@
 <template>
   <Numerics>
-    <Numeric number="1">
-      Создавать анимированные изображения
-    </Numeric>
-    <Numeric number="2">
-      Моделировать с помощью скриптов на Python
-    </Numeric>
-    <Numeric number="3">
-      Анимировать природные явления
-    </Numeric>
-    <Numeric number="4">
-      Работать в Houdini
-    </Numeric>
-    <Numeric number="5">
-      Настраивать рендеринг
+    <Numeric
+      v-for="(learn, key) in course.learns"
+      :key="key"
+      :number="key + 1"
+    >
+      {{ learn.text }}
     </Numeric>
   </Numerics>
 </template>

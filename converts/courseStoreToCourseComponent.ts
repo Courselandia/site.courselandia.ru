@@ -2,7 +2,6 @@ import level from '@/helpers/level';
 import ICourseComponent from '@/interfaces/components/molecules/course';
 import ICourseStore from '@/interfaces/stores/course/course';
 
-// eslint-disable-next-line import/prefer-default-export
 export const courseStoreToCourseComponent = (
   course: ICourseStore,
 ): ICourseComponent => ({
@@ -25,6 +24,7 @@ export const courseStoreToCourseComponent = (
   employment: course.employment,
   modules_amount: course.modules_amount,
   school: course.school ? {
+    id: course.school.id,
     name: course.school.name,
     image: course.school.image_logo_id?.path || null,
     link: `/courses/school/${course.school?.link}`,

@@ -1,103 +1,16 @@
 <template>
   <div class="course-view-teachers">
-    <div class="course-view-teachers__item">
+    <div
+      v-for="(teacher, key) in course.teachers"
+      :key="key"
+      class="course-view-teachers__item"
+    >
       <div class="course-view-teachers__picture">
         <Animal />
       </div>
       <div class="course-view-teachers__info">
         <div class="course-view-teachers__name">
-          Ольга Реутова
-        </div>
-        <div class="course-view-teachers__position">
-          Эксперт
-        </div>
-      </div>
-    </div>
-    <div class="course-view-teachers__item">
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          Ольга Реутова
-        </div>
-        <div class="course-view-teachers__position">
-          Эксперт
-        </div>
-      </div>
-    </div>
-    <div class="course-view-teachers__item">
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          Ольга Реутова
-        </div>
-        <div class="course-view-teachers__position">
-          Эксперт
-        </div>
-      </div>
-    </div>
-    <div class="course-view-teachers__item">
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          Ольга Реутова
-        </div>
-        <div class="course-view-teachers__position">
-          Эксперт
-        </div>
-      </div>
-    </div>
-    <div class="course-view-teachers__item">
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          Ольга Реутова
-        </div>
-        <div class="course-view-teachers__position">
-          Эксперт
-        </div>
-      </div>
-    </div>
-    <div class="course-view-teachers__item">
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          Ольга Реутова
-        </div>
-        <div class="course-view-teachers__position">
-          Эксперт
-        </div>
-      </div>
-    </div>
-    <div class="course-view-teachers__item">
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          Ольга Реутова
-        </div>
-        <div class="course-view-teachers__position">
-          Эксперт
-        </div>
-      </div>
-    </div>
-    <div class="course-view-teachers__item">
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          Ольга Реутова
+          {{ teacher.label }}
         </div>
         <div class="course-view-teachers__position">
           Эксперт

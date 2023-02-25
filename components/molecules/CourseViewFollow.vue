@@ -4,7 +4,7 @@
       <div class="course-view-follow__content content">
         <div class="course-view-follow__side course-view-follow__side--left">
           <div class="course-view-follow__name">
-            Houdini c нуля до PRO
+            {{ course.name }}
           </div>
           <div class="course-view-follow__prices">
             <div
@@ -12,8 +12,8 @@
               class="course-view-follow__price"
             >
               {{ course.price_recurrent_price
-              ? money(course.price_recurrent_price)
-              : money(course.price)
+                ? money(course.price_recurrent_price)
+                : money(course.price)
               }}
               {{ currency(course.currency) }}
               <template v-if="course.price_recurrent_price">
@@ -41,7 +41,7 @@
         </div>
         <div class="course-view-follow__side course-view-follow__side--right">
           <Button
-            to="https://ya.ru/"
+            :to="course.url"
             link="link"
             target="_blank"
             rel="nofollow"

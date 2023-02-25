@@ -1,39 +1,14 @@
 <template>
   <div class="course-view-processes">
-    <BlockCheck>
+    <BlockCheck
+      v-for="(process, key) in course.processes"
+      :key="key"
+    >
       <template #title>
-        Создадите портфолио
+        {{ process.name }}
       </template>
       <template #description>
-        Научитесь оформлять портфолио так, чтобы работодателю было удобно
-        изучать ваши работы и у него осталось хорошее впечатление
-      </template>
-    </BlockCheck>
-    <BlockCheck>
-      <template #title>
-        Научитесь работать на себя
-      </template>
-      <template #description>
-        Узнаете, где искать первых заказчиков, как выстраивать с ними
-        коммуникацию и защитить свои права
-      </template>
-    </BlockCheck>
-    <BlockCheck>
-      <template #title>
-        Научитесь работать на себя
-      </template>
-      <template #description>
-        Узнаете, где искать первых заказчиков, как выстраивать с ними
-        коммуникацию и защитить свои права
-      </template>
-    </BlockCheck>
-    <BlockCheck>
-      <template #title>
-        Создадите портфолио
-      </template>
-      <template #description>
-        Научитесь оформлять портфолио так, чтобы работодателю было удобно
-        изучать ваши работы и у него осталось хорошее впечатление
+        <div v-html="process.text" />
       </template>
     </BlockCheck>
   </div>

@@ -2,7 +2,6 @@ import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComp
 import ICourseComponent from '@/interfaces/components/molecules/course';
 import ICourseStore from '@/interfaces/stores/course/course';
 
-// eslint-disable-next-line import/prefer-default-export
 export const coursesStoreToCoursesComponent = (
   courses: Array<ICourseStore>,
 ): Array<ICourseComponent> => {

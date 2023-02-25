@@ -39,4 +39,20 @@
   &__action {
     margin-top: 1.5rem;
   }
+
+  &__dev {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  &__error {
+    text-align: left;
+    font-family: monospace, monospace;
+    font-size: 1rem;
+  }
+
+  &__stack {
+    padding-top: 1rem;
+    text-align: left;
+  }
 }

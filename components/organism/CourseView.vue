@@ -19,7 +19,10 @@
       </div>
 
       <div class="course-view__info">
-        <div class="mb-50 mb-15-md">
+        <div
+          v-if="courseItem.learns?.length"
+          class="mb-50 mb-15-md"
+        >
           <h2 class="title title--1">
             Чему вы научитесь
           </h2>
@@ -35,7 +38,10 @@
           />
         </div>
 
-        <div class="mb-50 mb-15-md">
+        <div
+          v-if="courseItem.processes?.length"
+          class="mb-50 mb-15-md"
+        >
           <h2 class="title title--1">
             Как проходит обучение
           </h2>
@@ -45,7 +51,10 @@
           />
         </div>
 
-        <div class="mb-50 mb-15-md">
+        <div
+          v-if="courseItem.teachers?.length"
+          class="mb-50 mb-15-md"
+        >
           <h2 class="title title--1">
             Преподаватели
           </h2>
@@ -55,7 +64,10 @@
           />
         </div>
 
-        <div class="mb-50 mb-15-md">
+        <div
+          v-if="courseItem.employments?.length"
+          class="mb-50 mb-15-md"
+        >
           <h2 class="title title--1">
             Помощь с трудоустройством
           </h2>
@@ -81,7 +93,7 @@
           </h2>
 
           <CourseViewFaqs
-            :course="courseItem"
+            :faqs="faqItems"
           />
         </div>
       </div>
@@ -105,6 +117,7 @@ import {
 import { useRoute } from 'vue-router';
 
 import { apiGetCourse } from '@/api/course';
+import { apiReadFaqs } from '@/api/faq';
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
 import CourseViewEmployments from '@/components/molecules/CourseViewEmployments.vue';
@@ -117,7 +130,9 @@ import CourseViewProcesses from '@/components/molecules/CourseViewProcesses.vue'
 import CourseViewSalaries from '@/components/molecules/CourseViewSalaries.vue';
 import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
+import faqsStoreToFaqsComponent from '@/converts/faqsStoreToFaqsComponent';
 import ICourse from '@/interfaces/components/molecules/course';
+import IFaqComponent from '@/interfaces/components/molecules/faq';
 
 const config = useRuntimeConfig();
 const scroll = ref(true);
@@ -157,8 +172,19 @@ try {
   const courseStore = await apiGetCourse(config.public.apiUrl, school as string, course as string);
 
   if (courseStore) {
-    console.dir(courseStore);
     courseItem.value = courseStoreToCourseComponent(courseStore);
+  }
+} catch (error: any) {
+  console.error(error.message);
+}
+
+const faqItems = ref<Array<IFaqComponent>>([]);
+
+try {
+  const faqsStore = await apiReadFaqs(config.public.apiUrl, school as string);
+
+  if (faqsStore) {
+    faqItems.value = faqsStoreToFaqsComponent(faqsStore);
   }
 } catch (error: any) {
   console.error(error.message);

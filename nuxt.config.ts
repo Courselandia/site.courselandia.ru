@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_API_URL,
+      development: process.env.NODE_ENV === 'development',
     },
   },
   router: {
