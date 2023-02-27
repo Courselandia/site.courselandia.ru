@@ -21,7 +21,8 @@
     "ress": "^5.0.2",
     "vue": "^3.2.45",
     "vue-range-component": "^1.0.3",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "yandex-metrika-module-nuxt3": "^1.5.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",

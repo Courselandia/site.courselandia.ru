@@ -13,6 +13,18 @@ export default defineNuxtConfig({
   ],
   modules: [
     '@pinia/nuxt',
+    [
+      'yandex-metrika-module-nuxt3',
+      {
+        id: process.env.YANDEX_METRIKA_ID,
+        webvisor: true,
+        consoleLog: false,
+        clickmap: true,
+        // useCDN: false,
+        trackLinks: true,
+        accurateTrackBounce: true,
+      },
+    ],
   ],
   runtimeConfig: {
     public: {
