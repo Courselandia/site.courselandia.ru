@@ -32,7 +32,10 @@
           />
         </div>
 
-        <div class="mb-50 mb-15-md">
+        <div
+          v-if="courseItem.professions?.length"
+          class="mb-50 mb-15-md"
+        >
           <CourseViewSalaries
             :course="courseItem"
           />

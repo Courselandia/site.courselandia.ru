@@ -89,6 +89,7 @@ const pointSeniorActive = ref(false);
 
 const emit = defineEmits({
   'update:value': (_: Number) => true,
+  slide: (_: Number) => true,
 });
 
 const salary = (val: number): number => {
@@ -118,6 +119,8 @@ const onSlide = (val: number): void => {
   pointSeniorActive.value = val === 100;
 
   input.value = salary(val);
+
+  emit('slide', val);
 };
 
 const format = (val: number): string => {

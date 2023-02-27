@@ -1,4 +1,5 @@
 @import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
 
 .course-view-salaries {
   background-color: $black;
@@ -78,16 +79,46 @@
     line-height: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 
-    @media all and (max-width: 576px) {
-      display: none;
+    &--top {
+      @media all and (max-width: 576px) {
+        display: none;
+      }
+    }
+
+    &--middle {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+
+      @media all and (max-width: 576px) {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
     }
   }
 
   &__professions {
-    padding: 2.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
 
     @media all and (max-width: 576px) {
-      padding: 2rem 2rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  &__profession {
+    opacity: 0.5;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    transition: all $speedPrimary $functionPrimary;
+
+    @media all and (max-width: 576px) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    &--active {
+      opacity: 1;
     }
   }
 

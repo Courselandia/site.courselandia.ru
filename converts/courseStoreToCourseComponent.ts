@@ -43,6 +43,11 @@ export const courseStoreToCourseComponent = (
     id: profession.id,
     label: profession.name,
     link: `/courses/professions/${profession.link}`,
+    salaries: profession?.salaries?.map((salary) => ({
+      id: salary.id,
+      level: salary.level,
+      salary: salary.salary,
+    })),
   })) : null,
   categories: course.categories ? course.categories.map((category) => ({
     id: category.id,

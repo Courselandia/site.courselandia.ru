@@ -6,6 +6,7 @@ import IFeature from '@/interfaces/stores/course/feature';
 import ILearn from '@/interfaces/stores/course/learn';
 import ILevel from '@/interfaces/stores/course/level';
 import IProcess from '@/interfaces/stores/course/process';
+import IProfession from '@/interfaces/stores/course/profession';
 import IProperty from '@/interfaces/stores/course/property';
 import IImage from '@/interfaces/stores/image/image';
 import IMetatag from '@/interfaces/stores/metatag/metatag';
@@ -44,7 +45,7 @@ export default interface ICourse {
   deleted_at: string | null;
   school: ISchool | null;
   directions: Array<IProperty> | null,
-  professions: Array<IProperty> | null,
+  professions: Array<IProfession> | null,
   categories: Array<IProperty> | null,
   skills: Array<IProperty> | null,
   teachers: Array<IProperty> | null,
