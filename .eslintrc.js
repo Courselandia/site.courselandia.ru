@@ -32,6 +32,7 @@ module.exports = {
     abortNavigation: true,
     useCookie: true,
     useHead: true,
+    defineNuxtPlugin: true,
   },
   settings: {
     'import/resolver': {

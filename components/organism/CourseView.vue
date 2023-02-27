@@ -33,7 +33,7 @@
         </div>
 
         <div
-          v-if="courseItem.professions?.length"
+          v-if="hasSalaries"
           class="mb-50 mb-15-md"
         >
           <CourseViewSalaries
@@ -116,6 +116,7 @@
 
 <script lang="ts" setup>
 import {
+  computed,
   onMounted,
   ref,
 } from 'vue';
@@ -194,6 +195,20 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
+
+const hasSalaries = computed((): boolean => {
+  let has = false;
+
+  if (courseItem.value?.professions) {
+    courseItem.value?.professions.forEach((profession) => {
+      if (profession.salaries?.length) {
+        has = true;
+      }
+    });
+  }
+
+  return has;
+});
 </script>
 
 <style lang="scss">

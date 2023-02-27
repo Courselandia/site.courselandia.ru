@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@/plugins/outsideClick.ts',
     '@/plugins/floating.ts',
     '@/plugins/dayjs.ts',
+    '@/plugins/google.ts',
   ],
   modules: [
     '@pinia/nuxt',
@@ -30,6 +31,7 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.NUXT_API_URL,
       development: process.env.NODE_ENV === 'development',
+      googleMeasurementId: process.env.GOOGLE_MEASUREMENT_ID,
     },
   },
   router: {
