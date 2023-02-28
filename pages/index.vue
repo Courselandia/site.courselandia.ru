@@ -87,9 +87,11 @@ import {
 } from 'vue';
 
 import {
-  apiReadDirections,
   apiReadRatedCourses,
 } from '@/api/course';
+import {
+  apiReadDirections,
+} from '@/api/direction';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';

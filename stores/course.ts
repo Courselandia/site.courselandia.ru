@@ -10,12 +10,10 @@ import {
 import ISorts from '@/interfaces/sorts';
 import ICourse from '@/interfaces/stores/course/course';
 import IDescription from '@/interfaces/stores/course/description';
-import IDirection from '@/interfaces/stores/course/direction';
 import IFilter from '@/interfaces/stores/course/filter';
 
-export default defineStore('direction', {
+export default defineStore('course', {
   state: () => ({
-    directions: null as IDirection[] | null,
     ratedCourses: null as ICourse[] | null,
     searchedCourses: null as ICourse[] | null,
     searchedTotal: null as number | null,
@@ -52,27 +50,6 @@ export default defineStore('direction', {
         this.filter = null;
         this.section = null;
         this.description = null;
-
-        throw error;
-      }
-    },
-    async readDirections(
-      baseUrl: string,
-    ): Promise<IResponseItems<IDirection>> {
-      try {
-        const response = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
-          baseURL: baseUrl,
-          params: {
-            withCategories: 1,
-            withCount: 1,
-          },
-        });
-
-        this.directions = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.directions = null;
 
         throw error;
       }
@@ -137,7 +114,7 @@ export default defineStore('direction', {
 
       return null;
     },
-    async readCourse(
+    async getCourse(
       baseUrl: string,
       school: string,
       course: string,

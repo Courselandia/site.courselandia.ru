@@ -48,7 +48,7 @@ import {
   ref,
 } from 'vue';
 
-import { apiReadDirections } from '@/api/course';
+import { apiReadDirections } from '@/api/direction';
 import { apiReadSchools } from '@/api/school';
 import Logo from '@/components/atoms/Logo.vue';
 import MenuBottom from '@/components/atoms/MenuBottom.vue';

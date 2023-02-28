@@ -186,7 +186,7 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { apiReadDirections } from '@/api/course';
+import { apiReadDirections } from '@/api/direction';
 import { apiReadSchools } from '@/api/school';
 import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';

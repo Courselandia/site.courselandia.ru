@@ -28,7 +28,7 @@ const directionsToMenu = async (
   if (addAllCourse) {
     result[result.length] = {
       label: 'Все курсы',
-      link: 'courses',
+      link: '/courses',
       image: images[0],
       amount: countAll,
     };

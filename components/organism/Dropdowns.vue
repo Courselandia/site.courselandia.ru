@@ -193,7 +193,7 @@ import {
   watch,
 } from 'vue';
 
-import { apiReadDirections } from '@/api/course';
+import { apiReadDirections } from '@/api/direction';
 import { apiReadSchools } from '@/api/school';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -244,7 +244,10 @@ const index = ref(0);
 const listDirections = ref<IMenu[]>();
 
 try {
-  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl), true);
+  listDirections.value = await directionsToMenu(
+    await apiReadDirections(config.public.apiUrl),
+    true,
+  );
 } catch (error: any) {
   console.error(error.message);
 }

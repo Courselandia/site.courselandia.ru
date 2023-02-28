@@ -9,7 +9,6 @@ import {
 } from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
 import ICourse from '@/interfaces/stores/course/course';
-import IDirection from '@/interfaces/stores/course/direction';
 import course from '@/stores/course';
 
 export const apiReadCourses = async (
@@ -41,25 +40,6 @@ export const apiReadCourses = async (
     description: description.value,
     total: total.value,
   };
-};
-
-export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirection>> => {
-  const {
-    readDirections,
-  } = course();
-
-  const loadDirections = async ():
-    Promise<IResponseItems<IDirection>> => readDirections(apiUrl);
-
-  const { directions } = storeToRefs(course());
-
-  if (directions.value) {
-    return directions.value;
-  }
-
-  const resultDirections = await useAsyncData('directions', async () => loadDirections());
-
-  return resultDirections.data.value?.data;
 };
 
 export const apiReadRatedCourses = async (
@@ -120,7 +100,7 @@ export const apiGetCourse = async (
   courseLink: string,
 ): Promise<ICourse | null> => {
   const {
-    readCourse,
+    getCourse,
   } = course();
 
   const index = `${schoolLink}-${courseLink}`;
@@ -130,7 +110,7 @@ export const apiGetCourse = async (
   }
 
   const loadGetCourse = async ():
-    Promise<IResponseItem<ICourse> | null> => await readCourse(apiUrl, schoolLink, courseLink);
+    Promise<IResponseItem<ICourse> | null> => await getCourse(apiUrl, schoolLink, courseLink);
 
   const resultCourse = await useAsyncData('course', async () => loadGetCourse());
 
