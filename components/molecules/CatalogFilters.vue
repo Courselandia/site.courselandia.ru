@@ -5,6 +5,7 @@
     <transition-group name="fade">
       <div
         v-if="directions?.length && !mobile"
+        key="directions"
         class="catalog-filters__directions"
       >
         <Tags>
@@ -33,6 +34,7 @@
       <transition-group name="fade">
         <div
           v-if="directions?.length"
+          :key="directions"
           class="catalog-filters__block catalog-filters__block--directions"
         >
           <Tags>
@@ -51,9 +53,7 @@
             </Tag>
           </Tags>
         </div>
-      </transition-group>
 
-      <transition-group name="fade">
         <div
           v-if="ratings.length"
           key="ratings"
@@ -124,7 +124,8 @@
         </div>
 
         <div
-          key="loan"
+          v-if="availableCredit"
+          key="credit"
           class="catalog-filters__block"
         >
           <Item
@@ -132,13 +133,14 @@
             horizontal
           >
             <Switch
-              v-model:value="selectedLoanValue"
-              name="loan"
+              v-model:value="selectedCreditValue"
+              name="credit"
             />
           </Item>
         </div>
 
         <div
+          v-if="availableFree"
           key="free"
           class="catalog-filters__block"
         >
@@ -538,7 +540,7 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
-  selectedLoan: {
+  selectedCredit: {
     type: Boolean,
     required: false,
     default: false,
@@ -638,6 +640,16 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  availableCredit: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  availableFree: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
 });
 
 //
@@ -655,7 +667,7 @@ const {
   selectedLevels,
   selectedPrices,
   selectedDurations,
-  selectedLoan,
+  selectedCredit,
   selectedFree,
 } = toRefs(props);
 
@@ -673,7 +685,7 @@ const emit = defineEmits({
   'update:selected-levels': (_: Array<ILevel>) => true,
   'update:selected-prices': (_: Array<number>) => true,
   'update:selected-durations': (_: Array<number>) => true,
-  'update:selected-loan': (_: Boolean) => true,
+  'update:selected-credit': (_: Boolean) => true,
   'update:selected-free': (_: Boolean) => true,
 });
 
@@ -753,14 +765,14 @@ const getLabelPrice = () => '₽';
 
 //
 
-const selectedLoanValue = ref(selectedLoan.value);
+const selectedCreditValue = ref(selectedCredit.value);
 
-watch(selectedLoanValue, () => {
-  emit('update:selected-loan', selectedLoanValue.value);
+watch(selectedCreditValue, () => {
+  emit('update:selected-credit', selectedCreditValue.value);
 });
 
-watch(selectedLoan, () => {
-  selectedLoanValue.value = selectedLoan.value;
+watch(selectedCredit, () => {
+  selectedCreditValue.value = selectedCredit.value;
 });
 
 //

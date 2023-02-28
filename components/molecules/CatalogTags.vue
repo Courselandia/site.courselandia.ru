@@ -3,7 +3,7 @@
     v-if="selectedDirectionValue
       || selectedRatingValue
       || (selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax)
-      || selectedLoanValue
+      || selectedCreditValue
       || selectedFreeValue
       || (selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax)
       || selectedSchoolsValue?.length
@@ -97,7 +97,7 @@
           </Tag>
 
           <Tag
-            v-if="selectedLoanValue"
+            v-if="selectedCreditValue"
             bck="blue1"
           >
             Рассрочка
@@ -107,8 +107,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetLoan"
-                @keyup="onClickResetLoan"
+                @click="onClickResetCredit"
+                @keyup="onClickResetCredit"
               />
             </template>
           </Tag>
@@ -400,7 +400,7 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
-  selectedLoan: {
+  selectedCredit: {
     type: Boolean,
     required: false,
     default: false,
@@ -487,7 +487,7 @@ const {
   selectedLevels,
   selectedPrices,
   selectedDurations,
-  selectedLoan,
+  selectedCredit,
   selectedFree,
 } = toRefs(props);
 
@@ -504,7 +504,7 @@ const emit = defineEmits({
   'update:selected-levels': (_: Array<ILevel>) => true,
   'update:selected-prices': (_: Array<number>) => true,
   'update:selected-durations': (_: Array<number>) => true,
-  'update:selected-loan': (_: Boolean) => true,
+  'update:selected-credit': (_: Boolean) => true,
   'update:selected-free': (_: Boolean) => true,
 });
 
@@ -570,18 +570,18 @@ const onClickResetPrices = (): void => {
 
 //
 
-const selectedLoanValue = ref(selectedLoan.value);
+const selectedCreditValue = ref(selectedCredit.value);
 
-watch(selectedLoanValue, () => {
-  emit('update:selected-loan', selectedLoanValue.value);
+watch(selectedCreditValue, () => {
+  emit('update:selected-credit', selectedCreditValue.value);
 });
 
-watch(selectedLoan, () => {
-  selectedLoanValue.value = selectedLoan.value;
+watch(selectedCredit, () => {
+  selectedCreditValue.value = selectedCredit.value;
 });
 
-const onClickResetLoan = (): void => {
-  selectedLoanValue.value = false;
+const onClickResetCredit = (): void => {
+  selectedCreditValue.value = false;
 };
 
 //
@@ -797,7 +797,7 @@ const onClickResetAll = (): void => {
   onClickResetDirection();
   onClickResetRating();
   onClickResetPrices();
-  onClickResetLoan();
+  onClickResetCredit();
   onClickResetFree();
   onClickResetDurations();
   selectedSchoolsValue.value = [];
@@ -828,7 +828,7 @@ const countFilters = computed((): number => {
     total++;
   }
 
-  if (selectedLoanValue.value) {
+  if (selectedCreditValue.value) {
     total++;
   }
 

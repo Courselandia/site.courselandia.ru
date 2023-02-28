@@ -16,7 +16,7 @@
           v-else
           :key="`item_${key}`"
           :class="`pagination__item ${pageCurrent === num ? 'pagination__item--current' : ''}`"
-          :to="link(key)"
+          :to="link(key + 1)"
         >
           {{ num }}
         </nuxt-link>

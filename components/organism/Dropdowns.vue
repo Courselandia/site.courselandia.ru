@@ -244,7 +244,7 @@ const index = ref(0);
 const listDirections = ref<IMenu[]>();
 
 try {
-  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
+  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl), true);
 } catch (error: any) {
   console.error(error.message);
 }

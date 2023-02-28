@@ -130,7 +130,7 @@
                 v-model:selected-levels="selectedLevels"
                 v-model:selected-prices="selectedPrices"
                 v-model:selected-durations="selectedDurations"
-                v-model:selected-loan="selectedLoan"
+                v-model:selected-credit="selectedCredit"
                 v-model:selected-free="selectedFree"
                 :price-min="priceMin"
                 :price-max="priceMax"
@@ -150,47 +150,51 @@
             </div>
             <div class="catalog__pagination">
               <Pagination
-                :total="1000"
-                :size="18"
-                :page="20"
+                :total="total"
+                :size="size"
+                :page="currentPage"
                 :link="getLinkPagination"
               />
             </div>
           </div>
           <div class="catalog__filter">
-            <CatalogFilters
-              v-model:selected-direction="selectedDirection"
-              v-model:selected-rating="selectedRating"
-              v-model:selected-schools="selectedSchools"
-              v-model:selected-categories="selectedCategories"
-              v-model:selected-professions="selectedProfessions"
-              v-model:selected-teachers="selectedTeachers"
-              v-model:selected-skills="selectedSkills"
-              v-model:selected-tools="selectedTools"
-              v-model:selected-format="selectedFormat"
-              v-model:selected-levels="selectedLevels"
-              v-model:selected-prices="selectedPrices"
-              v-model:selected-durations="selectedDurations"
-              v-model:selected-loan="selectedLoan"
-              v-model:selected-free="selectedFree"
-              :price-min="priceMin"
-              :price-max="priceMax"
-              :price-step="priceStep"
-              :duration-min="durationMin"
-              :duration-max="durationMax"
-              :duration-step="durationStep"
-              :directions="directions"
-              :ratings="ratings"
-              :schools="schools"
-              :categories="categories"
-              :professions="professions"
-              :teachers="teachers"
-              :skills="skills"
-              :tools="tools"
-              :formats="formats"
-              :levels="levels"
-              @load-items="onLoadItems"
-            />
+            <ClientOnly>
+              <CatalogFilters
+                v-model:selected-direction="selectedDirection"
+                v-model:selected-rating="selectedRating"
+                v-model:selected-schools="selectedSchools"
+                v-model:selected-categories="selectedCategories"
+                v-model:selected-professions="selectedProfessions"
+                v-model:selected-teachers="selectedTeachers"
+                v-model:selected-skills="selectedSkills"
+                v-model:selected-tools="selectedTools"
+                v-model:selected-format="selectedFormat"
+                v-model:selected-levels="selectedLevels"
+                v-model:selected-prices="selectedPrices"
+                v-model:selected-durations="selectedDurations"
+                v-model:selected-credit="selectedCredit"
+                v-model:selected-free="selectedFree"
+                :price-min="priceMin"
+                :price-max="priceMax"
+                :price-step="priceStep"
+                :duration-min="durationMin"
+                :duration-max="durationMax"
+                :duration-step="durationStep"
+                :directions="directions"
+                :ratings="ratings"
+                :schools="schools"
+                :categories="categories"
+                :professions="professions"
+                :teachers="teachers"
+                :skills="skills"
+                :tools="tools"
+                :formats="formats"
+                :levels="levels"
+                :available-credit="availableCredit"
+                :available-free="availableFree"
+                @load-items="onLoadItems"
+              />
+            </ClientOnly>
           </div>
         </div>
       </div>
@@ -211,7 +215,7 @@
           v-model:selected-levels="selectedLevels"
           v-model:selected-prices="selectedPrices"
           v-model:selected-durations="selectedDurations"
-          v-model:selected-loan="selectedLoan"
+          v-model:selected-credit="selectedCredit"
           v-model:selected-free="selectedFree"
           :price-min="priceMin"
           :price-max="priceMax"
@@ -229,6 +233,8 @@
           :tools="tools"
           :formats="formats"
           :levels="levels"
+          :available-credit="availableCredit"
+          :available-free="availableFree"
           mobile
           @load-items="onLoadItems"
         />
@@ -248,7 +254,7 @@
           v-model:selected-levels="selectedLevels"
           v-model:selected-prices="selectedPrices"
           v-model:selected-durations="selectedDurations"
-          v-model:selected-loan="selectedLoan"
+          v-model:selected-credit="selectedCredit"
           v-model:selected-free="selectedFree"
           :price-min="priceMin"
           :price-max="priceMax"
@@ -270,6 +276,7 @@ import {
 } from 'vue';
 import { useRoute } from 'vue-router';
 
+import { apiReadCourses } from '@/api/course';
 import Button from '@/components/atoms/Button.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import Tag from '@/components/atoms/Tag.vue';
@@ -280,6 +287,20 @@ import CatalogTags from '@/components/molecules/CatalogTags.vue';
 import CatalogTools from '@/components/molecules/CatalogTools.vue';
 import Courses from '@/components/molecules/Courses.vue';
 import Tags from '@/components/molecules/Tags.vue';
+import {
+  courseFilterStoreCategoriesToComponentCategories,
+} from '@/converts/courseFilterStoreCategoriesToComponentCategories';
+import {
+  courseFilterStoreDirectionsToComponentDirections,
+} from '@/converts/courseFilterStoreDirectionsToComponentDirections';
+import {
+  courseFilterStoreProfessionsToComponentProfessions,
+} from '@/converts/courseFilterStoreProfessionsToComponentProfessions';
+import { courseFilterStoreSchoolsToComponentSchools } from '@/converts/courseFilterStoreSchoolsToComponentSchools';
+import { courseFilterStoreSkillsToComponentSkills } from '@/converts/courseFilterStoreSkillsToComponentSkills';
+import { courseFilterStoreTeachersToComponentTeachers } from '@/converts/courseFilterStoreTeachersToComponentTeachers';
+import { courseFilterStoreToolsToComponentTools } from '@/converts/courseFilterStoreToolsToComponentTools';
+import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import ECourseSort from '@/enums/components/molecules/courseSort';
 import ECourseType from '@/enums/components/molecules/courseType';
 import ECurrency from '@/enums/components/molecules/currency';
@@ -302,344 +323,23 @@ const route = useRoute();
 const sort = ref<TValue>(route.query.sort as TValue || ECourseSort.DATE);
 const type = ref<TValue>(ECourseType.TILE);
 
-const courses = ref<ICourse[]>([
-  {
-    id: 12,
-    name: 'Контекстная реклама с нуля',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/1.webp',
-    price: 90000,
-    price_old: 130000,
-    price_recurrent_price: 4000,
-    currency: ECurrency.RUB,
-    duration: 24,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 90,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 14,
-    name: 'Разработчик',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 4.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/2.webp',
-    price: 50000,
-    price_old: 160000,
-    price_recurrent_price: 6000,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 13,
-    name: 'Геймификатор',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 4.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
-    price: 70000,
-    price_old: 160000,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 13,
-    name: 'Дизайнер упаковки',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 3.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/5.webp',
-    price: 120000,
-    price_old: null,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 18,
-    name: 'Продвижение на Wildberries и OZON',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 3.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/6.webp',
-    price: 120000,
-    price_old: null,
-    price_recurrent_price: 6000,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 12,
-    name: 'Контекстная реклама с нуля',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/1.webp',
-    price: 90000,
-    price_old: 130000,
-    price_recurrent_price: 4000,
-    currency: ECurrency.RUB,
-    duration: 24,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 90,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 20,
-    name: 'Эмоциональный интеллект и лидерство',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
-    price: 50000,
-    price_old: null,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: null,
-    duration_unit: null,
-    lessons_amount: null,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 20,
-    name: 'Эмоциональный интеллект и лидерство',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
-    price: 50000,
-    price_old: null,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: null,
-    duration_unit: null,
-    lessons_amount: null,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 12,
-    name: 'Контекстная реклама с нуля',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/1.webp',
-    price: 90000,
-    price_old: 130000,
-    price_recurrent_price: 4000,
-    currency: ECurrency.RUB,
-    duration: 24,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 90,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 14,
-    name: 'Разработчик',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 4.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/2.webp',
-    price: 50000,
-    price_old: 160000,
-    price_recurrent_price: 6000,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 13,
-    name: 'Геймификатор',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 4.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
-    price: 70000,
-    price_old: 160000,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 13,
-    name: 'Дизайнер упаковки',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 3.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/5.webp',
-    price: 120000,
-    price_old: null,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 18,
-    name: 'Продвижение на Wildberries и OZON',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 3.5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/6.webp',
-    price: 120000,
-    price_old: null,
-    price_recurrent_price: 6000,
-    currency: ECurrency.RUB,
-    duration: 12,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 70,
-    school: {
-      name: 'GeekBrains',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 12,
-    name: 'Контекстная реклама с нуля',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/1.webp',
-    price: 90000,
-    price_old: 130000,
-    price_recurrent_price: 4000,
-    currency: ECurrency.RUB,
-    duration: 24,
-    duration_unit: EDuration.MONTH,
-    lessons_amount: 90,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 20,
-    name: 'Эмоциональный интеллект и лидерство',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
-    price: 50000,
-    price_old: null,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: null,
-    duration_unit: null,
-    lessons_amount: null,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-  {
-    id: 20,
-    name: 'Эмоциональный интеллект и лидерство',
-    link: 'context',
-    url: 'http//:yandex.ru/',
-    rating: 5,
-    image: 'https://loc-api.courselandia.ru/storage/uploaded/images/courses/3.webp',
-    price: 50000,
-    price_old: null,
-    price_recurrent_price: null,
-    currency: ECurrency.RUB,
-    duration: null,
-    duration_unit: null,
-    lessons_amount: null,
-    school: {
-      name: 'Нетология',
-      image: 'https://loc-api.courselandia.ru/storage/uploaded/images/brands/4.png',
-      link: 'netology',
-    },
-  },
-]);
+const courses = ref<ICourse[]>([]);
 
-const onLoadItems = (name: string): void => {
-  console.log(`Loading ${name}...`);
-};
-
-const total = 10;
+const total = ref(0);
+const size = ref(36);
+const currentPage = ref(1);
 
 //
 
-const selectedLoan = ref(false);
+const selectedCredit = ref(false);
+const availableCredit = ref(true);
 const selectedFree = ref(false);
+const availableFree = ref(true);
 
 //
 
 const priceMin = ref(0);
-const priceMax = ref(350000);
+const priceMax = ref(0);
 const priceStep = ref(1000);
 const selectedPrices = ref<Array<number>>([priceMin.value, priceMax.value]);
 
@@ -652,472 +352,26 @@ const selectedDurations = ref<Array<number>>([durationMin.value, durationMax.val
 
 //
 
-const directions = ref<IDirection[]>([
-  {
-    id: 999,
-    name: 'Все направления',
-    link: '',
-  },
-  {
-    id: 1,
-    name: 'Программирование',
-    link: 'programming',
-  },
-  {
-    id: 2,
-    name: 'Маркетинг',
-    link: 'marketing',
-  },
-  {
-    id: 3,
-    name: 'Дизайн',
-    link: 'design',
-  },
-  {
-    id: 4,
-    name: 'Бизнес управление',
-    link: 'business',
-  },
-  {
-    id: 5,
-    name: 'Аналитика',
-    link: 'analitics',
-  },
-  {
-    id: 6,
-    name: 'Игры',
-    link: 'games',
-  },
-  {
-    id: 7,
-    name: 'Другие профессии',
-    link: 'other',
-  },
-]);
+const directions = ref<IDirection[]>([]);
 const selectedDirection = ref<IDirection | null>();
-const schools = ref<ISchool[]>([
-  {
-    id: 1,
-    label: 'Нетология',
-    link: 'netology',
-  },
-  {
-    id: 2,
-    label: 'GeekBrains',
-    link: 'GeekBrains',
-  },
-  {
-    id: 3,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 5,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 6,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 7,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 8,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-  {
-    id: 9,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 10,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 11,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 12,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 13,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-]);
-const categories = ref<ICategory[]>([
-  {
-    id: 1,
-    label: 'Нетология',
-    link: 'netology',
-  },
-  {
-    id: 2,
-    label: 'GeekBrains',
-    link: 'GeekBrains',
-  },
-  {
-    id: 3,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 5,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 6,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 7,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 8,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-  {
-    id: 9,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 10,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 11,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 12,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 13,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-]);
-const professions = ref<IProfession[]>([
-  {
-    id: 1,
-    label: 'Нетология',
-    link: 'netology',
-  },
-  {
-    id: 2,
-    label: 'GeekBrains',
-    link: 'GeekBrains',
-  },
-  {
-    id: 3,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 5,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 6,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 7,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 8,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-  {
-    id: 9,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 10,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 11,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 12,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 13,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-]);
-const teachers = ref<ITeacher[]>([
-  {
-    id: 1,
-    label: 'Нетология',
-    link: 'netology',
-  },
-  {
-    id: 2,
-    label: 'GeekBrains',
-    link: 'GeekBrains',
-  },
-  {
-    id: 3,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 5,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 6,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 7,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 8,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-  {
-    id: 9,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 10,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 11,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 12,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 13,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-]);
-const skills = ref<ISkill[]>([
-  {
-    id: 1,
-    label: 'Нетология',
-    link: 'netology',
-  },
-  {
-    id: 2,
-    label: 'GeekBrains',
-    link: 'GeekBrains',
-  },
-  {
-    id: 3,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 5,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 6,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 7,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 8,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-  {
-    id: 9,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 10,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 11,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 12,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 13,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-]);
-const tools = ref<ITool[]>([
-  {
-    id: 1,
-    label: 'Нетология',
-    link: 'netology',
-  },
-  {
-    id: 2,
-    label: 'GeekBrains',
-    link: 'GeekBrains',
-  },
-  {
-    id: 3,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 5,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 6,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 7,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 8,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-  {
-    id: 9,
-    label: 'Skillbox',
-    link: 'Skillbox',
-  },
-  {
-    id: 10,
-    label: 'XYZ',
-    link: 'xyz',
-  },
-  {
-    id: 11,
-    label: 'Яндекс Практикум',
-    link: 'yandex',
-  },
-  {
-    id: 12,
-    label: 'Otus',
-    link: 'Otus',
-  },
-  {
-    id: 13,
-    label: 'iKit.pro',
-    link: 'iKit',
-  },
-]);
+const schools = ref<ISchool[]>([]);
+const categories = ref<ICategory[]>([]);
+const professions = ref<IProfession[]>([]);
+const teachers = ref<ITeacher[]>([]);
+const skills = ref<ISkill[]>([]);
+const tools = ref<ITool[]>([]);
 
 const selectedFormat = ref<IFormat | null>();
-const formats = ref<IFormat[]>([
-  {
-    label: 'Онлайн',
-    value: true,
-  },
-  {
-    label: 'Офлайн',
-    value: false,
-  },
-]);
+const formats = ref<IFormat[]>([]);
 
 //
 
 const selectedLevels = ref<Array<ILevel>>([]);
-const levels = ref<ILevel[]>([
-  {
-    label: 'Для начинающих',
-    value: ELevel.JUNIOR,
-  },
-  {
-    label: 'Для продвинутых',
-    value: ELevel.MIDDLE,
-  },
-  {
-    label: 'Для профессионалов',
-    value: ELevel.SENIOR,
-  },
-]);
+const levels = ref<ILevel[]>([]);
 
 //
 
-const ratings = ref<IRating[]>([
-  {
-    label: '4.5 и выше',
-    value: 4.5,
-  },
-  {
-    label: '4.0 и выше',
-    value: 4,
-  },
-  {
-    label: '3.5 и выше',
-    value: 3.5,
-  },
-  {
-    label: '3.0 и выше',
-    value: 3,
-  },
-]);
+const ratings = ref<IRating[]>([]);
 
 const selectedRating = ref<IRating | null>();
 
@@ -1150,7 +404,7 @@ const totalFilters = computed((): number => {
     count++;
   }
 
-  if (selectedLoan.value) {
+  if (selectedCredit.value) {
     count++;
   }
 
@@ -1183,6 +437,151 @@ const totalFilters = computed((): number => {
 
   return count;
 });
+
+const config = useRuntimeConfig();
+
+const load = async (totalCurrent: number): Promise<void> => {
+  try {
+    const result = await apiReadCourses(config.public.apiUrl, totalCurrent);
+
+    courses.value = coursesStoreToCoursesComponent(result.courses);
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
+const getFormats = (online: boolean): Array<IFormat> => {
+  if (online) {
+    return [
+      {
+        label: 'Онлайн',
+        value: true,
+      },
+      {
+        label: 'Офлайн',
+        value: false,
+      },
+    ];
+  }
+
+  return [
+    {
+      label: 'Офлайн',
+      value: false,
+    },
+  ];
+};
+
+const getLevels = (lvls: Array<ELevel>): Array<ILevel> => {
+  const result: Array<ILevel> = [];
+
+  if (lvls.indexOf(ELevel.JUNIOR) !== -1) {
+    result[result.length] = {
+      label: 'Для начинающих',
+      value: ELevel.JUNIOR,
+    };
+  }
+
+  if (lvls.indexOf(ELevel.MIDDLE) !== -1) {
+    result[result.length] = {
+      label: 'Для продвинутых',
+      value: ELevel.MIDDLE,
+    };
+  }
+
+  if (lvls.indexOf(ELevel.SENIOR) !== -1) {
+    result[result.length] = {
+      label: 'Для профессионалов',
+      value: ELevel.SENIOR,
+    };
+  }
+
+  return result;
+};
+
+const getRatings = (rtgs: Array<number>): Array<IRating> => {
+  const result: Array<IRating> = [];
+
+  if (rtgs.indexOf(4.5) !== -1) {
+    result[result.length] = {
+      label: '4.5 и выше',
+      value: 4.5,
+    };
+  }
+
+  if (rtgs.indexOf(4) !== -1) {
+    result[result.length] = {
+      label: '4.0 и выше',
+      value: 4,
+    };
+  }
+
+  if (rtgs.indexOf(3.5) !== -1) {
+    result[result.length] = {
+      label: '3.5 и выше',
+      value: 3.5,
+    };
+  }
+
+  if (rtgs.indexOf(3) !== -1) {
+    result[result.length] = {
+      label: '3.0 и выше',
+      value: 3,
+    };
+  }
+
+  return result;
+};
+
+const onLoadItems = (name: string): void => {
+  console.log(`Loading ${name}...`);
+};
+
+try {
+  const result = await apiReadCourses(config.public.apiUrl, size.value);
+
+  courses.value = coursesStoreToCoursesComponent(result.courses);
+  total.value = result.total || 0;
+
+  const storeDirections = result.filter?.directions || [];
+  directions.value = courseFilterStoreDirectionsToComponentDirections(storeDirections);
+
+  const storeCategories = result.filter?.categories || [];
+  categories.value = courseFilterStoreCategoriesToComponentCategories(storeCategories);
+
+  const storeProfessions = result.filter?.professions || [];
+  professions.value = courseFilterStoreProfessionsToComponentProfessions(storeProfessions);
+
+  const storeSchools = result.filter?.schools || [];
+  schools.value = courseFilterStoreSchoolsToComponentSchools(storeSchools);
+
+  const storeSkills = result.filter?.skills || [];
+  skills.value = courseFilterStoreSkillsToComponentSkills(storeSkills);
+
+  const storeTeachers = result.filter?.teachers || [];
+  teachers.value = courseFilterStoreTeachersToComponentTeachers(storeTeachers);
+
+  const storeTools = result.filter?.tools || [];
+  tools.value = courseFilterStoreToolsToComponentTools(storeTools);
+
+  availableCredit.value = result.filter?.credit || true;
+  availableFree.value = result.filter?.free || true;
+
+  priceMin.value = result.filter?.price.min || 0;
+  priceMax.value = result.filter?.price.max || 0;
+  selectedPrices.value = [priceMin.value, priceMax.value];
+
+  durationMin.value = result.filter?.duration.min || 0;
+  durationMax.value = result.filter?.duration.max || 0;
+  selectedDurations.value = [durationMin.value, durationMax.value];
+
+  formats.value = getFormats(result.filter?.online || false);
+
+  levels.value = getLevels(result.filter?.levels || []);
+  ratings.value = getRatings(result.filter?.ratings || []);
+} catch (error: any) {
+  console.log(error.message);
+}
 </script>
 
 <style lang="scss">

@@ -2,5 +2,5 @@ import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogF
 import ISalary from '@/interfaces/components/molecules/salary';
 
 export default interface IProfession extends ICatalogFilterSelectItem {
-  salaries: Array<ISalary>
+  salaries?: Array<ISalary>
 }
