@@ -102,6 +102,10 @@ const nameClass = computed(() => {
     classes.push('catalog-filter-select--all');
   }
 
+  if (props.simple) {
+    classes.push('catalog-filter-select--simple');
+  }
+
   return classes.join(' ');
 });
 

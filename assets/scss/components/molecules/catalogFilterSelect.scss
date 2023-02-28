@@ -10,6 +10,15 @@
     }
   }
 
+  &--simple {
+    .catalog-filter-select {
+      &__items {
+        height: auto;
+        margin-bottom: 0;
+      }
+    }
+  }
+
   &__search {
     margin-bottom: 1rem;
 

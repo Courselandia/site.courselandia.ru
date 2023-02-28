@@ -303,8 +303,6 @@ import { courseFilterStoreToolsToComponentTools } from '@/converts/courseFilterS
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import ECourseSort from '@/enums/components/molecules/courseSort';
 import ECourseType from '@/enums/components/molecules/courseType';
-import ECurrency from '@/enums/components/molecules/currency';
-import EDuration from '@/enums/components/molecules/duration';
 import ELevel from '@/enums/components/molecules/level';
 import ICategory from '@/interfaces/components/molecules/category';
 import ICourse from '@/interfaces/components/molecules/course';

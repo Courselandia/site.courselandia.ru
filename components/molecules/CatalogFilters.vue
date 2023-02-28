@@ -215,6 +215,7 @@
             <CatalogFilterSelect
               v-model:value="selectedSchoolsValue"
               :items="schools"
+              :simple="schools.length < 6"
               @load-items="onLoadItems('schools')"
             />
           </div>
