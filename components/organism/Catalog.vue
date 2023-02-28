@@ -277,6 +277,7 @@ import {
 import { useRoute } from 'vue-router';
 
 import { apiReadCourses } from '@/api/course';
+import { apiReadProfessions } from '@/api/profession';
 import Button from '@/components/atoms/Button.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import Tag from '@/components/atoms/Tag.vue';
@@ -324,6 +325,7 @@ const type = ref<TValue>(ECourseType.TILE);
 const courses = ref<ICourse[]>([]);
 
 const total = ref(0);
+const offset = ref(0);
 const size = ref(36);
 const currentPage = ref(1);
 
@@ -438,9 +440,9 @@ const totalFilters = computed((): number => {
 
 const config = useRuntimeConfig();
 
-const load = async (totalCurrent: number): Promise<void> => {
+const load = async (offsetCurrent: number = 0, totalCurrent: number = 36): Promise<void> => {
   try {
-    const result = await apiReadCourses(config.public.apiUrl, totalCurrent);
+    const result = await apiReadCourses(config.public.apiUrl, offsetCurrent, totalCurrent);
 
     courses.value = coursesStoreToCoursesComponent(result.courses);
   } catch (error: any) {
@@ -531,12 +533,23 @@ const getRatings = (rtgs: Array<number>): Array<IRating> => {
   return result;
 };
 
-const onLoadItems = (name: string): void => {
+const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
+  if (name === 'professions') {
+    if (professions.value.length <= 6) {
+      const result = await apiReadProfessions(config.public.apiUrl);
+      professions.value = courseFilterStoreProfessionsToComponentProfessions(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  }
+
   console.log(`Loading ${name}...`);
 };
 
 try {
-  const result = await apiReadCourses(config.public.apiUrl, size.value);
+  const result = await apiReadCourses(config.public.apiUrl, offset.value, size.value);
 
   courses.value = coursesStoreToCoursesComponent(result.courses);
   total.value = result.total || 0;

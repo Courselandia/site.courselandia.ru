@@ -1,21 +1,27 @@
 import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
+import toQuery from '@/helpers/toQuery';
+import IFilters from '@/interfaces/filters';
 import {
   IResponseItems,
 } from '@/interfaces/response';
-import IProfession from '@/interfaces/stores/course/profession';
+import IFilterProfession from '@/interfaces/stores/course/filterProfession';
 
 export default defineStore('profession', {
   state: () => ({
-    professions: null as IProfession[] | null,
+    professions: null as IFilterProfession[] | null,
   }),
   actions: {
     async readProfessions(
       baseUrl: string,
-    ): Promise<IResponseItems<IProfession>> {
+      offset: number | null = null,
+      limit: number | null = null,
+      filters: IFilters | null = null,
+    ): Promise<IResponseItems<IFilterProfession>> {
       try {
-        const response = await axios.get<IResponseItems<IProfession>>('/api/private/site/course/professions', {
+        const query = toQuery(offset, limit, null, filters);
+        const response = await axios.get<IResponseItems<IFilterProfession>>(`/api/private/site/course/professions?${query}`, {
           baseURL: baseUrl,
         });
 

@@ -216,7 +216,7 @@
               v-model:value="selectedSchoolsValue"
               :items="schools"
               :simple="schools.length < 6"
-              @load-items="onLoadItems('schools')"
+              @load-items="onLoadItems('schools', $event)"
             />
           </div>
         </div>
@@ -247,7 +247,7 @@
             <CatalogFilterSelect
               v-model:value="selectedCategoriesValue"
               :items="categories"
-              @load-items="onLoadItems('categories')"
+              @load-items="onLoadItems('categories', $event)"
             />
           </div>
         </div>
@@ -278,7 +278,7 @@
             <CatalogFilterSelect
               v-model:value="selectedProfessionsValue"
               :items="professions"
-              @load-items="onLoadItems('professions')"
+              @load-items="onLoadItems('professions', $event)"
             />
           </div>
         </div>
@@ -309,7 +309,7 @@
             <CatalogFilterSelect
               v-model:value="selectedTeachersValue"
               :items="teachers"
-              @load-items="onLoadItems('teachers')"
+              @load-items="onLoadItems('teachers', $event)"
             />
           </div>
         </div>
@@ -340,7 +340,7 @@
             <CatalogFilterSelect
               v-model:value="selectedSkillsValue"
               :items="skills"
-              @load-items="onLoadItems('skills')"
+              @load-items="onLoadItems('skills', $event)"
             />
           </div>
         </div>
@@ -371,7 +371,7 @@
             <CatalogFilterSelect
               v-model:value="selectedToolsValue"
               :items="tools"
-              @load-items="onLoadItems('tools')"
+              @load-items="onLoadItems('tools', $event)"
             />
           </div>
         </div>
@@ -673,7 +673,7 @@ const {
 } = toRefs(props);
 
 const emit = defineEmits({
-  'load-items': (_: string) => true,
+  'load-items': (_: string, __?: Function) => true,
   'update:selected-direction': (_: IDirection | null) => true,
   'update:selected-rating': (_: IRating | null) => true,
   'update:selected-schools': (_: Array<ISchool>) => true,
@@ -704,8 +704,8 @@ const nameClass = computed(() => {
 
 //
 
-const onLoadItems = (name: string): void => {
-  emit('load-items', name);
+const onLoadItems = (name: string, callback?: Function): void => {
+  emit('load-items', name, callback);
 };
 
 //

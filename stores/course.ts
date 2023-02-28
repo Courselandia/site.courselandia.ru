@@ -27,12 +27,13 @@ export default defineStore('course', {
   actions: {
     async readCourses(
       baseUrl: string,
+      offset: number = 0,
       limit: number = 36,
       sorts: ISorts | null = null,
       filters: IFilters | null = null,
     ): Promise<IResponseItems<ICourse>> {
       try {
-        const query = toQuery(null, limit, sorts, filters);
+        const query = toQuery(offset, limit, sorts, filters);
         const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
           baseURL: baseUrl,
         });

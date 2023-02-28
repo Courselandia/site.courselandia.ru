@@ -13,7 +13,8 @@ import course from '@/stores/course';
 
 export const apiReadCourses = async (
   apiUrl: string,
-  limit: number = 12,
+  offset: number = 0,
+  limit: number = 36,
   sorts: ISorts | null = null,
   filters: IFilters | null = null,
 ): Promise<IApiReadCourses> => {
@@ -22,7 +23,7 @@ export const apiReadCourses = async (
   } = course();
 
   const loadRatedCourses = async ():
-    Promise<IResponseItems<ICourse>> => readCourses(apiUrl, limit, sorts, filters);
+    Promise<IResponseItems<ICourse>> => readCourses(apiUrl, offset, limit, sorts, filters);
 
   const {
     total,

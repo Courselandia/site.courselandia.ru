@@ -111,7 +111,7 @@ const nameClass = computed(() => {
 
 const emit = defineEmits({
   'update:value': (_: Array<ICatalogFilterSelectItem>) => true,
-  'load-items': () => true,
+  'load-items': (callback?: Function) => true,
 });
 
 const selects = ref(value.value?.map((item) => item.id) || []);
@@ -159,9 +159,9 @@ watch(value, () => {
 });
 
 const onclickMore = (): void => {
-  more.value = !more.value;
-
-  emit('load-items');
+  emit('load-items', () => {
+    more.value = !more.value;
+  });
 };
 
 const onLoadItems = (): void => {
