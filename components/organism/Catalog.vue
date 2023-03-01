@@ -276,8 +276,12 @@ import {
 } from 'vue';
 import { useRoute } from 'vue-router';
 
+import { apiReadCategories } from '@/api/category';
 import { apiReadCourses } from '@/api/course';
 import { apiReadProfessions } from '@/api/profession';
+import { apiReadSkills } from '@/api/skill';
+import { apiReadTeachers } from '@/api/teacher';
+import { apiReadTools } from '@/api/tool';
 import Button from '@/components/atoms/Button.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import Tag from '@/components/atoms/Tag.vue';
@@ -535,7 +539,7 @@ const getRatings = (rtgs: Array<number>): Array<IRating> => {
 
 const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
   if (name === 'professions') {
-    if (professions.value.length <= 6) {
+    if (professions.value.length <= 11) {
       const result = await apiReadProfessions(config.public.apiUrl);
       professions.value = courseFilterStoreProfessionsToComponentProfessions(result);
     }
@@ -543,9 +547,43 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     if (callback) {
       callback();
     }
-  }
+  } else if (name === 'categories') {
+    if (categories.value.length <= 11) {
+      const result = await apiReadCategories(config.public.apiUrl);
+      categories.value = courseFilterStoreCategoriesToComponentCategories(result);
+    }
 
-  console.log(`Loading ${name}...`);
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'teachers') {
+    if (teachers.value.length <= 11) {
+      const result = await apiReadTeachers(config.public.apiUrl);
+      teachers.value = courseFilterStoreTeachersToComponentTeachers(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'skills') {
+    if (skills.value.length <= 11) {
+      const result = await apiReadSkills(config.public.apiUrl);
+      skills.value = courseFilterStoreSkillsToComponentSkills(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'tools') {
+    if (tools.value.length <= 11) {
+      const result = await apiReadTools(config.public.apiUrl);
+      tools.value = courseFilterStoreToolsToComponentTools(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  }
 };
 
 try {
