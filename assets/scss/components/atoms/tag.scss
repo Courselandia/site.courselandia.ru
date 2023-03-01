@@ -36,6 +36,14 @@
     &-black {
       color: $black;
     }
+
+    &-hover {
+      &-white {
+        &:hover {
+          color: $white;
+        }
+      }
+    }
   }
 
   &--border {
@@ -61,6 +69,10 @@
       background-color: $blue1;
     }
 
+    &-blue2 {
+      background-color: $blue2;
+    }
+
     &-white {
       background-color: $white;
     }
@@ -73,6 +85,12 @@
       &-blue1 {
         &:hover {
           background-color: $blue1;
+        }
+      }
+
+      &-blue2 {
+        &:hover {
+          background-color: $blue2;
         }
       }
     }

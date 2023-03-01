@@ -24,6 +24,8 @@
 import {
   onMounted,
   ref,
+  watch,
+  toRefs,
 } from 'vue';
 
 const props = defineProps({
@@ -56,18 +58,26 @@ const props = defineProps({
 const image = ref('');
 const imageRef = ref<HTMLElement | null>(null);
 
+const { src } = toRefs(props);
+
 let observer: IntersectionObserver | null;
 
 onMounted(() => {
   observer = new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting && observer) {
       observer.disconnect();
-      image.value = props.src;
+      image.value = src.value;
     }
   });
 
   if (imageRef.value) {
     observer.observe(imageRef.value);
+  }
+});
+
+watch(src, () => {
+  if (image.value) {
+    image.value = src.value;
   }
 });
 </script>

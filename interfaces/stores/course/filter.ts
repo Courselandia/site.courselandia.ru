@@ -1,3 +1,4 @@
+import EFormat from '@/enums/stores/course/format';
 import ELevel from '@/enums/stores/course/level';
 import IFilterCategory from '@/interfaces/stores/course/filterCategory';
 import IFilterDirection from '@/interfaces/stores/course/filterDirection';
@@ -22,6 +23,6 @@ export default interface IFilter {
   duration: IFilterDuration,
   credit: boolean,
   free: boolean,
-  online: boolean,
+  formats: Array<EFormat>,
   levels: Array<ELevel>,
 }

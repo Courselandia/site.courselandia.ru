@@ -84,6 +84,11 @@ const props = defineProps({
     required: false,
     default: 'blue2',
   },
+  colorHover: {
+    type: String as PropType<TColor>,
+    required: false,
+    default: null,
+  },
   shadow: {
     type: Boolean,
     required: false,
@@ -113,6 +118,10 @@ const nameClass = computed(() => {
 
   if (props.color) {
     classes.push(`tag--color-${props.color}`);
+  }
+
+  if (props.colorHover) {
+    classes.push(`tag--color-hover-${props.colorHover}`);
   }
 
   if (props.bckHover) {

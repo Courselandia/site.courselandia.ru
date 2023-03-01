@@ -7,6 +7,7 @@
 
   &__items {
     order: 2;
+    width: calc(100% - 350px - 2.5rem);
   }
 
   &__filter {

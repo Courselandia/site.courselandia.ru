@@ -273,6 +273,7 @@
 import {
   computed,
   ref,
+  watch,
 } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -309,6 +310,8 @@ import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCourses
 import ECourseSort from '@/enums/components/molecules/courseSort';
 import ECourseType from '@/enums/components/molecules/courseType';
 import ELevel from '@/enums/components/molecules/level';
+import EFormat from '@/enums/stores/course/format';
+import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
 import ICategory from '@/interfaces/components/molecules/category';
 import ICourse from '@/interfaces/components/molecules/course';
 import IDirection from '@/interfaces/components/molecules/direction';
@@ -320,6 +323,8 @@ import ISchool from '@/interfaces/components/molecules/schoolFilter';
 import ISkill from '@/interfaces/components/molecules/skill';
 import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
+import IFilters from '@/interfaces/filters';
+import ISorts from '@/interfaces/sorts';
 import TValue from '@/types/value';
 
 const route = useRoute();
@@ -376,19 +381,12 @@ const levels = ref<ILevel[]>([]);
 //
 
 const ratings = ref<IRating[]>([]);
-
 const selectedRating = ref<IRating | null>();
-
 const selectedSchools = ref<Array<ISchool>>([]);
-
 const selectedCategories = ref<Array<ICategory>>([]);
-
 const selectedProfessions = ref<Array<IProfession>>([]);
-
 const selectedTeachers = ref<Array<ITeacher>>([]);
-
 const selectedSkills = ref<Array<ISkill>>([]);
-
 const selectedTools = ref<Array<ITool>>([]);
 
 const getLinkPagination = (page: number): string => `/courses/?page=${page}`;
@@ -442,38 +440,26 @@ const totalFilters = computed((): number => {
   return count;
 });
 
-const config = useRuntimeConfig();
+const getFormats = (formatValues: Array<EFormat>): Array<IFormat> => {
+  const result: Array<IFormat> = [];
 
-const load = async (offsetCurrent: number = 0, totalCurrent: number = 36): Promise<void> => {
-  try {
-    const result = await apiReadCourses(config.public.apiUrl, offsetCurrent, totalCurrent);
-
-    courses.value = coursesStoreToCoursesComponent(result.courses);
-  } catch (error: any) {
-    console.log(error.message);
-  }
-};
-
-const getFormats = (online: boolean): Array<IFormat> => {
-  if (online) {
-    return [
-      {
+  formatValues.forEach((val) => {
+    if (val === EFormat.ONLINE) {
+      result[result.length] = {
         label: 'Онлайн',
         value: true,
-      },
-      {
+      };
+    }
+
+    if (val === EFormat.OFFLINE) {
+      result[result.length] = {
         label: 'Офлайн',
         value: false,
-      },
-    ];
-  }
+      };
+    }
+  });
 
-  return [
-    {
-      label: 'Офлайн',
-      value: false,
-    },
-  ];
+  return result;
 };
 
 const getLevels = (lvls: Array<ELevel>): Array<ILevel> => {
@@ -537,6 +523,71 @@ const getRatings = (rtgs: Array<number>): Array<IRating> => {
   return result;
 };
 
+const config = useRuntimeConfig();
+
+const setCoursesAndFilters = (result: IApiReadCourses): void => {
+  courses.value = coursesStoreToCoursesComponent(result.courses);
+  total.value = result.total || 0;
+
+  const storeDirections = result.filter?.directions || [];
+  directions.value = courseFilterStoreDirectionsToComponentDirections(storeDirections);
+
+  const storeCategories = result.filter?.categories || [];
+  categories.value = courseFilterStoreCategoriesToComponentCategories(storeCategories);
+
+  const storeProfessions = result.filter?.professions || [];
+  professions.value = courseFilterStoreProfessionsToComponentProfessions(storeProfessions);
+
+  const storeSchools = result.filter?.schools || [];
+  schools.value = courseFilterStoreSchoolsToComponentSchools(storeSchools);
+
+  const storeSkills = result.filter?.skills || [];
+  skills.value = courseFilterStoreSkillsToComponentSkills(storeSkills);
+
+  const storeTeachers = result.filter?.teachers || [];
+  teachers.value = courseFilterStoreTeachersToComponentTeachers(storeTeachers);
+
+  const storeTools = result.filter?.tools || [];
+  tools.value = courseFilterStoreToolsToComponentTools(storeTools);
+
+  availableCredit.value = result.filter?.credit || true;
+  availableFree.value = result.filter?.free || true;
+
+  priceMin.value = result.filter?.price.min || 0;
+  priceMax.value = result.filter?.price.max || 0;
+  selectedPrices.value = [priceMin.value, priceMax.value];
+
+  durationMin.value = result.filter?.duration.min || 0;
+  durationMax.value = result.filter?.duration.max || 0;
+  selectedDurations.value = [durationMin.value, durationMax.value];
+
+  formats.value = getFormats(result.filter?.formats || []);
+
+  levels.value = getLevels(result.filter?.levels || []);
+  ratings.value = getRatings(result.filter?.ratings || []);
+};
+
+const load = async (
+  offsetCurrent: number = 0,
+  totalCurrent: number = 36,
+  sorts: ISorts | null = null,
+  filterCurrent: IFilters | null = null,
+): Promise<void> => {
+  try {
+    const result = await apiReadCourses(
+      config.public.apiUrl,
+      offsetCurrent,
+      totalCurrent,
+      sorts,
+      filterCurrent,
+    );
+
+    setCoursesAndFilters(result);
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
 const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
   if (name === 'professions') {
     if (professions.value.length <= 11) {
@@ -588,49 +639,114 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
 
 try {
   const result = await apiReadCourses(config.public.apiUrl, offset.value, size.value);
-
-  courses.value = coursesStoreToCoursesComponent(result.courses);
-  total.value = result.total || 0;
-
-  const storeDirections = result.filter?.directions || [];
-  directions.value = courseFilterStoreDirectionsToComponentDirections(storeDirections);
-
-  const storeCategories = result.filter?.categories || [];
-  categories.value = courseFilterStoreCategoriesToComponentCategories(storeCategories);
-
-  const storeProfessions = result.filter?.professions || [];
-  professions.value = courseFilterStoreProfessionsToComponentProfessions(storeProfessions);
-
-  const storeSchools = result.filter?.schools || [];
-  schools.value = courseFilterStoreSchoolsToComponentSchools(storeSchools);
-
-  const storeSkills = result.filter?.skills || [];
-  skills.value = courseFilterStoreSkillsToComponentSkills(storeSkills);
-
-  const storeTeachers = result.filter?.teachers || [];
-  teachers.value = courseFilterStoreTeachersToComponentTeachers(storeTeachers);
-
-  const storeTools = result.filter?.tools || [];
-  tools.value = courseFilterStoreToolsToComponentTools(storeTools);
-
-  availableCredit.value = result.filter?.credit || true;
-  availableFree.value = result.filter?.free || true;
-
-  priceMin.value = result.filter?.price.min || 0;
-  priceMax.value = result.filter?.price.max || 0;
-  selectedPrices.value = [priceMin.value, priceMax.value];
-
-  durationMin.value = result.filter?.duration.min || 0;
-  durationMax.value = result.filter?.duration.max || 0;
-  selectedDurations.value = [durationMin.value, durationMax.value];
-
-  formats.value = getFormats(result.filter?.online || false);
-
-  levels.value = getLevels(result.filter?.levels || []);
-  ratings.value = getRatings(result.filter?.ratings || []);
+  setCoursesAndFilters(result);
 } catch (error: any) {
   console.log(error.message);
 }
+
+//
+
+const onFilter = async (): Promise<void> => {
+  const filters: IFilters = {};
+
+  if (selectedDirection.value?.id) {
+    filters['directions-id'] = selectedDirection.value.id;
+  }
+
+  if (selectedRating.value?.value) {
+    filters.rating = selectedRating.value?.value;
+  }
+
+  if (selectedSchools.value?.length) {
+    filters['school-id'] = selectedSchools.value.map((item) => item.id);
+  }
+
+  if (selectedCategories.value?.length) {
+    filters['categories-id'] = selectedCategories.value.map((item) => item.id);
+  }
+
+  if (selectedProfessions.value?.length) {
+    filters['professions-id'] = selectedProfessions.value.map((item) => item.id);
+  }
+
+  if (selectedTeachers.value?.length) {
+    filters['teachers-id'] = selectedTeachers.value.map((item) => item.id);
+  }
+
+  if (selectedSkills.value?.length) {
+    filters['skills-id'] = selectedSkills.value.map((item) => item.id);
+  }
+
+  if (selectedTools.value?.length) {
+    filters['tools-id'] = selectedTools.value.map((item) => item.id);
+  }
+
+  if (selectedFormat.value?.value === true || selectedFormat.value?.value === false) {
+    filters.online = selectedFormat.value.value;
+  }
+
+  if (selectedLevels.value?.length) {
+    filters['levels-level'] = selectedLevels.value.map((item) => item.value);
+  }
+
+  await load(offset.value, size.value, null, filters);
+};
+
+watch(selectedDirection, () => {
+  onFilter();
+});
+
+watch(selectedRating, () => {
+  onFilter();
+}, {
+  deep: true,
+});
+
+watch(selectedSchools, () => {
+  onFilter();
+}, {
+  deep: true,
+});
+
+watch(selectedCategories, () => {
+  onFilter();
+}, {
+  deep: true,
+});
+
+watch(selectedProfessions, () => {
+  onFilter();
+}, {
+  deep: true,
+});
+
+watch(selectedTeachers, () => {
+  onFilter();
+}, {
+  deep: true,
+});
+
+watch(selectedSkills, () => {
+  onFilter();
+}, {
+  deep: true,
+});
+
+watch(selectedTools, () => {
+  onFilter();
+}, {
+  deep: true,
+});
+
+watch(selectedFormat, () => {
+  onFilter();
+});
+
+watch(selectedLevels, () => {
+  onFilter();
+}, {
+  deep: true,
+});
 </script>
 
 <style lang="scss">
