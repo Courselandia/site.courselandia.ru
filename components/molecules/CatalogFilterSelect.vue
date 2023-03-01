@@ -22,7 +22,10 @@
         </Input>
       </Item>
     </div>
-    <div class="catalog-filter-select__items">
+    <div
+      ref="itemsRef"
+      class="catalog-filter-select__items"
+    >
       <Group
         v-model:value="selects"
       >
@@ -94,6 +97,7 @@ const {
 
 const search = ref('');
 const more = ref(false);
+const itemsRef = ref<HTMLElement | null>(null);
 
 const nameClass = computed(() => {
   const classes = [];
@@ -161,6 +165,10 @@ watch(value, () => {
 const onclickMore = (): void => {
   emit('load-items', () => {
     more.value = !more.value;
+
+    if (!more.value && itemsRef.value) {
+      itemsRef.value.scrollTop = 0;
+    }
   });
 };
 
