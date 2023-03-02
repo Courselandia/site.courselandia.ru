@@ -33,6 +33,7 @@ const {
 
 const emit = defineEmits({
   'update:value': (_: Boolean) => true,
+  click: (_: Boolean) => true,
 });
 
 const input = ref(value.value);
@@ -57,6 +58,7 @@ const nameClass = computed(() => {
 
 const onClick = (): void => {
   input.value = !input.value;
+  emit('click', input.value);
 };
 </script>
 

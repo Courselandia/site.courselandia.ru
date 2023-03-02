@@ -51,8 +51,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetDirection"
-                @keyup="onClickResetDirection"
+                @click="onClickResetDirection(false)"
+                @keyup="onClickResetDirection(false)"
               />
             </template>
           </Tag>
@@ -68,8 +68,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetRating"
-                @keyup="onClickResetRating"
+                @click="onClickResetRating(false)"
+                @keyup="onClickResetRating(false)"
               />
             </template>
           </Tag>
@@ -97,8 +97,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetPrices"
-                @keyup="onClickResetPrices"
+                @click="onClickResetPrices(false)"
+                @keyup="onClickResetPrices(false)"
               />
             </template>
           </Tag>
@@ -114,8 +114,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetCredit"
-                @keyup="onClickResetCredit"
+                @click="onClickResetCredit(false)"
+                @keyup="onClickResetCredit(false)"
               />
             </template>
           </Tag>
@@ -131,8 +131,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetFree"
-                @keyup="onClickResetFree"
+                @click="onClickResetFree(false)"
+                @keyup="onClickResetFree(false)"
               />
             </template>
           </Tag>
@@ -163,8 +163,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetDurations"
-                @keyup="onClickResetDurations"
+                @click="onClickResetDurations(false)"
+                @keyup="onClickResetDurations(false)"
               />
             </template>
           </Tag>
@@ -300,8 +300,8 @@
                 color="grey2"
                 :size="[15, 15]"
                 class="cursor--pointer"
-                @click="onClickResetFormat"
-                @keyup="onClickResetFormat"
+                @click="onClickResetFormat(false)"
+                @keyup="onClickResetFormat(false)"
               />
             </template>
           </Tag>
@@ -518,6 +518,7 @@ const emit = defineEmits({
   'update:selected-durations': (_: Array<number>) => true,
   'update:selected-credit': (_: Boolean) => true,
   'update:selected-free': (_: Boolean) => true,
+  remove: () => true,
 });
 
 //
@@ -532,8 +533,12 @@ watch(selectedDirection, () => {
   selectedDirectionValue.value = selectedDirection.value;
 });
 
-const onClickResetDirection = (): void => {
+const onClickResetDirection = (silence: boolean = false): void => {
   selectedDirectionValue.value = null;
+
+  if (!silence) {
+    emit('remove');
+  }
 };
 
 //
@@ -560,8 +565,12 @@ const getSelectedRatingLabel = (): string | null => {
   return selectedRatingValueFound ? selectedRatingValueFound.label : null;
 };
 
-const onClickResetRating = (): void => {
+const onClickResetRating = (silence: boolean = false): void => {
   selectedRatingValue.value = null;
+
+  if (!silence) {
+    emit('remove');
+  }
 };
 
 //
@@ -576,8 +585,12 @@ watch(selectedPrices, () => {
   selectedPricesValue.value = selectedPrices.value;
 });
 
-const onClickResetPrices = (): void => {
+const onClickResetPrices = (silence: boolean = false): void => {
   selectedPricesValue.value = [props.priceMin, props.priceMax];
+
+  if (!silence) {
+    emit('remove');
+  }
 };
 
 //
@@ -592,8 +605,12 @@ watch(selectedCredit, () => {
   selectedCreditValue.value = selectedCredit.value;
 });
 
-const onClickResetCredit = (): void => {
+const onClickResetCredit = (silence: boolean = false): void => {
   selectedCreditValue.value = false;
+
+  if (!silence) {
+    emit('remove');
+  }
 };
 
 //
@@ -608,8 +625,12 @@ watch(selectedFree, () => {
   selectedFreeValue.value = selectedFree.value;
 });
 
-const onClickResetFree = (): void => {
+const onClickResetFree = (silence: boolean = false): void => {
   selectedFreeValue.value = false;
+
+  if (!silence) {
+    emit('remove');
+  }
 };
 
 //
@@ -624,8 +645,12 @@ watch(selectedDurations, () => {
   selectedDurationsValue.value = selectedDurations.value;
 });
 
-const onClickResetDurations = (): void => {
+const onClickResetDurations = (silence: boolean = false): void => {
   selectedDurationsValue.value = [props.durationMin, props.durationMax];
+
+  if (!silence) {
+    emit('remove');
+  }
 };
 
 const getLabelDuration = (val: number) => {
@@ -659,6 +684,8 @@ watch(selectedSchools, () => {
 const onClickResetSchool = (index: number): void => {
   selectedSchoolsValue.value.splice(index, 1);
   selectedSchoolsValue.value = cloneDeep(selectedSchoolsValue.value);
+
+  emit('remove');
 };
 
 //
@@ -676,6 +703,8 @@ watch(selectedCategories, () => {
 const onClickResetCategory = (index: number): void => {
   selectedCategoriesValue.value.splice(index, 1);
   selectedCategoriesValue.value = cloneDeep(selectedCategoriesValue.value);
+
+  emit('remove');
 };
 
 //
@@ -693,6 +722,8 @@ watch(selectedProfessions, () => {
 const onClickResetProfession = (index: number): void => {
   selectedProfessionsValue.value.splice(index, 1);
   selectedProfessionsValue.value = cloneDeep(selectedProfessionsValue.value);
+
+  emit('remove');
 };
 
 //
@@ -710,6 +741,8 @@ watch(selectedTeachers, () => {
 const onClickResetTeacher = (index: number): void => {
   selectedTeachersValue.value.splice(index, 1);
   selectedTeachersValue.value = cloneDeep(selectedTeachersValue.value);
+
+  emit('remove');
 };
 
 //
@@ -727,6 +760,8 @@ watch(selectedSkills, () => {
 const onClickResetSkill = (index: number): void => {
   selectedSkillsValue.value.splice(index, 1);
   selectedSkillsValue.value = cloneDeep(selectedSkillsValue.value);
+
+  emit('remove');
 };
 
 //
@@ -744,6 +779,8 @@ watch(selectedTools, () => {
 const onClickResetTool = (index: number): void => {
   selectedToolsValue.value.splice(index, 1);
   selectedToolsValue.value = cloneDeep(selectedToolsValue.value);
+
+  emit('remove');
 };
 
 //
@@ -762,8 +799,12 @@ watch(selectedFormat, () => {
   selectedFormatValue.value = selectedFormat.value?.value;
 });
 
-const onClickResetFormat = (): void => {
+const onClickResetFormat = (silence: boolean = false): void => {
   selectedFormatValue.value = null;
+
+  if (!silence) {
+    emit('remove');
+  }
 };
 
 //
@@ -795,6 +836,8 @@ watch(selectedLevels, () => {
 const onClickResetLevel = (index: number): void => {
   selectedLevelsValue.value?.splice(index, 1);
   selectedLevelsValue.value = cloneDeep(selectedLevelsValue.value);
+
+  emit('remove');
 };
 
 const getSelectedLevelLabel = (level: ELevel): string | null => {
@@ -806,20 +849,22 @@ const getSelectedLevelLabel = (level: ELevel): string | null => {
 };
 
 const onClickResetAll = (): void => {
-  onClickResetDirection();
-  onClickResetRating();
-  onClickResetPrices();
-  onClickResetCredit();
-  onClickResetFree();
-  onClickResetDurations();
+  onClickResetDirection(true);
+  onClickResetRating(true);
+  onClickResetPrices(true);
+  onClickResetCredit(true);
+  onClickResetFree(true);
+  onClickResetDurations(true);
   selectedSchoolsValue.value = [];
   selectedCategoriesValue.value = [];
   selectedProfessionsValue.value = [];
   selectedTeachersValue.value = [];
   selectedSkillsValue.value = [];
   selectedToolsValue.value = [];
-  onClickResetFormat();
+  onClickResetFormat(true);
   selectedLevelsValue.value = [];
+
+  emit('remove');
 };
 
 const countFilters = computed((): number => {

@@ -140,6 +140,7 @@
                 :formats="formats"
                 :levels="levels"
                 reset-all
+                @remove="onChangeFilter"
               />
             </div>
             <div class="catalog__courses">
@@ -158,45 +159,44 @@
             </div>
           </div>
           <div class="catalog__filter">
-            <ClientOnly>
-              <CatalogFilters
-                v-model:selected-direction="selectedDirection"
-                v-model:selected-rating="selectedRating"
-                v-model:selected-schools="selectedSchools"
-                v-model:selected-categories="selectedCategories"
-                v-model:selected-professions="selectedProfessions"
-                v-model:selected-teachers="selectedTeachers"
-                v-model:selected-skills="selectedSkills"
-                v-model:selected-tools="selectedTools"
-                v-model:selected-format="selectedFormat"
-                v-model:selected-levels="selectedLevels"
-                v-model:selected-prices="selectedPrices"
-                v-model:selected-durations="selectedDurations"
-                v-model:selected-credit="selectedCredit"
-                v-model:selected-free="selectedFree"
-                :price-min="priceMin"
-                :price-max="priceMax"
-                :price-step="priceStep"
-                :duration-min="durationMin"
-                :duration-max="durationMax"
-                :duration-step="durationStep"
-                :directions="directions"
-                :ratings="ratings"
-                :schools="schools"
-                :categories="categories"
-                :professions="professions"
-                :teachers="teachers"
-                :skills="skills"
-                :tools="tools"
-                :formats="formats"
-                :levels="levels"
-                :available-credit="availableCredit"
-                :available-free="availableFree"
-                @load-items="onLoadItems"
-                @change-prices="onChangePrices"
-                @change-durations="onChangeDurations"
-              />
-            </ClientOnly>
+            <CatalogFilters
+              v-model:selected-direction="selectedDirection"
+              v-model:selected-rating="selectedRating"
+              v-model:selected-schools="selectedSchools"
+              v-model:selected-categories="selectedCategories"
+              v-model:selected-professions="selectedProfessions"
+              v-model:selected-teachers="selectedTeachers"
+              v-model:selected-skills="selectedSkills"
+              v-model:selected-tools="selectedTools"
+              v-model:selected-format="selectedFormat"
+              v-model:selected-levels="selectedLevels"
+              v-model:selected-prices="selectedPrices"
+              v-model:selected-durations="selectedDurations"
+              v-model:selected-credit="selectedCredit"
+              v-model:selected-free="selectedFree"
+              :price-min="priceMin"
+              :price-max="priceMax"
+              :price-step="priceStep"
+              :duration-min="durationMin"
+              :duration-max="durationMax"
+              :duration-step="durationStep"
+              :directions="directions"
+              :ratings="ratings"
+              :schools="schools"
+              :categories="categories"
+              :professions="professions"
+              :teachers="teachers"
+              :skills="skills"
+              :tools="tools"
+              :formats="formats"
+              :levels="levels"
+              :available-credit="availableCredit"
+              :available-free="availableFree"
+              @load-items="onLoadItems"
+              @change-prices="onChangePrices"
+              @change-durations="onChangeDurations"
+              @change="onChangeFilter"
+            />
           </div>
         </div>
       </div>
@@ -241,6 +241,7 @@
           @load-items="onLoadItems"
           @change-prices="onChangePrices"
           @change-durations="onChangeDurations"
+          @change="onChangeFilter"
         />
       </teleport>
 
@@ -267,6 +268,7 @@
           :ratings="ratings"
           :formats="formats"
           :levels="levels"
+          @remove="onChangeFilter"
         />
       </teleport>
     </LazyClientOnly>
@@ -750,62 +752,6 @@ const onFilter = async (): Promise<void> => {
   await load(offset.value, size.value, null, filters);
 };
 
-watch(selectedDirection, () => {
-  onFilter();
-});
-
-watch(selectedRating, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
-watch(selectedSchools, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
-watch(selectedCategories, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
-watch(selectedProfessions, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
-watch(selectedTeachers, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
-watch(selectedSkills, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
-watch(selectedTools, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
-watch(selectedFormat, () => {
-  onFilter();
-});
-
-watch(selectedLevels, () => {
-  onFilter();
-}, {
-  deep: true,
-});
-
 const onChangePrices = (price: Number | Array<Number>): void => {
   window.setTimeout(() => {
     onFilter();
@@ -818,13 +764,11 @@ const onChangeDurations = (duration: Number | Array<Number>): void => {
   }, 200);
 };
 
-watch(selectedCredit, () => {
-  onFilter();
-});
-
-watch(selectedFree, () => {
-  onFilter();
-});
+const onChangeFilter = () => {
+  window.setTimeout(() => {
+    onFilter();
+  }, 50);
+};
 </script>
 
 <style lang="scss">

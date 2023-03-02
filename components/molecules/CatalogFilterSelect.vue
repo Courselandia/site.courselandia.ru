@@ -34,6 +34,7 @@
           :value="item.id"
           :label="item.label"
           name="select"
+          @click="onClick"
         />
       </Group>
     </div>
@@ -115,6 +116,7 @@ const nameClass = computed(() => {
 const emit = defineEmits({
   'update:value': (_: Array<ICatalogFilterSelectItem>) => true,
   'load-items': (callback?: Function) => true,
+  click: (_: Array<ICatalogFilterSelectItem>) => true,
 });
 
 const selects = ref(value.value?.map((item) => item.id) || []);
@@ -160,6 +162,12 @@ watch(value, () => {
     selects.value = value.value?.map((item) => item.id);
   }
 });
+
+const onClick = (): void => {
+  const selected = props.items.filter((itm) => selects.value.indexOf(itm.id) !== -1);
+
+  emit('click', selected);
+};
 
 const onclickMore = (): void => {
   emit('load-items', () => {

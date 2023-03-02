@@ -48,11 +48,16 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits({
+  click: (_: string | number | boolean) => true,
+});
+
 const instance = getCurrentInstance();
 
 const checked = computed((): boolean => instance?.parent?.exposed?.input.value === props.value);
 const onClick = (): void => {
   instance?.parent?.exposed?.onChangeValue(props.value);
+  emit('click', props.value);
 };
 </script>
 
