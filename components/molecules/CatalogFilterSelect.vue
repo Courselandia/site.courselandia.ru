@@ -3,7 +3,6 @@
     :class="`catalog-filter-select ${nameClass}`"
   >
     <div
-      v-if="simple === false"
       class="catalog-filter-select__search"
     >
       <Item>

@@ -419,8 +419,11 @@ const totalFilters = computed((): number => {
   }
 
   if (
-    selectedPrices.value[0] !== priceMin.value
-    || selectedPrices.value[1] !== priceMax.value
+    !selectedFree.value
+    && (
+      selectedPrices.value[0] !== priceMin.value
+      || selectedPrices.value[1] !== priceMax.value
+    )
   ) {
     count++;
   }
@@ -529,11 +532,7 @@ const getRatings = (rtgs: Array<number>): Array<IRating> => {
 
 const config = useRuntimeConfig();
 
-const setCoursesAndFilters = (
-  result: IApiReadCourses,
-  setupPrices = true,
-  setupDurations = true,
-): void => {
+const setCoursesAndFilters = (result: IApiReadCourses): void => {
   courses.value = coursesStoreToCoursesComponent(result.courses);
   total.value = result.total || 0;
 
@@ -558,20 +557,38 @@ const setCoursesAndFilters = (
   const storeTools = result.filter?.tools || [];
   tools.value = courseFilterStoreToolsToComponentTools(storeTools);
 
-  availableCredit.value = result.filter?.credit || true;
-  availableFree.value = result.filter?.free || true;
+  availableCredit.value = result.filter?.credit === undefined ? true : result.filter?.credit;
+  availableFree.value = result.filter?.free === undefined ? true : result.filter?.free;
+
+  let toSetupPrice = false;
+
+  if (
+    priceMin.value === selectedPrices.value[0]
+    && priceMax.value === selectedPrices.value[1]
+  ) {
+    toSetupPrice = true;
+  }
 
   priceMin.value = result.filter?.price.min || 0;
   priceMax.value = result.filter?.price.max || 0;
 
-  if (setupPrices) {
+  if (toSetupPrice) {
     selectedPrices.value = [priceMin.value, priceMax.value];
+  }
+
+  let toSetupDuration = false;
+
+  if (
+    durationMin.value === selectedDurations.value[0]
+    && durationMax.value === selectedDurations.value[1]
+  ) {
+    toSetupDuration = true;
   }
 
   durationMin.value = result.filter?.duration.min || 0;
   durationMax.value = result.filter?.duration.max || 0;
 
-  if (setupDurations) {
+  if (toSetupDuration) {
     selectedDurations.value = [durationMin.value, durationMax.value];
   }
 
@@ -586,8 +603,6 @@ const load = async (
   totalCurrent: number = 36,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
-  setupPrices = true,
-  setupDurations = true,
 ): Promise<void> => {
   try {
     const result = await apiReadCourses(
@@ -598,7 +613,7 @@ const load = async (
       filterCurrent,
     );
 
-    setCoursesAndFilters(result, setupPrices, setupDurations);
+    setCoursesAndFilters(result);
   } catch (error: any) {
     console.log(error.message);
   }
@@ -710,6 +725,7 @@ const onFilter = async (): Promise<void> => {
       selectedPrices.value[0] !== priceMin.value
       || selectedPrices.value[1] !== priceMax.value
     )
+    && !selectedFree.value
   ) {
     filters.price = [selectedPrices.value[0], selectedPrices.value[1]];
   }
@@ -731,7 +747,7 @@ const onFilter = async (): Promise<void> => {
     filters.free = true;
   }
 
-  await load(offset.value, size.value, null, filters, false, false);
+  await load(offset.value, size.value, null, filters);
 };
 
 watch(selectedDirection, () => {
@@ -796,7 +812,7 @@ const onChangePrices = (price: Number | Array<Number>): void => {
   }, 200);
 };
 
-const onChangeDurations = (price: Number | Array<Number>): void => {
+const onChangeDurations = (duration: Number | Array<Number>): void => {
   window.setTimeout(() => {
     onFilter();
   }, 200);

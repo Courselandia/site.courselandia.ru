@@ -61,7 +61,7 @@
             v-if="selectedRatingValue"
             bck="blue1"
           >
-            {{ getSelectedRatingLabel() }}
+            Рейтинг {{ getSelectedRatingLabel() }}
             <template #after>
               <Icon
                 name="close"
@@ -75,9 +75,16 @@
           </Tag>
 
           <Tag
-            v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
+            v-if="priceMin !== priceMax
+              && (
+                selectedPricesValue[0] !== priceMin
+                || selectedPricesValue[1] !== priceMax
+              )
+              && !selectedFreeValue
+            "
             bck="blue1"
           >
+            Цена:
             <template v-if="selectedPricesValue[0] === selectedPricesValue[1]">
               {{ money(selectedPricesValue[0]) }} ₽
             </template>
@@ -131,10 +138,15 @@
           </Tag>
 
           <Tag
-            v-if="selectedDurationsValue[0] !== durationMin
-              || selectedDurationsValue[1] !== durationMax"
+            v-if="durationMin !== durationMax
+              && (
+                selectedDurationsValue[0] !== durationMin
+                || selectedDurationsValue[1] !== durationMax
+              )
+            "
             bck="blue1"
           >
+            Длительность:
             <template v-if="selectedDurationsValue[0] === selectedDurationsValue[1]">
               {{ selectedDurationsValue[0] }} {{ getLabelDuration(selectedDurationsValue[0]) }}
             </template>

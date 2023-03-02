@@ -92,7 +92,7 @@
         </div>
 
         <div
-          v-if="priceMax"
+          v-if="priceMax && priceMin !== priceMax"
           key="price"
           class="catalog-filters__block"
         >
@@ -159,7 +159,7 @@
         </div>
 
         <div
-          v-if="durationMax"
+          v-if="durationMax && durationMax !== durationMin"
           key="duration"
           class="catalog-filters__block"
         >
@@ -219,7 +219,7 @@
             <CatalogFilterSelect
               v-model:value="selectedSchoolsValue"
               :items="schools"
-              :simple="schools.length < 6"
+              :simple="schools.length < 11"
               @load-items="onLoadItems('schools', $event)"
             />
           </div>
@@ -251,6 +251,7 @@
             <CatalogFilterSelect
               v-model:value="selectedCategoriesValue"
               :items="categories"
+              :simple="categories.length < 11"
               @load-items="onLoadItems('categories', $event)"
             />
           </div>
@@ -282,6 +283,7 @@
             <CatalogFilterSelect
               v-model:value="selectedProfessionsValue"
               :items="professions"
+              :simple="professions.length < 11"
               @load-items="onLoadItems('professions', $event)"
             />
           </div>
@@ -313,6 +315,7 @@
             <CatalogFilterSelect
               v-model:value="selectedTeachersValue"
               :items="teachers"
+              :simple="teachers.length < 11"
               @load-items="onLoadItems('teachers', $event)"
             />
           </div>
@@ -344,6 +347,7 @@
             <CatalogFilterSelect
               v-model:value="selectedSkillsValue"
               :items="skills"
+              :simple="skills.length < 11"
               @load-items="onLoadItems('skills', $event)"
             />
           </div>
@@ -375,6 +379,7 @@
             <CatalogFilterSelect
               v-model:value="selectedToolsValue"
               :items="tools"
+              :simple="tools.length < 11"
               @load-items="onLoadItems('tools', $event)"
             />
           </div>
