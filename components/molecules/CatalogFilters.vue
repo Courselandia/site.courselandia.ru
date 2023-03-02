@@ -121,6 +121,7 @@
               :step="priceStep"
               :label="getLabelPrice"
               money
+              @change="onChangePrice"
             />
           </div>
         </div>
@@ -690,6 +691,7 @@ const emit = defineEmits({
   'update:selected-durations': (_: Array<number>) => true,
   'update:selected-credit': (_: Boolean) => true,
   'update:selected-free': (_: Boolean) => true,
+  'change-price': (_: Number | Array<Number>) => true,
 });
 
 //
@@ -765,6 +767,10 @@ const onClickResetPrices = (): void => {
 };
 
 const getLabelPrice = () => '₽';
+
+const onChangePrice = (): void => {
+  emit('change-price', selectedPricesValue.value);
+};
 
 //
 

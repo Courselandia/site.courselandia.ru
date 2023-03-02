@@ -23,6 +23,7 @@
         :max="max"
         :step="step"
         :format="format"
+        @change="onChange"
       />
     </div>
   </div>
@@ -78,6 +79,7 @@ const {
 
 const emit = defineEmits({
   'update:value': (_: Number | Array<Number>) => true,
+  change: (_: Number | Array<Number>) => true,
 });
 
 const input = ref(value.value);
@@ -102,6 +104,10 @@ const format = (val: number): string => {
   }
 
   return String(Math.round(val));
+};
+
+const onChange = (): void => {
+  emit('change', input.value);
 };
 </script>
 
