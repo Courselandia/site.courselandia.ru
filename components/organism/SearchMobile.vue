@@ -69,7 +69,7 @@
           </div>
           <div class="search-mobile__action">
             <nuxt-link
-              :to="`/courses/?search=${encodeURIComponent(query)}&sort=relevance`"
+              :to="`/courses/?search=${encodeURIComponent(query)}&sort=${ECourseSort.RELEVANCY}`"
               class="search-mobile__link"
               @click="onClickResult"
             >
@@ -101,6 +101,7 @@ import Icon from '@/components/atoms/Icon.vue';
 import Loader from '@/components/atoms/Loader.vue';
 import CourseSearchResult from '@/components/molecules/CourseSearchResult.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
+import ECourseSort from '@/enums/components/molecules/courseSort';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const courses = ref<ICourse[]>([]);

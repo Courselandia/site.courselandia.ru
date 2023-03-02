@@ -334,7 +334,7 @@ import ISorts from '@/interfaces/sorts';
 import TValue from '@/types/value';
 
 const route = useRoute();
-const sort = ref<TValue>(route.query.sort as TValue || ECourseSort.DATE);
+const sort = ref<TValue>(route.query.sort as TValue || ECourseSort.ALPHABETIC);
 const type = ref<TValue>(ECourseType.TILE);
 
 const courses = ref<ICourse[]>([]);
@@ -621,6 +621,26 @@ const load = async (
   }
 };
 
+const getSort = (val: TValue): ISorts => {
+  const sorts: ISorts = {};
+
+  if (val === ECourseSort.ALPHABETIC) {
+    sorts.header = 'ASC';
+  } else if (val === ECourseSort.DATE) {
+    sorts.id = 'DESC';
+  } else if (val === ECourseSort.RATING) {
+    sorts.rating = 'DESC';
+  } else if (val === ECourseSort.PRICE_ASC) {
+    sorts.price = 'ASC';
+  } else if (val === ECourseSort.PRICE_DESC) {
+    sorts.price = 'DESC';
+  } else if (val === ECourseSort.RELEVANCY) {
+    sorts.relevance = 'DESC';
+  }
+
+  return sorts;
+};
+
 const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
   if (name === 'professions') {
     if (professions.value.length <= 11) {
@@ -671,7 +691,7 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
 };
 
 try {
-  const result = await apiReadCourses(config.public.apiUrl, offset.value, size.value);
+  const result = await apiReadCourses(config.public.apiUrl, offset.value, size.value, getSort(sort.value));
   setCoursesAndFilters(result);
 } catch (error: any) {
   console.log(error.message);
@@ -679,7 +699,7 @@ try {
 
 //
 
-const onFilter = async (): Promise<void> => {
+const onFilterAndSort = async (): Promise<void> => {
   const filters: IFilters = {};
 
   if (selectedDirection.value?.id) {
@@ -749,26 +769,30 @@ const onFilter = async (): Promise<void> => {
     filters.free = true;
   }
 
-  await load(offset.value, size.value, null, filters);
+  await load(offset.value, size.value, getSort(sort.value), filters);
 };
 
 const onChangePrices = (price: Number | Array<Number>): void => {
   window.setTimeout(() => {
-    onFilter();
+    onFilterAndSort();
   }, 200);
 };
 
 const onChangeDurations = (duration: Number | Array<Number>): void => {
   window.setTimeout(() => {
-    onFilter();
+    onFilterAndSort();
   }, 200);
 };
 
 const onChangeFilter = () => {
   window.setTimeout(() => {
-    onFilter();
+    onFilterAndSort();
   }, 50);
 };
+
+watch(sort, () => {
+  onFilterAndSort();
+});
 </script>
 
 <style lang="scss">

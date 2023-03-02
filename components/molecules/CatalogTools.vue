@@ -79,6 +79,10 @@ watch(sort, () => {
 
 const sorts: Array<IOption> = [
   {
+    value: ECourseSort.ALPHABETIC,
+    label: 'По алфавиту',
+  },
+  {
     value: ECourseSort.DATE,
     label: 'По дате',
   },
@@ -93,6 +97,10 @@ const sorts: Array<IOption> = [
   {
     value: ECourseSort.PRICE_DESC,
     label: 'Цена: по убыванию',
+  },
+  {
+    value: ECourseSort.RELEVANCY,
+    label: 'По релевантности',
   },
 ];
 
