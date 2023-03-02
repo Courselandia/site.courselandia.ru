@@ -70,24 +70,24 @@
         </div>
         <div class="course__prices">
           <div
-            v-if="course.price || course.price_recurrent_price"
+            v-if="course.price || course.price_recurrent"
             class="course__price"
           >
-            {{ course.price_recurrent_price
-              ? money(course.price_recurrent_price)
+            {{ course.price_recurrent
+              ? money(course.price_recurrent)
               : money(course.price)
             }}
             {{ currency(course.currency) }}
-            <template v-if="course.price_recurrent_price">
+            <template v-if="course.price_recurrent">
               в месяц
             </template>
           </div>
           <div
-            v-if="(course.price_recurrent_price && course.price) || course.price_old"
+            v-if="(course.price_recurrent && course.price) || course.price_old"
             class="course__price_additional"
           >
             <div
-              v-if="course.price_recurrent_price && course.price"
+              v-if="course.price_recurrent && course.price"
               class="course__price_current"
             >
               {{ money(course.price) }} {{ currency(course.currency) }}

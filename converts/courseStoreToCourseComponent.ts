@@ -13,7 +13,7 @@ export const courseStoreToCourseComponent = (
   image: course.image_middle_id?.path || null,
   price: course.price,
   price_old: course.price_old,
-  price_recurrent_price: course.price_recurrent_price,
+  price_recurrent: course.price_recurrent,
   currency: course.currency,
   duration: course.duration,
   duration_unit: course.duration_unit,

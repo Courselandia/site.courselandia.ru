@@ -121,7 +121,7 @@
               :step="priceStep"
               :label="getLabelPrice"
               money
-              @change="onChangePrice"
+              @change="onChangePrices"
             />
           </div>
         </div>
@@ -188,6 +188,7 @@
               :max="durationMax"
               :step="durationStep"
               :label="getLabelDuration"
+              @change="onChangeDurations"
             />
           </div>
         </div>
@@ -691,7 +692,8 @@ const emit = defineEmits({
   'update:selected-durations': (_: Array<number>) => true,
   'update:selected-credit': (_: Boolean) => true,
   'update:selected-free': (_: Boolean) => true,
-  'change-price': (_: Number | Array<Number>) => true,
+  'change-prices': (_: Number | Array<Number>) => true,
+  'change-durations': (_: Number | Array<Number>) => true,
 });
 
 //
@@ -768,8 +770,8 @@ const onClickResetPrices = (): void => {
 
 const getLabelPrice = () => '₽';
 
-const onChangePrice = (): void => {
-  emit('change-price', selectedPricesValue.value);
+const onChangePrices = (): void => {
+  emit('change-prices', selectedPricesValue.value);
 };
 
 //
@@ -826,6 +828,10 @@ const getLabelDuration = (val: number) => {
   }
 
   return 'месяцев';
+};
+
+const onChangeDurations = (): void => {
+  emit('change-durations', selectedDurationsValue.value);
 };
 
 //

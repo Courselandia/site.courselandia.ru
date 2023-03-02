@@ -193,7 +193,8 @@
                 :available-credit="availableCredit"
                 :available-free="availableFree"
                 @load-items="onLoadItems"
-                @change-price="onChangePrice"
+                @change-prices="onChangePrices"
+                @change-durations="onChangeDurations"
               />
             </ClientOnly>
           </div>
@@ -238,7 +239,8 @@
           :available-free="availableFree"
           mobile
           @load-items="onLoadItems"
-          @change-price="onChangePrice"
+          @change-prices="onChangePrices"
+          @change-durations="onChangeDurations"
         />
       </teleport>
 
@@ -527,7 +529,11 @@ const getRatings = (rtgs: Array<number>): Array<IRating> => {
 
 const config = useRuntimeConfig();
 
-const setCoursesAndFilters = (result: IApiReadCourses, setupPrice = true): void => {
+const setCoursesAndFilters = (
+  result: IApiReadCourses,
+  setupPrices = true,
+  setupDurations = true,
+): void => {
   courses.value = coursesStoreToCoursesComponent(result.courses);
   total.value = result.total || 0;
 
@@ -558,13 +564,16 @@ const setCoursesAndFilters = (result: IApiReadCourses, setupPrice = true): void 
   priceMin.value = result.filter?.price.min || 0;
   priceMax.value = result.filter?.price.max || 0;
 
-  if (setupPrice) {
+  if (setupPrices) {
     selectedPrices.value = [priceMin.value, priceMax.value];
   }
 
   durationMin.value = result.filter?.duration.min || 0;
   durationMax.value = result.filter?.duration.max || 0;
-  selectedDurations.value = [durationMin.value, durationMax.value];
+
+  if (setupDurations) {
+    selectedDurations.value = [durationMin.value, durationMax.value];
+  }
 
   formats.value = getFormats(result.filter?.formats || []);
 
@@ -577,7 +586,8 @@ const load = async (
   totalCurrent: number = 36,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
-  setupPrice = true,
+  setupPrices = true,
+  setupDurations = true,
 ): Promise<void> => {
   try {
     const result = await apiReadCourses(
@@ -588,7 +598,7 @@ const load = async (
       filterCurrent,
     );
 
-    setCoursesAndFilters(result, setupPrice);
+    setCoursesAndFilters(result, setupPrices, setupDurations);
   } catch (error: any) {
     console.log(error.message);
   }
@@ -695,11 +705,33 @@ const onFilter = async (): Promise<void> => {
     filters['levels-level'] = selectedLevels.value.map((item) => item.value);
   }
 
-  if (selectedPrices.value?.length) {
+  if (selectedPrices.value?.length
+    && (
+      selectedPrices.value[0] !== priceMin.value
+      || selectedPrices.value[1] !== priceMax.value
+    )
+  ) {
     filters.price = [selectedPrices.value[0], selectedPrices.value[1]];
   }
 
-  await load(offset.value, size.value, null, filters, false);
+  if (selectedDurations.value?.length
+    && (
+      selectedDurations.value[0] !== durationMin.value
+      || selectedDurations.value[1] !== durationMax.value
+    )
+  ) {
+    filters.duration = [selectedDurations.value[0], selectedDurations.value[1]];
+  }
+
+  if (selectedCredit.value) {
+    filters.credit = true;
+  }
+
+  if (selectedFree.value) {
+    filters.free = true;
+  }
+
+  await load(offset.value, size.value, null, filters, false, false);
 };
 
 watch(selectedDirection, () => {
@@ -758,11 +790,25 @@ watch(selectedLevels, () => {
   deep: true,
 });
 
-const onChangePrice = (price: Number | Array<Number>): void => {
+const onChangePrices = (price: Number | Array<Number>): void => {
   window.setTimeout(() => {
     onFilter();
   }, 200);
 };
+
+const onChangeDurations = (price: Number | Array<Number>): void => {
+  window.setTimeout(() => {
+    onFilter();
+  }, 200);
+};
+
+watch(selectedCredit, () => {
+  onFilter();
+});
+
+watch(selectedFree, () => {
+  onFilter();
+});
 </script>
 
 <style lang="scss">

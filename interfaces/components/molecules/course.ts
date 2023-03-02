@@ -25,7 +25,7 @@ export default interface ICourse {
     image: string | null,
     price: number | null;
     price_old: number | null;
-    price_recurrent_price: number | null;
+    price_recurrent: number | null;
     currency: ECurrency | null;
     duration: number | null;
     duration_unit: EDuration | null;
