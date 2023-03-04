@@ -41,10 +41,19 @@
       <Tags>
         <transition-group name="fade">
           <Tag
-            v-if="selectedDirectionValue"
+            v-if="selectedDirectionValue
+              && (
+                selectedDirectionValue.name
+                || getDirectionlabel(selectedDirectionValue)
+              )"
             bck="blue1"
           >
-            {{ selectedDirectionValue.name }}
+            <template v-if="selectedDirectionValue.name">
+              {{ selectedDirectionValue.name }}
+            </template>
+            <template v-else>
+              {{ getDirectionlabel(selectedDirectionValue) }}
+            </template>
             <template #after>
               <Icon
                 name="close"
@@ -467,6 +476,41 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  directions: {
+    type: Array as PropType<Array<IDirection>>,
+    required: false,
+    default: () => [],
+  },
+  schools: {
+    type: Array as PropType<Array<ISchool>>,
+    required: false,
+    default: () => [],
+  },
+  categories: {
+    type: Array as PropType<Array<ICategory>>,
+    required: false,
+    default: () => [],
+  },
+  professions: {
+    type: Array as PropType<Array<IProfession>>,
+    required: false,
+    default: () => [],
+  },
+  teachers: {
+    type: Array as PropType<Array<ITeacher>>,
+    required: false,
+    default: () => [],
+  },
+  skills: {
+    type: Array as PropType<Array<ISkill>>,
+    required: false,
+    default: () => [],
+  },
+  tools: {
+    type: Array as PropType<Array<ITool>>,
+    required: false,
+    default: () => [],
+  },
   levels: {
     type: Array as PropType<Array<ILevel>>,
     required: false,
@@ -501,6 +545,15 @@ const {
   selectedDurations,
   selectedCredit,
   selectedFree,
+  directions,
+  schools,
+  categories,
+  professions,
+  teachers,
+  skills,
+  tools,
+  formats,
+  levels,
 } = toRefs(props);
 
 const emit = defineEmits({
@@ -562,7 +615,11 @@ const getSelectedRatingLabel = (): string | null => {
     (itm) => itm.value === selectedRatingValue.value,
   );
 
-  return selectedRatingValueFound ? selectedRatingValueFound.label : null;
+  if (selectedRatingValueFound) {
+    return selectedRatingValueFound.label || null;
+  }
+
+  return null;
 };
 
 const onClickResetRating = (silence: boolean = false): void => {
@@ -938,6 +995,10 @@ const countFilters = computed((): number => {
 
   return total;
 });
+
+const getDirectionlabel = (
+  direction: IDirection,
+): string | null => directions.value.find((itm) => itm.id === direction.id)?.name || null;
 </script>
 
 <style lang="scss">

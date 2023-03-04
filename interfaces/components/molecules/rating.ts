@@ -1,4 +1,4 @@
 export default interface IRating {
-  label: string,
+  label?: string,
   value: number,
 }

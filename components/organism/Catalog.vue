@@ -117,31 +117,40 @@
               </CatalogTools>
             </div>
             <div class="catalog__tags">
-              <CatalogTags
-                v-model:selected-direction="selectedDirection"
-                v-model:selected-rating="selectedRating"
-                v-model:selected-schools="selectedSchools"
-                v-model:selected-categories="selectedCategories"
-                v-model:selected-professions="selectedProfessions"
-                v-model:selected-teachers="selectedTeachers"
-                v-model:selected-skills="selectedSkills"
-                v-model:selected-tools="selectedTools"
-                v-model:selected-format="selectedFormat"
-                v-model:selected-levels="selectedLevels"
-                v-model:selected-prices="selectedPrices"
-                v-model:selected-durations="selectedDurations"
-                v-model:selected-credit="selectedCredit"
-                v-model:selected-free="selectedFree"
-                :price-min="priceMin"
-                :price-max="priceMax"
-                :duration-min="durationMin"
-                :duration-max="durationMax"
-                :ratings="ratings"
-                :formats="formats"
-                :levels="levels"
-                reset-all
-                @remove="onChangeFilter"
-              />
+              <ClientOnly>
+                <CatalogTags
+                  v-model:selected-direction="selectedDirection"
+                  v-model:selected-rating="selectedRating"
+                  v-model:selected-schools="selectedSchools"
+                  v-model:selected-categories="selectedCategories"
+                  v-model:selected-professions="selectedProfessions"
+                  v-model:selected-teachers="selectedTeachers"
+                  v-model:selected-skills="selectedSkills"
+                  v-model:selected-tools="selectedTools"
+                  v-model:selected-format="selectedFormat"
+                  v-model:selected-levels="selectedLevels"
+                  v-model:selected-prices="selectedPrices"
+                  v-model:selected-durations="selectedDurations"
+                  v-model:selected-credit="selectedCredit"
+                  v-model:selected-free="selectedFree"
+                  :price-min="priceMin"
+                  :price-max="priceMax"
+                  :duration-min="durationMin"
+                  :duration-max="durationMax"
+                  :directions="directions"
+                  :schools="schools"
+                  :categories="categories"
+                  :professions="professions"
+                  :teachers="teachers"
+                  :skills="skills"
+                  :tools="tools"
+                  :ratings="ratings"
+                  :formats="formats"
+                  :levels="levels"
+                  reset-all
+                  @remove="onChangeFilter"
+                />
+              </ClientOnly>
             </div>
             <div class="catalog__courses">
               <Courses
@@ -333,16 +342,64 @@ import IFilters from '@/interfaces/filters';
 import ISorts from '@/interfaces/sorts';
 import TValue from '@/types/value';
 
+const getUrlFilterQuery = (name: string): Array<string> => {
+  const route = useRoute();
+  const { query } = route;
+  let foundResult: Array<string> = [];
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key in query) {
+    if (key.indexOf('filters[') !== -1 && key.indexOf(']') !== -1) {
+      const value = query[key] as string;
+      let resultValue: Array<string> = [];
+
+      if (value?.indexOf(',') && value?.split(',').length > 1) {
+        resultValue = value.split(',');
+      } else if (value) {
+        resultValue = [value];
+      }
+
+      const regex = /\[([A-Za-z0-9_.-]+)\]/;
+      const found = key.match(regex);
+
+      if (found?.length && found[1] && found[1] === name) {
+        foundResult = resultValue;
+
+        break;
+      }
+    }
+  }
+
+  return foundResult;
+};
+
+const getUrlQuery = (name: string): string | null => {
+  const route = useRoute();
+  const { query } = route;
+
+  if (query[name]) {
+    return query[name] as string;
+  }
+
+  return null;
+};
+
 const route = useRoute();
-const sort = ref<TValue>(route.query.sort as TValue || ECourseSort.ALPHABETIC);
+
+const sort = ref<TValue>(ECourseSort.ALPHABETIC);
+const valueQuery = getUrlQuery('sort');
+
+if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)) {
+  sort.value = valueQuery;
+}
+
 const type = ref<TValue>(ECourseType.TILE);
 
 const courses = ref<ICourse[]>([]);
 
 const total = ref(0);
-const offset = ref(0);
+const currentPage = ref(Number(getUrlQuery('page')) || 1);
 const size = ref(36);
-const currentPage = ref(1);
 
 //
 
@@ -600,17 +657,49 @@ const setCoursesAndFilters = (result: IApiReadCourses): void => {
   ratings.value = getRatings(result.filter?.ratings || []);
 };
 
+const setSelectedFiltersByQuery = (): void => {
+  if (getUrlFilterQuery('direction')?.length) {
+    selectedDirection.value = {
+      id: Number(getUrlFilterQuery('direction')[0]),
+    };
+  }
+
+  if (getUrlFilterQuery('rating')?.length) {
+    selectedRating.value = {
+      value: Number(getUrlFilterQuery('rating')[0]),
+    };
+  }
+
+  if (getUrlFilterQuery('price')?.length === 2) {
+    selectedPrices.value = getUrlFilterQuery('price').map((itm) => Number(itm));
+  }
+
+  if (getUrlFilterQuery('credit')?.length) {
+    selectedCredit.value = Boolean(getUrlFilterQuery('credit')[0]);
+  }
+
+  if (getUrlFilterQuery('free')?.length) {
+    selectedFree.value = Boolean(getUrlFilterQuery('free')[0]);
+  }
+
+  if (getUrlFilterQuery('duration')?.length === 2) {
+    selectedDurations.value = getUrlFilterQuery('duration').map((itm) => Number(itm));
+  }
+};
+
 const load = async (
-  offsetCurrent: number = 0,
-  totalCurrent: number = 36,
+  pageValue: number = 0,
+  sizeValue: number = 36,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
 ): Promise<void> => {
   try {
+    const pageValueCurrent = pageValue !== 0 ? pageValue - 1 : pageValue;
+
     const result = await apiReadCourses(
       config.public.apiUrl,
-      offsetCurrent,
-      totalCurrent,
+      pageValueCurrent * sizeValue,
+      sizeValue,
       sorts,
       filterCurrent,
     );
@@ -641,144 +730,7 @@ const getSort = (val: TValue): ISorts => {
   return sorts;
 };
 
-const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
-  if (name === 'professions') {
-    if (professions.value.length <= 11) {
-      const result = await apiReadProfessions(config.public.apiUrl);
-      professions.value = courseFilterStoreProfessionsToComponentProfessions(result);
-    }
-
-    if (callback) {
-      callback();
-    }
-  } else if (name === 'categories') {
-    if (categories.value.length <= 11) {
-      const result = await apiReadCategories(config.public.apiUrl);
-      categories.value = courseFilterStoreCategoriesToComponentCategories(result);
-    }
-
-    if (callback) {
-      callback();
-    }
-  } else if (name === 'teachers') {
-    if (teachers.value.length <= 11) {
-      const result = await apiReadTeachers(config.public.apiUrl);
-      teachers.value = courseFilterStoreTeachersToComponentTeachers(result);
-    }
-
-    if (callback) {
-      callback();
-    }
-  } else if (name === 'skills') {
-    if (skills.value.length <= 11) {
-      const result = await apiReadSkills(config.public.apiUrl);
-      skills.value = courseFilterStoreSkillsToComponentSkills(result);
-    }
-
-    if (callback) {
-      callback();
-    }
-  } else if (name === 'tools') {
-    if (tools.value.length <= 11) {
-      const result = await apiReadTools(config.public.apiUrl);
-      tools.value = courseFilterStoreToolsToComponentTools(result);
-    }
-
-    if (callback) {
-      callback();
-    }
-  }
-};
-
-try {
-  const result = await apiReadCourses(
-    config.public.apiUrl,
-    offset.value,
-    size.value,
-    getSort(sort.value),
-  );
-  setCoursesAndFilters(result);
-} catch (error: any) {
-  console.log(error.message);
-}
-
-//
-
-const joinIsNotEmpty = (items: Array<any>, separator: string = ','): string => {
-  let joined: string = '';
-
-  Object.values(items).forEach((item) => {
-    if (item !== null && item !== undefined) {
-      if (joined !== '') {
-        joined += separator;
-      }
-
-      joined += item;
-    }
-  });
-
-  return joined;
-};
-
-const setUrlQuery = (
-  offsetCurrent: number = 0,
-  totalCurrent: number = 36,
-  sortsCurrent: ISorts | null = null,
-  filtersCurrent: IFilters | null = null,
-): void => {
-  const queries: Array<string> = [];
-
-  queries.push(`offset=${encodeURIComponent(offsetCurrent)}`);
-  queries.push(`total=${encodeURIComponent(totalCurrent)}`);
-
-  if (sortsCurrent) {
-    if (sortsCurrent.header === 'ASC') {
-      queries.push('sort=header');
-    } else if (sortsCurrent.id === 'DESC') {
-      queries.push('sort=date');
-    } else if (sortsCurrent.rating === 'DESC') {
-      queries.push('sort=rating');
-    } else if (sortsCurrent.price === 'ASC') {
-      queries.push('sort=price-asc');
-    } else if (sortsCurrent.price === 'DESC') {
-      queries.push('sort=price-desc');
-    } else if (sortsCurrent.relevance === 'DESC') {
-      queries.push('sort=relevance');
-    }
-  }
-
-  if (filtersCurrent) {
-    Object.keys(filtersCurrent).forEach((name) => {
-      if (filtersCurrent[name]) {
-        if (typeof filtersCurrent[name] === 'string' || typeof filtersCurrent[name] === 'number') {
-          queries.push(`${encodeURIComponent(name)}=${filtersCurrent[name]}`);
-        } else if (typeof filtersCurrent[name] === 'boolean') {
-          queries.push(`${encodeURIComponent(name)}=${filtersCurrent[name] ? 1 : 0}`);
-        } else if (Array.isArray(filtersCurrent[name])) {
-          const items = filtersCurrent[name] as Array<string | number | boolean>;
-          const values = items.join(',');
-          queries.push(`filters[${encodeURIComponent(name)}]=${values}`);
-        }
-      }
-    });
-
-    const query = queries.join('&');
-
-    let url = window.location.href.split('?')[0];
-
-    if (query) {
-      url = `${url}?${query}`;
-    }
-
-    window.history.pushState(
-      {},
-      '',
-      url,
-    );
-  }
-};
-
-const onFilterAndSort = async (): Promise<void> => {
+const getFilters = (): IFilters => {
   const filters: IFilters = {};
 
   if (selectedDirection.value?.id) {
@@ -848,8 +800,146 @@ const onFilterAndSort = async (): Promise<void> => {
     filters.free = true;
   }
 
-  await load(offset.value, size.value, getSort(sort.value), filters);
-  setUrlQuery(offset.value, size.value, getSort(sort.value), filters);
+  return filters;
+};
+
+const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
+  if (name === 'professions') {
+    if (professions.value.length <= 11) {
+      const result = await apiReadProfessions(config.public.apiUrl);
+      professions.value = courseFilterStoreProfessionsToComponentProfessions(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'categories') {
+    if (categories.value.length <= 11) {
+      const result = await apiReadCategories(config.public.apiUrl);
+      categories.value = courseFilterStoreCategoriesToComponentCategories(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'teachers') {
+    if (teachers.value.length <= 11) {
+      const result = await apiReadTeachers(config.public.apiUrl);
+      teachers.value = courseFilterStoreTeachersToComponentTeachers(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'skills') {
+    if (skills.value.length <= 11) {
+      const result = await apiReadSkills(config.public.apiUrl);
+      skills.value = courseFilterStoreSkillsToComponentSkills(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'tools') {
+    if (tools.value.length <= 11) {
+      const result = await apiReadTools(config.public.apiUrl);
+      tools.value = courseFilterStoreToolsToComponentTools(result);
+    }
+
+    if (callback) {
+      callback();
+    }
+  }
+};
+
+try {
+  setSelectedFiltersByQuery();
+  const pageValueCurrent = currentPage.value !== 0 ? currentPage.value - 1 : currentPage.value;
+
+  const result = await apiReadCourses(
+    config.public.apiUrl,
+    pageValueCurrent * size.value,
+    size.value,
+    getSort(sort.value),
+    getFilters(),
+  );
+  setCoursesAndFilters(result);
+} catch (error: any) {
+  console.log(error.message);
+}
+
+//
+
+const setUrlQuery = (
+  pageValue: number = 0,
+  sortsCurrent: ISorts | null = null,
+  filtersCurrent: IFilters | null = null,
+): void => {
+  const queries: Array<string> = [];
+
+  queries.push(`page=${encodeURIComponent(pageValue)}`);
+
+  if (sortsCurrent) {
+    if (sortsCurrent.header === 'ASC') {
+      queries.push('sort=alphabetic');
+    } else if (sortsCurrent.id === 'DESC') {
+      queries.push('sort=date');
+    } else if (sortsCurrent.rating === 'DESC') {
+      queries.push('sort=rating');
+    } else if (sortsCurrent.price === 'ASC') {
+      queries.push('sort=price_asc');
+    } else if (sortsCurrent.price === 'DESC') {
+      queries.push('sort=price_desc');
+    } else if (sortsCurrent.relevance === 'DESC') {
+      queries.push('sort=relevance');
+    }
+  }
+
+  const convertNameFilter = (name: string) => {
+    if (name === 'directions-id') {
+      return 'direction';
+    }
+
+    return name;
+  };
+
+  if (filtersCurrent) {
+    Object.keys(filtersCurrent).forEach((name) => {
+      if (filtersCurrent[name]) {
+        const nameParameter = `filters[${encodeURIComponent(convertNameFilter(name))}]`;
+        if (typeof filtersCurrent[name] === 'string' || typeof filtersCurrent[name] === 'number') {
+          queries.push(`${nameParameter}=${filtersCurrent[name]}`);
+        } else if (typeof filtersCurrent[name] === 'boolean') {
+          queries.push(`${nameParameter}=${filtersCurrent[name] ? 1 : 0}`);
+        } else if (Array.isArray(filtersCurrent[name])) {
+          const items = filtersCurrent[name] as Array<string | number | boolean>;
+          const values = items.join(',');
+          queries.push(`${nameParameter}=${values}`);
+        }
+      }
+    });
+
+    const query = queries.join('&');
+
+    let url = window.location.href.split('?')[0];
+
+    if (query) {
+      url = `${url}?${query}`;
+    }
+
+    window.history.pushState(
+      {},
+      '',
+      url,
+    );
+  }
+};
+
+const onFilterAndSort = async (): Promise<void> => {
+  const filters: IFilters = getFilters();
+
+  await load(currentPage.value, size.value, getSort(sort.value), filters);
+  setUrlQuery(currentPage.value, getSort(sort.value), filters);
 };
 
 const onChangePrices = (): void => {
