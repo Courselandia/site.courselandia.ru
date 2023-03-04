@@ -691,13 +691,92 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
 };
 
 try {
-  const result = await apiReadCourses(config.public.apiUrl, offset.value, size.value, getSort(sort.value));
+  const result = await apiReadCourses(
+    config.public.apiUrl,
+    offset.value,
+    size.value,
+    getSort(sort.value),
+  );
   setCoursesAndFilters(result);
 } catch (error: any) {
   console.log(error.message);
 }
 
 //
+
+const joinIsNotEmpty = (items: Array<any>, separator: string = ','): string => {
+  let joined: string = '';
+
+  Object.values(items).forEach((item) => {
+    if (item !== null && item !== undefined) {
+      if (joined !== '') {
+        joined += separator;
+      }
+
+      joined += item;
+    }
+  });
+
+  return joined;
+};
+
+const setUrlQuery = (
+  offsetCurrent: number = 0,
+  totalCurrent: number = 36,
+  sortsCurrent: ISorts | null = null,
+  filtersCurrent: IFilters | null = null,
+): void => {
+  const queries: Array<string> = [];
+
+  queries.push(`offset=${encodeURIComponent(offsetCurrent)}`);
+  queries.push(`total=${encodeURIComponent(totalCurrent)}`);
+
+  if (sortsCurrent) {
+    if (sortsCurrent.header === 'ASC') {
+      queries.push('sort=header');
+    } else if (sortsCurrent.id === 'DESC') {
+      queries.push('sort=date');
+    } else if (sortsCurrent.rating === 'DESC') {
+      queries.push('sort=rating');
+    } else if (sortsCurrent.price === 'ASC') {
+      queries.push('sort=price-asc');
+    } else if (sortsCurrent.price === 'DESC') {
+      queries.push('sort=price-desc');
+    } else if (sortsCurrent.relevance === 'DESC') {
+      queries.push('sort=relevance');
+    }
+  }
+
+  if (filtersCurrent) {
+    Object.keys(filtersCurrent).forEach((name) => {
+      if (filtersCurrent[name]) {
+        if (typeof filtersCurrent[name] === 'string' || typeof filtersCurrent[name] === 'number') {
+          queries.push(`${encodeURIComponent(name)}=${filtersCurrent[name]}`);
+        } else if (typeof filtersCurrent[name] === 'boolean') {
+          queries.push(`${encodeURIComponent(name)}=${filtersCurrent[name] ? 1 : 0}`);
+        } else if (Array.isArray(filtersCurrent[name])) {
+          const items = filtersCurrent[name] as Array<string | number | boolean>;
+          const values = items.join(',');
+          queries.push(`filters[${encodeURIComponent(name)}]=${values}`);
+        }
+      }
+    });
+
+    const query = queries.join('&');
+
+    let url = window.location.href.split('?')[0];
+
+    if (query) {
+      url = `${url}?${query}`;
+    }
+
+    window.history.pushState(
+      {},
+      '',
+      url,
+    );
+  }
+};
 
 const onFilterAndSort = async (): Promise<void> => {
   const filters: IFilters = {};
@@ -770,15 +849,16 @@ const onFilterAndSort = async (): Promise<void> => {
   }
 
   await load(offset.value, size.value, getSort(sort.value), filters);
+  setUrlQuery(offset.value, size.value, getSort(sort.value), filters);
 };
 
-const onChangePrices = (price: Number | Array<Number>): void => {
+const onChangePrices = (): void => {
   window.setTimeout(() => {
     onFilterAndSort();
   }, 200);
 };
 
-const onChangeDurations = (duration: Number | Array<Number>): void => {
+const onChangeDurations = (): void => {
   window.setTimeout(() => {
     onFilterAndSort();
   }, 200);
