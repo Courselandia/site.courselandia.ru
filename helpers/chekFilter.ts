@@ -97,6 +97,23 @@ export const hasCategories = (
   return has;
 };
 
+export const countCategories = (
+  categories: Array<ICategory>,
+  items: Array<ICategory> | null,
+): number => {
+  let count = 0;
+
+  if (items) {
+    items.forEach((item) => {
+      if (item.label || getCategoryLabel(categories, item)) {
+        count++;
+      }
+    });
+  }
+
+  return count;
+};
+
 export const hasRating = (
   ratings: Array<IRating>,
   item: TId | null,
@@ -106,6 +123,23 @@ export const hasDirection = (
   directions: Array<IDirection>,
   item: IDirection | null,
 ): boolean => (item ? !!getDirectionLabel(directions, item) : false);
+
+export const countSchools = (
+  schools: Array<ISchool>,
+  items: Array<ISchool> | null,
+): number => {
+  let count = 0;
+
+  if (items) {
+    items.forEach((item) => {
+      if (item.label || getSchoolLabel(schools, item)) {
+        count++;
+      }
+    });
+  }
+
+  return count;
+};
 
 export const hasSchools = (
   schools: Array<ISchool>,
@@ -141,6 +175,23 @@ export const hasProfessions = (
   return has;
 };
 
+export const countProfessions = (
+  professions: Array<IProfession>,
+  items: Array<IProfession> | null,
+): number => {
+  let count = 0;
+
+  if (items) {
+    items.forEach((item) => {
+      if (item.label || getProfessionLabel(professions, item)) {
+        count++;
+      }
+    });
+  }
+
+  return count;
+};
+
 export const hasSkills = (
   skills: Array<ISkill>,
   items: Array<ISkill> | null,
@@ -156,6 +207,23 @@ export const hasSkills = (
   }
 
   return has;
+};
+
+export const countSkills = (
+  skills: Array<ISkill>,
+  items: Array<ISkill> | null,
+): number => {
+  let count = 0;
+
+  if (items) {
+    items.forEach((item) => {
+      if (item.label || getSkillLabel(skills, item)) {
+        count++;
+      }
+    });
+  }
+
+  return count;
 };
 
 export const hasTeachers = (
@@ -175,6 +243,23 @@ export const hasTeachers = (
   return has;
 };
 
+export const countTeachers = (
+  teachers: Array<ITeacher>,
+  items: Array<ITeacher> | null,
+): number => {
+  let count = 0;
+
+  if (items) {
+    items.forEach((item) => {
+      if (item.label || getTeacherLabel(teachers, item)) {
+        count++;
+      }
+    });
+  }
+
+  return count;
+};
+
 export const hasTools = (
   tools: Array<ITool>,
   items: Array<ITool> | null,
@@ -192,22 +277,27 @@ export const hasTools = (
   return has;
 };
 
-export const hasFormats = (
-  formats: Array<IFormat>,
-  items: Array<IFormat> | null,
-): boolean => {
-  let has = false;
+export const countTools = (
+  tools: Array<ITool>,
+  items: Array<ITool> | null,
+): number => {
+  let count = 0;
 
   if (items) {
     items.forEach((item) => {
-      if (item.label || getFormatLabel(formats, item)) {
-        has = true;
+      if (item.label || getToolLabel(tools, item)) {
+        count++;
       }
     });
   }
 
-  return has;
+  return count;
 };
+
+export const hasFormat = (
+  formats: Array<IFormat>,
+  item: IFormat | null,
+): boolean => item ? !!getFormatLabel(formats, item) : false;
 
 export const hasLevels = (
   levels: Array<ILevel>,
@@ -224,4 +314,21 @@ export const hasLevels = (
   }
 
   return has;
+};
+
+export const countLevels = (
+  levels: Array<ILevel>,
+  items: Array<ELevel> | null,
+): number => {
+  let count = 0;
+
+  if (items) {
+    items.forEach((item) => {
+      if (getLevelLabel(levels, item)) {
+        count++;
+      }
+    });
+  }
+
+  return count;
 };

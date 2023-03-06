@@ -326,6 +326,18 @@ import ECourseSort from '@/enums/components/molecules/courseSort';
 import ECourseType from '@/enums/components/molecules/courseType';
 import ELevel from '@/enums/components/molecules/level';
 import EFormat from '@/enums/stores/course/format';
+import {
+  countCategories,
+  countLevels,
+  countProfessions,
+  countSchools,
+  countSkills,
+  countTeachers,
+  countTools,
+  hasDirection,
+  hasFormat,
+  hasRating,
+} from '@/helpers/chekFilter';
 import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
 import ICategory from '@/interfaces/components/molecules/category';
 import ICourse from '@/interfaces/components/molecules/course';
@@ -457,15 +469,15 @@ const getLinkPagination = (page: number): string => `/courses/?page=${page}`;
 const totalFilters = computed((): number => {
   let count = 0;
 
-  if (selectedDirection.value) {
+  if (selectedDirection.value && hasDirection(directions.value, selectedDirection.value)) {
     count++;
   }
 
-  if (selectedRating.value) {
+  if (selectedRating.value && hasRating(ratings.value, selectedRating.value?.value)) {
     count++;
   }
 
-  if (selectedFormat.value) {
+  if (selectedFormat.value && hasFormat(formats.value, selectedFormat.value)) {
     count++;
   }
 
@@ -494,14 +506,13 @@ const totalFilters = computed((): number => {
     count++;
   }
 
-  count += selectedSchools.value.length;
-  count += selectedCategories.value.length;
-  count += selectedProfessions.value.length;
-  count += selectedTeachers.value.length;
-  count += selectedSkills.value.length;
-  count += selectedTools.value.length;
-  count += selectedTools.value.length;
-  count += selectedLevels.value.length;
+  count += countSchools(schools.value, selectedSchools.value);
+  count += countCategories(categories.value, selectedCategories.value);
+  count += countProfessions(professions.value, selectedProfessions.value);
+  count += countTeachers(teachers.value, selectedTeachers.value);
+  count += countSkills(skills.value, selectedSkills.value);
+  count += countTools(tools.value, selectedTools.value);
+  count += countLevels(levels.value, selectedLevels.value.map((itm) => itm.value));
 
   return count;
 });

@@ -42,8 +42,10 @@
             :key="key"
             :border="selectedDirectionValue?.id === direction.id ? 'blue2' : 'grey2'"
             border-hover="blue2"
-            bck="white"
-            color="black"
+            :bck="selectedDirectionValue?.id === direction.id ? 'blue2' : 'white'"
+            bck-hover="blue2"
+            :color="selectedDirectionValue?.id === direction.id ? 'white' : 'black'"
+            color-hover="white"
             cursor
             @click="onClickDirection(direction)"
             @keyup="onClickDirection(direction)"
@@ -491,7 +493,6 @@ import Tags from '@/components/molecules/Tags.vue';
 import ELevel from '@/enums/components/molecules/level';
 import {
   hasCategories,
-  hasFormats,
   hasLevels,
   hasProfessions,
   hasRating,
