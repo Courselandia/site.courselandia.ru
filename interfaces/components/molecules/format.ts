@@ -1,4 +1,4 @@
 export default interface IFormat {
-  label: string,
+  label?: string,
   value: boolean,
 }

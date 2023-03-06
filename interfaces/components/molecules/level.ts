@@ -1,6 +1,6 @@
 import ELevel from '@/enums/components/molecules/level';
 
 export default interface ILevel {
-  label: string,
+  label?: string,
   value: ELevel,
 }

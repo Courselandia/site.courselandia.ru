@@ -697,6 +697,42 @@ const setSelectedFiltersByQuery = (): void => {
       id: Number(category),
     }));
   }
+
+  if (getUrlFilterQuery('professions')?.length) {
+    selectedProfessions.value = getUrlFilterQuery('professions').map((profession) => ({
+      id: Number(profession),
+    }));
+  }
+
+  if (getUrlFilterQuery('skills')?.length) {
+    selectedSkills.value = getUrlFilterQuery('skills').map((skill) => ({
+      id: Number(skill),
+    }));
+  }
+
+  if (getUrlFilterQuery('teachers')?.length) {
+    selectedTeachers.value = getUrlFilterQuery('teachers').map((teacher) => ({
+      id: Number(teacher),
+    }));
+  }
+
+  if (getUrlFilterQuery('tools')?.length) {
+    selectedTools.value = getUrlFilterQuery('tools').map((tool) => ({
+      id: Number(tool),
+    }));
+  }
+
+  if (getUrlFilterQuery('online')?.length) {
+    selectedFormat.value = {
+      value: Boolean(getUrlFilterQuery('online')[0]),
+    };
+  }
+
+  if (getUrlFilterQuery('levels')?.length) {
+    selectedLevels.value = getUrlFilterQuery('levels').map((level) => ({
+      value: level as ELevel,
+    }));
+  }
 };
 
 const load = async (
@@ -909,7 +945,7 @@ const setUrlQuery = (
 
   const convertNameFilter = (name: string): string => {
     const names: Record<string, string> = {
-      'directions-id': 'directions',
+      'directions-id': 'direction',
       'school-id': 'schools',
       'categories-id': 'categories',
       'professions-id': 'professions',

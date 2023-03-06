@@ -237,90 +237,136 @@
           </template>
 
           <template v-if="selectedProfessionsValue?.length">
-            <Tag
+            <template
               v-for="(profession, key) in selectedProfessionsValue"
               :key="key"
-              bck="blue1"
             >
-              {{ profession.label }}
-              <template #after>
-                <Icon
-                  name="close"
-                  color="grey2"
-                  :size="[15, 15]"
-                  class="cursor--pointer"
-                  @click="onClickResetProfession(key)"
-                  @keyup="onClickResetProfession(key)"
-                />
-              </template>
-            </Tag>
+              <Tag
+                v-if="profession.label || getProfessionLabel(profession)"
+                bck="blue1"
+              >
+                <template v-if="profession.name">
+                  {{ profession.name }}
+                </template>
+                <template v-else>
+                  {{ getProfessionLabel(profession) }}
+                </template>
+                <template #after>
+                  <Icon
+                    name="close"
+                    color="grey2"
+                    :size="[15, 15]"
+                    class="cursor--pointer"
+                    @click="onClickResetProfession(key)"
+                    @keyup="onClickResetProfession(key)"
+                  />
+                </template>
+              </Tag>
+            </template>
           </template>
 
           <template v-if="selectedTeachersValue?.length">
-            <Tag
+            <template
               v-for="(teacher, key) in selectedTeachersValue"
               :key="key"
-              bck="blue1"
             >
-              {{ teacher.label }}
-              <template #after>
-                <Icon
-                  name="close"
-                  color="grey2"
-                  :size="[15, 15]"
-                  class="cursor--pointer"
-                  @click="onClickResetTeacher(key)"
-                  @keyup="onClickResetTeacher(key)"
-                />
-              </template>
-            </Tag>
+              <Tag
+                v-if="teacher.label || getTeacherLabel(teacher)"
+                bck="blue1"
+              >
+                <template v-if="teacher.name">
+                  {{ teacher.name }}
+                </template>
+                <template v-else>
+                  {{ getTeacherLabel(teacher) }}
+                </template>
+                <template #after>
+                  <Icon
+                    name="close"
+                    color="grey2"
+                    :size="[15, 15]"
+                    class="cursor--pointer"
+                    @click="onClickResetTeacher(key)"
+                    @keyup="onClickResetTeacher(key)"
+                  />
+                </template>
+              </Tag>
+            </template>
           </template>
 
           <template v-if="selectedSkillsValue?.length">
-            <Tag
+            <template
               v-for="(skill, key) in selectedSkillsValue"
               :key="key"
-              bck="blue1"
             >
-              {{ skill.label }}
-              <template #after>
-                <Icon
-                  name="close"
-                  color="grey2"
-                  :size="[15, 15]"
-                  class="cursor--pointer"
-                  @click="onClickResetSkill(key)"
-                  @keyup="onClickResetSkill(key)"
-                />
-              </template>
-            </Tag>
+              <Tag
+                v-if="skill.label || getSkillLabel(skill)"
+                bck="blue1"
+              >
+                <template v-if="skill.name">
+                  {{ skill.name }}
+                </template>
+                <template v-else>
+                  {{ getSkillLabel(skill) }}
+                </template>
+                <template #after>
+                  <Icon
+                    name="close"
+                    color="grey2"
+                    :size="[15, 15]"
+                    class="cursor--pointer"
+                    @click="onClickResetSkill(key)"
+                    @keyup="onClickResetSkill(key)"
+                  />
+                </template>
+              </Tag>
+            </template>
           </template>
 
           <template v-if="selectedToolsValue?.length">
-            <Tag
+            <template
               v-for="(tool, key) in selectedToolsValue"
               :key="key"
-              bck="blue1"
             >
-              {{ tool.label }}
-              <template #after>
-                <Icon
-                  name="close"
-                  color="grey2"
-                  :size="[15, 15]"
-                  class="cursor--pointer"
-                  @click="onClickResetTool(key)"
-                  @keyup="onClickResetTool(key)"
-                />
-              </template>
-            </Tag>
+              <Tag
+                v-if="tool.label || getToolLabel(tool)"
+                bck="blue1"
+              >
+                <template v-if="tool.name">
+                  {{ tool.name }}
+                </template>
+                <template v-else>
+                  {{ getToolLabel(tool) }}
+                </template>
+                <template #after>
+                  <Icon
+                    name="close"
+                    color="grey2"
+                    :size="[15, 15]"
+                    class="cursor--pointer"
+                    @click="onClickResetTool(key)"
+                    @keyup="onClickResetTool(key)"
+                  />
+                </template>
+              </Tag>
+            </template>
           </template>
 
           <Tag
-            v-if="selectedFormat"
+            v-if="selectedFormat
+              && (
+                selectedFormat.label
+                || getFormatLabel(selectedFormat)
+              )
+            "
             bck="blue1"
           >
-            {{ selectedFormat.label }}
+            <template v-if="selectedFormat.label">
+              {{ selectedFormat.label }}
+            </template>
+            <template v-else>
+              {{ getFormatLabel(selectedFormat) }}
+            </template>
             <template #after>
               <Icon
                 name="close"
@@ -339,7 +385,7 @@
               :key="key"
               bck="blue1"
             >
-              {{ getSelectedLevelLabel(level) }}
+              {{ getLevelLabel(level) }}
               <template #after>
                 <Icon
                   name="close"
@@ -915,7 +961,7 @@ const onClickResetLevel = (index: number): void => {
   emit('remove');
 };
 
-const getSelectedLevelLabel = (level: ELevel): string | null => {
+const getLevelLabel = (level: ELevel): string | null => {
   const selectedLevelValueFound = props.levels.find(
     (itm) => itm.value === level,
   );
@@ -1025,6 +1071,26 @@ const getSchoolLabel = (
 const getCategoryLabel = (
   category: ICategory,
 ): string | null => categories.value.find((itm) => itm.id === category.id)?.label || null;
+
+const getProfessionLabel = (
+  profession: IProfession,
+): string | null => professions.value.find((itm) => itm.id === profession.id)?.label || null;
+
+const getSkillLabel = (
+  skill: ISkill,
+): string | null => skills.value.find((itm) => itm.id === skill.id)?.label || null;
+
+const getTeacherLabel = (
+  teacher: ITeacher,
+): string | null => teachers.value.find((itm) => itm.id === teacher.id)?.label || null;
+
+const getToolLabel = (
+  tool: ITool,
+): string | null => tools.value.find((itm) => itm.id === tool.id)?.label || null;
+
+const getFormatLabel = (
+  format: IFormat,
+): string | null => props.formats.find((itm) => itm.value === format.value)?.label || null;
 </script>
 
 <style lang="scss">
