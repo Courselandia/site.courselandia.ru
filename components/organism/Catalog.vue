@@ -147,6 +147,7 @@
                   :ratings="ratings"
                   :formats="formats"
                   :levels="levels"
+                  :total-filters="totalFilters"
                   reset-all
                   @remove="onChangeFilter"
                 />
@@ -274,9 +275,17 @@
           :price-max="priceMax"
           :duration-min="durationMin"
           :duration-max="durationMax"
+          :directions="directions"
+          :schools="schools"
+          :categories="categories"
+          :professions="professions"
+          :teachers="teachers"
+          :skills="skills"
+          :tools="tools"
           :ratings="ratings"
           :formats="formats"
           :levels="levels"
+          :total-filters="totalFilters"
           @remove="onChangeFilter"
         />
       </teleport>

@@ -18,11 +18,11 @@
   >
     <transition name="fade">
       <div
-        v-if="!resetAll && countFilters"
+        v-if="!resetAll && totalFilters"
         class="catalog-tags__header"
       >
         <div class="catalog-tags__total">
-          Активные фильтры ({{ countFilters }})
+          Активные фильтры ({{ totalFilters }})
         </div>
         <div class="catalog-tags__reset">
           <Tag
@@ -611,6 +611,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  totalFilters: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
 });
 
 //
@@ -988,78 +993,6 @@ const onClickResetAll = (): void => {
 
   emit('remove');
 };
-
-const countFilters = computed((): number => {
-  let total = 0;
-
-  if (selectedDirectionValue.value) {
-    total++;
-  }
-
-  if (selectedRatingValue.value) {
-    total++;
-  }
-
-  if (
-    selectedPricesValue.value[0] !== props.priceMin
-    || selectedPricesValue.value[1] !== props.priceMax
-  ) {
-    total++;
-  }
-
-  if (selectedCreditValue.value) {
-    total++;
-  }
-
-  if (selectedFreeValue.value) {
-    total++;
-  }
-
-  if (
-    selectedDurationsValue.value[0] !== props.durationMin
-    || selectedDurationsValue.value[1] !== props.durationMax
-  ) {
-    total++;
-  }
-
-  if (selectedSchoolsValue.value?.length) {
-    total += selectedSchoolsValue.value.length;
-  }
-
-  if (selectedCategoriesValue.value?.length) {
-    total += selectedCategoriesValue.value.length;
-  }
-
-  if (selectedProfessionsValue.value?.length) {
-    total += selectedProfessionsValue.value.length;
-  }
-
-  if (selectedTeachersValue.value?.length) {
-    total += selectedTeachersValue.value.length;
-  }
-
-  if (selectedSkillsValue.value?.length) {
-    total += selectedSkillsValue.value.length;
-  }
-
-  if (selectedToolsValue.value?.length) {
-    total += selectedToolsValue.value.length;
-  }
-
-  if (selectedToolsValue.value?.length) {
-    total += selectedToolsValue.value.length;
-  }
-
-  if (selectedFormat.value) {
-    total++;
-  }
-
-  if (selectedLevelsValue.value?.length) {
-    total += selectedLevelsValue.value.length;
-  }
-
-  return total;
-});
 </script>
 
 <style lang="scss">

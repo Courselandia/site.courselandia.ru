@@ -9,6 +9,19 @@
     >
       <Tags>
         <Tag
+          :border="selectedDirectionValue?.id ? 'grey2' : 'blue2'"
+          border-hover="blue2"
+          :bck="selectedDirectionValue?.id ? 'white' : 'blue2'"
+          bck-hover="blue2"
+          :color="selectedDirectionValue?.id ? 'black' : 'white'"
+          color-hover="white"
+          cursor
+          @click="onClickDirection()"
+          @keyup="onClickDirection()"
+        >
+          Все направления
+        </Tag>
+        <Tag
           v-for="(direction, key) in directions"
           :key="key"
           :border="selectedDirectionValue?.id === direction.id ? 'blue2' : 'grey2'"
@@ -37,6 +50,19 @@
         class="catalog-filters__block catalog-filters__block--directions"
       >
         <Tags>
+          <Tag
+            :border="selectedDirectionValue?.id ? 'grey2' : 'blue2'"
+            border-hover="blue2"
+            :bck="selectedDirectionValue?.id ? 'white' : 'blue2'"
+            bck-hover="blue2"
+            :color="selectedDirectionValue?.id ? 'black' : 'white'"
+            color-hover="white"
+            cursor
+            @click="onClickDirection()"
+            @keyup="onClickDirection()"
+          >
+            Все направления
+          </Tag>
           <Tag
             v-for="(direction, key) in directions"
             :key="key"
@@ -751,9 +777,8 @@ watch(selectedDirection, () => {
   selectedDirectionValue.value = selectedDirection.value;
 });
 
-const onClickDirection = (value: IDirection): void => {
+const onClickDirection = (value: IDirection | null = null): void => {
   const toChange = selectedDirectionValue.value !== value;
-
   selectedDirectionValue.value = value;
 
   if (toChange) {
