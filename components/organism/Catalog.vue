@@ -685,6 +685,18 @@ const setSelectedFiltersByQuery = (): void => {
   if (getUrlFilterQuery('duration')?.length === 2) {
     selectedDurations.value = getUrlFilterQuery('duration').map((itm) => Number(itm));
   }
+
+  if (getUrlFilterQuery('schools')?.length) {
+    selectedSchools.value = getUrlFilterQuery('schools').map((school) => ({
+      id: Number(school),
+    }));
+  }
+
+  if (getUrlFilterQuery('categories')?.length) {
+    selectedCategories.value = getUrlFilterQuery('categories').map((category) => ({
+      id: Number(category),
+    }));
+  }
 };
 
 const load = async (
@@ -895,12 +907,19 @@ const setUrlQuery = (
     }
   }
 
-  const convertNameFilter = (name: string) => {
-    if (name === 'directions-id') {
-      return 'direction';
-    }
+  const convertNameFilter = (name: string): string => {
+    const names: Record<string, string> = {
+      'directions-id': 'directions',
+      'school-id': 'schools',
+      'categories-id': 'categories',
+      'professions-id': 'professions',
+      'teachers-id': 'teachers',
+      'skills-id': 'skills',
+      'tools-id': 'tools',
+      'levels-level': 'levels',
+    };
 
-    return name;
+    return names[name] || name;
   };
 
   if (filtersCurrent) {

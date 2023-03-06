@@ -44,7 +44,7 @@
             v-if="selectedDirectionValue
               && (
                 selectedDirectionValue.name
-                || getDirectionlabel(selectedDirectionValue)
+                || getDirectionLabel(selectedDirectionValue)
               )"
             bck="blue1"
           >
@@ -52,7 +52,7 @@
               {{ selectedDirectionValue.name }}
             </template>
             <template v-else>
-              {{ getDirectionlabel(selectedDirectionValue) }}
+              {{ getDirectionLabel(selectedDirectionValue) }}
             </template>
             <template #after>
               <Icon
@@ -179,43 +179,61 @@
           </Tag>
 
           <template v-if="selectedSchoolsValue?.length">
-            <Tag
+            <template
               v-for="(school, key) in selectedSchoolsValue"
               :key="key"
-              bck="blue1"
             >
-              {{ school.label }}
-              <template #after>
-                <Icon
-                  name="close"
-                  color="grey2"
-                  :size="[15, 15]"
-                  class="cursor--pointer"
-                  @click="onClickResetSchool(key)"
-                  @keyup="onClickResetSchool(key)"
-                />
-              </template>
-            </Tag>
+              <Tag
+                v-if="school.label || getSchoolLabel(school)"
+                bck="blue1"
+              >
+                <template v-if="school.label">
+                  {{ school.label }}
+                </template>
+                <template v-else>
+                  {{ getSchoolLabel(school) }}
+                </template>
+                <template #after>
+                  <Icon
+                    name="close"
+                    color="grey2"
+                    :size="[15, 15]"
+                    class="cursor--pointer"
+                    @click="onClickResetSchool(key)"
+                    @keyup="onClickResetSchool(key)"
+                  />
+                </template>
+              </Tag>
+            </template>
           </template>
 
           <template v-if="selectedCategoriesValue?.length">
-            <Tag
+            <template
               v-for="(category, key) in selectedCategoriesValue"
               :key="key"
-              bck="blue1"
             >
-              {{ category.label }}
-              <template #after>
-                <Icon
-                  name="close"
-                  color="grey2"
-                  :size="[15, 15]"
-                  class="cursor--pointer"
-                  @click="onClickResetCategory(key)"
-                  @keyup="onClickResetCategory(key)"
-                />
-              </template>
-            </Tag>
+              <Tag
+                v-if="category.label || getCategoryLabel(category)"
+                bck="blue1"
+              >
+                <template v-if="category.label">
+                  {{ category.label }}
+                </template>
+                <template v-else>
+                  {{ getCategoryLabel(category) }}
+                </template>
+                <template #after>
+                  <Icon
+                    name="close"
+                    color="grey2"
+                    :size="[15, 15]"
+                    class="cursor--pointer"
+                    @click="onClickResetCategory(key)"
+                    @keyup="onClickResetCategory(key)"
+                  />
+                </template>
+              </Tag>
+            </template>
           </template>
 
           <template v-if="selectedProfessionsValue?.length">
@@ -996,9 +1014,17 @@ const countFilters = computed((): number => {
   return total;
 });
 
-const getDirectionlabel = (
+const getDirectionLabel = (
   direction: IDirection,
 ): string | null => directions.value.find((itm) => itm.id === direction.id)?.name || null;
+
+const getSchoolLabel = (
+  school: ISchool,
+): string | null => schools.value.find((itm) => itm.id === school.id)?.label || null;
+
+const getCategoryLabel = (
+  category: ICategory,
+): string | null => categories.value.find((itm) => itm.id === category.id)?.label || null;
 </script>
 
 <style lang="scss">
