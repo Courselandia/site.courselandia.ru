@@ -671,7 +671,9 @@ const setSelectedFiltersByQuery = (): void => {
   }
 
   if (getUrlFilterQuery('price')?.length === 2) {
-    selectedPrices.value = getUrlFilterQuery('price').map((itm) => Number(itm));
+    const price = getUrlFilterQuery('price').map((itm) => Number(itm));
+    price[0] = price[0] >= 0 ? price[0] : 0;
+    selectedPrices.value = price;
   }
 
   if (getUrlFilterQuery('credit')?.length) {
@@ -683,7 +685,9 @@ const setSelectedFiltersByQuery = (): void => {
   }
 
   if (getUrlFilterQuery('duration')?.length === 2) {
-    selectedDurations.value = getUrlFilterQuery('duration').map((itm) => Number(itm));
+    const duration = getUrlFilterQuery('duration').map((itm) => Number(itm));
+    duration[0] = duration[0] >= 0 ? duration[0] : 0;
+    selectedDurations.value = duration;
   }
 
   if (getUrlFilterQuery('schools')?.length) {

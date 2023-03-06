@@ -63,7 +63,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedRatingValue"
+            v-if="hasRating(ratings, selectedRatingValue)"
             class="catalog-filters__reset"
             @click="onClickResetRating"
             @keyup="onClickResetRating"
@@ -439,7 +439,7 @@
 
         <transition name="fade">
           <div
-            v-if="selectedLevelsValue?.length"
+            v-if="hasLevels(levels, selectedLevelsValue)"
             class="catalog-filters__reset"
             @click="onClickResetLevels"
             @keyup="onClickResetLevels"
@@ -492,7 +492,9 @@ import ELevel from '@/enums/components/molecules/level';
 import {
   hasCategories,
   hasFormats,
+  hasLevels,
   hasProfessions,
+  hasRating,
   hasSchools,
   hasSkills,
   hasTeachers,

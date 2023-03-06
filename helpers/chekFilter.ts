@@ -2,10 +2,14 @@ import ICategory from '@/interfaces/components/molecules/category';
 import IDirection from '@/interfaces/components/molecules/direction';
 import IFormat from '@/interfaces/components/molecules/format';
 import IProfession from '@/interfaces/components/molecules/profession';
+import IRating from '@/interfaces/components/molecules/rating';
 import ISchool from '@/interfaces/components/molecules/schoolFilter';
 import ISkill from '@/interfaces/components/molecules/skill';
 import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
+import TId from '@/types/id';
+import ELevel from "~/enums/components/molecules/level";
+import ILevel from "~/interfaces/components/molecules/level";
 
 export const getDirectionLabel = (
   directions: Array<IDirection>,
@@ -47,6 +51,33 @@ export const getFormatLabel = (
   format: IFormat,
 ): string | null => formats.find((itm) => itm.value === format.value)?.label || null;
 
+export const getRatingLabel = (
+  ratings: Array<IRating>,
+  rating: TId,
+): string | null => {
+  const selectedRatingValueFound = ratings.find(
+    (itm) => itm.value === rating,
+  );
+
+  if (selectedRatingValueFound) {
+    return selectedRatingValueFound.label || null;
+  }
+
+  return null;
+};
+
+export const getLevelLabel = (levels: Array<ILevel>, level: ELevel): string | null => {
+  const selectedLevelValueFound = levels.find(
+    (itm) => itm.value === level,
+  );
+
+  if (selectedLevelValueFound) {
+    return selectedLevelValueFound.label || null;
+  }
+
+  return null;
+};
+
 //
 
 export const hasCategories = (
@@ -66,7 +97,12 @@ export const hasCategories = (
   return has;
 };
 
-export const hasDirections = (
+export const hasRating = (
+  ratings: Array<IRating>,
+  item: TId | null,
+): boolean => (item ? !!getRatingLabel(ratings, item) : false);
+
+export const hasDirection = (
   directions: Array<IDirection>,
   item: IDirection | null,
 ): boolean => (item ? !!getDirectionLabel(directions, item) : false);
@@ -165,6 +201,23 @@ export const hasFormats = (
   if (items) {
     items.forEach((item) => {
       if (item.label || getFormatLabel(formats, item)) {
+        has = true;
+      }
+    });
+  }
+
+  return has;
+};
+
+export const hasLevels = (
+  levels: Array<ILevel>,
+  items: Array<ELevel> | null,
+): boolean => {
+  let has = false;
+
+  if (items) {
+    items.forEach((item) => {
+      if (getLevelLabel(levels, item)) {
         has = true;
       }
     });

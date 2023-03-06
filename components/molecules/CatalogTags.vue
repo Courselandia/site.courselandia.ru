@@ -1,7 +1,7 @@
 <template>
   <div
-    v-if="hasDirections(directions, selectedDirectionValue)
-      || selectedRatingValue
+    v-if="hasDirection(directions, selectedDirectionValue)
+      || hasRating(ratings, selectedRatingValue)
       || (selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax)
       || selectedCreditValue
       || selectedFreeValue
@@ -13,7 +13,7 @@
       || hasSkills(skills, selectedSkillsValue)
       || hasTools(tools, selectedToolsValue)
       || selectedFormat !== null
-      || selectedLevelsValue?.length"
+      || hasLevels(levels, selectedLevelsValue)"
     class="catalog-tags"
   >
     <transition name="fade">
@@ -70,7 +70,7 @@
             v-if="selectedRatingValue"
             bck="blue1"
           >
-            Рейтинг {{ getSelectedRatingLabel() }}
+            Рейтинг {{ getRatingLabel(ratings, selectedRatingValue) }}
             <template #after>
               <Icon
                 name="close"
@@ -385,7 +385,7 @@
               :key="key"
               bck="blue1"
             >
-              {{ getLevelLabel(level) }}
+              {{ getLevelLabel(levels, level) }}
               <template #after>
                 <Icon
                   name="close"
@@ -435,19 +435,22 @@ import {
   getCategoryLabel,
   getDirectionLabel,
   getFormatLabel,
+  getLevelLabel,
   getProfessionLabel,
+  getRatingLabel,
   getSchoolLabel,
   getSkillLabel,
   getTeacherLabel,
   getToolLabel,
   hasCategories,
-  hasDirections,
-  hasSchools,
+  hasDirection,
+  hasLevels,
   hasProfessions,
+  hasRating,
+  hasSchools,
   hasSkills,
   hasTeachers,
   hasTools,
-  hasFormats,
 } from '@/helpers/chekFilter';
 import { money } from '@/helpers/number';
 import ICategory from '@/interfaces/components/molecules/category';
@@ -691,18 +694,6 @@ watch(selectedRatingValue, () => {
 watch(selectedRating, () => {
   selectedRatingValue.value = selectedRating.value?.value;
 });
-
-const getSelectedRatingLabel = (): string | null => {
-  const selectedRatingValueFound = props.ratings.find(
-    (itm) => itm.value === selectedRatingValue.value,
-  );
-
-  if (selectedRatingValueFound) {
-    return selectedRatingValueFound.label || null;
-  }
-
-  return null;
-};
 
 const onClickResetRating = (silence: boolean = false): void => {
   selectedRatingValue.value = null;
@@ -977,18 +968,6 @@ const onClickResetLevel = (index: number): void => {
   selectedLevelsValue.value = cloneDeep(selectedLevelsValue.value);
 
   emit('remove');
-};
-
-const getLevelLabel = (level: ELevel): string | null => {
-  const selectedLevelValueFound = props.levels.find(
-    (itm) => itm.value === level,
-  );
-
-  if (selectedLevelValueFound) {
-    return selectedLevelValueFound.label || null;
-  }
-
-  return null;
 };
 
 const onClickResetAll = (): void => {
