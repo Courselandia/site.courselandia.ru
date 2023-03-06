@@ -203,7 +203,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedSchoolsValue?.length"
+            v-if="hasSchools(schools, selectedSchoolsValue)"
             class="catalog-filters__reset"
             @click="onClickResetSchools"
             @keyup="onClickResetSchools"
@@ -236,7 +236,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedCategoriesValue?.length"
+            v-if="hasCategories(categories, selectedCategoriesValue)"
             class="catalog-filters__reset"
             @click="onClickResetCategories"
             @keyup="onClickResetCategories"
@@ -269,7 +269,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedProfessionsValue?.length"
+            v-if="hasProfessions(professions, selectedProfessionsValue)"
             class="catalog-filters__reset"
             @click="onClickResetProfessions"
             @keyup="onClickResetProfessions"
@@ -302,7 +302,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedTeachersValue?.length"
+            v-if="hasTeachers(teachers, selectedTeachersValue)"
             class="catalog-filters__reset"
             @click="onClickResetTeachers"
             @keyup="onClickResetTeachers"
@@ -335,7 +335,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedSkillsValue?.length"
+            v-if="hasSkills(skills, selectedSkillsValue)"
             class="catalog-filters__reset"
             @click="onClickResetSkills"
             @keyup="onClickResetSkills"
@@ -368,7 +368,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="selectedToolsValue?.length"
+            v-if="hasTools(tools, selectedToolsValue)"
             class="catalog-filters__reset"
             @click="onClickResetTools"
             @keyup="onClickResetTools"
@@ -489,6 +489,15 @@ import Tag from '@/components/atoms/Tag.vue';
 import CatalogFilterSelect from '@/components/molecules/CatalogFilterSelect.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import ELevel from '@/enums/components/molecules/level';
+import {
+  hasCategories,
+  hasFormats,
+  hasProfessions,
+  hasSchools,
+  hasSkills,
+  hasTeachers,
+  hasTools,
+} from '@/helpers/chekFilter';
 import ICategory from '@/interfaces/components/molecules/category';
 import IDirection from '@/interfaces/components/molecules/direction';
 import IFormat from '@/interfaces/components/molecules/format';

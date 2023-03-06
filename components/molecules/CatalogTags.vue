@@ -1,17 +1,17 @@
 <template>
   <div
-    v-if="selectedDirectionValue
+    v-if="hasDirections(directions, selectedDirectionValue)
       || selectedRatingValue
       || (selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax)
       || selectedCreditValue
       || selectedFreeValue
       || (selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax)
-      || selectedSchoolsValue?.length
-      || selectedCategoriesValue?.length
-      || selectedProfessionsValue?.length
-      || selectedTeachersValue?.length
-      || selectedSkillsValue?.length
-      || selectedToolsValue?.length
+      || hasSchools(schools, selectedSchoolsValue)
+      || hasCategories(categories, selectedCategoriesValue)
+      || hasProfessions(professions, selectedProfessionsValue)
+      || hasTeachers(teachers, selectedTeachersValue)
+      || hasSkills(skills, selectedSkillsValue)
+      || hasTools(tools, selectedToolsValue)
       || selectedFormat !== null
       || selectedLevelsValue?.length"
     class="catalog-tags"
@@ -44,7 +44,7 @@
             v-if="selectedDirectionValue
               && (
                 selectedDirectionValue.name
-                || getDirectionLabel(selectedDirectionValue)
+                || getDirectionLabel(directions, selectedDirectionValue)
               )"
             bck="blue1"
           >
@@ -52,7 +52,7 @@
               {{ selectedDirectionValue.name }}
             </template>
             <template v-else>
-              {{ getDirectionLabel(selectedDirectionValue) }}
+              {{ getDirectionLabel(directions, selectedDirectionValue) }}
             </template>
             <template #after>
               <Icon
@@ -184,14 +184,14 @@
               :key="key"
             >
               <Tag
-                v-if="school.label || getSchoolLabel(school)"
+                v-if="school.label || getSchoolLabel(schools, school)"
                 bck="blue1"
               >
                 <template v-if="school.label">
                   {{ school.label }}
                 </template>
                 <template v-else>
-                  {{ getSchoolLabel(school) }}
+                  {{ getSchoolLabel(schools, school) }}
                 </template>
                 <template #after>
                   <Icon
@@ -213,14 +213,14 @@
               :key="key"
             >
               <Tag
-                v-if="category.label || getCategoryLabel(category)"
+                v-if="category.label || getCategoryLabel(categories, category)"
                 bck="blue1"
               >
                 <template v-if="category.label">
                   {{ category.label }}
                 </template>
                 <template v-else>
-                  {{ getCategoryLabel(category) }}
+                  {{ getCategoryLabel(categories, category) }}
                 </template>
                 <template #after>
                   <Icon
@@ -242,14 +242,14 @@
               :key="key"
             >
               <Tag
-                v-if="profession.label || getProfessionLabel(profession)"
+                v-if="profession.label || getProfessionLabel(professions, profession)"
                 bck="blue1"
               >
                 <template v-if="profession.name">
                   {{ profession.name }}
                 </template>
                 <template v-else>
-                  {{ getProfessionLabel(profession) }}
+                  {{ getProfessionLabel(professions, profession) }}
                 </template>
                 <template #after>
                   <Icon
@@ -271,14 +271,14 @@
               :key="key"
             >
               <Tag
-                v-if="teacher.label || getTeacherLabel(teacher)"
+                v-if="teacher.label || getTeacherLabel(teachers, teacher)"
                 bck="blue1"
               >
                 <template v-if="teacher.name">
                   {{ teacher.name }}
                 </template>
                 <template v-else>
-                  {{ getTeacherLabel(teacher) }}
+                  {{ getTeacherLabel(teachers, teacher) }}
                 </template>
                 <template #after>
                   <Icon
@@ -300,14 +300,14 @@
               :key="key"
             >
               <Tag
-                v-if="skill.label || getSkillLabel(skill)"
+                v-if="skill.label || getSkillLabel(skills, skill)"
                 bck="blue1"
               >
                 <template v-if="skill.name">
                   {{ skill.name }}
                 </template>
                 <template v-else>
-                  {{ getSkillLabel(skill) }}
+                  {{ getSkillLabel(skills, skill) }}
                 </template>
                 <template #after>
                   <Icon
@@ -329,14 +329,14 @@
               :key="key"
             >
               <Tag
-                v-if="tool.label || getToolLabel(tool)"
+                v-if="tool.label || getToolLabel(tools, tool)"
                 bck="blue1"
               >
                 <template v-if="tool.name">
                   {{ tool.name }}
                 </template>
                 <template v-else>
-                  {{ getToolLabel(tool) }}
+                  {{ getToolLabel(tools, tool) }}
                 </template>
                 <template #after>
                   <Icon
@@ -356,7 +356,7 @@
             v-if="selectedFormat
               && (
                 selectedFormat.label
-                || getFormatLabel(selectedFormat)
+                || getFormatLabel(formats, selectedFormat)
               )
             "
             bck="blue1"
@@ -365,7 +365,7 @@
               {{ selectedFormat.label }}
             </template>
             <template v-else>
-              {{ getFormatLabel(selectedFormat) }}
+              {{ getFormatLabel(formats, selectedFormat) }}
             </template>
             <template #after>
               <Icon
@@ -431,6 +431,24 @@ import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import ELevel from '@/enums/components/molecules/level';
+import {
+  getCategoryLabel,
+  getDirectionLabel,
+  getFormatLabel,
+  getProfessionLabel,
+  getSchoolLabel,
+  getSkillLabel,
+  getTeacherLabel,
+  getToolLabel,
+  hasCategories,
+  hasDirections,
+  hasSchools,
+  hasProfessions,
+  hasSkills,
+  hasTeachers,
+  hasTools,
+  hasFormats,
+} from '@/helpers/chekFilter';
 import { money } from '@/helpers/number';
 import ICategory from '@/interfaces/components/molecules/category';
 import IDirection from '@/interfaces/components/molecules/direction';
@@ -966,7 +984,11 @@ const getLevelLabel = (level: ELevel): string | null => {
     (itm) => itm.value === level,
   );
 
-  return selectedLevelValueFound ? selectedLevelValueFound.label : null;
+  if (selectedLevelValueFound) {
+    return selectedLevelValueFound.label || null;
+  }
+
+  return null;
 };
 
 const onClickResetAll = (): void => {
@@ -1059,38 +1081,6 @@ const countFilters = computed((): number => {
 
   return total;
 });
-
-const getDirectionLabel = (
-  direction: IDirection,
-): string | null => directions.value.find((itm) => itm.id === direction.id)?.name || null;
-
-const getSchoolLabel = (
-  school: ISchool,
-): string | null => schools.value.find((itm) => itm.id === school.id)?.label || null;
-
-const getCategoryLabel = (
-  category: ICategory,
-): string | null => categories.value.find((itm) => itm.id === category.id)?.label || null;
-
-const getProfessionLabel = (
-  profession: IProfession,
-): string | null => professions.value.find((itm) => itm.id === profession.id)?.label || null;
-
-const getSkillLabel = (
-  skill: ISkill,
-): string | null => skills.value.find((itm) => itm.id === skill.id)?.label || null;
-
-const getTeacherLabel = (
-  teacher: ITeacher,
-): string | null => teachers.value.find((itm) => itm.id === teacher.id)?.label || null;
-
-const getToolLabel = (
-  tool: ITool,
-): string | null => tools.value.find((itm) => itm.id === tool.id)?.label || null;
-
-const getFormatLabel = (
-  format: IFormat,
-): string | null => props.formats.find((itm) => itm.value === format.value)?.label || null;
 </script>
 
 <style lang="scss">
