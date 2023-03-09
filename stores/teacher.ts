@@ -13,7 +13,7 @@ import TId from '@/types/id';
 export default defineStore('teacher', {
   state: () => ({
     teachers: null as IFilterTeacher[] | null,
-    teacher: null as IFilterTeacher | null,
+    itemTeacher: null as IFilterTeacher | null,
   }),
   actions: {
     async readTeachers(
@@ -43,11 +43,26 @@ export default defineStore('teacher', {
           baseURL: baseUrl,
         });
 
-        this.teacher = response.data.data;
+        this.itemTeacher = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.teacher = null;
+        this.itemTeacher = null;
+
+        throw error;
+      }
+    },
+    async linkTeacher(baseUrl: string, link: string): Promise<IResponseItem<IFilterTeacher>> {
+      try {
+        const response = await axios.get<IResponseItem<IFilterTeacher>>(`/api/private/site/teacher/link/${link}`, {
+          baseURL: baseUrl,
+        });
+
+        this.itemTeacher = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemTeacher = null;
 
         throw error;
       }

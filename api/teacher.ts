@@ -37,3 +37,19 @@ export const apiGetTeacher = async (
 
   return resultTeacher.data.value?.data || null;
 };
+
+export const apiLinkTeacher = async (
+  apiUrl: string,
+  link: string,
+): Promise<IFilterTeacher | null> => {
+  const {
+    linkTeacher,
+  } = teacher();
+
+  const loadTeacher = async ():
+    Promise<IResponseItem<IFilterTeacher | null>> => linkTeacher(apiUrl, link);
+
+  const resultTeacher = await useAsyncData('teacher', async () => loadTeacher());
+
+  return resultTeacher.data.value?.data || null;
+};
