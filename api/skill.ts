@@ -30,10 +30,10 @@ export const apiGetSkill = async (
     getSkill,
   } = skill();
 
-  const loadCategories = async ():
+  const loadSkills = async ():
     Promise<IResponseItem<IFilterSkill | null>> => getSkill(apiUrl, id);
 
-  const resultCategories = await useAsyncData('skill', async () => loadCategories());
+  const resultSkill = await useAsyncData('skill', async () => loadSkills());
 
-  return resultCategories.data.value?.data || null;
+  return resultSkill.data.value?.data || null;
 };

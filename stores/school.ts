@@ -11,7 +11,7 @@ import TId from '@/types/id';
 export default defineStore('school', {
   state: () => ({
     schools: null as ISchool[] | null,
-    school: null as ISchool | null,
+    itemSchool: null as ISchool | null,
   }),
   actions: {
     async readSchools(baseUrl: string): Promise<IResponseItems<ISchool>> {
@@ -35,11 +35,27 @@ export default defineStore('school', {
           baseURL: baseUrl,
         });
 
-        this.school = response.data.data;
+        this.itemSchool = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.school = null;
+        this.itemSchool = null;
+
+        throw error;
+      }
+    },
+    async linkSchool(baseUrl: string, link: string): Promise<IResponseItem<ISchool>> {
+      try {
+        console.log(`/api/private/site/school/link/${link}`);
+        const response = await axios.get<IResponseItem<ISchool>>(`/api/private/site/school/link/${link}`, {
+          baseURL: baseUrl,
+        });
+
+        this.itemSchool = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemSchool = null;
 
         throw error;
       }

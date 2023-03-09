@@ -30,10 +30,26 @@ export const apiGetCategory = async (
     getCategory,
   } = category();
 
-  const loadCategories = async ():
+  const loadCategory = async ():
     Promise<IResponseItem<IFilterCategory | null>> => getCategory(apiUrl, id);
 
-  const resultCategories = await useAsyncData('category', async () => loadCategories());
+  const resultCategory = await useAsyncData('category', async () => loadCategory());
 
-  return resultCategories.data.value?.data || null;
+  return resultCategory.data.value?.data || null;
+};
+
+export const apiLinkCategory = async (
+  apiUrl: string,
+  link: string,
+): Promise<IFilterCategory | null> => {
+  const {
+    linkCategory,
+  } = category();
+
+  const loadCategory = async ():
+    Promise<IResponseItem<IFilterCategory | null>> => linkCategory(apiUrl, link);
+
+  const resultCategory = await useAsyncData('category', async () => loadCategory());
+
+  return resultCategory.data.value?.data || null;
 };

@@ -30,10 +30,10 @@ export const apiGetProfession = async (
     getProfession,
   } = profession();
 
-  const loadCategories = async ():
+  const loadProfession = async ():
     Promise<IResponseItem<IFilterProfession | null>> => getProfession(apiUrl, id);
 
-  const resultCategories = await useAsyncData('profession', async () => loadCategories());
+  const resultProfession = await useAsyncData('profession', async () => loadProfession());
 
-  return resultCategories.data.value?.data || null;
+  return resultProfession.data.value?.data || null;
 };

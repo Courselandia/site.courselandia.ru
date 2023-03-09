@@ -30,10 +30,10 @@ export const apiGetTool = async (
     getTool,
   } = tool();
 
-  const loadCategories = async ():
+  const loadTool = async ():
     Promise<IResponseItem<IFilterTool | null>> => getTool(apiUrl, id);
 
-  const resultCategories = await useAsyncData('tool', async () => loadCategories());
+  const resultTool = await useAsyncData('tool', async () => loadTool());
 
-  return resultCategories.data.value?.data || null;
+  return resultTool.data.value?.data || null;
 };

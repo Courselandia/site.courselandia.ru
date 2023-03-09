@@ -11,7 +11,7 @@ import TId from '@/types/id';
 export default defineStore('direction', {
   state: () => ({
     directions: null as IDirection[] | null,
-    direction: null as IDirection | null,
+    itemDirection: null as IDirection | null,
   }),
   actions: {
     async readDirections(
@@ -41,11 +41,26 @@ export default defineStore('direction', {
           baseURL: baseUrl,
         });
 
-        this.direction = response.data.data;
+        this.itemDirection = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.direction = null;
+        this.itemDirection = null;
+
+        throw error;
+      }
+    },
+    async linkDirection(baseUrl: string, link: string): Promise<IResponseItem<IDirection>> {
+      try {
+        const response = await axios.get<IResponseItem<IDirection>>(`/api/private/site/direction/link/${link}`, {
+          baseURL: baseUrl,
+        });
+
+        this.itemDirection = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemDirection = null;
 
         throw error;
       }

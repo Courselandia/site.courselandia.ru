@@ -1,13 +1,12 @@
-import { apiGetSchool } from '@/api/school';
+import { apiLinkDirection } from '@/api/direction';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const config = useRuntimeConfig();
   const {
-    school,
-    course,
+    link,
   } = to.params;
 
-  const result = await apiGetCourse(config.public.apiUrl, school as string, course as string);
+  const result = await apiLinkDirection(config.public.apiUrl, link as string);
 
   return !!result;
 });

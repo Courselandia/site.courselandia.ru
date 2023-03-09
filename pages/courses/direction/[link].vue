@@ -1,7 +1,7 @@
 <template>
   <Catalog
     class="mb-30 mb-15-sm"
-    section="school"
+    section="direction"
   />
 </template>
 
@@ -10,7 +10,7 @@ import Catalog from '@/components/organism/Catalog.vue';
 
 definePageMeta({
   middleware: [
-    'course-section-school',
+    'course-section-direction',
   ],
 });
 </script>

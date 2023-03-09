@@ -33,10 +33,26 @@ export const apiGetSchool = async (
     getSchool,
   } = school();
 
-  const loadCategories = async ():
+  const loadSchool = async ():
     Promise<IResponseItem<IFilterSchool | null>> => getSchool(apiUrl, id);
 
-  const resultCategories = await useAsyncData('school', async () => loadCategories());
+  const resultCategories = await useAsyncData('school', async () => loadSchool());
+
+  return resultCategories.data.value?.data || null;
+};
+
+export const apiLinkSchool = async (
+  apiUrl: string,
+  link: string,
+): Promise<IFilterSchool | null> => {
+  const {
+    linkSchool,
+  } = school();
+
+  const loadSchool = async ():
+    Promise<IResponseItem<IFilterSchool | null>> => linkSchool(apiUrl, link);
+
+  const resultCategories = await useAsyncData('school', async () => loadSchool());
 
   return resultCategories.data.value?.data || null;
 };

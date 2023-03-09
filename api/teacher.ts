@@ -30,10 +30,10 @@ export const apiGetTeacher = async (
     getTeacher,
   } = teacher();
 
-  const loadCategories = async ():
+  const loadTeacher = async ():
     Promise<IResponseItem<IFilterTeacher | null>> => getTeacher(apiUrl, id);
 
-  const resultCategories = await useAsyncData('teacher', async () => loadCategories());
+  const resultTeacher = await useAsyncData('teacher', async () => loadTeacher());
 
-  return resultCategories.data.value?.data || null;
+  return resultTeacher.data.value?.data || null;
 };

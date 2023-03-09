@@ -294,6 +294,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
@@ -362,6 +363,8 @@ import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
 import IFilters from '@/interfaces/filters';
 import ISorts from '@/interfaces/sorts';
+import direction from '@/stores/direction';
+import school from '@/stores/school';
 import TValue from '@/types/value';
 
 const props = defineProps({
@@ -688,19 +691,25 @@ const setCoursesAndFilters = (result: IApiReadCourses): void => {
 
 const setSelectedFiltersByQuery = (): void => {
   if (section.value === 'direction') {
-    /*
-    selectedDirection.value = {
-      link: String(link),
-    };*/
+    const { itemDirection } = storeToRefs(direction());
+
+    if (itemDirection.value?.id) {
+      selectedDirection.value = {
+        id: itemDirection.value?.id,
+      };
+    }
   }
 
   if (section.value === 'school') {
-    /*
-    selectedSchools.value = [
-      {
-        link: String(link),
-      },
-    ];*/
+    const { itemSchool } = storeToRefs(school());
+
+    if (itemSchool.value?.id) {
+      selectedSchools.value = [
+        {
+          id: itemSchool.value?.id,
+        },
+      ];
+    }
   }
 
   if (getUrlFilterQuery('direction')?.length) {
@@ -736,38 +745,38 @@ const setSelectedFiltersByQuery = (): void => {
   }
 
   if (getUrlFilterQuery('schools')?.length) {
-    selectedSchools.value.concat(getUrlFilterQuery('schools').map((school) => ({
-      id: Number(school),
+    selectedSchools.value.concat(getUrlFilterQuery('schools').map((itm) => ({
+      id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('categories')?.length) {
-    selectedCategories.value.concat(getUrlFilterQuery('categories').map((category) => ({
-      id: Number(category),
+    selectedCategories.value.concat(getUrlFilterQuery('categories').map((itm) => ({
+      id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('professions')?.length) {
-    selectedProfessions.value.concat(getUrlFilterQuery('professions').map((profession) => ({
-      id: Number(profession),
+    selectedProfessions.value.concat(getUrlFilterQuery('professions').map((itm) => ({
+      id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('skills')?.length) {
-    selectedSkills.value.concat(getUrlFilterQuery('skills').map((skill) => ({
-      id: Number(skill),
+    selectedSkills.value.concat(getUrlFilterQuery('skills').map((itm) => ({
+      id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('teachers')?.length) {
-    selectedTeachers.value.concat(getUrlFilterQuery('teachers').map((teacher) => ({
-      id: Number(teacher),
+    selectedTeachers.value.concat(getUrlFilterQuery('teachers').map((itm) => ({
+      id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('tools')?.length) {
-    selectedTools.value.concat(getUrlFilterQuery('tools').map((tool) => ({
-      id: Number(tool),
+    selectedTools.value.concat(getUrlFilterQuery('tools').map((itm) => ({
+      id: Number(itm),
     })));
   }
 
