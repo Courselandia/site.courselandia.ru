@@ -4,13 +4,16 @@ import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import IFilters from '@/interfaces/filters';
 import {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterTool from '@/interfaces/stores/course/filterTool';
+import TId from '@/types/id';
 
 export default defineStore('tool', {
   state: () => ({
     tools: null as IFilterTool[] | null,
+    tool: null as IFilterTool | null,
   }),
   actions: {
     async readTools(
@@ -30,6 +33,21 @@ export default defineStore('tool', {
         return response.data;
       } catch (error) {
         this.tools = null;
+
+        throw error;
+      }
+    },
+    async getTool(baseUrl: string, id: TId): Promise<IResponseItem<IFilterTool>> {
+      try {
+        const response = await axios.get<IResponseItem<IFilterTool>>(`/api/private/site/tool/get/${id}`, {
+          baseURL: baseUrl,
+        });
+
+        this.tool = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.tool = null;
 
         throw error;
       }

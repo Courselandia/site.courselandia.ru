@@ -1,7 +1,8 @@
 import IFilters from '@/interfaces/filters';
-import { IResponseItems } from '@/interfaces/response';
+import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 import teacher from '@/stores/teacher';
+import TId from '@/types/id';
 
 export const apiReadTeachers = async (
   apiUrl: string,
@@ -19,4 +20,20 @@ export const apiReadTeachers = async (
   const resultTeachers = await useAsyncData('teachers', async () => loadTeachers());
 
   return resultTeachers.data.value?.data;
+};
+
+export const apiGetTeacher = async (
+  apiUrl: string,
+  id: TId,
+): Promise<IFilterTeacher | null> => {
+  const {
+    getTeacher,
+  } = teacher();
+
+  const loadCategories = async ():
+    Promise<IResponseItem<IFilterTeacher | null>> => getTeacher(apiUrl, id);
+
+  const resultCategories = await useAsyncData('teacher', async () => loadCategories());
+
+  return resultCategories.data.value?.data || null;
 };

@@ -1,7 +1,8 @@
 import IFilters from '@/interfaces/filters';
-import { IResponseItems } from '@/interfaces/response';
+import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import IFilterTool from '@/interfaces/stores/course/filterTool';
 import tool from '@/stores/tool';
+import TId from '@/types/id';
 
 export const apiReadTools = async (
   apiUrl: string,
@@ -19,4 +20,20 @@ export const apiReadTools = async (
   const resultTools = await useAsyncData('tools', async () => loadTools());
 
   return resultTools.data.value?.data;
+};
+
+export const apiGetTool = async (
+  apiUrl: string,
+  id: TId,
+): Promise<IFilterTool | null> => {
+  const {
+    getTool,
+  } = tool();
+
+  const loadCategories = async ():
+    Promise<IResponseItem<IFilterTool | null>> => getTool(apiUrl, id);
+
+  const resultCategories = await useAsyncData('tool', async () => loadCategories());
+
+  return resultCategories.data.value?.data || null;
 };

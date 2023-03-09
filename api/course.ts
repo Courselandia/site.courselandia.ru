@@ -111,7 +111,7 @@ export const apiGetCourse = async (
   }
 
   const loadGetCourse = async ():
-    Promise<IResponseItem<ICourse> | null> => await getCourse(apiUrl, schoolLink, courseLink);
+    Promise<IResponseItem<ICourse | null>> => await getCourse(apiUrl, schoolLink, courseLink);
 
   const resultCourse = await useAsyncData('course', async () => loadGetCourse());
 

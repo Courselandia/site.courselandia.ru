@@ -1,7 +1,7 @@
 import TId from '@/types/id';
 
 export default interface IDirection {
-  id: TId,
+  id?: TId,
   name?: string,
   link?: string,
 }

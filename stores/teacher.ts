@@ -4,13 +4,16 @@ import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import IFilters from '@/interfaces/filters';
 import {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
+import TId from '@/types/id';
 
 export default defineStore('teacher', {
   state: () => ({
     teachers: null as IFilterTeacher[] | null,
+    teacher: null as IFilterTeacher | null,
   }),
   actions: {
     async readTeachers(
@@ -30,6 +33,21 @@ export default defineStore('teacher', {
         return response.data;
       } catch (error) {
         this.teachers = null;
+
+        throw error;
+      }
+    },
+    async getTeacher(baseUrl: string, id: TId): Promise<IResponseItem<IFilterTeacher>> {
+      try {
+        const response = await axios.get<IResponseItem<IFilterTeacher>>(`/api/private/site/teacher/get/${id}`, {
+          baseURL: baseUrl,
+        });
+
+        this.teacher = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.teacher = null;
 
         throw error;
       }

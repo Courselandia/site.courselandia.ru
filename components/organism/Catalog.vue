@@ -297,6 +297,7 @@
 import {
   computed,
   ref,
+  toRefs,
   watch,
 } from 'vue';
 import { useRoute } from 'vue-router';
@@ -363,8 +364,19 @@ import IFilters from '@/interfaces/filters';
 import ISorts from '@/interfaces/sorts';
 import TValue from '@/types/value';
 
+const props = defineProps({
+  section: {
+    type: String,
+    required: false,
+    default: null,
+  },
+});
+
+const route = useRoute();
+const { link } = route.params;
+const { section } = toRefs(props);
+
 const getUrlFilterQuery = (name: string): Array<string> => {
-  const route = useRoute();
   const { query } = route;
   let foundResult: Array<string> = [];
 
@@ -395,7 +407,6 @@ const getUrlFilterQuery = (name: string): Array<string> => {
 };
 
 const getUrlQuery = (name: string): string | null => {
-  const route = useRoute();
   const { query } = route;
 
   if (query[name]) {
@@ -404,8 +415,6 @@ const getUrlQuery = (name: string): string | null => {
 
   return null;
 };
-
-const route = useRoute();
 
 const sort = ref<TValue>(ECourseSort.ALPHABETIC);
 const valueQuery = getUrlQuery('sort');
@@ -678,6 +687,22 @@ const setCoursesAndFilters = (result: IApiReadCourses): void => {
 };
 
 const setSelectedFiltersByQuery = (): void => {
+  if (section.value === 'direction') {
+    /*
+    selectedDirection.value = {
+      link: String(link),
+    };*/
+  }
+
+  if (section.value === 'school') {
+    /*
+    selectedSchools.value = [
+      {
+        link: String(link),
+      },
+    ];*/
+  }
+
   if (getUrlFilterQuery('direction')?.length) {
     selectedDirection.value = {
       id: Number(getUrlFilterQuery('direction')[0]),
@@ -711,39 +736,39 @@ const setSelectedFiltersByQuery = (): void => {
   }
 
   if (getUrlFilterQuery('schools')?.length) {
-    selectedSchools.value = getUrlFilterQuery('schools').map((school) => ({
+    selectedSchools.value.concat(getUrlFilterQuery('schools').map((school) => ({
       id: Number(school),
-    }));
+    })));
   }
 
   if (getUrlFilterQuery('categories')?.length) {
-    selectedCategories.value = getUrlFilterQuery('categories').map((category) => ({
+    selectedCategories.value.concat(getUrlFilterQuery('categories').map((category) => ({
       id: Number(category),
-    }));
+    })));
   }
 
   if (getUrlFilterQuery('professions')?.length) {
-    selectedProfessions.value = getUrlFilterQuery('professions').map((profession) => ({
+    selectedProfessions.value.concat(getUrlFilterQuery('professions').map((profession) => ({
       id: Number(profession),
-    }));
+    })));
   }
 
   if (getUrlFilterQuery('skills')?.length) {
-    selectedSkills.value = getUrlFilterQuery('skills').map((skill) => ({
+    selectedSkills.value.concat(getUrlFilterQuery('skills').map((skill) => ({
       id: Number(skill),
-    }));
+    })));
   }
 
   if (getUrlFilterQuery('teachers')?.length) {
-    selectedTeachers.value = getUrlFilterQuery('teachers').map((teacher) => ({
+    selectedTeachers.value.concat(getUrlFilterQuery('teachers').map((teacher) => ({
       id: Number(teacher),
-    }));
+    })));
   }
 
   if (getUrlFilterQuery('tools')?.length) {
-    selectedTools.value = getUrlFilterQuery('tools').map((tool) => ({
+    selectedTools.value.concat(getUrlFilterQuery('tools').map((tool) => ({
       id: Number(tool),
-    }));
+    })));
   }
 
   if (getUrlFilterQuery('online')?.length) {

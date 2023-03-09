@@ -119,7 +119,7 @@ export default defineStore('course', {
       baseUrl: string,
       school: string,
       course: string,
-    ): Promise<IResponseItem<ICourse> | null> {
+    ): Promise<IResponseItem<ICourse | null>> {
       try {
         const response = await axios.get<IResponseItem<ICourse>>(`/api/private/site/course/get/${school}/${course}`, {
           baseURL: baseUrl,

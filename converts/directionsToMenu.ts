@@ -39,7 +39,7 @@ const directionsToMenu = async (
 
     result[index] = {
       label: direction.name,
-      link: `courses/direction/${direction.link}`,
+      link: `/courses/direction/${direction.link}`,
       amount: direction.count,
       image: images[direction.id] || undefined,
       children: [],
@@ -52,7 +52,7 @@ const directionsToMenu = async (
         if (result[index].children !== undefined) {
           children[children.length] = {
             label: category.name,
-            link: `courses/category/${category.link}`,
+            link: `/courses/category/${category.link}`,
           };
         }
       });

@@ -7,7 +7,7 @@ export const coursesStoreToCoursesComponent = (
 ): Array<ICourseComponent> => {
   const result: Array<ICourseComponent> = [];
 
-  courses.forEach((item) => {
+  courses?.forEach((item) => {
     const index = result.length;
     result[index] = courseStoreToCourseComponent(item);
   });

@@ -11,7 +11,7 @@ const schoolsToMenu = (
 
     result[index] = {
       label: school.name,
-      link: `courses/school/${school.link}`,
+      link: `/courses/school/${school.link}`,
     };
   });
 
