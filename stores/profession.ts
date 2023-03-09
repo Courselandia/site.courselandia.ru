@@ -13,7 +13,7 @@ import TId from '@/types/id';
 export default defineStore('profession', {
   state: () => ({
     professions: null as IFilterProfession[] | null,
-    profession: null as IFilterProfession | null,
+    itemProfession: null as IFilterProfession | null,
   }),
   actions: {
     async readProfessions(
@@ -43,11 +43,26 @@ export default defineStore('profession', {
           baseURL: baseUrl,
         });
 
-        this.profession = response.data.data;
+        this.itemProfession = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.profession = null;
+        this.itemProfession = null;
+
+        throw error;
+      }
+    },
+    async linkProfession(baseUrl: string, link: string): Promise<IResponseItem<IFilterProfession>> {
+      try {
+        const response = await axios.get<IResponseItem<IFilterProfession>>(`/api/private/site/profession/link/${link}`, {
+          baseURL: baseUrl,
+        });
+
+        this.itemProfession = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemProfession = null;
 
         throw error;
       }

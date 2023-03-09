@@ -363,7 +363,9 @@ import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
 import IFilters from '@/interfaces/filters';
 import ISorts from '@/interfaces/sorts';
+import category from '@/stores/category';
 import direction from '@/stores/direction';
+import profession from '@/stores/profession';
 import school from '@/stores/school';
 import TValue from '@/types/value';
 
@@ -709,6 +711,26 @@ const setSelectedFiltersByQuery = (): void => {
           id: itemSchool.value?.id,
         },
       ];
+    }
+  }
+
+  if (section.value === 'category') {
+    const { itemCategory } = storeToRefs(category());
+
+    if (itemCategory.value?.id) {
+      selectedCategories.value[0] = {
+        id: itemCategory.value?.id,
+      };
+    }
+  }
+
+  if (section.value === 'profession') {
+    const { itemProfession } = storeToRefs(profession());
+
+    if (itemProfession.value?.id) {
+      selectedProfessions.value[0] = {
+        id: itemProfession.value?.id,
+      };
     }
   }
 

@@ -37,3 +37,19 @@ export const apiGetProfession = async (
 
   return resultProfession.data.value?.data || null;
 };
+
+export const apiLinkProfession = async (
+  apiUrl: string,
+  link: string,
+): Promise<IFilterProfession | null> => {
+  const {
+    linkProfession,
+  } = profession();
+
+  const loadProfession = async ():
+    Promise<IResponseItem<IFilterProfession | null>> => linkProfession(apiUrl, link);
+
+  const resultProfession = await useAsyncData('profession', async () => loadProfession());
+
+  return resultProfession.data.value?.data || null;
+};
