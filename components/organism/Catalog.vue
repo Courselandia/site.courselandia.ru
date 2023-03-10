@@ -20,42 +20,42 @@
       <template #tags>
         <Tags>
           <Tag
-            to="/courses/programmer"
+            to="/courses/direction/programmer"
             bck="white"
             shadow
           >
             Программирование
           </Tag>
           <Tag
-            to="/courses/marketing"
+            to="/courses/direction/marketing"
             bck="white"
             shadow
           >
             Маркетинг
           </Tag>
           <Tag
-            to="/courses/marketing"
+            to="/courses/direction/marketing"
             bck="white"
             shadow
           >
             Дизайн
           </Tag>
           <Tag
-            to="/courses/marketing"
+            to="/courses/direction/marketing"
             bck="white"
             shadow
           >
             Бизнес и управление
           </Tag>
           <Tag
-            to="/courses/marketing"
+            to="/courses/direction/marketing"
             bck="white"
             shadow
           >
             Аналитика
           </Tag>
           <Tag
-            to="/courses/marketing"
+            to="/courses/direction/marketing"
             bck="white"
             shadow
           >
@@ -366,7 +366,9 @@ import ISorts from '@/interfaces/sorts';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
+import skill from '@/stores/skill';
 import teacher from '@/stores/teacher';
+import tool from '@/stores/tool';
 import school from '@/stores/school';
 import TValue from '@/types/value';
 
@@ -741,6 +743,26 @@ const setSelectedFiltersByQuery = (): void => {
     if (itemTeacher.value?.id) {
       selectedTeachers.value[0] = {
         id: itemTeacher.value?.id,
+      };
+    }
+  }
+
+  if (section.value === 'skill') {
+    const { itemSkill } = storeToRefs(skill());
+
+    if (itemSkill.value?.id) {
+      selectedSkills.value[0] = {
+        id: itemSkill.value?.id,
+      };
+    }
+  }
+
+  if (section.value === 'tool') {
+    const { itemTool } = storeToRefs(tool());
+
+    if (itemTool.value?.id) {
+      selectedTools.value[0] = {
+        id: itemTool.value?.id,
       };
     }
   }

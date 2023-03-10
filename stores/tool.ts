@@ -13,7 +13,7 @@ import TId from '@/types/id';
 export default defineStore('tool', {
   state: () => ({
     tools: null as IFilterTool[] | null,
-    tool: null as IFilterTool | null,
+    itemTool: null as IFilterTool | null,
   }),
   actions: {
     async readTools(
@@ -43,11 +43,26 @@ export default defineStore('tool', {
           baseURL: baseUrl,
         });
 
-        this.tool = response.data.data;
+        this.itemTool = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.tool = null;
+        this.itemTool = null;
+
+        throw error;
+      }
+    },
+    async linkTool(baseUrl: string, link: string): Promise<IResponseItem<IFilterTool>> {
+      try {
+        const response = await axios.get<IResponseItem<IFilterTool>>(`/api/private/site/tool/link/${link}`, {
+          baseURL: baseUrl,
+        });
+
+        this.itemTool = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemTool = null;
 
         throw error;
       }

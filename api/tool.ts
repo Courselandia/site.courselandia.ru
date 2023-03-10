@@ -37,3 +37,19 @@ export const apiGetTool = async (
 
   return resultTool.data.value?.data || null;
 };
+
+export const apiLinkTool = async (
+  apiUrl: string,
+  link: string,
+): Promise<IFilterTool | null> => {
+  const {
+    linkTool,
+  } = tool();
+
+  const loadTool = async ():
+    Promise<IResponseItem<IFilterTool | null>> => linkTool(apiUrl, link);
+
+  const resultTool = await useAsyncData('tool', async () => loadTool());
+
+  return resultTool.data.value?.data || null;
+};

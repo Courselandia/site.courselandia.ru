@@ -13,7 +13,7 @@ import TId from '@/types/id';
 export default defineStore('skill', {
   state: () => ({
     skills: null as IFilterSkill[] | null,
-    skill: null as IFilterSkill | null,
+    itemSkill: null as IFilterSkill | null,
   }),
   actions: {
     async readSkills(
@@ -43,11 +43,26 @@ export default defineStore('skill', {
           baseURL: baseUrl,
         });
 
-        this.skill = response.data.data;
+        this.itemSkill = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.skill = null;
+        this.itemSkill = null;
+
+        throw error;
+      }
+    },
+    async linkSkill(baseUrl: string, link: string): Promise<IResponseItem<IFilterSkill>> {
+      try {
+        const response = await axios.get<IResponseItem<IFilterSkill>>(`/api/private/site/skill/link/${link}`, {
+          baseURL: baseUrl,
+        });
+
+        this.itemSkill = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemSkill = null;
 
         throw error;
       }

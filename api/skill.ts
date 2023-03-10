@@ -37,3 +37,19 @@ export const apiGetSkill = async (
 
   return resultSkill.data.value?.data || null;
 };
+
+export const apiLinkSkill = async (
+  apiUrl: string,
+  link: string,
+): Promise<IFilterSkill | null> => {
+  const {
+    linkSkill,
+  } = skill();
+
+  const loadSkills = async ():
+    Promise<IResponseItem<IFilterSkill | null>> => linkSkill(apiUrl, link);
+
+  const resultSkill = await useAsyncData('skill', async () => loadSkills());
+
+  return resultSkill.data.value?.data || null;
+};
