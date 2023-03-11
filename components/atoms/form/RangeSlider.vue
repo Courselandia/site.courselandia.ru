@@ -23,6 +23,7 @@
         :max="max"
         :step="step"
         :format="format"
+        :disabled="disabled"
         @change="onChange"
       />
     </div>
@@ -71,6 +72,11 @@ const props = defineProps({
     required: false,
     default: true,
   },
+  disabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const {
@@ -94,9 +100,7 @@ watch(value, () => {
 
 const toMoney = (val: number): string => money(val);
 
-const getLabel = (val: number): string => {
-  return props.label(val);
-};
+const getLabel = (val: number): string => props.label(val);
 
 const format = (val: number): string => {
   if (props.money) {

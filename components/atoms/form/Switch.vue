@@ -25,6 +25,11 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const {
@@ -53,12 +58,18 @@ const nameClass = computed(() => {
     classes.push('switch--checked');
   }
 
+  if (props.disabled) {
+    classes.push('switch--disabled');
+  }
+
   return classes.join(' ');
 });
 
 const onClick = (): void => {
-  input.value = !input.value;
-  emit('click', input.value);
+  if (!props.disabled) {
+    input.value = !input.value;
+    emit('click', input.value);
+  }
 };
 </script>
 

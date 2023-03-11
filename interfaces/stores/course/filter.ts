@@ -9,6 +9,7 @@ import IFilterSchool from '@/interfaces/stores/course/filterSchool';
 import IFilterSkill from '@/interfaces/stores/course/filterSkill';
 import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 import IFilterTool from '@/interfaces/stores/course/filterTool';
+import IRating from '@/interfaces/stores/course/rating';
 
 export default interface IFilter {
   directions: Array<IFilterDirection>,
@@ -18,7 +19,7 @@ export default interface IFilter {
   tools: Array<IFilterTool>,
   skills: Array<IFilterSkill>,
   teachers: Array<IFilterTeacher>,
-  ratings: Array<number>,
+  ratings: Array<IRating>,
   price: IFilterPrice,
   duration: IFilterDuration,
   credit: boolean,

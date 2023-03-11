@@ -12,6 +12,11 @@
   position: relative;
   transition: all $speedPrimary $functionPrimary;
 
+  &--disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
   &--checked {
     background-color: $blue2;
 

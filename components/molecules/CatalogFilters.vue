@@ -112,6 +112,7 @@
               :key="key"
               :value="rating.value"
               :label="rating.label"
+              :disabled="rating.disabled && selectedRatingValue !== rating.value"
               name="rating"
               @click="onClickRating"
             />
@@ -120,7 +121,6 @@
       </div>
 
       <div
-        v-if="priceMax && priceMin !== priceMax"
         key="price"
         class="catalog-filters__block"
       >
@@ -148,6 +148,7 @@
             :max="priceMax"
             :step="priceStep"
             :label="getLabelPrice"
+            :disabled="!(priceMax && priceMin !== priceMax)"
             money
             @change="onChangePrices"
           />
@@ -155,7 +156,6 @@
       </div>
 
       <div
-        v-if="availableCredit"
         key="credit"
         class="catalog-filters__block"
       >
@@ -166,13 +166,13 @@
           <Switch
             v-model:value="selectedCreditValue"
             name="credit"
+            :disabled="!availableCredit"
             @click="onClickCredit"
           />
         </Item>
       </div>
 
       <div
-        v-if="availableFree"
         key="free"
         class="catalog-filters__block"
       >
@@ -183,13 +183,13 @@
           <Switch
             v-model:value="selectedFreeValue"
             name="free"
+            :disabled="!availableFree"
             @click="onClickFree"
           />
         </Item>
       </div>
 
       <div
-        v-if="durationMax && durationMax !== durationMin"
         key="duration"
         class="catalog-filters__block"
       >
@@ -218,6 +218,7 @@
             :max="durationMax"
             :step="durationStep"
             :label="getLabelDuration"
+            :disabled="!(durationMax && durationMax !== durationMin)"
             @change="onChangeDurations"
           />
         </div>

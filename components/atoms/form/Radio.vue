@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`radio ${checked ? 'radio--checked' : ''}`"
+    :class="`radio ${nameClass}`"
     @click="onClick"
     @keydown="onClick"
   >
@@ -46,6 +46,11 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const emit = defineEmits({
@@ -56,9 +61,25 @@ const instance = getCurrentInstance();
 
 const checked = computed((): boolean => instance?.parent?.exposed?.input.value === props.value);
 const onClick = (): void => {
-  instance?.parent?.exposed?.onChangeValue(props.value);
-  emit('click', props.value);
+  if (!props.disabled) {
+    instance?.parent?.exposed?.onChangeValue(props.value);
+    emit('click', props.value);
+  }
 };
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (checked.value) {
+    classes.push('radio--checked');
+  }
+
+  if (props.disabled) {
+    classes.push('radio--disabled');
+  }
+
+  return classes.join(' ');
+});
 </script>
 
 <style lang="scss">

@@ -23,7 +23,23 @@
 
   .slider-handle {
     box-shadow: none;
-    border: 4px solid #3E3CFD;
+    --slider-handle-border: 4px solid #3E3CFD;
+  }
+
+  [disabled] {
+    opacity: 0.3;
+
+    .slider-handle {
+      border: 4px solid #DFE0E5;
+
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+
+    .slider-connect {
+      --slider-connect-bg-disabled: 4px solid #DFE0E5;
+    }
   }
 
   .slider-horizontal .slider-handle {

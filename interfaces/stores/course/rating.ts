@@ -1,5 +1,4 @@
 export default interface IRating {
-  label?: string,
-  value: number,
+  label: number,
   disabled: boolean,
 }

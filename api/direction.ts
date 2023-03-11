@@ -31,13 +31,13 @@ export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirectio
 export const apiGetDirection = async (
   apiUrl: string,
   id: TId,
-): Promise<IFilterDirection | null> => {
+): Promise<IDirection | null> => {
   const {
     getDirection,
   } = direction();
 
   const loadDirection = async ():
-    Promise<IResponseItem<IFilterDirection | null>> => getDirection(apiUrl, id);
+    Promise<IResponseItem<IDirection | null>> => getDirection(apiUrl, id);
 
   const resultCategories = await useAsyncData('direction', async () => loadDirection());
 
@@ -47,13 +47,13 @@ export const apiGetDirection = async (
 export const apiLinkDirection = async (
   apiUrl: string,
   link: string,
-): Promise<IFilterDirection | null> => {
+): Promise<IDirection | null> => {
   const {
     linkDirection,
   } = direction();
 
   const loadDirection = async ():
-    Promise<IResponseItem<IFilterDirection | null>> => linkDirection(apiUrl, link);
+    Promise<IResponseItem<IDirection | null>> => linkDirection(apiUrl, link);
 
   const resultDirection = await useAsyncData('direction', async () => loadDirection());
 

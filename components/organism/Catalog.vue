@@ -298,7 +298,6 @@ import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
-  toRefs,
   watch,
 } from 'vue';
 import { useRoute } from 'vue-router';
@@ -364,6 +363,7 @@ import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
 import IFilters from '@/interfaces/filters';
 import ISorts from '@/interfaces/sorts';
+import IRatingStore from '@/interfaces/stores/course/rating';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -593,36 +593,16 @@ const getLevels = (lvls: Array<ELevel>): Array<ILevel> => {
   return result;
 };
 
-const getRatings = (rtgs: Array<number>): Array<IRating> => {
+const getRatings = (rtgs: Array<IRatingStore>): Array<IRating> => {
   const result: Array<IRating> = [];
 
-  if (rtgs.indexOf(4.5) !== -1) {
+  rtgs.forEach((itm) => {
     result[result.length] = {
-      label: '4.5 и выше',
-      value: 4.5,
+      label: `${itm.label} и выше`,
+      value: itm.label,
+      disabled: itm.disabled,
     };
-  }
-
-  if (rtgs.indexOf(4) !== -1) {
-    result[result.length] = {
-      label: '4.0 и выше',
-      value: 4,
-    };
-  }
-
-  if (rtgs.indexOf(3.5) !== -1) {
-    result[result.length] = {
-      label: '3.5 и выше',
-      value: 3.5,
-    };
-  }
-
-  if (rtgs.indexOf(3) !== -1) {
-    result[result.length] = {
-      label: '3.0 и выше',
-      value: 3,
-    };
-  }
+  });
 
   return result;
 };
@@ -777,6 +757,7 @@ const setSelectedFiltersByQuery = (): void => {
   if (getUrlFilterQuery('rating')?.length) {
     selectedRating.value = {
       value: Number(getUrlFilterQuery('rating')[0]),
+      disabled: false,
     };
   }
 
@@ -968,7 +949,7 @@ const getFilters = (): IFilters => {
 const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
   if (name === 'professions') {
     if (professions.value.length <= 11) {
-      const result = await apiReadProfessions(config.public.apiUrl);
+      const result = await apiReadProfessions(config.public.apiUrl, null, null, getFilters());
       professions.value = courseFilterStoreProfessionsToComponentProfessions(result);
     }
 
@@ -977,7 +958,7 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'categories') {
     if (categories.value.length <= 11) {
-      const result = await apiReadCategories(config.public.apiUrl);
+      const result = await apiReadCategories(config.public.apiUrl, null, null, getFilters());
       categories.value = courseFilterStoreCategoriesToComponentCategories(result);
     }
 
@@ -986,7 +967,7 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'teachers') {
     if (teachers.value.length <= 11) {
-      const result = await apiReadTeachers(config.public.apiUrl);
+      const result = await apiReadTeachers(config.public.apiUrl, null, null, getFilters());
       teachers.value = courseFilterStoreTeachersToComponentTeachers(result);
     }
 
@@ -995,7 +976,7 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'skills') {
     if (skills.value.length <= 11) {
-      const result = await apiReadSkills(config.public.apiUrl);
+      const result = await apiReadSkills(config.public.apiUrl, null, null, getFilters());
       skills.value = courseFilterStoreSkillsToComponentSkills(result);
     }
 
@@ -1004,7 +985,7 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'tools') {
     if (tools.value.length <= 11) {
-      const result = await apiReadTools(config.public.apiUrl);
+      const result = await apiReadTools(config.public.apiUrl, null, null, getFilters());
       tools.value = courseFilterStoreToolsToComponentTools(result);
     }
 
