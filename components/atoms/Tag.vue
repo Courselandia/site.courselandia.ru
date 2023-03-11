@@ -99,6 +99,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const nameClass = computed(() => {
@@ -108,7 +113,7 @@ const nameClass = computed(() => {
     classes.push(`tag--border-${props.border}`);
   }
 
-  if (props.borderHover) {
+  if (props.borderHover && !props.disabled) {
     classes.push(`tag--border-hover-${props.borderHover}`);
   }
 
@@ -120,11 +125,11 @@ const nameClass = computed(() => {
     classes.push(`tag--color-${props.color}`);
   }
 
-  if (props.colorHover) {
+  if (props.colorHover && !props.disabled) {
     classes.push(`tag--color-hover-${props.colorHover}`);
   }
 
-  if (props.bckHover) {
+  if (props.bckHover && !props.disabled) {
     classes.push(`tag--bck-hover-${props.bckHover}`);
   }
 
@@ -132,7 +137,11 @@ const nameClass = computed(() => {
     classes.push('tag--shadow');
   }
 
-  if (props.to || props.cursor) {
+  if (props.disabled) {
+    classes.push('tag--disabled');
+  }
+
+  if (!props.disabled && (props.to || props.cursor)) {
     classes.push('tag--cursor');
   }
 

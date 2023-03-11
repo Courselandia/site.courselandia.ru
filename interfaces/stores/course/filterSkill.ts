@@ -4,4 +4,5 @@ export default interface IFilterSkill {
   id: TId,
   name: string,
   link: string,
+  disabled?: boolean,
 }

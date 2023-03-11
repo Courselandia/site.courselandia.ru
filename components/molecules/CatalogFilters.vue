@@ -31,6 +31,7 @@
           :color="selectedDirectionValue?.id === direction.id ? 'white' : 'black'"
           color-hover="white"
           cursor
+          :disabled="direction.disabled"
           @click="onClickDirection(direction)"
           @keyup="onClickDirection(direction)"
         >
@@ -73,6 +74,7 @@
             :color="selectedDirectionValue?.id === direction.id ? 'white' : 'black'"
             color-hover="white"
             cursor
+            :disabled="direction.disabled"
             @click="onClickDirection(direction)"
             @keyup="onClickDirection(direction)"
           >
@@ -778,6 +780,10 @@ watch(selectedDirection, () => {
 });
 
 const onClickDirection = (value: IDirection | null = null): void => {
+  if (value?.disabled === true) {
+    return;
+  }
+
   const toChange = selectedDirectionValue.value !== value;
   selectedDirectionValue.value = value;
 

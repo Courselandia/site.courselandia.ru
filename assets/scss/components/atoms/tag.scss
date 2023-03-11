@@ -16,6 +16,16 @@
     line-height: 1.1875rem;
   }
 
+  &--disabled {
+    opacity: 0.3;
+
+    .tag {
+      &--cursor {
+        cursor: default !important;
+      }
+    }
+  }
+
   &--cursor {
     cursor: pointer;
   }

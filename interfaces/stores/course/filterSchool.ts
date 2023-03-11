@@ -4,4 +4,5 @@ export default interface IFilterSchool {
   id: TId,
   name: string,
   link: string,
+  disabled?: boolean,
 }

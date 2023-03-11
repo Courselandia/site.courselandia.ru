@@ -11,6 +11,7 @@ export const courseFilterStoreToolsToComponentTools = (
       id: tool.id,
       label: tool.name,
       link: tool.link,
+      disabled: tool.disabled,
     };
   });
 

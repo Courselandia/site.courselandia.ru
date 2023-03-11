@@ -6,4 +6,5 @@ export default interface ICatalogFilterSelectItem {
   label?: string,
   link?: string,
   value?: ELevel,
+  disabled?: boolean,
 }

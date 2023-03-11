@@ -11,6 +11,7 @@ export const courseFilterStoreSkillsToComponentSkills = (
       id: skill.id,
       label: skill.name,
       link: skill.link,
+      disabled: skill.disabled,
     };
   });
 

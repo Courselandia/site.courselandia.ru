@@ -11,6 +11,7 @@ export const courseFilterStoreTeachersToComponentTeachers = (
       id: teacher.id,
       label: teacher.name,
       link: teacher.link,
+      disabled: teacher.disabled,
     };
   });
 

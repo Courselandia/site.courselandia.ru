@@ -11,6 +11,7 @@ export const courseFilterStoreProfessionsToComponentProfessions = (
       id: profession.id,
       label: profession.name,
       link: profession.link,
+      disabled: profession.disabled,
     };
   });
 

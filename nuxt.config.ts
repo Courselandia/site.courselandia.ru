@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     options: {
       linkActiveClass: 'link--active',
       linkExactActiveClass: 'link--exact-active',
+      strict: true,
     },
   },
   app: {

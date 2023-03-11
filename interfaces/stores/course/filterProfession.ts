@@ -4,4 +4,5 @@ export default interface IFilterProfession {
   id: TId,
   name: string,
   link: string,
+  disabled?: boolean,
 }

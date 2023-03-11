@@ -11,6 +11,7 @@ export const courseFilterStoreDirectionsToComponentDirections = (
       id: direction.id,
       name: direction.name,
       link: direction.link,
+      disabled: direction.disabled,
     };
   });
 

@@ -11,6 +11,7 @@ export const courseFilterStoreSchoolsToComponentSchools = (
       id: school.id,
       label: school.name,
       link: school.link,
+      disabled: school.disabled,
     };
   });
 

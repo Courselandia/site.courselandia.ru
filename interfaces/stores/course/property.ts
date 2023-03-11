@@ -4,4 +4,5 @@ export default interface IProperty {
   id: TId,
   name: string,
   link?: string,
+  disabled?: null,
 }

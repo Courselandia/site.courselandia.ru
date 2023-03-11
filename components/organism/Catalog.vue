@@ -350,6 +350,7 @@ import {
   hasRating,
 } from '@/helpers/chekFilter';
 import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
+import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 import ICategory from '@/interfaces/components/molecules/category';
 import ICourse from '@/interfaces/components/molecules/course';
 import IDirection from '@/interfaces/components/molecules/direction';
@@ -366,10 +367,10 @@ import ISorts from '@/interfaces/sorts';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
+import school from '@/stores/school';
 import skill from '@/stores/skill';
 import teacher from '@/stores/teacher';
 import tool from '@/stores/tool';
-import school from '@/stores/school';
 import TValue from '@/types/value';
 
 const props = defineProps({
@@ -381,8 +382,8 @@ const props = defineProps({
 });
 
 const route = useRoute();
-const { link } = route.params;
-const { section } = toRefs(props);
+let { link } = route.params;
+let section = props.section || null;
 
 const getUrlFilterQuery = (name: string): Array<string> => {
   const { query } = route;
@@ -695,7 +696,7 @@ const setCoursesAndFilters = (result: IApiReadCourses): void => {
 };
 
 const setSelectedFiltersByQuery = (): void => {
-  if (section.value === 'direction') {
+  if (section === 'direction') {
     const { itemDirection } = storeToRefs(direction());
 
     if (itemDirection.value?.id) {
@@ -705,7 +706,7 @@ const setSelectedFiltersByQuery = (): void => {
     }
   }
 
-  if (section.value === 'school') {
+  if (section === 'school') {
     const { itemSchool } = storeToRefs(school());
 
     if (itemSchool.value?.id) {
@@ -717,7 +718,7 @@ const setSelectedFiltersByQuery = (): void => {
     }
   }
 
-  if (section.value === 'category') {
+  if (section === 'category') {
     const { itemCategory } = storeToRefs(category());
 
     if (itemCategory.value?.id) {
@@ -727,7 +728,7 @@ const setSelectedFiltersByQuery = (): void => {
     }
   }
 
-  if (section.value === 'profession') {
+  if (section === 'profession') {
     const { itemProfession } = storeToRefs(profession());
 
     if (itemProfession.value?.id) {
@@ -737,7 +738,7 @@ const setSelectedFiltersByQuery = (): void => {
     }
   }
 
-  if (section.value === 'teacher') {
+  if (section === 'teacher') {
     const { itemTeacher } = storeToRefs(teacher());
 
     if (itemTeacher.value?.id) {
@@ -747,7 +748,7 @@ const setSelectedFiltersByQuery = (): void => {
     }
   }
 
-  if (section.value === 'skill') {
+  if (section === 'skill') {
     const { itemSkill } = storeToRefs(skill());
 
     if (itemSkill.value?.id) {
@@ -757,7 +758,7 @@ const setSelectedFiltersByQuery = (): void => {
     }
   }
 
-  if (section.value === 'tool') {
+  if (section === 'tool') {
     const { itemTool } = storeToRefs(tool());
 
     if (itemTool.value?.id) {
@@ -1036,70 +1037,175 @@ const setUrlQuery = (
   sortsCurrent: ISorts | null = null,
   filtersCurrent: IFilters | null = null,
 ): void => {
-  const queries: Array<string> = [];
-
-  queries.push(`page=${encodeURIComponent(pageValue)}`);
-
-  if (sortsCurrent) {
-    if (sortsCurrent.header === 'ASC') {
-      queries.push('sort=alphabetic');
-    } else if (sortsCurrent.id === 'DESC') {
-      queries.push('sort=date');
-    } else if (sortsCurrent.rating === 'DESC') {
-      queries.push('sort=rating');
-    } else if (sortsCurrent.price === 'ASC') {
-      queries.push('sort=price_asc');
-    } else if (sortsCurrent.price === 'DESC') {
-      queries.push('sort=price_desc');
-    } else if (sortsCurrent.relevance === 'DESC') {
-      queries.push('sort=relevance');
-    }
-  }
-
-  const convertNameFilter = (name: string): string => {
-    const names: Record<string, string> = {
-      'directions-id': 'direction',
-      'school-id': 'schools',
-      'categories-id': 'categories',
-      'professions-id': 'professions',
-      'teachers-id': 'teachers',
-      'skills-id': 'skills',
-      'tools-id': 'tools',
-      'levels-level': 'levels',
-    };
-
-    return names[name] || name;
+  const names: Record<string, string> = {
+    'directions-id': 'direction',
+    'school-id': 'schools',
+    'categories-id': 'categories',
+    'professions-id': 'professions',
+    'teachers-id': 'teachers',
+    'skills-id': 'skills',
+    'tools-id': 'tools',
+    'levels-level': 'levels',
   };
 
-  if (filtersCurrent) {
-    Object.keys(filtersCurrent).forEach((name) => {
-      if (filtersCurrent[name]) {
-        const nameParameter = `filters[${encodeURIComponent(convertNameFilter(name))}]`;
-        if (typeof filtersCurrent[name] === 'string' || typeof filtersCurrent[name] === 'number') {
-          queries.push(`${nameParameter}=${filtersCurrent[name]}`);
-        } else if (typeof filtersCurrent[name] === 'boolean') {
-          queries.push(`${nameParameter}=${filtersCurrent[name] ? 1 : 0}`);
-        } else if (Array.isArray(filtersCurrent[name])) {
-          const items = filtersCurrent[name] as Array<string | number | boolean>;
-          const values = items.join(',');
-          queries.push(`${nameParameter}=${values}`);
-        }
+  const convertNameFilterToSection = (name: string): string => names[name] || name;
+
+  const convertSectionFilterToName = (
+    name: string,
+  ): string | null => Object.keys(names).find((key) => names[key] === name) || null;
+
+  const getUrlWithQuery = (sectionValue?: string, linkValue?: string): string => {
+    const queries: Array<string> = [];
+
+    queries.push(`page=${encodeURIComponent(pageValue)}`);
+
+    if (sortsCurrent) {
+      if (sortsCurrent.header === 'ASC') {
+        queries.push('sort=alphabetic');
+      } else if (sortsCurrent.id === 'DESC') {
+        queries.push('sort=date');
+      } else if (sortsCurrent.rating === 'DESC') {
+        queries.push('sort=rating');
+      } else if (sortsCurrent.price === 'ASC') {
+        queries.push('sort=price_asc');
+      } else if (sortsCurrent.price === 'DESC') {
+        queries.push('sort=price_desc');
+      } else if (sortsCurrent.relevance === 'DESC') {
+        queries.push('sort=relevance');
       }
-    });
+    }
+
+    if (filtersCurrent) {
+      Object.keys(filtersCurrent).forEach((name) => {
+        if (
+          filtersCurrent[name]
+          && (
+            !sectionValue || convertSectionFilterToName(sectionValue) !== name
+          )
+        ) {
+          const nameParameter = `filters[${encodeURIComponent(convertNameFilterToSection(name))}]`;
+
+          if (typeof filtersCurrent[name] === 'string' || typeof filtersCurrent[name] === 'number') {
+            queries.push(`${nameParameter}=${filtersCurrent[name]}`);
+          } else if (typeof filtersCurrent[name] === 'boolean') {
+            queries.push(`${nameParameter}=${filtersCurrent[name] ? 1 : 0}`);
+          } else if (Array.isArray(filtersCurrent[name])) {
+            const items = filtersCurrent[name] as Array<string | number | boolean>;
+            const values = items.join(',');
+            queries.push(`${nameParameter}=${values}`);
+          }
+        }
+      });
+    }
 
     const query = queries.join('&');
 
     let url = window.location.href.split('?')[0];
 
+    if (sectionValue && linkValue) {
+      url += `/${sectionValue}/${linkValue}`;
+    }
+
     if (query) {
       url = `${url}?${query}`;
     }
 
+    return url;
+  };
+
+  const filterSectionNames: Record<string, Array<ICatalogFilterSelectItem>> = {
+    'school-id': schools.value,
+    'categories-id': categories.value,
+    'professions-id': professions.value,
+    'teachers-id': teachers.value,
+    'skills-id': skills.value,
+    'tools-id': tools.value,
+  };
+
+  const hasSectionFilter = (searchName?: string): boolean => {
+    let foundSection = false;
+
+    if (filtersCurrent) {
+      Object.keys(filterSectionNames).forEach((name): void => {
+        const flts = filtersCurrent[name] as Array<number>;
+
+        if (searchName && name === searchName && flts?.length === 1) {
+          foundSection = true;
+        }
+
+        if (!searchName && flts?.length === 1) {
+          foundSection = true;
+        }
+      });
+    }
+
+    return foundSection;
+  };
+
+  const getSectionFilter = (): { name: string, link: string } | null => {
+    if (filtersCurrent) {
+      let result: any = null;
+
+      Object.keys(filterSectionNames).forEach((name) => {
+        if (!result && filtersCurrent[name]) {
+          const checkFilters = filtersCurrent[name] as Array<number>;
+
+          if (checkFilters.length) {
+            const foundItem = filterSectionNames[name].find((itm) => itm.id === checkFilters[0]);
+
+            if (foundItem) {
+              result = {
+                name: convertNameFilterToSection(name) || '',
+                link: foundItem.link || '',
+              };
+            }
+          }
+        }
+      });
+
+      return result;
+    }
+
+    return null;
+  };
+
+  if (filtersCurrent) {
+    let url = '';
+
+    if (!section && !link) {
+      const filterSection = getSectionFilter();
+
+      if (filterSection) {
+        section = filterSection.name;
+        link = filterSection.link;
+
+        url = getUrlWithQuery(section || '', link);
+      } else {
+        url = getUrlWithQuery();
+      }
+    } else if (section) {
+      const sectionFilterName = convertSectionFilterToName(section);
+
+      if (sectionFilterName && link) {
+        const has = hasSectionFilter(sectionFilterName);
+
+        if (has) {
+          url = getUrlWithQuery(section, link as string);
+        } else {
+          url = getUrlWithQuery();
+        }
+      }
+    }
+
+    console.log(url);
+
+    /*
     window.history.pushState(
       {},
       '',
       url,
     );
+     */
   }
 };
 

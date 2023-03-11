@@ -11,6 +11,7 @@ export const courseFilterStoreCategoriesToComponentCategories = (
       id: category.id,
       label: category.name,
       link: category.link,
+      disabled: category.disabled,
     };
   });
 

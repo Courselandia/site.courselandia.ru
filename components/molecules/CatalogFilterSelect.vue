@@ -31,8 +31,9 @@
         <Checkbox
           v-for="(item, key) in activeItems"
           :key="key"
-          :value="item.id || item.link"
+          :value="item.id"
           :label="item.label"
+          :disabled="item.disabled && selects.indexOf(item.id) === -1"
           name="select"
           @click="onClick"
         />

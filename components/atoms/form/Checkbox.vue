@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`checkbox ${checked ? 'checkbox--checked' : ''}`"
+    :class="`checkbox ${nameClass}`"
     @click="onClick"
     @keydown="onClick"
   >
@@ -46,6 +46,11 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const instance = getCurrentInstance();
@@ -54,8 +59,24 @@ const checked = computed(
   (): boolean => instance?.parent?.exposed?.input.value?.indexOf(props.value) !== -1,
 );
 const onClick = (): void => {
-  instance?.parent?.exposed?.onChangeValue(props.value);
+  if (!props.disabled) {
+    instance?.parent?.exposed?.onChangeValue(props.value);
+  }
 };
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (checked.value) {
+    classes.push('checkbox--checked');
+  }
+
+  if (props.disabled) {
+    classes.push('checkbox--disabled');
+  }
+
+  return classes.join(' ');
+});
 </script>
 
 <style lang="scss">
