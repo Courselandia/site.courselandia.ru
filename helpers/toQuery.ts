@@ -6,6 +6,7 @@ export default function toQuery(
   limit: number | null = null,
   sorts: ISorts | null = null,
   filters: IFilters | null = null,
+  additional: Record<string, string | number | boolean | null> | null = null,
 ): string {
   const params: Record<string, string> = {};
 
@@ -46,6 +47,20 @@ export default function toQuery(
         } else {
           queryFilters += `filters[${field}]=${encodeURIComponent(String(filters[field]))}`;
         }
+      }
+    });
+  }
+
+  if (additional) {
+    Object.keys(additional).forEach((field) => {
+      if (queryFilters !== '') {
+        queryFilters += '&';
+      }
+
+      if (typeof additional[field] === 'boolean') {
+        queryFilters += `${field}=${additional[field] ? 1 : 0}`;
+      } else {
+        queryFilters += `${field}=${encodeURIComponent(String(additional[field]))}`;
       }
     });
   }

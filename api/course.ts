@@ -17,13 +17,21 @@ export const apiReadCourses = async (
   limit: number = 36,
   sorts: ISorts | null = null,
   filters: IFilters | null = null,
+  openedItems: Record<string, boolean> | null = null,
 ): Promise<IApiReadCourses> => {
   const {
     readCourses,
   } = course();
 
   const loadRatedCourses = async ():
-    Promise<IResponseItems<ICourse>> => readCourses(apiUrl, offset, limit, sorts, filters);
+    Promise<IResponseItems<ICourse>> => readCourses(
+    apiUrl,
+    offset,
+    limit,
+    sorts,
+    filters,
+    openedItems,
+  );
 
   const {
     total,

@@ -31,9 +31,10 @@ export default defineStore('course', {
       limit: number = 36,
       sorts: ISorts | null = null,
       filters: IFilters | null = null,
+      openedItems: Record<string, boolean> | null = null,
     ): Promise<IResponseItems<ICourse>> {
       try {
-        const query = toQuery(offset, limit, sorts, filters);
+        const query = toQuery(offset, limit, sorts, filters, openedItems);
         const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
           baseURL: baseUrl,
         });
@@ -60,16 +61,8 @@ export default defineStore('course', {
       limit: number = 12,
     ): Promise<IResponseItems<ICourse>> {
       try {
-        const sorts: ISorts = {
-          rating: 'DESC',
-        };
-
-        const filters: IFilters = {
-          price: [70000, 300000],
-        };
-
-        const query = toQuery(null, limit, sorts, filters);
-        const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
+        const query = toQuery(null, limit);
+        const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read/rated?${query}`, {
           baseURL: baseUrl,
         });
 
@@ -89,18 +82,12 @@ export default defineStore('course', {
     ): Promise<IResponseItems<ICourse> | null> {
       if (search) {
         try {
-          const filters: IFilters = {
-            search,
-          };
-
-          const sorts: ISorts = {
-            relevance: 'DESC',
-          };
-
-          const query = toQuery(null, limit, sorts, filters);
-          const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
-            baseURL: baseUrl,
-          });
+          const response = await axios.get<IResponseItems<ICourse>>(
+            `/api/private/site/course/read/search?limit=${limit}&search=${encodeURIComponent(search)}`,
+            {
+              baseURL: baseUrl,
+            },
+          );
 
           this.searchedCourses = response.data.data.courses;
           this.searchedTotal = response.data.data.total;

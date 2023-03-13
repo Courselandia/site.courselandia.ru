@@ -384,6 +384,14 @@ const props = defineProps({
 const route = useRoute();
 let { link } = route.params;
 let section = props.section || null;
+const openedItems: Record<string, boolean> = {
+  openedSchools: false,
+  openedCategories: false,
+  openedProfessions: false,
+  openedTeachers: false,
+  openedSkills: false,
+  openedTools: false,
+};
 
 const getUrlFilterQuery = (name: string): Array<string> => {
   const { query } = route;
@@ -491,7 +499,7 @@ const selectedTeachers = ref<Array<ITeacher>>([]);
 const selectedSkills = ref<Array<ISkill>>([]);
 const selectedTools = ref<Array<ITool>>([]);
 
-const getLinkPagination = (page: number): string => `/courses/?page=${page}`;
+const getLinkPagination = (page: number): string => `/courses?page=${page}`;
 
 const totalFilters = computed((): number => {
   let count = 0;
@@ -566,32 +574,23 @@ const getFormats = (formatValues: Array<EFormat>): Array<IFormat> => {
   return result;
 };
 
-const getLevels = (lvls: Array<ELevel>): Array<ILevel> => {
-  const result: Array<ILevel> = [];
-
-  if (lvls.indexOf(ELevel.JUNIOR) !== -1) {
-    result[result.length] = {
-      label: 'Для начинающих',
-      value: ELevel.JUNIOR,
-    };
-  }
-
-  if (lvls.indexOf(ELevel.MIDDLE) !== -1) {
-    result[result.length] = {
-      label: 'Для продвинутых',
-      value: ELevel.MIDDLE,
-    };
-  }
-
-  if (lvls.indexOf(ELevel.SENIOR) !== -1) {
-    result[result.length] = {
-      label: 'Для профессионалов',
-      value: ELevel.SENIOR,
-    };
-  }
-
-  return result;
-};
+const getLevels = (lvls: Array<ELevel>): Array<ILevel> => [
+  {
+    label: 'Для начинающих',
+    value: ELevel.JUNIOR,
+    disabled: lvls.indexOf(ELevel.JUNIOR) === -1,
+  },
+  {
+    label: 'Для продвинутых',
+    value: ELevel.MIDDLE,
+    disabled: lvls.indexOf(ELevel.MIDDLE) === -1,
+  },
+  {
+    label: 'Для профессионалов',
+    value: ELevel.SENIOR,
+    disabled: lvls.indexOf(ELevel.SENIOR) === -1,
+  },
+];
 
 const getRatings = (rtgs: Array<IRatingStore>): Array<IRating> => {
   const result: Array<IRating> = [];
@@ -782,37 +781,37 @@ const setSelectedFiltersByQuery = (): void => {
   }
 
   if (getUrlFilterQuery('schools')?.length) {
-    selectedSchools.value.concat(getUrlFilterQuery('schools').map((itm) => ({
+    selectedSchools.value = selectedSchools.value.concat(getUrlFilterQuery('schools').map((itm) => ({
       id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('categories')?.length) {
-    selectedCategories.value.concat(getUrlFilterQuery('categories').map((itm) => ({
+    selectedCategories.value = selectedCategories.value.concat(getUrlFilterQuery('categories').map((itm) => ({
       id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('professions')?.length) {
-    selectedProfessions.value.concat(getUrlFilterQuery('professions').map((itm) => ({
+    selectedProfessions.value = selectedProfessions.value.concat(getUrlFilterQuery('professions').map((itm) => ({
       id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('skills')?.length) {
-    selectedSkills.value.concat(getUrlFilterQuery('skills').map((itm) => ({
+    selectedSkills.value = selectedSkills.value.concat(getUrlFilterQuery('skills').map((itm) => ({
       id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('teachers')?.length) {
-    selectedTeachers.value.concat(getUrlFilterQuery('teachers').map((itm) => ({
+    selectedTeachers.value = selectedTeachers.value.concat(getUrlFilterQuery('teachers').map((itm) => ({
       id: Number(itm),
     })));
   }
 
   if (getUrlFilterQuery('tools')?.length) {
-    selectedTools.value.concat(getUrlFilterQuery('tools').map((itm) => ({
+    selectedTools.value = selectedTools.value.concat(getUrlFilterQuery('tools').map((itm) => ({
       id: Number(itm),
     })));
   }
@@ -826,6 +825,7 @@ const setSelectedFiltersByQuery = (): void => {
   if (getUrlFilterQuery('levels')?.length) {
     selectedLevels.value = getUrlFilterQuery('levels').map((level) => ({
       value: level as ELevel,
+      disabled: false,
     }));
   }
 };
@@ -845,6 +845,7 @@ const load = async (
       sizeValue,
       sorts,
       filterCurrent,
+      openedItems,
     );
 
     setCoursesAndFilters(result);
@@ -953,6 +954,8 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
       professions.value = courseFilterStoreProfessionsToComponentProfessions(result);
     }
 
+    openedItems.openedProfessions = true;
+
     if (callback) {
       callback();
     }
@@ -961,6 +964,8 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
       const result = await apiReadCategories(config.public.apiUrl, null, null, getFilters());
       categories.value = courseFilterStoreCategoriesToComponentCategories(result);
     }
+
+    openedItems.openedCategories = true;
 
     if (callback) {
       callback();
@@ -971,6 +976,8 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
       teachers.value = courseFilterStoreTeachersToComponentTeachers(result);
     }
 
+    openedItems.openedTeachers = true;
+
     if (callback) {
       callback();
     }
@@ -980,6 +987,8 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
       skills.value = courseFilterStoreSkillsToComponentSkills(result);
     }
 
+    openedItems.openedSkills = true;
+
     if (callback) {
       callback();
     }
@@ -988,6 +997,8 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
       const result = await apiReadTools(config.public.apiUrl, null, null, getFilters());
       tools.value = courseFilterStoreToolsToComponentTools(result);
     }
+
+    openedItems.openedTools = true;
 
     if (callback) {
       callback();
@@ -1018,7 +1029,7 @@ const setUrlQuery = (
   sortsCurrent: ISorts | null = null,
   filtersCurrent: IFilters | null = null,
 ): void => {
-  const names: Record<string, string> = {
+  const queryFilterNames: Record<string, string> = {
     'directions-id': 'direction',
     'school-id': 'schools',
     'categories-id': 'categories',
@@ -1029,13 +1040,26 @@ const setUrlQuery = (
     'levels-level': 'levels',
   };
 
-  const convertNameFilterToSection = (name: string): string => names[name] || name;
+  const sectionNames: Record<string, string> = {
+    'directions-id': 'direction',
+    'school-id': 'school',
+    'categories-id': 'category',
+    'professions-id': 'profession',
+    'teachers-id': 'teacher',
+    'skills-id': 'skill',
+    'tools-id': 'tool',
+    'levels-level': 'level',
+  };
+
+  const convertNameFilterToSection = (name: string): string => sectionNames[name] || name;
+  const convertNameFilterToFilterQuery = (name: string): string => queryFilterNames[name] || name;
 
   const convertSectionFilterToName = (
     name: string,
-  ): string | null => Object.keys(names).find((key) => names[key] === name) || null;
+  ): string | null => Object.keys(sectionNames).find((key) => sectionNames[key] === name) || null;
 
   const getUrlWithQuery = (sectionValue?: string, linkValue?: string): string => {
+    console.log(linkValue);
     const queries: Array<string> = [];
 
     queries.push(`page=${encodeURIComponent(pageValue)}`);
@@ -1064,7 +1088,7 @@ const setUrlQuery = (
             !sectionValue || convertSectionFilterToName(sectionValue) !== name
           )
         ) {
-          const nameParameter = `filters[${encodeURIComponent(convertNameFilterToSection(name))}]`;
+          const nameParameter = `filters[${encodeURIComponent(convertNameFilterToFilterQuery(name))}]`;
 
           if (typeof filtersCurrent[name] === 'string' || typeof filtersCurrent[name] === 'number') {
             queries.push(`${nameParameter}=${filtersCurrent[name]}`);
@@ -1081,7 +1105,7 @@ const setUrlQuery = (
 
     const query = queries.join('&');
 
-    let url = window.location.href.split('?')[0];
+    let url = '/courses';
 
     if (sectionValue && linkValue) {
       url += `/${sectionValue}/${linkValue}`;
@@ -1094,7 +1118,8 @@ const setUrlQuery = (
     return url;
   };
 
-  const filterSectionNames: Record<string, Array<ICatalogFilterSelectItem>> = {
+  const filterSectionNames: Record<string, Array<ICatalogFilterSelectItem | IDirection>> = {
+    'directions-id': directions.value,
     'school-id': schools.value,
     'categories-id': categories.value,
     'professions-id': professions.value,
@@ -1103,36 +1128,28 @@ const setUrlQuery = (
     'tools-id': tools.value,
   };
 
-  const hasSectionFilter = (searchName?: string): boolean => {
-    let foundSection = false;
-
-    if (filtersCurrent) {
-      Object.keys(filterSectionNames).forEach((name): void => {
-        const flts = filtersCurrent[name] as Array<number>;
-
-        if (searchName && name === searchName && flts?.length === 1) {
-          foundSection = true;
-        }
-
-        if (!searchName && flts?.length === 1) {
-          foundSection = true;
-        }
-      });
-    }
-
-    return foundSection;
-  };
-
   const getSectionFilter = (): { name: string, link: string } | null => {
     if (filtersCurrent) {
       let result: any = null;
 
       Object.keys(filterSectionNames).forEach((name) => {
         if (!result && filtersCurrent[name]) {
-          const checkFilters = filtersCurrent[name] as Array<number>;
+          if (Array.isArray(filtersCurrent[name])) {
+            const checkFilters = filtersCurrent[name] as Array<number>;
 
-          if (checkFilters.length) {
-            const foundItem = filterSectionNames[name].find((itm) => itm.id === checkFilters[0]);
+            if (checkFilters.length === 1) {
+              const foundItem = filterSectionNames[name].find((itm) => itm.id === checkFilters[0]);
+
+              if (foundItem) {
+                result = {
+                  name: convertNameFilterToSection(name) || '',
+                  link: foundItem.link || '',
+                };
+              }
+            }
+          } else {
+            const checkFilters = filtersCurrent[name] as number;
+            const foundItem = filterSectionNames[name].find((itm) => itm.id === checkFilters);
 
             if (foundItem) {
               result = {
@@ -1168,25 +1185,27 @@ const setUrlQuery = (
       const sectionFilterName = convertSectionFilterToName(section);
 
       if (sectionFilterName && link) {
-        const has = hasSectionFilter(sectionFilterName);
+        const filterSection = getSectionFilter();
 
-        if (has) {
-          url = getUrlWithQuery(section, link as string);
+        if (filterSection) {
+          section = filterSection.name;
+          link = filterSection.link;
+          url = getUrlWithQuery(section || '', link);
         } else {
           url = getUrlWithQuery();
+          section = null;
+          link = '';
         }
       }
     }
 
     console.log(url);
 
-    /*
     window.history.pushState(
       {},
       '',
       url,
     );
-     */
   }
 };
 

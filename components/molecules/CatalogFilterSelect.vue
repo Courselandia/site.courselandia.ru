@@ -124,38 +124,7 @@ const selects = ref(value.value?.map((item) => item.id) || []);
 
 const activeItems = computed((): Array<ICatalogFilterSelectItem> => props.items?.filter(
   (itm) => itm.label?.toLowerCase().indexOf(search.value.toLowerCase()) !== -1 || search.value === '',
-).sort((a: ICatalogFilterSelectItem, b: ICatalogFilterSelectItem): number => {
-  if (a.disabled && selects.value.indexOf(b.id) !== -1) {
-    return 1;
-  }
-
-  if (
-    selects.value.indexOf(a.id) !== -1
-    && selects.value.indexOf(b.id) !== -1
-  ) {
-    if (a.label && b.label) {
-      if (a.label > b.label) {
-        return 1;
-      }
-
-      if (a.label < b.label) {
-        return -1;
-      }
-    }
-
-    return 0;
-  }
-
-  if (selects.value.indexOf(a.id) !== -1) {
-    return -1;
-  }
-
-  if (selects.value.indexOf(b.id) !== -1) {
-    return 1;
-  }
-
-  return 0;
-}));
+));
 
 watch(selects, () => {
   const selected = props.items.filter((itm) => selects.value.indexOf(itm.id) !== -1);
