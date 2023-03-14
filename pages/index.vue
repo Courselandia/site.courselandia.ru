@@ -106,6 +106,16 @@ import directionsToMenu from '@/converts/directionsToMenu';
 import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
 
+useHead({
+  title: 'Агрегатор онлайн-курсов courselandia.ru',
+  meta: [
+    {
+      name: 'description',
+      content: 'courselandia.ru - это огромный каталог онлайн курсов по разным направлениям с умным поиском по  навыкам, направлениям, профессиям и инструментами.',
+    },
+  ],
+});
+
 const config = useRuntimeConfig();
 const listDirections = ref<IMenu[]>();
 

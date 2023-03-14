@@ -43,6 +43,9 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'ru',
+      },
       title: 'Courselandia.ru',
       meta: [
         {
