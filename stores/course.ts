@@ -8,9 +8,15 @@ import {
   IResponseItems,
 } from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
+import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import ICourse from '@/interfaces/stores/course/course';
-import IDescription from '@/interfaces/stores/course/description';
+import ISchoolLink from '@/interfaces/stores/course/directionLink';
 import IFilter from '@/interfaces/stores/course/filter';
+import IProfessionLink from '@/interfaces/stores/course/professionLink';
+import IDirectionLink from '@/interfaces/stores/course/schoolLink';
+import ISkillLink from '@/interfaces/stores/course/skillLink';
+import ITeacherLink from '@/interfaces/stores/course/teacherLink';
+import IToolLink from '@/interfaces/stores/course/toolLink';
 
 export default defineStore('course', {
   state: () => ({
@@ -22,7 +28,14 @@ export default defineStore('course', {
     total: null as number | null,
     filter: null as IFilter | null,
     section: null as string | null,
-    description: null as IDescription | null,
+    description: null as ICategoryLink
+      | IDirectionLink
+      | IProfessionLink
+      | ISchoolLink
+      | ISkillLink
+      | ITeacherLink
+      | IToolLink
+      | null,
   }),
   actions: {
     async readCourses(
@@ -33,13 +46,13 @@ export default defineStore('course', {
       filters: IFilters | null = null,
       openedItems: Record<string, boolean> | null = null,
       section: string | null = null,
-      link: string | null = null,
+      sectionLink: string | null = null,
     ): Promise<IResponseItems<ICourse>> {
       try {
         const additional: Record<string, string | boolean | null> | null = openedItems || {};
 
         additional.section = section;
-        additional.link = link;
+        additional.sectionLink = sectionLink;
 
         const query = toQuery(offset, limit, sorts, filters, additional);
         const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {

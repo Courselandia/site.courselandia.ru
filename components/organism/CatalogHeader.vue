@@ -25,11 +25,10 @@
         v-if="itemLinkCategory.directions"
         #tags
       >
-        <Tags
-          v-for="(item, key) in itemLinkCategory.directions"
-          :key="key"
-        >
+        <Tags>
           <Tag
+            v-for="(item, key) in itemLinkCategory.directions"
+            :key="key"
             :to="`/courses/direction/${item.link}`"
             bck="white"
             shadow

@@ -263,6 +263,13 @@ import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
 import IFilters from '@/interfaces/filters';
 import ISorts from '@/interfaces/sorts';
+import IDirectionLink from '@/interfaces/stores/course/directionLink';
+import IProfessionLink from '@/interfaces/stores/course/professionLink';
+import ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import ISkillLink from '@/interfaces/stores/course/skillLink';
+import ITeacherLink from '@/interfaces/stores/course/teacherLink';
+import IToolLink from '@/interfaces/stores/course/toolLink';
+import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import IRatingStore from '@/interfaces/stores/course/rating';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
@@ -517,6 +524,34 @@ const getRatings = (rtgs: Array<IRatingStore>): Array<IRating> => {
 
 const config = useRuntimeConfig();
 
+const setHeader = (result: IApiReadCourses): void => {
+  itemLinkDirection.value = null;
+  itemLinkCategory.value = null;
+  itemLinkProfession.value = null;
+  itemLinkSchool.value = null;
+  itemLinkSkill.value = null;
+  itemLinkTeacher.value = null;
+  itemLinkTool.value = null;
+
+  if (result.description) {
+    if (section === 'direction') {
+      itemLinkDirection.value = result.description as IDirectionLink;
+    } else if (section === 'category') {
+      itemLinkCategory.value = result.description as ICategoryLink;
+    } else if (section === 'profession') {
+      itemLinkProfession.value = result.description as IProfessionLink;
+    } else if (section === 'school') {
+      itemLinkSchool.value = result.description as ISchoolLink;
+    } else if (section === 'skill') {
+      itemLinkSkill.value = result.description as ISkillLink;
+    } else if (section === 'teacher') {
+      itemLinkTeacher.value = result.description as ITeacherLink;
+    } else if (section === 'tool') {
+      itemLinkTool.value = result.description as IToolLink;
+    }
+  }
+};
+
 const setCoursesAndFilters = (result: IApiReadCourses): void => {
   courses.value = coursesStoreToCoursesComponent(result.courses);
   total.value = result.total || 0;
@@ -746,6 +781,7 @@ const load = async (
     );
 
     setCoursesAndFilters(result);
+    setHeader(result);
   } catch (error: any) {
     console.log(error.message);
   }
