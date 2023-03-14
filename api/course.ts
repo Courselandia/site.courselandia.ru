@@ -18,6 +18,8 @@ export const apiReadCourses = async (
   sorts: ISorts | null = null,
   filters: IFilters | null = null,
   openedItems: Record<string, boolean> | null = null,
+  sectionValue: string | null = null,
+  link: string | null = null,
 ): Promise<IApiReadCourses> => {
   const {
     readCourses,
@@ -31,6 +33,8 @@ export const apiReadCourses = async (
     sorts,
     filters,
     openedItems,
+    sectionValue,
+    link,
   );
 
   const {

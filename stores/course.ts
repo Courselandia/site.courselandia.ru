@@ -32,9 +32,16 @@ export default defineStore('course', {
       sorts: ISorts | null = null,
       filters: IFilters | null = null,
       openedItems: Record<string, boolean> | null = null,
+      section: string | null = null,
+      link: string | null = null,
     ): Promise<IResponseItems<ICourse>> {
       try {
-        const query = toQuery(offset, limit, sorts, filters, openedItems);
+        const additional: Record<string, string | boolean | null> | null = openedItems || {};
+
+        additional.section = section;
+        additional.link = link;
+
+        const query = toQuery(offset, limit, sorts, filters, additional);
         const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
           baseURL: baseUrl,
         });

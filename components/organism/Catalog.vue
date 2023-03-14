@@ -741,6 +741,8 @@ const load = async (
       sorts,
       filterCurrent,
       openedItems,
+      section,
+      link as string,
     );
 
     setCoursesAndFilters(result);
@@ -1107,8 +1109,8 @@ const setUrlQuery = (
 const onFilterAndSort = async (): Promise<void> => {
   const filters: IFilters = getFilters();
 
-  await load(currentPage.value, size.value, getSort(sort.value), filters);
   setUrlQuery(currentPage.value, getSort(sort.value), filters);
+  await load(currentPage.value, size.value, getSort(sort.value), filters);
 };
 
 const onChangePrices = (): void => {
