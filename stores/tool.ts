@@ -8,12 +8,14 @@ import {
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterTool from '@/interfaces/stores/course/filterTool';
+import IToolLink from '@/interfaces/stores/course/toolLink';
 import TId from '@/types/id';
 
 export default defineStore('tool', {
   state: () => ({
     tools: null as IFilterTool[] | null,
     itemTool: null as IFilterTool | null,
+    itemLinkTool: null as IToolLink | null,
   }),
   actions: {
     async readTools(
@@ -52,17 +54,17 @@ export default defineStore('tool', {
         throw error;
       }
     },
-    async linkTool(baseUrl: string, link: string): Promise<IResponseItem<IFilterTool>> {
+    async linkTool(baseUrl: string, link: string): Promise<IResponseItem<IToolLink>> {
       try {
-        const response = await axios.get<IResponseItem<IFilterTool>>(`/api/private/site/tool/link/${link}`, {
+        const response = await axios.get<IResponseItem<IToolLink>>(`/api/private/site/tool/link/${link}`, {
           baseURL: baseUrl,
         });
 
-        this.itemTool = response.data.data;
+        this.itemLinkTool = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.itemTool = null;
+        this.itemLinkTool = null;
 
         throw error;
       }

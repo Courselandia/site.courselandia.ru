@@ -78,7 +78,7 @@
             :to="course.url"
             link="link"
             target="_blank"
-            rel="nofollow"
+            rel="nofollow noopener noreferrer"
             wide
           >
             На сайт курса

@@ -6,12 +6,14 @@ import {
   IResponseItems,
 } from '@/interfaces/response';
 import IDirection from '@/interfaces/stores/course/direction';
+import IDirectionLink from '@/interfaces/stores/course/directionLink';
 import TId from '@/types/id';
 
 export default defineStore('direction', {
   state: () => ({
     directions: null as IDirection[] | null,
     itemDirection: null as IDirection | null,
+    itemLinkDirection: null as IDirectionLink | null,
   }),
   actions: {
     async readDirections(
@@ -50,17 +52,17 @@ export default defineStore('direction', {
         throw error;
       }
     },
-    async linkDirection(baseUrl: string, link: string): Promise<IResponseItem<IDirection>> {
+    async linkDirection(baseUrl: string, link: string): Promise<IResponseItem<IDirectionLink>> {
       try {
-        const response = await axios.get<IResponseItem<IDirection>>(`/api/private/site/direction/link/${link}`, {
+        const response = await axios.get<IResponseItem<IDirectionLink>>(`/api/private/site/direction/link/${link}`, {
           baseURL: baseUrl,
         });
 
-        this.itemDirection = response.data.data;
+        this.itemLinkDirection = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.itemDirection = null;
+        this.itemLinkDirection = null;
 
         throw error;
       }

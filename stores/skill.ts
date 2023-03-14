@@ -8,12 +8,14 @@ import {
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterSkill from '@/interfaces/stores/course/filterSkill';
+import ISkillLink from '@/interfaces/stores/course/skillLink';
 import TId from '@/types/id';
 
 export default defineStore('skill', {
   state: () => ({
     skills: null as IFilterSkill[] | null,
     itemSkill: null as IFilterSkill | null,
+    itemLinkSkill: null as ISkillLink | null,
   }),
   actions: {
     async readSkills(
@@ -52,17 +54,17 @@ export default defineStore('skill', {
         throw error;
       }
     },
-    async linkSkill(baseUrl: string, link: string): Promise<IResponseItem<IFilterSkill>> {
+    async linkSkill(baseUrl: string, link: string): Promise<IResponseItem<ISkillLink>> {
       try {
-        const response = await axios.get<IResponseItem<IFilterSkill>>(`/api/private/site/skill/link/${link}`, {
+        const response = await axios.get<IResponseItem<ISkillLink>>(`/api/private/site/skill/link/${link}`, {
           baseURL: baseUrl,
         });
 
-        this.itemSkill = response.data.data;
+        this.itemLinkSkill = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.itemSkill = null;
+        this.itemLinkSkill = null;
 
         throw error;
       }

@@ -5,6 +5,7 @@ import {
   IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
+import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import ISchool from '@/interfaces/stores/school/school';
 import TId from '@/types/id';
 
@@ -12,6 +13,7 @@ export default defineStore('school', {
   state: () => ({
     schools: null as ISchool[] | null,
     itemSchool: null as ISchool | null,
+    itemLinkSchool: null as ISchoolLink | null,
   }),
   actions: {
     async readSchools(baseUrl: string): Promise<IResponseItems<ISchool>> {
@@ -44,18 +46,18 @@ export default defineStore('school', {
         throw error;
       }
     },
-    async linkSchool(baseUrl: string, link: string): Promise<IResponseItem<ISchool>> {
+    async linkSchool(baseUrl: string, link: string): Promise<IResponseItem<ISchoolLink>> {
       try {
         console.log(`/api/private/site/school/link/${link}`);
-        const response = await axios.get<IResponseItem<ISchool>>(`/api/private/site/school/link/${link}`, {
+        const response = await axios.get<IResponseItem<ISchoolLink>>(`/api/private/site/school/link/${link}`, {
           baseURL: baseUrl,
         });
 
-        this.itemSchool = response.data.data;
+        this.itemLinkSchool = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.itemSchool = null;
+        this.itemLinkSchool = null;
 
         throw error;
       }

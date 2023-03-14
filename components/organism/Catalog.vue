@@ -1,103 +1,6 @@
 <template>
   <div>
-    <CatalogHeader>
-      <template #title>
-        Онлайн курсы по Дизайну
-      </template>
-      <template #description>
-        Пройдя курсы от лучших онлайн-школ, вы научитесь моделировать и
-        визуализировать 3D-объекты, создавать дизайн одежды, интерьеров
-        или даже проектировать дизайны различных торговых центров,
-        скверов и парков, анимировать картинки, разрабатывать UX/UI-дизайн
-        и дизайн мобильных приложений, а также многое другое.
-      </template>
-      <template #section>
-        <div class="catalog-header__fire" />
-        <div class="catalog-header__label">
-          Сейчас в тренде
-        </div>
-      </template>
-      <template #tags>
-        <Tags>
-          <Tag
-            to="/courses/direction/programmer"
-            bck="white"
-            shadow
-          >
-            Программирование
-          </Tag>
-          <Tag
-            to="/courses/direction/marketing"
-            bck="white"
-            shadow
-          >
-            Маркетинг
-          </Tag>
-          <Tag
-            to="/courses/direction/marketing"
-            bck="white"
-            shadow
-          >
-            Дизайн
-          </Tag>
-          <Tag
-            to="/courses/direction/marketing"
-            bck="white"
-            shadow
-          >
-            Бизнес и управление
-          </Tag>
-          <Tag
-            to="/courses/direction/marketing"
-            bck="white"
-            shadow
-          >
-            Аналитика
-          </Tag>
-          <Tag
-            to="/courses/direction/marketing"
-            bck="white"
-            shadow
-          >
-            Игры
-          </Tag>
-        </Tags>
-      </template>
-    </CatalogHeader>
-
-    <CatalogHeader>
-      <template #title>
-        Онлайн курсы школы Skillbox
-      </template>
-      <template #description>
-        Skillbox — это одна из крупнейших образовательных платформ на российском рынке.
-        Она предоставляет более 500 образовательных курсов по различным тематикам,
-        начиная с программирования и аналитики и заканчивая модой и флористикой.
-      </template>
-      <template #rating>
-        4.5
-      </template>
-      <template #reviews>
-        <nuxt-link to="/">
-          1236 отзывов
-        </nuxt-link>
-      </template>
-      <template #image>
-        <img src="https://loc-api.courselandia.ru/storage/uploaded/images/schools/1.png" alt="" title="" />
-      </template>
-      <template #teachers>
-        2300
-      </template>
-      <template #action>
-        <Button
-          to="/"
-          link="link"
-          target="_blank"
-        >
-          Перейти на сайт
-        </Button>
-      </template>
-    </CatalogHeader>
+    <CatalogHeader />
 
     <div class="catalog">
       <div class="content">
@@ -308,16 +211,13 @@ import { apiReadProfessions } from '@/api/profession';
 import { apiReadSkills } from '@/api/skill';
 import { apiReadTeachers } from '@/api/teacher';
 import { apiReadTools } from '@/api/tool';
-import Button from '@/components/atoms/Button.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
-import Tag from '@/components/atoms/Tag.vue';
 import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
 import CatalogFiltersMobile from '@/components/molecules/CatalogFiltersMobile.vue';
-import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import CatalogTags from '@/components/molecules/CatalogTags.vue';
 import CatalogTools from '@/components/molecules/CatalogTools.vue';
 import Courses from '@/components/molecules/Courses.vue';
-import Tags from '@/components/molecules/Tags.vue';
+import CatalogHeader from '@/components/organism/CatalogHeader.vue';
 import {
   courseFilterStoreCategoriesToComponentCategories,
 } from '@/converts/courseFilterStoreCategoriesToComponentCategories';
@@ -384,6 +284,15 @@ const props = defineProps({
 const route = useRoute();
 let { link } = route.params;
 let section = props.section || null;
+
+const { itemLinkCategory } = storeToRefs(category());
+const { itemLinkDirection } = storeToRefs(direction());
+const { itemLinkProfession } = storeToRefs(profession());
+const { itemLinkSchool } = storeToRefs(school());
+const { itemLinkSkill } = storeToRefs(skill());
+const { itemLinkTeacher } = storeToRefs(teacher());
+const { itemLinkTool } = storeToRefs(tool());
+
 const openedItems: Record<string, boolean> = {
   openedSchools: false,
   openedCategories: false,
@@ -676,73 +585,59 @@ const setCoursesAndFilters = (result: IApiReadCourses): void => {
 
 const setSelectedFiltersByQuery = (): void => {
   if (section === 'direction') {
-    const { itemDirection } = storeToRefs(direction());
-
-    if (itemDirection.value?.id) {
+    if (itemLinkDirection.value?.id) {
       selectedDirection.value = {
-        id: itemDirection.value?.id,
+        id: itemLinkDirection.value?.id,
       };
     }
   }
 
   if (section === 'school') {
-    const { itemSchool } = storeToRefs(school());
-
-    if (itemSchool.value?.id) {
+    if (itemLinkSchool.value?.id) {
       selectedSchools.value = [
         {
-          id: itemSchool.value?.id,
+          id: itemLinkSchool.value?.id,
         },
       ];
     }
   }
 
   if (section === 'category') {
-    const { itemCategory } = storeToRefs(category());
-
-    if (itemCategory.value?.id) {
+    if (itemLinkCategory.value?.id) {
       selectedCategories.value[0] = {
-        id: itemCategory.value?.id,
+        id: itemLinkCategory.value?.id,
       };
     }
   }
 
   if (section === 'profession') {
-    const { itemProfession } = storeToRefs(profession());
-
-    if (itemProfession.value?.id) {
+    if (itemLinkProfession.value?.id) {
       selectedProfessions.value[0] = {
-        id: itemProfession.value?.id,
+        id: itemLinkProfession.value?.id,
       };
     }
   }
 
   if (section === 'teacher') {
-    const { itemTeacher } = storeToRefs(teacher());
-
-    if (itemTeacher.value?.id) {
+    if (itemLinkTeacher.value?.id) {
       selectedTeachers.value[0] = {
-        id: itemTeacher.value?.id,
+        id: itemLinkTeacher.value?.id,
       };
     }
   }
 
   if (section === 'skill') {
-    const { itemSkill } = storeToRefs(skill());
-
-    if (itemSkill.value?.id) {
+    if (itemLinkSkill.value?.id) {
       selectedSkills.value[0] = {
-        id: itemSkill.value?.id,
+        id: itemLinkSkill.value?.id,
       };
     }
   }
 
   if (section === 'tool') {
-    const { itemTool } = storeToRefs(tool());
-
-    if (itemTool.value?.id) {
+    if (itemLinkTool.value?.id) {
       selectedTools.value[0] = {
-        id: itemTool.value?.id,
+        id: itemLinkTool.value?.id,
       };
     }
   }

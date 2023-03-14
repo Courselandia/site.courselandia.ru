@@ -8,7 +8,7 @@
               <h1 class="title title--1">
                 <slot name="title" />
               </h1>
-              <template v-if="hasSlot('rating') && hasSlot('reviews')">
+              <template v-if="hasSlot('rating')">
                 <div class="catalog-header__popularity">
                   <div class="catalog-header__rating">
                     <div class="catalog-header__rating_amount">
@@ -22,7 +22,10 @@
                       />
                     </div>
                   </div>
-                  <div class="catalog-header__reviews">
+                  <div
+                    v-if="hasSlot('reviews')"
+                    class="catalog-header__reviews"
+                  >
                     <slot name="reviews" />
                   </div>
                 </div>

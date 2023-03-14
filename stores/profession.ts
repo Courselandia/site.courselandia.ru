@@ -8,12 +8,14 @@ import {
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterProfession from '@/interfaces/stores/course/filterProfession';
+import IProfessionLink from '@/interfaces/stores/course/professionLink';
 import TId from '@/types/id';
 
 export default defineStore('profession', {
   state: () => ({
     professions: null as IFilterProfession[] | null,
     itemProfession: null as IFilterProfession | null,
+    itemLinkProfession: null as IProfessionLink | null,
   }),
   actions: {
     async readProfessions(
@@ -52,17 +54,17 @@ export default defineStore('profession', {
         throw error;
       }
     },
-    async linkProfession(baseUrl: string, link: string): Promise<IResponseItem<IFilterProfession>> {
+    async linkProfession(baseUrl: string, link: string): Promise<IResponseItem<IProfessionLink>> {
       try {
-        const response = await axios.get<IResponseItem<IFilterProfession>>(`/api/private/site/profession/link/${link}`, {
+        const response = await axios.get<IResponseItem<IProfessionLink>>(`/api/private/site/profession/link/${link}`, {
           baseURL: baseUrl,
         });
 
-        this.itemProfession = response.data.data;
+        this.itemLinkProfession = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.itemProfession = null;
+        this.itemLinkProfession = null;
 
         throw error;
       }

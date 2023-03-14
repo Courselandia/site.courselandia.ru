@@ -7,13 +7,16 @@ import {
   IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
+import ICategory from '@/interfaces/stores/course/category';
+import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import IFilterCategory from '@/interfaces/stores/course/filterCategory';
 import TId from '@/types/id';
 
 export default defineStore('category', {
   state: () => ({
     categories: null as IFilterCategory[] | null,
-    itemCategory: null as IFilterCategory | null,
+    itemCategory: null as ICategory | null,
+    itemLinkCategory: null as ICategoryLink | null,
   }),
   actions: {
     async readCategories(
@@ -52,17 +55,17 @@ export default defineStore('category', {
         throw error;
       }
     },
-    async linkCategory(baseUrl: string, link: TId): Promise<IResponseItem<IFilterCategory | null>> {
+    async linkCategory(baseUrl: string, link: TId): Promise<IResponseItem<ICategoryLink | null>> {
       try {
-        const response = await axios.get<IResponseItem<IFilterCategory>>(`/api/private/site/category/link/${link}`, {
+        const response = await axios.get<IResponseItem<ICategoryLink>>(`/api/private/site/category/link/${link}`, {
           baseURL: baseUrl,
         });
 
-        this.itemCategory = response.data.data;
+        this.itemLinkCategory = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.itemCategory = null;
+        this.itemLinkCategory = null;
 
         throw error;
       }

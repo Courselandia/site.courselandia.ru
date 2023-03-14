@@ -106,7 +106,7 @@
       <a
         :href="course.url"
         target="_blank"
-        rel="noopener noreferrer"
+        rel="nofollow noopener noreferrer"
         class="course__link"
         @mousedown="onClickActive"
         @mouseup="onClickDisable"

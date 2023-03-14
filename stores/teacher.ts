@@ -8,12 +8,14 @@ import {
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
+import ITeacherLink from '@/interfaces/stores/course/teacherLink';
 import TId from '@/types/id';
 
 export default defineStore('teacher', {
   state: () => ({
     teachers: null as IFilterTeacher[] | null,
     itemTeacher: null as IFilterTeacher | null,
+    itemLinkTeacher: null as ITeacherLink | null,
   }),
   actions: {
     async readTeachers(
@@ -52,17 +54,17 @@ export default defineStore('teacher', {
         throw error;
       }
     },
-    async linkTeacher(baseUrl: string, link: string): Promise<IResponseItem<IFilterTeacher>> {
+    async linkTeacher(baseUrl: string, link: string): Promise<IResponseItem<ITeacherLink>> {
       try {
-        const response = await axios.get<IResponseItem<IFilterTeacher>>(`/api/private/site/teacher/link/${link}`, {
+        const response = await axios.get<IResponseItem<ITeacherLink>>(`/api/private/site/teacher/link/${link}`, {
           baseURL: baseUrl,
         });
 
-        this.itemTeacher = response.data.data;
+        this.itemLinkTeacher = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.itemTeacher = null;
+        this.itemLinkTeacher = null;
 
         throw error;
       }
