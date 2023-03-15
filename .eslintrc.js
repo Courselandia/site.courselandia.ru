@@ -32,6 +32,7 @@ module.exports = {
     abortNavigation: true,
     useCookie: true,
     useHead: true,
+    useSeoMeta: true,
     defineNuxtPlugin: true,
   },
   settings: {

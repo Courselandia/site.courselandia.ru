@@ -205,7 +205,7 @@
     <div v-else>
       <div class="content">
         <h1 class="title title--1">
-          Курсы онлайн от Courselandia.ru
+          Курсы онлайн от Courselandia
         </h1>
       </div>
     </div>

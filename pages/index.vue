@@ -107,11 +107,11 @@ import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
 
 useHead({
-  title: 'Агрегатор онлайн-курсов courselandia.ru',
+  title: 'Агрегатор онлайн-курсов Courselandia',
   meta: [
     {
       name: 'description',
-      content: 'courselandia.ru - это огромный каталог онлайн курсов по разным направлениям с умным поиском по  навыкам, направлениям, профессиям и инструментами.',
+      content: 'Courselandia - это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментами.',
     },
   ],
 });

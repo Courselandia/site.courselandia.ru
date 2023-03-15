@@ -99,6 +99,12 @@
               {{ money(course.price_old) }} {{ currency(course.currency) }}
             </div>
           </div>
+          <div
+            v-if="!course.price && !course.price_recurrent && !course.price_old"
+            class="course__price"
+          >
+            Бесплатно
+          </div>
         </div>
       </div>
     </nuxt-link>

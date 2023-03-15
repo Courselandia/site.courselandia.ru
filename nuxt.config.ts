@@ -46,7 +46,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ru',
       },
-      title: 'Courselandia.ru',
+      title: 'Courselandia',
       meta: [
         {
           charset: 'utf-8',

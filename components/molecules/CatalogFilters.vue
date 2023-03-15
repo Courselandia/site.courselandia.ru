@@ -500,7 +500,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isEqual } from 'lodash';
+import lodash from 'lodash';
 import {
   computed,
   PropType,
@@ -709,6 +709,8 @@ const props = defineProps({
     default: true,
   },
 });
+
+const { isEqual } = lodash;
 
 //
 

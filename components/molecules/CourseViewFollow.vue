@@ -37,6 +37,12 @@
                 {{ money(course.price_old) }} {{ currency(course.currency) }}
               </div>
             </div>
+            <div
+              v-if="!course.price && !course.price_recurrent && !course.price_old"
+              class="course-view-follow__price"
+            >
+              Бесплатно
+            </div>
           </div>
         </div>
         <div class="course-view-follow__side course-view-follow__side--right">

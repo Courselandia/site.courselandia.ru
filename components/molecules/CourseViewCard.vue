@@ -70,6 +70,12 @@
               {{ money(course.price_old) }} {{ currency(course.currency) }}
             </div>
           </div>
+          <div
+            v-if="!course.price && !course.price_recurrent && !course.price_old"
+            class="course-view-card__price"
+          >
+            Бесплатно
+          </div>
         </div>
       </div>
       <div class="course-view-card__footer">

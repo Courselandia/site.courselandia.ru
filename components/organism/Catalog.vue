@@ -263,14 +263,14 @@ import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
 import IFilters from '@/interfaces/filters';
 import ISorts from '@/interfaces/sorts';
+import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import IDirectionLink from '@/interfaces/stores/course/directionLink';
 import IProfessionLink from '@/interfaces/stores/course/professionLink';
+import IRatingStore from '@/interfaces/stores/course/rating';
 import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import ISkillLink from '@/interfaces/stores/course/skillLink';
 import ITeacherLink from '@/interfaces/stores/course/teacherLink';
 import IToolLink from '@/interfaces/stores/course/toolLink';
-import ICategoryLink from '@/interfaces/stores/course/categoryLink';
-import IRatingStore from '@/interfaces/stores/course/rating';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -523,6 +523,54 @@ const getRatings = (rtgs: Array<IRatingStore>): Array<IRating> => {
 };
 
 const config = useRuntimeConfig();
+
+const setMeta = (): void => {
+  let title = 'Каталог онлайн курсов от Courselandia';
+
+  if (section === 'direction' && itemLinkDirection.value?.metatag?.title) {
+    title = itemLinkDirection.value.metatag.title;
+  } else if (section === 'category' && itemLinkCategory.value?.metatag?.title) {
+    title = itemLinkCategory.value?.metatag?.title;
+  } else if (section === 'profession' && itemLinkProfession.value?.metatag?.title) {
+    title = itemLinkProfession.value?.metatag?.title;
+  } else if (section === 'school' && itemLinkSchool.value?.metatag?.title) {
+    title = itemLinkSchool.value?.metatag?.title;
+  } else if (section === 'skill' && itemLinkSkill.value?.metatag?.title) {
+    title = itemLinkSkill.value?.metatag?.title;
+  } else if (section === 'teacher' && itemLinkTeacher.value?.metatag?.title) {
+    title = itemLinkTeacher.value?.metatag?.title;
+  } else if (section === 'tool' && itemLinkTool.value?.metatag?.title) {
+    title = itemLinkTool.value?.metatag?.title;
+  }
+
+  let description = 'Каталог курсов от ведущих онлайн школ по разным направлениям. Удобный поиск по профессиям, направлениям, инструментам и навыкам. Найди свой курс быстро и легко.';
+
+  if (section === 'direction' && itemLinkDirection.value?.metatag?.description) {
+    description = itemLinkDirection.value.metatag.description;
+  } else if (section === 'category' && itemLinkCategory.value?.metatag?.description) {
+    description = itemLinkCategory.value?.metatag?.description;
+  } else if (section === 'profession' && itemLinkProfession.value?.metatag?.description) {
+    description = itemLinkProfession.value?.metatag?.description;
+  } else if (section === 'school' && itemLinkSchool.value?.metatag?.description) {
+    description = itemLinkSchool.value?.metatag?.description;
+  } else if (section === 'skill' && itemLinkSkill.value?.metatag?.description) {
+    description = itemLinkSkill.value?.metatag?.description;
+  } else if (section === 'teacher' && itemLinkTeacher.value?.metatag?.description) {
+    description = itemLinkTeacher.value?.metatag?.description;
+  } else if (section === 'tool' && itemLinkTool.value?.metatag?.description) {
+    description = itemLinkTool.value?.metatag?.description;
+  }
+
+  useHead({
+    title,
+    meta: [
+      {
+        name: 'description',
+        content: description,
+      },
+    ],
+  });
+};
 
 const setHeader = (result: IApiReadCourses): void => {
   itemLinkDirection.value = null;
@@ -782,6 +830,7 @@ const load = async (
 
     setCoursesAndFilters(result);
     setHeader(result);
+    setMeta();
   } catch (error: any) {
     console.log(error.message);
   }
@@ -992,7 +1041,6 @@ const setUrlQuery = (
   ): string | null => Object.keys(sectionNames).find((key) => sectionNames[key] === name) || null;
 
   const getUrlWithQuery = (sectionValue?: string, linkValue?: string): string => {
-    console.log(linkValue);
     const queries: Array<string> = [];
 
     queries.push(`page=${encodeURIComponent(pageValue)}`);
@@ -1132,8 +1180,6 @@ const setUrlQuery = (
       }
     }
 
-    console.log(url);
-
     window.history.pushState(
       {},
       '',
@@ -1170,6 +1216,8 @@ const onChangeFilter = () => {
 watch(sort, () => {
   onFilterAndSort();
 });
+
+setMeta();
 </script>
 
 <style lang="scss">
