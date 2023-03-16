@@ -4,7 +4,7 @@
   >
     <div class="menu-top__item">
       <div
-        :class="`menu-top__link ${hover === 'courses' ? 'menu-top__link--hover' : ''} ${menuValue === 'courses' ? 'link--active' : ''}`"
+        :class="`menu-top__link ${hover === 'courses' ? 'menu-top__link--hover' : ''} ${(menuValue === 'courses' || active === 'courses') ? 'link--active' : ''}`"
         @click="onClick('courses')"
         @keydown="onClick('courses')"
         @mouseenter="onMouseEnter('courses')"
@@ -17,14 +17,14 @@
         </div>
         <Icon
           :name="menuValue === 'courses' ? 'arrow-up' : 'arrow-down'"
-          :color="(hover === 'courses' || menuValue === 'courses') ? 'white' : 'black'"
+          :color="(hover === 'courses' || menuValue === 'courses' || active === 'courses') ? 'white' : 'black'"
           :size="[8, 8]"
         />
       </div>
     </div>
     <div class="menu-top__item">
       <div
-        :class="`menu-top__link ${hover === 'schools' ? 'menu-top__link--hover' : ''} ${menuValue === 'schools' ? 'link--active' : ''}`"
+        :class="`menu-top__link ${hover === 'schools' ? 'menu-top__link--hover' : ''} ${(menuValue === 'schools' || active === 'schools') ? 'link--active' : ''}`"
         @click="onClick('schools')"
         @keydown="onClick('schools')"
         @mouseenter="onMouseEnter('schools')"
@@ -37,14 +37,14 @@
         </div>
         <Icon
           :name="menuValue === 'schools' ? 'arrow-up' : 'arrow-down'"
-          :color="(hover === 'schools' || menuValue === 'schools') ? 'white' : 'black'"
+          :color="(hover === 'schools' || menuValue === 'schools' || active === 'schools') ? 'white' : 'black'"
           :size="[8, 8]"
         />
       </div>
     </div>
     <div class="menu-top__item" style="display: none">
       <div
-        :class="`menu-top__link ${hover === 'reviews' ? 'menu-top__link--hover' : ''} ${menuValue === 'reviews' ? 'link--active' : ''}`"
+        :class="`menu-top__link ${hover === 'reviews' ? 'menu-top__link--hover' : ''} ${(menuValue === 'reviews' || active === 'reviews') ? 'link--active' : ''}`"
         @click="onClick('reviews')"
         @keydown="onClick('reviews')"
         @mouseenter="onMouseEnter('reviews')"
@@ -57,7 +57,7 @@
         </div>
         <Icon
           :name="menuValue === 'reviews' ? 'arrow-up' : 'arrow-down'"
-          :color="(hover === 'reviews' || menuValue === 'reviews') ? 'white' : 'black'"
+          :color="(hover === 'reviews' || menuValue === 'reviews' || active === 'reviews') ? 'white' : 'black'"
           :size="[8, 8]"
         />
       </div>
@@ -84,6 +84,11 @@ import Icon from '@/components/atoms/Icon.vue';
 
 const props = defineProps({
   menu: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  active: {
     type: String,
     required: false,
     default: null,

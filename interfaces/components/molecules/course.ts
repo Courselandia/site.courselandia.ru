@@ -31,7 +31,6 @@ export default interface ICourse {
     duration_unit: EDuration | null;
     lessons_amount: number | null;
     school: ISchool | null,
-
     text?: string | null,
     language?: ELanguage | null,
     online?: boolean | null,

@@ -10,6 +10,7 @@
               <CatalogTools
                 v-model:sort="sort"
                 v-model:type="type"
+                @change-sort="onChangeSort"
               >
                 <template #filtersMobile>
                   <CatalogFiltersMobile
@@ -1207,16 +1208,17 @@ const onChangeDurations = (): void => {
   }, 200);
 };
 
-const onChangeFilter = () => {
+const onChangeFilter = (): void => {
   window.setTimeout(() => {
     onFilterAndSort();
   }, 50);
 };
 
-watch(sort, () => {
-  onFilterAndSort();
-});
-
+const onChangeSort = (): void => {
+  window.setTimeout(() => {
+    onFilterAndSort();
+  }, 50);
+};
 setMeta();
 </script>
 

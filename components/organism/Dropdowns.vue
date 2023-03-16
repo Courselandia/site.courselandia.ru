@@ -232,12 +232,6 @@ watch(menuValue, () => {
 
 watch(menu, () => {
   menuValue.value = menu.value;
-
-  if (menuValue.value) {
-    document.body.classList.add('scroll--no-scroll');
-  } else {
-    document.body.classList.remove('scroll--no-scroll');
-  }
 });
 
 const index = ref(0);

@@ -5,7 +5,10 @@
         <Logo />
       </div>
       <div class="header__menu">
-        <MenuTop v-model:menu="menuValue" />
+        <MenuTop
+          v-model:menu="menuValue"
+          :active="active"
+        />
       </div>
       <div class="header__search">
         <Search />
@@ -44,6 +47,11 @@ import SearchMobile from '@/components/organism/SearchMobile.vue';
 
 const props = defineProps({
   menu: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  active: {
     type: String,
     required: false,
     default: null,

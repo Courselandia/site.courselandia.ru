@@ -209,6 +209,18 @@ const hasSalaries = computed((): boolean => {
 
   return has;
 });
+
+const description = 'В каталоге Courselandia вы можете найти подходящий курс по различным направлениям. Только лучшие курсы со всей нужной информацией от ведущих онлайн школ.';
+
+useHead({
+  title: courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`,
+  meta: [
+    {
+      name: 'description',
+      content: courseItem.value?.metatag?.description || description,
+    },
+  ],
+});
 </script>
 
 <style lang="scss">

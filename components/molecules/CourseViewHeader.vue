@@ -2,7 +2,7 @@
   <div class="course-view-header">
     <div class="course-view-header__side course-view-header__side--left">
       <h1 class="title title--1">
-        {{ course.name }}
+        {{ course.name }} от {{ course.school.name }}
       </h1>
 
       <div

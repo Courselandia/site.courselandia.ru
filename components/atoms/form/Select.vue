@@ -102,6 +102,7 @@ const {
 
 const emit = defineEmits({
   'update:value': (_: TValue) => true,
+  change: (_: TValue) => true,
 });
 
 const input = ref(value.value);
@@ -191,6 +192,8 @@ const onSelect = (option: string | number): void => {
   input.value = option;
   dropped.value = false;
   hover.value = false;
+
+  emit('change', option);
 };
 
 const onClickOutside = (): void => {

@@ -8,6 +8,7 @@
             :border="false"
             :options="sorts"
             name="sort"
+            @change="onChangeSort"
           />
         </Item>
       </div>
@@ -63,6 +64,7 @@ const {
 const emit = defineEmits({
   'update:sort': (_: TValue) => true,
   'update:type': (_: TValue) => true,
+  'change-sort': (_: TValue) => true,
 });
 
 const route = useRoute();
@@ -119,6 +121,10 @@ watch(typeValue, () => {
 watch(type, () => {
   typeValue.value = type.value;
 });
+
+const onChangeSort = (val: TValue): void => {
+  emit('change-sort', sortValue.value);
+};
 </script>
 
 <style lang="scss">

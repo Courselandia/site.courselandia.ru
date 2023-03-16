@@ -93,7 +93,7 @@
         </template>
       </CatalogHeader>
       <div v-else>
-        <div class="content">
+        <div class="content mt-15">
           <h1 class="title title--1">
             {{ itemLinkProfession.header || itemLinkProfession.name }}
           </h1>
@@ -171,7 +171,7 @@
         </template>
       </CatalogHeader>
       <div v-else>
-        <div class="content">
+        <div class="content mt-15">
           <h1 class="title title--1">
             {{ itemLinkSkill.header || itemLinkSkill.name }}
           </h1>
@@ -195,7 +195,7 @@
         </template>
       </CatalogHeader>
       <div v-else>
-        <div class="content">
+        <div class="content mt-15">
           <h1 class="title title--1">
             {{ itemLinkTool.header || itemLinkTool.name }}
           </h1>
@@ -203,7 +203,7 @@
       </div>
     </template>
     <div v-else>
-      <div class="content">
+      <div class="content mt-15">
         <h1 class="title title--1">
           Курсы онлайн от Courselandia
         </h1>
