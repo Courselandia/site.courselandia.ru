@@ -1,10 +1,20 @@
 <template>
   <div :class="`courses ${nameClass}`">
-    <Course
-      v-for="(course, key) in courses"
-      :key="key"
-      :course="course"
-    />
+    <template
+      v-if="courses?.length"
+    >
+      <Course
+        v-for="(course, key) in courses"
+        :key="key"
+        :course="course"
+      />
+    </template>
+    <div
+      v-else
+      class="courses__no-result"
+    >
+      К сожалению мы не нашли подходящих курсов под ваш запрос.
+    </div>
   </div>
 </template>
 
@@ -32,8 +42,12 @@ const props = defineProps({
 const nameClass = computed(() => {
   const classes = [];
 
-  if (props.columns) {
+  if (props.columns && props.courses?.length) {
     classes.push(`courses--columns-${props.columns}`);
+  }
+
+  if (!props.courses?.length) {
+    classes.push('courses--no-result');
   }
 
   return classes.join(' ');
