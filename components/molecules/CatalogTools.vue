@@ -37,7 +37,6 @@ import {
   toRefs,
   watch,
 } from 'vue';
-import { useRoute } from 'vue-router';
 
 import Item from '@/components/atoms/form/Item.vue';
 import Select from '@/components/atoms/form/Select.vue';
@@ -66,8 +65,6 @@ const emit = defineEmits({
   'update:type': (_: TValue) => true,
   'change-sort': (_: TValue) => true,
 });
-
-const route = useRoute();
 
 const sortValue = ref<TValue>(sort.value);
 
@@ -105,10 +102,6 @@ const sorts: Array<IOption> = [
     label: 'По релевантности',
   },
 ];
-
-watch(route, (): void => {
-  sortValue.value = route.query.sort as TValue || ECourseSort.DATE;
-});
 
 //
 

@@ -210,7 +210,7 @@ import {
   ref,
   watch,
 } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 import { apiReadCategories } from '@/api/category';
 import { apiReadCourses } from '@/api/course';
@@ -297,6 +297,7 @@ const props = defineProps({
 });
 
 const route = useRoute();
+const router = useRouter();
 let { link } = route.params;
 let section = props.section || null;
 
@@ -859,11 +860,17 @@ const reload = async (
       filterCurrent,
     );
 
-    stopScrollLoader.value = false;
-
     if (result) {
       setCoursesAndFilters(result);
       setHeader(result);
+
+      if (result.total) {
+        if ((currentPage.value * size.value) >= result.total) {
+          stopScrollLoader.value = true;
+        } else {
+          stopScrollLoader.value = false;
+        }
+      }
     } else {
       courses.value = [];
       total.value = 0;
@@ -1034,12 +1041,21 @@ try {
 
   const result = await apiReadCourses(
     config.public.apiUrl,
-    pageValueCurrent * size.value,
-    size.value,
+    0,
+    size.value * currentPage.value,
     getSort(sort.value),
     getFilters(),
   );
+
   setCoursesAndFilters(result);
+
+  if (result?.total) {
+    if ((currentPage.value * size.value) >= result.total) {
+      stopScrollLoader.value = true;
+    } else {
+      stopScrollLoader.value = false;
+    }
+  }
 } catch (error: any) {
   console.log(error.message);
 }
@@ -1047,8 +1063,10 @@ try {
 //
 
 const setUrlQuery = (
+  pageValue: number = 0,
   sortsCurrent: ISorts | null = null,
   filtersCurrent: IFilters | null = null,
+  onlyPageChanged = false,
 ): void => {
   const queryFilterNames: Record<string, string> = {
     'directions-id': 'direction',
@@ -1081,6 +1099,10 @@ const setUrlQuery = (
 
   const getUrlWithQuery = (sectionValue?: string, linkValue?: string): string => {
     const queries: Array<string> = [];
+
+    if (pageValue !== 1 && onlyPageChanged === false) {
+      queries.push(`page=${encodeURIComponent(pageValue)}`);
+    }
 
     if (sortsCurrent) {
       if (sortsCurrent.id === 'DESC') {
@@ -1215,11 +1237,20 @@ const setUrlQuery = (
       }
     }
 
-    window.history.pushState(
-      {},
-      '',
-      url,
-    );
+    if (onlyPageChanged) {
+      router.replace({
+        path: url,
+        query: {
+          page: pageValue,
+        },
+      });
+    } else {
+      window.history.pushState(
+        {},
+        '',
+        url,
+      );
+    }
   }
 };
 
@@ -1228,7 +1259,7 @@ const onFilterAndSort = async (): Promise<void> => {
 
   currentPage.value = 1;
 
-  setUrlQuery(getSort(sort.value), filters);
+  setUrlQuery(currentPage.value, getSort(sort.value), filters);
   await reload(currentPage.value, size.value, getSort(sort.value), filters);
 };
 
@@ -1237,7 +1268,7 @@ const onLoadScrolling = async (): Promise<void> => {
 
   currentPage.value++;
 
-  setUrlQuery(getSort(sort.value), filters);
+  setUrlQuery(currentPage.value, getSort(sort.value), filters, true);
   const result = await load(currentPage.value, size.value, getSort(sort.value), filters);
 
   if (result) {
