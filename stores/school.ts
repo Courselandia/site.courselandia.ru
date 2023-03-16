@@ -48,7 +48,6 @@ export default defineStore('school', {
     },
     async linkSchool(baseUrl: string, link: string): Promise<IResponseItem<ISchoolLink>> {
       try {
-        console.log(`/api/private/site/school/link/${link}`);
         const response = await axios.get<IResponseItem<ISchoolLink>>(`/api/private/site/school/link/${link}`, {
           baseURL: baseUrl,
         });

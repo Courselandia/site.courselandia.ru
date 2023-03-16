@@ -58,10 +58,16 @@
               </ClientOnly>
             </div>
             <div class="catalog__courses">
-              <Courses
-                :courses="courses"
-                :columns="3"
-              />
+              <ScrollLoader
+                :stop="stopScrollLoader"
+                :distance="1000"
+                @load="onLoadScrolling"
+              >
+                <Courses
+                  :courses="courses"
+                  :columns="3"
+                />
+              </ScrollLoader>
             </div>
             <div class="catalog__pagination">
               <Pagination
@@ -213,6 +219,7 @@ import { apiReadSkills } from '@/api/skill';
 import { apiReadTeachers } from '@/api/teacher';
 import { apiReadTools } from '@/api/tool';
 import Pagination from '@/components/atoms/Pagination.vue';
+import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
 import CatalogFiltersMobile from '@/components/molecules/CatalogFiltersMobile.vue';
 import CatalogTags from '@/components/molecules/CatalogTags.vue';
@@ -293,6 +300,8 @@ const route = useRoute();
 let { link } = route.params;
 let section = props.section || null;
 
+const stopScrollLoader = ref(false);
+
 const { itemLinkCategory } = storeToRefs(category());
 const { itemLinkDirection } = storeToRefs(direction());
 const { itemLinkProfession } = storeToRefs(profession());
@@ -350,7 +359,8 @@ const getUrlQuery = (name: string): string | null => {
   return null;
 };
 
-const sort = ref<TValue>(ECourseSort.ALPHABETIC);
+const sortDefault = ECourseSort.ALPHABETIC;
+const sort = ref<TValue>(sortDefault);
 const valueQuery = getUrlQuery('sort');
 
 if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)) {
@@ -573,7 +583,7 @@ const setMeta = (): void => {
   });
 };
 
-const setHeader = (result: IApiReadCourses): void => {
+const setHeader = (result: IApiReadCourses | null = null): void => {
   itemLinkDirection.value = null;
   itemLinkCategory.value = null;
   itemLinkProfession.value = null;
@@ -582,7 +592,7 @@ const setHeader = (result: IApiReadCourses): void => {
   itemLinkTeacher.value = null;
   itemLinkTool.value = null;
 
-  if (result.description) {
+  if (result?.description) {
     if (section === 'direction') {
       itemLinkDirection.value = result.description as IDirectionLink;
     } else if (section === 'category') {
@@ -814,11 +824,11 @@ const load = async (
   sizeValue: number = 36,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
-): Promise<void> => {
+): Promise<IApiReadCourses | null> => {
   try {
     const pageValueCurrent = pageValue !== 0 ? pageValue - 1 : pageValue;
 
-    const result = await apiReadCourses(
+    return await apiReadCourses(
       config.public.apiUrl,
       pageValueCurrent * sizeValue,
       sizeValue,
@@ -828,9 +838,38 @@ const load = async (
       section,
       link as string,
     );
+  } catch (error: any) {
+    console.log(error.message);
+  }
 
-    setCoursesAndFilters(result);
-    setHeader(result);
+  return null;
+};
+
+const reload = async (
+  pageValue: number = 0,
+  sizeValue: number = 36,
+  sorts: ISorts | null = null,
+  filterCurrent: IFilters | null = null,
+): Promise<void> => {
+  try {
+    const result = await load(
+      pageValue,
+      sizeValue,
+      sorts,
+      filterCurrent,
+    );
+
+    stopScrollLoader.value = false;
+
+    if (result) {
+      setCoursesAndFilters(result);
+      setHeader(result);
+    } else {
+      courses.value = [];
+      total.value = 0;
+      setHeader();
+    }
+
     setMeta();
   } catch (error: any) {
     console.log(error.message);
@@ -1008,7 +1047,6 @@ try {
 //
 
 const setUrlQuery = (
-  pageValue: number = 0,
   sortsCurrent: ISorts | null = null,
   filtersCurrent: IFilters | null = null,
 ): void => {
@@ -1044,12 +1082,8 @@ const setUrlQuery = (
   const getUrlWithQuery = (sectionValue?: string, linkValue?: string): string => {
     const queries: Array<string> = [];
 
-    queries.push(`page=${encodeURIComponent(pageValue)}`);
-
     if (sortsCurrent) {
-      if (sortsCurrent.header === 'ASC') {
-        queries.push('sort=alphabetic');
-      } else if (sortsCurrent.id === 'DESC') {
+      if (sortsCurrent.id === 'DESC') {
         queries.push('sort=date');
       } else if (sortsCurrent.rating === 'DESC') {
         queries.push('sort=rating');
@@ -1192,8 +1226,28 @@ const setUrlQuery = (
 const onFilterAndSort = async (): Promise<void> => {
   const filters: IFilters = getFilters();
 
-  setUrlQuery(currentPage.value, getSort(sort.value), filters);
-  await load(currentPage.value, size.value, getSort(sort.value), filters);
+  currentPage.value = 1;
+
+  setUrlQuery(getSort(sort.value), filters);
+  await reload(currentPage.value, size.value, getSort(sort.value), filters);
+};
+
+const onLoadScrolling = async (): Promise<void> => {
+  const filters: IFilters = getFilters();
+
+  currentPage.value++;
+
+  setUrlQuery(getSort(sort.value), filters);
+  const result = await load(currentPage.value, size.value, getSort(sort.value), filters);
+
+  if (result) {
+    courses.value = courses.value.concat(coursesStoreToCoursesComponent(result.courses));
+    total.value = result.total || 0;
+
+    if ((currentPage.value * size.value) >= total.value) {
+      stopScrollLoader.value = true;
+    }
+  }
 };
 
 const onChangePrices = (): void => {

@@ -24,8 +24,8 @@
 import {
   onMounted,
   ref,
-  watch,
   toRefs,
+  watch,
 } from 'vue';
 
 const props = defineProps({
