@@ -9,11 +9,11 @@
       @mouseup="onClickDisable"
       @mouseleave="onClickDisable"
       @focusout="onClickDisable"
-      @click.stop="onClickLink(course.link)"
     >
-      <div
+      <LazyBackground
+        :background="course.image"
+        :holder="holder?.default"
         class="course__image"
-        :style="`background-image: url('${course.image || holder?.default}')`"
       >
         <div
           v-if="course.rating"
@@ -41,7 +41,7 @@
             :title="course.school.name"
           />
         </div>
-      </div>
+      </LazyBackground>
       <div class="course__content">
         <div class="course__name">
           {{ course.name }}
@@ -141,13 +141,13 @@ import {
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
+import LazyBackground from '@/components/atoms/LazyBackground.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import duration from '@/helpers/duration';
 import { money } from '@/helpers/number';
 import ICourse from '@/interfaces/components/molecules/course';
-import {useRouter} from "vue-router";
 
 const props = defineProps({
   course: {
@@ -156,7 +156,6 @@ const props = defineProps({
   },
 });
 
-const router = useRouter();
 const active = ref(false);
 const holder = await import('@/assets/images/holder.svg');
 
@@ -176,10 +175,6 @@ const onClickActive = (): void => {
 
 const onClickDisable = (): void => {
   active.value = false;
-};
-
-const onClickLink = (url: string): void => {
-  router.push(url);
 };
 </script>
 
