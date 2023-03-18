@@ -9,6 +9,7 @@
       @mouseup="onClickDisable"
       @mouseleave="onClickDisable"
       @focusout="onClickDisable"
+      @click.stop="onClickLink(course.link)"
     >
       <div
         class="course__image"
@@ -146,6 +147,7 @@ import currency from '@/helpers/currency';
 import duration from '@/helpers/duration';
 import { money } from '@/helpers/number';
 import ICourse from '@/interfaces/components/molecules/course';
+import {useRouter} from "vue-router";
 
 const props = defineProps({
   course: {
@@ -154,6 +156,7 @@ const props = defineProps({
   },
 });
 
+const router = useRouter();
 const active = ref(false);
 const holder = await import('@/assets/images/holder.svg');
 
@@ -173,6 +176,10 @@ const onClickActive = (): void => {
 
 const onClickDisable = (): void => {
   active.value = false;
+};
+
+const onClickLink = (url: string): void => {
+  router.push(url);
 };
 </script>
 

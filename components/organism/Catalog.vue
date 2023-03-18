@@ -208,9 +208,11 @@ import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
-  watch,
 } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import {
+  useRoute,
+  useRouter,
+} from 'vue-router';
 
 import { apiReadCategories } from '@/api/category';
 import { apiReadCourses } from '@/api/course';
@@ -1100,7 +1102,7 @@ const setUrlQuery = (
   const getUrlWithQuery = (sectionValue?: string, linkValue?: string): string => {
     const queries: Array<string> = [];
 
-    if (pageValue !== 1 && onlyPageChanged === false) {
+    if (pageValue !== 1) {
       queries.push(`page=${encodeURIComponent(pageValue)}`);
     }
 
@@ -1237,20 +1239,15 @@ const setUrlQuery = (
       }
     }
 
-    if (onlyPageChanged) {
-      router.replace({
-        path: url,
-        query: {
-          page: pageValue,
-        },
-      });
-    } else {
-      window.history.pushState(
-        {},
-        '',
-        url,
-      );
-    }
+    const newState = {
+      current: url,
+    };
+
+    window.history.pushState(
+      newState,
+      '',
+      url,
+    );
   }
 };
 
