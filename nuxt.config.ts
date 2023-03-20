@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     '@/plugins/google.ts',
   ],
   modules: [
+    //'@/modules/cache/index.ts',
     '@pinia/nuxt',
     [
       'yandex-metrika-module-nuxt3',

@@ -206,6 +206,10 @@ import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
+import {
+  fetchCacheStore,
+  putCacheStore,
+} from '@/modules/cache/store';
 
 const props = defineProps({
   menu: {
@@ -236,25 +240,22 @@ watch(menu, () => {
 
 const index = ref(0);
 const listDirections = ref<IMenu[]>();
+const cachedDirections = await fetchCacheStore('directions2');
 
-try {
-  listDirections.value = await directionsToMenu(
-    await apiReadDirections(config.public.apiUrl),
-    true,
-  );
-} catch (error: any) {
-  console.error(error.message);
+if (cachedDirections) {
+  listDirections.value = await directionsToMenu(cachedDirections);
+} else {
+  try {
+    const result = await apiReadDirections(config.public.apiUrl);
+    listDirections.value = await directionsToMenu(result);
+
+    await putCacheStore('directions2', result);
+  } catch (error: any) {
+    console.error(error.message);
+  }
 }
 
-const listDirectionsWithCategories = ref<IMenu[]>([]);
-
-try {
-  listDirectionsWithCategories.value = await directionsToMenu(
-    await apiReadDirections(config.public.apiUrl),
-  );
-} catch (error: any) {
-  console.error(error.message);
-}
+const listDirectionsWithCategories = ref<IMenu[]>(listDirections.value || []);
 
 const menuCourses = computed<IMenu[]>(() => [
   {
