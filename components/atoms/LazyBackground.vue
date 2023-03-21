@@ -18,7 +18,8 @@ import {
 const props = defineProps({
   background: {
     type: String,
-    required: true,
+    required: false,
+    default: null,
   },
   holder: {
     type: String,

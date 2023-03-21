@@ -86,12 +86,6 @@ import {
   ref,
 } from 'vue';
 
-import {
-  apiReadRatedCourses,
-} from '@/api/course';
-import {
-  apiReadDirections,
-} from '@/api/direction';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
@@ -105,10 +99,6 @@ import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCourses
 import directionsToMenu from '@/converts/directionsToMenu';
 import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
-import {
-  fetchCacheStore,
-  putCacheStore,
-} from '@/modules/cache/store';
 
 useHead({
   title: 'Агрегатор онлайн-курсов Courselandia',
@@ -123,37 +113,18 @@ useHead({
 const config = useRuntimeConfig();
 const listDirections = ref<IMenu[]>();
 
-const cachedDirections = await fetchCacheStore('directions2');
-
-if (cachedDirections) {
-  listDirections.value = await directionsToMenu(cachedDirections);
-} else {
-  try {
-    const result = await apiReadDirections(config.public.apiUrl);
-    listDirections.value = await directionsToMenu(result);
-
-    await putCacheStore('directions2', result);
-  } catch (error: any) {
-    console.error(error.message);
-  }
+try {
+  listDirections.value = await directionsToMenu(await $fetch('/api/direction/read'));
+} catch (error: any) {
+  console.error(error.message);
 }
 
 const courses = ref<ICourse[]>();
 
-const cachedRatedCourses = await fetchCacheStore('ratedCourses2');
-
-if (cachedRatedCourses) {
-  courses.value = coursesStoreToCoursesComponent(cachedRatedCourses);
-} else {
-  try {
-    const result = await apiReadRatedCourses(config.public.apiUrl, 16);
-
-    courses.value = coursesStoreToCoursesComponent(result);
-
-    await putCacheStore('ratedCourses2', result);
-  } catch (error: any) {
-    console.error(error.message);
-  }
+try {
+  courses.value = coursesStoreToCoursesComponent(await $fetch('/api/course/readRated'));
+} catch (error: any) {
+  console.error(error.message);
 }
 </script>
 

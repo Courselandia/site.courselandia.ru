@@ -5,7 +5,7 @@ import {
   IResponseItems,
 } from '@/interfaces/response';
 import IDirection from '@/interfaces/stores/course/direction';
-import IFilterDirection from '@/interfaces/stores/course/filterDirection';
+import IDirectionLink from '@/interfaces/stores/course/directionLink';
 import direction from '@/stores/direction';
 import TId from '@/types/id';
 
@@ -47,13 +47,13 @@ export const apiGetDirection = async (
 export const apiLinkDirection = async (
   apiUrl: string,
   link: string,
-): Promise<IDirection | null> => {
+): Promise<IDirectionLink | null> => {
   const {
     linkDirection,
   } = direction();
 
   const loadDirection = async ():
-    Promise<IResponseItem<IDirection | null>> => linkDirection(apiUrl, link);
+    Promise<IResponseItem<IDirectionLink | null>> => linkDirection(apiUrl, link);
 
   const resultDirection = await useAsyncData('direction', async () => loadDirection());
 

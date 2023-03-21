@@ -187,7 +187,6 @@ import {
 import { useRouter } from 'vue-router';
 
 import { apiReadDirections } from '@/api/direction';
-import { apiReadSchools } from '@/api/school';
 import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
@@ -264,7 +263,13 @@ const menuCourses = computed<IMenu[]>(() => [
   ...listDirectionsWithCategories.value,
 ]);
 
-const listSchools = ref<IMenu[]>(schoolsToMenu(await apiReadSchools(config.public.apiUrl)));
+const listSchools = ref<IMenu[]>();
+
+try {
+  listSchools.value = schoolsToMenu(await $fetch('/api/school/read'));
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const listSchoolReviews = ref<IListSchoolReview[]>(
   [

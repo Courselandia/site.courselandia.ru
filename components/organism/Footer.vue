@@ -48,51 +48,28 @@ import {
   ref,
 } from 'vue';
 
-import { apiReadDirections } from '@/api/direction';
-import { apiReadSchools } from '@/api/school';
 import Logo from '@/components/atoms/Logo.vue';
 import MenuBottom from '@/components/atoms/MenuBottom.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IMenu from '@/interfaces/menu';
-import {
-  fetchCacheStore,
-  putCacheStore,
-} from '@/modules/cache/store';
 
 const config = useRuntimeConfig();
 const menuSchools = ref<IMenu[]>();
-const cachedSchools = await fetchCacheStore('schools');
 
-if (cachedSchools) {
-  menuSchools.value = schoolsToMenu(cachedSchools);
-} else {
-  try {
-    const result = await apiReadSchools(config.public.apiUrl);
-    menuSchools.value = schoolsToMenu(result);
-
-    await putCacheStore('schools', result);
-  } catch (error: any) {
-    console.error(error.message);
-  }
+try {
+  menuSchools.value = schoolsToMenu(await $fetch('/api/school/read'));
+} catch (error: any) {
+  console.error(error.message);
 }
 
 const menuDirections = ref<IMenu[]>();
-const cachedDirections = await fetchCacheStore('directions2');
 
-if (cachedDirections) {
-  menuDirections.value = await directionsToMenu(cachedDirections);
-} else {
-  try {
-    const result = await apiReadDirections(config.public.apiUrl);
-    menuDirections.value = await directionsToMenu(result);
-
-    await putCacheStore('directions2', result);
-  } catch (error: any) {
-    console.error(error.message);
-  }
+try {
+  menuDirections.value = await directionsToMenu(await $fetch('/api/direction/read'));
+} catch (error: any) {
+  console.error(error.message);
 }
-
 
 const menuInfo = ref<IMenu[]>([
   {
