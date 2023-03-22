@@ -22,7 +22,7 @@ export const apiReadSchools = async (apiUrl: string): Promise<Array<ISchool>> =>
 
   const resultSchools = await useAsyncData('schools', async () => loadSchools());
 
-  return resultSchools.data.value?.data;
+  return resultSchools.data.value?.data || [];
 };
 
 export const apiGetSchool = async (

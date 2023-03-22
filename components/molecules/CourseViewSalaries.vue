@@ -54,6 +54,7 @@
           @focusin="onMouseEnter(keyProfession)"
           @focusout="onMouseLeave(keyProfession)"
           @click="onMouseEnter(keyProfession)"
+          @keyup="onMouseEnter(keyProfession)"
         >
           <div class="course-view-salaries__name">
             {{ profession.label }}:
@@ -117,7 +118,7 @@ const salaries = ref<Array<number>>([]);
 if (props?.course?.professions && props?.course?.professions[index.value].salaries) {
   for (let i = 0; i < props?.course?.professions?.length; i++) {
     salaries.value[i] = getSalary(
-      props.course.professions[i].salaries,
+      props.course.professions[i].salaries || [],
       ELevel.JUNIOR,
     ) || 0;
   }
@@ -143,9 +144,9 @@ const professionLevel = computed((): ELevel | null => {
   if (props?.course?.professions && props.course.professions[index.value]) {
     const profession: IProfession = props.course.professions[index.value];
 
-    const salaryJunior = getSalary(profession.salaries, ELevel.JUNIOR) || 0;
-    const salaryMiddle = getSalary(profession.salaries, ELevel.MIDDLE) || 0;
-    const salarySenior = getSalary(profession.salaries, ELevel.SENIOR) || 0;
+    const salaryJunior = getSalary(profession.salaries || [], ELevel.JUNIOR) || 0;
+    const salaryMiddle = getSalary(profession.salaries || [], ELevel.MIDDLE) || 0;
+    const salarySenior = getSalary(profession.salaries || [], ELevel.SENIOR) || 0;
 
     const juniorHalf = (salaryMiddle - salaryJunior) / 2;
     const middleHalf = (salarySenior - salaryMiddle) / 2;

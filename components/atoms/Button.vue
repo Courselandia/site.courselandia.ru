@@ -138,9 +138,7 @@ const nameClass = computed(() => {
 
 const slots = useSlots();
 
-const hasSlot = (name: string) => {
-  return !!slots[name];
-};
+const hasSlot = (name: string) => !!slots[name];
 
 const onClick = (): boolean => {
   if (props.disabled === false) {

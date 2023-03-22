@@ -2,8 +2,10 @@ import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
+import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
 import IFilters from '@/interfaces/filters';
 import {
+  IResponseData,
   IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
@@ -47,7 +49,7 @@ export default defineStore('course', {
       openedItems: Record<string, boolean> | null = null,
       section: string | null = null,
       sectionLink: string | null = null,
-    ): Promise<IResponseItems<ICourse>> {
+    ): Promise<IResponseData<IApiReadCourses>> {
       try {
         const additional: Record<string, string | boolean | null> | null = openedItems || {};
 
@@ -55,7 +57,7 @@ export default defineStore('course', {
         additional.sectionLink = sectionLink;
 
         const query = toQuery(offset, limit, sorts, filters, additional);
-        const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read?${query}`, {
+        const response = await axios.get<IResponseData<IApiReadCourses>>(`/api/private/site/course/read?${query}`, {
           baseURL: baseUrl,
         });
 
@@ -86,7 +88,7 @@ export default defineStore('course', {
           baseURL: baseUrl,
         });
 
-        this.ratedCourses = response.data.data.courses;
+        this.ratedCourses = response.data.data;
 
         return response.data;
       } catch (error) {
@@ -109,8 +111,8 @@ export default defineStore('course', {
             },
           );
 
-          this.searchedCourses = response.data.data.courses;
-          this.searchedTotal = response.data.data.total;
+          this.searchedCourses = response.data.data;
+          this.searchedTotal = response.data.total;
 
           return response.data;
         } catch (error) {

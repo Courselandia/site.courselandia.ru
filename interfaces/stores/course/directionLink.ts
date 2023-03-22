@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import IMetatag from '@/interfaces/stores/metatag/metatag';
 import TId from '@/types/id';

@@ -5,8 +5,13 @@ export interface IResponseItem<T> extends AxiosResponse {
   data: T | null,
 }
 
+export interface IResponseData<T> extends AxiosResponse {
+  success: boolean
+  data: T,
+}
+
 export interface IResponseItems<T> extends AxiosResponse {
   success: boolean
-  items: T[],
+  data: T[],
   total: number,
 }

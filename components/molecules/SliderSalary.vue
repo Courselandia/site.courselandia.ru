@@ -123,9 +123,7 @@ const onSlide = (val: number): void => {
   emit('slide', val);
 };
 
-const format = (val: number): string => {
-  return `${money(salary(val))} ₽`;
-};
+const format = (val: number): string => `${money(salary(val))} ₽`;
 </script>
 
 <style lang="scss">

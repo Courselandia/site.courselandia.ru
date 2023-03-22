@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="`animal ${nameClass}`">
-  </div>
+    :class="`animal ${nameClass}`"
+  />
 </template>
 
 <script lang="ts" setup>

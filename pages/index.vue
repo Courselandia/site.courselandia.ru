@@ -72,7 +72,9 @@
           class="mb-10"
         />
         <div class="align--center">
-          <Button>
+          <Button
+            to="/courses"
+          >
             Весь каталог
           </Button>
         </div>

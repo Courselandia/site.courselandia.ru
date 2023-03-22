@@ -4,6 +4,7 @@ import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
 import IApiReadSearchedCourses from '@/interfaces/api/course/apiReadSearchedCourses';
 import IFilters from '@/interfaces/filters';
 import {
+  IResponseData,
   IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
@@ -25,8 +26,8 @@ export const apiReadCourses = async (
     readCourses,
   } = course();
 
-  const loadRatedCourses = async ():
-    Promise<IResponseItems<ICourse>> => readCourses(
+  const loadCourses = async ():
+    Promise<IResponseData<IApiReadCourses>> => readCourses(
     apiUrl,
     offset,
     limit,
@@ -44,10 +45,10 @@ export const apiReadCourses = async (
     description,
   } = storeToRefs(course());
 
-  const resultCourses = await useAsyncData('courses', async () => loadRatedCourses());
+  const resultCourses = await useAsyncData('courses', async () => loadCourses());
 
   return {
-    courses: resultCourses.data.value?.data.courses,
+    courses: resultCourses.data.value?.data.courses || [],
     filter: filter.value,
     section: section.value,
     description: description.value,
@@ -74,7 +75,7 @@ export const apiReadRatedCourses = async (
 
   const resultCourses = await useAsyncData('ratedCourses', async () => loadRatedCourses());
 
-  return resultCourses.data.value?.data.courses;
+  return resultCourses.data.value?.data || [];
 };
 
 export const apiReadSearchedCourses = async (
@@ -97,7 +98,7 @@ export const apiReadSearchedCourses = async (
     const resultCourses = await useAsyncData('searchedCourses', async () => loadReadSearchedCourses());
 
     return {
-      courses: resultCourses.data.value?.data.courses,
+      courses: resultCourses.data.value?.data || [],
       total: searchedTotal.value,
     };
   }

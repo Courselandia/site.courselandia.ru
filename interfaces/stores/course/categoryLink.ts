@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import IDirectionLink from '@/interfaces/stores/course/directionLink';
 import IProfessionLink from '@/interfaces/stores/course/professionLink';
 import IMetatag from '@/interfaces/stores/metatag/metatag';

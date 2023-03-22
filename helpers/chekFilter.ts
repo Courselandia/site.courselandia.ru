@@ -297,7 +297,7 @@ export const countTools = (
 export const hasFormat = (
   formats: Array<IFormat>,
   item: IFormat | null,
-): boolean => item ? !!getFormatLabel(formats, item) : false;
+): boolean => (item ? !!getFormatLabel(formats, item) : false);
 
 export const hasLevels = (
   levels: Array<ILevel>,
