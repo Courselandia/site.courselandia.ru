@@ -6,7 +6,11 @@
     <Courses
       :courses="courses"
       :columns="4"
-    />
+    >
+      <template #empty>
+        В избранном пока нет курсов. Но вы всегда можете их добавить ;).
+      </template>
+    </Courses>
   </div>
 </template>
 

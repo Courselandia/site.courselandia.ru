@@ -10,10 +10,10 @@
       />
     </template>
     <div
-      v-else
+      v-else-if="hasSlot('empty')"
       class="courses__no-result"
     >
-      К сожалению мы не нашли подходящих курсов под ваш запрос.
+      <slot name="empty" />
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import {
   computed,
-  PropType,
+  PropType, useSlots,
 } from 'vue';
 
 import Course from '@/components/molecules/Course.vue';
@@ -38,6 +38,9 @@ const props = defineProps({
     default: 4,
   },
 });
+
+const slots = useSlots();
+const hasSlot = (name: string) => !!slots[name];
 
 const nameClass = computed(() => {
   const classes = [];

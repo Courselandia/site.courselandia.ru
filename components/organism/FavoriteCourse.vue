@@ -60,6 +60,7 @@ const onMouseLeave = (): void => {
 const onClick = (): void => {
   if (hasFavorite(props.id)) {
     removeFavorite(props.id);
+    hover.value = false;
   } else {
     addFavorite(props.id);
   }

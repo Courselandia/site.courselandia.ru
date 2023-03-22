@@ -66,7 +66,11 @@
                 <Courses
                   :courses="courses"
                   :columns="3"
-                />
+                >
+                  <template #empty>
+                    К сожалению мы не нашли подходящих курсов под ваш запрос.
+                  </template>
+                </Courses>
               </ScrollLoader>
             </div>
             <div class="catalog__pagination">
