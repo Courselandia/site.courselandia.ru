@@ -25,7 +25,7 @@ export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirectio
 
   const resultDirections = await useAsyncData('directions', async () => loadDirections());
 
-  return resultDirections.data.value?.data;
+  return resultDirections.data.value?.data || [];
 };
 
 export const apiGetDirection = async (

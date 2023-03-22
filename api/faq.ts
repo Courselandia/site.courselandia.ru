@@ -12,5 +12,5 @@ export const apiReadFaqs = async (apiUrl: string, school: string): Promise<Array
 
   const resultFaqs = await useAsyncData('faqs', async () => loadFaqs());
 
-  return resultFaqs.data.value?.data;
+  return resultFaqs.data.value?.data || [];
 };

@@ -5,10 +5,11 @@
     @focusin="onMouseEnter"
     @mouseleave="onMouseLeave"
     @focusout="onMouseLeave"
+    @click="onClick"
   >
     <transition name="fade-fast" mode="out-in">
       <Icon
-        v-if="hover"
+        v-if="hover || hasFavorite(id)"
         name="heart-full"
         :size="[25, 23]"
         color="blue2"
@@ -24,20 +25,29 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
+  PropType,
   ref,
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
+import favorite from '@/stores/favorite';
+import TId from '@/types/id';
 
 const props = defineProps({
   id: {
-    type: [Number, String],
+    type: Number as PropType<TId>,
     required: true,
   },
 });
 
 const hover = ref(false);
+const {
+  addFavorite,
+  removeFavorite,
+  hasFavorite,
+} = favorite();
 
 const onMouseEnter = (): void => {
   hover.value = true;
@@ -45,6 +55,17 @@ const onMouseEnter = (): void => {
 
 const onMouseLeave = (): void => {
   hover.value = false;
+};
+
+const onClick = (): void => {
+  console.log(1);
+  if (hasFavorite(props.id)) {
+    console.log(2);
+    removeFavorite(props.id);
+  } else {
+    console.log(3);
+    addFavorite(props.id);
+  }
 };
 </script>
 

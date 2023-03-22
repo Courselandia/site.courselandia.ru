@@ -125,7 +125,9 @@
       <div class="course__favorite">
         <div class="course__heart">
           <div class="course__heart_to_center">
-            <FavoriteCourse id="1" />
+            <FavoriteCourse
+              :id="course.id"
+            />
           </div>
         </div>
       </div>

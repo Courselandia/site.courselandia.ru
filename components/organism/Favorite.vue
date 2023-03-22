@@ -18,15 +18,21 @@
       Избранные
     </div>
     <div class="favorite__amount">
-      8
+      {{ amountFavorites }}
     </div>
   </nuxt-link>
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
+import favorite from '@/stores/favorite';
+
+const {
+  amountFavorites,
+} = storeToRefs(favorite());
 
 const hover = ref(false);
 
