@@ -11,6 +11,7 @@ import {
 import ISorts from '@/interfaces/sorts';
 import ICourse from '@/interfaces/stores/course/course';
 import course from '@/stores/course';
+import TId from "~/types/id";
 
 export const apiReadCourses = async (
   apiUrl: string,
@@ -104,6 +105,22 @@ export const apiReadSearchedCourses = async (
   }
 
   return null;
+};
+
+export const apiReadFavoritesCourses = async (
+  apiUrl: string,
+  ids: TId[],
+): Promise<Array<ICourse>> => {
+  const {
+    readFavoriteCourses,
+  } = course();
+
+  const loadReadFavoritesCourses = async ():
+    Promise<IResponseItems<ICourse> | null> => readFavoriteCourses(apiUrl, ids);
+
+  const resultCourses = await useAsyncData('searchedCourses', async () => loadReadFavoritesCourses());
+
+  return resultCourses.data.value?.data || [];
 };
 
 const courseItems: Record<string, ICourse> = {};

@@ -19,12 +19,14 @@ import IDirectionLink from '@/interfaces/stores/course/schoolLink';
 import ISkillLink from '@/interfaces/stores/course/skillLink';
 import ITeacherLink from '@/interfaces/stores/course/teacherLink';
 import IToolLink from '@/interfaces/stores/course/toolLink';
+import TId from '@/types/id';
 
 export default defineStore('course', {
   state: () => ({
     ratedCourses: null as ICourse[] | null,
     searchedCourses: null as ICourse[] | null,
     searchedTotal: null as number | null,
+    favoriteCourses: null as ICourse[] | null,
     course: null as ICourse | null,
     courses: null as ICourse[] | null,
     total: null as number | null,
@@ -139,6 +141,30 @@ export default defineStore('course', {
         return response.data;
       } catch (error) {
         this.course = null;
+
+        throw error;
+      }
+    },
+    async readFavoriteCourses(
+      baseUrl: string,
+      favorites: TId[],
+    ): Promise<IResponseItems<ICourse> | null> {
+      try {
+        const response = await axios.get<IResponseItems<ICourse>>(
+          '/api/private/site/course/read/favorites',
+          {
+            baseURL: baseUrl,
+            params: {
+              ids: favorites,
+            },
+          },
+        );
+
+        this.favoriteCourses = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.searchedCourses = null;
 
         throw error;
       }

@@ -58,12 +58,9 @@ const onMouseLeave = (): void => {
 };
 
 const onClick = (): void => {
-  console.log(1);
   if (hasFavorite(props.id)) {
-    console.log(2);
     removeFavorite(props.id);
   } else {
-    console.log(3);
     addFavorite(props.id);
   }
 };

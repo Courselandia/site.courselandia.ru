@@ -1039,7 +1039,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
 
 try {
   setSelectedFiltersByQuery();
-  const pageValueCurrent = currentPage.value !== 0 ? currentPage.value - 1 : currentPage.value;
 
   const result = await apiReadCourses(
     config.public.apiUrl,
@@ -1052,11 +1051,7 @@ try {
   setCoursesAndFilters(result);
 
   if (result?.total) {
-    if ((currentPage.value * size.value) >= result.total) {
-      stopScrollLoader.value = true;
-    } else {
-      stopScrollLoader.value = false;
-    }
+    stopScrollLoader.value = (currentPage.value * size.value) >= result.total;
   }
 } catch (error: any) {
   console.log(error.message);
