@@ -2,6 +2,7 @@
 
 .favorite-course {
   cursor: pointer;
+  display: inline-block;
 
   &:active {
     transform: scale(0.9);
