@@ -7,10 +7,12 @@
     transform: scale(0.9);
   }
 
-  @media all and (max-width: 600px) {
-    .icon {
-      width: 15px !important;
-      height: 14px !important;
+  &--mobile {
+    @media all and (max-width: 600px) {
+      .icon {
+        width: 15px !important;
+        height: 14px !important;
+      }
     }
   }
 }

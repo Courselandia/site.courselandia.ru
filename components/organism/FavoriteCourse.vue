@@ -1,6 +1,6 @@
 <template>
   <div
-    class="favorite-course"
+    :class="`favorite-course ${nameClass}`"
     @click="onClick"
     @keyup="onClick"
   >
@@ -23,6 +23,7 @@
 
 <script lang="ts" setup>
 import {
+  computed,
   PropType,
 } from 'vue';
 
@@ -36,6 +37,11 @@ const props = defineProps({
     type: Number as PropType<TId>,
     required: true,
   },
+  mobile: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
 });
 
 const {
@@ -43,6 +49,16 @@ const {
   removeFavorite,
   hasFavorite,
 } = favorite();
+
+const nameClass = computed(() => {
+  const classes = [];
+
+  if (props.mobile) {
+    classes.push('favorite-course--mobile');
+  }
+
+  return classes.join(' ');
+});
 
 const onClick = (): void => {
   if (hasFavorite(props.id)) {

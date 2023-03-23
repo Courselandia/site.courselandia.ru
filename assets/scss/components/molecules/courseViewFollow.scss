@@ -26,6 +26,22 @@
       flex-grow: 1;
       padding-right: 1rem;
     }
+
+    &--right {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__action {
+    &--button {
+      flex-grow: 1;
+    }
+
+    &--favorite {
+      line-height: 0;
+      padding-left: 1rem;
+    }
   }
 
   &__content {

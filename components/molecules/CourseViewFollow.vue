@@ -46,14 +46,23 @@
           </div>
         </div>
         <div class="course-view-follow__side course-view-follow__side--right">
-          <Button
-            :to="course.url"
-            link="link"
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-          >
-            Перейти
-          </Button>
+          <div class="course-view-follow__action course-view-follow__action--button">
+            <Button
+              :to="course.url"
+              link="link"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              @click="onClick"
+            >
+              Перейти
+            </Button>
+          </div>
+          <div class="course-view-follow__action course-view-follow__action--favorite">
+            <FavoriteCourse
+              :id="course.id"
+              :mobile="false"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -64,8 +73,10 @@
 import { PropType } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
+import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
+import track from '@/helpers/track';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
@@ -74,6 +85,10 @@ const props = defineProps({
     required: true,
   },
 });
+
+const onClick = (): void => {
+  track('school');
+};
 </script>
 
 <style lang="scss">
