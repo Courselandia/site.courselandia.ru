@@ -9,11 +9,11 @@
           <div class="footer__info">
             <p>Ищем и сравниваем курсы IT сферы.</p>
             <p>
-              Мы - каталог курсов IT сферы.
+              Мы — каталог курсов IT сферы.
               Ищите и сравнивайте курсы по различным параметрам:
               цена, продолжительность и много других критериев.
             </p>
-            <p>2023 Courcesalndia ©</p>
+            <p>{{ currentYear !== foundYear ? `${foundYear}–${currentYear}` : foundYear }} Courcesalndia ©</p>
           </div>
         </div>
         <div class="footer__side footer__side--right">
@@ -53,6 +53,9 @@ import MenuBottom from '@/components/atoms/MenuBottom.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IMenu from '@/interfaces/menu';
+
+const currentYear = ref(new Date().getFullYear());
+const foundYear = 2023;
 
 const config = useRuntimeConfig();
 const menuSchools = ref<IMenu[]>();
