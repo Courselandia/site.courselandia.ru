@@ -1314,11 +1314,15 @@ const onChangeSort = (): void => {
 };
 
 watch(route, async () => {
-  search.value = getUrlQuery('search');
-  const filters: IFilters = getFilters();
-  currentPage.value = 1;
+  const currentSearch = getUrlQuery('search');
 
-  await reload(currentPage.value, size.value, getSort(sort.value), filters);
+  if (currentSearch !== search.value) {
+    search.value = getUrlQuery('search');
+    const filters: IFilters = getFilters();
+    currentPage.value = 1;
+
+    await reload(currentPage.value, size.value, getSort(sort.value), filters);
+  }
 });
 setMeta();
 </script>
