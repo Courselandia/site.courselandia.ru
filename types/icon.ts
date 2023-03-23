@@ -23,6 +23,9 @@ type TIcon =
   'certificate' |
   'checked-circle' |
   'plus-circle' |
-  'minus-circle';
+  'minus-circle' |
+  'checkbox' |
+  'calendar' |
+  'note';
 
 export default TIcon;
