@@ -87,6 +87,7 @@
                   Изучите реальные отзывы тех, кто уже обучался в онлайн-школах,
                   сравнивайте курсы и найдите тот, что подходит вам лучше всего!
                 </div>
+                <!--
                 <div class="dropdowns__statistics">
                   <div class="dropdowns__statistics-item">
                     <div class="dropdowns__statistics-icon">
@@ -104,6 +105,7 @@
                     </div>
                   </div>
                 </div>
+                -->
                 <div class="dropdowns__button">
                   <Button
                     to="/courses"
