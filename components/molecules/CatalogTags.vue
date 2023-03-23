@@ -12,6 +12,7 @@
       || hasTeachers(teachers, selectedTeachersValue)
       || hasSkills(skills, selectedSkillsValue)
       || hasTools(tools, selectedToolsValue)
+      || search !== ''
       || selectedFormat !== null
       || hasLevels(levels, selectedLevelsValue)"
     class="catalog-tags"
@@ -62,6 +63,23 @@
                 class="cursor--pointer"
                 @click="onClickResetDirection(false)"
                 @keyup="onClickResetDirection(false)"
+              />
+            </template>
+          </Tag>
+
+          <Tag
+            v-if="searchValue"
+            bck="blue1"
+          >
+            {{ searchValue }}
+            <template #after>
+              <Icon
+                name="close"
+                color="grey2"
+                :size="[15, 15]"
+                class="cursor--pointer"
+                @click="onClickResetSearch(false)"
+                @keyup="onClickResetSearch(false)"
               />
             </template>
           </Tag>
@@ -551,6 +569,11 @@ const props = defineProps({
     required: false,
     default: () => [],
   },
+  search: {
+    type: String,
+    required: false,
+    default: null,
+  },
   formats: {
     type: Array as PropType<Array<IFormat>>,
     required: false,
@@ -635,6 +658,7 @@ const {
   selectedDurations,
   selectedCredit,
   selectedFree,
+  search,
   directions,
   schools,
   categories,
@@ -655,6 +679,7 @@ const emit = defineEmits({
   'update:selected-teachers': (_: Array<ITeacher>) => true,
   'update:selected-skills': (_: Array<ISkill>) => true,
   'update:selected-tools': (_: Array<ITool>) => true,
+  'update:search': (_: String) => true,
   'update:selected-format': (_: IFormat | null) => true,
   'update:selected-levels': (_: Array<ILevel>) => true,
   'update:selected-prices': (_: Array<number>) => true,
@@ -920,6 +945,26 @@ const onClickResetTool = (index: number): void => {
 
 //
 
+const searchValue = ref(search.value);
+
+watch(searchValue, () => {
+  emit('update:search', searchValue.value);
+});
+
+watch(search, () => {
+  searchValue.value = search.value;
+});
+
+const onClickResetSearch = (silence: boolean = false): void => {
+  searchValue.value = '';
+
+  if (!silence) {
+    emit('remove');
+  }
+};
+
+//
+
 const selectedFormatValue = ref<boolean | null>(selectedFormat.value?.value);
 
 watch(selectedFormatValue, () => {
@@ -982,6 +1027,7 @@ const onClickResetAll = (): void => {
   onClickResetCredit(true);
   onClickResetFree(true);
   onClickResetDurations(true);
+  onClickResetSearch(true);
   selectedSchoolsValue.value = [];
   selectedCategoriesValue.value = [];
   selectedProfessionsValue.value = [];

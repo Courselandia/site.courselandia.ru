@@ -37,6 +37,7 @@
                   v-model:selected-durations="selectedDurations"
                   v-model:selected-credit="selectedCredit"
                   v-model:selected-free="selectedFree"
+                  v-model:search="search"
                   :price-min="priceMin"
                   :price-max="priceMax"
                   :duration-min="durationMin"
@@ -185,6 +186,7 @@
           v-model:selected-durations="selectedDurations"
           v-model:selected-credit="selectedCredit"
           v-model:selected-free="selectedFree"
+          v-model:search="search"
           :price-min="priceMin"
           :price-max="priceMax"
           :duration-min="durationMin"
@@ -212,6 +214,7 @@ import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
+  watch,
 } from 'vue';
 import {
   useRoute,
@@ -369,6 +372,7 @@ const getUrlQuery = (name: string): string | null => {
 const sortDefault = ECourseSort.ALPHABETIC;
 const sort = ref<TValue>(sortDefault);
 const valueQuery = getUrlQuery('sort');
+const search = ref(getUrlQuery('search'));
 
 if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)) {
   sort.value = valueQuery;
@@ -472,6 +476,10 @@ const totalFilters = computed((): number => {
     selectedDurations.value[0] !== durationMin.value
     || selectedDurations.value[1] !== durationMax.value
   ) {
+    count++;
+  }
+
+  if (search.value) {
     count++;
   }
 
@@ -871,11 +879,7 @@ const reload = async (
       setHeader(result);
 
       if (result.total) {
-        if ((currentPage.value * size.value) >= result.total) {
-          stopScrollLoader.value = true;
-        } else {
-          stopScrollLoader.value = false;
-        }
+        stopScrollLoader.value = (currentPage.value * size.value) >= result.total;
       }
     } else {
       courses.value = [];
@@ -977,6 +981,10 @@ const getFilters = (): IFilters => {
 
   if (selectedFree.value) {
     filters.free = true;
+  }
+
+  if (search.value) {
+    filters.search = search.value;
   }
 
   return filters;
@@ -1142,6 +1150,10 @@ const setUrlQuery = (
       });
     }
 
+    if (search.value) {
+      queries.push(`search=${encodeURIComponent(search.value)}`);
+    }
+
     const query = queries.join('&');
 
     let url = '/courses';
@@ -1300,6 +1312,14 @@ const onChangeSort = (): void => {
     onFilterAndSort();
   }, 50);
 };
+
+watch(route, async () => {
+  search.value = getUrlQuery('search');
+  const filters: IFilters = getFilters();
+  currentPage.value = 1;
+
+  await reload(currentPage.value, size.value, getSort(sort.value), filters);
+});
 setMeta();
 </script>
 
