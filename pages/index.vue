@@ -37,7 +37,15 @@
           </Button>
         </template>
         <template #media>
-          <img src="@/assets/images/hero/1.webp" alt="С нами находить курсы легче" />
+          <template v-if="heroImage === 1">
+            <img src="@/assets/images/hero/1.webp" alt="С нами находить курсы легче" />
+          </template>
+          <template v-else-if="heroImage === 2">
+            <img src="@/assets/images/hero/2.webp" alt="С нами находить курсы легче" />
+          </template>
+          <template v-else>
+            <img src="@/assets/images/hero/3.webp" alt="С нами находить курсы легче" />
+          </template>
         </template>
       </Hero>
 
@@ -114,6 +122,7 @@ useHead({
 
 const config = useRuntimeConfig();
 const listDirections = ref<IMenu[]>();
+const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));
 
 try {
   listDirections.value = await directionsToMenu(await $fetch('/api/direction/read'));
