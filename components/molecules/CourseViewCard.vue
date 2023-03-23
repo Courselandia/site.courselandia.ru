@@ -79,16 +79,23 @@
         </div>
       </div>
       <div class="course-view-card__footer">
-        <div class="course-view-card__action">
-          <Button
-            :to="course.url"
-            link="link"
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-            wide
-          >
-            На сайт курса
-          </Button>
+        <div class="course-view-card__actions">
+          <div class="course-view-card__action course-view-card__action--button">
+            <Button
+              :to="course.url"
+              link="link"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              wide
+            >
+              На сайт курса
+            </Button>
+          </div>
+          <div class="course-view-card__action course-view-card__action--favorite">
+            <FavoriteCourse
+              :id="course.id"
+            />
+          </div>
         </div>
         <div
           v-if="course.features?.length"
@@ -133,6 +140,7 @@ import {
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
+import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
 import ICourse from '@/interfaces/components/molecules/course';

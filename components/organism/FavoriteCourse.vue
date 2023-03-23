@@ -9,7 +9,7 @@
   >
     <transition name="fade-fast" mode="out-in">
       <Icon
-        v-if="hover || hasFavorite(id)"
+        v-if="hasFavorite(id)"
         name="heart-full"
         :size="[25, 23]"
         color="blue2"
@@ -42,25 +42,15 @@ const props = defineProps({
   },
 });
 
-const hover = ref(false);
 const {
   addFavorite,
   removeFavorite,
   hasFavorite,
 } = favorite();
 
-const onMouseEnter = (): void => {
-  hover.value = true;
-};
-
-const onMouseLeave = (): void => {
-  hover.value = false;
-};
-
 const onClick = (): void => {
   if (hasFavorite(props.id)) {
     removeFavorite(props.id);
-    hover.value = false;
   } else {
     addFavorite(props.id);
   }
