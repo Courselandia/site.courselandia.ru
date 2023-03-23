@@ -87,6 +87,7 @@
               target="_blank"
               rel="nofollow noopener noreferrer"
               wide
+              @click="onClick"
             >
               На сайт курса
             </Button>
@@ -143,6 +144,7 @@ import LazyImage from '@/components/atoms/LazyImage.vue';
 import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
+import track from '@/helpers/track';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
@@ -166,6 +168,10 @@ const nameClass = computed(() => {
 
   return classes.join(' ');
 });
+
+const onClick = (): void => {
+  track('school');
+};
 </script>
 
 <style lang="scss">

@@ -119,6 +119,7 @@
         @mouseup="onClickDisable"
         @mouseleave="onClickDisable"
         @focusout="onClickDisable"
+        @click="onClickGoSchool"
       >
         Перейти на сайт
       </a>
@@ -149,6 +150,7 @@ import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import duration from '@/helpers/duration';
 import { money } from '@/helpers/number';
+import track from '@/helpers/track';
 import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
@@ -177,6 +179,10 @@ const onClickActive = (): void => {
 
 const onClickDisable = (): void => {
   active.value = false;
+};
+
+const onClickGoSchool = (): void => {
+  track('school');
 };
 </script>
 

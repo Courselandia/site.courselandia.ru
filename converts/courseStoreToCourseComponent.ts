@@ -37,12 +37,12 @@ export const courseStoreToCourseComponent = (
   directions: course.directions ? course.directions.map((direction) => ({
     id: direction.id,
     name: direction.name,
-    link: `/courses/directions/${direction.link}`,
+    link: `/courses/direction/${direction.link}`,
   })) : null,
   professions: course.professions ? course.professions.map((profession) => ({
     id: profession.id,
     label: profession.name,
-    link: `/courses/professions/${profession.link}`,
+    link: `/courses/profession/${profession.link}`,
     salaries: profession?.salaries?.map((salary) => ({
       id: salary.id,
       level: salary.level,
@@ -52,22 +52,22 @@ export const courseStoreToCourseComponent = (
   categories: course.categories ? course.categories.map((category) => ({
     id: category.id,
     label: category.name,
-    link: `/courses/categories/${category.link}`,
+    link: `/courses/category/${category.link}`,
   })) : null,
   skills: course.skills ? course.skills.map((skill) => ({
     id: skill.id,
     label: skill.name,
-    link: `/courses/skills/${skill.link}`,
+    link: `/courses/skill/${skill.link}`,
   })) : null,
   teachers: course.teachers ? course.teachers.map((teacher) => ({
     id: teacher.id,
     label: teacher.name,
-    link: `/courses/teachers/${teacher.link}`,
+    link: `/courses/teacher/${teacher.link}`,
   })) : null,
   tools: course.tools ? course.tools.map((tool) => ({
     id: tool.id,
     label: tool.name,
-    link: `/courses/tools/${tool.link}`,
+    link: `/courses/tool/${tool.link}`,
   })) : null,
   processes: course.processes ? course.processes.map((process) => ({
     name: process.name,

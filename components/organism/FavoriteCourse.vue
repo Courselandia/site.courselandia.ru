@@ -22,13 +22,12 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import {
   PropType,
-  ref,
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
+import track from '@/helpers/track';
 import favorite from '@/stores/favorite';
 import TId from '@/types/id';
 
@@ -50,6 +49,7 @@ const onClick = (): void => {
     removeFavorite(props.id);
   } else {
     addFavorite(props.id);
+    track('favorite');
   }
 };
 </script>

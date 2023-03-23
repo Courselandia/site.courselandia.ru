@@ -32,6 +32,7 @@ export default defineNuxtConfig({
       apiUrl: process.env.NUXT_API_URL,
       development: process.env.NODE_ENV === 'development',
       googleMeasurementId: process.env.GOOGLE_MEASUREMENT_ID,
+      yandexMeasurementId: process.env.YANDEX_METRIKA_ID,
     },
   },
   router: {
