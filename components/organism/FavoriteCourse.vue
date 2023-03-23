@@ -1,11 +1,8 @@
 <template>
   <div
     class="favorite-course"
-    @mouseenter="onMouseEnter"
-    @focusin="onMouseEnter"
-    @mouseleave="onMouseLeave"
-    @focusout="onMouseLeave"
     @click="onClick"
+    @keyup="onClick"
   >
     <transition name="fade-fast" mode="out-in">
       <Icon
