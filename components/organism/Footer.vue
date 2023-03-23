@@ -72,10 +72,12 @@ try {
 }
 
 const menuInfo = ref<IMenu[]>([
+  /*
   {
     label: 'Контактная информация',
     link: '/contact-info',
   },
+  */
   {
     label: 'Пользовательское соглашение',
     link: '/agreement',

@@ -46,7 +46,8 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ru',
       },
-      title: 'Courselandia',
+      title: 'Агрегатор онлайн-курсов Courselandia',
+      description: 'Courselandia - это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментами.',
       meta: [
         {
           charset: 'utf-8',
@@ -58,6 +59,34 @@ export default defineNuxtConfig({
         {
           name: 'theme-color',
           content: '#121F42',
+        },
+        {
+          property: 'og:title',
+          content: 'Агрегатор онлайн-курсов Courselandia',
+        },
+        {
+          property: 'og:type',
+          content: 'article',
+        },
+        {
+          property: 'og:url',
+          content: 'https://courselandia.ru',
+        },
+        {
+          property: 'og:image',
+          content: 'https://api.courselandia.ru/storage/uploaded/images/prev.webp',
+        },
+        {
+          property: 'og:image:width',
+          content: '620',
+        },
+        {
+          property: 'og:image:height',
+          content: '350',
+        },
+        {
+          property: 'og:description',
+          content: 'Courselandia - это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментами.',
         },
       ],
       link: [
