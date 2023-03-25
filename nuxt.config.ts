@@ -89,6 +89,10 @@ export default defineNuxtConfig({
           property: 'og:description',
           content: 'Courselandia - это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментами.',
         },
+        {
+          name: 'yandex-verification',
+          content: '71440411ee92b8f8',
+        },
       ],
       link: [
         {
