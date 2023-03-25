@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <url>
+        <loc>https://courselandia.ru/</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/school/netologiya</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/school/skillbox</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/school/geekbrains</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/direction/programmirovanie</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/direction/marketing</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/direction/dizayn</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/direction/biznes-i-upravlenie</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/direction/analitika</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/direction/igri</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://courselandia.ru/courses/direction/drugie-professii</loc>
+        <lastmod>2023-03-22T19:28:53+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+</urlset>
+
