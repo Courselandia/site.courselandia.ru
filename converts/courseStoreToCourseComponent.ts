@@ -7,7 +7,7 @@ export const courseStoreToCourseComponent = (
 ): ICourseComponent => ({
   id: course.id,
   name: course.header,
-  link: `/courses/course/${course.school?.link}/${course.link}`,
+  link: `/courses/show/${course.school?.link}/${course.link}`,
   url: course.url,
   rating: course.rating,
   image: course.image_middle_id?.path || null,
