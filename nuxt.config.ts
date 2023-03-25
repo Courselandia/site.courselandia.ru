@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   ],
   modules: [
     '@pinia/nuxt',
+    '@nuxt/image-edge',
     [
       'yandex-metrika-module-nuxt3',
       {
@@ -27,6 +28,9 @@ export default defineNuxtConfig({
       },
     ],
   ],
+  image: {
+    dir: 'assets/images',
+  },
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_API_URL,

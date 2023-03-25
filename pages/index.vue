@@ -38,13 +38,13 @@
         </template>
         <template #media>
           <template v-if="heroImage === 1">
-            <img src="@/assets/images/hero/1.webp" alt="С нами находить курсы легче" />
+            <nuxt-img src="/hero/1.webp" alt="С нами находить курсы легче" width="619" height="641" />
           </template>
           <template v-else-if="heroImage === 2">
-            <img src="@/assets/images/hero/2.webp" alt="С нами находить курсы легче" />
+            <nuxt-img src="/hero/2.webp" alt="С нами находить курсы легче" width="621" height="641" />
           </template>
           <template v-else>
-            <img src="@/assets/images/hero/3.webp" alt="С нами находить курсы легче" />
+            <nuxt-img src="/hero/3.webp" alt="С нами находить курсы легче" width="622" height="641" />
           </template>
         </template>
       </Hero>
