@@ -37,6 +37,7 @@
           </Button>
         </template>
         <template #media>
+          <!--
           <template v-if="heroImage === 1">
             <LazyImage
               :src="heros[0].default"
@@ -61,6 +62,7 @@
               :height="641"
             />
           </template>
+          -->
         </template>
       </Hero>
 
