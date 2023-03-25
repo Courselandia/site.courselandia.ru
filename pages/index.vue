@@ -38,13 +38,28 @@
         </template>
         <template #media>
           <template v-if="heroImage === 1">
-            <img src="@/assets/images/hero/1.webp" alt="С нами находить курсы легче" width="619" height="641" />
+            <LazyImage
+              :src="heros[0].default"
+              alt="С нами находить курсы легче"
+              :width="619"
+              :height="641"
+            />
           </template>
           <template v-else-if="heroImage === 2">
-            <img src="@/assets/images/hero/2.webp" alt="С нами находить курсы легче" width="621" height="641" />
+            <LazyImage
+              :src="heros[1].default"
+              alt="С нами находить курсы легче"
+              :width="621"
+              :height="641"
+            />
           </template>
           <template v-else>
-            <img src="@/assets/images/hero/3.webp" alt="С нами находить курсы легче" width="622" height="641" />
+            <LazyImage
+              :src="heros[2].default"
+              alt="С нами находить курсы легче"
+              :width="622"
+              :height="641"
+            />
           </template>
         </template>
       </Hero>
@@ -98,6 +113,7 @@ import {
 
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
+import LazyImage from '@/components/atoms/LazyImage.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import Courses from '@/components/molecules/Courses.vue';
 import Direction from '@/components/molecules/Direction.vue';
@@ -123,6 +139,12 @@ useHead({
 const config = useRuntimeConfig();
 const listDirections = ref<IMenu[]>();
 const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));
+
+const heros = [
+  await import('@/assets/images/hero/1.webp'),
+  await import('@/assets/images/hero/2.webp'),
+  await import('@/assets/images/hero/3.webp'),
+];
 
 try {
   listDirections.value = await directionsToMenu(await $fetch('/api/direction/read'));
