@@ -1,5 +1,5 @@
 <template>
-  <Bubbles class="mb-15">
+  <Bubbles class="mb-12">
     <div :class="`catalog-header ${hasSlot('image') ? 'catalog-header--image' : ''}`">
       <div class="content">
         <div class="catalog-header__sides">

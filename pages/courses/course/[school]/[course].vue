@@ -1,5 +1,5 @@
 <template>
-  <CourseView class="mb-30 mb-15-sm" />
+  <CourseView class="mb-24 mb-12-sm" />
 </template>
 
 <script lang="ts" setup>

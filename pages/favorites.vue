@@ -1,5 +1,5 @@
 <template>
-  <div class="content mt-15 mb-30 mb-15-sm">
+  <div class="content mt-12 mb-24 mb-12-sm">
     <h1 class="title title--1">
       Избранное
     </h1>

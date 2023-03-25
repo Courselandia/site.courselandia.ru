@@ -1,5 +1,5 @@
 <template>
-  <div class="content content--small mt-15 mb-30 mb-15-sm">
+  <div class="content content--small mt-12 mb-24 mb-12-sm">
     <h1 class="title title--1">
       Политика в отношении обработки персональных данных
     </h1>

@@ -21,7 +21,7 @@
       <div class="course-view__info">
         <div
           v-if="courseItem.learns?.length"
-          class="mb-50 mb-15-md"
+          class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
             Чему вы научитесь
@@ -34,7 +34,7 @@
 
         <div
           v-if="hasSalaries"
-          class="mb-50 mb-15-md"
+          class="mb-40 mb-12-md"
         >
           <CourseViewSalaries
             :course="courseItem"
@@ -43,7 +43,7 @@
 
         <div
           v-if="courseItem.processes?.length"
-          class="mb-50 mb-15-md"
+          class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
             Как проходит обучение
@@ -56,7 +56,7 @@
 
         <div
           v-if="courseItem.teachers?.length"
-          class="mb-50 mb-15-md"
+          class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
             Преподаватели
@@ -69,7 +69,7 @@
 
         <div
           v-if="courseItem.employments?.length"
-          class="mb-50 mb-15-md"
+          class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
             Помощь с трудоустройством
@@ -80,7 +80,7 @@
           />
         </div>
 
-        <div class="mb-50 mb-15-md">
+        <div class="mb-40 mb-12-md">
           <h2 class="title title--1">
             Информация
           </h2>

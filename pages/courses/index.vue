@@ -1,5 +1,5 @@
 <template>
-  <Catalog class="mb-30 mb-15-sm" />
+  <Catalog class="mb-24 mb-12-sm" />
 </template>
 
 <script lang="ts" setup>

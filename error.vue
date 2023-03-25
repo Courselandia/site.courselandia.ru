@@ -7,7 +7,7 @@
       <Dropdowns v-model:menu="menu" />
     </div>
     <div class="page__body">
-      <div class="content mt-30 mb-30">
+      <div class="content mt-24 mb-24">
         <Error
           v-if="error.statusCode === 404 || error.statusCode === '404'"
           :code="error.statusCode"

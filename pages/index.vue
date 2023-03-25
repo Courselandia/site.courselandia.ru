@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="content">
-      <Hero class="mt-15 mb-30 mb-15-sm">
+      <Hero class="mt-12 mb-24 mb-12-sm">
         <template #title>
           С нами находить курсы легче
         </template>
@@ -49,12 +49,12 @@
         </template>
       </Hero>
 
-      <Brands class="mb-50 mb-15-sm" />
+      <Brands class="mb-40 mb-12-sm" />
 
       <h1 class="title title--big title--center-mobil">
         Популярные направления
       </h1>
-      <Directions class="mb-50 mb-15-sm">
+      <Directions class="mb-40 mb-12-sm">
         <template
           v-for="(item, key) in listDirections"
           :key="key"
@@ -69,7 +69,7 @@
       </Directions>
     </div>
 
-    <div class="bck--blue-1 pt-50 pb-50 pt-15-sm pb-15-sm">
+    <div class="bck--blue-1 pt-40 pb-40 pt-12-sm pb-12-sm">
       <div class="content">
         <h1 class="title title--big title--center-mobil">
           Лучшие курсы
@@ -77,7 +77,7 @@
 
         <Courses
           :courses="courses"
-          class="mb-10"
+          class="mb-8"
         />
         <div class="align--center">
           <Button

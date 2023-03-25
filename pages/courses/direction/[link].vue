@@ -1,6 +1,6 @@
 <template>
   <Catalog
-    class="mb-30 mb-15-sm"
+    class="mb-24 mb-12-sm"
     section="direction"
   />
 </template>
