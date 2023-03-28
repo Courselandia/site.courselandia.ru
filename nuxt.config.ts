@@ -97,7 +97,7 @@ export default defineNuxtConfig({
       link: [
         {
           rel: 'icon',
-          href: '/images/favicon.ico',
+          href: 'https://courselandia.ru/images/favicon.ico',
           type: 'image/x-icon',
         },
       ],
