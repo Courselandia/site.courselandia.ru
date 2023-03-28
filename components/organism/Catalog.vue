@@ -587,12 +587,26 @@ const setMeta = (): void => {
     description = itemLinkTool.value?.metatag?.description;
   }
 
+  let canonical = '';
+
+  if (process.client) {
+    canonical = `https://courselandia.ru${window.location.pathname}`;
+  } else {
+    canonical = `https://courselandia.ru${route.path}`;
+  }
+
   useHead({
     title,
     meta: [
       {
         name: 'description',
         content: description,
+      },
+    ],
+    link: [
+      {
+        rel: 'canonical',
+        href: canonical,
       },
     ],
   });
