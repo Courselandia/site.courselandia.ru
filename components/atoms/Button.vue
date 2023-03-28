@@ -1,55 +1,65 @@
 <template>
-  <template v-if="link === 'nuxt-link'">
-    <nuxt-link
-      :class="`button ${nameClass}`"
-      :to="to"
-      :disabled="disabled"
+  <div
+    :class="`button ${nameClass}`"
+  >
+    <Loader
+      :active="loading"
+      color="white-transparency"
+      class="button__loader"
     >
-      <div class="button__label">
-        <slot />
-      </div>
-      <template v-if="hasSlot('icon')">
-        <div class="button__icon">
-          <slot name="icon" />
-        </div>
+      <template v-if="link === 'nuxt-link'">
+        <nuxt-link
+          class="button__box"
+          :to="to"
+          :disabled="disabled"
+        >
+          <div class="button__label">
+            <slot />
+          </div>
+          <template v-if="hasSlot('icon')">
+            <div class="button__icon">
+              <slot name="icon" />
+            </div>
+          </template>
+        </nuxt-link>
       </template>
-    </nuxt-link>
-  </template>
-  <template v-else-if="link === 'link'">
-    <a
-      :class="`button ${nameClass}`"
-      :href="to"
-      :disabled="disabled"
-      :target="target"
-      :rel="rel"
-    >
-      <div class="button__label">
-        <slot />
-      </div>
-      <template v-if="hasSlot('icon')">
-        <div class="button__icon">
-          <slot name="icon" />
-        </div>
+      <template v-else-if="link === 'link'">
+        <a
+          class="button__box"
+          :href="to"
+          :disabled="disabled"
+          :target="target"
+          :rel="rel"
+        >
+          <div class="button__label">
+            <slot />
+          </div>
+          <template v-if="hasSlot('icon')">
+            <div class="button__icon">
+              <slot name="icon" />
+            </div>
+          </template>
+        </a>
       </template>
-    </a>
-  </template>
-  <template v-else-if="link === 'button'">
-    <button
-      :class="`button ${nameClass}`"
-      :disabled="disabled"
-      @click.prevent="onClick"
-      @keydown.prevent="onClick"
-    >
-      <div class="button__label">
-        <slot />
-      </div>
-      <template v-if="hasSlot('icon')">
-        <div class="button__icon">
-          <slot name="icon" />
-        </div>
+      <template v-else-if="link === 'button'">
+        <button
+          class="button__box"
+          :disabled="disabled"
+          @click.prevent="onClick"
+          @keydown.prevent="onClick"
+        >
+          <div class="button__label">
+            <slot />
+          </div>
+          <template v-if="hasSlot('icon')">
+            <div class="button__icon">
+              <slot name="icon" />
+            </div>
+          </template>
+        </button>
       </template>
-    </button>
-  </template>
+    </Loader>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -60,6 +70,7 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 
+import Loader from '@/components/atoms/Loader.vue';
 import TButton from '@/types/button';
 import TLink from '@/types/link';
 
@@ -102,6 +113,11 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  loading: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const router = useRouter();
@@ -125,6 +141,10 @@ const nameClass = computed(() => {
     classes.push('button--disabled');
   }
 
+  if (props.loading) {
+    classes.push('button--loading');
+  }
+
   if (props.wide) {
     classes.push('button--wide');
   }
@@ -141,7 +161,7 @@ const slots = useSlots();
 const hasSlot = (name: string) => !!slots[name];
 
 const onClick = (): boolean => {
-  if (props.disabled === false) {
+  if (props.disabled === false && props.loading === false) {
     if (props.to) {
       router.push(props.to);
     }

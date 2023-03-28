@@ -73,6 +73,18 @@
     }
   }
 
+  &--color-white-transparency {
+    .loader__item {
+      border-top-color: $white;
+      border-left-color: $white;
+    }
+
+    .loader__scrim {
+      background-color: $white;
+      opacity: 0.3;
+    }
+  }
+
   &--color-blue2 {
     .loader__item {
       border-top-color: $blue2;

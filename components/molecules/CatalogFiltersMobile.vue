@@ -42,6 +42,7 @@
 
             <div class="catalog-filters-mobile__action">
               <Button
+                :loading="loading"
                 @click="onClickApply"
               >
                 Просмотреть {{ total }}
@@ -86,6 +87,11 @@ const props = defineProps({
     type: Number,
     required: false,
     default: 0,
+  },
+  loading: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 

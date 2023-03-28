@@ -2,23 +2,30 @@
 @import "@/assets/scss/vars/animations/transition";
 
 .button {
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all $speedPrimary $functionPrimary;
   display: inline-flex;
-  align-items: center;
-  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all $speedPrimary $functionPrimary;
 
-  &:active:not(.button--disabled) {
+  &__box {
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+    display: inline-flex;
+  }
+
+  &__loader {
+    display: inline-block;
+  }
+
+  &:active:not(.button--disabled):not(.button--loading) {
     transform: scale(0.97);
   }
 
   &--primary {
-    color: $white;
     background-color: $blue2;
     text-align: center;
 
-    &:hover {
+    &:hover:not(.button--disabled):not(.button--loading) {
       background-color: $blue3;
     }
 
@@ -28,6 +35,7 @@
         font-size: 1.125rem;
         line-height: 1.563rem;
         font-weight: 700;
+        color: $white;
 
         @media all and (max-width: 576px) {
           font-size: 1rem;
@@ -56,6 +64,15 @@
 
   &--tertiary {
 
+  }
+
+  &--loading {
+    .button {
+      &__label,
+      &__icon {
+        visibility: hidden;
+      }
+    }
   }
 
   &--disabled {
@@ -88,6 +105,12 @@
 
     &:empty {
       display: none;
+    }
+  }
+
+  .loader {
+    &__scrim {
+      border-radius: 0.5rem;
     }
   }
 }

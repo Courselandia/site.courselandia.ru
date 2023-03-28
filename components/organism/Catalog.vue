@@ -16,6 +16,7 @@
                   <CatalogFiltersMobile
                     :total="total"
                     :total-filters="totalFilters"
+                    :loading="loading"
                   />
                 </template>
               </CatalogTools>
@@ -309,6 +310,7 @@ const route = useRoute();
 const router = useRouter();
 let { link } = route.params;
 let section = props.section || null;
+const loading = ref(false);
 
 const stopScrollLoader = ref(false);
 
@@ -880,6 +882,8 @@ const reload = async (
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
 ): Promise<void> => {
+  loading.value = true;
+
   try {
     const result = await load(
       pageValue,
@@ -905,6 +909,8 @@ const reload = async (
   } catch (error: any) {
     console.log(error.message);
   }
+
+  loading.value = false;
 };
 
 const getSort = (val: TValue): ISorts => {
