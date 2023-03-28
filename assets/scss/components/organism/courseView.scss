@@ -5,6 +5,10 @@
     @media all and (max-width: 1200px) {
       padding-right: 0;
     }
+
+    @media all and (max-width: 768px) {
+      padding-right: 1rem;
+    }
   }
 
   &__info {

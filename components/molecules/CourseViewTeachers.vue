@@ -1,19 +1,21 @@
 <template>
   <div class="course-view-teachers">
-    <div
-      v-for="(teacher, key) in course.teachers"
-      :key="key"
-      class="course-view-teachers__item"
-    >
-      <div class="course-view-teachers__picture">
-        <Animal />
-      </div>
-      <div class="course-view-teachers__info">
-        <div class="course-view-teachers__name">
-          {{ teacher.label }}
+    <div class="course-view-teachers__items">
+      <div
+        v-for="(teacher, key) in course.teachers"
+        :key="key"
+        class="course-view-teachers__item"
+      >
+        <div class="course-view-teachers__picture">
+          <Animal />
         </div>
-        <div class="course-view-teachers__position">
-          Эксперт
+        <div class="course-view-teachers__info">
+          <div class="course-view-teachers__name">
+            {{ teacher.label }}
+          </div>
+          <div class="course-view-teachers__position">
+            Эксперт
+          </div>
         </div>
       </div>
     </div>
