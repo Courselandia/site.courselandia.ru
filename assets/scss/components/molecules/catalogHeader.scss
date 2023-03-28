@@ -24,6 +24,10 @@
     font-weight: 400;
     font-size: 1.25rem;
     line-height: 1.875rem;
+
+    @media all and (max-width: 1000px) {
+      margin-bottom: 2.125rem;
+    }
   }
 
   &__sides {
@@ -45,7 +49,6 @@
 
       @media all and (max-width: 1000px) {
         padding-right: 0;
-        margin-bottom: 2.125rem;
       }
     }
 
@@ -69,10 +72,6 @@
 
     .title {
       margin-bottom: 0;
-
-      @media all and (max-width: 576px) {
-        margin-bottom: 1rem;
-      }
     }
   }
 

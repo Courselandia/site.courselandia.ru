@@ -32,7 +32,10 @@
               </template>
             </div>
 
-            <div class="catalog-header__description">
+            <div
+              v-if="hasSlot('description')"
+              class="catalog-header__description"
+            >
               <slot name="description" />
             </div>
 
