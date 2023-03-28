@@ -125,7 +125,7 @@ const emit = defineEmits({
 const selects = ref(value.value?.map((item) => item.id) || []);
 
 const activeItems = computed((): Array<ICatalogFilterSelectItem> => props.items?.filter(
-  (itm) => itm.label?.toLowerCase().indexOf(search.value.toLowerCase()) !== -1 || search.value === '',
+  (itm) => itm.label?.toLowerCase().indexOf(search.value.toLowerCase().trim()) !== -1 || search.value.trim() === '',
 ));
 
 watch(selects, () => {
