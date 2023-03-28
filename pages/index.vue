@@ -25,6 +25,7 @@
           <Button
             to="/courses"
             icon
+            link="nuxt-link"
           >
             Каталог курсов
             <template #icon>
@@ -97,6 +98,7 @@
         <div class="align--center">
           <Button
             to="/courses"
+            link="nuxt-link"
           >
             Весь каталог
           </Button>
