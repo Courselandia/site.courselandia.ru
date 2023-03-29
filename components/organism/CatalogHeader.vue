@@ -63,17 +63,30 @@
         v-if="itemLinkDirection.categories"
         #tags
       >
-        <Tags>
-          <Tag
-            v-for="(item, key) in itemLinkDirection.categories"
+        <Carousel
+          snap-align="end"
+          wrap-around
+        >
+          <Slide
+            v-for="(handful, key) in getHandfulTags(itemLinkDirection.categories)"
             :key="key"
-            :to="`/courses/category/${item.link}`"
-            bck="white"
-            shadow
           >
-            {{ item.name }}
-          </Tag>
-        </Tags>
+            <Tags>
+              <Tag
+                v-for="(item, handfulLey) in handful"
+                :key="handfulLey"
+                :to="`/courses/category/${item.link}`"
+                bck="white"
+              >
+                {{ item.name }}
+              </Tag>
+            </Tags>
+          </Slide>
+
+          <template #addons>
+            <Pagination />
+          </template>
+        </Carousel>
       </template>
     </CatalogHeader>
     <template
@@ -238,11 +251,18 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+  Carousel,
+  Pagination,
+  Slide,
+} from 'vue3-carousel';
 
 import Button from '@/components/atoms/Button.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import Tags from '@/components/molecules/Tags.vue';
+import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -258,4 +278,25 @@ const { itemLinkSchool } = storeToRefs(school());
 const { itemLinkSkill } = storeToRefs(skill());
 const { itemLinkTeacher } = storeToRefs(teacher());
 const { itemLinkTool } = storeToRefs(tool());
+
+const getHandfulTags = (items: Array<ICategoryLink>): Array<Array<ICategoryLink>> => {
+  const result: Array<Array<ICategoryLink>> = [];
+  const totalInHandful = 10;
+
+  for (let i = 0; i < items.length; i++) {
+    const indexCurrent = Math.floor(i / totalInHandful);
+
+    if (!result[indexCurrent]) {
+      result[indexCurrent] = [];
+    }
+
+    result[indexCurrent][result[indexCurrent].length] = items[i];
+  }
+
+  return result;
+};
 </script>
+
+<style lang="scss">
+@import "@/assets/scss/components/molecules/carousel.scss";
+</style>
