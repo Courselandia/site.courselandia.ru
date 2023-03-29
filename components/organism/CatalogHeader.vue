@@ -284,7 +284,7 @@ const { itemLinkTool } = storeToRefs(tool());
 
 const getHandfulTags = (items: Array<ICategoryLink>): Array<Array<ICategoryLink>> => {
   const result: Array<Array<ICategoryLink>> = [];
-  const totalInHandful = 10;
+  const totalInHandful = 5;
 
   for (let i = 0; i < items.length; i++) {
     const indexCurrent = Math.floor(i / totalInHandful);
