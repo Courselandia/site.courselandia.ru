@@ -53,4 +53,11 @@
     margin-top: 2rem;
     display: none;
   }
+
+  &__total {
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    color: $grey4;
+    margin-top: 1rem;
+  }
 }

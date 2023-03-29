@@ -20,6 +20,24 @@
                   />
                 </template>
               </CatalogTools>
+              <div class="catalog__total">
+                <template v-if="total === 1">
+                  Найден
+                </template>
+                <template v-if="total >= 2">
+                  Найдено
+                </template>
+                {{ total }}
+                <template v-if="total === 1">
+                  курс
+                </template>
+                <template v-if="total >= 2 && total <= 4">
+                  курса
+                </template>
+                <template v-else>
+                  курсов
+                </template>
+              </div>
             </div>
             <div class="catalog__tags">
               <ClientOnly>
