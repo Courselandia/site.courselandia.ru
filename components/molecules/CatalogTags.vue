@@ -1,20 +1,6 @@
 <template>
   <div
-    v-if="hasDirection(directions, selectedDirectionValue)
-      || hasRating(ratings, selectedRatingValue)
-      || (selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax)
-      || selectedCreditValue
-      || selectedFreeValue
-      || (selectedDurationsValue[0] !== durationMin || selectedDurationsValue[1] !== durationMax)
-      || hasSchools(schools, selectedSchoolsValue)
-      || hasCategories(categories, selectedCategoriesValue)
-      || hasProfessions(professions, selectedProfessionsValue)
-      || hasTeachers(teachers, selectedTeachersValue)
-      || hasSkills(skills, selectedSkillsValue)
-      || hasTools(tools, selectedToolsValue)
-      || search !== ''
-      || selectedFormat !== null
-      || hasLevels(levels, selectedLevelsValue)"
+    v-if="hasFilters"
     class="catalog-tags"
   >
     <transition name="fade">
@@ -1039,6 +1025,30 @@ const onClickResetAll = (): void => {
 
   emit('remove');
 };
+
+const hasFilters = computed(
+  (): boolean => hasDirection(directions.value, selectedDirectionValue.value)
+  || hasRating(props.ratings, selectedRatingValue.value)
+  || (
+    selectedPricesValue.value[0] !== props.priceMin
+    || selectedPricesValue.value[1] !== props.priceMax
+  )
+  || selectedCreditValue.value
+  || selectedFreeValue.value
+  || (
+    selectedDurationsValue.value[0] !== props.durationMin
+    || selectedDurationsValue.value[1] !== props.durationMax
+  )
+  || hasSchools(schools.value, selectedSchoolsValue.value)
+  || hasCategories(categories.value, selectedCategoriesValue.value)
+  || hasProfessions(professions.value, selectedProfessionsValue.value)
+  || hasTeachers(teachers.value, selectedTeachersValue.value)
+  || hasSkills(skills.value, selectedSkillsValue.value)
+  || hasTools(tools.value, selectedToolsValue.value)
+  || (search.value !== '' && search.value !== null)
+  || selectedFormat.value !== null
+  || hasLevels(props.levels, selectedLevelsValue.value),
+);
 </script>
 
 <style lang="scss">
