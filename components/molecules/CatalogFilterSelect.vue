@@ -18,6 +18,16 @@
               :size="[16, 16]"
             />
           </template>
+          <template #after>
+            <Icon
+              v-if="search"
+              name="close"
+              color="grey3"
+              :size="[16, 16]"
+              class="catalog-filter-select__close"
+              @click="onCLickClean"
+            />
+          </template>
         </Input>
       </Item>
     </div>
@@ -162,6 +172,10 @@ const onclickMore = (): void => {
 
 const onLoadItems = (): void => {
   emit('load-items');
+};
+
+const onCLickClean = (): void => {
+  search.value = '';
 };
 </script>
 
