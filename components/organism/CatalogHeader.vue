@@ -250,6 +250,9 @@
 </template>
 
 <script lang="ts" setup>
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'vue3-carousel/dist/carousel.css';
+
 import { storeToRefs } from 'pinia';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
