@@ -179,6 +179,30 @@
       </div>
     </template>
     <template
+      v-else-if="itemLinkTeacher"
+    >
+      <CatalogHeader
+        v-if="itemLinkTeacher && itemLinkTeacher.text"
+      >
+        <template #title>
+          {{ itemLinkTeacher.header || itemLinkTeacher.name }}
+        </template>
+        <template
+          v-if="itemLinkTeacher.text"
+          #description
+        >
+          <span v-html="itemLinkTeacher.text" />
+        </template>
+      </CatalogHeader>
+      <div v-else>
+        <div class="content mt-12">
+          <h1 class="title title--1">
+            {{ itemLinkTeacher.header || itemLinkTeacher.name }}
+          </h1>
+        </div>
+      </div>
+    </template>
+    <template
       v-else-if="itemLinkTool"
     >
       <CatalogHeader
