@@ -174,11 +174,26 @@ const {
 
 const courseItem = ref<ICourse>();
 
+const setMeta = (): void => {
+  const description = 'В каталоге Courselandia вы можете найти подходящий курс по различным направлениям. Только лучшие курсы со всей нужной информацией от ведущих онлайн школ.';
+
+  useHead({
+    title: courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`,
+    meta: [
+      {
+        name: 'description',
+        content: courseItem.value?.metatag?.description || description,
+      },
+    ],
+  });
+};
+
 try {
   const courseStore = await apiGetCourse(config.public.apiUrl, school as string, course as string);
 
   if (courseStore) {
     courseItem.value = courseStoreToCourseComponent(courseStore);
+    setMeta();
   }
 } catch (error: any) {
   console.error(error.message);
@@ -208,18 +223,6 @@ const hasSalaries = computed((): boolean => {
   }
 
   return has;
-});
-
-const description = 'В каталоге Courselandia вы можете найти подходящий курс по различным направлениям. Только лучшие курсы со всей нужной информацией от ведущих онлайн школ.';
-
-useHead({
-  title: courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`,
-  meta: [
-    {
-      name: 'description',
-      content: courseItem.value?.metatag?.description || description,
-    },
-  ],
 });
 </script>
 
