@@ -21,9 +21,10 @@ export default interface ICourse {
   image_big_id: IImage | null;
   image_middle_id: IImage | null;
   image_small_id: IImage | null;
+  name: string;
   header: string;
   text: string | null;
-  header_morphy: string;
+  name_morphy: string;
   text_morphy: string | null;
   link: string;
   url: string;

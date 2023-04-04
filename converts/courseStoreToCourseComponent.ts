@@ -6,7 +6,8 @@ export const courseStoreToCourseComponent = (
   course: ICourseStore,
 ): ICourseComponent => ({
   id: course.id,
-  name: course.header,
+  name: course.name,
+  header: course.header,
   link: `/courses/show/${course.school?.link}/${course.link}`,
   url: course.url,
   rating: course.rating,

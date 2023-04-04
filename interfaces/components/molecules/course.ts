@@ -19,6 +19,7 @@ import TId from '@/types/id';
 export default interface ICourse {
     id: TId,
     name: string,
+    header: string,
     link: string,
     url: string,
     rating: number | null,
