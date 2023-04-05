@@ -25,7 +25,7 @@
         <div class="course-view-salaries__duration">
           <template v-if="months">
             за {{ months }}
-            <template v-if="months >= 1">
+            <template v-if="months === 1">
               месяц
             </template>
             <template v-else-if="months >= 2 && months <= 4">
@@ -40,14 +40,10 @@
     </div>
     <div class="course-view-salaries__professions">
       <template
-        v-for="(profession, keyProfession) in course.professions"
+        v-for="(profession, keyProfession) in activeProfessions"
         :key="keyProfession"
       >
         <div
-          v-if="
-            getSalary(profession.salaries, ELevel.JUNIOR)
-              && getSalary(profession.salaries, ELevel.MIDDLE)
-              && getSalary(profession.salaries, ELevel.SENIOR)"
           :class="`course-view-salaries__profession ${index === keyProfession ? 'course-view-salaries__profession--active' : ''}`"
           @mouseenter="onMouseEnter(keyProfession)"
           @mouseleave="onMouseLeave(keyProfession)"
@@ -72,7 +68,7 @@
           </div>
         </div>
         <div
-          v-if="keyProfession !== (course.professions.length - 1)"
+          v-if="keyProfession !== (activeProfessions.length - 1)"
           class="course-view-salaries__separator course-view-salaries__separator--middle"
         />
       </template>
@@ -113,20 +109,30 @@ const getSalary = (salaries: Array<ISalary>, level: ELevel): number | null => {
   return null;
 };
 
+let activeProfessions: Array<IProfession> = [];
+
+if (props.course.professions) {
+  // eslint-disable-next-line vue/max-len
+  activeProfessions = Object.values(props.course.professions).filter((profession) => !!(profession.salaries
+      && getSalary(profession.salaries, ELevel.JUNIOR)
+      && getSalary(profession.salaries, ELevel.MIDDLE)
+      && getSalary(profession.salaries, ELevel.SENIOR)));
+}
+
 const salaries = ref<Array<number>>([]);
 
-if (props?.course?.professions && props?.course?.professions[index.value].salaries) {
-  for (let i = 0; i < props?.course?.professions?.length; i++) {
+if (activeProfessions.length && activeProfessions[index.value].salaries) {
+  for (let i = 0; i < activeProfessions.length; i++) {
     salaries.value[i] = getSalary(
-      props.course.professions[i].salaries || [],
+      activeProfessions[i].salaries || [],
       ELevel.JUNIOR,
     ) || 0;
   }
 }
 
 const professionName = computed((): string | null => {
-  if (props?.course?.professions) {
-    return props.course.professions[index.value].label || null;
+  if (activeProfessions.length) {
+    return activeProfessions[index.value].label || null;
   }
 
   return null;
@@ -141,8 +147,8 @@ const months = computed((): number | null => {
 });
 
 const professionLevel = computed((): ELevel | null => {
-  if (props?.course?.professions && props.course.professions[index.value]) {
-    const profession: IProfession = props.course.professions[index.value];
+  if (activeProfessions.length && activeProfessions[index.value]) {
+    const profession: IProfession = activeProfessions[index.value];
 
     const salaryJunior = getSalary(profession.salaries || [], ELevel.JUNIOR) || 0;
     const salaryMiddle = getSalary(profession.salaries || [], ELevel.MIDDLE) || 0;
