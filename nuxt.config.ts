@@ -83,7 +83,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image:height',
-          content: '350',
+          content: '620',
         },
         {
           property: 'og:description',
