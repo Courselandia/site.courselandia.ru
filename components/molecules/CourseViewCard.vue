@@ -6,7 +6,7 @@
       id="course-view-card"
       :class="`course-view-card__box ${props.scroll ? 'course-view-card__box--scroll' : ''}`"
     >
-      <div class="course-view-card__image" :style="`background-image: url('${course.image}')`">
+      <div class="course-view-card__image" :style="`background-image: url('${course.image ? course.image : holder?.default}')`">
         <div
           v-if="course.rating"
           class="course-view-card__rating"
@@ -158,6 +158,8 @@ const props = defineProps({
     default: true,
   },
 });
+
+const holder = await import('@/assets/images/holder.svg');
 
 const nameClass = computed(() => {
   const classes = [];
