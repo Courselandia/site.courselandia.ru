@@ -1,0 +1,36 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.reducer {
+  &__content {
+    position: relative;
+    overflow: hidden;
+
+    &--hide {
+      &:after {
+        content: "";
+        position: absolute;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%);
+        height: 100px;
+        width: 100%;
+        bottom: 0;
+      }
+    }
+  }
+
+  &__to_show,
+  &__to_hide {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__action {
+    color: $blue2;
+    border-bottom: 1px dashed $blue2;
+    cursor: pointer;
+
+    &:hover {
+      border-bottom-width: 0;
+    }
+  }
+}

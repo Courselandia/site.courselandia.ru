@@ -67,9 +67,9 @@
 
       <Brands class="mb-40 mb-12-sm" />
 
-      <h1 class="title title--big title--center-mobil">
+      <h2 class="title title--big title--center-mobil">
         Популярные направления
-      </h1>
+      </h2>
       <Directions class="mb-40 mb-12-sm">
         <template
           v-for="(item, key) in listDirections"
@@ -87,9 +87,9 @@
 
     <div class="bck--blue-1 pt-40 pb-40 pt-12-sm pb-12-sm">
       <div class="content">
-        <h1 class="title title--big title--center-mobil">
+        <h2 class="title title--big title--center-mobil">
           Лучшие курсы
-        </h1>
+        </h2>
 
         <Courses
           :courses="courses"
@@ -105,6 +105,12 @@
         </div>
       </div>
     </div>
+
+    <div class="content">
+      <div class="pt-24 pb-40 pt-12-sm pb-12-sm">
+        <AboutUs />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -113,6 +119,7 @@ import {
   ref,
 } from 'vue';
 
+import AboutUs from '@/components/atoms/AboutUs.vue';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';

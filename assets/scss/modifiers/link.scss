@@ -1,11 +1,11 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .link {
-  text-decoration: none;
+  text-decoration: underline;
   color: $blue2;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   &--no-line {
@@ -17,10 +17,11 @@
 
 .links {
   A {
-    text-decoration: none;
+    text-decoration: underline;
+    color: $blue2;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 }
