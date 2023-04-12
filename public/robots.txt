@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://courselandia.ru/sitemap.xml
+host: courselandia.ru
