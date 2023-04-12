@@ -13,27 +13,31 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     link,
   } = to.params;
 
-  const result = await $fetch('/api/school/link', {
-    params: {
-      link: link as string,
-    },
-  });
+  try {
+    const result = await $fetch('/api/school/link', {
+      params: {
+        link: link as string,
+      },
+    });
 
-  const { itemLinkCategory } = storeToRefs(category());
-  const { itemLinkDirection } = storeToRefs(direction());
-  const { itemLinkProfession } = storeToRefs(profession());
-  const { itemLinkSchool } = storeToRefs(school());
-  const { itemLinkSkill } = storeToRefs(skill());
-  const { itemLinkTeacher } = storeToRefs(teacher());
-  const { itemLinkTool } = storeToRefs(tool());
+    const { itemLinkCategory } = storeToRefs(category());
+    const { itemLinkDirection } = storeToRefs(direction());
+    const { itemLinkProfession } = storeToRefs(profession());
+    const { itemLinkSchool } = storeToRefs(school());
+    const { itemLinkSkill } = storeToRefs(skill());
+    const { itemLinkTeacher } = storeToRefs(teacher());
+    const { itemLinkTool } = storeToRefs(tool());
 
-  itemLinkCategory.value = null;
-  itemLinkDirection.value = null;
-  itemLinkProfession.value = null;
-  itemLinkSchool.value = result;
-  itemLinkSkill.value = null;
-  itemLinkTeacher.value = null;
-  itemLinkTool.value = null;
+    itemLinkCategory.value = null;
+    itemLinkDirection.value = null;
+    itemLinkProfession.value = null;
+    itemLinkSchool.value = result;
+    itemLinkSkill.value = null;
+    itemLinkTeacher.value = null;
+    itemLinkTool.value = null;
 
-  return !!result;
+    return !!result;
+  } catch (error: any) {
+    return false;
+  }
 });

@@ -19,7 +19,7 @@ export const apiReadCategories = async (
 
   const resultCategories = await useAsyncData('categories', async () => loadCategories());
 
-  return resultCategories.data.value?.data;
+  return resultCategories.data.value?.data || [];
 };
 
 export const apiGetCategory = async (
