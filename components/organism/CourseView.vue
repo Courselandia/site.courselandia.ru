@@ -176,13 +176,23 @@ const courseItem = ref<ICourse>();
 
 const setMeta = (): void => {
   const description = 'В каталоге Courselandia вы можете найти подходящий курс по различным направлениям. Только лучшие курсы со всей нужной информацией от ведущих онлайн школ.';
+  const title = courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`;
+  const descriptionResult = courseItem.value?.metatag?.description || description;
 
   useHead({
-    title: courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`,
+    title,
     meta: [
       {
         name: 'description',
-        content: courseItem.value?.metatag?.description || description,
+        content: descriptionResult,
+      },
+      {
+        property: 'og:title',
+        content: title,
+      },
+      {
+        property: 'og:description',
+        content: description,
       },
     ],
   });
