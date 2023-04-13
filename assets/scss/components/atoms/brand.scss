@@ -8,6 +8,7 @@
     margin-left: 1rem;
     margin-right: 1rem;
     width: calc(33.33% - 2rem);
+    text-align: center;
   }
 
   @media all and (max-width: 576px) {
@@ -21,6 +22,10 @@
     height: auto;
     max-width: 200px;
     max-height: 70px;
+
+    @media all and (max-width: 768px) {
+      width: auto;
+    }
 
     @media all and (max-width: 576px) {
       max-width: none;
