@@ -1225,7 +1225,42 @@ const setUrlQuery = (
     'tools-id': tools.value,
   };
 
-  const getSectionFilter = (): { name: string, link: string } | null => {
+  const getSectionFilter = (currentSection?: string): { name: string, link: string } | null => {
+    if (currentSection) {
+      const currentSectionFilter = convertSectionFilterToName(currentSection);
+
+      if (currentSectionFilter && filtersCurrent && filtersCurrent[currentSectionFilter]) {
+        if (Array.isArray(filtersCurrent[currentSectionFilter])) {
+          const checkFilters = filtersCurrent[currentSectionFilter] as Array<number>;
+
+          if (checkFilters.length === 1) {
+            const foundItem = filterSectionNames[currentSectionFilter].find(
+              (itm) => itm.id === checkFilters[0],
+            );
+
+            if (foundItem) {
+              return {
+                name: convertNameFilterToSection(currentSectionFilter) || '',
+                link: foundItem.link || '',
+              };
+            }
+          }
+        } else {
+          const checkFilters = filtersCurrent[currentSectionFilter] as number;
+          const foundItem = filterSectionNames[currentSectionFilter].find(
+            (itm) => itm.id === checkFilters,
+          );
+
+          if (foundItem) {
+            return {
+              name: convertNameFilterToSection(currentSectionFilter) || '',
+              link: foundItem.link || '',
+            };
+          }
+        }
+      }
+    }
+
     if (filtersCurrent) {
       let result: any = null;
 
@@ -1282,7 +1317,7 @@ const setUrlQuery = (
       const sectionFilterName = convertSectionFilterToName(section);
 
       if (sectionFilterName && link) {
-        const filterSection = getSectionFilter();
+        const filterSection = getSectionFilter(section);
 
         if (filterSection) {
           section = filterSection.name;
