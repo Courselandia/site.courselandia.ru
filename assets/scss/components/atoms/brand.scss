@@ -20,6 +20,7 @@
     width: 100%;
     height: auto;
     max-width: 200px;
+    max-height: 70px;
 
     @media all and (max-width: 576px) {
       max-width: none;
