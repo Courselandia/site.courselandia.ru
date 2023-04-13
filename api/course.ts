@@ -11,7 +11,7 @@ import {
 import ISorts from '@/interfaces/sorts';
 import ICourse from '@/interfaces/stores/course/course';
 import course from '@/stores/course';
-import TId from "~/types/id";
+import TId from '@/types/id';
 
 export const apiReadCourses = async (
   apiUrl: string,

@@ -943,7 +943,7 @@ const getSort = (val: TValue): ISorts => {
   const sorts: ISorts = {};
 
   if (val === ECourseSort.ALPHABETIC) {
-    sorts.header = 'ASC';
+    sorts.name = 'ASC';
   } else if (val === ECourseSort.DATE) {
     sorts.id = 'DESC';
   } else if (val === ECourseSort.RATING) {
