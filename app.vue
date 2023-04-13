@@ -2,7 +2,7 @@
   <NuxtLayout>
     <NuxtLoadingIndicator
       color="#3E3CFD"
-      height="3"
+      height="5"
       throttle="0"
     />
     <NuxtPage />
