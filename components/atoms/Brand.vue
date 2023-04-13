@@ -7,7 +7,7 @@
       :src="image"
       :alt="label"
       :title="label"
-      :class="`brand__image ${height > width ? 'brand__image--vertical' : 'brand__image--horizontal'}`"
+      :class="`brand__image ${height === width ? 'brand__image--box' : ''}`"
     />
   </nuxt-link>
 </template>
