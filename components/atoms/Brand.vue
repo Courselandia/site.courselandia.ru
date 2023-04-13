@@ -7,7 +7,7 @@
       :src="image"
       :alt="label"
       :title="label"
-      class="brand__image"
+      :class="`brand__image ${height > width ? 'brand__image--vertical' : 'brand__image--horizontal'}`"
     />
   </nuxt-link>
 </template>
@@ -26,6 +26,14 @@ const props = defineProps({
   },
   image: {
     type: String,
+    required: true,
+  },
+  width: {
+    type: Number,
+    required: true,
+  },
+  height: {
+    type: Number,
     required: true,
   },
 });

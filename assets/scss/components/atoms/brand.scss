@@ -23,8 +23,10 @@
     max-width: 200px;
     max-height: 70px;
 
-    @media all and (max-width: 768px) {
-      width: auto;
+    &--vertical {
+      @media all and (max-width: 768px) {
+        width: auto;
+      }
     }
 
     @media all and (max-width: 576px) {

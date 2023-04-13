@@ -9,6 +9,8 @@
         :label="brand.label"
         :url="brand.url"
         :image="brand.image"
+        :width="brand.width"
+        :height="brand.height"
       />
     </template>
   </div>
