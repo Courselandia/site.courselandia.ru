@@ -438,10 +438,9 @@
         <div class="catalog-filters__title">
           Форма обучения
         </div>
-
         <transition name="fade">
           <div
-            v-if="!selectedFormatValue"
+            v-if="selectedFormatValue"
             class="catalog-filters__reset"
             @click="onClickResetFormat"
             @keyup="onClickResetFormat"
