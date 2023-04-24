@@ -365,7 +365,7 @@ const getUrlFilterQuery = (name: string): Array<string> => {
         resultValue = [value];
       }
 
-      const regex = /\[([A-Za-z0-9_.-]+)\]/;
+      const regex = /\[([A-Za-z0-9_.-]+)]/;
       const found = key.match(regex);
 
       if (found?.length && found[1] && found[1] === name) {
@@ -607,7 +607,7 @@ const setMeta = (): void => {
     description = itemLinkTool.value?.metatag?.description;
   }
 
-  let canonical = '';
+  let canonical;
 
   if (process.client) {
     canonical = `https://courselandia.ru${window.location.pathname}`;
@@ -1121,7 +1121,6 @@ const setUrlQuery = (
   pageValue: number = 0,
   sortsCurrent: ISorts | null = null,
   filtersCurrent: IFilters | null = null,
-  onlyPageChanged = false,
 ): void => {
   const queryFilterNames: Record<string, string> = {
     'directions-id': 'direction',
@@ -1357,7 +1356,7 @@ const onLoadScrolling = async (): Promise<void> => {
 
   currentPage.value++;
 
-  setUrlQuery(currentPage.value, getSort(sort.value), filters, true);
+  setUrlQuery(currentPage.value, getSort(sort.value), filters);
   const result = await load(currentPage.value, size.value, getSort(sort.value), filters);
 
   if (result) {
