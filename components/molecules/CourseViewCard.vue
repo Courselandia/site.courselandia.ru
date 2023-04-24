@@ -116,7 +116,7 @@
             >
               <div class="course-view-card__feature-icon">
                 <Icon
-                  :name="feature.icon"
+                  :name="feature.icon as TIcon"
                   color="black"
                   :size="[22, 22]"
                 />
@@ -146,6 +146,7 @@ import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
 import track from '@/helpers/track';
 import ICourse from '@/interfaces/components/molecules/course';
+import TIcon from '@/types/icon';
 
 const props = defineProps({
   course: {

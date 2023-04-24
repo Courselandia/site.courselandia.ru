@@ -33,7 +33,7 @@ import Header from '@/components/organism/Header.vue';
 
 const route = useRoute();
 const menu = ref('');
-const active = ref<string | null>('');
+const active = ref<string | undefined>('');
 
 const setActive = (): void => {
   if (route.path.indexOf('/courses/school/') !== -1) {
@@ -41,7 +41,7 @@ const setActive = (): void => {
   } else if (route.path.indexOf('/courses') !== -1) {
     active.value = 'courses';
   } else {
-    active.value = null;
+    active.value = undefined;
   }
 };
 

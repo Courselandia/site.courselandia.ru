@@ -118,6 +118,7 @@
             </div>
             <div class="dropdowns__side dropdowns__side--right">
               <ListSchools
+                v-if="listSchools"
                 :schools="listSchools"
                 @click="onClick"
               />

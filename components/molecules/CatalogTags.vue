@@ -31,7 +31,7 @@
             v-if="selectedDirectionValue
               && (
                 selectedDirectionValue.name
-                || getDirectionLabel(directions, selectedDirectionValue)
+                || (directions && getDirectionLabel(directions, selectedDirectionValue))
               )"
             bck="blue1"
           >
@@ -188,7 +188,7 @@
               :key="key"
             >
               <Tag
-                v-if="school.label || getSchoolLabel(schools, school)"
+                v-if="school.label || (schools && getSchoolLabel(schools, school))"
                 bck="blue1"
               >
                 <template v-if="school.label">
@@ -217,7 +217,7 @@
               :key="key"
             >
               <Tag
-                v-if="category.label || getCategoryLabel(categories, category)"
+                v-if="category.label || (categories && getCategoryLabel(categories, category))"
                 bck="blue1"
               >
                 <template v-if="category.label">
@@ -246,7 +246,11 @@
               :key="key"
             >
               <Tag
-                v-if="profession.label || getProfessionLabel(professions, profession)"
+                v-if="
+                  profession.label
+                    || (
+                      professions && getProfessionLabel(professions, profession)
+                    )"
                 bck="blue1"
               >
                 <template v-if="profession.name">
@@ -275,7 +279,7 @@
               :key="key"
             >
               <Tag
-                v-if="teacher.label || getTeacherLabel(teachers, teacher)"
+                v-if="teacher.label || (teachers && getTeacherLabel(teachers, teacher))"
                 bck="blue1"
               >
                 <template v-if="teacher.name">
@@ -304,7 +308,7 @@
               :key="key"
             >
               <Tag
-                v-if="skill.label || getSkillLabel(skills, skill)"
+                v-if="skill.label || (skills && getSkillLabel(skills, skill))"
                 bck="blue1"
               >
                 <template v-if="skill.name">
@@ -333,7 +337,7 @@
               :key="key"
             >
               <Tag
-                v-if="tool.label || getToolLabel(tools, tool)"
+                v-if="tool.label || (tools && getToolLabel(tools, tool))"
                 bck="blue1"
               >
                 <template v-if="tool.name">
@@ -360,13 +364,13 @@
             v-if="selectedFormat
               && (
                 selectedFormat.label
-                || getFormatLabel(formats, selectedFormat)
+                || (formats && getFormatLabel(formats, selectedFormat))
               )
             "
             bck="blue1"
           >
-            <template v-if="selectedFormat.label">
-              {{ selectedFormat.label }}
+            <template v-if="selectedFormat?.label">
+              {{ selectedFormat?.label }}
             </template>
             <template v-else>
               {{ getFormatLabel(formats, selectedFormat) }}

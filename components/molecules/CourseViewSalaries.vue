@@ -99,14 +99,14 @@ const props = defineProps({
 
 const index = ref(0);
 
-const getSalary = (salaries: Array<ISalary>, level: ELevel): number | null => {
+const getSalary = (salaries: Array<ISalary>, level: ELevel): number | undefined => {
   for (let i = 0; i < salaries?.length; i++) {
     if (salaries[i].level === level) {
       return salaries[i].salary;
     }
   }
 
-  return null;
+  return undefined;
 };
 
 let activeProfessions: Array<IProfession> = [];

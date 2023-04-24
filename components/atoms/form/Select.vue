@@ -101,11 +101,11 @@ const {
 } = toRefs(props);
 
 const emit = defineEmits({
-  'update:value': (_: TValue) => true,
-  change: (_: TValue) => true,
+  'update:value': (_: TValue | null) => true,
+  change: (_: TValue | null) => true,
 });
 
-const input = ref(value.value);
+const input = ref<TValue | null>(value.value);
 const dropped = ref(false);
 const hover = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
@@ -188,7 +188,7 @@ const setDropdownPosition = (): void => {
   }
 };
 
-const onSelect = (option: string | number): void => {
+const onSelect = (option: TValue | null): void => {
   input.value = option;
   dropped.value = false;
   hover.value = false;

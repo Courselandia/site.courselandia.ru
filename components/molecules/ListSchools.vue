@@ -19,7 +19,7 @@ import IMenu from '@/interfaces/menu';
 
 const props = defineProps({
   schools: {
-    type: Array as PropType<Array<IMenu>>,
+    type: Array<IMenu>,
     required: true,
   },
 });

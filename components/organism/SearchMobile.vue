@@ -69,7 +69,7 @@
           </div>
           <div class="search-mobile__action">
             <nuxt-link
-              :to="`/courses?search=${encodeURIComponent(query)}&sort=${ECourseSort.RELEVANCY}`"
+              :to="`/courses?search=${encodeURIComponent(query as string)}&sort=${ECourseSort.RELEVANCY}`"
               class="search-mobile__link"
               @click="onClickResult"
             >

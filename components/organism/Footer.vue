@@ -22,13 +22,19 @@
               <div class="footer__section">
                 Школы
               </div>
-              <MenuBottom :items="menuSchools" />
+              <MenuBottom
+                v-if="menuSchools"
+                :items="menuSchools"
+              />
             </div>
             <div class="footer__menu">
               <div class="footer__section">
                 Направления
               </div>
-              <MenuBottom :items="menuDirections" />
+              <MenuBottom
+                v-if="menuDirections"
+                :items="menuDirections"
+              />
             </div>
             <div class="footer__menu">
               <div class="footer__section">

@@ -47,7 +47,8 @@ const props = defineProps({
   },
   amount: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   image: {
     type: String,

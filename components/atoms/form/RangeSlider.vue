@@ -47,15 +47,18 @@ const props = defineProps({
   },
   min: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
   max: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
   step: {
     type: Number,
-    required: true,
+    required: false,
+    default: 1,
   },
   money: {
     type: Boolean,

@@ -365,7 +365,7 @@ const getUrlFilterQuery = (name: string): Array<string> => {
         resultValue = [value];
       }
 
-      const regex = /\[([A-Za-z0-9_.-]+)\]/;
+      const regex = /\[([A-Za-z0-9_.-]+)]/;
       const found = key.match(regex);
 
       if (found?.length && found[1] && found[1] === name) {
@@ -392,7 +392,7 @@ const getUrlQuery = (name: string): string | null => {
 const sortDefault = ECourseSort.ALPHABETIC;
 const sort = ref<TValue>(sortDefault);
 const valueQuery = getUrlQuery('sort');
-const search = ref(getUrlQuery('search'));
+const search = ref<string | undefined>(getUrlQuery('search') || undefined);
 
 if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)) {
   sort.value = valueQuery;
@@ -430,7 +430,7 @@ const selectedDurations = ref<Array<number>>([durationMin.value, durationMax.val
 //
 
 const directions = ref<IDirection[]>([]);
-const selectedDirection = ref<IDirection | null>();
+const selectedDirection = ref<IDirection | undefined>();
 const schools = ref<ISchool[]>([]);
 const categories = ref<ICategory[]>([]);
 const professions = ref<IProfession[]>([]);
@@ -438,7 +438,7 @@ const teachers = ref<ITeacher[]>([]);
 const skills = ref<ISkill[]>([]);
 const tools = ref<ITool[]>([]);
 
-const selectedFormat = ref<IFormat | null>();
+const selectedFormat = ref<IFormat | null>(null);
 const formats = ref<IFormat[]>([]);
 
 //
@@ -449,7 +449,7 @@ const levels = ref<ILevel[]>([]);
 //
 
 const ratings = ref<IRating[]>([]);
-const selectedRating = ref<IRating | null>();
+const selectedRating = ref<IRating | undefined>();
 const selectedSchools = ref<Array<ISchool>>([]);
 const selectedCategories = ref<Array<ICategory>>([]);
 const selectedProfessions = ref<Array<IProfession>>([]);
@@ -607,7 +607,7 @@ const setMeta = (): void => {
     description = itemLinkTool.value?.metatag?.description;
   }
 
-  let canonical = '';
+  let canonical;
 
   if (process.client) {
     canonical = `https://courselandia.ru${window.location.pathname}`;
@@ -1121,7 +1121,6 @@ const setUrlQuery = (
   pageValue: number = 0,
   sortsCurrent: ISorts | null = null,
   filtersCurrent: IFilters | null = null,
-  onlyPageChanged = false,
 ): void => {
   const queryFilterNames: Record<string, string> = {
     'directions-id': 'direction',
@@ -1357,7 +1356,7 @@ const onLoadScrolling = async (): Promise<void> => {
 
   currentPage.value++;
 
-  setUrlQuery(currentPage.value, getSort(sort.value), filters, true);
+  setUrlQuery(currentPage.value, getSort(sort.value), filters);
   const result = await load(currentPage.value, size.value, getSort(sort.value), filters);
 
   if (result) {
@@ -1398,7 +1397,7 @@ watch(route, async () => {
   const currentSearch = getUrlQuery('search');
 
   if (currentSearch !== search.value) {
-    search.value = getUrlQuery('search');
+    search.value = getUrlQuery('search') || undefined;
     const filters: IFilters = getFilters();
     currentPage.value = 1;
 

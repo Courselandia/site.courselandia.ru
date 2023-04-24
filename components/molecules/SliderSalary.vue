@@ -64,15 +64,18 @@ const props = defineProps({
   },
   junior: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
   middle: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
   senior: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
 });
 

@@ -21,22 +21,26 @@
         >
           Все направления
         </Tag>
-        <Tag
-          v-for="(direction, key) in directions"
-          :key="key"
-          :border="selectedDirectionValue?.id === direction.id ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          :bck="selectedDirectionValue?.id === direction.id ? 'blue2' : 'white'"
-          bck-hover="blue2"
-          :color="selectedDirectionValue?.id === direction.id ? 'white' : 'black'"
-          color-hover="white"
-          cursor
-          :disabled="direction.disabled"
-          @click="onClickDirection(direction)"
-          @keyup="onClickDirection(direction)"
+        <template
+          v-if="directions"
         >
-          {{ direction.name }}
-        </Tag>
+          <Tag
+            v-for="(direction, key) in directions"
+            :key="key"
+            :border="(selectedDirectionValue?.id === direction.id) ? 'blue2' : 'grey2'"
+            border-hover="blue2"
+            :bck="selectedDirectionValue?.id === direction.id ? 'blue2' : 'white'"
+            bck-hover="blue2"
+            :color="selectedDirectionValue?.id === direction.id ? 'white' : 'black'"
+            color-hover="white"
+            cursor
+            :disabled="direction.disabled"
+            @click="onClickDirection(direction)"
+            @keyup="onClickDirection(direction)"
+          >
+            {{ direction.name }}
+          </Tag>
+        </template>
       </Tags>
     </div>
     <div
@@ -84,7 +88,7 @@
       </div>
 
       <div
-        v-if="ratings.length"
+        v-if="ratings?.length"
         key="ratings"
         class="catalog-filters__block"
       >
@@ -93,7 +97,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="hasRating(ratings, selectedRatingValue)"
+            v-if="ratings && hasRating(ratings, selectedRatingValue || null)"
             class="catalog-filters__reset"
             @click="onClickResetRating"
             @keyup="onClickResetRating"
@@ -107,15 +111,19 @@
         </transition>
         <div class="catalog-filters__selection">
           <Group v-model:value="selectedRatingValue">
-            <Radio
-              v-for="(rating, key) in ratings"
-              :key="key"
-              :value="rating.value"
-              :label="rating.label"
-              :disabled="rating.disabled && selectedRatingValue !== rating.value"
-              name="rating"
-              @click="onClickRating"
-            />
+            <template
+              v-if="ratings"
+            >
+              <Radio
+                v-for="(rating, key) in ratings"
+                :key="key"
+                :value="rating.value"
+                :label="rating.label || ''"
+                :disabled="rating.disabled && selectedRatingValue !== rating.value"
+                name="rating"
+                @click="onClickRating"
+              />
+            </template>
           </Group>
         </div>
       </div>
@@ -250,7 +258,7 @@
           <CatalogFilterSelect
             v-model:value="selectedSchoolsValue"
             :items="schools"
-            :simple="schools.length < 11"
+            :simple="schools?.length < 11"
             @load-items="onLoadItems('schools', $event)"
             @click="onClickSchools"
           />
@@ -283,7 +291,7 @@
           <CatalogFilterSelect
             v-model:value="selectedCategoriesValue"
             :items="categories"
-            :simple="categories.length < 11"
+            :simple="categories?.length < 11"
             @load-items="onLoadItems('categories', $event)"
             @click="onClickCategories"
           />
@@ -316,7 +324,7 @@
           <CatalogFilterSelect
             v-model:value="selectedProfessionsValue"
             :items="professions"
-            :simple="professions.length < 11"
+            :simple="professions?.length < 11"
             @load-items="onLoadItems('professions', $event)"
             @click="onClickProfessions"
           />
@@ -349,7 +357,7 @@
           <CatalogFilterSelect
             v-model:value="selectedTeachersValue"
             :items="teachers"
-            :simple="teachers.length < 11"
+            :simple="teachers?.length < 11"
             @load-items="onLoadItems('teachers', $event)"
             @click="onClickTeachers"
           />
@@ -382,7 +390,7 @@
           <CatalogFilterSelect
             v-model:value="selectedSkillsValue"
             :items="skills"
-            :simple="skills.length < 11"
+            :simple="skills?.length < 11"
             @load-items="onLoadItems('skills', $event)"
             @click="onClickSkills"
           />
@@ -415,7 +423,7 @@
           <CatalogFilterSelect
             v-model:value="selectedToolsValue"
             :items="tools"
-            :simple="tools.length < 11"
+            :simple="tools?.length < 11"
             @load-items="onLoadItems('tools', $event)"
             @click="onClickTools"
           />
@@ -433,7 +441,7 @@
 
         <transition name="fade">
           <div
-            v-if="selectedFormatValue !== null && selectedFormatValue !== undefined"
+            v-if="!selectedFormatValue"
             class="catalog-filters__reset"
             @click="onClickResetFormat"
             @keyup="onClickResetFormat"
@@ -447,14 +455,18 @@
         </transition>
         <div class="catalog-filters__selection">
           <Group v-model:value="selectedFormatValue">
-            <Radio
-              v-for="(format, key) in formats"
-              :key="key"
-              :value="format.value"
-              :label="format.label"
-              name="format"
-              @click="onClickFormat"
-            />
+            <template
+              v-if="formats"
+            >
+              <Radio
+                v-for="(format, key) in formats"
+                :key="key"
+                :value="format.value"
+                :label="format.label || ''"
+                name="format"
+                @click="onClickFormat"
+              />
+            </template>
           </Group>
         </div>
       </div>
@@ -470,7 +482,7 @@
 
         <transition name="fade">
           <div
-            v-if="hasLevels(levels, selectedLevelsValue)"
+            v-if="hasLevels(levels, selectedLevelsValue || null)"
             class="catalog-filters__reset"
             @click="onClickResetLevels"
             @keyup="onClickResetLevels"
@@ -484,14 +496,18 @@
         </transition>
         <div class="catalog-filters__selection">
           <Group v-model:value="selectedLevelsValue">
-            <Checkbox
-              v-for="(level, key) in levels"
-              :key="key"
-              :value="level.value"
-              :label="level.label"
-              name="level"
-              @click="onClickLevels"
-            />
+            <template
+              v-if="levels"
+            >
+              <Checkbox
+                v-for="(level, key) in levels"
+                :key="key"
+                :value="level.value"
+                :label="level.label || ''"
+                name="level"
+                @click="onClickLevels"
+              />
+            </template>
           </Group>
         </div>
       </div>
@@ -540,7 +556,6 @@ import ISchool from '@/interfaces/components/molecules/schoolFilter';
 import ISkill from '@/interfaces/components/molecules/skill';
 import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
-import TId from '@/types/id';
 
 const props = defineProps({
   priceMin: {
@@ -797,7 +812,7 @@ const onClickDirection = (value: IDirection | null = null): void => {
 
 //
 
-const selectedRatingValue = ref<TId | null>(selectedRating.value?.value);
+const selectedRatingValue = ref<number | undefined>(selectedRating.value?.value || undefined);
 
 watch(selectedRatingValue, () => {
   const selectedRatingValueFound = props.ratings.find(
@@ -820,7 +835,7 @@ const onClickRating = (val: string | number | boolean): void => {
 //
 
 const onClickResetRating = (): void => {
-  selectedRatingValue.value = null;
+  selectedRatingValue.value = undefined;
   emit('change');
 };
 
@@ -849,7 +864,7 @@ const onChangePrices = (): void => {
 
 //
 
-const selectedCreditValue = ref(selectedCredit.value);
+const selectedCreditValue = ref<boolean>(selectedCredit.value || false);
 
 watch(selectedCreditValue, () => {
   emit('update:selected-credit', selectedCreditValue.value);
@@ -865,7 +880,7 @@ const onClickCredit = (): void => {
 
 //
 
-const selectedFreeValue = ref(selectedFree.value);
+const selectedFreeValue = ref<boolean>(selectedFree.value || false);
 
 watch(selectedFreeValue, () => {
   emit('update:selected-free', selectedFreeValue.value);
@@ -918,7 +933,7 @@ const onChangeDurations = (): void => {
 
 //
 
-const selectedSchoolsValue = ref(selectedSchools.value);
+const selectedSchoolsValue = ref<Array<ISchool>>(selectedSchools.value || []);
 
 watch(selectedSchoolsValue, () => {
   emit('update:selected-schools', selectedSchoolsValue.value);
@@ -939,7 +954,7 @@ const onClickSchools = (): void => {
 
 //
 
-const selectedCategoriesValue = ref(selectedCategories.value);
+const selectedCategoriesValue = ref<Array<ICategory>>(selectedCategories.value);
 
 watch(selectedCategoriesValue, () => {
   emit('update:selected-categories', selectedCategoriesValue.value);
@@ -960,7 +975,7 @@ const onClickCategories = (): void => {
 
 //
 
-const selectedProfessionsValue = ref(selectedProfessions.value);
+const selectedProfessionsValue = ref<Array<IProfession>>(selectedProfessions.value);
 
 watch(selectedProfessionsValue, () => {
   emit('update:selected-professions', selectedProfessionsValue.value);
@@ -981,7 +996,7 @@ const onClickProfessions = (): void => {
 
 //
 
-const selectedTeachersValue = ref(selectedTeachers.value);
+const selectedTeachersValue = ref<Array<ITeacher>>(selectedTeachers.value);
 
 watch(selectedTeachersValue, () => {
   emit('update:selected-teachers', selectedTeachersValue.value);
@@ -1002,7 +1017,7 @@ const onClickTeachers = (): void => {
 
 //
 
-const selectedSkillsValue = ref(selectedSkills.value);
+const selectedSkillsValue = ref<Array<ISkill>>(selectedSkills.value);
 
 watch(selectedSkillsValue, () => {
   emit('update:selected-skills', selectedSkillsValue.value);
@@ -1023,7 +1038,7 @@ const onClickSkills = (): void => {
 
 //
 
-const selectedToolsValue = ref(selectedTools.value);
+const selectedToolsValue = ref<Array<ITool>>(selectedTools.value);
 
 watch(selectedToolsValue, () => {
   emit('update:selected-tools', selectedToolsValue.value);
@@ -1044,7 +1059,7 @@ const onClickTools = (): void => {
 
 //
 
-const selectedFormatValue = ref<boolean | null>(selectedFormat.value?.value);
+const selectedFormatValue = ref<boolean | undefined>(selectedFormat.value?.value);
 
 watch(selectedFormatValue, () => {
   const selectedFormatValueFound = props.formats.find(
@@ -1059,7 +1074,7 @@ watch(selectedFormat, () => {
 });
 
 const onClickResetFormat = (): void => {
-  selectedFormatValue.value = null;
+  selectedFormatValue.value = undefined;
   emit('change');
 };
 
@@ -1071,7 +1086,7 @@ const onClickFormat = (val: string | number | boolean): void => {
 
 //
 
-const selectedLevelsValue = ref<Array<ELevel> | null>(
+const selectedLevelsValue = ref<Array<ELevel> | undefined>(
   selectedLevels.value?.map((itm) => itm.value),
 );
 
@@ -1100,7 +1115,7 @@ const onClickResetLevels = (): void => {
   emit('change');
 };
 
-const onClickLevels = (val: string | number | boolean): void => {
+const onClickLevels = (): void => {
   emit('change');
 };
 

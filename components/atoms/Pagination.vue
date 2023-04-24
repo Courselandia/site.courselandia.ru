@@ -121,7 +121,7 @@ const pages = computed<Array<number | string>>((): Array<number | string> => {
   return pgs;
 });
 
-const onClickPagination = (pagination: number) => {
+const onClickPagination = (pagination: number | string) => {
   emit('click', pagination);
 };
 </script>

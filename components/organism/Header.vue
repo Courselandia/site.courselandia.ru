@@ -63,10 +63,10 @@ const {
 } = toRefs(props);
 
 const emit = defineEmits({
-  'update:menu': (_: string | null) => true,
+  'update:menu': (_: string | undefined) => true,
 });
 
-const menuValue = ref<string | null>(menu.value);
+const menuValue = ref<string | undefined>(menu.value);
 
 watch(menuValue, () => {
   emit('update:menu', menuValue.value);

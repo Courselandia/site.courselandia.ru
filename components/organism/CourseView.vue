@@ -3,6 +3,7 @@
     <Bubbles>
       <div class="content">
         <CourseViewHeader
+          v-if="courseItem"
           :course="courseItem"
         />
       </div>
@@ -13,6 +14,7 @@
     >
       <div ref="cardRef">
         <CourseViewCard
+          v-if="courseItem"
           :course="courseItem"
           :scroll="scroll"
         />
@@ -20,7 +22,7 @@
 
       <div class="course-view__info">
         <div
-          v-if="courseItem.learns?.length"
+          v-if="courseItem?.learns?.length"
           class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
@@ -28,6 +30,7 @@
           </h2>
 
           <CourseViewLearn
+            v-if="courseItem"
             :course="courseItem"
           />
         </div>
@@ -37,12 +40,13 @@
           class="mb-40 mb-12-md"
         >
           <CourseViewSalaries
+            v-if="courseItem"
             :course="courseItem"
           />
         </div>
 
         <div
-          v-if="courseItem.processes?.length"
+          v-if="courseItem?.processes?.length"
           class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
@@ -50,12 +54,13 @@
           </h2>
 
           <CourseViewProcesses
+            v-if="courseItem"
             :course="courseItem"
           />
         </div>
 
         <div
-          v-if="courseItem.teachers?.length"
+          v-if="courseItem?.teachers?.length"
           class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
@@ -63,12 +68,13 @@
           </h2>
 
           <CourseViewTeachers
+            v-if="courseItem"
             :course="courseItem"
           />
         </div>
 
         <div
-          v-if="courseItem.employments?.length"
+          v-if="courseItem?.employments?.length"
           class="mb-40 mb-12-md"
         >
           <h2 class="title title--1">
@@ -76,6 +82,7 @@
           </h2>
 
           <CourseViewEmployments
+            v-if="courseItem"
             :course="courseItem"
           />
         </div>
@@ -86,6 +93,7 @@
           </h2>
 
           <CourseViewInfo
+            v-if="courseItem"
             :course="courseItem"
           />
         </div>
@@ -107,6 +115,7 @@
     <LazyClientOnly>
       <teleport to=".page">
         <CourseViewFollow
+          v-if="courseItem"
           :course="courseItem"
         />
       </teleport>

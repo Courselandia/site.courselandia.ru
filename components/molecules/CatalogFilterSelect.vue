@@ -42,7 +42,7 @@
           v-for="(item, key) in activeItems"
           :key="key"
           :value="item.id"
-          :label="item.label"
+          :label="item.label || ''"
           :disabled="item.disabled && selects.indexOf(item.id) === -1"
           name="select"
           @click="onClick"
@@ -132,7 +132,7 @@ const emit = defineEmits({
   click: (_: Array<ICatalogFilterSelectItem>) => true,
 });
 
-const selects = ref(value.value?.map((item) => item.id) || []);
+const selects = ref<Array<String | Number | Boolean>>(value.value?.map((item) => item.id) || []);
 
 const activeItems = computed((): Array<ICatalogFilterSelectItem> => props.items?.filter(
   (itm) => itm.label?.toLowerCase().indexOf(search.value.toLowerCase().trim()) !== -1 || search.value.trim() === '',

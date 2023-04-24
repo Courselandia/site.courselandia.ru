@@ -45,7 +45,7 @@ import IListSchoolReview from '@/interfaces/components/molecules/listSchoolRevie
 
 const props = defineProps({
   schools: {
-    type: Array as PropType<Array<IListSchoolReview>>,
+    type: Array<IListSchoolReview>,
     required: true,
   },
 });

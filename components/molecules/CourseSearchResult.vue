@@ -5,7 +5,15 @@
   >
     <div class="course-search-result__media">
       <LazyImage
-        :src="course.image || holder?.default"
+        v-if="course.image"
+        :src="course.image"
+        class="course-search-result__image"
+        :alt="course.name"
+        :title="course.name"
+      />
+      <LazyImage
+        v-else-if="holder.default"
+        :src="holder.default"
         class="course-search-result__image"
         :alt="course.name"
         :title="course.name"

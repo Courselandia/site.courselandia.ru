@@ -29,7 +29,7 @@ import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   courses: {
-    type: Array as PropType<Array<ICourse>>,
+    type: Array<ICourse>,
     required: true,
   },
   columns: {
