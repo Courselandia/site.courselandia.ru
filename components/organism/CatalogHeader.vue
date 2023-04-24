@@ -239,13 +239,149 @@
         </div>
       </div>
     </template>
-    <div v-else>
-      <div class="content mt-12">
-        <h1 class="title title--1">
-          Курсы онлайн от Courselandia
-        </h1>
-      </div>
-    </div>
+    <CatalogHeader
+      v-else
+    >
+      <template #title>
+        Курсы онлайн от Courselandia
+      </template>
+      <template #description>
+        <p>
+          IT курсы с нуля давно доказали свою эффективность.
+          Хорошо зная рынок услуг онлайн-образования в нашей стране,
+          проводя его систематический мониторинг и изучение, мы подобрали
+          для вас перечень IT курсов онлайн, которые обеспечивают учащимся
+          наилучший результат. Многие люди уже успешно прошли их и в
+          настоящее время стали успешными специалистами с отличными
+          перспективами карьерного роста.
+        </p>
+        <p>
+          <nuxt-link to="/courses/direction/programmirovanie" class="link">
+            Лучшие курсы по программированию</nuxt-link> рассортированы по категориям.
+          Это позволяет быстро найти нужное направление обучения. Подбор
+          курсов можно осуществить по профессии, например, курсы бизнес
+          аналитика или
+          <nuxt-link to="/courses/profession/fullstackdizayner" class="link">
+            Fullstack дизайнер</nuxt-link>, стоимости обучения,
+          уровню, рейтингу и т. д.
+        </p>
+      </template>
+      <template #section>
+        <div class="catalog-header__fire" />
+        <div class="catalog-header__label">
+          Сейчас в тренде
+        </div>
+      </template>
+      <template #tags>
+        <Tags>
+          <Tag
+            to="/courses/direction/programmirovanie"
+            bck="white"
+            shadow
+          >
+            Программирование
+          </Tag>
+          <Tag
+            to="/courses/school/geekbrains"
+            bck="white"
+            shadow
+          >
+            GeekBrains
+          </Tag>
+          <Tag
+            to="/courses/tool/java"
+            bck="white"
+            shadow
+          >
+            Java
+          </Tag>
+          <Tag
+            to="/courses/school/netologiya"
+            bck="white"
+            shadow
+          >
+            Нетология
+          </Tag>
+          <Tag
+            to="/courses/category/data-engineering"
+            bck="white"
+            shadow
+          >
+            Data Engineering
+          </Tag>
+          <Tag
+            to="/courses/direction/dizayn"
+            bck="white"
+            shadow
+          >
+            Дизайн
+          </Tag>
+          <Tag
+            to="/courses/direction/igri"
+            bck="white"
+            shadow
+          >
+            Игры
+          </Tag>
+          <Tag
+            to="/courses/school/skillbox"
+            bck="white"
+            shadow
+          >
+            Skillbox
+          </Tag>
+          <Tag
+            to="/courses/tool/php"
+            bck="white"
+            shadow
+          >
+            PHP
+          </Tag>
+          <Tag
+            to="/courses/school/xyz-school"
+            bck="white"
+            shadow
+          >
+            XYZ School
+          </Tag>
+          <Tag
+            to="/courses/direction/analitika"
+            bck="white"
+            shadow
+          >
+            Аналитика
+          </Tag>
+          <Tag
+            to="/courses/category/data-science"
+            bck="white"
+            shadow
+          >
+            Data Science
+          </Tag>
+          <Tag
+            to="/courses/direction/biznes-i-upravlenie"
+            bck="white"
+            shadow
+          >
+            Бизнес и управление
+          </Tag>
+          <Tag
+            to="/courses/tool/python"
+            bck="white"
+            shadow
+          >
+            Python
+          </Tag>
+          <Tag
+            to="/courses/category/razrabotka-mobilnih-prilozheniy"
+            bck="white"
+            shadow
+          >
+            Разработка мобильных приложений
+          </Tag>
+        </Tags>
+      </template>
+    </CatalogHeader>
   </div>
 </template>
 
