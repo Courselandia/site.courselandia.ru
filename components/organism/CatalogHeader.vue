@@ -51,7 +51,7 @@
         <span v-html="itemLinkDirection.text" />
       </template>
       <template
-        v-if="itemLinkDirection.categories"
+        v-if="itemLinkDirection?.categories"
         #section
       >
         <div class="catalog-header__fire" />
@@ -60,7 +60,7 @@
         </div>
       </template>
       <template
-        v-if="itemLinkDirection.categories"
+        v-if="itemLinkDirection?.categories"
         #tags
       >
         <Carousel
@@ -96,10 +96,10 @@
         v-if="itemLinkProfession && itemLinkProfession.text"
       >
         <template #title>
-          {{ itemLinkProfession.header || itemLinkProfession.name }}
+          {{ itemLinkProfession?.header || itemLinkProfession?.name }}
         </template>
         <template
-          v-if="itemLinkProfession.text"
+          v-if="itemLinkProfession?.text"
           #description
         >
           <span v-html="itemLinkProfession.text" />
@@ -108,7 +108,7 @@
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
-            {{ itemLinkProfession.header || itemLinkProfession.name }}
+            {{ itemLinkProfession?.header || itemLinkProfession?.name }}
           </h1>
         </div>
       </div>
@@ -126,7 +126,7 @@
         <span v-html="itemLinkSchool.text" />
       </template>
       <template
-        v-if="itemLinkSchool.rating"
+        v-if="itemLinkSchool?.rating"
         #rating
       >
         {{ itemLinkSchool.rating }}
@@ -139,7 +139,7 @@
       </template>
       -->
       <template
-        v-if="itemLinkSchool.image_site_id?.path"
+        v-if="itemLinkSchool?.image_site_id?.path"
         #image
       >
         <img
@@ -154,11 +154,11 @@
       </template>
       -->
       <template
-        v-if="itemLinkSchool.image_site_id.path"
+        v-if="itemLinkSchool?.image_site_id?.path"
         #action
       >
         <Button
-          :to="itemLinkSchool.site"
+          :to="itemLinkSchool.site as string"
           link="link"
           target="_blank"
           rel="nofollow noopener noreferrer"
@@ -174,10 +174,10 @@
         v-if="itemLinkSkill && itemLinkSkill.text"
       >
         <template #title>
-          {{ itemLinkSkill.header || itemLinkSkill.name }}
+          {{ itemLinkSkill?.header || itemLinkSkill?.name }}
         </template>
         <template
-          v-if="itemLinkSkill.text"
+          v-if="itemLinkSkill?.text"
           #description
         >
           <span v-html="itemLinkSkill.text" />
@@ -186,7 +186,7 @@
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
-            {{ itemLinkSkill.header || itemLinkSkill.name }}
+            {{ itemLinkSkill?.header || itemLinkSkill?.name }}
           </h1>
         </div>
       </div>
@@ -198,10 +198,10 @@
         v-if="itemLinkTeacher && itemLinkTeacher.text"
       >
         <template #title>
-          {{ itemLinkTeacher.header || itemLinkTeacher.name }}
+          {{ itemLinkTeacher?.header || itemLinkTeacher?.name }}
         </template>
         <template
-          v-if="itemLinkTeacher.text"
+          v-if="itemLinkTeacher?.text"
           #description
         >
           <span v-html="itemLinkTeacher.text" />
@@ -210,7 +210,7 @@
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
-            {{ itemLinkTeacher.header || itemLinkTeacher.name }}
+            {{ itemLinkTeacher?.header || itemLinkTeacher?.name }}
           </h1>
         </div>
       </div>
@@ -222,10 +222,10 @@
         v-if="itemLinkTool && itemLinkTool.text"
       >
         <template #title>
-          {{ itemLinkTool.header || itemLinkTool.name }}
+          {{ itemLinkTool?.header || itemLinkTool?.name }}
         </template>
         <template
-          v-if="itemLinkTool.text"
+          v-if="itemLinkTool?.text"
           #description
         >
           <span v-html="itemLinkTool.text" />
@@ -234,7 +234,7 @@
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
-            {{ itemLinkTool.header || itemLinkTool.name }}
+            {{ itemLinkTool?.header || itemLinkTool?.name }}
           </h1>
         </div>
       </div>
