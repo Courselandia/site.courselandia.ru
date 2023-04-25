@@ -29,14 +29,13 @@
               <div class="search-mobile__input">
                 <input
                   ref="inputRef"
-                  v-model="query"
+                  :value="query"
                   type="text"
                   name="query"
                   class="search-mobile__element"
                   placeholder="Чему вы хотите научиться?"
                   autocomplete="off"
-                  @change="onInput"
-                  @input="onInput"
+                  @input="e => query = e.target.value"
                 >
               </div>
               <div class="search-mobile__loader">
@@ -179,9 +178,9 @@ const search = (): void => {
   }
 };
 
-const onInput = (): void => {
+watch(query, () => {
   search();
-};
+});
 
 const onClickResult = (): void => {
   active.value = false;
