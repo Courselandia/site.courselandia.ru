@@ -56,17 +56,6 @@
           </div>
         </div>
         <div class="search-mobile__result">
-          <div class="search-mobile__amount">
-            Найдено {{ total }} курсов
-          </div>
-          <div class="search-mobile__courses">
-            <CourseSearchResult
-              v-for="(course, index) in courses"
-              :key="index"
-              :course="course"
-              @click="onClickResult"
-            />
-          </div>
           <div class="search-mobile__action">
             <nuxt-link
               :to="`/courses?search=${encodeURIComponent(query as string)}&sort=${ECourseSort.RELEVANCY}`"
@@ -82,6 +71,17 @@
                 :size="[9, 9]"
               />
             </nuxt-link>
+          </div>
+          <div class="search-mobile__amount">
+            Найдено {{ total }} курсов
+          </div>
+          <div class="search-mobile__courses">
+            <CourseSearchResult
+              v-for="(course, index) in courses"
+              :key="index"
+              :course="course"
+              @click="onClickResult"
+            />
           </div>
         </div>
       </div>
