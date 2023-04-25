@@ -83,14 +83,19 @@
                 :distance="1000"
                 @load="onLoadScrolling"
               >
-                <Courses
-                  :courses="courses"
-                  :columns="3"
+                <Loader
+                  :active="loading"
+                  color="white-transparency"
                 >
-                  <template #empty>
-                    К сожалению мы не нашли подходящих курсов под ваш запрос.
-                  </template>
-                </Courses>
+                  <Courses
+                    :courses="courses"
+                    :columns="3"
+                  >
+                    <template #empty>
+                      К сожалению мы не нашли подходящих курсов под ваш запрос.
+                    </template>
+                  </Courses>
+                </Loader>
               </ScrollLoader>
             </div>
             <div class="catalog__pagination">
@@ -246,6 +251,7 @@ import { apiReadProfessions } from '@/api/profession';
 import { apiReadSkills } from '@/api/skill';
 import { apiReadTeachers } from '@/api/teacher';
 import { apiReadTools } from '@/api/tool';
+import Loader from '@/components/atoms/Loader.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
