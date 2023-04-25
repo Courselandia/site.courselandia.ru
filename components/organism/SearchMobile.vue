@@ -35,6 +35,8 @@
                   class="search-mobile__element"
                   placeholder="Чему вы хотите научиться?"
                   autocomplete="off"
+                  @change="onInput"
+                  @input="onInput"
                 >
               </div>
               <div class="search-mobile__loader">
@@ -144,7 +146,7 @@ const onClean = (): void => {
 
 let timer: ReturnType<typeof setTimeout>;
 
-watch(query, () => {
+const search = (): void => {
   if (timer) {
     clearTimeout(timer);
   }
@@ -175,7 +177,11 @@ watch(query, () => {
     courses.value = [];
     total.value = 0;
   }
-});
+};
+
+const onInput = (): void => {
+  search();
+};
 
 const onClickResult = (): void => {
   active.value = false;
