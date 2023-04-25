@@ -51,12 +51,13 @@
     </div>
     <div
       v-if="simple === false"
+      :style="{ visibility: activeItems.length >= 10 ? 'visible' : 'hidden' }"
       class="catalog-filter-select__more"
-      @click="onclickMore"
-      @keyup="onclickMore"
+      @click="onClickMore"
+      @keyup="onClickMore"
     >
       <div>
-        Показать все
+        {{ more ? 'Скрыть' : 'Показать все' }}
       </div>
       <Icon
         :name="more ? 'angle-up' : 'angle-down'"
@@ -160,7 +161,7 @@ const onClick = (): void => {
   emit('click', selected);
 };
 
-const onclickMore = (): void => {
+const onClickMore = (): void => {
   emit('load-items', () => {
     more.value = !more.value;
 
@@ -171,7 +172,9 @@ const onclickMore = (): void => {
 };
 
 const onLoadItems = (): void => {
-  emit('load-items');
+  emit('load-items', () => {
+    more.value = true;
+  });
 };
 
 const onCLickClean = (): void => {
