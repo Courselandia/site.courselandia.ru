@@ -11,88 +11,91 @@
         :size="[20, 20]"
       />
     </div>
-    <transition name="fade">
-      <div
-        v-if="active"
-        class="search-mobile__content"
-      >
-        <div class="search-mobile__query">
-          <div class="search-mobile__icon search-mobile__icon--loop">
-            <Icon
-              name="loop"
-              color="blue2"
-              :size="[20, 20]"
-            />
-          </div>
-          <div class="search-mobile__input">
-            <input
-              ref="inputRef"
-              v-model="query"
-              type="text"
-              name="query"
-              class="search-mobile__element"
-              placeholder="Чему вы хотите научиться?"
-              autocomplete="off"
-              @input="onInput"
-            >
-          </div>
-          <div class="search-mobile__loader">
-            <transition name="fade">
-              <Loader
-                v-if="loading"
-                :active="loading"
-                color="blue2"
-                size="tiny"
-              />
-            </transition>
-          </div>
-          <div class="search-mobile__icon search-mobile__icon--clean">
-            <Icon
-              name="close"
-              color="grey3"
-              :size="[20, 20]"
-              @click="onClean"
-            />
-          </div>
-        </div>
-        <div class="search-mobile__result">
-          <div class="search-mobile__amount">
-            Найдено {{ total }} курсов
-          </div>
-          <div class="search-mobile__courses">
-            <CourseSearchResult
-              v-for="(course, index) in courses"
-              :key="index"
-              :course="course"
-              @click="onClickResult"
-            />
-          </div>
-          <div class="search-mobile__action">
-            <nuxt-link
-              :to="`/courses?search=${encodeURIComponent(query as string)}&sort=${ECourseSort.RELEVANCY}`"
-              class="search-mobile__link"
-              @click="onClickResult"
-            >
-              <div>
-                Смотреть все
+    <ClientOnly>
+      <teleport to="BODY">
+        <transition name="fade">
+          <div
+            v-if="active"
+            class="search-mobile__content"
+          >
+            <div class="search-mobile__query">
+              <div class="search-mobile__icon search-mobile__icon--loop">
+                <Icon
+                  name="loop"
+                  color="blue2"
+                  :size="[20, 20]"
+                />
               </div>
-              <Icon
-                name="link-to"
-                color="blue2"
-                :size="[9, 9]"
-              />
-            </nuxt-link>
+              <div class="search-mobile__input">
+                <input
+                  ref="inputRef"
+                  v-model="query"
+                  type="text"
+                  name="query"
+                  class="search-mobile__element"
+                  placeholder="Чему вы хотите научиться?"
+                  autocomplete="off"
+                  @input="onInput"
+                >
+              </div>
+              <div class="search-mobile__loader">
+                <transition name="fade">
+                  <Loader
+                    v-if="loading"
+                    :active="loading"
+                    color="blue2"
+                    size="tiny"
+                  />
+                </transition>
+              </div>
+              <div class="search-mobile__icon search-mobile__icon--clean">
+                <Icon
+                  name="close"
+                  color="grey3"
+                  :size="[20, 20]"
+                  @click="onClean"
+                />
+              </div>
+            </div>
+            <div class="search-mobile__result">
+              <div class="search-mobile__amount">
+                Найдено {{ total }} курсов
+              </div>
+              <div class="search-mobile__courses">
+                <CourseSearchResult
+                  v-for="(course, index) in courses"
+                  :key="index"
+                  :course="course"
+                  @click="onClickResult"
+                />
+              </div>
+              <div class="search-mobile__action">
+                <nuxt-link
+                  :to="`/courses?search=${encodeURIComponent(query as string)}&sort=${ECourseSort.RELEVANCY}`"
+                  class="search-mobile__link"
+                  @click="onClickResult"
+                >
+                  <div>
+                    Смотреть все
+                  </div>
+                  <Icon
+                    name="link-to"
+                    color="blue2"
+                    :size="[9, 9]"
+                  />
+                </nuxt-link>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </transition>
+        </transition>
+      </teleport>
+    </ClientOnly>
   </div>
 </template>
 
 <script lang="ts" setup>
 import {
   onDeactivated,
-  onMounted,
   ref,
   watch,
 } from 'vue';
@@ -178,12 +181,6 @@ const onClickResult = (): void => {
 
 onDeactivated(() => {
   document.body.classList.remove('scroll--no-scroll');
-});
-
-onMounted(() => {
-  window.addEventListener('resize', () => {
-    document.querySelector(':root')?.style.setProperty('--vh', `${window.innerHeight / 100}px`);
-  });
 });
 </script>
 
