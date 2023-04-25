@@ -9,7 +9,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   background-color: #ff0000;
   border: 5px solid #000000;
