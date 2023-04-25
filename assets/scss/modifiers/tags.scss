@@ -1,13 +1,6 @@
 @import "@/assets/scss/vars/modifiers/fonts";
 @import "@/assets/scss/vars/modifiers/colors";
 
-BODY,
-HTML {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-}
-
 BODY {
   overflow-x: hidden;
   font-family: $fontPrimary, $fontSecondary;

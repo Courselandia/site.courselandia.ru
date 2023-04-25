@@ -92,6 +92,7 @@
 <script lang="ts" setup>
 import {
   onDeactivated,
+  onMounted,
   ref,
   watch,
 } from 'vue';
@@ -177,6 +178,12 @@ const onClickResult = (): void => {
 
 onDeactivated(() => {
   document.body.classList.remove('scroll--no-scroll');
+});
+
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    document.querySelector(':root')?.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+  });
 });
 </script>
 
