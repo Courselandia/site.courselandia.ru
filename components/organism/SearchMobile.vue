@@ -35,7 +35,6 @@
                   class="search-mobile__element"
                   placeholder="Чему вы хотите научиться?"
                   autocomplete="off"
-                  @input="onInput"
                 >
               </div>
               <div class="search-mobile__loader">
@@ -58,7 +57,10 @@
               </div>
             </div>
             <div class="search-mobile__result">
-              <div class="search-mobile__amount">
+              <div
+                v-if="query && total"
+                class="search-mobile__amount"
+              >
                 Найдено {{ total }} курсов
               </div>
               <div class="search-mobile__courses">
@@ -69,7 +71,10 @@
                   @click="onClickResult"
                 />
               </div>
-              <div class="search-mobile__action">
+              <div
+                v-if="total"
+                class="search-mobile__action"
+              >
                 <nuxt-link
                   :to="`/courses?search=${encodeURIComponent(query as string)}&sort=${ECourseSort.RELEVANCY}`"
                   class="search-mobile__link"
@@ -138,7 +143,8 @@ const onClean = (): void => {
 };
 
 let timer: ReturnType<typeof setTimeout>;
-const onInput = (): void => {
+
+watch(query, () => {
   if (timer) {
     clearTimeout(timer);
   }
@@ -169,7 +175,7 @@ const onInput = (): void => {
     courses.value = [];
     total.value = 0;
   }
-};
+});
 
 const onClickResult = (): void => {
   active.value = false;
