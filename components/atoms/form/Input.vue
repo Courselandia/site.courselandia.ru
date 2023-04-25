@@ -11,11 +11,12 @@
     </div>
     <div class="input__place">
       <input
-        v-model="input"
+        :value="input"
         :type="type"
         :name="name"
         :placeholder="placeholder"
         class="input__element"
+        @input="e => input = e.target.value"
         @focus="onFocus"
         @blur="onBlur"
       />

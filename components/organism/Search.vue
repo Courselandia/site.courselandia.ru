@@ -51,10 +51,13 @@
       </div>
     </div>
     <div
-      v-if="query && searching"
+      v-if="query && searching && total"
       class="search__results"
     >
-      <div class="search__amount">
+      <div
+        v-if="query && total"
+        class="search__amount"
+      >
         Найдено {{ total }} курсов
       </div>
       <div class="search__courses">
@@ -65,7 +68,10 @@
           @click="onClickResult"
         />
       </div>
-      <div class="search__action">
+      <div
+        v-if="total"
+        class="search__action"
+      >
         <nuxt-link
           :to="`/courses?search=${encodeURIComponent(query as string)}&sort=${ECourseSort.RELEVANCY}`"
           class="search__link"
