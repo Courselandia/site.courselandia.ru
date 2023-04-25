@@ -1,10 +1,16 @@
 @import "@/assets/scss/vars/modifiers/fonts";
 @import "@/assets/scss/vars/modifiers/colors";
 
+HTML {
+  height: -webkit-fill-available;
+}
+
 BODY {
   overflow-x: hidden;
   font-family: $fontPrimary, $fontSecondary;
   color: $primary;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 DIV, SPAN, OBJECT, H1, H2,
