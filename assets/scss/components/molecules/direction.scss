@@ -14,11 +14,15 @@
   transition: all $speedPrimary $functionPrimary;
 
   @media all and (max-width: 576px) {
-    width: 153px;
+    width: calc(33.33% - 0.65rem * 2);
     height: 153px;
     margin-left: 0.65rem;
     margin-right: 0.65rem;
     margin-bottom: 1.3rem;
+  }
+
+  @media all and (max-width: 470px) {
+    width: calc(50% - 0.65rem * 2);
   }
 
   &:hover {
