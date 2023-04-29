@@ -101,6 +101,7 @@
 
           <div
             v-if="faqItems?.length"
+            class="mb-40 mb-12-md"
           >
             <h2 class="title title--1">
               Часто задаваемые вопросы
