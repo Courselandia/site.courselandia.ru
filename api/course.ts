@@ -12,6 +12,7 @@ import ISorts from '@/interfaces/sorts';
 import ICourse from '@/interfaces/stores/course/course';
 import course from '@/stores/course';
 import TId from '@/types/id';
+import ICourseResponse from "~/interfaces/stores/course/courseResponse";
 
 export const apiReadCourses = async (
   apiUrl: string,
@@ -123,13 +124,13 @@ export const apiReadFavoritesCourses = async (
   return resultCourses.data.value?.data || [];
 };
 
-const courseItems: Record<string, ICourse> = {};
+const courseItems: Record<string, ICourseResponse> = {};
 
 export const apiGetCourse = async (
   apiUrl: string,
   schoolLink: string,
   courseLink: string,
-): Promise<ICourse | null> => {
+): Promise<ICourseResponse | null> => {
   const {
     getCourse,
   } = course();
@@ -141,7 +142,11 @@ export const apiGetCourse = async (
   }
 
   const loadGetCourse = async ():
-    Promise<IResponseItem<ICourse | null>> => await getCourse(apiUrl, schoolLink, courseLink);
+    Promise<IResponseItem<ICourseResponse | null>> => await getCourse(
+    apiUrl,
+    schoolLink,
+    courseLink,
+  );
 
   const resultCourse = await useAsyncData('course', async () => loadGetCourse());
 

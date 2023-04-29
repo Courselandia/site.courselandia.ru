@@ -12,6 +12,7 @@ import {
 import ISorts from '@/interfaces/sorts';
 import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import ICourse from '@/interfaces/stores/course/course';
+import ICourseResponse from '@/interfaces/stores/course/courseResponse';
 import ISchoolLink from '@/interfaces/stores/course/directionLink';
 import IFilter from '@/interfaces/stores/course/filter';
 import IProfessionLink from '@/interfaces/stores/course/professionLink';
@@ -28,6 +29,7 @@ export default defineStore('course', {
     searchedTotal: null as number | null,
     favoriteCourses: null as ICourse[] | null,
     course: null as ICourse | null,
+    similarities: null as ICourse[] | null,
     courses: null as ICourse[] | null,
     total: null as number | null,
     filter: null as IFilter | null,
@@ -130,13 +132,18 @@ export default defineStore('course', {
       baseUrl: string,
       school: string,
       course: string,
-    ): Promise<IResponseItem<ICourse | null>> {
+    ): Promise<IResponseItem<ICourseResponse | null>> {
       try {
-        const response = await axios.get<IResponseItem<ICourse>>(`/api/private/site/course/get/${school}/${course}`, {
+        const response = await axios.get<IResponseItem<ICourseResponse>>(`/api/private/site/course/get/${school}/${course}`, {
           baseURL: baseUrl,
         });
 
-        this.course = response.data.data;
+        if (response?.data?.data?.course) {
+          this.course = response.data.data.course;
+          this.similarities = response.data.data.similarities;
+
+          return response.data;
+        }
 
         return response.data;
       } catch (error) {

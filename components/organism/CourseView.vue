@@ -1,125 +1,142 @@
 <template>
-  <div class="course-view">
-    <Bubbles>
-      <div class="content">
-        <CourseViewHeader
-          v-if="courseItem"
-          :course="courseItem"
-        />
+  <div>
+    <div class="course-view">
+      <Bubbles>
+        <div class="content">
+          <CourseViewHeader
+            v-if="courseItem"
+            :course="courseItem"
+          />
+        </div>
+      </Bubbles>
+      <div
+        ref="contentRef"
+        class="course-view__content content"
+      >
+        <div ref="cardRef">
+          <CourseViewCard
+            v-if="courseItem"
+            :course="courseItem"
+            :scroll="scroll"
+          />
+        </div>
+
+        <div class="course-view__info">
+          <div
+            v-if="courseItem?.learns?.length"
+            class="mb-40 mb-12-md"
+          >
+            <h2 class="title title--1">
+              Чему вы научитесь
+            </h2>
+
+            <CourseViewLearn
+              v-if="courseItem"
+              :course="courseItem"
+            />
+          </div>
+
+          <div
+            v-if="hasSalaries"
+            class="mb-40 mb-12-md"
+          >
+            <CourseViewSalaries
+              v-if="courseItem"
+              :course="courseItem"
+            />
+          </div>
+
+          <div
+            v-if="courseItem?.processes?.length"
+            class="mb-40 mb-12-md"
+          >
+            <h2 class="title title--1">
+              Как проходит обучение
+            </h2>
+
+            <CourseViewProcesses
+              v-if="courseItem"
+              :course="courseItem"
+            />
+          </div>
+
+          <div
+            v-if="courseItem?.teachers?.length"
+            class="mb-40 mb-12-md"
+          >
+            <h2 class="title title--1">
+              Преподаватели
+            </h2>
+
+            <CourseViewTeachers
+              v-if="courseItem"
+              :course="courseItem"
+            />
+          </div>
+
+          <div
+            v-if="courseItem?.employments?.length"
+            class="mb-40 mb-12-md"
+          >
+            <h2 class="title title--1">
+              Помощь с трудоустройством
+            </h2>
+
+            <CourseViewEmployments
+              v-if="courseItem"
+              :course="courseItem"
+            />
+          </div>
+
+          <div class="mb-40 mb-12-md">
+            <h2 class="title title--1">
+              Информация
+            </h2>
+
+            <CourseViewInfo
+              v-if="courseItem"
+              :course="courseItem"
+            />
+          </div>
+
+          <div
+            v-if="faqItems?.length"
+          >
+            <h2 class="title title--1">
+              Часто задаваемые вопросы
+            </h2>
+
+            <CourseViewFaqs
+              :faqs="faqItems"
+            />
+          </div>
+        </div>
       </div>
-    </Bubbles>
-    <div
-      ref="contentRef"
-      class="course-view__content content"
-    >
-      <div ref="cardRef">
-        <CourseViewCard
-          v-if="courseItem"
-          :course="courseItem"
-          :scroll="scroll"
-        />
-      </div>
 
-      <div class="course-view__info">
-        <div
-          v-if="courseItem?.learns?.length"
-          class="mb-40 mb-12-md"
-        >
-          <h2 class="title title--1">
-            Чему вы научитесь
-          </h2>
-
-          <CourseViewLearn
+      <LazyClientOnly>
+        <teleport to=".page">
+          <CourseViewFollow
             v-if="courseItem"
             :course="courseItem"
           />
-        </div>
-
-        <div
-          v-if="hasSalaries"
-          class="mb-40 mb-12-md"
-        >
-          <CourseViewSalaries
-            v-if="courseItem"
-            :course="courseItem"
-          />
-        </div>
-
-        <div
-          v-if="courseItem?.processes?.length"
-          class="mb-40 mb-12-md"
-        >
-          <h2 class="title title--1">
-            Как проходит обучение
-          </h2>
-
-          <CourseViewProcesses
-            v-if="courseItem"
-            :course="courseItem"
-          />
-        </div>
-
-        <div
-          v-if="courseItem?.teachers?.length"
-          class="mb-40 mb-12-md"
-        >
-          <h2 class="title title--1">
-            Преподаватели
-          </h2>
-
-          <CourseViewTeachers
-            v-if="courseItem"
-            :course="courseItem"
-          />
-        </div>
-
-        <div
-          v-if="courseItem?.employments?.length"
-          class="mb-40 mb-12-md"
-        >
-          <h2 class="title title--1">
-            Помощь с трудоустройством
-          </h2>
-
-          <CourseViewEmployments
-            v-if="courseItem"
-            :course="courseItem"
-          />
-        </div>
-
-        <div class="mb-40 mb-12-md">
-          <h2 class="title title--1">
-            Информация
-          </h2>
-
-          <CourseViewInfo
-            v-if="courseItem"
-            :course="courseItem"
-          />
-        </div>
-
-        <div
-          v-if="faqItems?.length"
-        >
-          <h2 class="title title--1">
-            Часто задаваемые вопросы
-          </h2>
-
-          <CourseViewFaqs
-            :faqs="faqItems"
-          />
-        </div>
-      </div>
+        </teleport>
+      </LazyClientOnly>
     </div>
 
-    <LazyClientOnly>
-      <teleport to=".page">
-        <CourseViewFollow
-          v-if="courseItem"
-          :course="courseItem"
+    <template
+      v-if="courseSimilarities?.length"
+    >
+      <div class="content">
+        <h2 class="title title--1">
+          Похожие курсы
+        </h2>
+
+        <Courses
+          :courses="courseSimilarities"
+          class="mb-8"
         />
-      </teleport>
-    </LazyClientOnly>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -134,6 +151,7 @@ import { useRoute } from 'vue-router';
 import { apiGetCourse } from '@/api/course';
 import { apiReadFaqs } from '@/api/faq';
 import Bubbles from '@/components/atoms/Bubbles.vue';
+import Courses from '@/components/molecules/Courses.vue';
 import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
 import CourseViewEmployments from '@/components/molecules/CourseViewEmployments.vue';
 import CourseViewFaqs from '@/components/molecules/CourseViewFaqs.vue';
@@ -144,6 +162,7 @@ import CourseViewLearn from '@/components/molecules/CourseViewLearn.vue';
 import CourseViewProcesses from '@/components/molecules/CourseViewProcesses.vue';
 import CourseViewSalaries from '@/components/molecules/CourseViewSalaries.vue';
 import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
+import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
 import faqsStoreToFaqsComponent from '@/converts/faqsStoreToFaqsComponent';
 import ICourse from '@/interfaces/components/molecules/course';
@@ -182,6 +201,7 @@ const {
 } = route.params;
 
 const courseItem = ref<ICourse>();
+const courseSimilarities = ref<ICourse[]>();
 
 const setMeta = (): void => {
   const description = 'В каталоге Courselandia вы можете найти подходящий курс по различным направлениям. Только лучшие курсы со всей нужной информацией от ведущих онлайн школ.';
@@ -208,10 +228,16 @@ const setMeta = (): void => {
 };
 
 try {
-  const courseStore = await apiGetCourse(config.public.apiUrl, school as string, course as string);
+  const courseResponseStore = await apiGetCourse(
+    config.public.apiUrl,
+    school as string,
+    course as string,
+  );
 
-  if (courseStore) {
-    courseItem.value = courseStoreToCourseComponent(courseStore);
+  if (courseResponseStore) {
+    courseItem.value = courseStoreToCourseComponent(courseResponseStore.course);
+    courseSimilarities.value = coursesStoreToCoursesComponent(courseResponseStore.similarities);
+
     setMeta();
   }
 } catch (error: any) {

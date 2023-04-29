@@ -9,7 +9,9 @@
           Находи онлайн курсы легче используя умный поиск.
         </template>
         <template #tags>
-          <Tags>
+          <Tags
+            v-if="listDirections"
+          >
             <Tag
               v-for="(item, key) in listDirections"
               :key="key"
@@ -70,7 +72,10 @@
       <h2 class="title title--big title--center-mobil">
         Популярные направления
       </h2>
-      <Directions class="mb-40 mb-12-sm">
+      <Directions
+        v-if="listDirections"
+        class="mb-40 mb-12-sm"
+      >
         <template
           v-for="(item, key) in listDirections"
           :key="key"
