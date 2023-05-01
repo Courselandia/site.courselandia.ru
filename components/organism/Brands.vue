@@ -1,5 +1,8 @@
 <template>
-  <div class="brands">
+  <div
+    v-if="brands"
+    class="brands"
+  >
     <template
       v-for="(brand, key) in brands"
     >
@@ -9,8 +12,8 @@
         :label="brand.label"
         :url="brand.url"
         :image="brand.image"
-        :width="brand.width"
-        :height="brand.height"
+        :width="brand.width || undefined"
+        :height="brand.height || undefined"
       />
     </template>
   </div>

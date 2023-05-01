@@ -30,11 +30,13 @@ const props = defineProps({
   },
   width: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
   height: {
     type: Number,
-    required: true,
+    required: false,
+    default: null,
   },
 });
 </script>

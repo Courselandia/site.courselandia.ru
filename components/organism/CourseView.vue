@@ -61,6 +61,19 @@
           </div>
 
           <div
+            v-if="program?.length"
+            class="mb-40 mb-12-md"
+          >
+            <h2 class="title title--1">
+              Программа курса
+            </h2>
+
+            <CourseProgram
+              :faqs="program"
+            />
+          </div>
+
+          <div
             v-if="courseItem?.teachers?.length"
             class="mb-40 mb-12-md"
           >
@@ -152,6 +165,7 @@ import { useRoute } from 'vue-router';
 import { apiGetCourse } from '@/api/course';
 import { apiReadFaqs } from '@/api/faq';
 import Bubbles from '@/components/atoms/Bubbles.vue';
+import CourseProgram from '@/components/molecules/CourseProgram.vue';
 import Courses from '@/components/molecules/Courses.vue';
 import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
 import CourseViewEmployments from '@/components/molecules/CourseViewEmployments.vue';
