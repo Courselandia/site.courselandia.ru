@@ -7,6 +7,7 @@ import ILearn from '@/interfaces/stores/course/learn';
 import ILevel from '@/interfaces/stores/course/level';
 import IProcess from '@/interfaces/stores/course/process';
 import IProfession from '@/interfaces/stores/course/profession';
+import IProgram from '@/interfaces/stores/course/program';
 import IProperty from '@/interfaces/stores/course/property';
 import IImage from '@/interfaces/stores/image/image';
 import IMetatag from '@/interfaces/stores/metatag/metatag';
@@ -57,4 +58,5 @@ export default interface ICourse {
   learns: Array<ILearn>,
   employments?: Array<IEmployment>,
   features?: Array<IFeature>,
+  program?: Array<IProgram>,
 }

@@ -10,6 +10,7 @@ import ILevel from '@/interfaces/components/molecules/level';
 import IMetatag from '@/interfaces/components/molecules/metatag';
 import IProcess from '@/interfaces/components/molecules/process';
 import IProfession from '@/interfaces/components/molecules/profession';
+import IProgram from '@/interfaces/components/molecules/program';
 import ISchool from '@/interfaces/components/molecules/school';
 import ISkill from '@/interfaces/components/molecules/skill';
 import ITeacher from '@/interfaces/components/molecules/teacher';
@@ -49,4 +50,5 @@ export default interface ICourse {
     learns?: Array<ILearn> | null,
     employments?: Array<IEmployment> | null,
     features?: Array<IFeature> | null,
+    program?: Array<IProgram> | null,
 }

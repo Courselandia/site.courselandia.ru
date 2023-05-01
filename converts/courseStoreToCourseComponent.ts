@@ -89,4 +89,8 @@ export const courseStoreToCourseComponent = (
     icon: feature.icon,
     text: feature.text,
   })) : null,
+  program: course.program ? course.program.map((program) => ({
+    name: program.name,
+    text: program.text,
+  })) : null,
 });

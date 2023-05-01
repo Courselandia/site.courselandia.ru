@@ -55,21 +55,16 @@
             </h2>
 
             <CourseViewProcesses
-              v-if="courseItem"
               :course="courseItem"
             />
           </div>
 
           <div
-            v-if="program?.length"
+            v-if="courseItem?.program?.length"
             class="mb-40 mb-12-md"
           >
-            <h2 class="title title--1">
-              Программа курса
-            </h2>
-
-            <CourseProgram
-              :faqs="program"
+            <CourseViewProgram
+              :course="courseItem"
             />
           </div>
 
@@ -82,7 +77,6 @@
             </h2>
 
             <CourseViewTeachers
-              v-if="courseItem"
               :course="courseItem"
             />
           </div>
@@ -165,7 +159,6 @@ import { useRoute } from 'vue-router';
 import { apiGetCourse } from '@/api/course';
 import { apiReadFaqs } from '@/api/faq';
 import Bubbles from '@/components/atoms/Bubbles.vue';
-import CourseProgram from '@/components/molecules/CourseProgram.vue';
 import Courses from '@/components/molecules/Courses.vue';
 import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
 import CourseViewEmployments from '@/components/molecules/CourseViewEmployments.vue';
@@ -175,6 +168,7 @@ import CourseViewHeader from '@/components/molecules/CourseViewHeader.vue';
 import CourseViewInfo from '@/components/molecules/CourseViewInfo.vue';
 import CourseViewLearn from '@/components/molecules/CourseViewLearn.vue';
 import CourseViewProcesses from '@/components/molecules/CourseViewProcesses.vue';
+import CourseViewProgram from '@/components/molecules/CourseViewProgram.vue';
 import CourseViewSalaries from '@/components/molecules/CourseViewSalaries.vue';
 import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
