@@ -8,53 +8,13 @@
     </h2>
 
     <div
-      v-if="course.modules_amount || course.lessons_amount"
+      v-if="description"
       class="course-view-program__top"
     >
       <div class="course-view-program__description">
-        <template v-if="course.duration && course.duration_unit">
-          Программа курса расчитана на {{ duration(course.duration, course.duration_unit) }}.
-        </template>
-        В курсе
-        <template
-          v-if="course.modules_amount === 1"
-        >
-          представлен
-        </template>
-        <template
-          v-else
-        >
-          представлено
-        </template>
-        {{ course.modules_amount }}
-        <template
-          v-if="course.modules_amount === 1"
-        >
-          модуль, который
-        </template>
-        <template
-          v-else-if="course.modules_amount >= 2 && course.modules_amount <= 4"
-        >
-          модуля, которые
-        </template>
-        <template v-else>
-          модулей, которые
-        </template>
-        содержат {{ course.lessons_amount }}
-        <template
-          v-if="course.modules_amount === 1"
-        >
-          онлайн-курс.
-        </template>
-        <template
-          v-else-if="course.modules_amount >= 2 && course.modules_amount <= 4"
-        >
-          онлайн-курса.
-        </template>
-        <template v-else>
-          онлайн-курсов.
-        </template>
-        содержащих видеолекций и практические задания, которые вы разберете вместе со спикерами.
+        <ClientOnly>
+          {{ description }}
+        </ClientOnly>
       </div>
       <div
         v-if="course.modules_amount"
@@ -105,13 +65,16 @@
     </div>
 
     <div class="course-view-program__bottom">
-
+      HERE
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import {
+  computed,
+  PropType,
+} from 'vue';
 
 import duration from '@/helpers/duration';
 import ICourse from '@/interfaces/components/molecules/course';
@@ -121,6 +84,64 @@ const props = defineProps({
     type: Object as PropType<ICourse>,
     required: true,
   },
+});
+
+const description = computed(() => {
+  let text = '';
+
+  if (props.course.duration && props.course.duration_unit) {
+    text += `Программа курса расчитана на ${duration(props.course.duration, props.course.duration_unit)}.`;
+  }
+
+  if (props.course.modules_amount || props.course.lessons_amount) {
+    if (props.course.modules_amount) {
+      text += ' В курсе ';
+
+      if (props.course.modules_amount === 1) {
+        text += 'представлен ';
+      } else {
+        text += 'представлено ';
+      }
+
+      text += props.course.modules_amount;
+
+      if (props.course.modules_amount === 1) {
+        text += ` модуль${props.course.lessons_amount ? ', который' : ','}`;
+      } else if (props.course.modules_amount >= 2 && props.course.modules_amount <= 4) {
+        text += ` модуля${props.course.lessons_amount ? ', которые' : ','}`;
+      } else {
+        text += ` модулей${props.course.lessons_amount ? ', которые' : ','}`;
+      }
+
+      if (props.course.lessons_amount) {
+        text += ` содержат ${props.course.lessons_amount} `;
+
+        if (props.course.lessons_amount === 1) {
+          text += 'онлайн-курс,';
+        } else if (props.course.lessons_amount >= 2 && props.course.lessons_amount <= 4) {
+          text += 'онлайн-курса,';
+        } else {
+          text += 'онлайн-курсов,';
+        }
+      }
+    } else if (props.course.lessons_amount) {
+      text += ' В курсе ';
+
+      text += props.course.lessons_amount;
+
+      if (props.course.lessons_amount === 1) {
+        text += ' онлайн-курс,';
+      } else if (props.course.lessons_amount >= 2 && props.course.lessons_amount <= 4) {
+        text += ' онлайн-курса,';
+      } else {
+        text += ' онлайн-курсов,';
+      }
+    }
+
+    text += ` что ${props.course.lessons_amount === 1 ? 'состоит' : 'состоят'} из видеолекций и практических заданий, которые вы разберете вместе со спикерами.`;
+  }
+
+  return text;
 });
 </script>
 

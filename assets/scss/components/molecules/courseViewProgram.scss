@@ -1,3 +1,52 @@
-.course-view-program {
+@import "@/assets/scss/vars/modifiers/colors";
 
+.course-view-program {
+  border: 1px solid $grey2;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  position: relative;
+
+  &::after {
+    content: "";
+    background-image: url("@/assets/images/angle.svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+  }
+
+  &__top {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid $grey2;
+    padding-bottom: 2.5rem;
+  }
+
+  &__description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $grey4;
+    width: calc(100% - 160px * 2);
+    padding-right: 3rem;
+  }
+
+  &__modules,
+  &__lessons {
+    text-align: center;
+    width: 160px;
+  }
+
+  &__amount {
+    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 3.5rem;
+  }
+
+  &__unit {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+  }
 }

@@ -18,12 +18,12 @@ export const courseStoreToCourseComponent = (
   currency: course.currency,
   duration: course.duration,
   duration_unit: course.duration_unit,
+  modules_amount: course.modules_amount,
   lessons_amount: course.lessons_amount,
   text: course.text,
   language: course.language,
   online: course.online,
   employment: course.employment,
-  modules_amount: course.modules_amount,
   school: course.school ? {
     id: course.school.id,
     name: course.school.name,
