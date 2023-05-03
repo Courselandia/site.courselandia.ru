@@ -3,7 +3,7 @@
     <div class="content">
       <Hero class="mt-12 mb-24 mb-12-sm">
         <template #title>
-          Агрегатор, с которым выберешь курс быстрее
+          Агрегатор, с которым выберешь онлайн-курс быстрее
         </template>
         <template #description>
           Находи онлайн курсы легче используя умный поиск.
@@ -43,7 +43,7 @@
           <template v-if="heroImage === 1">
             <img
               src="@/assets/images/hero/1.webp"
-              alt="Агрегатор, с которым выберешь курс быстрее"
+              alt="Агрегатор, с которым выберешь онлайн-курс быстрее"
               :width="619"
               :height="641"
             />
@@ -51,7 +51,7 @@
           <template v-else-if="heroImage === 2">
             <img
               src="@/assets/images/hero/2.webp"
-              alt="Агрегатор, с которым выберешь курс быстрее"
+              alt="Агрегатор, с которым выберешь онлайн-курс быстрее"
               :width="621"
               :height="641"
             />
@@ -59,7 +59,7 @@
           <template v-else>
             <img
               src="@/assets/images/hero/3.webp"
-              alt="Агрегатор, с которым выберешь курс быстрее"
+              alt="Агрегатор, с которым выберешь онлайн-курс быстрее"
               :width="622"
               :height="641"
             />
