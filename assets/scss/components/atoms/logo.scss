@@ -1,7 +1,7 @@
 .logo {
   line-height: 0;
   display: inline-block;
-  background-image: url("~/assets/images/logo.svg");
+  background-image: url("@/assets/images/logo.svg");
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: center center;
@@ -13,7 +13,7 @@
   }
 
   &--light {
-    background-image: url("~/assets/images/logo-light.svg");
+    background-image: url("@/assets/images/logo-light.svg");
     width: 200px;
     height: 31px;
   }

@@ -4,4 +4,5 @@ export default interface IProgram {
   id: TId,
   name: string,
   text: string,
+  children?: Array<IProgram>,
 }

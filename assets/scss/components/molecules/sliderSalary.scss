@@ -21,7 +21,7 @@
     --slider-handle-height: 32px;
     --slider-handle-radius: 10px;
 
-    background-image: url("~/assets/images/junior.svg");
+    background-image: url("@/assets/images/junior.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100% auto;
@@ -80,15 +80,15 @@
     cursor: pointer;
 
     &--junior {
-      background-image: url("~/assets/images/junior.svg");
+      background-image: url("@/assets/images/junior.svg");
     }
 
     &--middle {
-      background-image: url("~/assets/images/middle.svg");
+      background-image: url("@/assets/images/middle.svg");
     }
 
     &--senior {
-      background-image: url("~/assets/images/senior.svg");
+      background-image: url("@/assets/images/senior.svg");
     }
   }
 

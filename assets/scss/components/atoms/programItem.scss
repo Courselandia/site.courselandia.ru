@@ -1,0 +1,48 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.program-item {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $grey2;
+  position: relative;
+
+  &:last-child {
+    border-bottom-width: 0;
+    padding-bottom: 0;
+  }
+
+  &__name {
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    padding-right: 3rem;
+  }
+
+  &__text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+
+    P {
+      &:last-child {
+        padding-bottom: 0 !important;
+      }
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  &__action {
+    line-height: 0;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    cursor: pointer;
+  }
+
+  &__children {
+    padding-left: 3rem;
+  }
+}

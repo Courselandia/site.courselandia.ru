@@ -92,5 +92,6 @@ export const courseStoreToCourseComponent = (
   program: course.program ? course.program.map((program) => ({
     name: program.name,
     text: program.text,
+    children: program.children,
   })) : null,
 });

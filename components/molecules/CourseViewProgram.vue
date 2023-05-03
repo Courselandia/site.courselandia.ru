@@ -12,9 +12,7 @@
       class="course-view-program__top"
     >
       <div class="course-view-program__description">
-        <ClientOnly>
-          {{ description }}
-        </ClientOnly>
+        {{ description }}Zz
       </div>
       <div
         v-if="course.modules_amount"
@@ -48,12 +46,12 @@
         </div>
         <div class="course-view-program__unit">
           <template
-            v-if="course.modules_amount === 1"
+            v-if="course.lessons_amount === 1"
           >
             Онлайн-курс
           </template>
           <template
-            v-else-if="course.modules_amount >= 2 && course.modules_amount <= 4"
+            v-else-if="course.lessons_amount >= 2 && course.lessons_amount <= 4"
           >
             Онлайн-курса
           </template>
@@ -65,7 +63,9 @@
     </div>
 
     <div class="course-view-program__bottom">
-      HERE
+      <Program
+        :program="course.program"
+      />
     </div>
   </div>
 </template>
@@ -76,6 +76,7 @@ import {
   PropType,
 } from 'vue';
 
+import Program from '@/components/molecules/Program.vue';
 import duration from '@/helpers/duration';
 import ICourse from '@/interfaces/components/molecules/course';
 
