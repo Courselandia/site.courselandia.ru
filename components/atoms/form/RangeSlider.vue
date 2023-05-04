@@ -12,7 +12,7 @@
         </template>
       </template>
       <template v-else>
-        {{ money ? toMoney(input) : input }} ₽
+        {{ money ? toMoney(input as number) : input }} ₽
       </template>
     </div>
     <div class="range-slider__slider">

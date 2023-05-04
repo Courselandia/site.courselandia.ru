@@ -23,7 +23,7 @@
           </div>
         </div>
         <div
-          v-if="course.school.image"
+          v-if="course.school?.image"
           class="course-view-card__brand"
         >
           <LazyImage

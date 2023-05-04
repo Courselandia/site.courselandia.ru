@@ -1,5 +1,8 @@
 <template>
-  <div class="course-view-employments">
+  <div
+    v-if="course.employments"
+    class="course-view-employments"
+  >
     <BlockCheck
       v-for="(employment, key) in course.employments"
       :key="key"

@@ -1,5 +1,8 @@
 <template>
-  <div class="course-view-processes">
+  <div
+    v-if="course.processes"
+    class="course-view-processes"
+  >
     <BlockCheck
       v-for="(process, key) in course.processes"
       :key="key"

@@ -5,7 +5,7 @@
   align-items: center;
 
   &__star {
-    mask-image: url("~/assets/images/star.svg");
+    mask-image: url("@/assets/images/star.svg");
     mask-size: 100% auto;
     mask-repeat: no-repeat;
     mask-position: center center;

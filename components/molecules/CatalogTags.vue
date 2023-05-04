@@ -35,8 +35,8 @@
               )"
             bck="blue1"
           >
-            <template v-if="selectedDirectionValue.name">
-              {{ selectedDirectionValue.name }}
+            <template v-if="selectedDirectionValue?.name">
+              {{ selectedDirectionValue?.name }}
             </template>
             <template v-else>
               {{ getDirectionLabel(directions, selectedDirectionValue) }}

@@ -55,10 +55,22 @@
             </h2>
 
             <CourseViewProcesses
-              v-if="courseItem"
               :course="courseItem"
             />
           </div>
+
+          <ClientOnly>
+            <!--noindex-->
+            <div
+              v-if="courseItem?.program?.length"
+              class="mb-40 mb-12-md"
+            >
+              <CourseViewProgram
+                :course="courseItem"
+              />
+            </div>
+            <!--/noindex-->
+          </ClientOnly>
 
           <div
             v-if="courseItem?.teachers?.length"
@@ -69,7 +81,6 @@
             </h2>
 
             <CourseViewTeachers
-              v-if="courseItem"
               :course="courseItem"
             />
           </div>
@@ -161,6 +172,7 @@ import CourseViewHeader from '@/components/molecules/CourseViewHeader.vue';
 import CourseViewInfo from '@/components/molecules/CourseViewInfo.vue';
 import CourseViewLearn from '@/components/molecules/CourseViewLearn.vue';
 import CourseViewProcesses from '@/components/molecules/CourseViewProcesses.vue';
+import CourseViewProgram from '@/components/molecules/CourseViewProgram.vue';
 import CourseViewSalaries from '@/components/molecules/CourseViewSalaries.vue';
 import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';

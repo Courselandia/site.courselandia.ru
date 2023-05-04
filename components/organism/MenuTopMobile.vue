@@ -127,15 +127,19 @@
           Школы
         </div>
       </div>
-      <div
-        v-for="(item, key) in listSchools"
-        :key="key"
-        class="menu-top-mobile__item"
-        @click="onClickLink(item.link)"
-        @keydown="onClickLink(item.link)"
+      <template
+        v-if="listSchools"
       >
-        {{ item.label }}
-      </div>
+        <div
+          v-for="(item, key) in listSchools"
+          :key="key"
+          class="menu-top-mobile__item"
+          @click="onClickLink(item.link)"
+          @keydown="onClickLink(item.link)"
+        >
+          {{ item.label }}
+        </div>
+      </template>
     </template>
     <template v-else-if="menu === 'reviews'">
       <div

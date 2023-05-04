@@ -1,5 +1,8 @@
 <template>
-  <div class="course-view-teachers">
+  <div
+    v-if="course.teachers"
+    class="course-view-teachers"
+  >
     <div class="course-view-teachers__items">
       <div
         v-for="(teacher, key) in course.teachers"

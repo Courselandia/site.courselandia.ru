@@ -1,5 +1,7 @@
 <template>
-  <Numerics>
+  <Numerics
+    v-if="course.learns"
+  >
     <Numeric
       v-for="(learn, key) in course.learns"
       :key="key"
