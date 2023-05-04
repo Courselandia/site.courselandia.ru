@@ -59,14 +59,18 @@
             />
           </div>
 
-          <div
-            v-if="courseItem?.program?.length"
-            class="mb-40 mb-12-md"
-          >
-            <CourseViewProgram
-              :course="courseItem"
-            />
-          </div>
+          <ClientOnly>
+            <!--noindex-->
+            <div
+              v-if="courseItem?.program?.length"
+              class="mb-40 mb-12-md"
+            >
+              <CourseViewProgram
+                :course="courseItem"
+              />
+            </div>
+            <!--/noindex-->
+          </ClientOnly>
 
           <div
             v-if="courseItem?.teachers?.length"
