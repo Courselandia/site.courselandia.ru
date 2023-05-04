@@ -12,7 +12,7 @@
       class="course-view-program__top"
     >
       <div class="course-view-program__description">
-        {{ description }}Zz
+        {{ description }}
       </div>
       <div
         v-if="course.modules_amount"
