@@ -225,4 +225,20 @@
   &__empty {
     display: none;
   }
+
+  &__desktop {
+    display: block;
+
+    @media all and (max-width: 576px) {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    display: none;
+
+    @media all and (max-width: 576px) {
+      display: block;
+    }
+  }
 }

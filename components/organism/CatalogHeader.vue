@@ -63,30 +63,62 @@
         v-if="itemLinkDirection?.categories"
         #tags
       >
-        <Carousel
-          snap-align="end"
-          wrap-around
-        >
-          <Slide
-            v-for="(handful, key) in getHandfulTags(itemLinkDirection.categories)"
-            :key="key"
+        <div class="catalog-header__desktop">
+          <Carousel
+            snap-align="end"
+            wrap-around
           >
-            <Tags>
-              <Tag
-                v-for="(item, handfulLey) in handful"
-                :key="handfulLey"
-                :to="`/courses/category/${item.link}`"
-                bck="white"
-              >
-                {{ item.name }}
-              </Tag>
-            </Tags>
-          </Slide>
+            <Slide
+              v-for="(handful, key) in getHandfulTags(itemLinkDirection.categories, 20)"
+              :key="key"
+            >
+              <Tags>
+                <Tag
+                  v-for="(item, handfulLey) in handful"
+                  :key="handfulLey"
+                  :to="`/courses/category/${item.link}`"
+                  bck="white"
+                >
+                  {{ item.name }}
+                </Tag>
+              </Tags>
+            </Slide>
 
-          <template #addons>
-            <Pagination />
-          </template>
-        </Carousel>
+            <template #addons>
+              <Pagination />
+            </template>
+          </Carousel>
+        </div>
+        <!--noindex-->
+        <ClientOnly>
+          <div class="catalog-header__mobile">
+            <Carousel
+              snap-align="end"
+              wrap-around
+            >
+              <Slide
+                v-for="(handful, key) in getHandfulTags(itemLinkDirection.categories, 5)"
+                :key="key"
+              >
+                <Tags>
+                  <Tag
+                    v-for="(item, handfulLey) in handful"
+                    :key="handfulLey"
+                    :to="`/courses/category/${item.link}`"
+                    bck="white"
+                  >
+                    {{ item.name }}
+                  </Tag>
+                </Tags>
+              </Slide>
+
+              <template #addons>
+                <Pagination />
+              </template>
+            </Carousel>
+          </div>
+        </ClientOnly>
+        <!--/noindex-->
       </template>
     </CatalogHeader>
     <template
@@ -273,113 +305,62 @@
         </div>
       </template>
       <template #tags>
-        <Tags>
-          <Tag
-            to="/courses/direction/programmirovanie"
-            bck="white"
-            shadow
+        <div class="catalog-header__desktop">
+          <Carousel
+            snap-align="end"
+            wrap-around
           >
-            Программирование
-          </Tag>
-          <Tag
-            to="/courses/school/geekbrains"
-            bck="white"
-            shadow
-          >
-            GeekBrains
-          </Tag>
-          <Tag
-            to="/courses/tool/java"
-            bck="white"
-            shadow
-          >
-            Java
-          </Tag>
-          <Tag
-            to="/courses/school/netologiya"
-            bck="white"
-            shadow
-          >
-            Нетология
-          </Tag>
-          <Tag
-            to="/courses/category/data-engineering"
-            bck="white"
-            shadow
-          >
-            Data Engineering
-          </Tag>
-          <Tag
-            to="/courses/direction/dizayn"
-            bck="white"
-            shadow
-          >
-            Дизайн
-          </Tag>
-          <Tag
-            to="/courses/direction/igri"
-            bck="white"
-            shadow
-          >
-            Игры
-          </Tag>
-          <Tag
-            to="/courses/school/skillbox"
-            bck="white"
-            shadow
-          >
-            Skillbox
-          </Tag>
-          <Tag
-            to="/courses/tool/php"
-            bck="white"
-            shadow
-          >
-            PHP
-          </Tag>
-          <Tag
-            to="/courses/school/xyz-school"
-            bck="white"
-            shadow
-          >
-            XYZ School
-          </Tag>
-          <Tag
-            to="/courses/direction/analitika"
-            bck="white"
-            shadow
-          >
-            Аналитика
-          </Tag>
-          <Tag
-            to="/courses/category/data-science"
-            bck="white"
-            shadow
-          >
-            Data Science
-          </Tag>
-          <Tag
-            to="/courses/direction/biznes-i-upravlenie"
-            bck="white"
-            shadow
-          >
-            Бизнес и управление
-          </Tag>
-          <Tag
-            to="/courses/tool/python"
-            bck="white"
-            shadow
-          >
-            Python
-          </Tag>
-          <Tag
-            to="/courses/category/razrabotka-mobilnih-prilozheniy"
-            bck="white"
-            shadow
-          >
-            Разработка мобильных приложений
-          </Tag>
-        </Tags>
+            <Slide
+              v-for="(handful, key) in getHandfulTags(popularTags, 15)"
+              :key="key"
+            >
+              <Tags>
+                <Tag
+                  v-for="(item, handfulLey) in handful"
+                  :key="handfulLey"
+                  :to="item.link"
+                  bck="white"
+                >
+                  {{ item.name }}
+                </Tag>
+              </Tags>
+            </Slide>
+
+            <template #addons>
+              <Pagination />
+            </template>
+          </Carousel>
+        </div>
+        <!--noindex-->
+        <ClientOnly>
+          <div class="catalog-header__mobile">
+            <Carousel
+              snap-align="end"
+              wrap-around
+            >
+              <Slide
+                v-for="(handful, key) in getHandfulTags(popularTags, 5)"
+                :key="key"
+              >
+                <Tags>
+                  <Tag
+                    v-for="(item, handfulLey) in handful"
+                    :key="handfulLey"
+                    :to="item.link"
+                    bck="white"
+                  >
+                    {{ item.name }}
+                  </Tag>
+                </Tags>
+              </Slide>
+
+              <template #addons>
+                <Pagination />
+              </template>
+            </Carousel>
+          </div>
+        </ClientOnly>
+        <!--/noindex-->
       </template>
     </CatalogHeader>
   </div>
@@ -390,6 +371,9 @@
 import 'vue3-carousel/dist/carousel.css';
 
 import { storeToRefs } from 'pinia';
+import {
+  ref,
+} from 'vue';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Carousel,
@@ -401,6 +385,7 @@ import Button from '@/components/atoms/Button.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import Tags from '@/components/molecules/Tags.vue';
+import ITag from '@/interfaces/components/atoms/tag';
 import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
@@ -418,9 +403,11 @@ const { itemLinkSkill } = storeToRefs(skill());
 const { itemLinkTeacher } = storeToRefs(teacher());
 const { itemLinkTool } = storeToRefs(tool());
 
-const getHandfulTags = (items: Array<ICategoryLink>): Array<Array<ICategoryLink>> => {
-  const result: Array<Array<ICategoryLink>> = [];
-  const totalInHandful = 5;
+const getHandfulTags = (
+  items: Array<ICategoryLink | ITag>,
+  totalInHandful: number,
+): Array<Array<ICategoryLink | ITag>> => {
+  const result: Array<Array<ICategoryLink | ITag>> = [];
 
   for (let i = 0; i < items.length; i++) {
     const indexCurrent = Math.floor(i / totalInHandful);
@@ -434,6 +421,93 @@ const getHandfulTags = (items: Array<ICategoryLink>): Array<Array<ICategoryLink>
 
   return result;
 };
+
+const popularTags = ref<Array<ITag>>([
+  {
+    name: 'Нейронные сети',
+    link: '/courses/skill/razrabotka-neyrosetey',
+  },
+  {
+    name: 'Программирование',
+    link: '/courses/direction/programmirovanie',
+  },
+  {
+    name: 'Разработка мобильных приложений',
+    link: '/courses/category/razrabotka-mobilnih-prilozheniy',
+  },
+  {
+    name: 'GeekBrains',
+    link: '/courses/school/geekbrains',
+  },
+  {
+    name: 'Java',
+    link: '/courses/tool/java',
+  },
+  {
+    name: 'Нетология',
+    link: '/courses/school/netologiya',
+  },
+  {
+    name: 'Data Engineering',
+    link: '/courses/category/data-engineering',
+  },
+  {
+    name: 'Дизайн',
+    link: '/courses/direction/dizayn',
+  },
+  {
+    name: 'Игры',
+    link: '/courses/direction/igri',
+  },
+  {
+    name: 'Skillbox',
+    link: '/courses/school/skillbox',
+  },
+  {
+    name: 'PHP',
+    link: '/courses/tool/php',
+  },
+  {
+    name: 'XYZ School',
+    link: '/courses/school/xyz-school',
+  },
+  {
+    name: 'Интернет-маркетинг',
+    link: '/courses/category/internetmarketing',
+  },
+  {
+    name: 'Frontend-разработка',
+    link: '/courses/category/frontendrazrabotka',
+  },
+  {
+    name: 'Аналитика',
+    link: '/courses/direction/analitika',
+  },
+  {
+    name: 'Бизнес и управление',
+    link: '/courses/category/data-science',
+  },
+  {
+    name: 'Python',
+    link: '/courses/tool/python',
+  },
+  {
+    name: 'Веб-разработка',
+    link: '/courses/category/vebrazrabotka',
+  },
+  {
+    name: 'UX/UI-дизайнер',
+    link: '/courses/profession/uxuidizayner',
+  },
+  {
+    name: 'Project-менеджер',
+    link: '/courses/profession/projectmenedzher',
+  },
+  {
+    name: 'Тестирование ПО',
+    link: '/courses/category/testirovanie-po',
+  },
+]);
 </script>
 
 <style lang="scss">
