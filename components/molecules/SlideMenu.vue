@@ -16,11 +16,12 @@
       </div>
     </div>
     <transition name="slide-right">
-      <template v-if="showValue">
-        <div class="slide-menu__content">
-          <slot />
-        </div>
-      </template>
+      <div
+        v-show="showValue"
+        class="slide-menu__content"
+      >
+        <slot />
+      </div>
     </transition>
   </div>
 </template>
