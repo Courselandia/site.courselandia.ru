@@ -23,7 +23,11 @@
         <SlideMenu
           v-model:show="show"
         >
-          <MenuTopMobile v-model:show="show" />
+          <!--noindex-->
+          <ClientOnly>
+            <MenuTopMobile v-model:show="show" />
+          </ClientOnly>
+          <!--/noindex-->
         </SlideMenu>
       </div>
     </header>
