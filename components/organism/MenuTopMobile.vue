@@ -44,13 +44,15 @@
           :size="[7, 13]"
         />
       </div>
+      <!--
       <nuxt-link
         style="display: none"
         class="menu-top-mobile__item"
-        to="/reviews"
+        to="/blog"
       >
         Блог
       </nuxt-link>
+      -->
     </template>
     <template v-else-if="menu === 'courses'">
       <template v-if="direction === null">
@@ -216,6 +218,10 @@ const emit = defineEmits({
   'update:show': (_: Boolean) => true,
 });
 
+watch(show, () => {
+  showValue.value = show.value;
+});
+
 watch(showValue, () => {
   emit('update:show', showValue.value);
 });
@@ -291,6 +297,8 @@ const listSchoolReviews = ref<IListSchoolReview[]>(
 const onClickLink = (link: string): void => {
   router.push(link);
   showValue.value = false;
+  menu.value = null;
+  direction.value = null;
 };
 </script>
 
