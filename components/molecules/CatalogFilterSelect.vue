@@ -31,23 +31,22 @@
         </Input>
       </Item>
     </div>
-    <div
-      ref="itemsRef"
-      class="catalog-filter-select__items"
-    >
-      <Group
-        v-model:value="selects"
-      >
-        <Checkbox
-          v-for="(item, key) in activeItems"
-          :key="key"
-          :value="item.id"
-          :label="item.label || ''"
-          :disabled="item.disabled && selects.indexOf(item.id) === -1"
-          name="select"
-          @click="onClick"
-        />
-      </Group>
+    <div>
+      <ClientOnly>
+        <Group
+          v-model:value="selects"
+          class="catalog-filter-select__group"
+        >
+          <VirtualList
+            ref="itemsRef"
+            class="catalog-filter-select__items"
+            :data-key="'id'"
+            :data-sources="activeItems"
+            :data-component="CatalogFilterSelectItem"
+            :extra-props="{ selects: selects }"
+          />
+        </Group>
+      </ClientOnly>
     </div>
     <div
       v-if="simple === false"
@@ -77,12 +76,14 @@ import {
   toRefs,
   watch,
 } from 'vue';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import VirtualList from 'vue3-virtual-scroll-list';
 
-import Checkbox from '@/components/atoms/form/Checkbox.vue';
 import Group from '@/components/atoms/form/Group.vue';
 import Input from '@/components/atoms/form/Input.vue';
 import Item from '@/components/atoms/form/Item.vue';
 import Icon from '@/components/atoms/Icon.vue';
+import CatalogFilterSelectItem from '@/components/molecules/CatalogFilterSelectItem.vue';
 import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
 const props = defineProps({
@@ -143,6 +144,7 @@ watch(selects, () => {
   const selected = props.items.filter((itm) => selects.value.indexOf(itm.id) !== -1);
 
   emit('update:value', selected);
+  emit('click', selected);
 }, {
   deep: true,
 });
@@ -154,12 +156,6 @@ watch(value, () => {
     selects.value = value.value?.map((item) => item.id);
   }
 });
-
-const onClick = (): void => {
-  const selected = props.items.filter((itm) => selects.value.indexOf(itm.id) !== -1);
-
-  emit('click', selected);
-};
 
 const onClickMore = (): void => {
   emit('load-items', () => {

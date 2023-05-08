@@ -52,14 +52,41 @@ const props = defineProps({
   },
 });
 
+const selects = inject<any>('selects');
+
 const instance = getCurrentInstance();
 
-const checked = computed(
-  (): boolean => instance?.parent?.exposed?.input.value?.indexOf(props.value) !== -1,
-);
+const checked = computed((): boolean => {
+  if (selects?.value) {
+    return selects.value.indexOf(props.value) !== -1;
+  }
+
+  return instance?.parent?.exposed?.input?.value?.indexOf(props.value) !== -1;
+});
+
+const onChangeValue = (val: string | number): void => {
+  if (Array.isArray(selects.value)) {
+    if (selects.value.indexOf(val) !== -1) {
+      const index = selects.value?.indexOf(val);
+
+      if (index > -1) {
+        selects.value.splice(index, 1);
+      }
+    } else {
+      selects.value?.push(val);
+    }
+  } else {
+    selects.value = val;
+  }
+};
+
 const onClick = (): void => {
   if (!props.disabled) {
-    instance?.parent?.exposed?.onChangeValue(props.value);
+    if (selects.value) {
+      onChangeValue(props.value);
+    } else {
+      instance?.parent?.exposed?.onChangeValue(props.value);
+    }
   }
 };
 

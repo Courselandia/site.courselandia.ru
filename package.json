@@ -24,6 +24,7 @@
     "vue-range-component": "^1.0.3",
     "vue-router": "^4.1.6",
     "vue3-carousel": "^0.2.14",
+    "vue3-virtual-scroll-list": "^0.2.1",
     "yandex-metrika-module-nuxt3": "^1.5.3"
   },
   "devDependencies": {

@@ -38,6 +38,10 @@
     }
   }
 
+  &__group {
+    width: 100%;
+  }
+
   &__items {
     height: 177px;
     overflow: hidden;
@@ -64,6 +68,17 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+
+    .wrap {
+      & > DIV {
+        margin-bottom: 1rem;
+        line-height: 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 
