@@ -21,6 +21,14 @@
     }
   }
 
+  .program-item {
+    &:last-child {
+      @media all and (max-width: 576px) {
+        border-bottom-width: 0;
+      }
+    }
+  }
+
   &__name {
     font-weight: 800;
     font-size: 1.25rem;

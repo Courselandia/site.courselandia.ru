@@ -58,7 +58,8 @@
     width: 160px;
 
     @media all and (max-width: 576px) {
-      width: 135px;
+      width: auto;
+      margin-right: 2rem;
     }
   }
 
