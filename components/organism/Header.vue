@@ -2,7 +2,9 @@
   <div class="content">
     <header class="header">
       <div class="header__logo">
-        <Logo />
+        <Logo
+          @click="onClickLogo"
+        />
       </div>
       <div class="header__menu">
         <MenuTop
@@ -17,7 +19,9 @@
         <SearchMobile />
       </div>
       <div class="header__favorite">
-        <Favorite />
+        <Favorite
+          @click="onClickFavorite"
+        />
       </div>
       <div class="header__burger">
         <SlideMenu
@@ -83,6 +87,14 @@ watch(menu, () => {
 const show = ref(false);
 
 const onClick = (): void => {
+  show.value = false;
+};
+
+const onClickLogo = (): void => {
+  show.value = false;
+};
+
+const onClickFavorite = (): void => {
   show.value = false;
 };
 </script>
