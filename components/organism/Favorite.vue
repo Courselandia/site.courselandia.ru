@@ -10,7 +10,7 @@
     <div class="favorite__icon">
       <Icon
         name="heart"
-        :size="[20, 18]"
+        :size="[20, 19]"
         color="blue2"
       />
     </div>
