@@ -43,13 +43,13 @@
             :data-key="'id'"
             :data-sources="activeItems"
             :data-component="CatalogFilterSelectItem"
-            :extra-props="{ selects: selects }"
+            :extra-props="{ selects: selects, onClickItem: clickItem }"
           />
         </Group>
       </ClientOnly>
     </div>
     <div
-      v-if="simple === false"
+      v-if="!simple"
       :style="{ visibility: activeItems.length >= 10 ? 'visible' : 'hidden' }"
       class="catalog-filter-select__more"
       @click="onClickMore"
@@ -140,14 +140,11 @@ const activeItems = computed((): Array<ICatalogFilterSelectItem> => props.items?
   (itm) => itm.label?.toLowerCase().indexOf(search.value.toLowerCase().trim()) !== -1 || search.value.trim() === '',
 ));
 
-watch(selects, () => {
+const clickItem = (): void => {
   const selected = props.items.filter((itm) => selects.value.indexOf(itm.id) !== -1);
-
   emit('update:value', selected);
   emit('click', selected);
-}, {
-  deep: true,
-});
+};
 
 watch(value, () => {
   const newValues = value.value?.map((item) => item.id);

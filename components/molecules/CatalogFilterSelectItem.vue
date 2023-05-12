@@ -30,9 +30,14 @@ const props = defineProps({
     type: Array as PropType<Array<String | Number | Boolean>>,
     required: true,
   },
+  onClickItem: {
+    type: Function,
+    required: true,
+  },
 });
 
 const { selects } = toRefs(props);
 
 provide('selects', selects);
+provide('onClickItem', props.onClickItem);
 </script>

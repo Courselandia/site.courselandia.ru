@@ -53,6 +53,7 @@ const props = defineProps({
 });
 
 const selects = inject<any>('selects');
+const onClickItem = inject<any>('onClickItem');
 
 const instance = getCurrentInstance();
 
@@ -87,6 +88,8 @@ const onClick = (): void => {
     } else {
       instance?.parent?.exposed?.onChangeValue(props.value);
     }
+
+    onClickItem();
   }
 };
 
