@@ -192,7 +192,6 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { apiReadDirections } from '@/api/direction';
 import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
@@ -249,7 +248,9 @@ const onClickBackRemoveDirection = (): void => {
 const listDirections = ref<IMenu[]>();
 
 try {
-  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
+  const result = await $fetch('/api/direction/read');
+
+  listDirections.value = await directionsToMenu(result);
 } catch (error: any) {
   console.error(error.message);
 }
@@ -257,9 +258,9 @@ try {
 const listDirectionsWithCategories = ref<IMenu[]>([]);
 
 try {
-  listDirectionsWithCategories.value = await directionsToMenu(
-    await apiReadDirections(config.public.apiUrl),
-  );
+  const result = await $fetch('/api/direction/read');
+
+  listDirectionsWithCategories.value = await directionsToMenu(result);
 } catch (error: any) {
   console.error(error.message);
 }
