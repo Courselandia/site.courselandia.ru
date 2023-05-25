@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="direction__media">
-      <img
+      <LazyImage
         :src="image"
         :alt="label"
         :title="label"
@@ -36,6 +36,8 @@
 </template>
 
 <script lang="ts" setup>
+import LazyImage from '@/components/atoms/LazyImage.vue';
+
 const props = defineProps({
   label: {
     type: String,
