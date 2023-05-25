@@ -97,6 +97,7 @@
         </h2>
 
         <Courses
+          v-if="courses"
           :courses="courses"
           class="mb-8"
         />
