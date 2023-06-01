@@ -11,9 +11,9 @@
             <p>
               Мы — каталог курсов IT сферы.
               Ищите и сравнивайте курсы по различным параметрам:
-              цена, продолжительность и много других критериев.
+              цена, продолжительность и другие критерии.
             </p>
-            <p>{{ currentYear !== foundYear ? `${foundYear}–${currentYear}` : foundYear }} Courcesalndia ©</p>
+            <p>{{ currentYear !== foundYear ? `${foundYear}–${currentYear}` : foundYear }} Courselandia ©</p>
           </div>
         </div>
         <div class="footer__side footer__side--right">
