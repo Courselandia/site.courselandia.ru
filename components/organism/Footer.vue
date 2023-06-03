@@ -61,7 +61,7 @@ import schoolsToMenu from '@/converts/schoolsToMenu';
 import IMenu from '@/interfaces/menu';
 
 const currentYear = ref(new Date().getFullYear());
-const foundYear = 2023; //
+const foundYear = 2023;
 
 const config = useRuntimeConfig();
 const menuSchools = ref<IMenu[]>();
