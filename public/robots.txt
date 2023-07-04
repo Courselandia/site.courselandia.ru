@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cache-flush
 
 Sitemap: https://courselandia.ru/sitemap.xml
 host: courselandia.ru
