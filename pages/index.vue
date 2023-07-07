@@ -139,7 +139,7 @@ import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCourses
 import directionsToMenu from '@/converts/directionsToMenu';
 import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
-
+//
 useHead({
   title: 'Агрегатор онлайн-курсов Courselandia',
   meta: [
