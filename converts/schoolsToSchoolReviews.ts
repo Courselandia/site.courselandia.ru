@@ -14,6 +14,9 @@ const schoolsToSchoolReviews = (
       link: `/reviews/${school.link}`,
       reviews: school.reviews_count,
       rating: school.rating,
+      text: school.text,
+      image: school.image_logo_id?.path || null,
+      site: school.site,
     };
   });
 

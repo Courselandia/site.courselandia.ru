@@ -6,4 +6,7 @@ export default interface IListSchoolReview {
   link: string,
   reviews: number,
   rating: number,
+  text: string | null;
+  image: string | null,
+  site: string | null;
 }
