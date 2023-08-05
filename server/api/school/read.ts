@@ -14,6 +14,8 @@ export default defineEventHandler(async (event): Promise<ISchool[]> => {
     baseURL: config.public.apiUrl,
   });
 
+  console.dir(response.data.data);
+
   await useStorage().setItem('redis:schools', response.data.data);
 
   return response.data.data;

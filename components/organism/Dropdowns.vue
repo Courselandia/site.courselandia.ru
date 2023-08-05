@@ -84,8 +84,8 @@
                   Все школы
                 </div>
                 <div class="dropdowns__description">
-                  Изучите реальные отзывы тех, кто уже обучался в онлайн-школах,
-                  сравнивайте курсы и найдите тот, что подходит вам лучше всего!
+                  Изучайте курсы онлайн-школ, сравнивайте их
+                  и надите тот, который лучше всего подходит для вас.
                 </div>
                 <!--
                 <div class="dropdowns__statistics">
@@ -134,9 +134,13 @@
               <div class="dropdowns__bck" />
               <div class="dropdowns__info-block">
                 <div class="dropdowns__title">
-                  Все школы
+                  Все отзывы о школах
                 </div>
-                <div class="dropdowns__description" />
+                <div class="dropdowns__description">
+                  Изучите реальные отзывы тех, кто уже обучался в онлайн-школах,
+                  сравнивайте курсы и найдите тот, что подходит вам лучше всего!
+                </div>
+                <!--
                 <div class="dropdowns__statistics">
                   <div class="dropdowns__statistics-item">
                     <div class="dropdowns__statistics-icon">
@@ -165,9 +169,10 @@
                     <div class="dropdowns__statistics-amount" />
                   </div>
                 </div>
+                -->
                 <div class="dropdowns__button">
                   <Button
-                    to="/"
+                    to="/reviews"
                     @click="onClick"
                   >
                     Все отзывы
@@ -177,6 +182,7 @@
             </div>
             <div class="dropdowns__side dropdowns__side--right">
               <ListSchoolReviews
+                v-if="listSchoolReviews"
                 :schools="listSchoolReviews"
                 @click="onClick"
               />
@@ -205,6 +211,7 @@ import ListSchoolReviews from '@/components/molecules/ListSchoolReviews.vue';
 import ListSchools from '@/components/molecules/ListSchools.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
+import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
 
@@ -256,25 +263,15 @@ const menuCourses = computed<IMenu[]>(() => [
 ]);
 
 const listSchools = ref<IMenu[]>();
+const listSchoolReviews = ref<IListSchoolReview[]>();
 
 try {
-  listSchools.value = schoolsToMenu(await $fetch('/api/school/read'));
+  const schools = await $fetch('/api/school/read');
+  listSchools.value = schoolsToMenu(schools);
+  listSchoolReviews.value = schoolsToSchoolReviews(schools);
 } catch (error: any) {
   console.error(error.message);
 }
-
-const listSchoolReviews = ref<IListSchoolReview[]>(
-  [
-    /*
-    {
-      label: 'Skillbox',
-      link: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4.5,
-    },
-     */
-  ],
-);
 
 const onClickDirection = (indx: number): void => {
   index.value = indx;

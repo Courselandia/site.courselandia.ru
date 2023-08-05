@@ -17,4 +17,5 @@ export default interface ISchool {
   created_at: string,
   updated_at: string,
   deleted_at: string | null,
+  reviews_count: number;
 }

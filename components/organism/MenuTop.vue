@@ -42,7 +42,7 @@
         />
       </div>
     </div>
-    <div class="menu-top__item" style="display: none">
+    <div class="menu-top__item">
       <div
         :class="`menu-top__link ${hover === 'reviews' ? 'menu-top__link--hover' : ''} ${(menuValue === 'reviews' || active === 'reviews') ? 'link--active' : ''}`"
         @click="onClick('reviews')"
