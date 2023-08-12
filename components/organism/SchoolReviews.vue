@@ -1,9 +1,23 @@
 <template>
   <div class="school-reviews">
+    <div>
+      {{ sort }}
+    </div>
     <div class="school-reviews__items">
       <div class="school-reviews__header">
         <div class="school-reviews__th school-reviews__th--school">
-          Школа
+          <span
+            class="school-reviews__sortable"
+            @click="onClickSort('label')"
+            @keyup="onClickSort('label')"
+          >
+            Школа
+          </span>
+          <SortDirection
+            field="label"
+            :sort-by="sort.sortBy"
+            :sort-order="sort.sortOrder as TSortOrder"
+          />
         </div>
         <div class="school-reviews__th school-reviews__th--description">
           Описание
@@ -12,10 +26,24 @@
           Курсы
         </div>
         <div class="school-reviews__th school-reviews__th--rating">
-          Рейтинг
+          <span
+            class="school-reviews__sortable"
+            @click="onClickSort('rating')"
+            @keyup="onClickSort('rating')"
+          >
+            Рейтинг
+          </span>
+          <SortDirection
+            field="rating"
+            :sort-by="sort.sortBy"
+            :sort-order="sort.sortOrder as TSortOrder"
+          />
         </div>
       </div>
-      <div class="school-reviews__body">
+      <div
+        v-if="listSchoolReviews"
+        class="school-reviews__body"
+      >
         <div
           v-for="(school, key) in listSchoolReviews"
           :key="key"
@@ -58,27 +86,105 @@
             >
               <Tag
                 v-if="school.amount_courses.direction_all"
+                :to="`/courses/school/${school.link}`"
                 bck="blue1"
                 cursor
               >
-                {{ school.amount_courses.direction_all }}
                 <Plural
-                  v-if="school.amount_courses.direction_programming"
-                  :number="school.amount_courses.direction_programming"
+                  v-if="school.amount_courses.direction_all"
+                  :number="school.amount_courses.direction_all"
                   :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
                 />
                 от {{ school.label }}
               </Tag>
               <Tag
                 v-if="school.amount_courses.direction_programming"
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.PROGRAMMING}`"
                 bck="blue1"
                 cursor
-                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.PROGRAMMING}`"
               >
                 Программирование
                 (<Plural
                   v-if="school.amount_courses.direction_programming"
                   :number="school.amount_courses.direction_programming"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />)
+              </Tag>
+              <Tag
+                v-if="school.amount_courses.direction_marketing"
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.MARKETING}`"
+                bck="blue1"
+                cursor
+              >
+                Маркетинг
+                (<Plural
+                  v-if="school.amount_courses.direction_marketing"
+                  :number="school.amount_courses.direction_marketing"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />)
+              </Tag>
+              <Tag
+                v-if="school.amount_courses.direction_design"
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.DESIGN}`"
+                bck="blue1"
+                cursor
+              >
+                Дизайн
+                (<Plural
+                  v-if="school.amount_courses.direction_design"
+                  :number="school.amount_courses.direction_design"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />)
+              </Tag>
+              <Tag
+                v-if="school.amount_courses.direction_business"
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.BUSINESS}`"
+                bck="blue1"
+                cursor
+              >
+                Бизнес и управление
+                (<Plural
+                  v-if="school.amount_courses.direction_business"
+                  :number="school.amount_courses.direction_business"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />)
+              </Tag>
+              <Tag
+                v-if="school.amount_courses.direction_analytics"
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.ANALYTICS}`"
+                bck="blue1"
+                cursor
+              >
+                Аналитика
+                (<Plural
+                  v-if="school.amount_courses.direction_analytics"
+                  :number="school.amount_courses.direction_analytics"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />)
+              </Tag>
+              <Tag
+                v-if="school.amount_courses.direction_games"
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.GAMES}`"
+                bck="blue1"
+                cursor
+              >
+                Игры
+                (<Plural
+                  v-if="school.amount_courses.direction_games"
+                  :number="school.amount_courses.direction_games"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />)
+              </Tag>
+              <Tag
+                v-if="school.amount_courses.direction_other"
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.OTHER}`"
+                bck="blue1"
+                cursor
+              >
+                Другие профессии
+                (<Plural
+                  v-if="school.amount_courses.direction_other"
+                  :number="school.amount_courses.direction_other"
                   :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
                 />)
               </Tag>
@@ -101,7 +207,7 @@
               </div>
               <div class="school-reviews__to-reviews">
                 <Button
-                  to=""
+                  :to="`/reviews/${school.link}`"
                 >
                   {{ school.reviews }}
                   <template v-if="school.reviews === 0 || school.reviews >= 5">
@@ -124,26 +230,110 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import Plural from '@/components/atoms/Plural.vue';
+import SortDirection from '@/components/atoms/SortDirection.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import EDirection from '@/enums/direction';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import ISort from '@/interfaces/sort';
+import ISchool from '@/interfaces/stores/school/school';
+import TSortOrder from '@/types/sortOrder';
 
-const listSchoolReviews = ref<IListSchoolReview[]>();
+const sortDefault: ISort = {
+  sortBy: 'rating',
+  sortOrder: 'DESC',
+};
+const sort = ref<ISort>(sortDefault);
+const schools = ref<Array<ISchool>>();
 
 try {
-  const schools = await $fetch('/api/school/read');
-  listSchoolReviews.value = schoolsToSchoolReviews(schools);
+  schools.value = await $fetch('/api/school/read');
 } catch (error: any) {
   console.error(error.message);
 }
+
+const listSchoolReviews = computed<IListSchoolReview[] | null>(() => {
+  if (!schools.value) {
+    return null;
+  }
+
+  let items = schoolsToSchoolReviews(schools.value);
+  items = items.sort((first: IListSchoolReview, second: IListSchoolReview) => {
+    if (sort.value.sortBy === 'label') {
+      if (sort.value.sortOrder === 'ASC') {
+        if (first.label < second.label) {
+          return -1;
+        }
+
+        if (first.label > second.label) {
+          return 1;
+        }
+      } else {
+        if (first.label > second.label) {
+          return -1;
+        }
+
+        if (first.label < second.label) {
+          return 1;
+        }
+      }
+    }
+
+    if (sort.value.sortBy === 'rating') {
+      if (sort.value.sortOrder === 'ASC') {
+        if (first.rating < second.rating) {
+          return -1;
+        }
+
+        if (first.rating > second.rating) {
+          return 1;
+        }
+      } else {
+        if (first.rating > second.rating) {
+          return -1;
+        }
+
+        if (first.rating < second.rating) {
+          return 1;
+        }
+      }
+    }
+
+    return 0;
+  });
+
+  return items;
+});
+
+const onClickSort = (field: string): void => {
+  if (sort.value?.sortBy === field) {
+    console.log('HERE!');
+    if (sort.value?.sortOrder === 'ASC') {
+      console.log('1');
+      sort.value.sortOrder = 'DESC';
+      sort.value.sortBy = field;
+    } else if (sort.value?.sortOrder === 'DESC') {
+      console.log('2');
+      sort.value = sortDefault;
+    } else {
+      console.log('3');
+      sort.value.sortOrder = 'ASC';
+      sort.value.sortBy = field;
+    }
+  } else {
+    sort.value = {
+      sortOrder: 'ASC',
+      sortBy: field,
+    };
+  }
+};
 </script>
 
 <style lang="scss">

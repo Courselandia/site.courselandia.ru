@@ -107,8 +107,8 @@
           v-for="(item, key) in menuCourses[direction].children"
           :key="key"
           class="menu-top-mobile__item"
-          @click="onClickLink(item.link)"
-          @keydown="onClickLink(item.link)"
+          @click="onClickLink(item.path)"
+          @keydown="onClickLink(item.path)"
         >
           {{ item.label }}
         </div>
@@ -136,8 +136,8 @@
           v-for="(item, key) in listSchools"
           :key="key"
           class="menu-top-mobile__item"
-          @click="onClickLink(item.link)"
-          @keydown="onClickLink(item.link)"
+          @click="onClickLink(item.path)"
+          @keydown="onClickLink(item.path)"
         >
           {{ item.label }}
         </div>
@@ -162,8 +162,8 @@
         v-for="(item, key) in listSchoolReviews"
         :key="key"
         class="menu-top-mobile__item menu-top-mobile__item--review"
-        @click="onClickLink(item.link)"
-        @keydown="onClickLink(item.link)"
+        @click="onClickLink(item.path)"
+        @keydown="onClickLink(item.path)"
       >
         <div class="menu-top-mobile__star">
           <Icon
@@ -268,7 +268,7 @@ try {
 const menuCourses = computed<IMenu[]>(() => [
   {
     label: 'Полный каталог',
-    link: '/courses',
+    path: '/courses',
     children: listDirections.value,
   },
   ...listDirectionsWithCategories.value,
@@ -287,7 +287,7 @@ const listSchoolReviews = ref<IListSchoolReview[]>(
     /*
     {
       label: 'Skillbox',
-      link: '/courses/skillbox',
+      path: '/courses/skillbox',
       reviews: 2000,
       rating: 4.5,
     },

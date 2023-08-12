@@ -1,5 +1,7 @@
 <template>
-  {{ number }} {{ word ? word : '' }}
+  <span>
+    {{ number }} {{ word ? word : '' }}
+  </span>
 </template>
 
 <script lang="ts" setup>

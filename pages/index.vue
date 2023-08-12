@@ -15,7 +15,7 @@
             <Tag
               v-for="(item, key) in listDirections"
               :key="key"
-              :to="item.link"
+              :to="item.path"
               border="grey2"
               bck-hover="blue1"
             >
@@ -84,7 +84,7 @@
             :image="item.image?.default"
             :amount="item.amount"
             :label="item.label"
-            :link="item.link"
+            :link="item.path"
           />
         </template>
       </Directions>

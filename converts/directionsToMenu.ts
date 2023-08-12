@@ -28,7 +28,7 @@ const directionsToMenu = async (
   if (addAllCourse) {
     result[result.length] = {
       label: 'Все курсы',
-      link: '/courses',
+      path: '/courses',
       image: images[0],
       amount: countAll,
     };
@@ -39,7 +39,7 @@ const directionsToMenu = async (
 
     result[index] = {
       label: direction.name,
-      link: `/courses/direction/${direction.link}`,
+      path: `/courses/direction/${direction.link}`,
       amount: direction.count,
       image: images[direction.id] || undefined,
       children: [],
@@ -52,7 +52,7 @@ const directionsToMenu = async (
         if (result[index].children !== undefined) {
           children[children.length] = {
             label: category.name,
-            link: `/courses/category/${category.link}`,
+            path: `/courses/category/${category.link}`,
           };
         }
       });

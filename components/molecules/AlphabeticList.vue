@@ -12,7 +12,7 @@
         <nuxt-link
           v-for="(item, key) in list"
           :key="key"
-          :to="item.link"
+          :to="item.path"
           class="alphabetic-list__item"
           @click="onClick"
         >

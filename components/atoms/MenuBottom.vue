@@ -6,7 +6,7 @@
       class="menu-bottom__item"
     >
       <nuxt-link
-        :to="item.link"
+        :to="item.path"
         class="menu-bottom__link"
       >
         {{ item.label }}

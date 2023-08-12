@@ -84,16 +84,16 @@ const menuInfo = ref<IMenu[]>([
   /*
   {
     label: 'Контактная информация',
-    link: '/contact-info',
+    path: '/contact-info',
   },
   */
   {
     label: 'Пользовательское соглашение',
-    link: '/agreement',
+    path: '/agreement',
   },
   {
     label: 'Политика конфиденциальности',
-    link: '/privacy-policy',
+    path: '/privacy-policy',
   },
 ]);
 

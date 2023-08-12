@@ -10,7 +10,7 @@
         v-if="brand.image"
         :key="key"
         :label="brand.label"
-        :url="brand.url"
+        :url="brand.path"
         :image="brand.image"
         :width="brand.width || undefined"
         :height="brand.height || undefined"

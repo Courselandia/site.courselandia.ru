@@ -37,7 +37,7 @@
                       :image="item.image?.default"
                       :amount="item.amount"
                       :label="item.label"
-                      :link="item.link"
+                      :link="item.path"
                       @click="onClick"
                     />
                   </template>
@@ -48,7 +48,7 @@
               >
                 <div class="dropdowns__actions">
                   <nuxt-link
-                    :to="menuCourses[index].link"
+                    :to="menuCourses[index].path"
                     class="dropdowns__action"
                     @click="onClick"
                   >
@@ -256,7 +256,7 @@ const listDirectionsWithCategories = ref<IMenu[]>(listDirections.value || []);
 const menuCourses = computed<IMenu[]>(() => [
   {
     label: 'Полный каталог',
-    link: '/courses',
+    path: '/courses',
     children: listDirections.value,
   },
   ...listDirectionsWithCategories.value,
