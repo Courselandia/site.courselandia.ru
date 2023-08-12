@@ -1,3 +1,4 @@
+import ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
 import TId from '@/types/id';
 
 export default interface IListSchoolReview {
@@ -9,4 +10,5 @@ export default interface IListSchoolReview {
   text: string | null;
   image: string | null,
   site: string | null;
+  amount_courses: ISchoolAmountCourses;
 }

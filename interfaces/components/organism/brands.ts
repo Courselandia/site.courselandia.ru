@@ -1,6 +1,6 @@
 export default interface IBrand {
     label: string
-    url: string,
+    path: string,
     image: string | null,
     width: number | null,
     height: number | null,

@@ -3,7 +3,7 @@
     <nuxt-link
       v-for="(school, key) in schools"
       :key="key"
-      :to="school.link"
+      :to="`/courses/school/${school.link}`"
       class="list-schools__item"
       @click="onClick"
     >

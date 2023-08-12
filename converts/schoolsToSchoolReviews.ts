@@ -11,12 +11,13 @@ const schoolsToSchoolReviews = (
 
     result[index] = {
       label: school.name,
-      link: `/reviews/${school.link}`,
+      link: school.link,
       reviews: school.reviews_count,
       rating: school.rating,
       text: school.text,
       image: school.image_logo_id?.path || null,
       site: school.site,
+      amount_courses: school.amount_courses,
     };
   });
 

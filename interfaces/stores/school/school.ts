@@ -1,5 +1,6 @@
 import IImage from '@/interfaces/stores/image/image';
 import IMetatag from '@/interfaces/stores/metatag/metatag';
+import ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
 import TId from '@/types/id';
 
 export default interface ISchool {
@@ -18,4 +19,5 @@ export default interface ISchool {
   updated_at: string,
   deleted_at: string | null,
   reviews_count: number;
+  amount_courses: ISchoolAmountCourses;
 }

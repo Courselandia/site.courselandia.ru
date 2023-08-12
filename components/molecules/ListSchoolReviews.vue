@@ -6,7 +6,7 @@
       class="list-school-reviews__item"
     >
       <nuxt-link
-        :to="school.link"
+        :to="`/reviews/${school.link}`"
         class="list-school-reviews__link"
         @click="onClick"
       >

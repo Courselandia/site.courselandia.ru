@@ -53,7 +53,36 @@
             </a>
           </div>
           <div class="school-reviews__td school-reviews__td--courses">
-            Курсы
+            <Tags
+              v-if="school.amount_courses.direction_all"
+            >
+              <Tag
+                v-if="school.amount_courses.direction_all"
+                bck="blue1"
+                cursor
+              >
+                {{ school.amount_courses.direction_all }}
+                <Plural
+                  v-if="school.amount_courses.direction_programming"
+                  :number="school.amount_courses.direction_programming"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />
+                от {{ school.label }}
+              </Tag>
+              <Tag
+                v-if="school.amount_courses.direction_programming"
+                bck="blue1"
+                cursor
+                :to="`/courses/school/${school.link}?filters[direction]=${EDirection.PROGRAMMING}`"
+              >
+                Программирование
+                (<Plural
+                  v-if="school.amount_courses.direction_programming"
+                  :number="school.amount_courses.direction_programming"
+                  :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                />)
+              </Tag>
+            </Tags>
           </div>
           <div class="school-reviews__td school-reviews__td--rating">
             <div class="school-reviews__reviews">
@@ -100,7 +129,11 @@ import { ref } from 'vue';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
+import Plural from '@/components/atoms/Plural.vue';
+import Tag from '@/components/atoms/Tag.vue';
+import Tags from '@/components/molecules/Tags.vue';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
+import EDirection from '@/enums/direction';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 
 const listSchoolReviews = ref<IListSchoolReview[]>();

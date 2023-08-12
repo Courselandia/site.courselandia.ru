@@ -11,7 +11,7 @@ const schoolsToBrand = (
 
     result[index] = {
       label: school.name,
-      url: `/courses/school/${school.link}`,
+      path: `/courses/school/${school.link}`,
       image: school.image_logo_id?.path || null,
       width: school.image_logo_id?.width || null,
       height: school.image_logo_id?.height || null,
