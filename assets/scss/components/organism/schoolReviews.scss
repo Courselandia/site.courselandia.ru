@@ -1,6 +1,10 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .school-reviews {
+  &__directions {
+    margin-bottom: 3.5rem;
+  }
+
   &__header {
     display: flex;
     border-bottom: 1px solid $grey2;

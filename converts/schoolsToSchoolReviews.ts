@@ -12,6 +12,7 @@ const schoolsToSchoolReviews = (
     result[index] = {
       label: school.name,
       link: school.link,
+      path: `/courses/school/${school.link}`,
       reviews: school.reviews_count,
       rating: school.rating,
       text: school.text,

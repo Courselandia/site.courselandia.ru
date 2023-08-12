@@ -1,7 +1,88 @@
 <template>
   <div class="school-reviews">
-    <div>
-      {{ sort }}
+    <div class="school-reviews__directions">
+      <Tags>
+        <Tag
+          bck="white"
+          :border="direction === null ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(null)"
+        >
+          Все направления
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.PROGRAMMING ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.PROGRAMMING)"
+        >
+          Программирование
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.MARKETING ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.MARKETING)"
+        >
+          Маркетинг
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.DESIGN ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.DESIGN)"
+        >
+          Дизайн
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.BUSINESS ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.BUSINESS)"
+        >
+          Бизнес и управление
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.ANALYTICS ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.ANALYTICS)"
+        >
+          Аналитика
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.GAMES ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.GAMES)"
+        >
+          Игры
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.OTHER ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.OTHER)"
+        >
+          Другие профессии
+        </Tag>
+      </Tags>
     </div>
     <div class="school-reviews__items">
       <div class="school-reviews__header">
@@ -207,7 +288,7 @@
               </div>
               <div class="school-reviews__to-reviews">
                 <Button
-                  :to="`/reviews/${school.link}`"
+                  :to="`/reviews/${school.path}`"
                 >
                   {{ school.reviews }}
                   <template v-if="school.reviews === 0 || school.reviews >= 5">
@@ -230,7 +311,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import {
+  computed,
+  ref,
+  watch,
+} from 'vue';
+import {
+  useRoute,
+} from 'vue-router';
 
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -244,20 +332,70 @@ import EDirection from '@/enums/direction';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import ISort from '@/interfaces/sort';
 import ISchool from '@/interfaces/stores/school/school';
+import { TOrder } from '@/types/order';
 import TSortOrder from '@/types/sortOrder';
 
 const sortDefault: ISort = {
   sortBy: 'rating',
   sortOrder: 'DESC',
 };
-const sort = ref<ISort>(sortDefault);
+const route = useRoute();
+const sortByCurrent = route.query.sortBy as string;
+const sortOrderCurrent = route.query.sortOrder as string;
+const directionCurrent = route.query.direction as string;
+
+const sort = ref<ISort>({
+  sortBy: sortByCurrent || sortDefault.sortBy,
+  sortOrder: sortOrderCurrent as TOrder || sortDefault.sortOrder,
+});
 const schools = ref<Array<ISchool>>();
+const direction = ref<EDirection | null>(Number(directionCurrent) as unknown as EDirection || null);
 
 try {
   schools.value = await $fetch('/api/school/read');
 } catch (error: any) {
   console.error(error.message);
 }
+
+const toHistory = (): void => {
+  let url = '/reviews';
+  const queries: Array<string> = [];
+
+  if (
+    sort.value.sortBy !== sortDefault.sortBy
+    || sort.value.sortOrder !== sortDefault.sortOrder
+  ) {
+    queries[queries.length] = `sortBy=${sort.value.sortBy}&sortOrder=${sort.value.sortOrder}`;
+  }
+
+  if (direction.value) {
+    queries[queries.length] = `direction=${direction.value}`;
+  }
+
+  if (queries.length) {
+    url += `?${queries.join('&')}`;
+  }
+
+  const newState = {
+    current: url,
+  };
+
+  window.history.pushState(
+    newState,
+    '',
+    url,
+  );
+};
+
+watch(sort, () => {
+  toHistory();
+}, {
+  deep: true,
+});
+
+watch(direction, () => {
+  toHistory();
+});
 
 const listSchoolReviews = computed<IListSchoolReview[] | null>(() => {
   if (!schools.value) {
@@ -309,21 +447,49 @@ const listSchoolReviews = computed<IListSchoolReview[] | null>(() => {
     return 0;
   });
 
+  if (direction.value) {
+    items = items.filter((school: IListSchoolReview) => {
+      if (direction.value === EDirection.PROGRAMMING) {
+        return !!school.amount_courses.direction_programming;
+      }
+
+      if (direction.value === EDirection.MARKETING) {
+        return !!school.amount_courses.direction_marketing;
+      }
+
+      if (direction.value === EDirection.DESIGN) {
+        return !!school.amount_courses.direction_marketing;
+      }
+
+      if (direction.value === EDirection.BUSINESS) {
+        return !!school.amount_courses.direction_business;
+      }
+
+      if (direction.value === EDirection.ANALYTICS) {
+        return !!school.amount_courses.direction_analytics;
+      }
+
+      if (direction.value === EDirection.GAMES) {
+        return !!school.amount_courses.direction_games;
+      }
+
+      if (direction.value === EDirection.OTHER) {
+        return !!school.amount_courses.direction_other;
+      }
+
+      return false;
+    });
+  }
+
   return items;
 });
 
 const onClickSort = (field: string): void => {
   if (sort.value?.sortBy === field) {
-    console.log('HERE!');
     if (sort.value?.sortOrder === 'ASC') {
-      console.log('1');
       sort.value.sortOrder = 'DESC';
       sort.value.sortBy = field;
-    } else if (sort.value?.sortOrder === 'DESC') {
-      console.log('2');
-      sort.value = sortDefault;
     } else {
-      console.log('3');
       sort.value.sortOrder = 'ASC';
       sort.value.sortBy = field;
     }
@@ -333,6 +499,10 @@ const onClickSort = (field: string): void => {
       sortBy: field,
     };
   }
+};
+
+const onSelectDirection = (directionSelected: EDirection | null): void => {
+  direction.value = directionSelected;
 };
 </script>
 
