@@ -194,9 +194,9 @@ import { useRouter } from 'vue-router';
 import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
+import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
-import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 
 const props = defineProps({
   show: {
