@@ -30,7 +30,6 @@
         />
       </div>
       <div
-        style="display: none"
         class="menu-top-mobile__item"
         @click="onClick('reviews')"
         @keydown="onClick('reviews')"
@@ -162,8 +161,8 @@
         v-for="(item, key) in listSchoolReviews"
         :key="key"
         class="menu-top-mobile__item menu-top-mobile__item--review"
-        @click="onClickLink(item.path)"
-        @keydown="onClickLink(item.path)"
+        @click="onClickLink(`/reviews/${item.link}`)"
+        @keydown="onClickLink(`/reviews/${item.link}`)"
       >
         <div class="menu-top-mobile__star">
           <Icon
@@ -197,6 +196,7 @@ import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
+import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 
 const props = defineProps({
   show: {
@@ -282,18 +282,15 @@ try {
   console.error(error.message);
 }
 
-const listSchoolReviews = ref<IListSchoolReview[]>(
-  [
-    /*
-    {
-      label: 'Skillbox',
-      path: '/courses/skillbox',
-      reviews: 2000,
-      rating: 4.5,
-    },
-     */
-  ],
-);
+const listSchoolReviews = ref<IListSchoolReview[]>();
+
+try {
+  const schools = await $fetch('/api/school/read');
+  listSchools.value = schoolsToMenu(schools);
+  listSchoolReviews.value = schoolsToSchoolReviews(schools);
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const onClickLink = (link: string): void => {
   router.push(link);

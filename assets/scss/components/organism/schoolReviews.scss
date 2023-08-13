@@ -3,12 +3,41 @@
 .school-reviews {
   &__directions {
     margin-bottom: 3.5rem;
+
+    @media all and (max-width: 1200px) {
+      margin-bottom: 1.5rem;
+      overflow: scroll;
+
+      &::-webkit-scrollbar,
+      &::-webkit-scrollbar-thumb,
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      .tags {
+        flex-wrap: nowrap !important;
+
+        .tag {
+          &__label {
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    @media all and (max-width: 768px) {
+      margin-bottom: 0;
+    }
   }
 
   &__header {
     display: flex;
     border-bottom: 1px solid $grey2;
     padding-bottom: 0.5rem;
+
+    @media all and (max-width: 1200px) {
+      display: none;
+    }
 
     .school-reviews {
       &__th {
@@ -18,33 +47,105 @@
     }
   }
 
+  &__group {
+    display: flex;
+    width: 50%;
+
+    @media all and (max-width: 1200px) {
+      flex-wrap: wrap;
+
+      &:first-child {
+        padding-right: 1.5rem;
+      }
+
+      &:last-child {
+        padding-left: 1.5rem;
+      }
+    }
+
+    @media all and (max-width: 768px) {
+      width: 100%;
+
+      &:first-child,
+      &:last-child {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+
+    &:first-child {
+      @media all and (max-width: 768px) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
   &__td,
   &__th {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
 
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-    }
-
     &--school {
-      width: 20%;
+      width: 50%;
+
+      @media all and (max-width: 1200px) {
+        width: 100%;
+      }
     }
 
     &--description {
-      width: 30%;
+      width: 50%;
+
+      @media all and (max-width: 1200px) {
+        width: 100%;
+      }
     }
 
     &--courses {
-      width: 30%;
+      width: 50%;
+
+      @media all and (max-width: 1200px) {
+        width: 100%;
+      }
     }
 
     &--rating {
-      width: 20%;
+      width: 50%;
+
+      @media all and (max-width: 1200px) {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  &__td {
+    &--school,
+    &--description,
+    &--courses,
+    &--rating {
+      @media all and (max-width: 1200px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    &--school {
+      @media all and (max-width: 1200px) {
+        margin-bottom: 2rem;
+      }
+    }
+
+    &--courses {
+      @media all and (max-width: 1200px) {
+        order: 2;
+      }
+    }
+
+    &--rating {
+      @media all and (max-width: 1200px) {
+        order: 1;
+      }
     }
   }
 
@@ -63,6 +164,10 @@
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
     border-bottom: 1px solid $grey2;
+
+    @media all and (max-width: 768px) {
+      flex-direction: column;
+    }
 
     &:last-child {
       border-bottom-width: 0;
@@ -94,12 +199,34 @@
     text-align: center;
     flex-direction: column;
     align-items: center;
+
+    @media all and (max-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+  }
+
+  &__content-rating {
+    @media all and (max-width: 768px) {
+      width: 30%;
+    }
   }
 
   &__rating {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+
+    @media all and (max-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__to-reviews {
+    @media all and (max-width: 768px) {
+      width: 70%;
+    }
   }
 
   &__rating-value {
