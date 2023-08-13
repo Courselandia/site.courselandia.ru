@@ -11,6 +11,8 @@ import {
   toRefs,
 } from 'vue';
 
+import plural from '@/helpers/plural';
+
 const props = defineProps({
   number: {
     type: Number,
@@ -28,33 +30,6 @@ const {
 } = toRefs(props);
 
 const word = computed<string | null>(() => {
-  let max: number = 0;
-  let index: string | number | null = null;
-
-  Object.keys(conditions.value)
-    .forEach((condition: string | number) => {
-      if (condition.toString().indexOf('+') >= 0) {
-        const conditionNumber = Number(condition.toString()
-          .replace('+', ''));
-
-        if (number.value >= conditionNumber && conditionNumber > max) {
-          max = conditionNumber;
-          index = condition;
-        }
-      } else {
-        const conditionNumber = Number(condition);
-
-        if (number.value >= conditionNumber && conditionNumber > max) {
-          max = conditionNumber;
-          index = condition;
-        }
-      }
-    });
-
-  if (index) {
-    return conditions.value[index];
-  }
-
-  return null;
+  return plural(number?.value, conditions.value);
 });
 </script>

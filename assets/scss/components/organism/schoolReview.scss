@@ -1,0 +1,26 @@
+.school-review {
+  &__content {
+    position: relative;
+
+    @media all and (max-width: 1200px) {
+      padding-right: 0;
+    }
+
+    @media all and (max-width: 768px) {
+      padding-right: 1rem;
+    }
+  }
+
+  &__info {
+    padding-right: 420px;
+    padding-top: 7.5rem;
+
+    @media all and (max-width: 1200px) {
+      padding-right: 0;
+    }
+
+    @media all and (max-width: 576px) {
+      padding-top: 3.5rem;
+    }
+  }
+}

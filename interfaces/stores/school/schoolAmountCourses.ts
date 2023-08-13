@@ -1,5 +1,5 @@
 export default interface ISchoolAmountCourses {
-  direction_all: number,
+  all: number,
   direction_games: number,
   direction_other: number,
   direction_design: number,

@@ -164,17 +164,17 @@
           <div class="school-reviews__group">
             <div class="school-reviews__td school-reviews__td--courses">
               <Tags
-                v-if="school.amount_courses.direction_all"
+                v-if="school.amount_courses.all"
               >
                 <Tag
-                  v-if="school.amount_courses.direction_all"
+                  v-if="school.amount_courses.all"
                   :to="`/courses/school/${school.link}`"
                   bck="blue1"
                   cursor
                 >
                   <Plural
-                    v-if="school.amount_courses.direction_all"
-                    :number="school.amount_courses.direction_all"
+                    v-if="school.amount_courses.all"
+                    :number="school.amount_courses.all"
                     :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
                   />
                   от {{ school.label }}
@@ -291,7 +291,7 @@
                 </div>
                 <div class="school-reviews__to-reviews">
                   <Button
-                    :to="`/reviews/${school.path}`"
+                    :to="`/reviews/${school.link}`"
                   >
                     {{ school.reviews }}
                     <template v-if="school.reviews === 0 || school.reviews >= 5">

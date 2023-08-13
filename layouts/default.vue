@@ -40,6 +40,8 @@ const setActive = (): void => {
     active.value = 'schools';
   } else if (route.path.indexOf('/courses') !== -1) {
     active.value = 'courses';
+  } else if (route.path.indexOf('/reviews') !== -1) {
+    active.value = 'reviews';
   } else {
     active.value = undefined;
   }

@@ -26,6 +26,7 @@ type TIcon =
   'minus-circle' |
   'checkbox' |
   'calendar' |
-  'note';
+  'note' |
+  'message';
 
 export default TIcon;

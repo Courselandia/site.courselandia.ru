@@ -1,5 +1,6 @@
 import IImage from '@/interfaces/stores/image/image';
 import IMetatag from '@/interfaces/stores/metatag/metatag';
+import ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
 import TId from '@/types/id';
 
 export default interface ISchoolLink {
@@ -18,4 +19,6 @@ export default interface ISchoolLink {
   image_site_id: IImage | null;
   site: number | null,
   rating: number | null,
+  reviews_count: number;
+  amount_courses: ISchoolAmountCourses;
 }

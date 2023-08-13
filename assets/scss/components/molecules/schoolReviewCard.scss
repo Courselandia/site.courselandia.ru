@@ -1,0 +1,142 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.school-review-card {
+  position: absolute;
+  right: 0;
+  width: 440px;
+  bottom: 0;
+
+  @media all and (max-width: 1600px) {
+    right: 50px;
+  }
+
+  @media all and (max-width: 1200px) {
+    position: static;
+    width: auto;
+  }
+
+  @media all and (max-width: 576px) {
+    display: none;
+  }
+
+  &--scroll {
+    top: 0;
+    bottom: auto;
+
+    @media all and (max-width: 1200px) {
+      display: none;
+    }
+  }
+
+  &__box {
+    z-index: 5;
+    border-radius: 1rem;
+    box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
+    width: 400px;
+    position: absolute;
+    background-color: $white;
+    bottom: 0;
+    padding: 1.5rem;
+
+    @media all and (max-width: 1200px) {
+      display: none;
+    }
+
+    &--scroll {
+      position: fixed;
+      top: 150px;
+      bottom: auto;
+
+      @media all and (max-width: 1200px) {
+        display: none;
+      }
+    }
+  }
+
+  &__row {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+
+    &--horizontal {
+      display: flex;
+      align-items: center;
+    }
+
+    &--line {
+      border-bottom: 1px solid $grey1;
+    }
+  }
+
+  &__content-logo {
+    flex-grow: 1;
+  }
+
+  &__logo {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    line-height: 0;
+  }
+
+  &__amount-review {
+    display: flex;
+    flex-grow: 0;
+    text-align: right;
+  }
+
+  &__amount-review-icon {
+    margin-right: 0.5rem;
+  }
+
+  &__content-statistic,
+  &__content-rating {
+    width: 50%;
+  }
+
+  &__content-statistic {
+    padding-right: 1rem;
+  }
+
+  &__content-rating {
+    padding-left: 1rem;
+  }
+
+  &__statistic {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+  }
+
+  &__statistic-amount {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    width: 20px;
+  }
+
+  &__statistic-item {
+    flex-grow: 1;
+  }
+
+  &__statistic-bar {
+    border: 1px solid $blue2;
+    background-color: $blue2;
+    border-radius: 0.75rem;
+    height: 24px;
+    cursor: pointer;
+
+    &--empty {
+      background-color: transparent;
+    }
+  }
+
+  &__statistic-cancel {
+    line-height: 0;
+    padding-left: 0.5rem;
+    width: 25px;
+  }
+
+  &__statistic-cancel-icon {
+    cursor: pointer;
+  }
+}
