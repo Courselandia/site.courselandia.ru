@@ -15,17 +15,9 @@
     width: auto;
   }
 
-  @media all and (max-width: 576px) {
-    display: none;
-  }
-
   &--scroll {
     top: 0;
     bottom: auto;
-
-    @media all and (max-width: 1200px) {
-      display: none;
-    }
   }
 
   &__box {
@@ -39,7 +31,17 @@
     padding: 1.5rem;
 
     @media all and (max-width: 1200px) {
-      display: none;
+      position: static;
+      width: 100%;
+      margin-top: 3rem;
+      box-shadow: 0 16px 54px rgba(0, 0, 0, 0.064);
+    }
+
+    @media all and (max-width: 768px) {
+      position: static;
+      width: 100%;
+      margin-top: 1rem;
+      box-shadow: 0 16px 54px rgba(0, 0, 0, 0.064);
     }
 
     &--scroll {
@@ -48,14 +50,13 @@
       bottom: auto;
 
       @media all and (max-width: 1200px) {
-        display: none;
+        position: static;
       }
     }
   }
 
   &__row {
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
 
     &--horizontal {
       display: flex;
@@ -64,6 +65,7 @@
 
     &--line {
       border-bottom: 1px solid $grey1;
+      margin-bottom: 1rem;
     }
   }
 
@@ -99,6 +101,23 @@
 
   &__content-rating {
     padding-left: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__content-rating-number {
+    font-weight: 800;
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+
+    @media all and (max-width: 768px) {
+      font-size: 3rem;
+      line-height: 3rem;
+    }
+  }
+
+  &__content-rating-icon {
+    margin-left: 0.6875rem;
   }
 
   &__statistic {
@@ -138,5 +157,73 @@
 
   &__statistic-cancel-icon {
     cursor: pointer;
+  }
+
+  &__statistics {
+    display: flex;
+    align-items: center;
+  }
+
+  &__block-statistic {
+    width: 50%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__block-statistic-icon {
+    margin-right: 0.75rem;
+  }
+
+  &__block-statistic-label {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  &__action {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__others-label {
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $grey4;
+    margin-bottom: 1rem;
+  }
+
+  &__others-school {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__others-school-rating {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding-right: 0.25rem;
+    width: 30px;
+  }
+
+  &__others-school-icon {
+    margin-right: 1rem;
+    margin-bottom: 2px;
+  }
+
+  &__others-school-name {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__others-school-reviews {
+    flex-grow: 1;
+    text-align: right;
   }
 }

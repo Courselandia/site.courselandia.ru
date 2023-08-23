@@ -27,6 +27,8 @@ type TIcon =
   'checkbox' |
   'calendar' |
   'note' |
-  'message';
+  'message' |
+  'sort-asc' |
+  'sort-desc';
 
 export default TIcon;

@@ -11,6 +11,10 @@
   &__side {
     width: 670px;
 
+    @media all and (max-width: 1250px) {
+      width: 640px;
+    }
+
     @media all and (max-width: 1200px) {
       width: auto;
     }

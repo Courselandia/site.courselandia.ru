@@ -1,8 +1,5 @@
 <template>
   <div class="rate">
-    <div class="rate__amount">
-      {{ value }}
-    </div>
     <div
       v-for="star in goldenStars"
       :key="star"

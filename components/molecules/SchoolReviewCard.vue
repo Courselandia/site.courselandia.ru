@@ -27,7 +27,7 @@
             <Plural
               v-if="school.reviews_count"
               :number="school.reviews_count"
-              :conditions="{ 1: 'отзыв', '2+': 'отзыва', '5+': 'отзывов' }"
+              :conditions="conditions"
             />
           </div>
         </div>
@@ -153,7 +153,122 @@
           </div>
         </div>
         <div class="school-review-card__content-rating">
-          HERE
+          <div class="school-review-card__content-rating-number">
+            4.5
+          </div>
+          <Icon
+            class="school-review-card__content-rating-icon"
+            name="star"
+            :size="[32, 32]"
+            color="blue2"
+          />
+        </div>
+      </div>
+      <div class="school-review-card__row school-review-card__row--line">
+        <div class="school-review-card__block-statistics">
+          <div class="school-review-card__block-statistic">
+            <Icon
+              name="video"
+              :size="[24, 24]"
+              color="black"
+              class="school-review-card__block-statistic-icon"
+            />
+            <div class="school-review-card__block-statistic-label">
+              Курсов: <b>497</b>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="school-review-card__row">
+        <div class="school-review-card__actions">
+          <div class="school-review-card__action">
+            <Button
+              wide
+            >
+              Перейти на сайт
+            </Button>
+          </div>
+          <div class="school-review-card__action">
+            <Button
+              wide
+              type="secondary"
+            >
+              Все курсы Skillbox
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div class="school-review-card__others">
+        <div class="school-review-card__others-label">
+          Отзывы о других школах
+        </div>
+        <div class="school-review-card__others-schools">
+          <div class="school-review-card__others-school">
+            <div class="school-review-card__others-school-rating">
+              3.5
+            </div>
+            <Icon
+              name="star"
+              :size="[22, 22]"
+              color="blue2"
+              class="school-review-card__others-school-icon"
+            />
+            <div class="school-review-card__others-school-name">
+              Skypro
+            </div>
+            <div class="school-review-card__others-school-reviews">
+              <nuxt-link
+                to="/"
+                class="link link--no-line"
+              >
+                4000 {{ plural(4000, conditions) }}
+              </nuxt-link>
+            </div>
+          </div>
+          <div class="school-review-card__others-school">
+            <div class="school-review-card__others-school-rating">
+              3.5
+            </div>
+            <Icon
+              name="star"
+              :size="[22, 22]"
+              color="blue2"
+              class="school-review-card__others-school-icon"
+            />
+            <div class="school-review-card__others-school-name">
+              Skypro
+            </div>
+            <div class="school-review-card__others-school-reviews">
+              <nuxt-link
+                to="/"
+                class="link link--no-line"
+              >
+                4000 {{ plural(4000, conditions) }}
+              </nuxt-link>
+            </div>
+          </div>
+          <div class="school-review-card__others-school">
+            <div class="school-review-card__others-school-rating">
+              3.5
+            </div>
+            <Icon
+              name="star"
+              :size="[22, 22]"
+              color="blue2"
+              class="school-review-card__others-school-icon"
+            />
+            <div class="school-review-card__others-school-name">
+              Skypro
+            </div>
+            <div class="school-review-card__others-school-reviews">
+              <nuxt-link
+                to="/"
+                class="link link--no-line"
+              >
+                4000 {{ plural(4000, conditions) }}
+              </nuxt-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -163,9 +278,11 @@
 <script lang="ts" setup>
 import { PropType, ref } from 'vue';
 
+import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import Plural from '@/components/atoms/Plural.vue';
+import plural from '@/helpers/plural';
 import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 
 const props = defineProps({
@@ -179,6 +296,13 @@ const props = defineProps({
     default: true,
   },
 });
+
+const conditions = {
+  0: 'отзывов',
+  1: 'отзыв',
+  '2+': 'отзыва',
+  '5+': 'отзывов',
+};
 
 const emit = defineEmits({
   filter: (_: number | null) => true,

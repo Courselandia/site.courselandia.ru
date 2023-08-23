@@ -1,14 +1,18 @@
 <template>
   <div class="list-schools">
-    <nuxt-link
+    <div
       v-for="(school, key) in schools"
       :key="key"
-      :to="`/courses/school/${school.link}`"
       class="list-schools__item"
-      @click="onClick"
     >
-      {{ school.label }}
-    </nuxt-link>
+      <nuxt-link
+        :to="`/courses/school/${school.link}`"
+        class="list-schools__link"
+        @click="onClick"
+      >
+        {{ school.label }}
+      </nuxt-link>
+    </div>
   </div>
 </template>
 

@@ -8,14 +8,14 @@ const plural = (number: number, conditions: Record<string | number, string>): st
         const conditionNumber = Number(condition.toString()
           .replace('+', ''));
 
-        if (number >= conditionNumber && conditionNumber > max) {
+        if (number >= conditionNumber && conditionNumber >= max) {
           max = conditionNumber;
           index = condition;
         }
       } else {
         const conditionNumber = Number(condition);
 
-        if (number >= conditionNumber && conditionNumber > max) {
+        if (number >= conditionNumber && conditionNumber >= max) {
           max = conditionNumber;
           index = condition;
         }

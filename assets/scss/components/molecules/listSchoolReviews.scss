@@ -14,7 +14,7 @@
   &__link {
     text-decoration: none;
     color: $black;
-    display: flex;
+    display: inline-flex;
     align-items: center;
 
     &:hover {

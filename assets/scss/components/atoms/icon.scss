@@ -125,6 +125,17 @@
     &-message {
       mask-image: url("@/assets/images/icons/message.svg");
     }
+
+    &-sort {
+      &-asc,
+      &-desc {
+        mask-image: url("@/assets/images/icons/sort.svg");
+      }
+
+      &-desc {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &--color {

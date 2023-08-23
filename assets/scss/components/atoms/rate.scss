@@ -9,13 +9,13 @@
     mask-size: 100% auto;
     mask-repeat: no-repeat;
     mask-position: center center;
-    background-color: #F4CC40;
-    width: 18px;
-    height: 18px;
+    background-color: $blue2;
+    width: 28px;
+    height: 28px;
     margin-right: 0.25rem;
 
     &--grey {
-      background-color: #DFDFEB;
+      background-color: $grey2;
     }
   }
 
