@@ -20,5 +20,10 @@ export default interface ISchoolLink {
   site: number | null,
   rating: number | null,
   reviews_count: number;
+  reviews_1_star_count: number;
+  reviews_2_stars_count: number;
+  reviews_3_stars_count: number;
+  reviews_4_stars_count: number;
+  reviews_5_stars_count: number;
   amount_courses: ISchoolAmountCourses;
 }

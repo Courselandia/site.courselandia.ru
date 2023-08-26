@@ -209,21 +209,29 @@
     line-height: 1.5rem;
     padding-right: 0.25rem;
     width: 30px;
+    min-width: 30px;
   }
 
   &__others-school-icon {
-    margin-right: 1rem;
+    padding-right: 1rem;
     margin-bottom: 2px;
+    line-height: 0;
+    width: calc(24px + 1rem);
+    min-width: calc(24px + 1rem);
   }
 
   &__others-school-name {
     font-size: 1rem;
-    line-height: 1.5rem;
+    line-height: 1.3rem;
     font-weight: 700;
   }
 
   &__others-school-reviews {
     flex-grow: 1;
     text-align: right;
+
+    .link {
+      white-space: nowrap
+    }
   }
 }

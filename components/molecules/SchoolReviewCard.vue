@@ -41,7 +41,8 @@
             <div class="school-review-card__statistic-item">
               <div
                 :class="`school-review-card__statistic-bar ${ratingCurrent !== 5 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
-                style="width: 50%"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_5_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_5_stars_count}`"
                 @click="onClickFilter(5)"
                 @keyup="onClickFilter(5)"
               />
@@ -64,7 +65,8 @@
             <div class="school-review-card__statistic-item">
               <div
                 :class="`school-review-card__statistic-bar ${ratingCurrent !== 4 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
-                style="width: 30%"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_4_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_4_stars_count}`"
                 @click="onClickFilter(4)"
                 @keyup="onClickFilter(4)"
               />
@@ -87,7 +89,8 @@
             <div class="school-review-card__statistic-item">
               <div
                 :class="`school-review-card__statistic-bar ${ratingCurrent !== 3 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
-                style="width: 20%"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_3_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_3_stars_count}`"
                 @click="onClickFilter(3)"
                 @keyup="onClickFilter(3)"
               />
@@ -110,7 +113,8 @@
             <div class="school-review-card__statistic-item">
               <div
                 :class="`school-review-card__statistic-bar ${ratingCurrent !== 2 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
-                style="width: 10%"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_2_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_2_stars_count}`"
                 @click="onClickFilter(2)"
                 @keyup="onClickFilter(2)"
               />
@@ -133,7 +137,8 @@
             <div class="school-review-card__statistic-item">
               <div
                 :class="`school-review-card__statistic-bar ${ratingCurrent !== 1 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
-                style="width: 70%"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_1_star_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_1_star_count}`"
                 @click="onClickFilter(1)"
                 @keyup="onClickFilter(1)"
               />
@@ -154,7 +159,7 @@
         </div>
         <div class="school-review-card__content-rating">
           <div class="school-review-card__content-rating-number">
-            4.5
+            {{ school.rating }}
           </div>
           <Icon
             class="school-review-card__content-rating-icon"
@@ -174,7 +179,7 @@
               class="school-review-card__block-statistic-icon"
             />
             <div class="school-review-card__block-statistic-label">
-              Курсов: <b>497</b>
+              Курсов: <b>{{ school.amount_courses.all }}</b>
             </div>
           </div>
         </div>
@@ -183,6 +188,10 @@
         <div class="school-review-card__actions">
           <div class="school-review-card__action">
             <Button
+              :to="school.site as string"
+              link="link"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
               wide
             >
               Перейти на сайт
@@ -190,6 +199,7 @@
           </div>
           <div class="school-review-card__action">
             <Button
+              :to="`/courses/school/${school.link}`"
               wide
               type="secondary"
             >
@@ -203,69 +213,31 @@
           Отзывы о других школах
         </div>
         <div class="school-review-card__others-schools">
-          <div class="school-review-card__others-school">
+          <div
+            v-for="(otherSchool, index) in otherSchools"
+            :key="index"
+            class="school-review-card__others-school"
+          >
             <div class="school-review-card__others-school-rating">
-              3.5
+              {{ otherSchool.rating }}
             </div>
-            <Icon
-              name="star"
-              :size="[22, 22]"
-              color="blue2"
-              class="school-review-card__others-school-icon"
-            />
+            <div class="school-review-card__others-school-icon">
+              <Icon
+                name="star"
+                :size="[22, 22]"
+                color="blue2"
+              />
+            </div>
             <div class="school-review-card__others-school-name">
-              Skypro
+              {{ otherSchool.name }}
             </div>
             <div class="school-review-card__others-school-reviews">
               <nuxt-link
-                to="/"
+                :to="`/courses/school/${otherSchool.link}`"
                 class="link link--no-line"
               >
-                4000 {{ plural(4000, conditions) }}
-              </nuxt-link>
-            </div>
-          </div>
-          <div class="school-review-card__others-school">
-            <div class="school-review-card__others-school-rating">
-              3.5
-            </div>
-            <Icon
-              name="star"
-              :size="[22, 22]"
-              color="blue2"
-              class="school-review-card__others-school-icon"
-            />
-            <div class="school-review-card__others-school-name">
-              Skypro
-            </div>
-            <div class="school-review-card__others-school-reviews">
-              <nuxt-link
-                to="/"
-                class="link link--no-line"
-              >
-                4000 {{ plural(4000, conditions) }}
-              </nuxt-link>
-            </div>
-          </div>
-          <div class="school-review-card__others-school">
-            <div class="school-review-card__others-school-rating">
-              3.5
-            </div>
-            <Icon
-              name="star"
-              :size="[22, 22]"
-              color="blue2"
-              class="school-review-card__others-school-icon"
-            />
-            <div class="school-review-card__others-school-name">
-              Skypro
-            </div>
-            <div class="school-review-card__others-school-reviews">
-              <nuxt-link
-                to="/"
-                class="link link--no-line"
-              >
-                4000 {{ plural(4000, conditions) }}
+                {{ otherSchool.amount_courses.all }}
+                {{ plural(otherSchool.amount_courses.all, conditions) }}
               </nuxt-link>
             </div>
           </div>
@@ -284,6 +256,7 @@ import LazyImage from '@/components/atoms/LazyImage.vue';
 import Plural from '@/components/atoms/Plural.vue';
 import plural from '@/helpers/plural';
 import ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import ISchool from '@/interfaces/stores/school/school';
 
 const props = defineProps({
   school: {
@@ -297,6 +270,10 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits({
+  filter: (_: number | null) => true,
+});
+
 const conditions = {
   0: 'отзывов',
   1: 'отзыв',
@@ -304,9 +281,29 @@ const conditions = {
   '5+': 'отзывов',
 };
 
-const emit = defineEmits({
-  filter: (_: number | null) => true,
-});
+const sortSchools = (schools: Array<ISchool>): Array<ISchool> => {
+  const result = schools.sort((first: ISchool, second: ISchool) => {
+    if (first.rating > second.rating) {
+      return -1;
+    }
+
+    if (first.rating < second.rating) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  return result;
+};
+
+const otherSchools = ref<Array<ISchool>>();
+
+try {
+  otherSchools.value = sortSchools(await $fetch('/api/school/read')).slice(0, 4);
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const ratingCurrent = ref<number | null>(null);
 
@@ -324,6 +321,11 @@ const onClickCancelFilter = (): void => {
   ratingCurrent.value = null;
   emit('filter', null);
 };
+
+const getWidthStatsBar = (
+  total: number,
+  forParticularStars: number,
+): number => Math.round((forParticularStars * 100) / total);
 </script>
 
 <style lang="scss">
