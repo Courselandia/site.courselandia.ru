@@ -19,7 +19,7 @@ export const apiReadProfessions = async (
 
   const resultProfessions = await useAsyncData('professions', async () => loadProfessions());
 
-  return resultProfessions.data.value?.data;
+  return resultProfessions.data.value?.data || [];
 };
 
 export const apiGetProfession = async (

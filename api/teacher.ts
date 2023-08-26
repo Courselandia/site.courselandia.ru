@@ -19,7 +19,7 @@ export const apiReadTeachers = async (
 
   const resultTeachers = await useAsyncData('teachers', async () => loadTeachers());
 
-  return resultTeachers.data.value?.data;
+  return resultTeachers.data.value?.data || [];
 };
 
 export const apiGetTeacher = async (

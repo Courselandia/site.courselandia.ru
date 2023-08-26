@@ -19,7 +19,7 @@ export const apiReadSkills = async (
 
   const resultSkills = await useAsyncData('skills', async () => loadSkills());
 
-  return resultSkills.data.value?.data;
+  return resultSkills.data.value?.data || [];
 };
 
 export const apiGetSkill = async (

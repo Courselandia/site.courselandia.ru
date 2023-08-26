@@ -19,7 +19,7 @@ export const apiReadTools = async (
 
   const resultTools = await useAsyncData('tools', async () => loadTools());
 
-  return resultTools.data.value?.data;
+  return resultTools.data.value?.data || [];
 };
 
 export const apiGetTool = async (

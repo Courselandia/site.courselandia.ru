@@ -10,9 +10,9 @@ import {
 } from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
 import ICourse from '@/interfaces/stores/course/course';
+import ICourseResponse from '@/interfaces/stores/course/courseResponse';
 import course from '@/stores/course';
 import TId from '@/types/id';
-import ICourseResponse from "~/interfaces/stores/course/courseResponse";
 
 export const apiReadCourses = async (
   apiUrl: string,
