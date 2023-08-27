@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
-import IFilters from '@/interfaces/filters';
 import {
   IResponseItems,
 } from '@/interfaces/response';
@@ -18,18 +17,22 @@ export default defineStore('review', {
   actions: {
     async readReviews(
       baseUrl: string,
-      school: TId,
+      school: string,
       offset: number = 0,
       limit: number = 36,
       sorts: ISorts | null = null,
-      filters: IFilters | null = null,
+      rating: number | null = null,
     ): Promise<IResponseItems<IReview>> {
       try {
-        const additional: Record<string, TId> | null = {};
+        const additional: Record<string, string | number> | null = {};
 
-        additional.school_id = school;
+        additional.link = school;
 
-        const query = toQuery(offset, limit, sorts, filters, additional);
+        if (rating) {
+          additional.rating = rating;
+        }
+
+        const query = toQuery(offset, limit, sorts, null, additional);
         const response = await axios.get<IResponseItems<IReview>>(`/api/private/site/review/read?${query}`, {
           baseURL: baseUrl,
         });

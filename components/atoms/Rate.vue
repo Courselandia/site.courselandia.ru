@@ -14,7 +14,10 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue';
+import {
+  computed,
+  toRefs,
+} from 'vue';
 
 const props = defineProps({
   value: {
@@ -27,8 +30,8 @@ const {
   value,
 } = toRefs(props);
 
-const goldenStars = Math.round(value.value);
-const greyStars = 5 - goldenStars;
+const goldenStars = computed(() => Math.round(value.value));
+const greyStars = computed(() => 5 - goldenStars.value);
 </script>
 
 <style lang="scss">

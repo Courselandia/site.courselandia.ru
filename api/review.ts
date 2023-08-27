@@ -1,19 +1,17 @@
-import IFilters from '@/interfaces/filters';
 import {
   IResponseItems,
 } from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
 import IReview from '@/interfaces/stores/review/review';
 import review from '@/stores/review';
-import TId from '@/types/id';
 
 export const apiReadReviews = async (
   apiUrl: string,
-  school: TId,
+  school: string,
   offset: number = 0,
   limit: number = 36,
   sorts: ISorts | null = null,
-  filters: IFilters | null = null,
+  rating: number | null = null,
 ): Promise<IResponseItems<IReview> | null> => {
   const {
     readReviews,
@@ -26,7 +24,7 @@ export const apiReadReviews = async (
     offset,
     limit,
     sorts,
-    filters,
+    rating,
   );
 
   const resultReviews = await useAsyncData('reviews', async () => loadReviews());
