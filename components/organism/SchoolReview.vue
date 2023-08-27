@@ -20,6 +20,7 @@
         <SchoolReviewCard
           :school="itemLinkSchool"
           :scroll="scroll"
+          :rating="ratingCurrent"
           @filter="onFilter"
         />
       </div>
@@ -58,84 +59,90 @@
             </div>
           </div>
         </div>
-        <Loader
-          :active="loading"
-          color="white-transparency"
+        <ScrollLoader
+          :stop="stopScrollLoader"
+          :distance="1000"
+          @load="onLoadScrolling"
         >
-          <div class="school-review__reviews">
-            <div
-              v-for="(review, index) in reviews"
-              :key="index"
-              class="school-review__review"
-            >
-              <Rate
-                :value="review.rating"
-                class="school-review__review-rate"
-              />
+          <Loader
+            :active="loading"
+            color="white-transparency"
+          >
+            <div class="school-review__reviews">
               <div
-                v-if="review.title"
-                class="school-review__review-title"
+                v-for="(review, index) in reviews"
+                :key="index"
+                class="school-review__review"
               >
-                {{ review.title }}
-              </div>
-              <div
-                v-if="review.review"
-                class="school-review__review-text"
-                v-html="rnToBr(review.review)"
-              />
-              <template
-                v-if="review.advantages"
-              >
-                <div class="school-review__review-sub-title">
-                  Достоинства
-                </div>
-                <div
-                  class="school-review__review-text"
-                  v-html="rnToBr(review.advantages)"
+                <Rate
+                  :value="review.rating"
+                  class="school-review__review-rate"
                 />
-              </template>
-              <template
-                v-if="review.disadvantages"
-              >
-                <div class="school-review__review-sub-title">
-                  Недостатки
-                </div>
                 <div
-                  class="school-review__review-text"
-                  v-html="rnToBr(review.disadvantages)"
-                />
-              </template>
-              <div
-                v-if="review.name || review.created_at || review.source"
-                class="school-review__review-info"
-              >
-                <div class="school-review__review-avatar">
-                  <Animal />
-                </div>
-                <div class="school-review__review-name-and-date">
-                  <div
-                    v-if="review.name"
-                    class="school-review__review-name"
-                  >
-                    {{ review.name }}
-                  </div>
-                  <div
-                    v-if="review.created_at"
-                    class="school-review__review-date"
-                  >
-                    {{ dayjs.utc(review.created_at).tz(dayjs.tz.guess()).format('D MMMM YYYY') }}
-                  </div>
-                </div>
-                <div
-                  v-if="review.source"
-                  class="school-review__review-source"
+                  v-if="review.title"
+                  class="school-review__review-title"
                 >
-                  {{ getDomain(review.source) }}
+                  {{ review.title }}
+                </div>
+                <div
+                  v-if="review.review"
+                  class="school-review__review-text"
+                  v-html="rnToBr(review.review)"
+                />
+                <template
+                  v-if="review.advantages"
+                >
+                  <div class="school-review__review-sub-title">
+                    Достоинства
+                  </div>
+                  <div
+                    class="school-review__review-text"
+                    v-html="rnToBr(review.advantages)"
+                  />
+                </template>
+                <template
+                  v-if="review.disadvantages"
+                >
+                  <div class="school-review__review-sub-title">
+                    Недостатки
+                  </div>
+                  <div
+                    class="school-review__review-text"
+                    v-html="rnToBr(review.disadvantages)"
+                  />
+                </template>
+                <div
+                  v-if="review.name || review.created_at || review.source"
+                  class="school-review__review-info"
+                >
+                  <div class="school-review__review-avatar">
+                    <Animal />
+                  </div>
+                  <div class="school-review__review-name-and-date">
+                    <div
+                      v-if="review.name"
+                      class="school-review__review-name"
+                    >
+                      {{ review.name }}
+                    </div>
+                    <div
+                      v-if="review.created_at"
+                      class="school-review__review-date"
+                    >
+                      {{ dayjs.utc(review.created_at).tz(dayjs.tz.guess()).format('D MMMM YYYY') }}
+                    </div>
+                  </div>
+                  <div
+                    v-if="review.source"
+                    class="school-review__review-source"
+                  >
+                    {{ getDomain(review.source) }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Loader>
+          </Loader>
+        </ScrollLoader>
       </div>
     </div>
   </div>
@@ -153,28 +160,65 @@ import Bubbles from '@/components/atoms/Bubbles.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Loader from '@/components/atoms/Loader.vue';
 import Rate from '@/components/atoms/Rate.vue';
+import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import SchoolReviewCard from '@/components/molecules/SchoolReviewCard.vue';
 import SchoolReviewHeader from '@/components/molecules/SchoolReviewHeader.vue';
 import { rnToBr } from '@/helpers/format';
 import plural from '@/helpers/plural';
+import { IResponseItems } from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
 import IReview from '@/interfaces/stores/review/review';
 import school from '@/stores/school';
 import { TOrder } from '@/types/order';
 
+const route = useRoute();
+
+const {
+  sort,
+  rating,
+} = route.query;
+
+let ratingQuery;
+
+if (rating && Number(rating)) {
+  ratingQuery = Number(rating);
+}
+
+const getDefaultSort = (sortQuery: string | null): ISorts => {
+  if (sortQuery === 'date_asc') {
+    return {
+      created_at: 'ASC',
+    };
+  }
+
+  if (sortQuery === 'rating_asc') {
+    return {
+      rating: 'ASC',
+    };
+  }
+
+  if (sortQuery === 'rating_desc') {
+    return {
+      rating: 'DESC',
+    };
+  }
+
+  return {
+    created_at: 'DESC',
+  };
+};
+
 const scroll = ref(true);
 const contentRef = ref<HTMLElement | null>(null);
 const config = useRuntimeConfig();
-const route = useRoute();
-const offset = 0;
 const limit = 20;
+const currentPage = ref(1);
 const total = ref<number>();
 const reviews = ref<Array<IReview>>();
 const loading = ref(false);
-const ratingCurrent = ref();
-const sorts = ref<ISorts>({
-  created_at: 'DESC',
-});
+const ratingCurrent = ref(ratingQuery || null);
+const stopScrollLoader = ref(false);
+const sorts = ref<ISorts>(getDefaultSort(sort as string));
 
 const {
   link,
@@ -184,7 +228,7 @@ try {
   const response = await apiReadReviews(
     config.public.apiUrl,
     link as string,
-    offset,
+    (currentPage.value - 1) * limit,
     limit,
     sorts.value,
     ratingCurrent.value,
@@ -194,6 +238,45 @@ try {
 } catch (error: any) {
   console.log(error.message);
 }
+
+const setUrlQuery = (): void => {
+  const queries: Array<string> = [];
+
+  if (currentPage.value && currentPage.value !== 1) {
+    queries.push(`page=${currentPage.value}`);
+  }
+
+  if (sorts.value) {
+    if (sorts.value.created_at && sorts.value.created_at === 'ASC') {
+      queries.push('sort=date_asc');
+    } else if (sorts.value.rating && sorts.value.rating === 'ASC') {
+      queries.push('sort=rating_asc');
+    } else if (sorts.value.rating && sorts.value.rating === 'DESC') {
+      queries.push('sort=rating_desc');
+    }
+  }
+
+  if (ratingCurrent.value) {
+    queries.push(`rating=${ratingCurrent.value}`);
+  }
+
+  const query = queries.join('&');
+  let url = `/reviews/${link}`;
+
+  if (query) {
+    url = `${url}?${query}`;
+  }
+
+  const newState = {
+    current: url,
+  };
+
+  window.history.pushState(
+    newState,
+    '',
+    url,
+  );
+};
 
 const setScroll = (): void => {
   const card = document.querySelector('#school-review-card');
@@ -209,28 +292,34 @@ const setScroll = (): void => {
   }
 };
 
-const load = async (): Promise<void> => {
+const load = async (callback: Function): Promise<void> => {
   try {
     const response = await apiReadReviews(
       config.public.apiUrl,
       link as string,
-      offset,
+      (currentPage.value - 1) * limit,
       limit,
       sorts.value,
       ratingCurrent.value,
     );
-    reviews.value = response?.data;
-    total.value = response?.total;
+
+    callback(response);
   } catch (error: any) {
     console.log(error.message);
   }
 };
 
-const onFilter = async (rating: number | null): Promise<void> => {
-  ratingCurrent.value = rating;
+const onFilter = async (rtng: number | null): Promise<void> => {
+  ratingCurrent.value = rtng;
+  currentPage.value = 1;
 
   loading.value = true;
-  await load();
+  await load((response: IResponseItems<IReview>) => {
+    reviews.value = response?.data;
+    total.value = response?.total;
+    stopScrollLoader.value = false;
+    setUrlQuery();
+  });
   loading.value = false;
 };
 
@@ -239,8 +328,25 @@ const onSort = async (field: string, order: TOrder): Promise<void> => {
   sorts.value[field] = order;
 
   loading.value = true;
-  await load();
+  await load((response: IResponseItems<IReview>) => {
+    reviews.value = response?.data;
+    total.value = response?.total;
+    setUrlQuery();
+  });
   loading.value = false;
+};
+
+const onLoadScrolling = async (): Promise<void> => {
+  currentPage.value++;
+
+  await load((response: IResponseItems<IReview>) => {
+    reviews.value = reviews.value?.concat(response?.data);
+    setUrlQuery();
+
+    if ((currentPage.value * limit) >= (total.value || 0)) {
+      stopScrollLoader.value = true;
+    }
+  });
 };
 
 const getDomain = (url: string): string => {

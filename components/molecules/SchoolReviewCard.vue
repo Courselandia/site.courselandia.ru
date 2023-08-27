@@ -233,11 +233,11 @@
             </div>
             <div class="school-review-card__others-school-reviews">
               <nuxt-link
-                :to="`/courses/school/${otherSchool.link}`"
+                :to="`/reviews/${otherSchool.link}`"
                 class="link link--no-line"
               >
-                {{ otherSchool.amount_courses.all }}
-                {{ plural(otherSchool.amount_courses.all, conditions) }}
+                {{ otherSchool.reviews_count }}
+                {{ plural(otherSchool.reviews_count, conditions) }}
               </nuxt-link>
             </div>
           </div>
@@ -248,7 +248,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType, ref } from 'vue';
+import { PropType, ref, toRefs } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -268,7 +268,16 @@ const props = defineProps({
     required: false,
     default: true,
   },
+  rating: {
+    type: Number,
+    required: false,
+    default: null,
+  },
 });
+
+const {
+  rating,
+} = toRefs(props);
 
 const emit = defineEmits({
   filter: (_: number | null) => true,
@@ -300,16 +309,19 @@ const sortSchools = (schools: Array<ISchool>): Array<ISchool> => {
 const otherSchools = ref<Array<ISchool>>();
 
 try {
-  otherSchools.value = sortSchools(await $fetch('/api/school/read')).slice(0, 4);
+  const fetchedOtherSchools = await $fetch('/api/school/read');
+  otherSchools.value = sortSchools(
+    fetchedOtherSchools.filter((school: ISchool) => !!school.reviews_count),
+  ).slice(0, 4);
 } catch (error: any) {
   console.error(error.message);
 }
 
-const ratingCurrent = ref<number | null>(null);
+const ratingCurrent = ref<number | null>(rating.value);
 
-const onClickFilter = (rating: number): void => {
-  if (rating !== ratingCurrent.value) {
-    ratingCurrent.value = rating;
+const onClickFilter = (rtg: number): void => {
+  if (rtg !== ratingCurrent.value) {
+    ratingCurrent.value = rtg;
   } else {
     ratingCurrent.value = null;
   }

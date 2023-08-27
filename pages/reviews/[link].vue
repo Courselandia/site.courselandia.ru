@@ -7,7 +7,7 @@ import SchoolReview from '@/components/organism/SchoolReview.vue';
 
 definePageMeta({
   middleware: [
-    'school',
+    'school-reviews',
   ],
 });
 </script>
