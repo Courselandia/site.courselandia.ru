@@ -39,7 +39,8 @@
     margin-right: 0.75rem;
     border-right: 1px solid $grey2;
     padding-right: 0.75rem;
-    width: 40px;
+    width: 50px;
+    min-width: 50px;
   }
 
   &__label {
