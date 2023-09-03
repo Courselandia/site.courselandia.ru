@@ -234,7 +234,10 @@
 </template>
 
 <script lang="ts" setup>
+// eslint-disable-next-line import/no-unresolved
+import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
 import { storeToRefs } from 'pinia';
+import { ListItem } from 'schema-dts';
 import {
   computed,
   ref,
@@ -616,9 +619,9 @@ const setMeta = (): void => {
   let canonical;
 
   if (process.client) {
-    canonical = `https://courselandia.ru${window.location.pathname}`;
+    canonical = `${config.public.siteUrl}${window.location.pathname}`;
   } else {
-    canonical = `https://courselandia.ru${route.path}`;
+    canonical = `${config.public.siteUrl}${route.path}`;
   }
 
   useHead({
@@ -1411,6 +1414,35 @@ watch(route, async () => {
   }
 });
 setMeta();
+
+const itemListElements = computed<ListItem[]>(
+  () => Object.values(courses.value).map((course: ICourse, index: number) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: `${config.public.siteUrl}${course.link}`,
+  })),
+);
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: itemListElements.value,
+});
+
+const teacherJsonLd = computed<JsonLD | JsonLDFunc | undefined>(() => {
+  if (itemLinkTeacher.value) {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: itemLinkTeacher.value?.name,
+      jobTitle: 'Эксперт',
+    };
+  }
+
+  return undefined;
+});
+
+useJsonld(teacherJsonLd.value);
 </script>
 
 <style lang="scss">

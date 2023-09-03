@@ -36,6 +36,8 @@ module.exports = {
     defineNuxtPlugin: true,
     useFetch: true,
     useStorage: true,
+    useMeta: true,
+    useJsonld: true,
   },
   settings: {
     'import/resolver': {

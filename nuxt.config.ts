@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   ],
   modules: [
     '@pinia/nuxt',
+    'nuxt-jsonld',
     [
       'yandex-metrika-module-nuxt3',
       {
@@ -30,6 +31,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_API_URL,
+      siteUrl: process.env.NUXT_SITE_URL,
       development: process.env.NODE_ENV === 'development',
       googleMeasurementId: process.env.GOOGLE_MEASUREMENT_ID,
       yandexMeasurementId: process.env.YANDEX_METRIKA_ID,
@@ -79,11 +81,11 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image:width',
-          content: '620',
+          content: '1200',
         },
         {
           property: 'og:image:height',
-          content: '620',
+          content: '630',
         },
         {
           property: 'og:description',

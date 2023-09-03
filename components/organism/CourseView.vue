@@ -153,6 +153,8 @@
 </template>
 
 <script lang="ts" setup>
+// eslint-disable-next-line import/no-unresolved
+import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
 import {
   computed,
   onMounted,
@@ -178,8 +180,10 @@ import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
 import faqsStoreToFaqsComponent from '@/converts/faqsStoreToFaqsComponent';
+import { brToRn, stripTags } from '@/helpers/format';
 import ICourse from '@/interfaces/components/molecules/course';
 import IFaqComponent from '@/interfaces/components/molecules/faq';
+import ITeacher from '@/interfaces/components/molecules/teacher';
 
 const config = useRuntimeConfig();
 const scroll = ref(true);
@@ -282,6 +286,123 @@ const hasSalaries = computed((): boolean => {
 
   return has;
 });
+
+const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {
+  const instructors = courseItem.value?.teachers?.map((item: ITeacher) => ({
+    '@type': 'Person',
+    name: item.label,
+    jobTitle: 'Эксперт',
+    image: null,
+    url: `${config.public.siteUrl}${item.link}`,
+  }));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: courseItem.value?.name,
+    description: stripTags(brToRn(courseItem.value?.text || '')),
+    url: courseItem.value?.link ? `${config.public.siteUrl}${courseItem.value?.link}` : '',
+    inLanguage: courseItem.value?.language,
+    isAccessibleForFree: (!courseItem.value?.price && !courseItem.value?.price_recurrent && !courseItem.value?.price_old) ? 'http://schema.org/False' : 'http://schema.org/True',
+    provider: {
+      '@type': 'Organization',
+      name: courseItem.value?.school?.name,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: courseItem.value?.rating,
+      ratingCount: '1',
+    },
+    hasCourseInstance: {
+      '@type': 'CourseInstance',
+      name: courseItem.value?.school?.name,
+      description: stripTags(brToRn(courseItem.value?.text || '')),
+      courseMode: [
+        courseItem.value?.online ? 'online' : 'offline',
+      ],
+      offers: {
+        '@type': 'Offer',
+        url: courseItem.value?.link ? `${config.public.siteUrl}${courseItem.value?.link}` : '',
+        name: courseItem.value?.school?.name,
+        availability: 'OnlineOnly',
+        price: courseItem.value?.price || 0,
+        priceCurrency: courseItem.value?.currency,
+      },
+      instructor: instructors,
+    },
+  };
+});
+
+useJsonld(courseJsonLd.value);
+
+const breadcrumbsJsonLd = computed<JsonLD | JsonLDFunc>(() => {
+  const [direction] = courseItem.value?.directions || [];
+  const [category] = courseItem.value?.categories || [];
+
+  const result: JsonLD | JsonLDFunc = {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        name: 'Courselandia',
+        position: 1,
+        item: {
+          '@type': 'Thing',
+          '@id': config.public.siteUrl,
+        },
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        item: {
+          '@type': 'WebPage',
+          '@id': `${config.public.siteUrl}${courseItem.value?.school?.link}`,
+          name: courseItem.value?.school?.name,
+        },
+      },
+    ],
+  };
+
+  if (direction) {
+    const position = result.itemListElement.length;
+
+    result.itemListElement[position] = {
+      '@type': 'ListItem',
+      position: position + 1,
+      item: {
+        '@type': 'WebPage',
+        '@id': `${config.public.siteUrl}${direction.link}`,
+        name: direction.name,
+      },
+    };
+  }
+
+  if (category) {
+    const position = result.itemListElement.length;
+
+    result.itemListElement[position] = {
+      '@type': 'ListItem',
+      position: position + 1,
+      item: {
+        '@type': 'WebPage',
+        '@id': `${config.public.siteUrl}${category.link}`,
+        name: category.label,
+      },
+    };
+  }
+
+  const position = result.itemListElement.length;
+
+  result.itemListElement[position] = {
+    '@type': 'ListItem',
+    position: position + 1,
+    name: courseItem.value?.header,
+  };
+
+  return result;
+});
+
+useJsonld(breadcrumbsJsonLd.value);
 </script>
 
 <style lang="scss">

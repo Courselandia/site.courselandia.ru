@@ -40,7 +40,7 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 5 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
+                :class="`school-review-card__statistic-bar ${ratingCurrent !== 5 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_5_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_5_stars_count}`"
                 @click="onClickFilter(5)"
@@ -64,7 +64,7 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 4 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
+                :class="`school-review-card__statistic-bar ${ratingCurrent !== 4 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_4_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_4_stars_count}`"
                 @click="onClickFilter(4)"
@@ -88,7 +88,7 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 3 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
+                :class="`school-review-card__statistic-bar ${ratingCurrent !== 3 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_3_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_3_stars_count}`"
                 @click="onClickFilter(3)"
@@ -112,7 +112,7 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 2 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
+                :class="`school-review-card__statistic-bar ${ratingCurrent !== 2 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_2_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_2_stars_count}`"
                 @click="onClickFilter(2)"
@@ -136,7 +136,7 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 1 && ratingCurrent !== null ? 'school-review-card__statistic-bar--empty' : ''}`"
+                :class="`school-review-card__statistic-bar ${ratingCurrent !== 1 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_1_star_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_1_star_count}`"
                 @click="onClickFilter(1)"

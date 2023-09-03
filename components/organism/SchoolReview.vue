@@ -20,7 +20,7 @@
         <SchoolReviewCard
           :school="itemLinkSchool"
           :scroll="scroll"
-          :rating="ratingCurrent"
+          :rating="ratingCurrent || 0"
           @filter="onFilter"
         />
       </div>
@@ -150,8 +150,10 @@
 
 <script lang="ts" setup>
 import dayjs from 'dayjs';
+// eslint-disable-next-line import/no-unresolved
+import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
 import { storeToRefs } from 'pinia';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { apiReadReviews } from '@/api/review';
@@ -163,7 +165,7 @@ import Rate from '@/components/atoms/Rate.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import SchoolReviewCard from '@/components/molecules/SchoolReviewCard.vue';
 import SchoolReviewHeader from '@/components/molecules/SchoolReviewHeader.vue';
-import { rnToBr } from '@/helpers/format';
+import { brToRn, rnToBr, stripTags } from '@/helpers/format';
 import plural from '@/helpers/plural';
 import { IResponseItems } from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
@@ -389,6 +391,82 @@ useHead({
       content: description,
     },
   ],
+});
+
+const reviewsJsonld = computed<JsonLD[] | JsonLDFunc[]>((): JsonLD[] | JsonLDFunc[] => {
+  const res = Object.values(reviews.value || []).map<JsonLD | JsonLDFunc>(
+    (review: IReview): JsonLD | JsonLDFunc => {
+      let desc = '';
+
+      if (review.review) {
+        desc += review.review;
+      }
+
+      if (review.advantages) {
+        if (desc) {
+          desc += '\n';
+        }
+
+        desc += `Достоинства: ${review.advantages}`;
+      }
+
+      if (review.disadvantages) {
+        if (desc) {
+          desc += '\n';
+        }
+
+        desc += `Недостатки: ${review.disadvantages}`;
+      }
+
+      const result: JsonLD | JsonLDFunc = {
+        '@context': 'https://schema.org',
+        '@type': 'Review',
+        name: review.title,
+        description: desc,
+        itemReviewed: {
+          '@type': 'MediaObject',
+          name: itemLinkSchool.value?.name,
+        },
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: review.rating,
+          bestRating: 5,
+          worstRating: 1,
+        },
+      };
+
+      if (review.name) {
+        result.author = {
+          '@type': 'Person',
+          name: review.name,
+        };
+      }
+
+      return result;
+    },
+  );
+
+  return res;
+});
+
+reviewsJsonld.value.forEach((reviewJsonld) => {
+  useJsonld(reviewJsonld);
+});
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  category: 'Онлайн курсы',
+  name: itemLinkSchool.value?.name,
+  image: itemLinkSchool.value?.image_logo_id?.path,
+  description: stripTags(brToRn(itemLinkSchool.value?.text || '')),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: itemLinkSchool.value?.rating || 0,
+    reviewCount: itemLinkSchool.value?.reviews_count,
+    bestRating: '5',
+    worstRating: '1',
+  },
 });
 </script>
 

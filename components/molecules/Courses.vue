@@ -19,9 +19,12 @@
 </template>
 
 <script lang="ts" setup>
+import { ListItem } from 'schema-dts';
 import {
   computed,
-  PropType, useSlots,
+  PropType,
+  toRefs,
+  useSlots,
 } from 'vue';
 
 import Course from '@/components/molecules/Course.vue';
@@ -29,7 +32,7 @@ import ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   courses: {
-    type: Array<ICourse>,
+    type: Array as PropType<Array<ICourse>>,
     required: true,
   },
   columns: {
@@ -39,6 +42,8 @@ const props = defineProps({
   },
 });
 
+const config = useRuntimeConfig();
+const { courses } = toRefs(props);
 const slots = useSlots();
 const hasSlot = (name: string) => !!slots[name];
 
@@ -54,6 +59,20 @@ const nameClass = computed(() => {
   }
 
   return classes.join(' ');
+});
+
+const itemListElements = computed<ListItem[]>(
+  () => Object.values(courses.value).map((course: ICourse, index: number) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: `${config.public.siteUrl}${course.link}`,
+  })),
+);
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: itemListElements.value,
 });
 </script>
 

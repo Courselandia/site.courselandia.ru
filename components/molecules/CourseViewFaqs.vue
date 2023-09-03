@@ -17,8 +17,11 @@
 </template>
 
 <script lang="ts" setup>
+import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
 import {
+  computed,
   PropType,
+  toRefs,
 } from 'vue';
 
 import Faq from '@/components/atoms/Faq.vue';
@@ -31,6 +34,27 @@ const props = defineProps({
     required: true,
   },
 });
+
+const { faqs } = toRefs(props);
+
+const faqsJsonLd = computed<JsonLD | JsonLDFunc>(() => {
+  const mainEntities = Object.values(faqs.value).map((faq: IFaqComponent) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  }));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: mainEntities,
+  };
+});
+
+useJsonld(faqsJsonLd.value);
 </script>
 
 <style lang="scss">

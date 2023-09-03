@@ -31,6 +31,7 @@ import Dropdowns from '@/components/organism/Dropdowns.vue';
 import Footer from '@/components/organism/Footer.vue';
 import Header from '@/components/organism/Header.vue';
 
+const config = useRuntimeConfig();
 const route = useRoute();
 const menu = ref('');
 const active = ref<string | undefined>('');
@@ -46,6 +47,16 @@ const setActive = (): void => {
     active.value = undefined;
   }
 };
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Courselandia',
+  description: 'Courselandia — это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментам. Найдите свой курс быстро и легко.',
+  image: 'https://api.courselandia.ru/storage/uploaded/images/prev.webp',
+  logo: 'https://api.courselandia.ru/storage/uploaded/images/logo.webp',
+  url: config.public.siteUrl,
+});
 
 watch(route, () => {
   setActive();
