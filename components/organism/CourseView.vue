@@ -340,6 +340,7 @@ const breadcrumbsJsonLd = computed<JsonLD | JsonLDFunc>(() => {
   const [category] = courseItem.value?.categories || [];
 
   const result: JsonLD | JsonLDFunc = {
+    '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       {
