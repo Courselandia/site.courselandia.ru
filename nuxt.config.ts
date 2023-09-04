@@ -77,7 +77,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image',
-          content: 'https://api.courselandia.ru/storage/uploaded/images/prev.webp',
+          content: 'https://api.courselandia.ru/storage/uploaded/images/prev.png',
         },
         {
           property: 'og:image:width',
