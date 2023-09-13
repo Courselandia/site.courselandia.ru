@@ -1,5 +1,6 @@
 import IFilters from '@/interfaces/filters';
 import { IResponseItem, IResponseItems } from '@/interfaces/response';
+import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import IFilterCategory from '@/interfaces/stores/course/filterCategory';
 import category from '@/stores/category';
 import TId from '@/types/id';
@@ -41,13 +42,13 @@ export const apiGetCategory = async (
 export const apiLinkCategory = async (
   apiUrl: string,
   link: string,
-): Promise<IFilterCategory | null> => {
+): Promise<ICategoryLink | null> => {
   const {
     linkCategory,
   } = category();
 
   const loadCategory = async ():
-    Promise<IResponseItem<IFilterCategory | null>> => linkCategory(apiUrl, link);
+    Promise<IResponseItem<ICategoryLink | null>> => linkCategory(apiUrl, link);
 
   const resultCategory = await useAsyncData('category', async () => loadCategory());
 

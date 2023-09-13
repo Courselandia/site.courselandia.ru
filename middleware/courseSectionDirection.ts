@@ -1,5 +1,6 @@
 import { storeToRefs } from 'pinia';
 
+import { apiLinkDirection } from '@/api/direction';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -13,12 +14,10 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     link,
   } = to.params;
 
+  const config = useRuntimeConfig();
+
   try {
-    const result = await $fetch('/api/direction/link', {
-      params: {
-        link: link as string,
-      },
-    });
+    const result = await apiLinkDirection(config.public.apiUrl, link as string);
 
     const { itemLinkCategory } = storeToRefs(category());
     const { itemLinkDirection } = storeToRefs(direction());
@@ -38,6 +37,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
 
     return !!result;
   } catch (error: any) {
+    console.dir(error);
     return false;
   }
 });

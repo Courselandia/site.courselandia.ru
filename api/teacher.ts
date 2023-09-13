@@ -1,6 +1,7 @@
 import IFilters from '@/interfaces/filters';
 import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
+import ITeacherLink from '@/interfaces/stores/course/teacherLink';
 import teacher from '@/stores/teacher';
 import TId from '@/types/id';
 
@@ -41,13 +42,13 @@ export const apiGetTeacher = async (
 export const apiLinkTeacher = async (
   apiUrl: string,
   link: string,
-): Promise<IFilterTeacher | null> => {
+): Promise<ITeacherLink | null> => {
   const {
     linkTeacher,
   } = teacher();
 
   const loadTeacher = async ():
-    Promise<IResponseItem<IFilterTeacher | null>> => linkTeacher(apiUrl, link);
+    Promise<IResponseItem<ITeacherLink | null>> => linkTeacher(apiUrl, link);
 
   const resultTeacher = await useAsyncData('teacher', async () => loadTeacher());
 

@@ -1,5 +1,6 @@
 import { storeToRefs } from 'pinia';
 
+import { apiLinkTeacher } from '@/api/teacher';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -13,12 +14,10 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     link,
   } = to.params;
 
+  const config = useRuntimeConfig();
+
   try {
-    const result = await $fetch('/api/teacher/link', {
-      params: {
-        link: link as string,
-      },
-    });
+    const result = await apiLinkTeacher(config.public.apiUrl, link as string);
 
     const { itemLinkCategory } = storeToRefs(category());
     const { itemLinkDirection } = storeToRefs(direction());

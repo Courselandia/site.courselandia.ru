@@ -248,8 +248,13 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType, ref, toRefs } from 'vue';
+import {
+  PropType,
+  ref,
+  toRefs,
+} from 'vue';
 
+import { apiReadSchools } from '@/api/school';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
@@ -283,6 +288,8 @@ const emit = defineEmits({
   filter: (_: number | null) => true,
 });
 
+const config = useRuntimeConfig();
+
 const conditions = {
   0: 'отзывов',
   1: 'отзыв',
@@ -309,7 +316,8 @@ const sortSchools = (schools: Array<ISchool>): Array<ISchool> => {
 const otherSchools = ref<Array<ISchool>>();
 
 try {
-  const fetchedOtherSchools = await $fetch('/api/school/read');
+  const fetchedOtherSchools = await apiReadSchools(config.public.apiUrl);
+
   otherSchools.value = sortSchools(
     fetchedOtherSchools.filter((school: ISchool) => !!school.reviews_count),
   ).slice(0, 4);

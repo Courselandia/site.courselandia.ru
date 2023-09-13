@@ -5,6 +5,7 @@ import IFilterSchool from '@/interfaces/stores/course/filterSchool';
 import ISchool from '@/interfaces/stores/school/school';
 import school from '@/stores/school';
 import TId from '@/types/id';
+import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 
 export const apiReadSchools = async (apiUrl: string): Promise<Array<ISchool>> => {
   const {
@@ -44,13 +45,13 @@ export const apiGetSchool = async (
 export const apiLinkSchool = async (
   apiUrl: string,
   link: string,
-): Promise<IFilterSchool | null> => {
+): Promise<ISchoolLink | null> => {
   const {
     linkSchool,
   } = school();
 
   const loadSchool = async ():
-    Promise<IResponseItem<IFilterSchool | null>> => linkSchool(apiUrl, link);
+    Promise<IResponseItem<ISchoolLink | null>> => linkSchool(apiUrl, link);
 
   const resultCategories = await useAsyncData('school', async () => loadSchool());
 

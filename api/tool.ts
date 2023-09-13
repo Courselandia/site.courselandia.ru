@@ -1,6 +1,7 @@
 import IFilters from '@/interfaces/filters';
 import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import IFilterTool from '@/interfaces/stores/course/filterTool';
+import IToolLink from '@/interfaces/stores/course/toolLink';
 import tool from '@/stores/tool';
 import TId from '@/types/id';
 
@@ -41,13 +42,13 @@ export const apiGetTool = async (
 export const apiLinkTool = async (
   apiUrl: string,
   link: string,
-): Promise<IFilterTool | null> => {
+): Promise<IToolLink | null> => {
   const {
     linkTool,
   } = tool();
 
   const loadTool = async ():
-    Promise<IResponseItem<IFilterTool | null>> => linkTool(apiUrl, link);
+    Promise<IResponseItem<IToolLink | null>> => linkTool(apiUrl, link);
 
   const resultTool = await useAsyncData('tool', async () => loadTool());
 

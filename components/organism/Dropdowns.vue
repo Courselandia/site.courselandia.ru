@@ -202,6 +202,7 @@ import {
   watch,
 } from 'vue';
 
+import { apiReadDirections } from '@/api/direction';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import AlphabeticList from '@/components/molecules/AlphabeticList.vue';
@@ -214,6 +215,7 @@ import schoolsToMenu from '@/converts/schoolsToMenu';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
+import {apiReadSchools} from "~/api/school";
 
 const props = defineProps({
   menu: {
@@ -246,7 +248,7 @@ const index = ref(0);
 const listDirections = ref<IMenu[]>();
 
 try {
-  listDirections.value = await directionsToMenu(await $fetch('/api/direction/read'));
+  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
 } catch (error: any) {
   console.error(error.message);
 }
@@ -266,7 +268,7 @@ const listSchools = ref<IMenu[]>();
 const listSchoolReviews = ref<IListSchoolReview[]>();
 
 try {
-  const schools = await $fetch('/api/school/read');
+  const schools = await apiReadSchools(config.public.apiUrl);
   listSchools.value = schoolsToMenu(schools);
   listSchoolReviews.value = schoolsToSchoolReviews(schools);
 } catch (error: any) {

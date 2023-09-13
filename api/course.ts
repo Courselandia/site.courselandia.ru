@@ -69,12 +69,6 @@ export const apiReadRatedCourses = async (
   const loadRatedCourses = async ():
     Promise<IResponseItems<ICourse>> => readRatedCourses(apiUrl, limit);
 
-  const { ratedCourses } = storeToRefs(course());
-
-  if (ratedCourses.value) {
-    return ratedCourses.value;
-  }
-
   const resultCourses = await useAsyncData('ratedCourses', async () => loadRatedCourses());
 
   return resultCourses.data.value?.data || [];

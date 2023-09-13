@@ -1,6 +1,7 @@
 import IFilters from '@/interfaces/filters';
 import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import IFilterSkill from '@/interfaces/stores/course/filterSkill';
+import ISkillLink from '@/interfaces/stores/course/skillLink';
 import skill from '@/stores/skill';
 import TId from '@/types/id';
 
@@ -41,13 +42,13 @@ export const apiGetSkill = async (
 export const apiLinkSkill = async (
   apiUrl: string,
   link: string,
-): Promise<IFilterSkill | null> => {
+): Promise<ISkillLink | null> => {
   const {
     linkSkill,
   } = skill();
 
   const loadSkills = async ():
-    Promise<IResponseItem<IFilterSkill | null>> => linkSkill(apiUrl, link);
+    Promise<IResponseItem<ISkillLink | null>> => linkSkill(apiUrl, link);
 
   const resultSkill = await useAsyncData('skill', async () => loadSkills());
 

@@ -54,6 +54,8 @@ import {
   ref,
 } from 'vue';
 
+import { apiReadDirections } from '@/api/direction';
+import { apiReadSchools } from '@/api/school';
 import Logo from '@/components/atoms/Logo.vue';
 import MenuBottom from '@/components/atoms/MenuBottom.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
@@ -67,7 +69,7 @@ const config = useRuntimeConfig();
 const menuSchools = ref<IMenu[]>();
 
 try {
-  menuSchools.value = schoolsToMenu(await $fetch('/api/school/read'));
+  menuSchools.value = schoolsToMenu(await apiReadSchools(config.public.apiUrl));
 } catch (error: any) {
   console.error(error.message);
 }
@@ -75,7 +77,7 @@ try {
 const menuDirections = ref<IMenu[]>();
 
 try {
-  menuDirections.value = await directionsToMenu(await $fetch('/api/direction/read'));
+  menuDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
 } catch (error: any) {
   console.error(error.message);
 }

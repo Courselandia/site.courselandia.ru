@@ -125,6 +125,8 @@ import {
   ref,
 } from 'vue';
 
+import { apiReadRatedCourses } from '@/api/course';
+import { apiReadDirections } from '@/api/direction';
 import AboutUs from '@/components/atoms/AboutUs.vue';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -155,7 +157,7 @@ const listDirections = ref<IMenu[]>();
 const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));
 
 try {
-  listDirections.value = await directionsToMenu(await $fetch('/api/direction/read'));
+  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
 } catch (error: any) {
   console.error(error.message);
 }
@@ -163,7 +165,7 @@ try {
 const courses = ref<ICourse[]>();
 
 try {
-  courses.value = coursesStoreToCoursesComponent(await $fetch('/api/course/readRated'));
+  courses.value = coursesStoreToCoursesComponent(await apiReadRatedCourses(config.public.apiUrl));
 } catch (error: any) {
   console.error(error.message);
 }

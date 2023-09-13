@@ -191,6 +191,8 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { apiReadDirections } from '@/api/direction';
+import { apiReadSchools } from '@/api/school';
 import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
@@ -228,6 +230,8 @@ watch(showValue, () => {
 const router = useRouter();
 const menu = ref<string | null>(null);
 const direction = ref<number | null>(null);
+const schools = await apiReadSchools(config.public.apiUrl);
+const directions = await apiReadDirections(config.public.apiUrl);
 
 const onClick = (name: string): void => {
   menu.value = name;
@@ -248,9 +252,7 @@ const onClickBackRemoveDirection = (): void => {
 const listDirections = ref<IMenu[]>();
 
 try {
-  const result = await $fetch('/api/direction/read');
-
-  listDirections.value = await directionsToMenu(result);
+  listDirections.value = await directionsToMenu(directions);
 } catch (error: any) {
   console.error(error.message);
 }
@@ -258,9 +260,7 @@ try {
 const listDirectionsWithCategories = ref<IMenu[]>([]);
 
 try {
-  const result = await $fetch('/api/direction/read');
-
-  listDirectionsWithCategories.value = await directionsToMenu(result);
+  listDirectionsWithCategories.value = await directionsToMenu(directions);
 } catch (error: any) {
   console.error(error.message);
 }
@@ -277,7 +277,7 @@ const menuCourses = computed<IMenu[]>(() => [
 const listSchools = ref<IMenu[]>();
 
 try {
-  listSchools.value = schoolsToMenu(await $fetch('/api/school/read'));
+  listSchools.value = schoolsToMenu(schools);
 } catch (error: any) {
   console.error(error.message);
 }
@@ -285,7 +285,6 @@ try {
 const listSchoolReviews = ref<IListSchoolReview[]>();
 
 try {
-  const schools = await $fetch('/api/school/read');
   listSchools.value = schoolsToMenu(schools);
   listSchoolReviews.value = schoolsToSchoolReviews(schools);
 } catch (error: any) {

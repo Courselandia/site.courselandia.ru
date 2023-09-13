@@ -1,6 +1,7 @@
 import IFilters from '@/interfaces/filters';
 import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import IFilterProfession from '@/interfaces/stores/course/filterProfession';
+import IProfessionLink from '@/interfaces/stores/course/professionLink';
 import profession from '@/stores/profession';
 import TId from '@/types/id';
 
@@ -41,13 +42,13 @@ export const apiGetProfession = async (
 export const apiLinkProfession = async (
   apiUrl: string,
   link: string,
-): Promise<IFilterProfession | null> => {
+): Promise<IProfessionLink | null> => {
   const {
     linkProfession,
   } = profession();
 
   const loadProfession = async ():
-    Promise<IResponseItem<IFilterProfession | null>> => linkProfession(apiUrl, link);
+    Promise<IResponseItem<IProfessionLink | null>> => linkProfession(apiUrl, link);
 
   const resultProfession = await useAsyncData('profession', async () => loadProfession());
 

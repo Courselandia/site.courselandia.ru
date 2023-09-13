@@ -1,26 +1,19 @@
-import { storeToRefs } from 'pinia';
-
-import school from '@/stores/school';
+import { apiLinkSchool } from '@/api/school';
+import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
+  const config = useRuntimeConfig();
+
   const {
     link,
   } = to.params;
 
   try {
-    const result = await $fetch('/api/school/link', {
-      params: {
-        link: link as string,
-      },
-    });
+    const result: ISchoolLink | null = await apiLinkSchool(config.public.apiUrl, link as string);
 
     if (!result?.reviews_count) {
       return false;
     }
-
-    const { itemLinkSchool } = storeToRefs(school());
-
-    itemLinkSchool.value = result;
 
     return !!result;
   } catch (error: any) {

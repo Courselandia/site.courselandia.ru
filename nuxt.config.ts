@@ -1,4 +1,17 @@
 // eslint-disable-next-line no-undef
+import axios from 'axios';
+
+import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
+import { IResponseData, IResponseItems } from '@/interfaces/response';
+import ICategory from '@/interfaces/stores/course/category';
+import ICourse from '@/interfaces/stores/course/course';
+import IDirection from '@/interfaces/stores/course/direction';
+import IFilterSkill from '@/interfaces/stores/course/filterSkill';
+import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
+import IFilterTool from '@/interfaces/stores/course/filterTool';
+import IProfession from '@/interfaces/stores/course/profession';
+import ISchool from '@/interfaces/stores/school/school';
+
 export default defineNuxtConfig({
   ssr: true,
   dev: process.env.NODE_ENV !== 'production',
@@ -50,7 +63,6 @@ export default defineNuxtConfig({
         lang: 'ru',
       },
       title: 'Агрегатор онлайн-курсов Courselandia',
-      description: 'Courselandia — это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментам. Найдите свой курс быстро и легко.',
       meta: [
         {
           charset: 'utf-8',
@@ -95,6 +107,10 @@ export default defineNuxtConfig({
           name: 'yandex-verification',
           content: '71440411ee92b8f8',
         },
+        {
+          name: 'description',
+          content: 'Courselandia — это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментам. Найдите свой курс быстро и легко.',
+        },
       ],
       link: [
         {
@@ -121,13 +137,114 @@ export default defineNuxtConfig({
   experimental: {
     inlineSSRStyles: false,
   },
+  hooks: {
+    'nitro:config': async function (nitroConfig) {
+      // Reviews
+      const responseSchools = await axios.get<IResponseItems<ISchool>>('/api/private/site/school/read', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const schools: ISchool[] = responseSchools.data.data;
+      let routers = schools
+        .filter((item: ISchool) => item.reviews_count)
+        .map((item: ISchool) => `/reviews/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Schools
+      routers = schools
+        .map((item: ISchool) => `/courses/school/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Directions
+      const responseDirections = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const directions: IDirection[] = responseDirections.data.data;
+
+      routers = directions
+        .map((item: IDirection) => `/courses/direction/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Categories
+      const responseCategories = await axios.get<IResponseItems<ICategory>>('/api/private/site/course/categories', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const categories: ICategory[] = responseCategories.data.data;
+
+      routers = categories
+        .map((item: ICategory) => `/courses/category/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Professions
+      const responseProfessions = await axios.get<IResponseItems<IProfession>>('/api/private/site/course/professions', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const professions: IProfession[] = responseProfessions.data.data;
+
+      routers = professions
+        .map((item: IProfession) => `/courses/profession/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Skills
+      const responseSkills = await axios.get<IResponseItems<IFilterSkill>>('/api/private/site/course/skills', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const skills: IFilterSkill[] = responseSkills.data.data;
+
+      routers = skills
+        .map((item: IFilterSkill) => `/courses/skill/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Teachers
+      const responseTeachers = await axios.get<IResponseItems<IFilterTeacher>>('/api/private/site/course/teachers', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const teachers: IFilterTeacher[] = responseTeachers.data.data;
+
+      routers = teachers
+        .map((item: IFilterTeacher) => `/courses/teacher/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Tools
+      const responseTools = await axios.get<IResponseItems<IFilterTool>>('/api/private/site/course/tools', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const tools: IFilterTool[] = responseTools.data.data;
+
+      routers = tools
+        .map((item: IFilterTool) => `/courses/tool/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Courses
+      const responseCourses = await axios.get<IResponseData<IApiReadCourses>>('/api/private/site/course/read', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const { courses } = responseCourses.data.data;
+
+      routers = courses
+        .map((item: ICourse) => `/courses/show/${item.school?.link}/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+    },
+  },
   nitro: {
-    storage: {
-      redis: {
-        driver: 'redis',
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT,
-      },
+    prerender: {
+      concurrency: 20,
     },
   },
 });
