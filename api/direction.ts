@@ -31,23 +31,6 @@ export const apiReadDirections = async (
   return resultDirections.data.value?.data || [];
 };
 
-export const apiGetDirection = async (
-  apiUrl: string,
-  development: boolean,
-  id: TId,
-): Promise<IDirection | null> => {
-  const {
-    getDirection,
-  } = direction();
-
-  const loadDirection = async ():
-    Promise<IResponseItem<IDirection | null>> => getDirection(apiUrl, development, id);
-
-  const resultCategories = await useAsyncData('direction', async () => loadDirection());
-
-  return resultCategories.data.value?.data || null;
-};
-
 export const apiLinkDirection = async (
   apiUrl: string,
   development: boolean,

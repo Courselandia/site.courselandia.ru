@@ -29,23 +29,6 @@ export const apiReadSchools = async (
   return resultSchools.data.value?.data || [];
 };
 
-export const apiGetSchool = async (
-  apiUrl: string,
-  development: boolean,
-  id: TId,
-): Promise<IFilterSchool | null> => {
-  const {
-    getSchool,
-  } = school();
-
-  const loadSchool = async ():
-    Promise<IResponseItem<IFilterSchool | null>> => getSchool(apiUrl, development, id);
-
-  const resultCategories = await useAsyncData('school', async () => loadSchool());
-
-  return resultCategories.data.value?.data || null;
-};
-
 export const apiLinkSchool = async (
   apiUrl: string,
   development: boolean,

@@ -14,13 +14,11 @@ import TId from '@/types/id';
 export default defineStore('profession', {
   state: () => ({
     professions: null as IFilterProfession[] | null,
-    itemProfession: null as IFilterProfession | null,
     itemLinkProfession: null as IProfessionLink | null,
   }),
   actions: {
     async readProfessions(
       baseUrl: string,
-      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -40,32 +38,15 @@ export default defineStore('profession', {
         throw error;
       }
     },
-    async getProfession(
-      baseUrl: string,
-      development: boolean,
-      id: TId,
-    ): Promise<IResponseItem<IFilterProfession>> {
-      try {
-        const response = await axios.get<IResponseItem<IFilterProfession>>(`/api/private/site/profession/get/${id}`, {
-          baseURL: baseUrl,
-        });
-
-        this.itemProfession = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemProfession = null;
-
-        throw error;
-      }
-    },
     async linkProfession(
       baseUrl: string,
       development: boolean,
       link: string,
     ): Promise<IResponseItem<IProfessionLink>> {
       try {
-        const response = await axios.get<IResponseItem<IProfessionLink>>(`/api/private/site/profession/link/${link}`, {
+        const path = development ? `/api/private/site/profession/link/${link}` : `/storage/json/professions/${link}.json`;
+
+        const response = await axios.get<IResponseItem<IProfessionLink>>(path, {
           baseURL: baseUrl,
         });
 

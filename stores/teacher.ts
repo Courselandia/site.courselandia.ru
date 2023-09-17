@@ -14,13 +14,11 @@ import TId from '@/types/id';
 export default defineStore('teacher', {
   state: () => ({
     teachers: null as IFilterTeacher[] | null,
-    itemTeacher: null as IFilterTeacher | null,
     itemLinkTeacher: null as ITeacherLink | null,
   }),
   actions: {
     async readTeachers(
       baseUrl: string,
-      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -40,32 +38,15 @@ export default defineStore('teacher', {
         throw error;
       }
     },
-    async getTeacher(
-      baseUrl: string,
-      development: boolean,
-      id: TId,
-    ): Promise<IResponseItem<IFilterTeacher>> {
-      try {
-        const response = await axios.get<IResponseItem<IFilterTeacher>>(`/api/private/site/teacher/get/${id}`, {
-          baseURL: baseUrl,
-        });
-
-        this.itemTeacher = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemTeacher = null;
-
-        throw error;
-      }
-    },
     async linkTeacher(
       baseUrl: string,
       development: boolean,
       link: string,
     ): Promise<IResponseItem<ITeacherLink>> {
       try {
-        const response = await axios.get<IResponseItem<ITeacherLink>>(`/api/private/site/teacher/link/${link}`, {
+        const path = development ? `/api/private/site/teacher/link/${link}` : `/storage/json/teachers/${link}.json`;
+
+        const response = await axios.get<IResponseItem<ITeacherLink>>(path, {
           baseURL: baseUrl,
         });
 

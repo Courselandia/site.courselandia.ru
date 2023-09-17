@@ -62,7 +62,28 @@ export default defineStore('course', {
         additional.sectionLink = sectionLink;
 
         const query = toQuery(offset, limit, sorts, filters, additional);
-        const response = await axios.get<IResponseData<IApiReadCourses>>(`/api/private/site/course/read?${query}`, {
+        let path = `/api/private/site/course/read?${query}`;
+
+        const hasInitFilter = (flts: IFilters | null = null): boolean => {
+          const hasOneFilter = Object.keys(flts || {}).length === 1;
+
+          return (hasOneFilter && flts !== null && flts['directions-id'] !== undefined);
+        };
+
+        if (
+          development
+          && offset === 0
+          && limit === 36
+          && sorts?.name === 'ASC'
+          && hasInitFilter(filters)
+          && Object.keys(openedItems || {}).length === 0
+          && section
+          && sectionLink
+        ) {
+          path = `/storage/json/courses/${section}/${sectionLink}.json`;
+        }
+
+        const response = await axios.get<IResponseData<IApiReadCourses>>(path, {
           baseURL: baseUrl,
         });
 
@@ -90,7 +111,9 @@ export default defineStore('course', {
     ): Promise<IResponseItems<ICourse>> {
       try {
         const query = toQuery(null, limit);
-        const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read/rated?${query}`, {
+        const path = development ? `/api/private/site/course/read/rated?${query}` : '/storage/json/courses/rated.json';
+
+        const response = await axios.get<IResponseItems<ICourse>>(path, {
           baseURL: baseUrl,
         });
 
@@ -105,7 +128,6 @@ export default defineStore('course', {
     },
     async readSearchedCourses(
       baseUrl: string,
-      development: boolean,
       search: string,
       limit: number = 12,
     ): Promise<IResponseItems<ICourse> | null> {
@@ -138,7 +160,8 @@ export default defineStore('course', {
       course: string,
     ): Promise<IResponseItem<ICourseResponse | null>> {
       try {
-        const response = await axios.get<IResponseItem<ICourseResponse>>(`/api/private/site/course/get/${school}/${course}`, {
+        const path = development ? `/api/private/site/course/get/${school}/${course}` : `/storage/json/courses/show/${school}/${course}.json`;
+        const response = await axios.get<IResponseItem<ICourseResponse>>(path, {
           baseURL: baseUrl,
         });
 
@@ -158,7 +181,6 @@ export default defineStore('course', {
     },
     async readFavoriteCourses(
       baseUrl: string,
-      development: boolean,
       favorites: TId[],
     ): Promise<IResponseItems<ICourse> | null> {
       try {

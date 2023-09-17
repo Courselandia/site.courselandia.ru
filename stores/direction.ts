@@ -12,7 +12,6 @@ import TId from '@/types/id';
 export default defineStore('direction', {
   state: () => ({
     directions: null as IDirection[] | null,
-    itemDirection: null as IDirection | null,
     itemLinkDirection: null as IDirectionLink | null,
   }),
   actions: {
@@ -21,7 +20,9 @@ export default defineStore('direction', {
       development: boolean,
     ): Promise<IResponseItems<IDirection>> {
       try {
-        const response = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
+        const path = development ? '/api/private/site/course/directions' : '/storage/json/directions.json';
+
+        const response = await axios.get<IResponseItems<IDirection>>(path, {
           baseURL: baseUrl,
           params: {
             withCategories: 1,
@@ -38,32 +39,15 @@ export default defineStore('direction', {
         throw error;
       }
     },
-    async getDirection(
-      baseUrl: string,
-      development: boolean,
-      id: TId,
-    ): Promise<IResponseItem<IDirection>> {
-      try {
-        const response = await axios.get<IResponseItem<IDirection>>(`/api/private/site/direction/get/${id}`, {
-          baseURL: baseUrl,
-        });
-
-        this.itemDirection = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemDirection = null;
-
-        throw error;
-      }
-    },
     async linkDirection(
       baseUrl: string,
       development: boolean,
       link: string,
     ): Promise<IResponseItem<IDirectionLink>> {
       try {
-        const response = await axios.get<IResponseItem<IDirectionLink>>(`/api/private/site/direction/link/${link}`, {
+        const path = development ? `/api/private/site/direction/link/${link}` : `/storage/json/directions/${link}.json`;
+
+        const response = await axios.get<IResponseItem<IDirectionLink>>(path, {
           baseURL: baseUrl,
         });
 

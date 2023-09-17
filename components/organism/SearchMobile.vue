@@ -157,7 +157,6 @@ const search = (): void => {
       try {
         const result = await apiReadSearchedCourses(
           config.public.apiUrl,
-          config.public.development,
           query.value || '',
           10,
         );

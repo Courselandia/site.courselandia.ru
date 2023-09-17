@@ -15,7 +15,8 @@ export default defineStore('faq', {
       school: string,
     ): Promise<IResponseItems<IFaq>> {
       try {
-        const response = await axios.get<IResponseItems<IFaq>>(`/api/private/site/faq/read/${school}`, {
+        const path = development ? `/api/private/site/faq/read/${school}` : `/storage/json/faqs/${school}.json`;
+        const response = await axios.get<IResponseItems<IFaq>>(path, {
           baseURL: baseUrl,
         });
 

@@ -1051,7 +1051,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     if (professions.value.length <= 11) {
       const result = await apiReadProfessions(
         config.public.apiUrl,
-        config.public.development,
         null,
         null,
         getFilters(),
@@ -1068,7 +1067,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     if (categories.value.length <= 11) {
       const result = await apiReadCategories(
         config.public.apiUrl,
-        config.public.development,
         null,
         null,
         getFilters(),
@@ -1085,7 +1083,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     if (teachers.value.length <= 11) {
       const result = await apiReadTeachers(
         config.public.apiUrl,
-        config.public.development,
         null,
         null,
         getFilters(),
@@ -1102,7 +1099,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     if (skills.value.length <= 11) {
       const result = await apiReadSkills(
         config.public.apiUrl,
-        config.public.development,
         null,
         null,
         getFilters(),
@@ -1119,7 +1115,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     if (tools.value.length <= 11) {
       const result = await apiReadTools(
         config.public.apiUrl,
-        config.public.development,
         null,
         null,
         getFilters(),
@@ -1145,6 +1140,9 @@ try {
     size.value * currentPage.value,
     getSort(sort.value),
     getFilters(),
+    null,
+    section,
+    link as string,
   );
 
   setCoursesAndFilters(result);

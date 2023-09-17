@@ -15,13 +15,11 @@ import TId from '@/types/id';
 export default defineStore('category', {
   state: () => ({
     categories: null as IFilterCategory[] | null,
-    itemCategory: null as ICategory | null,
     itemLinkCategory: null as ICategoryLink | null,
   }),
   actions: {
     async readCategories(
       baseUrl: string,
-      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -41,32 +39,14 @@ export default defineStore('category', {
         throw error;
       }
     },
-    async getCategory(
-      baseUrl: string,
-      development: boolean,
-      id: TId,
-    ): Promise<IResponseItem<IFilterCategory | null>> {
-      try {
-        const response = await axios.get<IResponseItem<IFilterCategory>>(`/api/private/site/category/get/${id}`, {
-          baseURL: baseUrl,
-        });
-
-        this.itemCategory = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemCategory = null;
-
-        throw error;
-      }
-    },
     async linkCategory(
       baseUrl: string,
       development: boolean,
       link: TId,
     ): Promise<IResponseItem<ICategoryLink | null>> {
       try {
-        const response = await axios.get<IResponseItem<ICategoryLink>>(`/api/private/site/category/link/${link}`, {
+        const path = development ? `/api/private/site/category/link/${link}` : `/storage/json/categories/${link}.json`;
+        const response = await axios.get<IResponseItem<ICategoryLink>>(path, {
           baseURL: baseUrl,
         });
 

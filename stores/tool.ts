@@ -14,13 +14,11 @@ import TId from '@/types/id';
 export default defineStore('tool', {
   state: () => ({
     tools: null as IFilterTool[] | null,
-    itemTool: null as IFilterTool | null,
     itemLinkTool: null as IToolLink | null,
   }),
   actions: {
     async readTools(
       baseUrl: string,
-      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -40,32 +38,15 @@ export default defineStore('tool', {
         throw error;
       }
     },
-    async getTool(
-      baseUrl: string,
-      development: boolean,
-      id: TId,
-    ): Promise<IResponseItem<IFilterTool>> {
-      try {
-        const response = await axios.get<IResponseItem<IFilterTool>>(`/api/private/site/tool/get/${id}`, {
-          baseURL: baseUrl,
-        });
-
-        this.itemTool = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemTool = null;
-
-        throw error;
-      }
-    },
     async linkTool(
       baseUrl: string,
       development: boolean,
       link: string,
     ): Promise<IResponseItem<IToolLink>> {
       try {
-        const response = await axios.get<IResponseItem<IToolLink>>(`/api/private/site/tool/link/${link}`, {
+        const path = development ? `/api/private/site/tool/link/${link}` : `/storage/json/tools/${link}.json`;
+
+        const response = await axios.get<IResponseItem<IToolLink>>(path, {
           baseURL: baseUrl,
         });
 

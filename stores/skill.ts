@@ -14,13 +14,11 @@ import TId from '@/types/id';
 export default defineStore('skill', {
   state: () => ({
     skills: null as IFilterSkill[] | null,
-    itemSkill: null as IFilterSkill | null,
     itemLinkSkill: null as ISkillLink | null,
   }),
   actions: {
     async readSkills(
       baseUrl: string,
-      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -40,32 +38,15 @@ export default defineStore('skill', {
         throw error;
       }
     },
-    async getSkill(
-      baseUrl: string,
-      development: boolean,
-      id: TId,
-    ): Promise<IResponseItem<IFilterSkill>> {
-      try {
-        const response = await axios.get<IResponseItem<IFilterSkill>>(`/api/private/site/skill/get/${id}`, {
-          baseURL: baseUrl,
-        });
-
-        this.itemSkill = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemSkill = null;
-
-        throw error;
-      }
-    },
     async linkSkill(
       baseUrl: string,
       development: boolean,
       link: string,
     ): Promise<IResponseItem<ISkillLink>> {
       try {
-        const response = await axios.get<IResponseItem<ISkillLink>>(`/api/private/site/skill/link/${link}`, {
+        const path = development ? `/api/private/site/skill/link/${link}` : `/storage/json/skills/${link}.json`;
+
+        const response = await axios.get<IResponseItem<ISkillLink>>(path, {
           baseURL: baseUrl,
         });
 

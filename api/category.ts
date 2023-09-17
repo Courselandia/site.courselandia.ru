@@ -7,7 +7,6 @@ import TId from '@/types/id';
 
 export const apiReadCategories = async (
   apiUrl: string,
-  development: boolean,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -19,7 +18,6 @@ export const apiReadCategories = async (
   const loadCategories = async ():
     Promise<IResponseItems<IFilterCategory>> => readCategories(
     apiUrl,
-    development,
     offset,
     limit,
     filters,
@@ -28,23 +26,6 @@ export const apiReadCategories = async (
   const resultCategories = await useAsyncData('categories', async () => loadCategories());
 
   return resultCategories.data.value?.data || [];
-};
-
-export const apiGetCategory = async (
-  apiUrl: string,
-  development: boolean,
-  id: TId,
-): Promise<IFilterCategory | null> => {
-  const {
-    getCategory,
-  } = category();
-
-  const loadCategory = async ():
-    Promise<IResponseItem<IFilterCategory | null>> => getCategory(apiUrl, development, id);
-
-  const resultCategory = await useAsyncData('category', async () => loadCategory());
-
-  return resultCategory.data.value?.data || null;
 };
 
 export const apiLinkCategory = async (

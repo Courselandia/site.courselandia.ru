@@ -18,7 +18,8 @@ export default defineStore('school', {
   actions: {
     async readSchools(baseUrl: string, development: boolean): Promise<IResponseItems<ISchool>> {
       try {
-        const response = await axios.get<IResponseItems<ISchool>>('/api/private/site/school/read', {
+        const path = development ? '/api/private/site/school/read' : '/storage/json/schools.json';
+        const response = await axios.get<IResponseItems<ISchool>>(path, {
           baseURL: baseUrl,
         });
 
@@ -31,32 +32,15 @@ export default defineStore('school', {
         throw error;
       }
     },
-    async getSchool(
-      baseUrl: string,
-      development: boolean,
-      id: TId,
-    ): Promise<IResponseItem<ISchool>> {
-      try {
-        const response = await axios.get<IResponseItem<ISchool>>(`/api/private/site/school/get/${id}`, {
-          baseURL: baseUrl,
-        });
-
-        this.itemSchool = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemSchool = null;
-
-        throw error;
-      }
-    },
     async linkSchool(
       baseUrl: string,
       development: boolean,
       link: string,
     ): Promise<IResponseItem<ISchoolLink>> {
       try {
-        const response = await axios.get<IResponseItem<ISchoolLink>>(`/api/private/site/school/link/${link}`, {
+        const path = development ? `/api/private/site/school/link/${link}` : `/storage/json/schools/${link}.json`;
+
+        const response = await axios.get<IResponseItem<ISchoolLink>>(path, {
           baseURL: baseUrl,
         });
 

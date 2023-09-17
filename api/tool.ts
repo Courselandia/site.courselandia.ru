@@ -7,7 +7,6 @@ import TId from '@/types/id';
 
 export const apiReadTools = async (
   apiUrl: string,
-  development: boolean,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -17,28 +16,11 @@ export const apiReadTools = async (
   } = tool();
 
   const loadTools = async ():
-    Promise<IResponseItems<IFilterTool>> => readTools(apiUrl, development, offset, limit, filters);
+    Promise<IResponseItems<IFilterTool>> => readTools(apiUrl, offset, limit, filters);
 
   const resultTools = await useAsyncData('tools', async () => loadTools());
 
   return resultTools.data.value?.data || [];
-};
-
-export const apiGetTool = async (
-  apiUrl: string,
-  development: boolean,
-  id: TId,
-): Promise<IFilterTool | null> => {
-  const {
-    getTool,
-  } = tool();
-
-  const loadTool = async ():
-    Promise<IResponseItem<IFilterTool | null>> => getTool(apiUrl, development, id);
-
-  const resultTool = await useAsyncData('tool', async () => loadTool());
-
-  return resultTool.data.value?.data || null;
 };
 
 export const apiLinkTool = async (
