@@ -33,7 +33,9 @@ const config = useRuntimeConfig();
 const brands = ref<Array<IBrand>>();
 
 try {
-  brands.value = schoolsToBrand(await apiReadSchools(config.public.apiUrl));
+  brands.value = schoolsToBrand(
+    await apiReadSchools(config.public.apiUrl, config.public.development),
+  );
 } catch (error: any) {
   console.error(error.message);
 }

@@ -9,7 +9,11 @@ export default defineStore('faq', {
     faqs: null as IFaq[] | null,
   }),
   actions: {
-    async readFaqs(baseUrl: string, school: string): Promise<IResponseItems<IFaq>> {
+    async readFaqs(
+      baseUrl: string,
+      development: boolean,
+      school: string,
+    ): Promise<IResponseItems<IFaq>> {
       try {
         const response = await axios.get<IResponseItems<IFaq>>(`/api/private/site/faq/read/${school}`, {
           baseURL: baseUrl,

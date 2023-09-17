@@ -7,6 +7,7 @@ import TId from '@/types/id';
 
 export const apiReadProfessions = async (
   apiUrl: string,
+  development: boolean,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -16,7 +17,13 @@ export const apiReadProfessions = async (
   } = profession();
 
   const loadProfessions = async ():
-    Promise<IResponseItems<IFilterProfession>> => readProfessions(apiUrl, offset, limit, filters);
+    Promise<IResponseItems<IFilterProfession>> => readProfessions(
+    apiUrl,
+    development,
+    offset,
+    limit,
+    filters,
+  );
 
   const resultProfessions = await useAsyncData('professions', async () => loadProfessions());
 
@@ -25,6 +32,7 @@ export const apiReadProfessions = async (
 
 export const apiGetProfession = async (
   apiUrl: string,
+  development: boolean,
   id: TId,
 ): Promise<IFilterProfession | null> => {
   const {
@@ -32,7 +40,7 @@ export const apiGetProfession = async (
   } = profession();
 
   const loadProfession = async ():
-    Promise<IResponseItem<IFilterProfession | null>> => getProfession(apiUrl, id);
+    Promise<IResponseItem<IFilterProfession | null>> => getProfession(apiUrl, development, id);
 
   const resultProfession = await useAsyncData('profession', async () => loadProfession());
 
@@ -41,6 +49,7 @@ export const apiGetProfession = async (
 
 export const apiLinkProfession = async (
   apiUrl: string,
+  development: boolean,
   link: string,
 ): Promise<IProfessionLink | null> => {
   const {
@@ -48,7 +57,7 @@ export const apiLinkProfession = async (
   } = profession();
 
   const loadProfession = async ():
-    Promise<IResponseItem<IProfessionLink | null>> => linkProfession(apiUrl, link);
+    Promise<IResponseItem<IProfessionLink | null>> => linkProfession(apiUrl, development, link);
 
   const resultProfession = await useAsyncData('profession', async () => loadProfession());
 

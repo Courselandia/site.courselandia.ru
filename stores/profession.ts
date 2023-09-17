@@ -20,6 +20,7 @@ export default defineStore('profession', {
   actions: {
     async readProfessions(
       baseUrl: string,
+      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -39,7 +40,11 @@ export default defineStore('profession', {
         throw error;
       }
     },
-    async getProfession(baseUrl: string, id: TId): Promise<IResponseItem<IFilterProfession>> {
+    async getProfession(
+      baseUrl: string,
+      development: boolean,
+      id: TId,
+    ): Promise<IResponseItem<IFilterProfession>> {
       try {
         const response = await axios.get<IResponseItem<IFilterProfession>>(`/api/private/site/profession/get/${id}`, {
           baseURL: baseUrl,
@@ -54,7 +59,11 @@ export default defineStore('profession', {
         throw error;
       }
     },
-    async linkProfession(baseUrl: string, link: string): Promise<IResponseItem<IProfessionLink>> {
+    async linkProfession(
+      baseUrl: string,
+      development: boolean,
+      link: string,
+    ): Promise<IResponseItem<IProfessionLink>> {
       try {
         const response = await axios.get<IResponseItem<IProfessionLink>>(`/api/private/site/profession/link/${link}`, {
           baseURL: baseUrl,

@@ -171,7 +171,7 @@ const schools = ref<Array<ISchool>>();
 const direction = ref<EDirection | null>(Number(directionCurrent) as unknown as EDirection || null);
 
 try {
-  schools.value = await apiReadSchools(config.public.apiUrl);
+  schools.value = await apiReadSchools(config.public.apiUrl, config.public.development);
 } catch (error: any) {
   console.error(error.message);
 }

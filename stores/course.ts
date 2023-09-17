@@ -46,6 +46,7 @@ export default defineStore('course', {
   actions: {
     async readCourses(
       baseUrl: string,
+      development: boolean,
       offset: number = 0,
       limit: number = 36,
       sorts: ISorts | null = null,
@@ -84,6 +85,7 @@ export default defineStore('course', {
     },
     async readRatedCourses(
       baseUrl: string,
+      development: boolean,
       limit: number = 12,
     ): Promise<IResponseItems<ICourse>> {
       try {
@@ -103,6 +105,7 @@ export default defineStore('course', {
     },
     async readSearchedCourses(
       baseUrl: string,
+      development: boolean,
       search: string,
       limit: number = 12,
     ): Promise<IResponseItems<ICourse> | null> {
@@ -130,6 +133,7 @@ export default defineStore('course', {
     },
     async getCourse(
       baseUrl: string,
+      development: boolean,
       school: string,
       course: string,
     ): Promise<IResponseItem<ICourseResponse | null>> {
@@ -154,6 +158,7 @@ export default defineStore('course', {
     },
     async readFavoriteCourses(
       baseUrl: string,
+      development: boolean,
       favorites: TId[],
     ): Promise<IResponseItems<ICourse> | null> {
       try {

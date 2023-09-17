@@ -7,7 +7,12 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     course,
   } = to.params;
 
-  const result = await apiGetCourse(config.public.apiUrl, school as string, course as string);
+  const result = await apiGetCourse(
+    config.public.apiUrl,
+    config.public.development,
+    school as string,
+    course as string,
+  );
 
   return !!result;
 });

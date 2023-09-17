@@ -20,6 +20,7 @@ export default defineStore('tool', {
   actions: {
     async readTools(
       baseUrl: string,
+      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -39,7 +40,11 @@ export default defineStore('tool', {
         throw error;
       }
     },
-    async getTool(baseUrl: string, id: TId): Promise<IResponseItem<IFilterTool>> {
+    async getTool(
+      baseUrl: string,
+      development: boolean,
+      id: TId,
+    ): Promise<IResponseItem<IFilterTool>> {
       try {
         const response = await axios.get<IResponseItem<IFilterTool>>(`/api/private/site/tool/get/${id}`, {
           baseURL: baseUrl,
@@ -54,7 +59,11 @@ export default defineStore('tool', {
         throw error;
       }
     },
-    async linkTool(baseUrl: string, link: string): Promise<IResponseItem<IToolLink>> {
+    async linkTool(
+      baseUrl: string,
+      development: boolean,
+      link: string,
+    ): Promise<IResponseItem<IToolLink>> {
       try {
         const response = await axios.get<IResponseItem<IToolLink>>(`/api/private/site/tool/link/${link}`, {
           baseURL: baseUrl,

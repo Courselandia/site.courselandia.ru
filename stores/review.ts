@@ -17,6 +17,7 @@ export default defineStore('review', {
   actions: {
     async readReviews(
       baseUrl: string,
+      development: boolean,
       school: string,
       offset: number = 0,
       limit: number = 36,

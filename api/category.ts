@@ -7,6 +7,7 @@ import TId from '@/types/id';
 
 export const apiReadCategories = async (
   apiUrl: string,
+  development: boolean,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -16,7 +17,13 @@ export const apiReadCategories = async (
   } = category();
 
   const loadCategories = async ():
-    Promise<IResponseItems<IFilterCategory>> => readCategories(apiUrl, offset, limit, filters);
+    Promise<IResponseItems<IFilterCategory>> => readCategories(
+    apiUrl,
+    development,
+    offset,
+    limit,
+    filters,
+  );
 
   const resultCategories = await useAsyncData('categories', async () => loadCategories());
 
@@ -25,6 +32,7 @@ export const apiReadCategories = async (
 
 export const apiGetCategory = async (
   apiUrl: string,
+  development: boolean,
   id: TId,
 ): Promise<IFilterCategory | null> => {
   const {
@@ -32,7 +40,7 @@ export const apiGetCategory = async (
   } = category();
 
   const loadCategory = async ():
-    Promise<IResponseItem<IFilterCategory | null>> => getCategory(apiUrl, id);
+    Promise<IResponseItem<IFilterCategory | null>> => getCategory(apiUrl, development, id);
 
   const resultCategory = await useAsyncData('category', async () => loadCategory());
 
@@ -41,6 +49,7 @@ export const apiGetCategory = async (
 
 export const apiLinkCategory = async (
   apiUrl: string,
+  development: boolean,
   link: string,
 ): Promise<ICategoryLink | null> => {
   const {
@@ -48,7 +57,7 @@ export const apiLinkCategory = async (
   } = category();
 
   const loadCategory = async ():
-    Promise<IResponseItem<ICategoryLink | null>> => linkCategory(apiUrl, link);
+    Promise<IResponseItem<ICategoryLink | null>> => linkCategory(apiUrl, development, link);
 
   const resultCategory = await useAsyncData('category', async () => loadCategory());
 

@@ -18,6 +18,7 @@ export default defineStore('direction', {
   actions: {
     async readDirections(
       baseUrl: string,
+      development: boolean,
     ): Promise<IResponseItems<IDirection>> {
       try {
         const response = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
@@ -37,7 +38,11 @@ export default defineStore('direction', {
         throw error;
       }
     },
-    async getDirection(baseUrl: string, id: TId): Promise<IResponseItem<IDirection>> {
+    async getDirection(
+      baseUrl: string,
+      development: boolean,
+      id: TId,
+    ): Promise<IResponseItem<IDirection>> {
       try {
         const response = await axios.get<IResponseItem<IDirection>>(`/api/private/site/direction/get/${id}`, {
           baseURL: baseUrl,
@@ -52,7 +57,11 @@ export default defineStore('direction', {
         throw error;
       }
     },
-    async linkDirection(baseUrl: string, link: string): Promise<IResponseItem<IDirectionLink>> {
+    async linkDirection(
+      baseUrl: string,
+      development: boolean,
+      link: string,
+    ): Promise<IResponseItem<IDirectionLink>> {
       try {
         const response = await axios.get<IResponseItem<IDirectionLink>>(`/api/private/site/direction/link/${link}`, {
           baseURL: baseUrl,

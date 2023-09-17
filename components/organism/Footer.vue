@@ -69,7 +69,9 @@ const config = useRuntimeConfig();
 const menuSchools = ref<IMenu[]>();
 
 try {
-  menuSchools.value = schoolsToMenu(await apiReadSchools(config.public.apiUrl));
+  menuSchools.value = schoolsToMenu(
+    await apiReadSchools(config.public.apiUrl, config.public.development),
+  );
 } catch (error: any) {
   console.error(error.message);
 }
@@ -77,7 +79,9 @@ try {
 const menuDirections = ref<IMenu[]>();
 
 try {
-  menuDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
+  menuDirections.value = await directionsToMenu(
+    await apiReadDirections(config.public.apiUrl, config.public.development),
+  );
 } catch (error: any) {
   console.error(error.message);
 }

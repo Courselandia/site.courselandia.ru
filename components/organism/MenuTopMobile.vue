@@ -230,8 +230,8 @@ watch(showValue, () => {
 const router = useRouter();
 const menu = ref<string | null>(null);
 const direction = ref<number | null>(null);
-const schools = await apiReadSchools(config.public.apiUrl);
-const directions = await apiReadDirections(config.public.apiUrl);
+const schools = await apiReadSchools(config.public.apiUrl, config.public.development);
+const directions = await apiReadDirections(config.public.apiUrl, config.public.development);
 
 const onClick = (name: string): void => {
   menu.value = name;

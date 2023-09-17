@@ -229,6 +229,7 @@ const {
 try {
   const response = await apiReadReviews(
     config.public.apiUrl,
+    config.public.development,
     link as string,
     (currentPage.value - 1) * limit,
     limit,
@@ -298,6 +299,7 @@ const load = async (callback: Function): Promise<void> => {
   try {
     const response = await apiReadReviews(
       config.public.apiUrl,
+      config.public.development,
       link as string,
       (currentPage.value - 1) * limit,
       limit,

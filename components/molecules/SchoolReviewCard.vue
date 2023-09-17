@@ -316,7 +316,7 @@ const sortSchools = (schools: Array<ISchool>): Array<ISchool> => {
 const otherSchools = ref<Array<ISchool>>();
 
 try {
-  const fetchedOtherSchools = await apiReadSchools(config.public.apiUrl);
+  const fetchedOtherSchools = await apiReadSchools(config.public.apiUrl, config.public.development);
 
   otherSchools.value = sortSchools(
     fetchedOtherSchools.filter((school: ISchool) => !!school.reviews_count),

@@ -17,7 +17,11 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   const config = useRuntimeConfig();
 
   try {
-    const result = await apiLinkDirection(config.public.apiUrl, link as string);
+    const result = await apiLinkDirection(
+      config.public.apiUrl,
+      config.public.development,
+      link as string,
+    );
 
     const { itemLinkCategory } = storeToRefs(category());
     const { itemLinkDirection } = storeToRefs(direction());

@@ -20,6 +20,7 @@ export default defineStore('skill', {
   actions: {
     async readSkills(
       baseUrl: string,
+      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -39,7 +40,11 @@ export default defineStore('skill', {
         throw error;
       }
     },
-    async getSkill(baseUrl: string, id: TId): Promise<IResponseItem<IFilterSkill>> {
+    async getSkill(
+      baseUrl: string,
+      development: boolean,
+      id: TId,
+    ): Promise<IResponseItem<IFilterSkill>> {
       try {
         const response = await axios.get<IResponseItem<IFilterSkill>>(`/api/private/site/skill/get/${id}`, {
           baseURL: baseUrl,
@@ -54,7 +59,11 @@ export default defineStore('skill', {
         throw error;
       }
     },
-    async linkSkill(baseUrl: string, link: string): Promise<IResponseItem<ISkillLink>> {
+    async linkSkill(
+      baseUrl: string,
+      development: boolean,
+      link: string,
+    ): Promise<IResponseItem<ISkillLink>> {
       try {
         const response = await axios.get<IResponseItem<ISkillLink>>(`/api/private/site/skill/link/${link}`, {
           baseURL: baseUrl,

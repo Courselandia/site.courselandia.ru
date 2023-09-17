@@ -7,6 +7,7 @@ import TId from '@/types/id';
 
 export const apiReadTools = async (
   apiUrl: string,
+  development: boolean,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -16,7 +17,7 @@ export const apiReadTools = async (
   } = tool();
 
   const loadTools = async ():
-    Promise<IResponseItems<IFilterTool>> => readTools(apiUrl, offset, limit, filters);
+    Promise<IResponseItems<IFilterTool>> => readTools(apiUrl, development, offset, limit, filters);
 
   const resultTools = await useAsyncData('tools', async () => loadTools());
 
@@ -25,6 +26,7 @@ export const apiReadTools = async (
 
 export const apiGetTool = async (
   apiUrl: string,
+  development: boolean,
   id: TId,
 ): Promise<IFilterTool | null> => {
   const {
@@ -32,7 +34,7 @@ export const apiGetTool = async (
   } = tool();
 
   const loadTool = async ():
-    Promise<IResponseItem<IFilterTool | null>> => getTool(apiUrl, id);
+    Promise<IResponseItem<IFilterTool | null>> => getTool(apiUrl, development, id);
 
   const resultTool = await useAsyncData('tool', async () => loadTool());
 
@@ -41,6 +43,7 @@ export const apiGetTool = async (
 
 export const apiLinkTool = async (
   apiUrl: string,
+  development: boolean,
   link: string,
 ): Promise<IToolLink | null> => {
   const {
@@ -48,7 +51,7 @@ export const apiLinkTool = async (
   } = tool();
 
   const loadTool = async ():
-    Promise<IResponseItem<IToolLink | null>> => linkTool(apiUrl, link);
+    Promise<IResponseItem<IToolLink | null>> => linkTool(apiUrl, development, link);
 
   const resultTool = await useAsyncData('tool', async () => loadTool());
 

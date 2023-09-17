@@ -247,6 +247,7 @@ const setMeta = (): void => {
 try {
   const courseResponseStore = await apiGetCourse(
     config.public.apiUrl,
+    config.public.development,
     school as string,
     course as string,
   );
@@ -264,7 +265,11 @@ try {
 const faqItems = ref<Array<IFaqComponent>>([]);
 
 try {
-  const faqsStore = await apiReadFaqs(config.public.apiUrl, school as string);
+  const faqsStore = await apiReadFaqs(
+    config.public.apiUrl,
+    config.public.development,
+    school as string,
+  );
 
   if (faqsStore) {
     faqItems.value = faqsStoreToFaqsComponent(faqsStore);

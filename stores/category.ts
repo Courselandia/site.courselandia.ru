@@ -21,6 +21,7 @@ export default defineStore('category', {
   actions: {
     async readCategories(
       baseUrl: string,
+      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -40,7 +41,11 @@ export default defineStore('category', {
         throw error;
       }
     },
-    async getCategory(baseUrl: string, id: TId): Promise<IResponseItem<IFilterCategory | null>> {
+    async getCategory(
+      baseUrl: string,
+      development: boolean,
+      id: TId,
+    ): Promise<IResponseItem<IFilterCategory | null>> {
       try {
         const response = await axios.get<IResponseItem<IFilterCategory>>(`/api/private/site/category/get/${id}`, {
           baseURL: baseUrl,
@@ -55,7 +60,11 @@ export default defineStore('category', {
         throw error;
       }
     },
-    async linkCategory(baseUrl: string, link: TId): Promise<IResponseItem<ICategoryLink | null>> {
+    async linkCategory(
+      baseUrl: string,
+      development: boolean,
+      link: TId,
+    ): Promise<IResponseItem<ICategoryLink | null>> {
       try {
         const response = await axios.get<IResponseItem<ICategoryLink>>(`/api/private/site/category/link/${link}`, {
           baseURL: baseUrl,

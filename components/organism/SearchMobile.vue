@@ -155,7 +155,12 @@ const search = (): void => {
       loading.value = true;
 
       try {
-        const result = await apiReadSearchedCourses(config.public.apiUrl, query.value || '', 10);
+        const result = await apiReadSearchedCourses(
+          config.public.apiUrl,
+          config.public.development,
+          query.value || '',
+          10,
+        );
 
         if (result?.courses) {
           courses.value = coursesStoreToCoursesComponent(result?.courses);

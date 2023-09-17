@@ -7,6 +7,7 @@ import TId from '@/types/id';
 
 export const apiReadTeachers = async (
   apiUrl: string,
+  development: boolean,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -16,7 +17,13 @@ export const apiReadTeachers = async (
   } = teacher();
 
   const loadTeachers = async ():
-    Promise<IResponseItems<IFilterTeacher>> => readTeachers(apiUrl, offset, limit, filters);
+    Promise<IResponseItems<IFilterTeacher>> => readTeachers(
+    apiUrl,
+    development,
+    offset,
+    limit,
+    filters,
+  );
 
   const resultTeachers = await useAsyncData('teachers', async () => loadTeachers());
 
@@ -25,6 +32,7 @@ export const apiReadTeachers = async (
 
 export const apiGetTeacher = async (
   apiUrl: string,
+  development: boolean,
   id: TId,
 ): Promise<IFilterTeacher | null> => {
   const {
@@ -32,7 +40,7 @@ export const apiGetTeacher = async (
   } = teacher();
 
   const loadTeacher = async ():
-    Promise<IResponseItem<IFilterTeacher | null>> => getTeacher(apiUrl, id);
+    Promise<IResponseItem<IFilterTeacher | null>> => getTeacher(apiUrl, development, id);
 
   const resultTeacher = await useAsyncData('teacher', async () => loadTeacher());
 
@@ -41,6 +49,7 @@ export const apiGetTeacher = async (
 
 export const apiLinkTeacher = async (
   apiUrl: string,
+  development: boolean,
   link: string,
 ): Promise<ITeacherLink | null> => {
   const {
@@ -48,7 +57,7 @@ export const apiLinkTeacher = async (
   } = teacher();
 
   const loadTeacher = async ():
-    Promise<IResponseItem<ITeacherLink | null>> => linkTeacher(apiUrl, link);
+    Promise<IResponseItem<ITeacherLink | null>> => linkTeacher(apiUrl, development, link);
 
   const resultTeacher = await useAsyncData('teacher', async () => loadTeacher());
 

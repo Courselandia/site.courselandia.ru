@@ -20,6 +20,7 @@ export default defineStore('teacher', {
   actions: {
     async readTeachers(
       baseUrl: string,
+      development: boolean,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -39,7 +40,11 @@ export default defineStore('teacher', {
         throw error;
       }
     },
-    async getTeacher(baseUrl: string, id: TId): Promise<IResponseItem<IFilterTeacher>> {
+    async getTeacher(
+      baseUrl: string,
+      development: boolean,
+      id: TId,
+    ): Promise<IResponseItem<IFilterTeacher>> {
       try {
         const response = await axios.get<IResponseItem<IFilterTeacher>>(`/api/private/site/teacher/get/${id}`, {
           baseURL: baseUrl,
@@ -54,7 +59,11 @@ export default defineStore('teacher', {
         throw error;
       }
     },
-    async linkTeacher(baseUrl: string, link: string): Promise<IResponseItem<ITeacherLink>> {
+    async linkTeacher(
+      baseUrl: string,
+      development: boolean,
+      link: string,
+    ): Promise<IResponseItem<ITeacherLink>> {
       try {
         const response = await axios.get<IResponseItem<ITeacherLink>>(`/api/private/site/teacher/link/${link}`, {
           baseURL: baseUrl,

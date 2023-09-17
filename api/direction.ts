@@ -9,13 +9,16 @@ import IDirectionLink from '@/interfaces/stores/course/directionLink';
 import direction from '@/stores/direction';
 import TId from '@/types/id';
 
-export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirection>> => {
+export const apiReadDirections = async (
+  apiUrl: string,
+  development: boolean,
+): Promise<Array<IDirection>> => {
   const {
     readDirections,
   } = direction();
 
   const loadDirections = async ():
-    Promise<IResponseItems<IDirection>> => readDirections(apiUrl);
+    Promise<IResponseItems<IDirection>> => readDirections(apiUrl, development);
 
   const { directions } = storeToRefs(direction());
 
@@ -30,6 +33,7 @@ export const apiReadDirections = async (apiUrl: string): Promise<Array<IDirectio
 
 export const apiGetDirection = async (
   apiUrl: string,
+  development: boolean,
   id: TId,
 ): Promise<IDirection | null> => {
   const {
@@ -37,7 +41,7 @@ export const apiGetDirection = async (
   } = direction();
 
   const loadDirection = async ():
-    Promise<IResponseItem<IDirection | null>> => getDirection(apiUrl, id);
+    Promise<IResponseItem<IDirection | null>> => getDirection(apiUrl, development, id);
 
   const resultCategories = await useAsyncData('direction', async () => loadDirection());
 
@@ -46,6 +50,7 @@ export const apiGetDirection = async (
 
 export const apiLinkDirection = async (
   apiUrl: string,
+  development: boolean,
   link: string,
 ): Promise<IDirectionLink | null> => {
   const {
@@ -53,7 +58,7 @@ export const apiLinkDirection = async (
   } = direction();
 
   const loadDirection = async ():
-    Promise<IResponseItem<IDirectionLink | null>> => linkDirection(apiUrl, link);
+    Promise<IResponseItem<IDirectionLink | null>> => linkDirection(apiUrl, development, link);
 
   const resultDirection = await useAsyncData('direction', async () => loadDirection());
 

@@ -2,18 +2,21 @@ import { storeToRefs } from 'pinia';
 
 import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import IFilterSchool from '@/interfaces/stores/course/filterSchool';
+import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import ISchool from '@/interfaces/stores/school/school';
 import school from '@/stores/school';
 import TId from '@/types/id';
-import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 
-export const apiReadSchools = async (apiUrl: string): Promise<Array<ISchool>> => {
+export const apiReadSchools = async (
+  apiUrl: string,
+  development: boolean,
+): Promise<Array<ISchool>> => {
   const {
     readSchools,
   } = school();
 
   const loadSchools = async ():
-    Promise<IResponseItems<ISchool>> => readSchools(apiUrl);
+    Promise<IResponseItems<ISchool>> => readSchools(apiUrl, development);
 
   const { schools } = storeToRefs(school());
 
@@ -28,6 +31,7 @@ export const apiReadSchools = async (apiUrl: string): Promise<Array<ISchool>> =>
 
 export const apiGetSchool = async (
   apiUrl: string,
+  development: boolean,
   id: TId,
 ): Promise<IFilterSchool | null> => {
   const {
@@ -35,7 +39,7 @@ export const apiGetSchool = async (
   } = school();
 
   const loadSchool = async ():
-    Promise<IResponseItem<IFilterSchool | null>> => getSchool(apiUrl, id);
+    Promise<IResponseItem<IFilterSchool | null>> => getSchool(apiUrl, development, id);
 
   const resultCategories = await useAsyncData('school', async () => loadSchool());
 
@@ -44,6 +48,7 @@ export const apiGetSchool = async (
 
 export const apiLinkSchool = async (
   apiUrl: string,
+  development: boolean,
   link: string,
 ): Promise<ISchoolLink | null> => {
   const {
@@ -51,7 +56,7 @@ export const apiLinkSchool = async (
   } = school();
 
   const loadSchool = async ():
-    Promise<IResponseItem<ISchoolLink | null>> => linkSchool(apiUrl, link);
+    Promise<IResponseItem<ISchoolLink | null>> => linkSchool(apiUrl, development, link);
 
   const resultCategories = await useAsyncData('school', async () => loadSchool());
 

@@ -7,6 +7,7 @@ import TId from '@/types/id';
 
 export const apiReadSkills = async (
   apiUrl: string,
+  development: boolean,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -16,7 +17,13 @@ export const apiReadSkills = async (
   } = skill();
 
   const loadSkills = async ():
-    Promise<IResponseItems<IFilterSkill>> => readSkills(apiUrl, offset, limit, filters);
+    Promise<IResponseItems<IFilterSkill>> => readSkills(
+    apiUrl,
+    development,
+    offset,
+    limit,
+    filters,
+  );
 
   const resultSkills = await useAsyncData('skills', async () => loadSkills());
 
@@ -25,6 +32,7 @@ export const apiReadSkills = async (
 
 export const apiGetSkill = async (
   apiUrl: string,
+  development: boolean,
   id: TId,
 ): Promise<IFilterSkill | null> => {
   const {
@@ -32,7 +40,7 @@ export const apiGetSkill = async (
   } = skill();
 
   const loadSkills = async ():
-    Promise<IResponseItem<IFilterSkill | null>> => getSkill(apiUrl, id);
+    Promise<IResponseItem<IFilterSkill | null>> => getSkill(apiUrl, development, id);
 
   const resultSkill = await useAsyncData('skill', async () => loadSkills());
 
@@ -41,6 +49,7 @@ export const apiGetSkill = async (
 
 export const apiLinkSkill = async (
   apiUrl: string,
+  development: boolean,
   link: string,
 ): Promise<ISkillLink | null> => {
   const {
@@ -48,7 +57,7 @@ export const apiLinkSkill = async (
   } = skill();
 
   const loadSkills = async ():
-    Promise<IResponseItem<ISkillLink | null>> => linkSkill(apiUrl, link);
+    Promise<IResponseItem<ISkillLink | null>> => linkSkill(apiUrl, development, link);
 
   const resultSkill = await useAsyncData('skill', async () => loadSkills());
 

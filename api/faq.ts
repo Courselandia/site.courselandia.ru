@@ -2,13 +2,17 @@ import { IResponseItems } from '@/interfaces/response';
 import IFaq from '@/interfaces/stores/faq/faq';
 import faq from '@/stores/faq';
 
-export const apiReadFaqs = async (apiUrl: string, school: string): Promise<Array<IFaq>> => {
+export const apiReadFaqs = async (
+  apiUrl: string,
+  development: boolean,
+  school: string,
+): Promise<Array<IFaq>> => {
   const {
     readFaqs,
   } = faq();
 
   const loadFaqs = async ():
-    Promise<IResponseItems<IFaq>> => readFaqs(apiUrl, school);
+    Promise<IResponseItems<IFaq>> => readFaqs(apiUrl, development, school);
 
   const resultFaqs = await useAsyncData('faqs', async () => loadFaqs());
 

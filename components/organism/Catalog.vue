@@ -896,6 +896,7 @@ const load = async (
 
     return await apiReadCourses(
       config.public.apiUrl,
+      config.public.development,
       pageValueCurrent * sizeValue,
       sizeValue,
       sorts,
@@ -1048,7 +1049,13 @@ const getFilters = (): IFilters => {
 const onLoadItems = async (name: string, callback?: Function): Promise<void> => {
   if (name === 'professions') {
     if (professions.value.length <= 11) {
-      const result = await apiReadProfessions(config.public.apiUrl, null, null, getFilters());
+      const result = await apiReadProfessions(
+        config.public.apiUrl,
+        config.public.development,
+        null,
+        null,
+        getFilters(),
+      );
       professions.value = courseFilterStoreProfessionsToComponentProfessions(result);
     }
 
@@ -1059,7 +1066,13 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'categories') {
     if (categories.value.length <= 11) {
-      const result = await apiReadCategories(config.public.apiUrl, null, null, getFilters());
+      const result = await apiReadCategories(
+        config.public.apiUrl,
+        config.public.development,
+        null,
+        null,
+        getFilters(),
+      );
       categories.value = courseFilterStoreCategoriesToComponentCategories(result);
     }
 
@@ -1070,7 +1083,13 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'teachers') {
     if (teachers.value.length <= 11) {
-      const result = await apiReadTeachers(config.public.apiUrl, null, null, getFilters());
+      const result = await apiReadTeachers(
+        config.public.apiUrl,
+        config.public.development,
+        null,
+        null,
+        getFilters(),
+      );
       teachers.value = courseFilterStoreTeachersToComponentTeachers(result);
     }
 
@@ -1081,7 +1100,13 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'skills') {
     if (skills.value.length <= 11) {
-      const result = await apiReadSkills(config.public.apiUrl, null, null, getFilters());
+      const result = await apiReadSkills(
+        config.public.apiUrl,
+        config.public.development,
+        null,
+        null,
+        getFilters(),
+      );
       skills.value = courseFilterStoreSkillsToComponentSkills(result);
     }
 
@@ -1092,7 +1117,13 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'tools') {
     if (tools.value.length <= 11) {
-      const result = await apiReadTools(config.public.apiUrl, null, null, getFilters());
+      const result = await apiReadTools(
+        config.public.apiUrl,
+        config.public.development,
+        null,
+        null,
+        getFilters(),
+      );
       tools.value = courseFilterStoreToolsToComponentTools(result);
     }
 
@@ -1109,6 +1140,7 @@ try {
 
   const result = await apiReadCourses(
     config.public.apiUrl,
+    config.public.development,
     0,
     size.value * currentPage.value,
     getSort(sort.value),

@@ -11,7 +11,11 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   const config = useRuntimeConfig();
 
   try {
-    const result = await apiLinkSchool(config.public.apiUrl, link as string);
+    const result = await apiLinkSchool(
+      config.public.apiUrl,
+      config.public.development,
+      link as string,
+    );
 
     const { itemLinkSchool } = storeToRefs(school());
 

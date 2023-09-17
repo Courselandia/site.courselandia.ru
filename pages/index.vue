@@ -157,7 +157,9 @@ const listDirections = ref<IMenu[]>();
 const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));
 
 try {
-  listDirections.value = await directionsToMenu(await apiReadDirections(config.public.apiUrl));
+  listDirections.value = await directionsToMenu(
+    await apiReadDirections(config.public.apiUrl, config.public.development),
+  );
 } catch (error: any) {
   console.error(error.message);
 }
@@ -165,7 +167,9 @@ try {
 const courses = ref<ICourse[]>();
 
 try {
-  courses.value = coursesStoreToCoursesComponent(await apiReadRatedCourses(config.public.apiUrl));
+  courses.value = coursesStoreToCoursesComponent(
+    await apiReadRatedCourses(config.public.apiUrl, config.public.development),
+  );
 } catch (error: any) {
   console.error(error.message);
 }
