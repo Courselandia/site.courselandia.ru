@@ -11,6 +11,8 @@ import Catalog from '@/components/organism/Catalog.vue';
 definePageMeta({
   middleware: [
     'course-section-school',
+    'preload-directions',
+    'preload-schools',
   ],
 });
 </script>

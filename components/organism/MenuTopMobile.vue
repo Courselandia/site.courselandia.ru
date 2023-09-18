@@ -183,6 +183,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
@@ -191,14 +192,14 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { apiReadDirections } from '@/api/direction';
-import { apiReadSchools } from '@/api/school';
 import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
+import directionStore from '@/stores/direction';
+import school from '@/stores/school';
 
 const props = defineProps({
   show: {
@@ -230,8 +231,21 @@ watch(showValue, () => {
 const router = useRouter();
 const menu = ref<string | null>(null);
 const direction = ref<number | null>(null);
-const schools = await apiReadSchools(config.public.apiUrl, config.public.development);
-const directions = await apiReadDirections(config.public.apiUrl, config.public.development);
+
+const { directions } = storeToRefs(directionStore());
+const listDirections = ref<IMenu[]>();
+const listDirectionsWithCategories = ref<IMenu[]>([]);
+
+const { schools } = storeToRefs(school());
+const listSchools = ref<IMenu[]>(schoolsToMenu(schools.value || null));
+const listSchoolReviews = ref<IListSchoolReview[]>(schoolsToSchoolReviews(schools.value || null));
+
+try {
+  listDirections.value = await directionsToMenu(directions.value);
+  listDirectionsWithCategories.value = await directionsToMenu(directions.value);
+} catch (error: any) {
+  console.error(error.message);
+}
 
 const onClick = (name: string): void => {
   menu.value = name;
@@ -249,22 +263,6 @@ const onClickBackRemoveDirection = (): void => {
   direction.value = null;
 };
 
-const listDirections = ref<IMenu[]>();
-
-try {
-  listDirections.value = await directionsToMenu(directions);
-} catch (error: any) {
-  console.error(error.message);
-}
-
-const listDirectionsWithCategories = ref<IMenu[]>([]);
-
-try {
-  listDirectionsWithCategories.value = await directionsToMenu(directions);
-} catch (error: any) {
-  console.error(error.message);
-}
-
 const menuCourses = computed<IMenu[]>(() => [
   {
     label: 'Полный каталог',
@@ -273,23 +271,6 @@ const menuCourses = computed<IMenu[]>(() => [
   },
   ...listDirectionsWithCategories.value,
 ]);
-
-const listSchools = ref<IMenu[]>();
-
-try {
-  listSchools.value = schoolsToMenu(schools);
-} catch (error: any) {
-  console.error(error.message);
-}
-
-const listSchoolReviews = ref<IListSchoolReview[]>();
-
-try {
-  listSchools.value = schoolsToMenu(schools);
-  listSchoolReviews.value = schoolsToSchoolReviews(schools);
-} catch (error: any) {
-  console.error(error.message);
-}
 
 const onClickLink = (link: string): void => {
   router.push(link);

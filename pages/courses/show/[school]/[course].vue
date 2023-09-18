@@ -8,6 +8,8 @@ import CourseView from '@/components/organism/CourseView.vue';
 definePageMeta({
   middleware: [
     'course',
+    'preload-directions',
+    'preload-schools',
   ],
 });
 </script>

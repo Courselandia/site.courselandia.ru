@@ -3,7 +3,7 @@ import IDirection from '@/interfaces/stores/course/direction';
 import TId from '@/types/id';
 
 const directionsToMenu = async (
-  directions: Array<IDirection>,
+  directions: Array<IDirection> | null,
   addAllCourse: boolean = false,
 ): Promise<Array<IMenu>> => {
   const images: Record<TId, string> = {
@@ -19,9 +19,11 @@ const directionsToMenu = async (
 
   let countAll: number = 0;
 
-  directions.forEach((direction) => {
-    countAll += direction.count;
-  });
+  if (directions) {
+    directions.forEach((direction) => {
+      countAll += direction.count;
+    });
+  }
 
   const result: Array<IMenu> = [];
 
@@ -34,32 +36,34 @@ const directionsToMenu = async (
     };
   }
 
-  directions.forEach((direction) => {
-    const index = result.length;
+  if (directions) {
+    directions.forEach((direction) => {
+      const index = result.length;
 
-    result[index] = {
-      label: direction.name,
-      path: `/courses/direction/${direction.link}`,
-      amount: direction.count,
-      image: images[direction.id] || undefined,
-      children: [],
-    };
+      result[index] = {
+        label: direction.name,
+        path: `/courses/direction/${direction.link}`,
+        amount: direction.count,
+        image: images[direction.id] || undefined,
+        children: [],
+      };
 
-    if (direction.categories) {
-      const children: Array<IMenu> = [];
+      if (direction.categories) {
+        const children: Array<IMenu> = [];
 
-      direction.categories.forEach((category) => {
-        if (result[index].children !== undefined) {
-          children[children.length] = {
-            label: category.name,
-            path: `/courses/category/${category.link}`,
-          };
-        }
-      });
+        direction.categories.forEach((category) => {
+          if (result[index].children !== undefined) {
+            children[children.length] = {
+              label: category.name,
+              path: `/courses/category/${category.link}`,
+            };
+          }
+        });
 
-      result[index].children = children;
-    }
-  });
+        result[index].children = children;
+      }
+    });
+  }
 
   return result;
 };

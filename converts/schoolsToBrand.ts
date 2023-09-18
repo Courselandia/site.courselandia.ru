@@ -2,21 +2,23 @@ import IBrand from '@/interfaces/components/organism/brands';
 import ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToBrand = (
-  schools: Array<ISchool>,
+  schools: Array<ISchool> | null,
 ): Array<IBrand> => {
   const result: Array<IBrand> = [];
 
-  schools.forEach((school) => {
-    const index = result.length;
+  if (schools) {
+    schools.forEach((school) => {
+      const index = result.length;
 
-    result[index] = {
-      label: school.name,
-      path: `/courses/school/${school.link}`,
-      image: school.image_logo_id?.path || null,
-      width: school.image_logo_id?.width || null,
-      height: school.image_logo_id?.height || null,
-    };
-  });
+      result[index] = {
+        label: school.name,
+        path: `/courses/school/${school.link}`,
+        image: school.image_logo_id?.path || null,
+        width: school.image_logo_id?.width || null,
+        height: school.image_logo_id?.height || null,
+      };
+    });
+  }
 
   return result;
 };

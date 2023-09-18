@@ -195,6 +195,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
@@ -202,8 +203,6 @@ import {
   watch,
 } from 'vue';
 
-import { apiReadDirections } from '@/api/direction';
-import { apiReadSchools } from '@/api/school';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import AlphabeticList from '@/components/molecules/AlphabeticList.vue';
@@ -216,6 +215,8 @@ import schoolsToMenu from '@/converts/schoolsToMenu';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import IMenu from '@/interfaces/menu';
+import direction from '@/stores/direction';
+import school from '@/stores/school';
 
 const props = defineProps({
   menu: {
@@ -245,12 +246,12 @@ watch(menu, () => {
 });
 
 const index = ref(0);
+
+const { directions } = storeToRefs(direction());
 const listDirections = ref<IMenu[]>();
 
 try {
-  listDirections.value = await directionsToMenu(
-    await apiReadDirections(config.public.apiUrl, config.public.development),
-  );
+  listDirections.value = await directionsToMenu(directions.value);
 } catch (error: any) {
   console.error(error.message);
 }
@@ -266,16 +267,9 @@ const menuCourses = computed<IMenu[]>(() => [
   ...listDirectionsWithCategories.value,
 ]);
 
-const listSchools = ref<IMenu[]>();
-const listSchoolReviews = ref<IListSchoolReview[]>();
-
-try {
-  const schools = await apiReadSchools(config.public.apiUrl, config.public.development);
-  listSchools.value = schoolsToMenu(schools);
-  listSchoolReviews.value = schoolsToSchoolReviews(schools);
-} catch (error: any) {
-  console.error(error.message);
-}
+const { schools } = storeToRefs(school());
+const listSchools = ref<IMenu[]>(schoolsToMenu(schools.value));
+const listSchoolReviews = ref<IListSchoolReview[]>(schoolsToSchoolReviews(schools.value));
 
 const onClickDirection = (indx: number): void => {
   index.value = indx;

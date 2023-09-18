@@ -67,11 +67,23 @@ export default defineStore('course', {
         const hasInitFilter = (flts: IFilters | null = null): boolean => {
           const hasOneFilter = Object.keys(flts || {}).length === 1;
 
-          return (hasOneFilter && flts !== null && flts['directions-id'] !== undefined);
+          return (
+            hasOneFilter
+            && flts !== null
+            && (
+              flts['directions-id'] !== undefined
+              || flts['school-id'] !== undefined
+              || flts['categories-id'] !== undefined
+              || flts['professions-id'] !== undefined
+              || flts['teachers-id'] !== undefined
+              || flts['skills-id'] !== undefined
+              || flts['tools-id'] !== undefined
+            )
+          );
         };
 
         if (
-          development
+          !development
           && offset === 0
           && limit === 36
           && sorts?.name === 'ASC'

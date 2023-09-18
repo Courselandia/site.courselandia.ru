@@ -45,7 +45,8 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.NUXT_API_URL,
       siteUrl: process.env.NUXT_SITE_URL,
-      development: process.env.NODE_ENV === 'development',
+      // development: process.env.NODE_ENV === 'development',
+      development: false,
       googleMeasurementId: process.env.GOOGLE_MEASUREMENT_ID,
       yandexMeasurementId: process.env.YANDEX_METRIKA_ID,
     },
@@ -137,6 +138,7 @@ export default defineNuxtConfig({
   experimental: {
     inlineSSRStyles: false,
   },
+  /*
   hooks: {
     'nitro:config': async function (nitroConfig) {
       // Reviews
@@ -242,6 +244,7 @@ export default defineNuxtConfig({
       nitroConfig.prerender?.routes?.push(...routers);
     },
   },
+  */
   nitro: {
     prerender: {
       concurrency: 20,

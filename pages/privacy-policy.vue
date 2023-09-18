@@ -759,3 +759,22 @@
     </p>
   </div>
 </template>
+
+<script lang="ts" setup>
+useHead({
+  title: 'Политика в отношении обработки персональных данных',
+  meta: [
+    {
+      name: 'description',
+      content: 'Наша политика безопасности по обработке персональных данных.',
+    },
+  ],
+});
+
+definePageMeta({
+  middleware: [
+    'preload-directions',
+    'preload-schools',
+  ],
+});
+</script>

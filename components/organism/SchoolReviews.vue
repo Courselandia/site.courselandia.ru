@@ -1,7 +1,88 @@
 <template>
   <div class="school-reviews">
     <div class="school-reviews__directions">
-
+      <Tags>
+        <Tag
+          bck="white"
+          :border="direction === null ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(null)"
+        >
+          Все направления
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.PROGRAMMING ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.PROGRAMMING)"
+        >
+          Программирование
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.MARKETING ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.MARKETING)"
+        >
+          Маркетинг
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.DESIGN ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.DESIGN)"
+        >
+          Дизайн
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.BUSINESS ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.BUSINESS)"
+        >
+          Бизнес и управление
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.ANALYTICS ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.ANALYTICS)"
+        >
+          Аналитика
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.GAMES ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.GAMES)"
+        >
+          Игры
+        </Tag>
+        <Tag
+          bck="white"
+          :border="direction === EDirection.OTHER ? 'blue2' : 'grey2'"
+          border-hover="blue2"
+          color="black"
+          cursor
+          @click="onSelectDirection(EDirection.OTHER)"
+        >
+          Другие профессии
+        </Tag>
+      </Tags>
     </div>
     <div class="school-reviews__items">
       <div class="school-reviews__header">
@@ -84,6 +165,116 @@
               </div>
             </div>
             <div class="school-reviews__group">
+              <div class="school-reviews__td school-reviews__td--courses">
+                <Tags
+                  v-if="school.amount_courses.all"
+                >
+                  <Tag
+                    v-if="school.amount_courses.all"
+                    :to="`/courses/school/${school.link}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    <Plural
+                      v-if="school.amount_courses.all"
+                      :number="school.amount_courses.all"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />
+                    от {{ school.label }}
+                  </Tag>
+                  <Tag
+                    v-if="school.amount_courses.direction_programming"
+                    :to="`/courses/school/${school.link}?filters[direction]=${EDirection.PROGRAMMING}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    Программирование
+                    (<Plural
+                      v-if="school.amount_courses.direction_programming"
+                      :number="school.amount_courses.direction_programming"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />)
+                  </Tag>
+                  <Tag
+                    v-if="school.amount_courses.direction_marketing"
+                    :to="`/courses/school/${school.link}?filters[direction]=${EDirection.MARKETING}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    Маркетинг
+                    (<Plural
+                      v-if="school.amount_courses.direction_marketing"
+                      :number="school.amount_courses.direction_marketing"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />)
+                  </Tag>
+                  <Tag
+                    v-if="school.amount_courses.direction_design"
+                    :to="`/courses/school/${school.link}?filters[direction]=${EDirection.DESIGN}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    Дизайн
+                    (<Plural
+                      v-if="school.amount_courses.direction_design"
+                      :number="school.amount_courses.direction_design"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />)
+                  </Tag>
+                  <Tag
+                    v-if="school.amount_courses.direction_business"
+                    :to="`/courses/school/${school.link}?filters[direction]=${EDirection.BUSINESS}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    Бизнес и управление
+                    (<Plural
+                      v-if="school.amount_courses.direction_business"
+                      :number="school.amount_courses.direction_business"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />)
+                  </Tag>
+                  <Tag
+                    v-if="school.amount_courses.direction_analytics"
+                    :to="`/courses/school/${school.link}?filters[direction]=${EDirection.ANALYTICS}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    Аналитика
+                    (<Plural
+                      v-if="school.amount_courses.direction_analytics"
+                      :number="school.amount_courses.direction_analytics"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />)
+                  </Tag>
+                  <Tag
+                    v-if="school.amount_courses.direction_games"
+                    :to="`/courses/school/${school.link}?filters[direction]=${EDirection.GAMES}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    Игры
+                    (<Plural
+                      v-if="school.amount_courses.direction_games"
+                      :number="school.amount_courses.direction_games"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />)
+                  </Tag>
+                  <Tag
+                    v-if="school.amount_courses.direction_other"
+                    :to="`/courses/school/${school.link}?filters[direction]=${EDirection.OTHER}`"
+                    bck="blue1"
+                    cursor
+                  >
+                    Другие профессии
+                    (<Plural
+                      v-if="school.amount_courses.direction_other"
+                      :number="school.amount_courses.direction_other"
+                      :conditions="{ 1: 'курс', '2+': 'курса', '5+': 'курсов' }"
+                    />)
+                  </Tag>
+                </Tags>
+              </div>
               <div class="school-reviews__td school-reviews__td--rating">
                 <div class="school-reviews__reviews">
                   <div class="school-reviews__content-rating">
@@ -128,6 +319,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   computed,
   ref,
@@ -137,7 +329,6 @@ import {
   useRoute,
 } from 'vue-router';
 
-import { apiReadSchools } from '@/api/school';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
@@ -149,7 +340,7 @@ import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import EDirection from '@/enums/direction';
 import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import ISort from '@/interfaces/sort';
-import ISchool from '@/interfaces/stores/school/school';
+import school from '@/stores/school';
 import { TOrder } from '@/types/order';
 import TSortOrder from '@/types/sortOrder';
 
@@ -167,14 +358,8 @@ const sort = ref<ISort>({
   sortBy: sortByCurrent || sortDefault.sortBy,
   sortOrder: sortOrderCurrent as TOrder || sortDefault.sortOrder,
 });
-const schools = ref<Array<ISchool>>();
+const { schools } = storeToRefs(school());
 const direction = ref<EDirection | null>(Number(directionCurrent) as unknown as EDirection || null);
-
-try {
-  schools.value = await apiReadSchools(config.public.apiUrl, config.public.development);
-} catch (error: any) {
-  console.error(error.message);
-}
 
 const toHistory = (): void => {
   let url = '/reviews';
@@ -267,33 +452,33 @@ const listSchoolReviews = computed<IListSchoolReview[] | null>(() => {
   });
 
   if (direction.value) {
-    items = items.filter((school: IListSchoolReview) => {
+    items = items.filter((sch: IListSchoolReview) => {
       if (direction.value === EDirection.PROGRAMMING) {
-        return !!school.amount_courses.direction_programming;
+        return !!sch.amount_courses.direction_programming;
       }
 
       if (direction.value === EDirection.MARKETING) {
-        return !!school.amount_courses.direction_marketing;
+        return !!sch.amount_courses.direction_marketing;
       }
 
       if (direction.value === EDirection.DESIGN) {
-        return !!school.amount_courses.direction_marketing;
+        return !!sch.amount_courses.direction_marketing;
       }
 
       if (direction.value === EDirection.BUSINESS) {
-        return !!school.amount_courses.direction_business;
+        return !!sch.amount_courses.direction_business;
       }
 
       if (direction.value === EDirection.ANALYTICS) {
-        return !!school.amount_courses.direction_analytics;
+        return !!sch.amount_courses.direction_analytics;
       }
 
       if (direction.value === EDirection.GAMES) {
-        return !!school.amount_courses.direction_games;
+        return !!sch.amount_courses.direction_games;
       }
 
       if (direction.value === EDirection.OTHER) {
-        return !!school.amount_courses.direction_other;
+        return !!sch.amount_courses.direction_other;
       }
 
       return false;

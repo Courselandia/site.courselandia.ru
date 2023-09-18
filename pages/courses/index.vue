@@ -8,6 +8,8 @@ import Catalog from '@/components/organism/Catalog.vue';
 definePageMeta({
   middleware: [
     'course-section',
+    'preload-directions',
+    'preload-schools',
   ],
 });
 </script>

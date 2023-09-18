@@ -55,6 +55,13 @@ const { error } = toRefs(props);
 useHead({
   title: `Ошибка ${error.value.statusCode}`,
 });
+
+definePageMeta({
+  middleware: [
+    'preload-directions',
+    'preload-schools',
+  ],
+});
 </script>
 
 <style lang="scss">

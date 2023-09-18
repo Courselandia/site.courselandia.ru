@@ -8,6 +8,8 @@ import SchoolReview from '@/components/organism/SchoolReview.vue';
 definePageMeta({
   middleware: [
     'school-reviews',
+    'preload-directions',
+    'preload-schools',
   ],
 });
 </script>

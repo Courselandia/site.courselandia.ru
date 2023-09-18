@@ -51,4 +51,11 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
+
+definePageMeta({
+  middleware: [
+    'preload-directions',
+    'preload-schools',
+  ],
+});
 </script>

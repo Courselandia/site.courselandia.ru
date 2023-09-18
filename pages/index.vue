@@ -121,12 +121,12 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   ref,
 } from 'vue';
 
 import { apiReadRatedCourses } from '@/api/course';
-import { apiReadDirections } from '@/api/direction';
 import AboutUs from '@/components/atoms/AboutUs.vue';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -141,6 +141,7 @@ import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCourses
 import directionsToMenu from '@/converts/directionsToMenu';
 import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
+import direction from '@/stores/direction';
 //
 useHead({
   title: 'Агрегатор онлайн-курсов Courselandia',
@@ -153,13 +154,12 @@ useHead({
 });
 
 const config = useRuntimeConfig();
+const { directions } = storeToRefs(direction());
 const listDirections = ref<IMenu[]>();
 const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));
 
 try {
-  listDirections.value = await directionsToMenu(
-    await apiReadDirections(config.public.apiUrl, config.public.development),
-  );
+  listDirections.value = await directionsToMenu(directions.value);
 } catch (error: any) {
   console.error(error.message);
 }
@@ -173,6 +173,13 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
+
+definePageMeta({
+  middleware: [
+    'preload-directions',
+    'preload-schools',
+  ],
+});
 </script>
 
 <style lang="scss">

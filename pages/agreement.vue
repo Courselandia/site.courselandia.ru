@@ -1192,5 +1192,18 @@
 <script lang="ts" setup>
 useHead({
   title: 'Пользовательское соглашение',
+  meta: [
+    {
+      name: 'description',
+      content: 'Полный текст пользовательского соглашения, который вы обязуетель исполнять если используете наш ресур.',
+    },
+  ],
+});
+
+definePageMeta({
+  middleware: [
+    'preload-directions',
+    'preload-schools',
+  ],
 });
 </script>

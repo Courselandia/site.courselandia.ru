@@ -26,4 +26,11 @@ useHead({
     },
   ],
 });
+
+definePageMeta({
+  middleware: [
+    'preload-directions',
+    'preload-schools',
+  ],
+});
 </script>

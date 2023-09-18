@@ -50,38 +50,31 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   ref,
 } from 'vue';
 
-import { apiReadDirections } from '@/api/direction';
-import { apiReadSchools } from '@/api/school';
 import Logo from '@/components/atoms/Logo.vue';
 import MenuBottom from '@/components/atoms/MenuBottom.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import IMenu from '@/interfaces/menu';
+import direction from '@/stores/direction';
+import school from '@/stores/school';
 
 const currentYear = ref(new Date().getFullYear());
 const foundYear = 2023;
 
 const config = useRuntimeConfig();
-const menuSchools = ref<IMenu[]>();
+const { schools } = storeToRefs(school());
+const menuSchools = ref<IMenu[]>(schoolsToMenu(schools.value));
 
-try {
-  menuSchools.value = schoolsToMenu(
-    await apiReadSchools(config.public.apiUrl, config.public.development),
-  );
-} catch (error: any) {
-  console.error(error.message);
-}
-
+const { directions } = storeToRefs(direction());
 const menuDirections = ref<IMenu[]>();
 
 try {
-  menuDirections.value = await directionsToMenu(
-    await apiReadDirections(config.public.apiUrl, config.public.development),
-  );
+  menuDirections.value = await directionsToMenu(directions.value);
 } catch (error: any) {
   console.error(error.message);
 }

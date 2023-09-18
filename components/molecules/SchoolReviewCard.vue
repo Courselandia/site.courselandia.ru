@@ -208,7 +208,9 @@
           </div>
         </div>
       </div>
-      <div class="school-review-card__others">
+      <div
+        v-if="otherSchools?.length"
+        class="school-review-card__others">
         <div class="school-review-card__others-label">
           Отзывы о других школах
         </div>
@@ -248,6 +250,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   PropType,
   ref,
@@ -262,6 +265,7 @@ import Plural from '@/components/atoms/Plural.vue';
 import plural from '@/helpers/plural';
 import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import ISchool from '@/interfaces/stores/school/school';
+import schoolStore from '@/stores/school';
 
 const props = defineProps({
   school: {
@@ -297,33 +301,30 @@ const conditions = {
   '5+': 'отзывов',
 };
 
-const sortSchools = (schools: Array<ISchool>): Array<ISchool> => {
-  const result = schools.sort((first: ISchool, second: ISchool) => {
-    if (first.rating > second.rating) {
-      return -1;
-    }
+const sortSchools = (items: Array<ISchool> | null): Array<ISchool> | null => {
+  if (items) {
+    return items.sort((first: ISchool, second: ISchool) => {
+      if (first.rating > second.rating) {
+        return -1;
+      }
 
-    if (first.rating < second.rating) {
-      return 1;
-    }
+      if (first.rating < second.rating) {
+        return 1;
+      }
 
-    return 0;
-  });
+      return 0;
+    });
+  }
 
-  return result;
+  return null;
 };
 
-const otherSchools = ref<Array<ISchool>>();
-
-try {
-  const fetchedOtherSchools = await apiReadSchools(config.public.apiUrl, config.public.development);
-
-  otherSchools.value = sortSchools(
-    fetchedOtherSchools.filter((school: ISchool) => !!school.reviews_count),
-  ).slice(0, 4);
-} catch (error: any) {
-  console.error(error.message);
-}
+const { schools } = storeToRefs(schoolStore());
+const otherSchools = ref<Array<ISchool> | null>(
+  sortSchools(
+    schools.value?.filter((item: ISchool) => !!item.reviews_count) || null,
+  )?.slice(0, 4) || null,
+);
 
 const ratingCurrent = ref<number | null>(rating.value);
 

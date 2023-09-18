@@ -2,19 +2,21 @@ import IMenu from '@/interfaces/menu';
 import ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToMenu = (
-  schools: Array<ISchool>,
+  schools: Array<ISchool> | null,
 ): Array<IMenu> => {
   const result: Array<IMenu> = [];
 
-  schools.forEach((school) => {
-    const index = result.length;
+  if (schools) {
+    schools.forEach((school) => {
+      const index = result.length;
 
-    result[index] = {
-      label: school.name,
-      path: `/courses/school/${school.link}`,
-      link: school.link,
-    };
-  });
+      result[index] = {
+        label: school.name,
+        path: `/courses/school/${school.link}`,
+        link: school.link,
+      };
+    });
+  }
 
   return result;
 };
