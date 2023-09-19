@@ -9,7 +9,6 @@ import {
 } from '@/interfaces/response';
 import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 import ITeacherLink from '@/interfaces/stores/course/teacherLink';
-import TId from '@/types/id';
 
 export default defineStore('teacher', {
   state: () => ({

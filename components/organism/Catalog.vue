@@ -579,86 +579,12 @@ const getRatings = (rtgs: Array<IRatingStore>): Array<IRating> => {
 
 const config = useRuntimeConfig();
 
-const getMetaTitle = (): string => {
-  if (section === 'direction' && itemLinkDirection.value?.metatag?.title) {
-    return itemLinkDirection.value.metatag.title;
-  }
-
-  if (section === 'category' && itemLinkCategory.value?.metatag?.title) {
-    return itemLinkCategory.value?.metatag?.title;
-  }
-
-  if (section === 'profession' && itemLinkProfession.value?.metatag?.title) {
-    return itemLinkProfession.value?.metatag?.title;
-  }
-
-  if (section === 'school' && itemLinkSchool.value?.metatag?.title) {
-    return itemLinkSchool.value?.metatag?.title;
-  }
-
-  if (section === 'skill' && itemLinkSkill.value?.metatag?.title) {
-    return itemLinkSkill.value?.metatag?.title;
-  }
-
-  if (section === 'teacher' && itemLinkTeacher.value?.metatag?.title) {
-    return itemLinkTeacher.value?.metatag?.title;
-  }
-
-  if (section === 'tool' && itemLinkTool.value?.metatag?.title) {
-    return itemLinkTool.value?.metatag?.title;
-  }
-
-  return 'Каталог онлайн курсов от Courselandia';
-};
-
-const getMetaDescription = (): string => {
-  if (section === 'direction' && itemLinkDirection.value?.metatag?.description) {
-    return itemLinkDirection.value.metatag.description;
-  }
-
-  if (section === 'category' && itemLinkCategory.value?.metatag?.description) {
-    return itemLinkCategory.value?.metatag?.description;
-  }
-
-  if (section === 'profession' && itemLinkProfession.value?.metatag?.description) {
-    return itemLinkProfession.value?.metatag?.description;
-  }
-
-  if (section === 'school' && itemLinkSchool.value?.metatag?.description) {
-    return itemLinkSchool.value?.metatag?.description;
-  }
-
-  if (section === 'skill' && itemLinkSkill.value?.metatag?.description) {
-    return itemLinkSkill.value?.metatag?.description;
-  }
-
-  if (section === 'teacher' && itemLinkTeacher.value?.metatag?.description) {
-    return itemLinkTeacher.value?.metatag?.description;
-  }
-
-  if (section === 'tool' && itemLinkTool.value?.metatag?.description) {
-    return itemLinkTool.value?.metatag?.description;
-  }
-
-  return 'Каталог курсов от ведущих онлайн школ по разным направлениям. Удобный поиск по профессиям, направлениям, инструментам и навыкам. Найди свой курс быстро и легко.';
-};
-
 const getMetaCanonical = (): string => {
   if (process.client) {
     return `${config.public.siteUrl}${window.location.pathname}`;
   }
 
   return `${config.public.siteUrl}${route.path}`;
-};
-
-const description = ref(getMetaDescription());
-const title = ref(getMetaTitle());
-const canonical = ref(getMetaCanonical());
-
-const setMeta = (): void => {
-  title.value = getMetaTitle();
-  description.value = getMetaDescription();
-  canonical.value = getMetaCanonical();
 };
 
 const setHeader = (result: IApiReadCourses | null = null): void => {
@@ -946,6 +872,47 @@ const reload = async (
 
       if (result.total) {
         stopScrollLoader.value = (currentPage.value * size.value) >= result.total;
+      }
+
+      if (result.description?.metatag?.title || result.description?.metatag?.description) {
+        useHead({
+          title: result.description?.metatag?.title || '',
+          meta: [
+            {
+              name: 'description',
+              content: result.description?.metatag?.description || '',
+            },
+            {
+              property: 'og:title',
+              content: result.description?.metatag?.title || '',
+            },
+            {
+              property: 'og:description',
+              content: result.description?.metatag?.description || '',
+            },
+          ],
+        });
+      } else {
+        const title = 'Каталог онлайн курсов от Courselandia';
+        const description = 'Каталог курсов от ведущих онлайн школ по разным направлениям. Удобный поиск по профессиям, направлениям, инструментам и навыкам. Найди свой курс быстро и легко.';
+
+        useHead({
+          title,
+          meta: [
+            {
+              name: 'description',
+              content: description,
+            },
+            {
+              property: 'og:title',
+              content: title,
+            },
+            {
+              property: 'og:description',
+              content: description,
+            },
+          ],
+        });
       }
     } else {
       courses.value = [];
@@ -1457,33 +1424,18 @@ watch(route, async () => {
 });
 
 const itemListElements = computed<ListItem[]>(
-  () => Object.values(courses.value).map((course: ICourse, index: number) => ({
+  () => Object.values(courses.value).map((itm: ICourse, index: number) => ({
     '@type': 'ListItem',
     position: index + 1,
-    url: `${config.public.siteUrl}${course.link}`,
+    url: `${config.public.siteUrl}${itm.link}`,
   })),
 );
 
 useServerHead({
-  title,
-  meta: [
-    {
-      name: 'description',
-      content: description,
-    },
-    {
-      property: 'og:title',
-      content: title,
-    },
-    {
-      property: 'og:description',
-      content: description,
-    },
-  ],
   link: [
     {
       rel: 'canonical',
-      href: canonical,
+      href: getMetaCanonical(),
     },
   ],
 });

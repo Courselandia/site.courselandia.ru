@@ -142,7 +142,6 @@ export default defineNuxtConfig({
     'nitro:config': async function (nitroConfig) {
       let routers: string[] = [];
 
-      /*
       // Courses
       const responseCourses = await axios.get<IResponseData<IApiReadCourses>>('/api/private/site/course/read', {
         baseURL: process.env.NUXT_API_URL,
@@ -154,9 +153,7 @@ export default defineNuxtConfig({
         .map((item: ICourse) => `/courses/show/${item.school?.link}/${item.link}`);
 
       nitroConfig.prerender?.routes?.push(...routers);
-       */
 
-      /*
       // Skills
       const responseSkills = await axios.get<IResponseItems<IFilterSkill>>('/api/private/site/course/skills', {
         baseURL: process.env.NUXT_API_URL,
@@ -234,7 +231,7 @@ export default defineNuxtConfig({
         .map((item: ISchool) => `/courses/school/${item.link}`);
 
       nitroConfig.prerender?.routes?.push(...routers);
-*/
+
       // Directions
       const responseDirections = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
         baseURL: process.env.NUXT_API_URL,
@@ -244,7 +241,6 @@ export default defineNuxtConfig({
 
       routers = directions
         .map((item: IDirection) => `/courses/direction/${item.link}`);
-
 
       nitroConfig.prerender?.routes?.push(...routers);
     },

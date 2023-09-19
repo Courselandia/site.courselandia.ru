@@ -9,7 +9,6 @@ import {
 } from '@/interfaces/response';
 import IFilterProfession from '@/interfaces/stores/course/filterProfession';
 import IProfessionLink from '@/interfaces/stores/course/professionLink';
-import TId from '@/types/id';
 
 export default defineStore('profession', {
   state: () => ({

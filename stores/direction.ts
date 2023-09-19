@@ -7,7 +7,6 @@ import {
 } from '@/interfaces/response';
 import IDirection from '@/interfaces/stores/course/direction';
 import IDirectionLink from '@/interfaces/stores/course/directionLink';
-import TId from '@/types/id';
 
 export default defineStore('direction', {
   state: () => ({

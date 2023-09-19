@@ -7,7 +7,6 @@ import {
 } from '@/interfaces/response';
 import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import ISchool from '@/interfaces/stores/school/school';
-import TId from '@/types/id';
 
 export default defineStore('school', {
   state: () => ({

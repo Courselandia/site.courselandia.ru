@@ -9,7 +9,6 @@ import {
 } from '@/interfaces/response';
 import IFilterSkill from '@/interfaces/stores/course/filterSkill';
 import ISkillLink from '@/interfaces/stores/course/skillLink';
-import TId from '@/types/id';
 
 export default defineStore('skill', {
   state: () => ({

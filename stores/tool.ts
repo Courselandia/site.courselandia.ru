@@ -9,7 +9,6 @@ import {
 } from '@/interfaces/response';
 import IFilterTool from '@/interfaces/stores/course/filterTool';
 import IToolLink from '@/interfaces/stores/course/toolLink';
-import TId from '@/types/id';
 
 export default defineStore('tool', {
   state: () => ({
