@@ -138,60 +138,19 @@ export default defineNuxtConfig({
   experimental: {
     inlineSSRStyles: false,
   },
-  /*
   hooks: {
     'nitro:config': async function (nitroConfig) {
-      // Reviews
-      const responseSchools = await axios.get<IResponseItems<ISchool>>('/api/private/site/school/read', {
+      let routers: string[] = [];
+
+      // Courses
+      const responseCourses = await axios.get<IResponseData<IApiReadCourses>>('/api/private/site/course/read', {
         baseURL: process.env.NUXT_API_URL,
       });
 
-      const schools: ISchool[] = responseSchools.data.data;
-      let routers = schools
-        .filter((item: ISchool) => item.reviews_count)
-        .map((item: ISchool) => `/reviews/${item.link}`);
+      const { courses } = responseCourses.data.data;
 
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Schools
-      routers = schools
-        .map((item: ISchool) => `/courses/school/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Directions
-      const responseDirections = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const directions: IDirection[] = responseDirections.data.data;
-
-      routers = directions
-        .map((item: IDirection) => `/courses/direction/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Categories
-      const responseCategories = await axios.get<IResponseItems<ICategory>>('/api/private/site/course/categories', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const categories: ICategory[] = responseCategories.data.data;
-
-      routers = categories
-        .map((item: ICategory) => `/courses/category/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Professions
-      const responseProfessions = await axios.get<IResponseItems<IProfession>>('/api/private/site/course/professions', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const professions: IProfession[] = responseProfessions.data.data;
-
-      routers = professions
-        .map((item: IProfession) => `/courses/profession/${item.link}`);
+      routers = courses
+        .map((item: ICourse) => `/courses/show/${item.school?.link}/${item.link}`);
 
       nitroConfig.prerender?.routes?.push(...routers);
 
@@ -231,20 +190,61 @@ export default defineNuxtConfig({
 
       nitroConfig.prerender?.routes?.push(...routers);
 
-      // Courses
-      const responseCourses = await axios.get<IResponseData<IApiReadCourses>>('/api/private/site/course/read', {
+      // Professions
+      const responseProfessions = await axios.get<IResponseItems<IProfession>>('/api/private/site/course/professions', {
         baseURL: process.env.NUXT_API_URL,
       });
 
-      const { courses } = responseCourses.data.data;
+      const professions: IProfession[] = responseProfessions.data.data;
 
-      routers = courses
-        .map((item: ICourse) => `/courses/show/${item.school?.link}/${item.link}`);
+      routers = professions
+        .map((item: IProfession) => `/courses/profession/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Categories
+      const responseCategories = await axios.get<IResponseItems<ICategory>>('/api/private/site/course/categories', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const categories: ICategory[] = responseCategories.data.data;
+
+      routers = categories
+        .map((item: ICategory) => `/courses/category/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Reviews
+      const responseSchools = await axios.get<IResponseItems<ISchool>>('/api/private/site/school/read', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const schools: ISchool[] = responseSchools.data.data;
+      routers = schools
+        .filter((item: ISchool) => item.reviews_count)
+        .map((item: ISchool) => `/reviews/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Schools
+      routers = schools
+        .map((item: ISchool) => `/courses/school/${item.link}`);
+
+      nitroConfig.prerender?.routes?.push(...routers);
+
+      // Directions
+      const responseDirections = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
+        baseURL: process.env.NUXT_API_URL,
+      });
+
+      const directions: IDirection[] = responseDirections.data.data;
+
+      routers = directions
+        .map((item: IDirection) => `/courses/direction/${item.link}`);
 
       nitroConfig.prerender?.routes?.push(...routers);
     },
   },
-  */
   nitro: {
     prerender: {
       concurrency: 20,

@@ -225,6 +225,24 @@ const setMeta = (): void => {
   const title = courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`;
   const descriptionResult = courseItem.value?.metatag?.description || description;
 
+  useServerHead({
+    title,
+    meta: [
+      {
+        name: 'description',
+        content: descriptionResult,
+      },
+      {
+        property: 'og:title',
+        content: title,
+      },
+      {
+        property: 'og:description',
+        content: description,
+      },
+    ],
+  });
+
   useHead({
     title,
     meta: [

@@ -624,6 +624,30 @@ const setMeta = (): void => {
     canonical = `${config.public.siteUrl}${route.path}`;
   }
 
+  useServerHead({
+    title,
+    meta: [
+      {
+        name: 'description',
+        content: description,
+      },
+      {
+        property: 'og:title',
+        content: title,
+      },
+      {
+        property: 'og:description',
+        content: description,
+      },
+    ],
+    link: [
+      {
+        rel: 'canonical',
+        href: canonical,
+      },
+    ],
+  });
+
   useHead({
     title,
     meta: [

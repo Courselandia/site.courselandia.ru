@@ -11,6 +11,22 @@
 <script lang="ts" setup>
 import SchoolReviews from '@/components/organism/SchoolReviews.vue';
 
+useServerHead({
+  title: 'Реальные отзывы об онлайн-школах и их курсах',
+  meta: [
+    {
+      name: 'description',
+      content: 'Отзывы об онлайн-школах и их курсах. Честные и реальные отзывы от студентов, закончивших обучение в онлайн-школах',
+    },
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: '/reviews',
+    },
+  ],
+});
+
 useHead({
   title: 'Реальные отзывы об онлайн-школах и их курсах',
   meta: [

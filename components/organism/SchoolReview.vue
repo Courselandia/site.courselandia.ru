@@ -377,6 +377,24 @@ const conditions = {
 const title = `Школа ${itemLinkSchool.value?.name}: ${itemLinkSchool.value?.amount_courses?.all || 0} ${plural(itemLinkSchool.value?.amount_courses?.all || 0, conditions)} (${itemLinkSchool.value?.rating}⭐️) от учеников проходивших курсы`;
 const description = `Список проверенных отзывов о школе ${itemLinkSchool.value?.name} от реальных учеников, проходивших курсы. ${itemLinkSchool.value?.amount_courses?.all || 0} ${plural(itemLinkSchool.value?.amount_courses?.all || 0, conditions)} со средней оценкой ${itemLinkSchool.value?.rating}⭐️`;
 
+useServerHead({
+  title,
+  meta: [
+    {
+      name: 'description',
+      content: description,
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:description',
+      content: description,
+    },
+  ],
+});
+
 useHead({
   title,
   meta: [

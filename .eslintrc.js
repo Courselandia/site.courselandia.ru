@@ -38,6 +38,8 @@ module.exports = {
     useStorage: true,
     useMeta: true,
     useJsonld: true,
+    useServerSeoMeta: true,
+    useServerHead: true,
   },
   settings: {
     'import/resolver': {

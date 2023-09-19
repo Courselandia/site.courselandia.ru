@@ -52,6 +52,10 @@ const menu = ref('');
 
 const { error } = toRefs(props);
 
+useServerHead({
+  title: `Ошибка ${error.value.statusCode}`,
+});
+
 useHead({
   title: `Ошибка ${error.value.statusCode}`,
 });
