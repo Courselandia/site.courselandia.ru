@@ -220,47 +220,8 @@ const {
 const courseItem = ref<ICourse>();
 const courseSimilarities = ref<ICourse[]>();
 
-const setMeta = (): void => {
-  const description = 'В каталоге Courselandia вы можете найти подходящий курс по различным направлениям. Только лучшие курсы со всей нужной информацией от ведущих онлайн школ.';
-  const title = courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`;
-  const descriptionResult = courseItem.value?.metatag?.description || description;
-
-  useServerHead({
-    title,
-    meta: [
-      {
-        name: 'description',
-        content: descriptionResult,
-      },
-      {
-        property: 'og:title',
-        content: title,
-      },
-      {
-        property: 'og:description',
-        content: description,
-      },
-    ],
-  });
-
-  useHead({
-    title,
-    meta: [
-      {
-        name: 'description',
-        content: descriptionResult,
-      },
-      {
-        property: 'og:title',
-        content: title,
-      },
-      {
-        property: 'og:description',
-        content: description,
-      },
-    ],
-  });
-};
+const description = ref('');
+const title = ref('');
 
 try {
   const courseResponseStore = await apiGetCourse(
@@ -274,7 +235,9 @@ try {
     courseItem.value = courseStoreToCourseComponent(courseResponseStore.course);
     courseSimilarities.value = coursesStoreToCoursesComponent(courseResponseStore.similarities);
 
-    setMeta();
+    const descriptionDefault = 'В каталоге Courselandia вы можете найти подходящий курс по различным направлениям. Только лучшие курсы со всей нужной информацией от ведущих онлайн школ.';
+    title.value = courseItem.value?.metatag?.title || `${courseItem.value?.name} от ${courseItem.value?.school?.name}`;
+    description.value = courseItem.value?.metatag?.description || descriptionDefault;
   }
 } catch (error: any) {
   console.error(error.message);
@@ -308,6 +271,24 @@ const hasSalaries = computed((): boolean => {
   }
 
   return has;
+});
+
+useHead({
+  title,
+  meta: [
+    {
+      name: 'description',
+      content: description,
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:description',
+      content: description,
+    },
+  ],
 });
 
 const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {

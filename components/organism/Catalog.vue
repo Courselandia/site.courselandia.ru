@@ -579,98 +579,86 @@ const getRatings = (rtgs: Array<IRatingStore>): Array<IRating> => {
 
 const config = useRuntimeConfig();
 
-const setMeta = (): void => {
-  let title = 'Каталог онлайн курсов от Courselandia';
-
+const getMetaTitle = (): string => {
   if (section === 'direction' && itemLinkDirection.value?.metatag?.title) {
-    title = itemLinkDirection.value.metatag.title;
-  } else if (section === 'category' && itemLinkCategory.value?.metatag?.title) {
-    title = itemLinkCategory.value?.metatag?.title;
-  } else if (section === 'profession' && itemLinkProfession.value?.metatag?.title) {
-    title = itemLinkProfession.value?.metatag?.title;
-  } else if (section === 'school' && itemLinkSchool.value?.metatag?.title) {
-    title = itemLinkSchool.value?.metatag?.title;
-  } else if (section === 'skill' && itemLinkSkill.value?.metatag?.title) {
-    title = itemLinkSkill.value?.metatag?.title;
-  } else if (section === 'teacher' && itemLinkTeacher.value?.metatag?.title) {
-    title = itemLinkTeacher.value?.metatag?.title;
-  } else if (section === 'tool' && itemLinkTool.value?.metatag?.title) {
-    title = itemLinkTool.value?.metatag?.title;
+    return itemLinkDirection.value.metatag.title;
   }
 
-  let description = 'Каталог курсов от ведущих онлайн школ по разным направлениям. Удобный поиск по профессиям, направлениям, инструментам и навыкам. Найди свой курс быстро и легко.';
+  if (section === 'category' && itemLinkCategory.value?.metatag?.title) {
+    return itemLinkCategory.value?.metatag?.title;
+  }
 
+  if (section === 'profession' && itemLinkProfession.value?.metatag?.title) {
+    return itemLinkProfession.value?.metatag?.title;
+  }
+
+  if (section === 'school' && itemLinkSchool.value?.metatag?.title) {
+    return itemLinkSchool.value?.metatag?.title;
+  }
+
+  if (section === 'skill' && itemLinkSkill.value?.metatag?.title) {
+    return itemLinkSkill.value?.metatag?.title;
+  }
+
+  if (section === 'teacher' && itemLinkTeacher.value?.metatag?.title) {
+    return itemLinkTeacher.value?.metatag?.title;
+  }
+
+  if (section === 'tool' && itemLinkTool.value?.metatag?.title) {
+    return itemLinkTool.value?.metatag?.title;
+  }
+
+  return 'Каталог онлайн курсов от Courselandia';
+};
+
+const getMetaDescription = (): string => {
   if (section === 'direction' && itemLinkDirection.value?.metatag?.description) {
-    description = itemLinkDirection.value.metatag.description;
-  } else if (section === 'category' && itemLinkCategory.value?.metatag?.description) {
-    description = itemLinkCategory.value?.metatag?.description;
-  } else if (section === 'profession' && itemLinkProfession.value?.metatag?.description) {
-    description = itemLinkProfession.value?.metatag?.description;
-  } else if (section === 'school' && itemLinkSchool.value?.metatag?.description) {
-    description = itemLinkSchool.value?.metatag?.description;
-  } else if (section === 'skill' && itemLinkSkill.value?.metatag?.description) {
-    description = itemLinkSkill.value?.metatag?.description;
-  } else if (section === 'teacher' && itemLinkTeacher.value?.metatag?.description) {
-    description = itemLinkTeacher.value?.metatag?.description;
-  } else if (section === 'tool' && itemLinkTool.value?.metatag?.description) {
-    description = itemLinkTool.value?.metatag?.description;
+    return itemLinkDirection.value.metatag.description;
   }
 
-  let canonical;
+  if (section === 'category' && itemLinkCategory.value?.metatag?.description) {
+    return itemLinkCategory.value?.metatag?.description;
+  }
 
+  if (section === 'profession' && itemLinkProfession.value?.metatag?.description) {
+    return itemLinkProfession.value?.metatag?.description;
+  }
+
+  if (section === 'school' && itemLinkSchool.value?.metatag?.description) {
+    return itemLinkSchool.value?.metatag?.description;
+  }
+
+  if (section === 'skill' && itemLinkSkill.value?.metatag?.description) {
+    return itemLinkSkill.value?.metatag?.description;
+  }
+
+  if (section === 'teacher' && itemLinkTeacher.value?.metatag?.description) {
+    return itemLinkTeacher.value?.metatag?.description;
+  }
+
+  if (section === 'tool' && itemLinkTool.value?.metatag?.description) {
+    return itemLinkTool.value?.metatag?.description;
+  }
+
+  return 'Каталог курсов от ведущих онлайн школ по разным направлениям. Удобный поиск по профессиям, направлениям, инструментам и навыкам. Найди свой курс быстро и легко.';
+};
+
+const getMetaCanonical = (): string => {
   if (process.client) {
-    canonical = `${config.public.siteUrl}${window.location.pathname}`;
-  } else {
-    canonical = `${config.public.siteUrl}${route.path}`;
+    return `${config.public.siteUrl}${window.location.pathname}`;
   }
 
-  useServerHead({
-    title,
-    meta: [
-      {
-        name: 'description',
-        content: description,
-      },
-      {
-        property: 'og:title',
-        content: title,
-      },
-      {
-        property: 'og:description',
-        content: description,
-      },
-    ],
-    link: [
-      {
-        rel: 'canonical',
-        href: canonical,
-      },
-    ],
-  });
+  return `${config.public.siteUrl}${route.path}`;
+};
 
-  useHead({
-    title,
-    meta: [
-      {
-        name: 'description',
-        content: description,
-      },
-      {
-        property: 'og:title',
-        content: title,
-      },
-      {
-        property: 'og:description',
-        content: description,
-      },
-    ],
-    link: [
-      {
-        rel: 'canonical',
-        href: canonical,
-      },
-    ],
-  });
+const description = ref(getMetaDescription());
+const title = ref(getMetaTitle());
+const canonical = ref(getMetaCanonical());
+
+const setMeta = (): void => {
+  title.value = getMetaTitle();
+  description.value = getMetaDescription();
+  canonical.value = getMetaCanonical();
 };
 
 const setHeader = (result: IApiReadCourses | null = null): void => {
@@ -965,7 +953,7 @@ const reload = async (
       setHeader();
     }
 
-    setMeta();
+    // setMeta();
   } catch (error: any) {
     console.log(error.message);
   }
@@ -1467,7 +1455,6 @@ watch(route, async () => {
     await reload(currentPage.value, size.value, getSort(sort.value), filters);
   }
 });
-setMeta();
 
 const itemListElements = computed<ListItem[]>(
   () => Object.values(courses.value).map((course: ICourse, index: number) => ({
@@ -1476,6 +1463,30 @@ const itemListElements = computed<ListItem[]>(
     url: `${config.public.siteUrl}${course.link}`,
   })),
 );
+
+useServerHead({
+  title,
+  meta: [
+    {
+      name: 'description',
+      content: description,
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:description',
+      content: description,
+    },
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: canonical,
+    },
+  ],
+});
 
 useJsonld({
   '@context': 'https://schema.org',
