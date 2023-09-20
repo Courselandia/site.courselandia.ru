@@ -11,7 +11,7 @@ export const courseStoreToCourseComponent = (
   link: `/courses/show/${course.school?.link}/${course.link}`,
   url: course.url,
   rating: course.rating,
-  image: course.image_middle_id?.path || null,
+  image: course.image_middle_id || null,
   price: course.price,
   price_old: course.price_old,
   price_recurrent: course.price_recurrent,

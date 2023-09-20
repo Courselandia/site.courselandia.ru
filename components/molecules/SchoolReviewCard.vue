@@ -10,7 +10,7 @@
         <div class="school-review-card__content-logo">
           <LazyImage
             v-if="school.image_logo_id"
-            :src="school.image_logo_id.pathCache"
+            :src="school.image_logo_id.path"
             :alt="school.name"
             :title="school.name"
             class="school-review-card__logo"

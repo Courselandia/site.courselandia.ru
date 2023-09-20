@@ -15,6 +15,7 @@ import ISchool from '@/interfaces/components/molecules/school';
 import ISkill from '@/interfaces/components/molecules/skill';
 import ITeacher from '@/interfaces/components/molecules/teacher';
 import ITool from '@/interfaces/components/molecules/tool';
+import IImage from '@/interfaces/stores/image/image';
 import TId from '@/types/id';
 
 export default interface ICourse {
@@ -24,7 +25,7 @@ export default interface ICourse {
     link: string,
     url: string,
     rating: number | null,
-    image: string | null,
+    image: IImage | null,
     price: number | null;
     price_old: number | null;
     price_recurrent: number | null;

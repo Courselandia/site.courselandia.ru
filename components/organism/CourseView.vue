@@ -288,6 +288,18 @@ useHead({
       property: 'og:description',
       content: description,
     },
+    {
+      property: 'og:image',
+      content: courseItem.value?.image?.path ? courseItem.value.image.path : `${config.public.apiUrl}/storage/uploaded/images/prev.png`,
+    },
+    {
+      property: 'og:image:width',
+      content: courseItem.value?.image?.width ? courseItem.value.image.width : '1200',
+    },
+    {
+      property: 'og:image:height',
+      content: courseItem.value?.image?.height ? courseItem.value.image.height : '630',
+    },
   ],
 });
 

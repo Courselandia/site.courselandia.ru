@@ -11,7 +11,7 @@
       @focusout="onClickDisable"
     >
       <LazyBackground
-        :background="course.image || undefined"
+        :background="course.image?.path || undefined"
         :holder="holder.default || undefined"
         class="course__image"
       >
