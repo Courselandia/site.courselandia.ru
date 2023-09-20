@@ -761,12 +761,23 @@
 </template>
 
 <script lang="ts" setup>
+const title = 'Политика в отношении обработки персональных данных';
+const description = 'Наша политика безопасности по обработке персональных данных.';
+
 useHead({
-  title: 'Политика в отношении обработки персональных данных',
+  title,
   meta: [
     {
       name: 'description',
-      content: 'Наша политика безопасности по обработке персональных данных.',
+      content: description,
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:description',
+      content: description,
     },
   ],
 });

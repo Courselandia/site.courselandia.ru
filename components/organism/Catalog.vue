@@ -891,6 +891,12 @@ const reload = async (
               content: result.description?.metatag?.description || '',
             },
           ],
+          link: [
+            {
+              rel: 'canonical',
+              href: getMetaCanonical(),
+            },
+          ],
         });
       } else {
         const title = 'Каталог онлайн курсов от Courselandia';
@@ -912,6 +918,12 @@ const reload = async (
               content: description,
             },
           ],
+          link: [
+            {
+              rel: 'canonical',
+              href: getMetaCanonical(),
+            },
+          ],
         });
       }
     } else {
@@ -919,8 +931,6 @@ const reload = async (
       total.value = 0;
       setHeader();
     }
-
-    // setMeta();
   } catch (error: any) {
     console.log(error.message);
   }

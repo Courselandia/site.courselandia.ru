@@ -11,18 +11,30 @@
 <script lang="ts" setup>
 import SchoolReviews from '@/components/organism/SchoolReviews.vue';
 
+const config = useRuntimeConfig();
+const title = 'Реальные отзывы об онлайн-школах и их курсах';
+const description = 'Отзывы об онлайн-школах и их курсах. Честные и реальные отзывы от студентов, закончивших обучение в онлайн-школах';
+
 useHead({
-  title: 'Реальные отзывы об онлайн-школах и их курсах',
+  title,
   meta: [
     {
       name: 'description',
-      content: 'Отзывы об онлайн-школах и их курсах. Честные и реальные отзывы от студентов, закончивших обучение в онлайн-школах',
+      content: description,
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:description',
+      content: description,
     },
   ],
   link: [
     {
       rel: 'canonical',
-      href: '/reviews',
+      href: `${config.public.siteUrl}/reviews`,
     },
   ],
 });

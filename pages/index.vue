@@ -143,16 +143,6 @@ import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
 import direction from '@/stores/direction';
 
-useHead({
-  title: 'Агрегатор онлайн-курсов Courselandia',
-  meta: [
-    {
-      name: 'description',
-      content: 'Courselandia — это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментам. Найдите свой курс быстро и легко.',
-    },
-  ],
-});
-
 const config = useRuntimeConfig();
 const { directions } = storeToRefs(direction());
 const listDirections = ref<IMenu[]>();

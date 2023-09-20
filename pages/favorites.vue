@@ -26,12 +26,23 @@ import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCourses
 import ICourse from '@/interfaces/components/molecules/course';
 import favorite from '@/stores/favorite';
 
+const title = 'Список Избранного';
+const description = 'Список избранных онлайн курсов разных направлений от программирования до маркетинга. Найди свой онлйн курс и прокачайся.';
+
 useHead({
-  title: 'Список Избранного',
+  title,
   meta: [
     {
       name: 'description',
-      content: 'Список избранных онлайн курсов разных направлений от программирования до маркетинга. Найди свой онлйн курс и прокачайся.',
+      content: description,
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:description',
+      content: description,
     },
   ],
 });

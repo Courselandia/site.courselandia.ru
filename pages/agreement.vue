@@ -1190,12 +1190,23 @@
 </template>
 
 <script lang="ts" setup>
+const title = 'Пользовательское соглашение';
+const description = 'Полный текст пользовательского соглашения, который вы обязуетель исполнять если используете наш ресур.';
+
 useHead({
-  title: 'Пользовательское соглашение',
+  title,
   meta: [
     {
       name: 'description',
-      content: 'Полный текст пользовательского соглашения, который вы обязуетель исполнять если используете наш ресур.',
+      content: description,
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:description',
+      content: description,
     },
   ],
 });

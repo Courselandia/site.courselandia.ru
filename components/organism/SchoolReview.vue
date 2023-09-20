@@ -393,6 +393,12 @@ useHead({
       content: description,
     },
   ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `${config.public.siteUrl}/reviews/${link}`,
+    },
+  ],
 });
 
 const reviewsJsonld = computed<JsonLD[] | JsonLDFunc[]>((): JsonLD[] | JsonLDFunc[] => {
