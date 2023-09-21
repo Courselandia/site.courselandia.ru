@@ -1,7 +1,7 @@
 <template>
   <div
     ref="backgroundRef"
-    :style="(image || holder) ? `background-image: url('${image || holder}')` : ''"
+    :style="(image || holder) ? `background-image: url(${image || holder})` : ''"
   >
     <slot />
   </div>

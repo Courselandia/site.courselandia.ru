@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www
     ports:
-      - ${APP_PORT}:3000
+      - ${APP_PORT}:443
     networks:
       - network
 

@@ -844,7 +844,7 @@ const load = async (
       link as string,
     );
   } catch (error: any) {
-    console.log(error.message);
+    console.error(error.message);
   }
 
   return null;
@@ -932,7 +932,7 @@ const reload = async (
       setHeader();
     }
   } catch (error: any) {
-    console.log(error.message);
+    console.error(error.message);
   }
 
   loading.value = false;
@@ -1140,7 +1140,7 @@ try {
     stopScrollLoader.value = (currentPage.value * size.value) >= result.total;
   }
 } catch (error: any) {
-  console.log(error.message);
+  console.error(error.message);
 }
 
 //
