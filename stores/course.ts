@@ -91,6 +91,15 @@ export default defineStore('course', {
           && sectionLink
         ) {
           path = `/storage/json/courses/${section}/${sectionLink}.json`;
+        } else if (
+          !config.public.development
+          && offset === 0
+          && limit === 36
+          && sorts?.name === 'ASC'
+          && section === null
+          && sectionLink === null
+        ) {
+          path = '/storage/json/courses.json';
         }
 
         const response = await axios.get<IResponseData<IApiReadCourses>>(path, {
