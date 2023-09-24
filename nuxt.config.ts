@@ -1,6 +1,4 @@
 // eslint-disable-next-line no-undef
-// @ts-ignore
-// @ts-ignore
 export default defineNuxtConfig({
   ssr: true,
   target: 'static',
