@@ -3,7 +3,6 @@ import { IResponseItem, IResponseItems } from '@/interfaces/response';
 import ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import IFilterCategory from '@/interfaces/stores/course/filterCategory';
 import category from '@/stores/category';
-import TId from '@/types/id';
 
 export const apiReadCategories = async (
   apiUrl: string,

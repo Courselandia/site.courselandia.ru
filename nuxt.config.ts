@@ -1,17 +1,6 @@
 // eslint-disable-next-line no-undef
-import axios from 'axios';
-
-import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
-import { IResponseData, IResponseItems } from '@/interfaces/response';
-import ICategory from '@/interfaces/stores/course/category';
-import ICourse from '@/interfaces/stores/course/course';
-import IDirection from '@/interfaces/stores/course/direction';
-import IFilterSkill from '@/interfaces/stores/course/filterSkill';
-import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
-import IFilterTool from '@/interfaces/stores/course/filterTool';
-import IProfession from '@/interfaces/stores/course/profession';
-import ISchool from '@/interfaces/stores/school/school';
-
+// @ts-ignore
+// @ts-ignore
 export default defineNuxtConfig({
   ssr: true,
   target: 'static',
