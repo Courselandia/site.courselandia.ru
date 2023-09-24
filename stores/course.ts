@@ -45,8 +45,6 @@ export default defineStore('course', {
   }),
   actions: {
     async readCourses(
-      baseUrl: string,
-      development: boolean,
       offset: number = 0,
       limit: number = 36,
       sorts: ISorts | null = null,
@@ -56,6 +54,7 @@ export default defineStore('course', {
       sectionLink: string | null = null,
     ): Promise<IResponseData<IApiReadCourses>> {
       try {
+        const config = useRuntimeConfig();
         const additional: Record<string, string | boolean | null> | null = openedItems || {};
 
         additional.section = section;
@@ -64,39 +63,41 @@ export default defineStore('course', {
         const query = toQuery(offset, limit, sorts, filters, additional);
         let path = `/api/private/site/course/read?${query}`;
 
-        const hasInitFilter = (flts: IFilters | null = null): boolean => {
-          const hasOneFilter = Object.keys(flts || {}).length === 1;
+        const hasInitFilter = (
+          flts: IFilters | null = null,
+        ): boolean => Object.keys(flts || {}).length === 1 || Object.keys(flts || {}).length === 0;
 
-          return (
-            hasOneFilter
-            && flts !== null
-            && (
-              flts['directions-id'] !== undefined
-              || flts['school-id'] !== undefined
-              || flts['categories-id'] !== undefined
-              || flts['professions-id'] !== undefined
-              || flts['teachers-id'] !== undefined
-              || flts['skills-id'] !== undefined
-              || flts['tools-id'] !== undefined
-            )
-          );
+        const hasOpenedItem = (itms: Record<string, string | boolean | null> | null): boolean => {
+          if (itms) {
+            return Boolean(itms.openedCategories
+              || itms.openedProfessions
+              || itms.openedSchools
+              || itms.openedSkills
+              || itms.openedTeachers
+              || itms.openedTools);
+          }
+
+          return false;
         };
 
         if (
-          !development
+          !config.public.apiUrl
           && offset === 0
           && limit === 36
           && sorts?.name === 'ASC'
           && hasInitFilter(filters)
-          && Object.keys(openedItems || {}).length === 0
+          && !hasOpenedItem(openedItems)
           && section
           && sectionLink
         ) {
+          console.log('JSON');
           path = `/storage/json/courses/${section}/${sectionLink}.json`;
+        } else {
+          console.log('SERVER');
         }
 
         const response = await axios.get<IResponseData<IApiReadCourses>>(path, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.courses = response.data.data.courses;
@@ -117,16 +118,17 @@ export default defineStore('course', {
       }
     },
     async readSearchedCourses(
-      baseUrl: string,
       search: string,
       limit: number = 12,
     ): Promise<IResponseItems<ICourse> | null> {
       if (search) {
         try {
+          const config = useRuntimeConfig();
+
           const response = await axios.get<IResponseItems<ICourse>>(
             `/api/private/site/course/read/search?limit=${limit}&search=${encodeURIComponent(search)}`,
             {
-              baseURL: baseUrl,
+              baseURL: config.public.apiUrl,
             },
           );
 
@@ -144,15 +146,15 @@ export default defineStore('course', {
       return null;
     },
     async getCourse(
-      baseUrl: string,
-      development: boolean,
       school: string,
       course: string,
     ): Promise<IResponseItem<ICourseResponse | null>> {
       try {
-        const path = development ? `/api/private/site/course/get/${school}/${course}` : `/storage/json/courses/show/${school}/${course}.json`;
+        const config = useRuntimeConfig();
+
+        const path = config.public.development ? `/api/private/site/course/get/${school}/${course}` : `/storage/json/courses/show/${school}/${course}.json`;
         const response = await axios.get<IResponseItem<ICourseResponse>>(path, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         if (response?.data?.data?.course) {
@@ -170,14 +172,15 @@ export default defineStore('course', {
       }
     },
     async readFavoriteCourses(
-      baseUrl: string,
       favorites: TId[],
     ): Promise<IResponseItems<ICourse> | null> {
       try {
+        const config = useRuntimeConfig();
+
         const response = await axios.get<IResponseItems<ICourse>>(
           '/api/private/site/course/read/favorites',
           {
-            baseURL: baseUrl,
+            baseURL: config.public.apiUrl,
             params: {
               ids: favorites,
             },

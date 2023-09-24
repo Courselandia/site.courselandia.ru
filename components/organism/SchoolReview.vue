@@ -285,8 +285,6 @@ const setScroll = (): void => {
 const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | null> => {
   try {
     return await apiReadReviews(
-      config.public.apiUrl,
-      config.public.development,
       fetch,
       link as string,
       (currentPage.value - 1) * limit,

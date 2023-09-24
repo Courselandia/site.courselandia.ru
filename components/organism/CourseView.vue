@@ -225,8 +225,6 @@ const title = ref('');
 
 try {
   const courseResponseStore = await apiGetCourse(
-    config.public.apiUrl,
-    config.public.development,
     school as string,
     course as string,
   );
@@ -247,8 +245,6 @@ const faqItems = ref<Array<IFaqComponent>>([]);
 
 try {
   const faqsStore = await apiReadFaqs(
-    config.public.apiUrl,
-    config.public.development,
     school as string,
   );
 

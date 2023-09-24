@@ -142,7 +142,6 @@ import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
 import direction from '@/stores/direction';
 
-const config = useRuntimeConfig();
 const { directions } = storeToRefs(direction());
 const listDirections = ref<IMenu[]>();
 const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));

@@ -4,7 +4,6 @@ import IFilterProfession from '@/interfaces/stores/course/filterProfession';
 import profession from '@/stores/profession';
 
 export const apiReadProfessions = async (
-  apiUrl: string,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -15,7 +14,6 @@ export const apiReadProfessions = async (
 
   const loadProfessions = async ():
     Promise<IResponseItems<IFilterProfession>> => readProfessions(
-    apiUrl,
     offset,
     limit,
     filters,

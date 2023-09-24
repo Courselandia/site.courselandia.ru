@@ -6,8 +6,6 @@ import IReview from '@/interfaces/stores/review/review';
 import review from '@/stores/review';
 
 export const apiReadReviews = async (
-  apiUrl: string,
-  development: boolean,
   fetch: boolean,
   school: string,
   offset: number = 0,
@@ -21,8 +19,6 @@ export const apiReadReviews = async (
 
   const loadReviews = async ():
     Promise<IResponseItems<IReview>> => readReviews(
-    apiUrl,
-    development,
     school,
     offset,
     limit,

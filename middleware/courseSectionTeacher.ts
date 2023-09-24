@@ -3,8 +3,6 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     link,
   } = to.params;
 
-  const config = useRuntimeConfig();
-
   try {
     const result = await $fetch('/api/teacher/link', {
       params: {

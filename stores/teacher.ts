@@ -16,15 +16,15 @@ export default defineStore('teacher', {
   }),
   actions: {
     async readTeachers(
-      baseUrl: string,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
     ): Promise<IResponseItems<IFilterTeacher>> {
       try {
+        const config = useRuntimeConfig();
         const query = toQuery(offset, limit, null, filters);
         const response = await axios.get<IResponseItems<IFilterTeacher>>(`/api/private/site/course/teachers?${query}`, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.teachers = response.data.data;

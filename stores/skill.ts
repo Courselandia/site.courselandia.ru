@@ -16,15 +16,15 @@ export default defineStore('skill', {
   }),
   actions: {
     async readSkills(
-      baseUrl: string,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
     ): Promise<IResponseItems<IFilterSkill>> {
       try {
+        const config = useRuntimeConfig();
         const query = toQuery(offset, limit, null, filters);
         const response = await axios.get<IResponseItems<IFilterSkill>>(`/api/private/site/course/skills?${query}`, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.skills = response.data.data;

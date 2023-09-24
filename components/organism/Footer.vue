@@ -66,7 +66,6 @@ import school from '@/stores/school';
 const currentYear = ref(new Date().getFullYear());
 const foundYear = 2023;
 
-const config = useRuntimeConfig();
 const { schools } = storeToRefs(school());
 const menuSchools = ref<IMenu[]>(schoolsToMenu(schools.value));
 

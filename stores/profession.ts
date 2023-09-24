@@ -16,15 +16,15 @@ export default defineStore('profession', {
   }),
   actions: {
     async readProfessions(
-      baseUrl: string,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
     ): Promise<IResponseItems<IFilterProfession>> {
       try {
+        const config = useRuntimeConfig();
         const query = toQuery(offset, limit, null, filters);
         const response = await axios.get<IResponseItems<IFilterProfession>>(`/api/private/site/course/professions?${query}`, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.professions = response.data.data;

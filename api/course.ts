@@ -15,8 +15,6 @@ import course from '@/stores/course';
 import TId from '@/types/id';
 
 export const apiReadCourses = async (
-  apiUrl: string,
-  development: boolean,
   offset: number = 0,
   limit: number = 36,
   sorts: ISorts | null = null,
@@ -31,8 +29,6 @@ export const apiReadCourses = async (
 
   const loadCourses = async ():
     Promise<IResponseData<IApiReadCourses>> => readCourses(
-    apiUrl,
-    development,
     offset,
     limit,
     sorts,
@@ -61,7 +57,6 @@ export const apiReadCourses = async (
 };
 
 export const apiReadSearchedCourses = async (
-  apiUrl: string,
   search: string,
   limit: number = 12,
 ): Promise<IApiReadSearchedCourses | null> => {
@@ -72,7 +67,6 @@ export const apiReadSearchedCourses = async (
 
     const loadReadSearchedCourses = async ():
       Promise<IResponseItems<ICourse> | null> => readSearchedCourses(
-      apiUrl,
       search,
       limit,
     );
@@ -93,7 +87,6 @@ export const apiReadSearchedCourses = async (
 };
 
 export const apiReadFavoritesCourses = async (
-  apiUrl: string,
   ids: TId[],
 ): Promise<Array<ICourse>> => {
   const {
@@ -101,7 +94,7 @@ export const apiReadFavoritesCourses = async (
   } = course();
 
   const loadReadFavoritesCourses = async ():
-    Promise<IResponseItems<ICourse> | null> => readFavoriteCourses(apiUrl, ids);
+    Promise<IResponseItems<ICourse> | null> => readFavoriteCourses(ids);
 
   const resultCourses = await useAsyncData('searchedCourses', async () => loadReadFavoritesCourses());
 
@@ -111,8 +104,6 @@ export const apiReadFavoritesCourses = async (
 const courseItems: Record<string, ICourseResponse> = {};
 
 export const apiGetCourse = async (
-  apiUrl: string,
-  development: boolean,
   schoolLink: string,
   courseLink: string,
 ): Promise<ICourseResponse | null> => {
@@ -128,8 +119,6 @@ export const apiGetCourse = async (
 
   const loadGetCourse = async ():
     Promise<IResponseItem<ICourseResponse | null>> => await getCourse(
-    apiUrl,
-    development,
     schoolLink,
     courseLink,
   );

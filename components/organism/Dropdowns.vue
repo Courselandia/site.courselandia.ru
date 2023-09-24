@@ -234,7 +234,6 @@ const emit = defineEmits({
   'update:menu': (_: string | null) => true,
 });
 
-const config = useRuntimeConfig();
 const menuValue = ref<string | null>(menu.value);
 
 watch(menuValue, () => {

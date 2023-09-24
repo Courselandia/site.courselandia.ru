@@ -4,7 +4,6 @@ import IFilterTool from '@/interfaces/stores/course/filterTool';
 import tool from '@/stores/tool';
 
 export const apiReadTools = async (
-  apiUrl: string,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -14,7 +13,7 @@ export const apiReadTools = async (
   } = tool();
 
   const loadTools = async ():
-    Promise<IResponseItems<IFilterTool>> => readTools(apiUrl, offset, limit, filters);
+    Promise<IResponseItems<IFilterTool>> => readTools(offset, limit, filters);
 
   const resultTools = await useAsyncData('tools', async () => loadTools());
 

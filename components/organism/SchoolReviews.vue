@@ -349,7 +349,6 @@ const sortDefault: ISort = {
   sortOrder: 'DESC',
 };
 const route = useRoute();
-const config = useRuntimeConfig();
 const sortByCurrent = route.query.sortBy as string;
 const sortOrderCurrent = route.query.sortOrder as string;
 const directionCurrent = route.query.direction as string;

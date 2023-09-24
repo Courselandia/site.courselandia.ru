@@ -337,8 +337,6 @@ const emit = defineEmits({
   filter: (_: number | null) => true,
 });
 
-const config = useRuntimeConfig();
-
 const conditions = {
   0: 'отзывов',
   1: 'отзыв',

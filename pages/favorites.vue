@@ -47,8 +47,6 @@ useHead({
   ],
 });
 
-const config = useRuntimeConfig();
-
 const {
   favorites,
 } = storeToRefs(favorite());
@@ -57,7 +55,7 @@ const courses = ref<Array<ICourse>>([]);
 
 try {
   courses.value = coursesStoreToCoursesComponent(
-    await apiReadFavoritesCourses(config.public.apiUrl, favorites.value),
+    await apiReadFavoritesCourses(favorites.value),
   );
 } catch (error: any) {
   console.error(error.message);

@@ -30,7 +30,6 @@ import schoolsToBrand from '@/converts/schoolsToBrand';
 import IBrand from '@/interfaces/components/organism/brands';
 import school from '@/stores/school';
 
-const config = useRuntimeConfig();
 const { schools } = storeToRefs(school());
 const brands = ref<Array<IBrand>>(schoolsToBrand(schools.value));
 </script>

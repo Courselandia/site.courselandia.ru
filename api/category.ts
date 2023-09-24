@@ -4,7 +4,6 @@ import IFilterCategory from '@/interfaces/stores/course/filterCategory';
 import category from '@/stores/category';
 
 export const apiReadCategories = async (
-  apiUrl: string,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -15,7 +14,6 @@ export const apiReadCategories = async (
 
   const loadCategories = async ():
     Promise<IResponseItems<IFilterCategory>> => readCategories(
-    apiUrl,
     offset,
     limit,
     filters,

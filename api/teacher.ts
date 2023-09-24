@@ -4,7 +4,6 @@ import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 import teacher from '@/stores/teacher';
 
 export const apiReadTeachers = async (
-  apiUrl: string,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -15,7 +14,6 @@ export const apiReadTeachers = async (
 
   const loadTeachers = async ():
     Promise<IResponseItems<IFilterTeacher>> => readTeachers(
-    apiUrl,
     offset,
     limit,
     filters,

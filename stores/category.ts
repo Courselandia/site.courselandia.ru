@@ -16,15 +16,15 @@ export default defineStore('category', {
   }),
   actions: {
     async readCategories(
-      baseUrl: string,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
     ): Promise<IResponseItems<IFilterCategory>> {
       try {
+        const config = useRuntimeConfig();
         const query = toQuery(offset, limit, null, filters);
         const response = await axios.get<IResponseItems<IFilterCategory>>(`/api/private/site/course/categories?${query}`, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.categories = response.data.data;

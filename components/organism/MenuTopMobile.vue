@@ -213,7 +213,6 @@ const {
   show,
 } = toRefs(props);
 
-const config = useRuntimeConfig();
 const showValue = ref(show.value);
 
 const emit = defineEmits({

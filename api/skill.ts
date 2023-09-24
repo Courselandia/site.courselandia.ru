@@ -4,7 +4,6 @@ import IFilterSkill from '@/interfaces/stores/course/filterSkill';
 import skill from '@/stores/skill';
 
 export const apiReadSkills = async (
-  apiUrl: string,
   offset: number | null = null,
   limit: number | null = null,
   filters: IFilters | null = null,
@@ -15,7 +14,6 @@ export const apiReadSkills = async (
 
   const loadSkills = async ():
     Promise<IResponseItems<IFilterSkill>> => readSkills(
-    apiUrl,
     offset,
     limit,
     filters,

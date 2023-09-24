@@ -16,15 +16,15 @@ export default defineStore('tool', {
   }),
   actions: {
     async readTools(
-      baseUrl: string,
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
     ): Promise<IResponseItems<IFilterTool>> {
       try {
+        const config = useRuntimeConfig();
         const query = toQuery(offset, limit, null, filters);
         const response = await axios.get<IResponseItems<IFilterTool>>(`/api/private/site/course/tools?${query}`, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.tools = response.data.data;

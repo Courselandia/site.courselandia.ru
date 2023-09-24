@@ -833,8 +833,6 @@ const load = async (
     const pageValueCurrent = pageValue !== 0 ? pageValue - 1 : pageValue;
 
     return await apiReadCourses(
-      config.public.apiUrl,
-      config.public.development,
       pageValueCurrent * sizeValue,
       sizeValue,
       sorts,
@@ -1039,7 +1037,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
   if (name === 'professions') {
     if (professions.value.length <= 11) {
       const result = await apiReadProfessions(
-        config.public.apiUrl,
         null,
         null,
         getFilters(),
@@ -1055,7 +1052,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
   } else if (name === 'categories') {
     if (categories.value.length <= 11) {
       const result = await apiReadCategories(
-        config.public.apiUrl,
         null,
         null,
         getFilters(),
@@ -1071,7 +1067,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
   } else if (name === 'teachers') {
     if (teachers.value.length <= 11) {
       const result = await apiReadTeachers(
-        config.public.apiUrl,
         null,
         null,
         getFilters(),
@@ -1087,7 +1082,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
   } else if (name === 'skills') {
     if (skills.value.length <= 11) {
       const result = await apiReadSkills(
-        config.public.apiUrl,
         null,
         null,
         getFilters(),
@@ -1103,7 +1097,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
   } else if (name === 'tools') {
     if (tools.value.length <= 11) {
       const result = await apiReadTools(
-        config.public.apiUrl,
         null,
         null,
         getFilters(),
@@ -1123,8 +1116,6 @@ try {
   setSelectedFiltersByQuery();
 
   const result = await apiReadCourses(
-    config.public.apiUrl,
-    config.public.development,
     0,
     size.value * currentPage.value,
     getSort(sort.value),

@@ -116,7 +116,6 @@ import ICourse from '@/interfaces/components/molecules/course';
 
 const courses = ref<ICourse[]>([]);
 const total = ref(0);
-const config = useRuntimeConfig();
 const active = ref(false);
 const query = ref<string>();
 const loading = ref(false);
@@ -156,7 +155,6 @@ const search = (): void => {
 
       try {
         const result = await apiReadSearchedCourses(
-          config.public.apiUrl,
           query.value || '',
           10,
         );

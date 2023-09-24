@@ -10,14 +10,13 @@ export default defineStore('faq', {
   }),
   actions: {
     async readFaqs(
-      baseUrl: string,
-      development: boolean,
       school: string,
     ): Promise<IResponseItems<IFaq>> {
       try {
-        const path = development ? `/api/private/site/faq/read/${school}` : `/storage/json/faqs/${school}.json`;
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/faq/read/${school}` : `/storage/json/faqs/${school}.json`;
         const response = await axios.get<IResponseItems<IFaq>>(path, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.faqs = response.data.data;

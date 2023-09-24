@@ -16,8 +16,6 @@ export default defineStore('review', {
   }),
   actions: {
     async readReviews(
-      baseUrl: string,
-      development: boolean,
       school: string,
       offset: number = 0,
       limit: number = 20,
@@ -25,6 +23,7 @@ export default defineStore('review', {
       rating: number | null = null,
     ): Promise<IResponseItems<IReview>> {
       try {
+        const config = useRuntimeConfig();
         const additional: Record<string, string | number> | null = {};
 
         additional.link = school;
@@ -36,12 +35,12 @@ export default defineStore('review', {
         const query = toQuery(offset, limit, sorts, null, additional);
         let path = `/api/private/site/review/read?${query}`;
 
-        if (!development && offset === 0 && limit === 20 && sorts?.created_at === 'DESC' && !rating) {
+        if (!config.public.development && offset === 0 && limit === 20 && sorts?.created_at === 'DESC' && !rating) {
           path = `/storage/json/reviews/${school}.json`;
         }
 
         const response = await axios.get<IResponseItems<IReview>>(path, {
-          baseURL: baseUrl,
+          baseURL: config.public.apiUrl,
         });
 
         this.reviews = response.data.data;
