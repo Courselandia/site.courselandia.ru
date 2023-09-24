@@ -303,7 +303,6 @@ import {
   watch,
 } from 'vue';
 
-import { apiReadSchools } from '@/api/school';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';

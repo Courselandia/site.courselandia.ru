@@ -60,23 +60,6 @@ export const apiReadCourses = async (
   };
 };
 
-export const apiReadRatedCourses = async (
-  apiUrl: string,
-  development: boolean,
-  limit: number = 12,
-): Promise<Array<ICourse>> => {
-  const {
-    readRatedCourses,
-  } = course();
-
-  const loadRatedCourses = async ():
-    Promise<IResponseItems<ICourse>> => readRatedCourses(apiUrl, development, limit);
-
-  const resultCourses = await useAsyncData('ratedCourses', async () => loadRatedCourses());
-
-  return resultCourses.data.value?.data || [];
-};
-
 export const apiReadSearchedCourses = async (
   apiUrl: string,
   search: string,

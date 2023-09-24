@@ -12,7 +12,9 @@ export default defineEventHandler(async (event): Promise<ISchoolLink | null> => 
     return cachedSchools as ISchoolLink;
   }
 
-  const response = await axios.get<IResponseItem<ISchoolLink>>(`/api/private/site/school/link/${link}`, {
+  const path = config.public.development ? `/api/private/site/school/link/${link}` : `/storage/json/schools/${link}.json`;
+
+  const response = await axios.get<IResponseItem<ISchoolLink>>(path, {
     baseURL: config.public.apiUrl,
   });
 

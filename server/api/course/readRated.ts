@@ -1,5 +1,4 @@
 import axios from '@/helpers/axios';
-import toQuery from '@/helpers/toQuery';
 import { IResponseItems } from '@/interfaces/response';
 import ICourse from '@/interfaces/stores/course/course';
 
@@ -11,8 +10,8 @@ export default defineEventHandler(async (event): Promise<ICourse[]> => {
     return cachedRatedCourses as ICourse[];
   }
 
-  const query = toQuery(null, 16);
-  const response = await axios.get<IResponseItems<ICourse>>(`/api/private/site/course/read/rated?${query}`, {
+  const path = config.public.development ? '/api/private/site/course/read/rated' : '/storage/json/courses/rated.json';
+  const response = await axios.get<IResponseItems<ICourse>>(path, {
     baseURL: config.public.apiUrl,
   });
 

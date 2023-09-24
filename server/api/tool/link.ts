@@ -12,7 +12,8 @@ export default defineEventHandler(async (event): Promise<IToolLink | null> => {
     return cachedTools as IToolLink;
   }
 
-  const response = await axios.get<IResponseItem<IToolLink>>(`/api/private/site/tool/link/${link}`, {
+  const path = config.public.development ? `/api/private/site/tool/link/${link}` : `/storage/json/tools/${link}.json`;
+  const response = await axios.get<IResponseItem<IToolLink>>(path, {
     baseURL: config.public.apiUrl,
   });
 

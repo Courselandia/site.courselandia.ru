@@ -12,7 +12,8 @@ export default defineEventHandler(async (event): Promise<IDirectionLink | null> 
     return cachedDirections as IDirectionLink;
   }
 
-  const response = await axios.get<IResponseItem<IDirectionLink>>(`/api/private/site/direction/link/${link}`, {
+  const path = config.public.development ? `/api/private/site/direction/link/${link}` : `/storage/json/directions/${link}.json`;
+  const response = await axios.get<IResponseItem<IDirectionLink>>(path, {
     baseURL: config.public.apiUrl,
   });
 

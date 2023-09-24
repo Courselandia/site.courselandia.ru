@@ -116,28 +116,6 @@ export default defineStore('course', {
         throw error;
       }
     },
-    async readRatedCourses(
-      baseUrl: string,
-      development: boolean,
-      limit: number = 12,
-    ): Promise<IResponseItems<ICourse>> {
-      try {
-        const query = toQuery(null, limit);
-        const path = development ? `/api/private/site/course/read/rated?${query}` : '/storage/json/courses/rated.json';
-
-        const response = await axios.get<IResponseItems<ICourse>>(path, {
-          baseURL: baseUrl,
-        });
-
-        this.ratedCourses = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.ratedCourses = null;
-
-        throw error;
-      }
-    },
     async readSearchedCourses(
       baseUrl: string,
       search: string,

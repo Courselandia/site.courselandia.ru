@@ -1,6 +1,3 @@
-import { apiLinkSchool } from '@/api/school';
-import ISchoolLink from '@/interfaces/stores/course/schoolLink';
-
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const config = useRuntimeConfig();
 
@@ -9,12 +6,11 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   } = to.params;
 
   try {
-    const result: ISchoolLink | null = await apiLinkSchool(
-      config.public.apiUrl,
-      config.public.development,
-      true,
-      link as string,
-    );
+    const result = await $fetch('/api/school/link', {
+      params: {
+        link: link as string,
+      },
+    });
 
     if (!result?.reviews_count) {
       return false;

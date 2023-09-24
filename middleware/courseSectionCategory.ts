@@ -1,18 +1,14 @@
-import { apiLinkCategory } from '@/api/category';
-
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const {
     link,
   } = to.params;
 
-  const config = useRuntimeConfig();
-
   try {
-    const result = await apiLinkCategory(
-      config.public.apiUrl,
-      config.public.development,
-      link as string,
-    );
+    const result = await $fetch('/api/category/link', {
+      params: {
+        link: link as string,
+      },
+    });
 
     const title = result?.metatag?.title || '';
     const description = result?.metatag?.description || '';

@@ -1,18 +1,14 @@
-import { apiLinkProfession } from '@/api/profession';
-
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const {
     link,
   } = to.params;
 
-  const config = useRuntimeConfig();
-
   try {
-    const result = await apiLinkProfession(
-      config.public.apiUrl,
-      config.public.development,
-      link as string,
-    );
+    const result = await $fetch('/api/profession/link', {
+      params: {
+        link: link as string,
+      },
+    });
 
     const title = result?.metatag?.title || '';
     const description = result?.metatag?.description || '';

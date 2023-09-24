@@ -1,6 +1,5 @@
 import { storeToRefs } from 'pinia';
 
-import { apiLinkSchool } from '@/api/school';
 import school from '@/stores/school';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
@@ -11,12 +10,11 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   const config = useRuntimeConfig();
 
   try {
-    const result = await apiLinkSchool(
-      config.public.apiUrl,
-      config.public.development,
-      true,
-      link as string,
-    );
+    const result = await $fetch('/api/school/link', {
+      params: {
+        link: link as string,
+      },
+    });
 
     const { itemLinkSchool } = storeToRefs(school());
 

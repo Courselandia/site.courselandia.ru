@@ -10,11 +10,10 @@ export default defineEventHandler(async (event): Promise<ISchool[]> => {
     return cachedSchools as ISchool[];
   }
 
-  const response = await axios.get<IResponseItems<ISchool>>('/api/private/site/school/read', {
+  const path = config.public.development ? '/api/private/site/school/read' : '/storage/json/schools.json';
+  const response = await axios.get<IResponseItems<ISchool>>(path, {
     baseURL: config.public.apiUrl,
   });
-
-  console.dir(response.data.data);
 
   await useStorage().setItem('redis:schools', response.data.data);
 

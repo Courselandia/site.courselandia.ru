@@ -10,7 +10,9 @@ export default defineEventHandler(async (event): Promise<IDirection[]> => {
     return cachedDirections as IDirection[];
   }
 
-  const response = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
+  const path = config.public.development ? '/api/private/site/course/directions' : '/storage/json/directions.json';
+
+  const response = await axios.get<IResponseItems<IDirection>>(path, {
     baseURL: config.public.apiUrl,
     params: {
       withCategories: 1,

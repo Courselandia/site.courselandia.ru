@@ -12,7 +12,8 @@ export default defineEventHandler(async (event): Promise<IProfessionLink | null>
     return cachedProfessions as IProfessionLink;
   }
 
-  const response = await axios.get<IResponseItem<IProfessionLink>>(`/api/private/site/profession/link/${link}`, {
+  const path = config.public.development ? `/api/private/site/profession/link/${link}` : `/storage/json/professions/${link}.json`;
+  const response = await axios.get<IResponseItem<IProfessionLink>>(path, {
     baseURL: config.public.apiUrl,
   });
 

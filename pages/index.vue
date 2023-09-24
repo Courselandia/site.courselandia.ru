@@ -126,7 +126,6 @@ import {
   ref,
 } from 'vue';
 
-import { apiReadRatedCourses } from '@/api/course';
 import AboutUs from '@/components/atoms/AboutUs.vue';
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -158,7 +157,7 @@ const courses = ref<ICourse[]>();
 
 try {
   courses.value = coursesStoreToCoursesComponent(
-    await apiReadRatedCourses(config.public.apiUrl, config.public.development),
+    await $fetch('/api/course/readRated'),
   );
 } catch (error: any) {
   console.error(error.message);

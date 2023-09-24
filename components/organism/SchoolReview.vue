@@ -160,7 +160,6 @@ import {
 import { useRoute } from 'vue-router';
 
 import { apiReadReviews } from '@/api/review';
-import { apiLinkSchool } from '@/api/school';
 import Animal from '@/components/atoms/Animal.vue';
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -307,14 +306,13 @@ const response = await loadReviews(!Object.keys(route.query).length);
 reviews.value = response?.data;
 total.value = response?.total;
 
-const loadSchool = async (fetch: boolean): Promise<ISchoolLink | null> => {
+const loadSchool = async (): Promise<ISchoolLink | null> => {
   try {
-    return await apiLinkSchool(
-      config.public.apiUrl,
-      config.public.development,
-      fetch,
-      link as string,
-    );
+    return await $fetch('/api/school/link', {
+      params: {
+        link: link as string,
+      },
+    });
   } catch (error: any) {
     console.error(error.message);
   }
@@ -369,7 +367,7 @@ const getDomain = (url: string): string => {
   return urlObj.host;
 };
 
-const schoolItem = ref<ISchoolLink | null>(await loadSchool(true));
+const schoolItem = ref<ISchoolLink | null>(await loadSchool());
 
 onMounted(async () => {
   window.addEventListener('scroll', () => {

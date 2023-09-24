@@ -12,7 +12,8 @@ export default defineEventHandler(async (event): Promise<ICategoryLink | null> =
     return cachedCategories as ICategoryLink;
   }
 
-  const response = await axios.get<IResponseItem<ICategoryLink>>(`/api/private/site/category/link/${link}`, {
+  const path = config.public.development ? `/api/private/site/category/link/${link}` : `/storage/json/categories/${link}.json`;
+  const response = await axios.get<IResponseItem<ICategoryLink>>(path, {
     baseURL: config.public.apiUrl,
   });
 

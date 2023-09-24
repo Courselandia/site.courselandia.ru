@@ -1,5 +1,3 @@
-import { apiLinkSchool } from '@/api/school';
-
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const {
     link,
@@ -8,12 +6,11 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   const config = useRuntimeConfig();
 
   try {
-    const result = await apiLinkSchool(
-      config.public.apiUrl,
-      config.public.development,
-      true,
-      link as string,
-    );
+    const result = await $fetch('/api/school/link', {
+      params: {
+        link: link as string,
+      },
+    });
 
     const title = result?.metatag?.title || '';
     const description = result?.metatag?.description || '';

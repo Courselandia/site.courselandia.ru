@@ -1,9 +1,7 @@
 import IFilters from '@/interfaces/filters';
-import { IResponseItem, IResponseItems } from '@/interfaces/response';
+import { IResponseItems } from '@/interfaces/response';
 import IFilterProfession from '@/interfaces/stores/course/filterProfession';
-import IProfessionLink from '@/interfaces/stores/course/professionLink';
 import profession from '@/stores/profession';
-import TId from '@/types/id';
 
 export const apiReadProfessions = async (
   apiUrl: string,
@@ -26,21 +24,4 @@ export const apiReadProfessions = async (
   const resultProfessions = await useAsyncData('professions', async () => loadProfessions());
 
   return resultProfessions.data.value?.data || [];
-};
-
-export const apiLinkProfession = async (
-  apiUrl: string,
-  development: boolean,
-  link: string,
-): Promise<IProfessionLink | null> => {
-  const {
-    linkProfession,
-  } = profession();
-
-  const loadProfession = async ():
-    Promise<IResponseItem<IProfessionLink | null>> => linkProfession(apiUrl, development, link);
-
-  const resultProfession = await useAsyncData('profession', async () => loadProfession());
-
-  return resultProfession.data.value?.data || null;
 };

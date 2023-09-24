@@ -4,7 +4,6 @@ import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import IFilters from '@/interfaces/filters';
 import {
-  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
@@ -33,27 +32,6 @@ export default defineStore('teacher', {
         return response.data;
       } catch (error) {
         this.teachers = null;
-
-        throw error;
-      }
-    },
-    async linkTeacher(
-      baseUrl: string,
-      development: boolean,
-      link: string,
-    ): Promise<IResponseItem<ITeacherLink>> {
-      try {
-        const path = development ? `/api/private/site/teacher/link/${link}` : `/storage/json/teachers/${link}.json`;
-
-        const response = await axios.get<IResponseItem<ITeacherLink>>(path, {
-          baseURL: baseUrl,
-        });
-
-        this.itemLinkTeacher = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemLinkTeacher = null;
 
         throw error;
       }

@@ -12,7 +12,8 @@ export default defineEventHandler(async (event): Promise<ISkillLink | null> => {
     return cachedSkills as ISkillLink;
   }
 
-  const response = await axios.get<IResponseItem<ISkillLink>>(`/api/private/site/skill/link/${link}`, {
+  const path = config.public.development ? `/api/private/site/skill/link/${link}` : `/storage/json/skills/${link}.json`;
+  const response = await axios.get<IResponseItem<ISkillLink>>(path, {
     baseURL: config.public.apiUrl,
   });
 

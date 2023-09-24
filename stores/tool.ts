@@ -4,7 +4,6 @@ import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import IFilters from '@/interfaces/filters';
 import {
-  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import IFilterTool from '@/interfaces/stores/course/filterTool';
@@ -33,27 +32,6 @@ export default defineStore('tool', {
         return response.data;
       } catch (error) {
         this.tools = null;
-
-        throw error;
-      }
-    },
-    async linkTool(
-      baseUrl: string,
-      development: boolean,
-      link: string,
-    ): Promise<IResponseItem<IToolLink>> {
-      try {
-        const path = development ? `/api/private/site/tool/link/${link}` : `/storage/json/tools/${link}.json`;
-
-        const response = await axios.get<IResponseItem<IToolLink>>(path, {
-          baseURL: baseUrl,
-        });
-
-        this.itemLinkTool = response.data.data;
-
-        return response.data;
-      } catch (error) {
-        this.itemLinkTool = null;
 
         throw error;
       }
