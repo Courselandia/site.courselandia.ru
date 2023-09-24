@@ -81,7 +81,7 @@ export default defineStore('course', {
         };
 
         if (
-          !config.public.apiUrl
+          !config.public.development
           && offset === 0
           && limit === 36
           && sorts?.name === 'ASC'
@@ -90,10 +90,7 @@ export default defineStore('course', {
           && section
           && sectionLink
         ) {
-          console.log('JSON');
           path = `/storage/json/courses/${section}/${sectionLink}.json`;
-        } else {
-          console.log('SERVER');
         }
 
         const response = await axios.get<IResponseData<IApiReadCourses>>(path, {
