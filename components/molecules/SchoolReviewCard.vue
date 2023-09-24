@@ -40,7 +40,16 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 5 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
+                v-if="ratingCurrent === 5 || !ratingCurrent"
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_5_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_5_stars_count}`"
+                @click="onClickFilter(5)"
+                @keyup="onClickFilter(5)"
+              />
+              <div
+                v-else
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_5_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_5_stars_count}`"
                 @click="onClickFilter(5)"
@@ -64,7 +73,16 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 4 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
+                v-if="ratingCurrent === 4 || !ratingCurrent"
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_4_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_4_stars_count}`"
+                @click="onClickFilter(4)"
+                @keyup="onClickFilter(4)"
+              />
+              <div
+                v-else
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_4_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_4_stars_count}`"
                 @click="onClickFilter(4)"
@@ -88,7 +106,16 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 3 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
+                v-if="ratingCurrent === 3 || !ratingCurrent"
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_3_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_3_stars_count}`"
+                @click="onClickFilter(3)"
+                @keyup="onClickFilter(3)"
+              />
+              <div
+                v-else
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_3_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_3_stars_count}`"
                 @click="onClickFilter(3)"
@@ -112,7 +139,16 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 2 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
+                v-if="ratingCurrent === 2 || !ratingCurrent"
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_2_stars_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_2_stars_count}`"
+                @click="onClickFilter(2)"
+                @keyup="onClickFilter(2)"
+              />
+              <div
+                v-else
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_2_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_2_stars_count}`"
                 @click="onClickFilter(2)"
@@ -136,7 +172,16 @@
             </div>
             <div class="school-review-card__statistic-item">
               <div
-                :class="`school-review-card__statistic-bar ${ratingCurrent !== 1 && ratingCurrent ? 'school-review-card__statistic-bar--empty' : ''}`"
+                v-if="ratingCurrent === 1 || !ratingCurrent"
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_1_star_count) + 'px' }"
+                :title="`Отзывов: ${school.reviews_1_star_count}`"
+                @click="onClickFilter(1)"
+                @keyup="onClickFilter(1)"
+              />
+              <div
+                v-else
+                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_1_star_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_1_star_count}`"
                 @click="onClickFilter(1)"
@@ -255,6 +300,7 @@ import {
   PropType,
   ref,
   toRefs,
+  watch,
 } from 'vue';
 
 import { apiReadSchools } from '@/api/school';
@@ -327,6 +373,10 @@ const otherSchools = ref<Array<ISchool> | null>(
 );
 
 const ratingCurrent = ref<number | null>(rating.value);
+
+watch(rating, () => {
+  ratingCurrent.value = rating.value;
+});
 
 const onClickFilter = (rtg: number): void => {
   if (rtg !== ratingCurrent.value) {

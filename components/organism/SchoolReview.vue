@@ -1,13 +1,13 @@
 <template>
   <div
-    v-if="itemLinkSchool"
+    v-if="schoolItem"
     class="school-review"
   >
     <div class="school-review__header">
       <Bubbles>
         <div class="content">
           <SchoolReviewHeader
-            :school="itemLinkSchool"
+            :school="schoolItem"
           />
         </div>
       </Bubbles>
@@ -18,7 +18,7 @@
     >
       <div ref="cardRef">
         <SchoolReviewCard
-          :school="itemLinkSchool"
+          :school="schoolItem"
           :scroll="scroll"
           :rating="ratingCurrent || 0"
           @filter="onFilter"
@@ -152,11 +152,15 @@
 import dayjs from 'dayjs';
 // eslint-disable-next-line import/no-unresolved
 import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
-import { storeToRefs } from 'pinia';
-import { computed, onMounted, ref } from 'vue';
+import {
+  computed,
+  onMounted,
+  ref,
+} from 'vue';
 import { useRoute } from 'vue-router';
 
 import { apiReadReviews } from '@/api/review';
+import { apiLinkSchool } from '@/api/school';
 import Animal from '@/components/atoms/Animal.vue';
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import Icon from '@/components/atoms/Icon.vue';
@@ -169,8 +173,8 @@ import { brToRn, rnToBr, stripTags } from '@/helpers/format';
 import plural from '@/helpers/plural';
 import { IResponseItems } from '@/interfaces/response';
 import ISorts from '@/interfaces/sorts';
+import ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import IReview from '@/interfaces/stores/review/review';
-import school from '@/stores/school';
 import { TOrder } from '@/types/order';
 
 const route = useRoute();
@@ -179,12 +183,6 @@ const {
   sort,
   rating,
 } = route.query;
-
-let ratingQuery;
-
-if (rating && Number(rating)) {
-  ratingQuery = Number(rating);
-}
 
 const getDefaultSort = (sortQuery: string | null): ISorts => {
   if (sortQuery === 'date_asc') {
@@ -210,6 +208,12 @@ const getDefaultSort = (sortQuery: string | null): ISorts => {
   };
 };
 
+let ratingQuery: number | null = null;
+
+if (rating && Number(rating)) {
+  ratingQuery = Number(rating);
+}
+
 const scroll = ref(true);
 const contentRef = ref<HTMLElement | null>(null);
 const config = useRuntimeConfig();
@@ -225,22 +229,6 @@ const sorts = ref<ISorts>(getDefaultSort(sort as string));
 const {
   link,
 } = route.params;
-
-try {
-  const response = await apiReadReviews(
-    config.public.apiUrl,
-    config.public.development,
-    link as string,
-    (currentPage.value - 1) * limit,
-    limit,
-    sorts.value,
-    ratingCurrent.value,
-  );
-  reviews.value = response?.data;
-  total.value = response?.total;
-} catch (error: any) {
-  console.log(error.message);
-}
 
 const setUrlQuery = (): void => {
   const queries: Array<string> = [];
@@ -295,22 +283,43 @@ const setScroll = (): void => {
   }
 };
 
-const load = async (callback: Function): Promise<void> => {
+const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | null> => {
   try {
-    const response = await apiReadReviews(
+    return await apiReadReviews(
       config.public.apiUrl,
       config.public.development,
+      fetch,
       link as string,
       (currentPage.value - 1) * limit,
       limit,
       sorts.value,
       ratingCurrent.value,
     );
-
-    callback(response);
   } catch (error: any) {
-    console.log(error.message);
+    console.error(error.message);
   }
+
+  return null;
+};
+
+const response = await loadReviews(!Object.keys(route.query).length);
+// loading.value = false;
+reviews.value = response?.data;
+total.value = response?.total;
+
+const loadSchool = async (fetch: boolean): Promise<ISchoolLink | null> => {
+  try {
+    return await apiLinkSchool(
+      config.public.apiUrl,
+      config.public.development,
+      fetch,
+      link as string,
+    );
+  } catch (error: any) {
+    console.error(error.message);
+  }
+
+  return null;
 };
 
 const onFilter = async (rtng: number | null): Promise<void> => {
@@ -318,12 +327,11 @@ const onFilter = async (rtng: number | null): Promise<void> => {
   currentPage.value = 1;
 
   loading.value = true;
-  await load((response: IResponseItems<IReview>) => {
-    reviews.value = response?.data;
-    total.value = response?.total;
-    stopScrollLoader.value = false;
-    setUrlQuery();
-  });
+  const res = await loadReviews(false);
+  reviews.value = res?.data;
+  total.value = res?.total;
+  stopScrollLoader.value = false;
+  setUrlQuery();
   loading.value = false;
 };
 
@@ -332,25 +340,27 @@ const onSort = async (field: string, order: TOrder): Promise<void> => {
   sorts.value[field] = order;
 
   loading.value = true;
-  await load((response: IResponseItems<IReview>) => {
-    reviews.value = response?.data;
-    total.value = response?.total;
-    setUrlQuery();
-  });
+  const res = await loadReviews(false);
+  reviews.value = res?.data;
+  total.value = res?.total;
+  setUrlQuery();
   loading.value = false;
 };
 
 const onLoadScrolling = async (): Promise<void> => {
   currentPage.value++;
 
-  await load((response: IResponseItems<IReview>) => {
-    reviews.value = reviews.value?.concat(response?.data);
-    setUrlQuery();
+  const res = await loadReviews(false);
 
-    if ((currentPage.value * limit) >= (total.value || 0)) {
-      stopScrollLoader.value = true;
-    }
-  });
+  if (res?.data && reviews.value) {
+    reviews.value = reviews.value.concat(res.data);
+  }
+
+  setUrlQuery();
+
+  if ((currentPage.value * limit) >= (total.value || 0)) {
+    stopScrollLoader.value = true;
+  }
 };
 
 const getDomain = (url: string): string => {
@@ -359,23 +369,25 @@ const getDomain = (url: string): string => {
   return urlObj.host;
 };
 
-onMounted(() => {
+const schoolItem = ref<ISchoolLink | null>(await loadSchool(true));
+
+onMounted(async () => {
   window.addEventListener('scroll', () => {
     setScroll();
   });
 
   setScroll();
+  ratingCurrent.value = ratingQuery;
 });
 
-const { itemLinkSchool } = storeToRefs(school());
 const conditions = {
   0: 'отзывов',
   1: 'отзыв',
   '2+': 'отзыва',
   '5+': 'отзывов',
 };
-const title = `Школа ${itemLinkSchool.value?.name}: ${itemLinkSchool.value?.amount_courses?.all || 0} ${plural(itemLinkSchool.value?.amount_courses?.all || 0, conditions)} (${itemLinkSchool.value?.rating}⭐️) от учеников проходивших курсы`;
-const description = `Список проверенных отзывов о школе ${itemLinkSchool.value?.name} от реальных учеников, проходивших курсы. ${itemLinkSchool.value?.amount_courses?.all || 0} ${plural(itemLinkSchool.value?.amount_courses?.all || 0, conditions)} со средней оценкой ${itemLinkSchool.value?.rating}⭐️`;
+const title = `Школа ${schoolItem.value?.name}: ${schoolItem.value?.amount_courses?.all || 0} ${plural(schoolItem.value?.amount_courses?.all || 0, conditions)} (${schoolItem.value?.rating}⭐️) от учеников проходивших курсы`;
+const description = `Список проверенных отзывов о школе ${schoolItem.value?.name} от реальных учеников, проходивших курсы. ${schoolItem.value?.amount_courses?.all || 0} ${plural(schoolItem.value?.amount_courses?.all || 0, conditions)} со средней оценкой ${schoolItem.value?.rating}⭐️`;
 
 useHead({
   title,
@@ -433,7 +445,7 @@ const reviewsJsonld = computed<JsonLD[] | JsonLDFunc[]>((): JsonLD[] | JsonLDFun
         description: desc,
         itemReviewed: {
           '@type': 'MediaObject',
-          name: itemLinkSchool.value?.name,
+          name: schoolItem.value?.name,
         },
         reviewRating: {
           '@type': 'Rating',
@@ -465,13 +477,13 @@ useJsonld({
   '@context': 'https://schema.org',
   '@type': 'Product',
   category: 'Онлайн курсы',
-  name: itemLinkSchool.value?.name,
-  image: itemLinkSchool.value?.image_logo_id?.path,
-  description: stripTags(brToRn(itemLinkSchool.value?.text || '')),
+  name: schoolItem.value?.name,
+  image: schoolItem.value?.image_logo_id?.path,
+  description: stripTags(brToRn(schoolItem.value?.text || '')),
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: itemLinkSchool.value?.rating || 0,
-    reviewCount: itemLinkSchool.value?.reviews_count,
+    ratingValue: schoolItem.value?.rating || 0,
+    reviewCount: schoolItem.value?.reviews_count,
     bestRating: '5',
     worstRating: '1',
   },

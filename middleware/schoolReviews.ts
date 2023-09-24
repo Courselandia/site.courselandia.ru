@@ -12,6 +12,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const result: ISchoolLink | null = await apiLinkSchool(
       config.public.apiUrl,
       config.public.development,
+      true,
       link as string,
     );
 

@@ -32,6 +32,7 @@ export const apiReadSchools = async (
 export const apiLinkSchool = async (
   apiUrl: string,
   development: boolean,
+  fetch: boolean,
   link: string,
 ): Promise<ISchoolLink | null> => {
   const {
@@ -41,7 +42,13 @@ export const apiLinkSchool = async (
   const loadSchool = async ():
     Promise<IResponseItem<ISchoolLink | null>> => linkSchool(apiUrl, development, link);
 
-  const resultCategories = await useAsyncData('school', async () => loadSchool());
+  if (fetch) {
+    const resultCategories = await useAsyncData(`school_${link}`, async () => loadSchool());
 
-  return resultCategories.data.value?.data || null;
+    return resultCategories.data.value?.data || null;
+  }
+
+  const resultCategories = await linkSchool(apiUrl, development, link);
+
+  return resultCategories.data || null;
 };

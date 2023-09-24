@@ -14,6 +14,7 @@ import ISchool from '@/interfaces/stores/school/school';
 
 export default defineNuxtConfig({
   ssr: true,
+  target: 'static',
   dev: process.env.NODE_ENV !== 'production',
   css: [
     '~/assets/scss/app.scss',
@@ -45,8 +46,7 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.NUXT_API_URL,
       siteUrl: process.env.NUXT_SITE_URL,
-      // development: process.env.NODE_ENV === 'development',
-      development: false,
+      development: process.env.NODE_ENV === 'development',
       googleMeasurementId: process.env.GOOGLE_MEASUREMENT_ID,
       yandexMeasurementId: process.env.YANDEX_METRIKA_ID,
     },
@@ -139,111 +139,6 @@ export default defineNuxtConfig({
     inlineSSRStyles: false,
   },
   hooks: {
-    'nitro:config': async function (nitroConfig) {
-      let routers: string[] = [];
-
-      // Courses
-      const responseCourses = await axios.get<IResponseData<IApiReadCourses>>('/api/private/site/course/read', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const { courses } = responseCourses.data.data;
-
-      routers = courses
-        .map((item: ICourse) => `/courses/show/${item.school?.link}/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Skills
-      const responseSkills = await axios.get<IResponseItems<IFilterSkill>>('/api/private/site/course/skills', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const skills: IFilterSkill[] = responseSkills.data.data;
-
-      routers = skills
-        .map((item: IFilterSkill) => `/courses/skill/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Teachers
-      const responseTeachers = await axios.get<IResponseItems<IFilterTeacher>>('/api/private/site/course/teachers', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const teachers: IFilterTeacher[] = responseTeachers.data.data;
-
-      routers = teachers
-        .map((item: IFilterTeacher) => `/courses/teacher/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Tools
-      const responseTools = await axios.get<IResponseItems<IFilterTool>>('/api/private/site/course/tools', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const tools: IFilterTool[] = responseTools.data.data;
-
-      routers = tools
-        .map((item: IFilterTool) => `/courses/tool/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Professions
-      const responseProfessions = await axios.get<IResponseItems<IProfession>>('/api/private/site/course/professions', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const professions: IProfession[] = responseProfessions.data.data;
-
-      routers = professions
-        .map((item: IProfession) => `/courses/profession/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Categories
-      const responseCategories = await axios.get<IResponseItems<ICategory>>('/api/private/site/course/categories', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const categories: ICategory[] = responseCategories.data.data;
-
-      routers = categories
-        .map((item: ICategory) => `/courses/category/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Reviews
-      const responseSchools = await axios.get<IResponseItems<ISchool>>('/api/private/site/school/read', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const schools: ISchool[] = responseSchools.data.data;
-      routers = schools
-        .filter((item: ISchool) => item.reviews_count)
-        .map((item: ISchool) => `/reviews/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Schools
-      routers = schools
-        .map((item: ISchool) => `/courses/school/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-
-      // Directions
-      const responseDirections = await axios.get<IResponseItems<IDirection>>('/api/private/site/course/directions', {
-        baseURL: process.env.NUXT_API_URL,
-      });
-
-      const directions: IDirection[] = responseDirections.data.data;
-
-      routers = directions
-        .map((item: IDirection) => `/courses/direction/${item.link}`);
-
-      nitroConfig.prerender?.routes?.push(...routers);
-    },
     'vite:extend': function ({ nuxt, config }) {
       return config.build.assetsInlineLimit = 0;
     },
@@ -251,6 +146,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       concurrency: 20,
+      crawlLinks: false,
     },
   },
 });

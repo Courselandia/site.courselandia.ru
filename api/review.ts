@@ -8,6 +8,7 @@ import review from '@/stores/review';
 export const apiReadReviews = async (
   apiUrl: string,
   development: boolean,
+  fetch: boolean,
   school: string,
   offset: number = 0,
   limit: number = 36,
@@ -29,7 +30,11 @@ export const apiReadReviews = async (
     rating,
   );
 
-  const resultReviews = await useAsyncData('reviews', async () => loadReviews());
+  if (fetch) {
+    const resultReviews = await useAsyncData(`reviews_${school}`, async () => loadReviews());
 
-  return resultReviews.data.value || null;
+    return resultReviews.data.value || null;
+  }
+
+  return await loadReviews();
 };
