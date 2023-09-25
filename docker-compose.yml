@@ -21,7 +21,7 @@ services:
     container_name: site-courselandia-ru-redis
     restart: unless-stopped
     ports:
-      - ${DOCKER_REDIS_PORT}:6379
+      - ${DOCKER_REDIS_PORT}:${REDIS_PORT}
     networks:
       - network
 

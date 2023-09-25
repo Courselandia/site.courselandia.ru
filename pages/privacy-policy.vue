@@ -761,6 +761,12 @@
 </template>
 
 <script lang="ts" setup>
+import { NuxtMultiCacheRouteCacheHelper } from 'nuxt-multi-cache/dist/runtime/helpers/RouteCacheHelper';
+
+useRouteCache((helper: NuxtMultiCacheRouteCacheHelper) => {
+  helper.setMaxAge(3600 * 24).setCacheable().addTags(['privacy-policy']);
+});
+
 const title = 'Политика в отношении обработки персональных данных';
 const description = 'Наша политика безопасности по обработке персональных данных.';
 

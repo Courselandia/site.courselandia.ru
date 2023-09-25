@@ -9,7 +9,13 @@
 </template>
 
 <script lang="ts" setup>
+import { NuxtMultiCacheRouteCacheHelper } from 'nuxt-multi-cache/dist/runtime/helpers/RouteCacheHelper';
+
 import SchoolReviews from '@/components/organism/SchoolReviews.vue';
+
+useRouteCache((helper: NuxtMultiCacheRouteCacheHelper) => {
+  helper.setMaxAge(3600 * 24).setCacheable().addTags(['reviews']);
+});
 
 const config = useRuntimeConfig();
 const title = 'Реальные отзывы об онлайн-школах и их курсах';

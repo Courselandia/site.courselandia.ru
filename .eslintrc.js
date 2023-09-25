@@ -40,6 +40,7 @@ module.exports = {
     useJsonld: true,
     useServerSeoMeta: true,
     useServerHead: true,
+    useRouteCache: true,
   },
   settings: {
     'import/resolver': {

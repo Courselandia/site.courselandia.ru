@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-undef
 export default defineNuxtConfig({
   ssr: true,
-  target: 'static',
   dev: process.env.NODE_ENV !== 'production',
   css: [
     '~/assets/scss/app.scss',
@@ -15,6 +14,7 @@ export default defineNuxtConfig({
   ],
   modules: [
     '@pinia/nuxt',
+    'nuxt-multi-cache',
     'nuxt-jsonld',
     [
       'yandex-metrika-module-nuxt3',
@@ -36,6 +36,8 @@ export default defineNuxtConfig({
       development: process.env.NODE_ENV === 'development',
       googleMeasurementId: process.env.GOOGLE_MEASUREMENT_ID,
       yandexMeasurementId: process.env.YANDEX_METRIKA_ID,
+      redisHost: process.env.REDIS_HOST,
+      redisPort: process.env.REDIS_PORT,
     },
   },
   router: {
@@ -137,6 +139,14 @@ export default defineNuxtConfig({
         host: process.env.REDIS_HOST,
         port: process.env.REDIS_PORT,
       },
+    },
+  },
+  multiCache: {
+    component: {
+      enabled: true,
+    },
+    route: {
+      enabled: true,
     },
   },
 });

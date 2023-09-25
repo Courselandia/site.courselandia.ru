@@ -1190,6 +1190,12 @@
 </template>
 
 <script lang="ts" setup>
+import { NuxtMultiCacheRouteCacheHelper } from 'nuxt-multi-cache/dist/runtime/helpers/RouteCacheHelper';
+
+useRouteCache((helper: NuxtMultiCacheRouteCacheHelper) => {
+  helper.setMaxAge(3600 * 24).setCacheable().addTags(['agreement']);
+});
+
 const title = 'Пользовательское соглашение';
 const description = 'Полный текст пользовательского соглашения, который вы обязуетель исполнять если используете наш ресур.';
 

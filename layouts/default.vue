@@ -2,20 +2,32 @@
   <div class="page">
     <div class="page__header">
       <div class="page__header-slide">
-        <Header
-          v-model:menu="menu"
-          :active="active"
-        />
+        <RenderCacheable
+          :cache-tags="['header']"
+        >
+          <Header
+            v-model:menu="menu"
+            :active="active"
+          />
+        </RenderCacheable>
       </div>
     </div>
     <div class="page__dropdown">
-      <Dropdowns v-model:menu="menu" />
+      <RenderCacheable
+        :cache-tags="['dropdown']"
+      >
+        <Dropdowns v-model:menu="menu" />
+      </RenderCacheable>
     </div>
     <div class="page__body">
       <slot />
     </div>
     <div class="page__footer">
-      <Footer />
+      <RenderCacheable
+        :cache-tags="['footer']"
+      >
+        <Footer />
+      </RenderCacheable>
     </div>
   </div>
 </template>
