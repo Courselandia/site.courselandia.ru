@@ -373,7 +373,6 @@ onMounted(async () => {
   });
 
   setScroll();
-  ratingCurrent.value = ratingQuery;
 });
 
 const conditions = {
