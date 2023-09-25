@@ -39,6 +39,7 @@ export default defineNuxtConfig({
       redisHost: process.env.REDIS_HOST,
       redisPort: process.env.REDIS_PORT,
     },
+    cacheToken: process.env.CACHE_TOKEN,
   },
   router: {
     options: {
@@ -147,6 +148,12 @@ export default defineNuxtConfig({
     },
     route: {
       enabled: true,
+    },
+    api: {
+      enabled: true,
+      prefix: '/__nuxt_multi_cache',
+      authorization: process.env.CACHE_TOKEN || '',
+      cacheTagInvalidationDelay: 60000,
     },
   },
 });
