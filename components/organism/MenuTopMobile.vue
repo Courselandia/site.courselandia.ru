@@ -157,27 +157,31 @@
           Отзывы о школах
         </div>
       </div>
-      <div
+      <template
         v-for="(item, key) in listSchoolReviews"
         :key="key"
-        class="menu-top-mobile__item menu-top-mobile__item--review"
-        @click="onClickLink(`/reviews/${item.link}`)"
-        @keydown="onClickLink(`/reviews/${item.link}`)"
       >
-        <div class="menu-top-mobile__star">
-          <Icon
-            name="star"
-            color="blue2"
-            :size="[16, 16]"
-          />
+        <div
+          v-if="item.reviews"
+          class="menu-top-mobile__item menu-top-mobile__item--review"
+          @click="onClickLink(`/reviews/${item.link}`)"
+          @keydown="onClickLink(`/reviews/${item.link}`)"
+        >
+          <div class="menu-top-mobile__star">
+            <Icon
+              name="star"
+              color="blue2"
+              :size="[16, 16]"
+            />
+          </div>
+          <div class="menu-top-mobile__rating">
+            {{ item.rating }}
+          </div>
+          <div class="menu-top-mobile__label">
+            {{ item.label }}
+          </div>
         </div>
-        <div class="menu-top-mobile__rating">
-          {{ item.rating }}
-        </div>
-        <div class="menu-top-mobile__label">
-          {{ item.label }}
-        </div>
-      </div>
+      </template>
     </template>
   </div>
 </template>
