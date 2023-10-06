@@ -251,6 +251,7 @@ import {
 import { apiReadCategories } from '@/api/category';
 import { apiReadCourses } from '@/api/course';
 import { apiReadProfessions } from '@/api/profession';
+import { apiReadSchools } from '@/api/school';
 import { apiReadSkills } from '@/api/skill';
 import { apiReadTeachers } from '@/api/teacher';
 import { apiReadTools } from '@/api/tool';
@@ -1105,6 +1106,21 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
 
     openedItems.openedTools = true;
+
+    if (callback) {
+      callback();
+    }
+  } else if (name === 'schools') {
+    if (schools.value.length <= 11) {
+      const result = await apiReadSchools(
+        null,
+        null,
+        getFilters(),
+      );
+      schools.value = courseFilterStoreSchoolsToComponentSchools(result);
+    }
+
+    openedItems.openedSchools = true;
 
     if (callback) {
       callback();
