@@ -227,13 +227,13 @@
       v-else-if="itemLinkTeacher"
     >
       <CatalogHeader
-        v-if="itemLinkTeacher && itemLinkTeacher.text"
+        v-if="itemLinkTeacher && itemLinkTeacher.text && !itemLinkTeacher?.copied"
       >
         <template #title>
           {{ itemLinkTeacher?.header || itemLinkTeacher?.name }}
         </template>
         <template
-          v-if="itemLinkTeacher?.text"
+          v-if="itemLinkTeacher?.text && !itemLinkTeacher?.copied"
           #description
         >
           <span v-html="itemLinkTeacher.text" />
