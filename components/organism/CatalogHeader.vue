@@ -161,7 +161,7 @@
         v-if="itemLinkSchool?.rating"
         #rating
       >
-        {{ itemLinkSchool.rating }}
+        {{ Math.round(itemLinkSchool.rating * 100) / 100 }}
       </template>
       <!--
       <template #reviews>

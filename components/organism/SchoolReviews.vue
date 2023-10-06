@@ -280,7 +280,7 @@
                   <div class="school-reviews__content-rating">
                     <div class="school-reviews__rating">
                       <div class="school-reviews__rating-value">
-                        {{ school.rating }}
+                        {{ Math.round(school.rating * 100) / 100 }}
                       </div>
                       <div class="school-reviews__rating-star">
                         <Icon

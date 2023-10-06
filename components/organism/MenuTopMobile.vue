@@ -175,7 +175,7 @@
             />
           </div>
           <div class="menu-top-mobile__rating">
-            {{ item.rating }}
+            {{ Math.round(item.rating * 100) / 100 }}
           </div>
           <div class="menu-top-mobile__label">
             {{ item.label }}

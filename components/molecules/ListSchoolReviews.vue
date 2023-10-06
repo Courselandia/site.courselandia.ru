@@ -21,7 +21,7 @@
             />
           </div>
           <div class="list-school-reviews__rating">
-            {{ school.rating }}
+            {{ Math.round(school.rating * 100) / 100 }}
           </div>
           <div class="list-school-reviews__label">
             {{ school.label }} ({{ school.reviews }}

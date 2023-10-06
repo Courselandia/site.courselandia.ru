@@ -204,7 +204,7 @@
         </div>
         <div class="school-review-card__content-rating">
           <div class="school-review-card__content-rating-number">
-            {{ school.rating }}
+            {{ Math.round(school.rating * 100) / 100 }}
           </div>
           <Icon
             class="school-review-card__content-rating-icon"
@@ -266,7 +266,7 @@
             class="school-review-card__others-school"
           >
             <div class="school-review-card__others-school-rating">
-              {{ otherSchool.rating }}
+              {{ Math.round(school.rating * 100) / 100 }}
             </div>
             <div class="school-review-card__others-school-icon">
               <Icon
