@@ -5,8 +5,8 @@
   >
     <div class="course-search-result__media">
       <LazyImage
-        v-if="course.image"
-        :src="course.image"
+        v-if="course.image?.path"
+        :src="course.image.path"
         class="course-search-result__image"
         :alt="course.name"
         :title="course.name"
