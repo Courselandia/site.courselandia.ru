@@ -143,11 +143,9 @@ import ICourse from '@/interfaces/components/molecules/course';
 import IMenu from '@/interfaces/menu';
 import direction from '@/stores/direction';
 
-/*
 useRouteCache((helper: NuxtMultiCacheRouteCacheHelper) => {
   helper.setMaxAge(3600 * 24).setCacheable().addTags(['index']);
 });
- */
 
 const { directions } = storeToRefs(direction());
 const listDirections = ref<IMenu[]>();

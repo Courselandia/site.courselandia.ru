@@ -8,6 +8,8 @@
       :alt="label"
       :title="label"
       :class="`brand__image ${height === width ? 'brand__image--box' : ''}`"
+      :width="width"
+      :height="height"
     />
   </nuxt-link>
 </template>
