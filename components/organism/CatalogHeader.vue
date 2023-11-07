@@ -223,30 +223,10 @@
         </div>
       </div>
     </template>
-    <template
+    <CatalogHeaderTeacher
       v-else-if="itemLinkTeacher"
-    >
-      <CatalogHeader
-        v-if="itemLinkTeacher && itemLinkTeacher.text && !itemLinkTeacher?.copied"
-      >
-        <template #title>
-          {{ itemLinkTeacher?.header || itemLinkTeacher?.name }}
-        </template>
-        <template
-          v-if="itemLinkTeacher?.text && !itemLinkTeacher?.copied"
-          #description
-        >
-          <span v-html="itemLinkTeacher.text" />
-        </template>
-      </CatalogHeader>
-      <div v-else>
-        <div class="content mt-12">
-          <h1 class="title title--1">
-            {{ itemLinkTeacher?.header || itemLinkTeacher?.name }}
-          </h1>
-        </div>
-      </div>
-    </template>
+      :teacher="itemLinkTeacher"
+    />
     <template
       v-else-if="itemLinkTool"
     >
@@ -384,6 +364,7 @@ import {
 import Button from '@/components/atoms/Button.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
+import CatalogHeaderTeacher from '@/components/molecules/CatalogHeaderTeacher.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import ITag from '@/interfaces/components/atoms/tag';
 import ICategoryLink from '@/interfaces/stores/course/categoryLink';

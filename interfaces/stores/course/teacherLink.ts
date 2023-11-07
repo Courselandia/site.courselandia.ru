@@ -1,7 +1,9 @@
 import IDirectionLink from '@/interfaces/stores/course/directionLink';
 import ISkillLink from '@/interfaces/stores/course/skillLink';
+import ITeacherExperience from '@/interfaces/stores/course/teacherExperience';
 import IImage from '@/interfaces/stores/image/image';
 import IMetatag from '@/interfaces/stores/metatag/metatag';
+import ISocialMedia from '@/interfaces/stores/socialMedia';
 import TId from '@/types/id';
 
 export default interface ITeacherLink {
@@ -23,4 +25,6 @@ export default interface ITeacherLink {
   schools: Array<ISkillLink>,
   copied: boolean;
   city: string | null;
+  experiences: ITeacherExperience[];
+  social_medias: ISocialMedia[];
 }
