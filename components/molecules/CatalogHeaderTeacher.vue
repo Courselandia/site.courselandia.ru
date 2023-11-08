@@ -57,48 +57,53 @@
             class="catalog-header-teacher__info"
             v-html="teacher.text"
           />
-          <template
-            v-if="teacher.directions.length"
+          <div
+            v-if="teacher.directions.length || teacher.schools.length"
+            class="catalog-header-teacher__params"
           >
-            <div
-              v-for="(direction, key) in teacher.directions"
-              :key="key"
-              class="catalog-header-teacher__directions"
+            <template
+              v-if="teacher.directions.length"
             >
-              <div class="catalog-header-teacher__direction-label">
-                Направление:
+              <div
+                v-for="(direction, key) in teacher.directions"
+                :key="key"
+                class="catalog-header-teacher__directions"
+              >
+                <div class="catalog-header-teacher__direction-label">
+                  Направление:
+                </div>
+                <div class="catalog-header-teacher__direction-items">
+                  <nuxt-link
+                    :to="`/courses/direction/${direction.link}`"
+                    class="catalog-header-teacher__direction-item"
+                  >
+                    {{ direction.name }}
+                  </nuxt-link>
+                </div>
               </div>
-              <div class="catalog-header-teacher__direction-items">
-                <nuxt-link
-                  :to="`/courses/direction/${direction.link}`"
-                  class="catalog-header-teacher__direction-item"
-                >
-                  {{ direction.name }}
-                </nuxt-link>
-              </div>
-            </div>
-          </template>
-          <template
-            v-if="teacher.schools.length"
-          >
-            <div
-              v-for="(school, key) in teacher.schools"
-              :key="key"
-              class="catalog-header-teacher__schools"
+            </template>
+            <template
+              v-if="teacher.schools.length"
             >
-              <div class="catalog-header-teacher__school-label">
-                Школа:
+              <div
+                v-for="(school, key) in teacher.schools"
+                :key="key"
+                class="catalog-header-teacher__schools"
+              >
+                <div class="catalog-header-teacher__school-label">
+                  Школа:
+                </div>
+                <div class="catalog-header-teacher__school-items">
+                  <nuxt-link
+                    :to="`/courses/school/${school.link}`"
+                    class="catalog-header-teacher__school-item"
+                  >
+                    {{ school.name }}
+                  </nuxt-link>
+                </div>
               </div>
-              <div class="catalog-header-teacher__school-items">
-                <nuxt-link
-                  :to="`/courses/school/${school.link}`"
-                  class="catalog-header-teacher__school-item"
-                >
-                  {{ school.name }}
-                </nuxt-link>
-              </div>
-            </div>
-          </template>
+            </template>
+          </div>
         </div>
         <div
           v-if="teacher.experiences"
@@ -138,7 +143,7 @@
                 <template
                   v-if="experience.started && experience.finished"
                 >
-                  -
+                  –
                 </template>
                 <template
                   v-if="experience.finished"
