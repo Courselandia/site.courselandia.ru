@@ -64,6 +64,8 @@ export const courseStoreToCourseComponent = (
     id: teacher.id,
     label: teacher.name,
     link: `/courses/teacher/${teacher.link}`,
+    image: teacher.image_middle_id,
+    extra: teacher.experiences?.length ? teacher.experiences[0].position : undefined,
   })) : null,
   tools: course.tools ? course.tools.map((tool) => ({
     id: tool.id,

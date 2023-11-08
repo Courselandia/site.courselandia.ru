@@ -1,3 +1,5 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
 .course-view-teachers {
   margin-bottom: -2rem;
 
@@ -15,6 +17,8 @@
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 2rem;
+    color: $primary;
+    text-decoration: none;
 
     @media all and (max-width: 1200px) {
       width: calc(25% - 2rem);
@@ -31,6 +35,14 @@
     @media all and (max-width: 576px) {
       flex-direction: column;
     }
+
+    &:hover {
+      .course-view-teachers {
+        &__name {
+          color: $blue3;
+        }
+      }
+    }
   }
 
   &__picture {
@@ -39,6 +51,12 @@
     @media all and (max-width: 576px) {
       margin-right: 0;
     }
+  }
+
+  &__image {
+    width: 80px;
+    height: auto;
+    border-radius: 100%;
   }
 
   &__name {

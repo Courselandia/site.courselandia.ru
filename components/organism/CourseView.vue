@@ -218,6 +218,7 @@ const {
 } = route.params;
 
 const courseItem = ref<ICourse>();
+let courseTempItem: ICourse | undefined;
 const courseSimilarities = ref<ICourse[]>();
 
 const description = ref('');
