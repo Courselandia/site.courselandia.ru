@@ -304,7 +304,7 @@ const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {
   const instructors = courseItem.value?.teachers?.map((item: ITeacher) => ({
     '@type': 'Person',
     name: item.label,
-    jobTitle: 'Эксперт',
+    jobTitle: item.extra,
     image: null,
     url: `${config.public.siteUrl}${item.link}`,
   }));

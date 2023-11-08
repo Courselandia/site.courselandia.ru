@@ -1469,7 +1469,9 @@ const teacherJsonLd = computed<JsonLD | JsonLDFunc | undefined>(() => {
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: itemLinkTeacher.value?.name,
-      jobTitle: 'Эксперт',
+      jobTitle: itemLinkTeacher.value.experiences.length
+        ? itemLinkTeacher.value.experiences[0].position
+        : undefined,
     };
   }
 
