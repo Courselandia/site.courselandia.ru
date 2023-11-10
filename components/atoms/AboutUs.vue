@@ -85,12 +85,6 @@
         этом море тот островок, который нужен именно вам.
       </p>
     </div>
-    <template #show>
-      Читать полностью
-    </template>
-    <template #hide>
-      Сократить
-    </template>
   </Reducer>
 </template>
 

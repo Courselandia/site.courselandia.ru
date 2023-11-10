@@ -53,10 +53,11 @@
           >
             {{ teacher.city }}
           </div>
-          <div
-            class="catalog-header-teacher__info"
-            v-html="teacher.text"
-          />
+          <div class="catalog-header-teacher__info">
+            <Reducer>
+              <span v-html="teacher.text" />
+            </Reducer>
+          </div>
           <div
             v-if="teacher.directions.length || teacher.schools.length"
             class="catalog-header-teacher__params"
@@ -173,6 +174,7 @@ import dayjs from 'dayjs';
 import { PropType } from 'vue';
 
 import LazyImage from '@/components/atoms/LazyImage.vue';
+import Reducer from '@/components/atoms/Reducer.vue';
 import ITeacherLink from '@/interfaces/stores/course/teacherLink';
 
 const props = defineProps({

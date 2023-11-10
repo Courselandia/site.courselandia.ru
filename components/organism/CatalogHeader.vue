@@ -10,7 +10,9 @@
         v-if="itemLinkCategory.text"
         #description
       >
-        <span v-html="itemLinkCategory.text" />
+        <Reducer>
+          <span v-html="itemLinkCategory.text" />
+        </Reducer>
       </template>
       <template
         v-if="itemLinkCategory.directions"
@@ -48,7 +50,9 @@
         v-if="itemLinkDirection.text"
         #description
       >
-        <span v-html="itemLinkDirection.text" />
+        <Reducer>
+          <span v-html="itemLinkDirection.text" />
+        </Reducer>
       </template>
       <template
         v-if="itemLinkDirection?.categories"
@@ -134,7 +138,9 @@
           v-if="itemLinkProfession?.text"
           #description
         >
-          <span v-html="itemLinkProfession.text" />
+          <Reducer>
+            <span v-html="itemLinkProfession.text" />
+          </Reducer>
         </template>
       </CatalogHeader>
       <div v-else>
@@ -155,7 +161,9 @@
         v-if="itemLinkSchool.text"
         #description
       >
-        <span v-html="itemLinkSchool.text" />
+        <Reducer>
+          <span v-html="itemLinkSchool.text" />
+        </Reducer>
       </template>
       <template
         v-if="itemLinkSchool?.rating"
@@ -212,7 +220,9 @@
           v-if="itemLinkSkill?.text"
           #description
         >
-          <span v-html="itemLinkSkill.text" />
+          <Reducer>
+            <span v-html="itemLinkSkill.text" />
+          </Reducer>
         </template>
       </CatalogHeader>
       <div v-else>
@@ -240,7 +250,9 @@
           v-if="itemLinkTool?.text"
           #description
         >
-          <span v-html="itemLinkTool.text" />
+          <Reducer>
+            <span v-html="itemLinkTool.text" />
+          </Reducer>
         </template>
       </CatalogHeader>
       <div v-else>
@@ -258,25 +270,27 @@
         Курсы онлайн от Courselandia
       </template>
       <template #description>
-        <p>
-          IT курсы с нуля давно доказали свою эффективность.
-          Хорошо зная рынок услуг онлайн-образования в нашей стране,
-          проводя его систематический мониторинг и изучение, мы подобрали
-          для вас перечень IT курсов онлайн, которые обеспечивают учащимся
-          наилучший результат. Многие люди уже успешно прошли их и в
-          настоящее время стали успешными специалистами с отличными
-          перспективами карьерного роста.
-        </p>
-        <p>
-          <nuxt-link to="/courses/direction/programmirovanie" class="link">
-            Все онлайн-курсы</nuxt-link> рассортированы по категориям.
-          Это позволяет быстро найти нужное направление обучения. Подбор
-          курсов можно осуществить по профессии, например, курсы бизнес
-          аналитика или
-          <nuxt-link to="/courses/profession/fullstackdizayner" class="link">
-            Fullstack дизайнер</nuxt-link>, стоимости обучения,
-          уровню, рейтингу и т. д.
-        </p>
+        <Reducer>
+          <p>
+            IT курсы с нуля давно доказали свою эффективность.
+            Хорошо зная рынок услуг онлайн-образования в нашей стране,
+            проводя его систематический мониторинг и изучение, мы подобрали
+            для вас перечень IT курсов онлайн, которые обеспечивают учащимся
+            наилучший результат. Многие люди уже успешно прошли их и в
+            настоящее время стали успешными специалистами с отличными
+            перспективами карьерного роста.
+          </p>
+          <p>
+            <nuxt-link to="/courses/direction/programmirovanie" class="link">
+              Все онлайн-курсы</nuxt-link> рассортированы по категориям.
+            Это позволяет быстро найти нужное направление обучения. Подбор
+            курсов можно осуществить по профессии, например, курсы бизнес
+            аналитика или
+            <nuxt-link to="/courses/profession/fullstackdizayner" class="link">
+              Fullstack дизайнер</nuxt-link>, стоимости обучения,
+            уровню, рейтингу и т. д.
+          </p>
+        </Reducer>
       </template>
       <template #section>
         <div class="catalog-header__fire" />
@@ -362,6 +376,7 @@ import {
 } from 'vue3-carousel';
 
 import Button from '@/components/atoms/Button.vue';
+import Reducer from '@/components/atoms/Reducer.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
 import CatalogHeaderTeacher from '@/components/molecules/CatalogHeaderTeacher.vue';
