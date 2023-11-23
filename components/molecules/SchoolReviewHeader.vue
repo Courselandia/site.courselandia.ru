@@ -5,11 +5,14 @@
         Отзывы о школе {{ school.name }}
       </h1>
 
-      <div
+      <Reducer
         v-if="school.text"
         class="school-review-header__description"
-        v-html="school.text"
-      />
+      >
+        <span
+          v-html="school.text"
+        />
+      </Reducer>
     </div>
   </div>
 </template>
@@ -18,6 +21,7 @@
 import { PropType } from 'vue';
 
 import ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import Reducer from "~/components/atoms/Reducer.vue";
 
 const props = defineProps({
   school: {

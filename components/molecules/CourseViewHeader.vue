@@ -5,11 +5,14 @@
         {{ course.header }}
       </h1>
 
-      <div
+      <Reducer
         v-if="course.text"
         class="course-view-header__description"
-        v-html="course.text"
-      />
+      >
+        <span
+          v-html="course.text"
+        />
+      </Reducer>
 
       <Facts>
         <Fact
@@ -91,6 +94,7 @@
 import { PropType } from 'vue';
 
 import Fact from '@/components/atoms/Fact.vue';
+import Reducer from '@/components/atoms/Reducer.vue';
 import Facts from '@/components/molecules/Facts.vue';
 import language from '@/helpers/language';
 import ICourse from '@/interfaces/components/molecules/course';
