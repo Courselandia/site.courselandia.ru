@@ -20,8 +20,8 @@
 <script lang="ts" setup>
 import { PropType } from 'vue';
 
+import Reducer from '@/components/atoms/Reducer.vue';
 import ISchoolLink from '@/interfaces/stores/course/schoolLink';
-import Reducer from "~/components/atoms/Reducer.vue";
 
 const props = defineProps({
   school: {

@@ -220,6 +220,21 @@
     font-weight: 400;
     line-height: 1.875rem;
     margin-bottom: 2rem;
+
+    .reducer {
+      &__content {
+        &--hide {
+          &::after {
+            background: linear-gradient(0deg, rgba(239, 246, 251, 1) 0%, rgba(239, 246, 251, 0) 50%);
+          }
+        }
+      }
+
+      &__action {
+        font-size: 1rem;
+        line-height: 1.4rem;
+      }
+    }
   }
 
   &__params {
