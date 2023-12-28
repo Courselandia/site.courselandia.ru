@@ -184,6 +184,7 @@ import { brToRn, stripTags } from '@/helpers/format';
 import ICourse from '@/interfaces/components/molecules/course';
 import IFaqComponent from '@/interfaces/components/molecules/faq';
 import ITeacher from '@/interfaces/components/molecules/teacher';
+import EDuration from '@/enums/components/molecules/duration';
 
 const config = useRuntimeConfig();
 const scroll = ref(true);
@@ -309,6 +310,29 @@ const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {
     url: `${config.public.siteUrl}${item.link}`,
   }));
 
+  const getCourseWorkload = (
+    duration: number,
+    durationUnit: EDuration,
+  ): string | null => {
+    if (duration && durationUnit) {
+      let result = `P${duration}`;
+
+      if (durationUnit === EDuration.DAY) {
+        result += 'D';
+      } else if (durationUnit === EDuration.WEEK) {
+        result += 'W';
+      } else if (durationUnit === EDuration.MONTH) {
+        result += 'M';
+      } else if (durationUnit === EDuration.YEAR) {
+        result += 'Y';
+      }
+
+      return result;
+    }
+
+    return null;
+  };
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Course',
@@ -342,6 +366,10 @@ const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {
         priceCurrency: courseItem.value?.currency,
       },
       instructor: instructors,
+      courseWorkload: (
+        courseItem.value?.duration
+        && courseItem.value?.duration_unit
+      ) ? getCourseWorkload(courseItem.value.duration, courseItem.value.duration_unit) : null,
     },
   };
 });
