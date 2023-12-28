@@ -350,6 +350,14 @@ const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {
       ratingValue: courseItem.value?.rating,
       ratingCount: '1',
     },
+    offers: {
+      '@type': 'Offer',
+      url: courseItem.value?.link ? `${config.public.siteUrl}${courseItem.value?.link}` : '',
+      name: courseItem.value?.school?.name,
+      availability: 'OnlineOnly',
+      price: courseItem.value?.price || 0,
+      priceCurrency: courseItem.value?.currency,
+    },
     hasCourseInstance: {
       '@type': 'CourseInstance',
       name: courseItem.value?.school?.name,
