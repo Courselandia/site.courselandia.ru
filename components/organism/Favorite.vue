@@ -18,7 +18,7 @@
       Избранные
     </div>
     <div class="favorite__amount">
-      {{ amountFavorites }}
+      {{ amount }}
     </div>
   </nuxt-link>
 </template>
@@ -31,7 +31,7 @@ import Icon from '@/components/atoms/Icon.vue';
 import favorite from '@/stores/favorite';
 
 const {
-  amountFavorites,
+  amount,
 } = storeToRefs(favorite());
 
 const hover = ref(false);
