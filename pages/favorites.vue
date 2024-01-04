@@ -48,14 +48,14 @@ useHead({
 });
 
 const {
-  favorites,
-} = storeToRefs(favorite());
+  getFavorites,
+} = favorite();
 
 const courses = ref<Array<ICourse>>([]);
 
 try {
   courses.value = coursesStoreToCoursesComponent(
-    await apiReadFavoritesCourses(favorites.value),
+    await apiReadFavoritesCourses(getFavorites()),
   );
 } catch (error: any) {
   console.error(error.message);

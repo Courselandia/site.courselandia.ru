@@ -18,19 +18,6 @@ export default defineStore('favorite', {
 
       return favorites.value.length || 0;
     },
-    favorites: () => {
-      const expires = new Date(new Date().setFullYear(new Date().getFullYear() + 30));
-
-      const favorites = useCookie<TId[]>(
-        'favorites',
-        {
-          expires,
-          default: () => [],
-        },
-      );
-
-      return favorites.value;
-    },
   },
   actions: {
     addFavorite(id: TId): TId[] {
@@ -81,6 +68,19 @@ export default defineStore('favorite', {
       );
 
       return favorites.value.indexOf(id) !== -1;
+    },
+    getFavorites(): TId[] {
+      const expires = new Date(new Date().setFullYear(new Date().getFullYear() + 30));
+
+      const favorites = useCookie<TId[]>(
+        'favorites',
+        {
+          expires,
+          default: () => [],
+        },
+      );
+
+      return favorites.value;
     },
   },
 });
