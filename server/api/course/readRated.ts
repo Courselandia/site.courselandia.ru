@@ -1,6 +1,6 @@
 import axios from '@/helpers/axios';
-import { IResponseItems } from '@/interfaces/response';
-import ICourse from '@/interfaces/stores/course/course';
+import type { IResponseItems } from '@/interfaces/response';
+import type ICourse from '@/interfaces/stores/course/course';
 
 export default defineEventHandler(async (event): Promise<ICourse[]> => {
   const config = useRuntimeConfig();

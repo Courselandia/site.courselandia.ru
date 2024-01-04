@@ -1,4 +1,4 @@
-import TId from '@/types/id';
+import type TId from '@/types/id';
 
 export default interface IImage {
   id: TId,

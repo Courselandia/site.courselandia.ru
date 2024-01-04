@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-cycle
-import ICategoryLink from '@/interfaces/stores/course/categoryLink';
-import IMetatag from '@/interfaces/stores/metatag/metatag';
-import TId from '@/types/id';
+import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
+import type IMetatag from '@/interfaces/stores/metatag/metatag';
+import type TId from '@/types/id';
 
 export default interface IDirectionLink {
   id: TId;

@@ -1,5 +1,5 @@
-import IMenu from '@/interfaces/menu';
-import ISchool from '@/interfaces/stores/school/school';
+import type IMenu from '@/interfaces/menu';
+import type ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToMenu = (
   schools: Array<ISchool> | null,

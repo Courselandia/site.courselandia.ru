@@ -1,6 +1,6 @@
-import IMenu from '@/interfaces/menu';
-import IDirection from '@/interfaces/stores/course/direction';
-import TId from '@/types/id';
+import type IMenu from '@/interfaces/menu';
+import type IDirection from '@/interfaces/stores/course/direction';
+import type TId from '@/types/id';
 
 const directionsToMenu = async (
   directions: Array<IDirection> | null,

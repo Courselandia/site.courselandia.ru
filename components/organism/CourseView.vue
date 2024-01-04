@@ -154,7 +154,6 @@
 
 <script lang="ts" setup>
 // eslint-disable-next-line import/no-unresolved
-import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
 import {
   computed,
   onMounted,
@@ -181,9 +180,9 @@ import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCourses
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
 import faqsStoreToFaqsComponent from '@/converts/faqsStoreToFaqsComponent';
 import { brToRn, stripTags } from '@/helpers/format';
-import ICourse from '@/interfaces/components/molecules/course';
-import IFaqComponent from '@/interfaces/components/molecules/faq';
-import ITeacher from '@/interfaces/components/molecules/teacher';
+import type ICourse from '@/interfaces/components/molecules/course';
+import type IFaqComponent from '@/interfaces/components/molecules/faq';
+import type ITeacher from '@/interfaces/components/molecules/teacher';
 import EDuration from '@/enums/components/molecules/duration';
 
 const config = useRuntimeConfig();
@@ -301,7 +300,7 @@ useHead({
   ],
 });
 
-const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {
+const courseJsonLd = computed<any>(() => {
   const instructors = courseItem.value?.teachers?.map((item: ITeacher) => ({
     '@type': 'Person',
     name: item.label,
@@ -386,11 +385,11 @@ const courseJsonLd = computed<JsonLD | JsonLDFunc>(() => {
 
 useJsonld(courseJsonLd.value);
 
-const breadcrumbsJsonLd = computed<JsonLD | JsonLDFunc>(() => {
+const breadcrumbsJsonLd = computed<any>(() => {
   const [direction] = courseItem.value?.directions || [];
   const [category] = courseItem.value?.categories || [];
 
-  const result: JsonLD | JsonLDFunc = {
+  const result: any = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [

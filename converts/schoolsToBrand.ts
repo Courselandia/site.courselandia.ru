@@ -1,5 +1,5 @@
-import IBrand from '@/interfaces/components/organism/brands';
-import ISchool from '@/interfaces/stores/school/school';
+import type IBrand from '@/interfaces/components/organism/brands';
+import type ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToBrand = (
   schools: Array<ISchool> | null,

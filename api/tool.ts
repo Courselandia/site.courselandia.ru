@@ -1,6 +1,6 @@
-import IFilters from '@/interfaces/filters';
-import { IResponseItems } from '@/interfaces/response';
-import IFilterTool from '@/interfaces/stores/course/filterTool';
+import type IFilters from '@/interfaces/filters';
+import type { IResponseItems } from '@/interfaces/response';
+import type IFilterTool from '@/interfaces/stores/course/filterTool';
 import tool from '@/stores/tool';
 
 export const apiReadTools = async (

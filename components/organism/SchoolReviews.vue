@@ -338,11 +338,11 @@ import Tag from '@/components/atoms/Tag.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import EDirection from '@/enums/direction';
-import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
-import ISort from '@/interfaces/sort';
+import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type ISort from '@/interfaces/sort';
 import school from '@/stores/school';
-import { TOrder } from '@/types/order';
-import TSortOrder from '@/types/sortOrder';
+import type { TOrder } from '@/types/order';
+import type TSortOrder from '@/types/sortOrder';
 
 const sortDefault: ISort = {
   sortBy: 'rating',

@@ -77,18 +77,20 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   ref,
 } from 'vue';
 
 import SliderSalary from '@/components/molecules/SliderSalary.vue';
 import ELevel from '@/enums/stores/course/level';
 import { money } from '@/helpers/number';
-import ICourse from '@/interfaces/components/molecules/course';
-import IProfession from '@/interfaces/components/molecules/profession';
-import ISalary from '@/interfaces/components/molecules/salary';
+import type ICourse from '@/interfaces/components/molecules/course';
+import type IProfession from '@/interfaces/components/molecules/profession';
+import type ISalary from '@/interfaces/components/molecules/salary';
 
 const props = defineProps({
   course: {

@@ -1,5 +1,5 @@
 import ELevel from '@/enums/stores/course/level';
-import TId from '@/types/id';
+import type TId from '@/types/id';
 
 export default interface ILevel {
   id: TId,

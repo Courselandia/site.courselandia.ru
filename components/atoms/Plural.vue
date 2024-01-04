@@ -5,9 +5,11 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   toRefs,
 } from 'vue';
 

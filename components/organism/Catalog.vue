@@ -234,8 +234,6 @@
 </template>
 
 <script lang="ts" setup>
-// eslint-disable-next-line import/no-unresolved
-import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
 import { storeToRefs } from 'pinia';
 import { ListItem } from 'schema-dts';
 import {
@@ -294,29 +292,29 @@ import {
   hasFormat,
   hasRating,
 } from '@/helpers/chekFilter';
-import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
-import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
-import ICategory from '@/interfaces/components/molecules/category';
-import ICourse from '@/interfaces/components/molecules/course';
-import IDirection from '@/interfaces/components/molecules/direction';
-import IFormat from '@/interfaces/components/molecules/format';
-import ILevel from '@/interfaces/components/molecules/level';
-import IProfession from '@/interfaces/components/molecules/profession';
-import IRating from '@/interfaces/components/molecules/rating';
-import ISchool from '@/interfaces/components/molecules/schoolFilter';
-import ISkill from '@/interfaces/components/molecules/skill';
-import ITeacher from '@/interfaces/components/molecules/teacher';
-import ITool from '@/interfaces/components/molecules/tool';
-import IFilters from '@/interfaces/filters';
-import ISorts from '@/interfaces/sorts';
-import ICategoryLink from '@/interfaces/stores/course/categoryLink';
-import IDirectionLink from '@/interfaces/stores/course/directionLink';
-import IProfessionLink from '@/interfaces/stores/course/professionLink';
-import IRatingStore from '@/interfaces/stores/course/rating';
-import ISchoolLink from '@/interfaces/stores/course/schoolLink';
-import ISkillLink from '@/interfaces/stores/course/skillLink';
-import ITeacherLink from '@/interfaces/stores/course/teacherLink';
-import IToolLink from '@/interfaces/stores/course/toolLink';
+import type IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
+import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
+import type ICategory from '@/interfaces/components/molecules/category';
+import type ICourse from '@/interfaces/components/molecules/course';
+import type IDirection from '@/interfaces/components/molecules/direction';
+import type IFormat from '@/interfaces/components/molecules/format';
+import type ILevel from '@/interfaces/components/molecules/level';
+import type IProfession from '@/interfaces/components/molecules/profession';
+import type IRating from '@/interfaces/components/molecules/rating';
+import type ISchool from '@/interfaces/components/molecules/schoolFilter';
+import type ISkill from '@/interfaces/components/molecules/skill';
+import type ITeacher from '@/interfaces/components/molecules/teacher';
+import type ITool from '@/interfaces/components/molecules/tool';
+import type IFilters from '@/interfaces/filters';
+import type ISorts from '@/interfaces/sorts';
+import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
+import type IDirectionLink from '@/interfaces/stores/course/directionLink';
+import type IProfessionLink from '@/interfaces/stores/course/professionLink';
+import type IRatingStore from '@/interfaces/stores/course/rating';
+import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import type ISkillLink from '@/interfaces/stores/course/skillLink';
+import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
+import type IToolLink from '@/interfaces/stores/course/toolLink';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -324,7 +322,7 @@ import school from '@/stores/school';
 import skill from '@/stores/skill';
 import teacher from '@/stores/teacher';
 import tool from '@/stores/tool';
-import TValue from '@/types/value';
+import type TValue from '@/types/value';
 
 const props = defineProps({
   section: {
@@ -1463,7 +1461,7 @@ useJsonld({
   itemListElement: itemListElements.value,
 });
 
-const teacherJsonLd = computed<JsonLD | JsonLDFunc | undefined>(() => {
+const teacherJsonLd = computed<any>(() => {
   if (itemLinkTeacher.value) {
     return {
       '@context': 'https://schema.org',

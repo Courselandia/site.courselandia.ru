@@ -2,12 +2,12 @@ import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
-import IFilters from '@/interfaces/filters';
-import {
+import type IFilters from '@/interfaces/filters';
+import type {
   IResponseItems,
 } from '@/interfaces/response';
-import IFilterSkill from '@/interfaces/stores/course/filterSkill';
-import ISkillLink from '@/interfaces/stores/course/skillLink';
+import type IFilterSkill from '@/interfaces/stores/course/filterSkill';
+import type ISkillLink from '@/interfaces/stores/course/skillLink';
 
 export default defineStore('skill', {
   state: () => ({

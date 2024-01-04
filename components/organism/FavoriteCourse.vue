@@ -22,15 +22,17 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
 import track from '@/helpers/track';
 import favorite from '@/stores/favorite';
-import TId from '@/types/id';
+import type TId from '@/types/id';
 
 const props = defineProps({
   id: {

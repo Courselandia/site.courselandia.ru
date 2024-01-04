@@ -137,9 +137,11 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   ref,
 } from 'vue';
 
@@ -151,7 +153,7 @@ import currency from '@/helpers/currency';
 import duration from '@/helpers/duration';
 import { money } from '@/helpers/number';
 import track from '@/helpers/track';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

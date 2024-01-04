@@ -1,6 +1,6 @@
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
-import ICourseComponent from '@/interfaces/components/molecules/course';
-import ICourseStore from '@/interfaces/stores/course/course';
+import type ICourseComponent from '@/interfaces/components/molecules/course';
+import type ICourseStore from '@/interfaces/stores/course/course';
 
 export const coursesStoreToCoursesComponent = (
   courses: Array<ICourseStore>,

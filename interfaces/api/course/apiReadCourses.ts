@@ -1,12 +1,12 @@
-import ICategoryLink from '@/interfaces/stores/course/categoryLink';
-import ICourse from '@/interfaces/stores/course/course';
-import IDirectionLink from '@/interfaces/stores/course/directionLink';
-import IFilter from '@/interfaces/stores/course/filter';
-import IProfessionLink from '@/interfaces/stores/course/professionLink';
-import ISchoolLink from '@/interfaces/stores/course/schoolLink';
-import ISkillLink from '@/interfaces/stores/course/skillLink';
-import ITeacherLink from '@/interfaces/stores/course/teacherLink';
-import IToolLink from '@/interfaces/stores/course/toolLink';
+import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
+import type ICourse from '@/interfaces/stores/course/course';
+import type IDirectionLink from '@/interfaces/stores/course/directionLink';
+import type IFilter from '@/interfaces/stores/course/filter';
+import type IProfessionLink from '@/interfaces/stores/course/professionLink';
+import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import type ISkillLink from '@/interfaces/stores/course/skillLink';
+import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
+import type IToolLink from '@/interfaces/stores/course/toolLink';
 
 export default interface IApiReadCourses {
   courses: Array<ICourse>,

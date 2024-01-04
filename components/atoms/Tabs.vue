@@ -10,14 +10,16 @@
 </template>
 
 <script lang="ts" setup>
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   ref,
   toRefs,
   watch,
 } from 'vue';
 
-import TValue from '@/types/value';
+import type TValue from '@/types/value';
 
 const props = defineProps({
   value: {

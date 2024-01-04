@@ -37,8 +37,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   ref,
   toRefs,
   watch,

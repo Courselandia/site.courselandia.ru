@@ -1,6 +1,6 @@
 import level from '@/helpers/level';
-import ICourseComponent from '@/interfaces/components/molecules/course';
-import ICourseStore from '@/interfaces/stores/course/course';
+import type ICourseComponent from '@/interfaces/components/molecules/course';
+import type ICourseStore from '@/interfaces/stores/course/course';
 
 export const courseStoreToCourseComponent = (
   course: ICourseStore,

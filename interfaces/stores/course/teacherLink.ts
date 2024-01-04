@@ -1,10 +1,10 @@
-import IDirectionLink from '@/interfaces/stores/course/directionLink';
-import ISkillLink from '@/interfaces/stores/course/skillLink';
-import ITeacherExperience from '@/interfaces/stores/course/teacherExperience';
-import IImage from '@/interfaces/stores/image/image';
-import IMetatag from '@/interfaces/stores/metatag/metatag';
-import ISocialMedia from '@/interfaces/stores/socialMedia';
-import TId from '@/types/id';
+import type IDirectionLink from '@/interfaces/stores/course/directionLink';
+import type ISkillLink from '@/interfaces/stores/course/skillLink';
+import type ITeacherExperience from '@/interfaces/stores/course/teacherExperience';
+import type IImage from '@/interfaces/stores/image/image';
+import type IMetatag from '@/interfaces/stores/metatag/metatag';
+import type ISocialMedia from '@/interfaces/stores/socialMedia';
+import type TId from '@/types/id';
 
 export default interface ITeacherLink {
   id: TId;

@@ -1,18 +1,18 @@
 import { storeToRefs } from 'pinia';
 
-import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
-import IApiReadSearchedCourses from '@/interfaces/api/course/apiReadSearchedCourses';
-import IFilters from '@/interfaces/filters';
-import {
+import type IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
+import type IApiReadSearchedCourses from '@/interfaces/api/course/apiReadSearchedCourses';
+import type IFilters from '@/interfaces/filters';
+import type {
   IResponseData,
   IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
-import ISorts from '@/interfaces/sorts';
-import ICourse from '@/interfaces/stores/course/course';
-import ICourseResponse from '@/interfaces/stores/course/courseResponse';
+import type ISorts from '@/interfaces/sorts';
+import type ICourse from '@/interfaces/stores/course/course';
+import type ICourseResponse from '@/interfaces/stores/course/courseResponse';
 import course from '@/stores/course';
-import TId from '@/types/id';
+import type TId from '@/types/id';
 
 export const apiReadCourses = async (
   offset: number = 0,

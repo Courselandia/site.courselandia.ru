@@ -1,5 +1,5 @@
-import IProfession from '@/interfaces/components/molecules/profession';
-import IFilterProfession from '@/interfaces/stores/course/filterProfession';
+import type IProfession from '@/interfaces/components/molecules/profession';
+import type IFilterProfession from '@/interfaces/stores/course/filterProfession';
 
 export const courseFilterStoreProfessionsToComponentProfessions = (
   professions: Array<IFilterProfession>,

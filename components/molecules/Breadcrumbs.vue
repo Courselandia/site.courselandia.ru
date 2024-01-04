@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
-import IBreadcrumb from '@/interfaces/components/molecules/breadcrumb';
+import type IBreadcrumb from '@/interfaces/components/molecules/breadcrumb';
 
 const props = defineProps({
   breadcrumbs: {

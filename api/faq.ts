@@ -1,5 +1,5 @@
-import { IResponseItems } from '@/interfaces/response';
-import IFaq from '@/interfaces/stores/faq/faq';
+import type { IResponseItems } from '@/interfaces/response';
+import type IFaq from '@/interfaces/stores/faq/faq';
 import faq from '@/stores/faq';
 
 export const apiReadFaqs = async (

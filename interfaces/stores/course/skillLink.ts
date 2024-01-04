@@ -1,5 +1,5 @@
-import IMetatag from '@/interfaces/stores/metatag/metatag';
-import TId from '@/types/id';
+import type IMetatag from '@/interfaces/stores/metatag/metatag';
+import type TId from '@/types/id';
 
 export default interface ISkillLink {
   id: TId;

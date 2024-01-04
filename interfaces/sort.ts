@@ -1,4 +1,4 @@
-import { TOrder } from '@/types/order';
+import type { TOrder } from '@/types/order';
 
 export default interface ISort {
   sortBy: string,

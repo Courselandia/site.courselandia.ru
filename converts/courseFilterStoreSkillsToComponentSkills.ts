@@ -1,5 +1,5 @@
-import ISkill from '@/interfaces/components/molecules/skill';
-import IFilterSkill from '@/interfaces/stores/course/filterSkill';
+import type ISkill from '@/interfaces/components/molecules/skill';
+import type IFilterSkill from '@/interfaces/stores/course/filterSkill';
 
 export const courseFilterStoreSkillsToComponentSkills = (
   skills: Array<IFilterSkill>,

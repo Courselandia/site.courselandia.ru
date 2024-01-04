@@ -1,5 +1,5 @@
-import IFaqComponent from '@/interfaces/components/molecules/faq';
-import IFaqStore from '@/interfaces/stores/faq/faq';
+import type IFaqComponent from '@/interfaces/components/molecules/faq';
+import type IFaqStore from '@/interfaces/stores/faq/faq';
 
 const faqsStoreToFaqsComponent = (
   faqs: Array<IFaqStore>,

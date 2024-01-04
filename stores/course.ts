@@ -2,25 +2,25 @@ import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
-import IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
-import IFilters from '@/interfaces/filters';
-import {
+import type IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
+import type IFilters from '@/interfaces/filters';
+import type {
   IResponseData,
   IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
-import ISorts from '@/interfaces/sorts';
-import ICategoryLink from '@/interfaces/stores/course/categoryLink';
-import ICourse from '@/interfaces/stores/course/course';
-import ICourseResponse from '@/interfaces/stores/course/courseResponse';
-import ISchoolLink from '@/interfaces/stores/course/directionLink';
-import IFilter from '@/interfaces/stores/course/filter';
-import IProfessionLink from '@/interfaces/stores/course/professionLink';
-import IDirectionLink from '@/interfaces/stores/course/schoolLink';
-import ISkillLink from '@/interfaces/stores/course/skillLink';
-import ITeacherLink from '@/interfaces/stores/course/teacherLink';
-import IToolLink from '@/interfaces/stores/course/toolLink';
-import TId from '@/types/id';
+import type ISorts from '@/interfaces/sorts';
+import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
+import type ICourse from '@/interfaces/stores/course/course';
+import type ICourseResponse from '@/interfaces/stores/course/courseResponse';
+import type ISchoolLink from '@/interfaces/stores/course/directionLink';
+import type IFilter from '@/interfaces/stores/course/filter';
+import type IProfessionLink from '@/interfaces/stores/course/professionLink';
+import type IDirectionLink from '@/interfaces/stores/course/schoolLink';
+import type ISkillLink from '@/interfaces/stores/course/skillLink';
+import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
+import type IToolLink from '@/interfaces/stores/course/toolLink';
+import type TId from '@/types/id';
 
 export default defineStore('course', {
   state: () => ({

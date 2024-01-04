@@ -150,8 +150,6 @@
 
 <script lang="ts" setup>
 import dayjs from 'dayjs';
-// eslint-disable-next-line import/no-unresolved
-import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
 import {
   computed,
   onMounted,
@@ -170,11 +168,11 @@ import SchoolReviewCard from '@/components/molecules/SchoolReviewCard.vue';
 import SchoolReviewHeader from '@/components/molecules/SchoolReviewHeader.vue';
 import { brToRn, rnToBr, stripTags } from '@/helpers/format';
 import plural from '@/helpers/plural';
-import { IResponseItems } from '@/interfaces/response';
-import ISorts from '@/interfaces/sorts';
-import ISchoolLink from '@/interfaces/stores/course/schoolLink';
-import IReview from '@/interfaces/stores/review/review';
-import { TOrder } from '@/types/order';
+import type { IResponseItems } from '@/interfaces/response';
+import type ISorts from '@/interfaces/sorts';
+import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import type IReview from '@/interfaces/stores/review/review';
+import type { TOrder } from '@/types/order';
 
 const route = useRoute();
 
@@ -408,9 +406,9 @@ useHead({
   ],
 });
 
-const reviewsJsonld = computed<JsonLD[] | JsonLDFunc[]>((): JsonLD[] | JsonLDFunc[] => {
-  const res = Object.values(reviews.value || []).map<JsonLD | JsonLDFunc>(
-    (review: IReview): JsonLD | JsonLDFunc => {
+const reviewsJsonld = computed<any>((): any => {
+  const res = Object.values(reviews.value || []).map<any>(
+    (review: IReview): any => {
       let desc = '';
 
       if (review.review) {
@@ -433,7 +431,7 @@ const reviewsJsonld = computed<JsonLD[] | JsonLDFunc[]>((): JsonLD[] | JsonLDFun
         desc += `Недостатки: ${review.disadvantages}`;
       }
 
-      const result: JsonLD | JsonLDFunc = {
+      const result: any = {
         '@context': 'https://schema.org',
         '@type': 'Review',
         name: review.title,

@@ -39,14 +39,15 @@
 </template>
 
 <script lang="ts" setup>
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   ref,
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
-import Program from '@/components/molecules/Program.vue';
-import IProgram from '@/interfaces/components/molecules/program';
+import type IProgram from '@/interfaces/components/molecules/program';
 
 const props = defineProps({
   item: {

@@ -16,9 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
-import IMenu from '@/interfaces/menu';
+import type IMenu from '@/interfaces/menu';
 
 const props = defineProps({
   items: {

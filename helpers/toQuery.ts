@@ -1,5 +1,5 @@
-import IFilters from '@/interfaces/filters';
-import ISorts from '@/interfaces/sorts';
+import type IFilters from '@/interfaces/filters';
+import type ISorts from '@/interfaces/sorts';
 
 export default function toQuery(
   offset: number | null = null,

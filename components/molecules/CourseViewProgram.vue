@@ -71,14 +71,16 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
 } from 'vue';
 
 import Program from '@/components/molecules/Program.vue';
 import duration from '@/helpers/duration';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

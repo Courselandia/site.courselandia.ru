@@ -1,6 +1,6 @@
 import axios from '@/helpers/axios';
-import { IResponseItem } from '@/interfaces/response';
-import ICategoryLink from '@/interfaces/stores/course/categoryLink';
+import type { IResponseItem } from '@/interfaces/response';
+import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
 
 export default defineEventHandler(async (event): Promise<ICategoryLink | null> => {
   const config = useRuntimeConfig();

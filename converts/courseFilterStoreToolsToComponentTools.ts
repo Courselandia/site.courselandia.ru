@@ -1,5 +1,5 @@
-import ITool from '@/interfaces/components/molecules/tool';
-import IFilterTool from '@/interfaces/stores/course/filterTool';
+import type ITool from '@/interfaces/components/molecules/tool';
+import type IFilterTool from '@/interfaces/stores/course/filterTool';
 
 export const courseFilterStoreToolsToComponentTools = (
   tools: Array<IFilterTool>,

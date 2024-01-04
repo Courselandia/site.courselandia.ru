@@ -1,5 +1,5 @@
-import ITeacher from '@/interfaces/components/molecules/teacher';
-import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
+import type ITeacher from '@/interfaces/components/molecules/teacher';
+import type IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 
 export const courseFilterStoreTeachersToComponentTeachers = (
   teachers: Array<IFilterTeacher>,

@@ -23,7 +23,7 @@ import {
 import { apiReadFavoritesCourses } from '@/api/course';
 import Courses from '@/components/molecules/Courses.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 import favorite from '@/stores/favorite';
 
 const title = 'Список Избранного';

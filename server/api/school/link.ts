@@ -1,6 +1,6 @@
 import axios from '@/helpers/axios';
-import { IResponseItem } from '@/interfaces/response';
-import ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import type { IResponseItem } from '@/interfaces/response';
+import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
 
 export default defineEventHandler(async (event): Promise<ISchoolLink | null> => {
   const config = useRuntimeConfig();

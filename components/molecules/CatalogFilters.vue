@@ -516,9 +516,11 @@
 
 <script lang="ts" setup>
 import lodash from 'lodash';
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   ref,
   toRefs,
   watch,
@@ -545,16 +547,16 @@ import {
   hasTeachers,
   hasTools,
 } from '@/helpers/chekFilter';
-import ICategory from '@/interfaces/components/molecules/category';
-import IDirection from '@/interfaces/components/molecules/direction';
-import IFormat from '@/interfaces/components/molecules/format';
-import ILevel from '@/interfaces/components/molecules/level';
-import IProfession from '@/interfaces/components/molecules/profession';
-import IRating from '@/interfaces/components/molecules/rating';
-import ISchool from '@/interfaces/components/molecules/schoolFilter';
-import ISkill from '@/interfaces/components/molecules/skill';
-import ITeacher from '@/interfaces/components/molecules/teacher';
-import ITool from '@/interfaces/components/molecules/tool';
+import type ICategory from '@/interfaces/components/molecules/category';
+import type IDirection from '@/interfaces/components/molecules/direction';
+import type IFormat from '@/interfaces/components/molecules/format';
+import type ILevel from '@/interfaces/components/molecules/level';
+import type IProfession from '@/interfaces/components/molecules/profession';
+import type IRating from '@/interfaces/components/molecules/rating';
+import type ISchool from '@/interfaces/components/molecules/schoolFilter';
+import type ISkill from '@/interfaces/components/molecules/skill';
+import type ITeacher from '@/interfaces/components/molecules/teacher';
+import type ITool from '@/interfaces/components/molecules/tool';
 
 const props = defineProps({
   priceMin: {

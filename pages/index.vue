@@ -121,7 +121,6 @@
 </template>
 
 <script lang="ts" setup>
-import { NuxtMultiCacheRouteCacheHelper } from 'nuxt-multi-cache/dist/runtime/helpers/RouteCacheHelper';
 import { storeToRefs } from 'pinia';
 import {
   ref,
@@ -139,11 +138,11 @@ import Tags from '@/components/molecules/Tags.vue';
 import Brands from '@/components/organism/Brands.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import directionsToMenu from '@/converts/directionsToMenu';
-import ICourse from '@/interfaces/components/molecules/course';
-import IMenu from '@/interfaces/menu';
+import type ICourse from '@/interfaces/components/molecules/course';
+import type IMenu from '@/interfaces/menu';
 import direction from '@/stores/direction';
 
-useRouteCache((helper: NuxtMultiCacheRouteCacheHelper) => {
+useRouteCache((helper: any) => {
   helper.setMaxAge(3600 * 24).setCacheable().addTags(['index']);
 });
 

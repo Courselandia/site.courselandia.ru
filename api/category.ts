@@ -1,6 +1,6 @@
-import IFilters from '@/interfaces/filters';
-import { IResponseItems } from '@/interfaces/response';
-import IFilterCategory from '@/interfaces/stores/course/filterCategory';
+import type IFilters from '@/interfaces/filters';
+import type { IResponseItems } from '@/interfaces/response';
+import type IFilterCategory from '@/interfaces/stores/course/filterCategory';
 import category from '@/stores/category';
 
 export const apiReadCategories = async (

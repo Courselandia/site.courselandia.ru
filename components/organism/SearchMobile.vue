@@ -112,7 +112,7 @@ import Loader from '@/components/atoms/Loader.vue';
 import CourseSearchResult from '@/components/molecules/CourseSearchResult.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import ECourseSort from '@/enums/components/molecules/courseSort';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const courses = ref<ICourse[]>([]);
 const total = ref(0);

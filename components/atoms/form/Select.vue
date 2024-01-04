@@ -54,19 +54,21 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
   onMounted,
-  PropType,
   ref,
   toRefs,
   watch,
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
-import IOption from '@/interfaces/components/atoms/option';
-import TLabel from '@/types/label';
-import TValue from '@/types/value';
+import type IOption from '@/interfaces/components/atoms/option';
+import type TLabel from '@/types/label';
+import type TValue from '@/types/value';
 
 const props = defineProps({
   name: {

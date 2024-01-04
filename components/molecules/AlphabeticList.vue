@@ -24,15 +24,17 @@
 </template>
 
 <script lang="ts" setup>
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   ref,
   toRefs,
   watch,
 } from 'vue';
 
-import IAlphabetic from '@/interfaces/components/molecules/alphabetic';
-import IMenu from '@/interfaces/menu';
+import type IAlphabetic from '@/interfaces/components/molecules/alphabetic';
+import type IMenu from '@/interfaces/menu';
 
 const props = defineProps({
   items: {

@@ -1,7 +1,7 @@
-import IImage from '@/interfaces/stores/image/image';
-import IMetatag from '@/interfaces/stores/metatag/metatag';
-import ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
-import TId from '@/types/id';
+import type IImage from '@/interfaces/stores/image/image';
+import type IMetatag from '@/interfaces/stores/metatag/metatag';
+import type ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
+import type TId from '@/types/id';
 
 export default interface ISchoolLink {
   id: TId;

@@ -2,12 +2,11 @@ import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
-import {
+import type {
   IResponseItems,
 } from '@/interfaces/response';
-import ISorts from '@/interfaces/sorts';
-import IReview from '@/interfaces/stores/review/review';
-import TId from '@/types/id';
+import type ISorts from '@/interfaces/sorts';
+import type IReview from '@/interfaces/stores/review/review';
 
 export default defineStore('review', {
   state: () => ({

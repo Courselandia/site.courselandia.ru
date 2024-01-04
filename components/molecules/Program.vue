@@ -11,10 +11,10 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import ProgramItem from '@/components/atoms/ProgramItem.vue';
-import IProgram from '@/interfaces/components/molecules/program';
+import type IProgram from '@/interfaces/components/molecules/program';
 
 const props = defineProps({
   program: {

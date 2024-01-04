@@ -1,5 +1,5 @@
-import ICategory from '@/interfaces/components/molecules/category';
-import IFilterCategory from '@/interfaces/stores/course/filterCategory';
+import type ICategory from '@/interfaces/components/molecules/category';
+import type IFilterCategory from '@/interfaces/stores/course/filterCategory';
 
 export const courseFilterStoreCategoriesToComponentCategories = (
   categories: Array<IFilterCategory>,

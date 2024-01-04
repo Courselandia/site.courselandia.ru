@@ -1,5 +1,5 @@
-import ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
-import TId from '@/types/id';
+import type ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
+import type TId from '@/types/id';
 
 export default interface IListSchoolReview {
   id?: TId,

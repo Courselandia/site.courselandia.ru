@@ -27,7 +27,7 @@ import {
 
 import Brand from '@/components/atoms/Brand.vue';
 import schoolsToBrand from '@/converts/schoolsToBrand';
-import IBrand from '@/interfaces/components/organism/brands';
+import type IBrand from '@/interfaces/components/organism/brands';
 import school from '@/stores/school';
 
 const { schools } = storeToRefs(school());

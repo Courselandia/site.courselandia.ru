@@ -296,8 +296,10 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   ref,
   toRefs,
   watch,
@@ -308,8 +310,8 @@ import Icon from '@/components/atoms/Icon.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import Plural from '@/components/atoms/Plural.vue';
 import plural from '@/helpers/plural';
-import ISchoolLink from '@/interfaces/stores/course/schoolLink';
-import ISchool from '@/interfaces/stores/school/school';
+import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
+import type ISchool from '@/interfaces/stores/school/school';
 import schoolStore from '@/stores/school';
 
 const props = defineProps({

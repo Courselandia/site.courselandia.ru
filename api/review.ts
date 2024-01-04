@@ -1,8 +1,8 @@
-import {
+import type {
   IResponseItems,
 } from '@/interfaces/response';
-import ISorts from '@/interfaces/sorts';
-import IReview from '@/interfaces/stores/review/review';
+import type ISorts from '@/interfaces/sorts';
+import type IReview from '@/interfaces/stores/review/review';
 import review from '@/stores/review';
 
 export const apiReadReviews = async (

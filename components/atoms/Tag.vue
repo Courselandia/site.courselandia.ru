@@ -45,13 +45,15 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   useSlots,
 } from 'vue';
 
-import TColor from '@/types/color';
+import type TColor from '@/types/color';
 
 const props = defineProps({
   to: {

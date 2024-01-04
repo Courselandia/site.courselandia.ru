@@ -68,12 +68,12 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

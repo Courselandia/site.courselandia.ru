@@ -41,11 +41,11 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import Animal from '@/components/atoms/Animal.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

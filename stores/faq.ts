@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
-import { IResponseItems } from '@/interfaces/response';
-import IFaq from '@/interfaces/stores/faq/faq';
+import type { IResponseItems } from '@/interfaces/response';
+import type IFaq from '@/interfaces/stores/faq/faq';
 
 export default defineStore('faq', {
   state: () => ({

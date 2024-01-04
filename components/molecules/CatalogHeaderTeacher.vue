@@ -171,11 +171,11 @@
 
 <script lang="ts" setup>
 import dayjs from 'dayjs';
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
-import ITeacherLink from '@/interfaces/stores/course/teacherLink';
+import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
 
 const props = defineProps({
   teacher: {

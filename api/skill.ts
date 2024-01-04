@@ -1,6 +1,6 @@
-import IFilters from '@/interfaces/filters';
-import { IResponseItems } from '@/interfaces/response';
-import IFilterSkill from '@/interfaces/stores/course/filterSkill';
+import type IFilters from '@/interfaces/filters';
+import type { IResponseItems } from '@/interfaces/response';
+import type IFilterSkill from '@/interfaces/stores/course/filterSkill';
 import skill from '@/stores/skill';
 
 export const apiReadSkills = async (

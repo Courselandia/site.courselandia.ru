@@ -63,16 +63,18 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   useSlots,
 } from 'vue';
 import { useRouter } from 'vue-router';
 
 import Loader from '@/components/atoms/Loader.vue';
-import TButton from '@/types/button';
-import TLink from '@/types/link';
+import type TButton from '@/types/button';
+import type TLink from '@/types/link';
 
 const props = defineProps({
   type: {

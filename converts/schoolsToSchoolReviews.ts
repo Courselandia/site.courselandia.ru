@@ -1,5 +1,5 @@
-import IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
-import ISchool from '@/interfaces/stores/school/school';
+import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToSchoolReviews = (
   schools: Array<ISchool> | null,

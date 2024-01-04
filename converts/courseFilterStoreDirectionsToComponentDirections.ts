@@ -1,5 +1,5 @@
-import IDirection from '@/interfaces/components/molecules/direction';
-import IFilterDirection from '@/interfaces/stores/course/filterDirection';
+import type IDirection from '@/interfaces/components/molecules/direction';
+import type IFilterDirection from '@/interfaces/stores/course/filterDirection';
 
 export const courseFilterStoreDirectionsToComponentDirections = (
   directions: Array<IFilterDirection>,

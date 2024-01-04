@@ -1,6 +1,6 @@
 import axios from '@/helpers/axios';
-import { IResponseItem } from '@/interfaces/response';
-import IDirectionLink from '@/interfaces/stores/course/directionLink';
+import type { IResponseItem } from '@/interfaces/response';
+import type IDirectionLink from '@/interfaces/stores/course/directionLink';
 
 export default defineEventHandler(async (event): Promise<IDirectionLink | null> => {
   const config = useRuntimeConfig();

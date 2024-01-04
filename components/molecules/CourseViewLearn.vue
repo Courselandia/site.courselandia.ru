@@ -13,11 +13,11 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import Numeric from '@/components/atoms/Numeric.vue';
 import Numerics from '@/components/molecules/Numerics.vue';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

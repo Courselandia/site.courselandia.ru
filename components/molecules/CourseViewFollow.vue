@@ -70,14 +70,14 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
 import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
 import track from '@/helpers/track';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

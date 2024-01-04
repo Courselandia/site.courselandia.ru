@@ -1,6 +1,6 @@
-import ITeacherExperience from '@/interfaces/stores/course/teacherExperience';
-import IImage from '@/interfaces/stores/image/image';
-import TId from '@/types/id';
+import type ITeacherExperience from '@/interfaces/stores/course/teacherExperience';
+import type IImage from '@/interfaces/stores/image/image';
+import type TId from '@/types/id';
 
 export default interface IProperty {
   id: TId,

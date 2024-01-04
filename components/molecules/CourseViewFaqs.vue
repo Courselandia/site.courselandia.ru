@@ -17,16 +17,17 @@
 </template>
 
 <script lang="ts" setup>
-import { JsonLD, JsonLDFunc } from 'nuxt-jsonld/dist/types/index.d';
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   toRefs,
 } from 'vue';
 
 import Faq from '@/components/atoms/Faq.vue';
 import Faqs from '@/components/molecules/Faqs.vue';
-import IFaqComponent from '@/interfaces/components/molecules/faq';
+import type IFaqComponent from '@/interfaces/components/molecules/faq';
 
 const props = defineProps({
   faqs: {
@@ -37,7 +38,7 @@ const props = defineProps({
 
 const { faqs } = toRefs(props);
 
-const faqsJsonLd = computed<JsonLD | JsonLDFunc>(() => {
+const faqsJsonLd = computed<any>(() => {
   const mainEntities = Object.values(faqs.value).map((faq: IFaqComponent) => ({
     '@type': 'Question',
     name: faq.question,

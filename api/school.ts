@@ -1,6 +1,6 @@
-import IFilters from '@/interfaces/filters';
-import { IResponseItems } from '@/interfaces/response';
-import ISchool from '@/interfaces/stores/school/school';
+import type IFilters from '@/interfaces/filters';
+import type { IResponseItems } from '@/interfaces/response';
+import type ISchool from '@/interfaces/stores/school/school';
 import school from '@/stores/school';
 
 export const apiReadSchools = async (

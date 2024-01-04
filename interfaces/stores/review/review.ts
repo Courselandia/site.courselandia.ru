@@ -1,6 +1,6 @@
-import ICourse from '@/interfaces/stores/course/course';
-import ISchool from '@/interfaces/stores/school/school';
-import TId from '@/types/id';
+import type ICourse from '@/interfaces/stores/course/course';
+import type ISchool from '@/interfaces/stores/school/school';
+import type TId from '@/types/id';
 
 export default interface IReview {
   id: TId;

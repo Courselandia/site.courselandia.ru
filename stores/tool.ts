@@ -2,12 +2,12 @@ import { defineStore } from 'pinia';
 
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
-import IFilters from '@/interfaces/filters';
-import {
+import type IFilters from '@/interfaces/filters';
+import type {
   IResponseItems,
 } from '@/interfaces/response';
-import IFilterTool from '@/interfaces/stores/course/filterTool';
-import IToolLink from '@/interfaces/stores/course/toolLink';
+import type IFilterTool from '@/interfaces/stores/course/filterTool';
+import type IToolLink from '@/interfaces/stores/course/toolLink';
 
 export default defineStore('tool', {
   state: () => ({

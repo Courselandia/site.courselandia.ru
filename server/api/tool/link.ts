@@ -1,6 +1,6 @@
 import axios from '@/helpers/axios';
-import { IResponseItem } from '@/interfaces/response';
-import IToolLink from '@/interfaces/stores/course/toolLink';
+import type { IResponseItem } from '@/interfaces/response';
+import type IToolLink from '@/interfaces/stores/course/toolLink';
 
 export default defineEventHandler(async (event): Promise<IToolLink | null> => {
   const config = useRuntimeConfig();

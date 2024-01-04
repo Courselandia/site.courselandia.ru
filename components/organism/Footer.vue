@@ -59,7 +59,7 @@ import Logo from '@/components/atoms/Logo.vue';
 import MenuBottom from '@/components/atoms/MenuBottom.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
-import IMenu from '@/interfaces/menu';
+import type IMenu from '@/interfaces/menu';
 import direction from '@/stores/direction';
 import school from '@/stores/school';
 

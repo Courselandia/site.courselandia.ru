@@ -1,5 +1,5 @@
-import ICategory from '@/interfaces/stores/course/category';
-import TId from '@/types/id';
+import type ICategory from '@/interfaces/stores/course/category';
+import type TId from '@/types/id';
 
 export default interface IDirection {
   id: TId;

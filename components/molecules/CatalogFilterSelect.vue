@@ -69,9 +69,11 @@
 
 <script lang="ts" setup>
 import lodash from 'lodash';
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   ref,
   toRefs,
   watch,
@@ -84,7 +86,7 @@ import Input from '@/components/atoms/form/Input.vue';
 import Item from '@/components/atoms/form/Item.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import CatalogFilterSelectItem from '@/components/molecules/CatalogFilterSelectItem.vue';
-import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
+import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
 const props = defineProps({
   items: {

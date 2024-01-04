@@ -20,15 +20,17 @@
 
 <script lang="ts" setup>
 import { ListItem } from 'schema-dts';
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
   toRefs,
   useSlots,
 } from 'vue';
 
 import Course from '@/components/molecules/Course.vue';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   courses: {

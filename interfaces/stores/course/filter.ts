@@ -1,15 +1,15 @@
 import EFormat from '@/enums/stores/course/format';
 import ELevel from '@/enums/stores/course/level';
-import IFilterCategory from '@/interfaces/stores/course/filterCategory';
-import IFilterDirection from '@/interfaces/stores/course/filterDirection';
-import IFilterDuration from '@/interfaces/stores/course/filterDuration';
-import IFilterPrice from '@/interfaces/stores/course/filterPrice';
-import IFilterProfession from '@/interfaces/stores/course/filterProfession';
-import IFilterSchool from '@/interfaces/stores/course/filterSchool';
-import IFilterSkill from '@/interfaces/stores/course/filterSkill';
-import IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
-import IFilterTool from '@/interfaces/stores/course/filterTool';
-import IRating from '@/interfaces/stores/course/rating';
+import type IFilterCategory from '@/interfaces/stores/course/filterCategory';
+import type IFilterDirection from '@/interfaces/stores/course/filterDirection';
+import type IFilterDuration from '@/interfaces/stores/course/filterDuration';
+import type IFilterPrice from '@/interfaces/stores/course/filterPrice';
+import type IFilterProfession from '@/interfaces/stores/course/filterProfession';
+import type IFilterSchool from '@/interfaces/stores/course/filterSchool';
+import type IFilterSkill from '@/interfaces/stores/course/filterSkill';
+import type IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
+import type IFilterTool from '@/interfaces/stores/course/filterTool';
+import type IRating from '@/interfaces/stores/course/rating';
 
 export default interface IFilter {
   directions: Array<IFilterDirection>,

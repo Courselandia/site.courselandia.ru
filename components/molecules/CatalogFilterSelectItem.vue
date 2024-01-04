@@ -8,14 +8,16 @@
 </template>
 
 <script lang="ts" setup>
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   provide,
   toRefs,
 } from 'vue';
 
 import CatalogFilterSelectItemCheckbox from '@/components/molecules/CatalogFilterSelectItemCheckbox.vue';
-import ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
+import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
 const props = defineProps({
   index: {

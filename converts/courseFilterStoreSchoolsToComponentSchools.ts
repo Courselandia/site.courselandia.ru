@@ -1,5 +1,5 @@
-import ISchool from '@/interfaces/components/molecules/schoolFilter';
-import IFilterSchool from '@/interfaces/stores/course/filterSchool';
+import type ISchool from '@/interfaces/components/molecules/schoolFilter';
+import type IFilterSchool from '@/interfaces/stores/course/filterSchool';
 
 export const courseFilterStoreSchoolsToComponentSchools = (
   schools: Array<IFilterSchool>,

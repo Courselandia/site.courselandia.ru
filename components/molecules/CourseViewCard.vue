@@ -133,9 +133,11 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
-  PropType,
 } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
@@ -145,8 +147,8 @@ import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
 import track from '@/helpers/track';
-import ICourse from '@/interfaces/components/molecules/course';
-import TIcon from '@/types/icon';
+import type ICourse from '@/interfaces/components/molecules/course';
+import type TIcon from '@/types/icon';
 
 const props = defineProps({
   course: {

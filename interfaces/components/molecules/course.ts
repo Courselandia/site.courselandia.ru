@@ -1,22 +1,22 @@
 import ECurrency from '@/enums/components/molecules/currency';
 import EDuration from '@/enums/components/molecules/duration';
 import ELanguage from '@/enums/components/molecules/language';
-import ICategory from '@/interfaces/components/molecules/category';
-import IDirection from '@/interfaces/components/molecules/direction';
-import IEmployment from '@/interfaces/components/molecules/employment';
-import IFeature from '@/interfaces/components/molecules/feature';
-import ILearn from '@/interfaces/components/molecules/learn';
-import ILevel from '@/interfaces/components/molecules/level';
-import IMetatag from '@/interfaces/components/molecules/metatag';
-import IProcess from '@/interfaces/components/molecules/process';
-import IProfession from '@/interfaces/components/molecules/profession';
-import IProgram from '@/interfaces/components/molecules/program';
-import ISchool from '@/interfaces/components/molecules/school';
-import ISkill from '@/interfaces/components/molecules/skill';
-import ITeacher from '@/interfaces/components/molecules/teacher';
-import ITool from '@/interfaces/components/molecules/tool';
-import IImage from '@/interfaces/stores/image/image';
-import TId from '@/types/id';
+import type ICategory from '@/interfaces/components/molecules/category';
+import type IDirection from '@/interfaces/components/molecules/direction';
+import type IEmployment from '@/interfaces/components/molecules/employment';
+import type IFeature from '@/interfaces/components/molecules/feature';
+import type ILearn from '@/interfaces/components/molecules/learn';
+import type ILevel from '@/interfaces/components/molecules/level';
+import type IMetatag from '@/interfaces/components/molecules/metatag';
+import type IProcess from '@/interfaces/components/molecules/process';
+import type IProfession from '@/interfaces/components/molecules/profession';
+import type IProgram from '@/interfaces/components/molecules/program';
+import type ISchool from '@/interfaces/components/molecules/school';
+import type ISkill from '@/interfaces/components/molecules/skill';
+import type ITeacher from '@/interfaces/components/molecules/teacher';
+import type ITool from '@/interfaces/components/molecules/tool';
+import type IImage from '@/interfaces/stores/image/image';
+import type TId from '@/types/id';
 
 export default interface ICourse {
     id: TId,

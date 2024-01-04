@@ -31,8 +31,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   ref,
   toRefs,
   watch,
@@ -41,8 +43,8 @@ import {
 import Item from '@/components/atoms/form/Item.vue';
 import Select from '@/components/atoms/form/Select.vue';
 import ECourseSort from '@/enums/components/molecules/courseSort';
-import IOption from '@/interfaces/components/atoms/option';
-import TValue from '@/types/value';
+import type IOption from '@/interfaces/components/atoms/option';
+import type TValue from '@/types/value';
 
 const props = defineProps({
   sort: {

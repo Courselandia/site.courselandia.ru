@@ -7,14 +7,16 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  computed,
+import type {
   PropType,
 } from 'vue';
+import {
+  computed,
+} from 'vue';
 
-import TColor from '@/types/color';
-import TIcon from '@/types/icon';
-import TIconSize from '@/types/iconSize';
+import type TColor from '@/types/color';
+import type TIcon from '@/types/icon';
+import type TIconSize from '@/types/iconSize';
 
 const props = defineProps({
   name: {

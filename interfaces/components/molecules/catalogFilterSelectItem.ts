@@ -1,6 +1,6 @@
 import ELevel from '@/enums/stores/course/level';
-import IImage from '@/interfaces/stores/image/image';
-import TId from '@/types/id';
+import type IImage from '@/interfaces/stores/image/image';
+import type TId from '@/types/id';
 
 export default interface ICatalogFilterSelectItem {
   id: TId,

@@ -1,18 +1,18 @@
 import ECurrency from '@/enums/stores/course/currency';
 import EDuration from '@/enums/stores/course/duration';
 import ELanguage from '@/enums/stores/course/language';
-import IEmployment from '@/interfaces/stores/course/employment';
-import IFeature from '@/interfaces/stores/course/feature';
-import ILearn from '@/interfaces/stores/course/learn';
-import ILevel from '@/interfaces/stores/course/level';
-import IProcess from '@/interfaces/stores/course/process';
-import IProfession from '@/interfaces/stores/course/profession';
-import IProgram from '@/interfaces/stores/course/program';
-import IProperty from '@/interfaces/stores/course/property';
-import IImage from '@/interfaces/stores/image/image';
-import IMetatag from '@/interfaces/stores/metatag/metatag';
-import ISchool from '@/interfaces/stores/school/school';
-import TId from '@/types/id';
+import type IEmployment from '@/interfaces/stores/course/employment';
+import type IFeature from '@/interfaces/stores/course/feature';
+import type ILearn from '@/interfaces/stores/course/learn';
+import type ILevel from '@/interfaces/stores/course/level';
+import type IProcess from '@/interfaces/stores/course/process';
+import type IProfession from '@/interfaces/stores/course/profession';
+import type IProgram from '@/interfaces/stores/course/program';
+import type IProperty from '@/interfaces/stores/course/property';
+import type IImage from '@/interfaces/stores/image/image';
+import type IMetatag from '@/interfaces/stores/metatag/metatag';
+import type ISchool from '@/interfaces/stores/school/school';
+import type TId from '@/types/id';
 
 export default interface ICourse {
   id: TId;

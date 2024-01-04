@@ -1190,9 +1190,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NuxtMultiCacheRouteCacheHelper } from 'nuxt-multi-cache/dist/runtime/helpers/RouteCacheHelper';
-
-useRouteCache((helper: NuxtMultiCacheRouteCacheHelper) => {
+useRouteCache((helper: any) => {
   helper.setMaxAge(3600 * 24).setCacheable().addTags(['agreement']);
 });
 

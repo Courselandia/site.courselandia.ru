@@ -91,13 +91,13 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import Fact from '@/components/atoms/Fact.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import Facts from '@/components/molecules/Facts.vue';
 import language from '@/helpers/language';
-import ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

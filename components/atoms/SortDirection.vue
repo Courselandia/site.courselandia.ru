@@ -24,13 +24,15 @@
 </template>
 
 <script lang="ts" setup>
-import {
+import type {
   PropType,
+} from 'vue';
+import {
   toRefs,
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
-import TSortOrder from '@/types/sortOrder';
+import type TSortOrder from '@/types/sortOrder';
 
 const props = defineProps({
   field: {
