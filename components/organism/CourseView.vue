@@ -179,11 +179,11 @@ import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
 import faqsStoreToFaqsComponent from '@/converts/faqsStoreToFaqsComponent';
+import EDuration from '@/enums/components/molecules/duration';
 import { brToRn, stripTags } from '@/helpers/format';
 import type ICourse from '@/interfaces/components/molecules/course';
 import type IFaqComponent from '@/interfaces/components/molecules/faq';
 import type ITeacher from '@/interfaces/components/molecules/teacher';
-import EDuration from '@/enums/components/molecules/duration';
 
 const config = useRuntimeConfig();
 const scroll = ref(true);
@@ -218,7 +218,6 @@ const {
 } = route.params;
 
 const courseItem = ref<ICourse>();
-let courseTempItem: ICourse | undefined;
 const courseSimilarities = ref<ICourse[]>();
 
 const description = ref('');
