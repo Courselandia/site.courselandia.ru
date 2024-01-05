@@ -153,7 +153,6 @@
 </template>
 
 <script lang="ts" setup>
-// eslint-disable-next-line import/no-unresolved
 import {
   computed,
   onMounted,
