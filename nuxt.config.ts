@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   components: false,
   plugins: [
     '@/plugins/outsideClick.ts',
-    '@/plugins/floating.ts',
     '@/plugins/dayjs.ts',
     '@/plugins/google.ts',
   ],
@@ -16,6 +15,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-multi-cache',
     'nuxt-jsonld',
+    'floating-vue/nuxt',
     [
       'yandex-metrika-module-nuxt3',
       {

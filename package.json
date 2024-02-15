@@ -14,7 +14,7 @@
     "click-outside-vue3": "^4.0.1",
     "consola": "^3.2.3",
     "dayjs": "^1.11.10",
-    "floating-vue": "^2.0.0-beta.24",
+    "floating-vue": "^5.2.2",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "nuxt": "3.9.0",
