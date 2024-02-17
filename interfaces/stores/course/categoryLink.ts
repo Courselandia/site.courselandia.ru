@@ -9,12 +9,13 @@ export default interface ICategoryLink {
   name: string,
   link: string,
   header: string,
-  text: string,
+  text: string | null,
+  additional: string | null,
   metatag: IMetatag | null,
   status: boolean,
   created_at: string;
   updated_at: string;
-  deleted_at: string,
+  deleted_at: string | null,
   directions: Array<IDirectionLink>,
   professions: Array<IProfessionLink>,
 }

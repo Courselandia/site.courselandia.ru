@@ -106,6 +106,14 @@
                 :link="getLinkPagination"
               />
             </div>
+            <div
+              v-if="additional?.additional"
+              class="catalog__additional"
+            >
+              <Reducer class="lists links titles">
+                <div v-html="additional.additional" />
+              </Reducer>
+            </div>
           </div>
           <div class="catalog__filter">
             <CatalogFilters
@@ -255,6 +263,7 @@ import { apiReadTeachers } from '@/api/teacher';
 import { apiReadTools } from '@/api/tool';
 import Loader from '@/components/atoms/Loader.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
+import Reducer from '@/components/atoms/Reducer.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
 import CatalogFiltersMobile from '@/components/molecules/CatalogFiltersMobile.vue';
@@ -409,6 +418,16 @@ if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)
 const type = ref<TValue>(ECourseType.TILE);
 
 const courses = ref<ICourse[]>([]);
+const additional = ref<
+  ICategoryLink |
+  IDirectionLink |
+  IProfessionLink |
+  ISchoolLink |
+  ISkillLink |
+  ITeacherLink |
+  IToolLink |
+  null
+>(null);
 
 const total = ref(0);
 const currentPage = ref(Number(getUrlQuery('page')) || 1);
@@ -617,6 +636,7 @@ const setHeader = (result: IApiReadCourses | null = null): void => {
 const setCoursesAndFilters = (result: IApiReadCourses): void => {
   courses.value = coursesStoreToCoursesComponent(result.courses);
   total.value = result.total || 0;
+  additional.value = result.description;
 
   const storeDirections = result.filter?.directions || [];
   directions.value = courseFilterStoreDirectionsToComponentDirections(storeDirections);
@@ -926,6 +946,7 @@ const reload = async (
     } else {
       courses.value = [];
       total.value = 0;
+      additional.value = null;
       setHeader();
     }
   } catch (error: any) {
@@ -1395,6 +1416,7 @@ const onLoadScrolling = async (): Promise<void> => {
   if (result) {
     courses.value = courses.value.concat(coursesStoreToCoursesComponent(result.courses));
     total.value = result.total || 0;
+    additional.value = result.description;
 
     if ((currentPage.value * size.value) >= total.value) {
       stopScrollLoader.value = true;

@@ -11,12 +11,13 @@ export default interface ITeacherLink {
   name: string,
   link: string,
   header: string,
-  text: string,
+  text: string | null,
+  additional: string | null,
   metatag: IMetatag | null,
   status: boolean,
   created_at: string;
   updated_at: string;
-  deleted_at: string,
+  deleted_at: string | null,
   rating: number | null,
   image_small_id: IImage | null,
   image_middle_id: IImage | null,

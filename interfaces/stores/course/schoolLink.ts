@@ -9,12 +9,13 @@ export default interface ISchoolLink {
   link: string,
   header: string,
   weight: number,
-  text: string,
+  text: string | null,
+  additional: string | null,
   metatag: IMetatag | null,
   status: boolean,
   created_at: string;
   updated_at: string;
-  deleted_at: string,
+  deleted_at: string | null,
   image_logo_id: IImage | null;
   image_site_id: IImage | null;
   site: number | null,
