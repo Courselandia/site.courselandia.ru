@@ -4,6 +4,7 @@ import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
 import school from '@/stores/school';
+import section from '@/stores/section';
 import skill from '@/stores/skill';
 import teacher from '@/stores/teacher';
 import tool from '@/stores/tool';
@@ -37,6 +38,7 @@ export default defineNuxtRouteMiddleware((to): boolean => {
   const { itemLinkSkill } = storeToRefs(skill());
   const { itemLinkTeacher } = storeToRefs(teacher());
   const { itemLinkTool } = storeToRefs(tool());
+  const { itemLinkSection } = storeToRefs(section());
 
   itemLinkDirection.value = null;
   itemLinkCategory.value = null;
@@ -45,6 +47,7 @@ export default defineNuxtRouteMiddleware((to): boolean => {
   itemLinkSkill.value = null;
   itemLinkTeacher.value = null;
   itemLinkTool.value = null;
+  itemLinkSection.value = null;
 
   return true;
 });

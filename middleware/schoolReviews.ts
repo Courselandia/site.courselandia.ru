@@ -1,6 +1,4 @@
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
-  const config = useRuntimeConfig();
-
   const {
     link,
   } = to.params;

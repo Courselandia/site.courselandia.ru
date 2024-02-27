@@ -11,13 +11,23 @@ import tool from '@/stores/tool';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const {
-    link,
+    sectionType1,
+    sectionLink1,
+    sectionType2,
+    sectionLink2,
+    level,
+    free,
   } = to.params;
 
   try {
-    const result = await $fetch('/api/skill/link', {
+    const result = await $fetch('/api/section/link', {
       params: {
-        link: link as string,
+        sectionType1: sectionType1 as string,
+        sectionLink1: sectionLink1 as string,
+        sectionType2: sectionType2 as string,
+        sectionLink2: sectionLink2 as string,
+        level: level as string,
+        free: free === 'free' ? 1 : 0,
       },
     });
 
@@ -55,10 +65,10 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     itemLinkDirection.value = null;
     itemLinkProfession.value = null;
     itemLinkSchool.value = null;
-    itemLinkSkill.value = result;
+    itemLinkSkill.value = null;
     itemLinkTeacher.value = null;
     itemLinkTool.value = null;
-    itemLinkSection.value = null;
+    itemLinkSection.value = result;
 
     return !!result;
   } catch (error: any) {
