@@ -1,10 +1,13 @@
 <template>
-  <div>
-    SECTION!
-  </div>
+  <Catalog
+    class="mb-24 mb-12-sm"
+    section="section"
+  />
 </template>
 
 <script lang="ts" setup>
+import Catalog from '@/components/organism/Catalog.vue';
+
 definePageMeta({
   middleware: [
     'section',

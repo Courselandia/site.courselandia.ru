@@ -129,7 +129,7 @@
       v-else-if="itemLinkProfession"
     >
       <CatalogHeader
-        v-if="itemLinkProfession && itemLinkProfession.text"
+        v-if="itemLinkProfession?.text"
       >
         <template #title>
           {{ itemLinkProfession?.header || itemLinkProfession?.name }}
@@ -211,7 +211,7 @@
       v-else-if="itemLinkSkill"
     >
       <CatalogHeader
-        v-if="itemLinkSkill && itemLinkSkill.text"
+        v-if="itemLinkSkill?.text"
       >
         <template #title>
           {{ itemLinkSkill?.header || itemLinkSkill?.name }}
@@ -241,7 +241,7 @@
       v-else-if="itemLinkTool"
     >
       <CatalogHeader
-        v-if="itemLinkTool && itemLinkTool.text"
+        v-if="itemLinkTool?.text"
       >
         <template #title>
           {{ itemLinkTool?.header || itemLinkTool?.name }}
@@ -259,6 +259,32 @@
         <div class="content mt-12">
           <h1 class="title title--1">
             {{ itemLinkTool?.header || itemLinkTool?.name }}
+          </h1>
+        </div>
+      </div>
+    </template>
+    <template
+      v-else-if="itemLinkSection"
+    >
+      <CatalogHeader
+        v-if="itemLinkSection?.text"
+      >
+        <template #title>
+          {{ itemLinkSection?.header || itemLinkSection?.name }}
+        </template>
+        <template
+          v-if="itemLinkSection?.text"
+          #description
+        >
+          <Reducer>
+            <span v-html="itemLinkSection.text" />
+          </Reducer>
+        </template>
+      </CatalogHeader>
+      <div v-else>
+        <div class="content mt-12">
+          <h1 class="title title--1">
+            {{ itemLinkSection?.header || itemLinkSection?.name }}
           </h1>
         </div>
       </div>
@@ -387,6 +413,7 @@ import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
 import school from '@/stores/school';
+import section from '@/stores/section';
 import skill from '@/stores/skill';
 import teacher from '@/stores/teacher';
 import tool from '@/stores/tool';
@@ -398,6 +425,7 @@ const { itemLinkSchool } = storeToRefs(school());
 const { itemLinkSkill } = storeToRefs(skill());
 const { itemLinkTeacher } = storeToRefs(teacher());
 const { itemLinkTool } = storeToRefs(tool());
+const { itemLinkSection } = storeToRefs(section());
 
 const getHandfulTags = (
   items: Array<ICategoryLink | ITag>,

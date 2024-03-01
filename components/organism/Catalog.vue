@@ -107,11 +107,11 @@
               />
             </div>
             <div
-              v-if="additional?.additional"
+              v-if="additional"
               class="catalog__additional"
             >
               <Reducer class="lists links titles">
-                <div v-html="additional.additional" />
+                <div v-html="additional" />
               </Reducer>
             </div>
           </div>
@@ -328,6 +328,7 @@ import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
 import school from '@/stores/school';
+import sectionStore from '@/stores/section';
 import skill from '@/stores/skill';
 import teacher from '@/stores/teacher';
 import tool from '@/stores/tool';
@@ -356,6 +357,7 @@ const { itemLinkSchool } = storeToRefs(school());
 const { itemLinkSkill } = storeToRefs(skill());
 const { itemLinkTeacher } = storeToRefs(teacher());
 const { itemLinkTool } = storeToRefs(tool());
+const { itemLinkSection } = storeToRefs(sectionStore());
 
 const openedItems: Record<string, boolean> = {
   openedSchools: false,
@@ -418,16 +420,7 @@ if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)
 const type = ref<TValue>(ECourseType.TILE);
 
 const courses = ref<ICourse[]>([]);
-const additional = ref<
-  ICategoryLink |
-  IDirectionLink |
-  IProfessionLink |
-  ISchoolLink |
-  ISkillLink |
-  ITeacherLink |
-  IToolLink |
-  null
->(null);
+const additional = ref<string | null>(null);
 
 const total = ref(0);
 const currentPage = ref(Number(getUrlQuery('page')) || 1);
@@ -613,6 +606,7 @@ const setHeader = (result: IApiReadCourses | null = null): void => {
   itemLinkSkill.value = null;
   itemLinkTeacher.value = null;
   itemLinkTool.value = null;
+  itemLinkSection.value = null;
 
   if (result?.description) {
     if (section === 'direction') {
@@ -633,10 +627,15 @@ const setHeader = (result: IApiReadCourses | null = null): void => {
   }
 };
 
-const setCoursesAndFilters = (result: IApiReadCourses): void => {
+const setCoursesAndFilters = (result: IApiReadCourses, itCouldBeSection: boolean = false): void => {
   courses.value = coursesStoreToCoursesComponent(result.courses);
   total.value = result.total || 0;
-  additional.value = result.description;
+
+  if (itCouldBeSection && section === 'section' && itemLinkSection.value) {
+    additional.value = itemLinkSection.value.additional;
+  } else {
+    additional.value = result.description?.additional || null;
+  }
 
   const storeDirections = result.filter?.directions || [];
   directions.value = courseFilterStoreDirectionsToComponentDirections(storeDirections);
@@ -701,61 +700,156 @@ const setCoursesAndFilters = (result: IApiReadCourses): void => {
 };
 
 const setSelectedFiltersByQuery = (): void => {
-  if (section === 'direction') {
-    if (itemLinkDirection.value?.id) {
-      selectedDirection.value = {
-        id: itemLinkDirection.value?.id,
-      };
-    }
+  if (section === 'direction' && itemLinkDirection.value?.id) {
+    selectedDirection.value = {
+      id: itemLinkDirection.value?.id,
+    };
   }
 
-  if (section === 'school') {
-    if (itemLinkSchool.value?.id) {
+  if (section === 'school' && itemLinkSchool.value?.id) {
+    selectedSchools.value = [
+      {
+        id: itemLinkSchool.value?.id,
+      },
+    ];
+  }
+
+  if (section === 'category' && itemLinkCategory.value?.id) {
+    selectedCategories.value = [
+      {
+        id: itemLinkCategory.value?.id,
+      },
+    ];
+  }
+
+  if (section === 'profession' && itemLinkProfession.value?.id) {
+    selectedProfessions.value = [
+      {
+        id: itemLinkProfession.value?.id,
+      },
+    ];
+  }
+
+  if (section === 'teacher' && itemLinkTeacher.value?.id) {
+    selectedTeachers.value = [
+      {
+        id: itemLinkTeacher.value?.id,
+      },
+    ];
+  }
+
+  if (section === 'skill' && itemLinkSkill.value?.id) {
+    selectedSkills.value = [
+      {
+        id: itemLinkSkill.value?.id,
+      },
+    ];
+  }
+
+  if (section === 'tool' && itemLinkTool.value?.id) {
+    selectedTools.value = [
+      {
+        id: itemLinkTool.value?.id,
+      },
+    ];
+  }
+
+  if (section === 'section' && itemLinkSection.value?.items[0]?.itemable_id) {
+    const [itemFirst, itemSecond] = itemLinkSection.value.items;
+
+    if (itemFirst.type === 'direction') {
+      selectedDirection.value = {
+        id: itemFirst.itemable_id,
+      };
+    } else if (itemFirst.type === 'school') {
       selectedSchools.value = [
         {
-          id: itemLinkSchool.value?.id,
+          id: itemFirst.itemable_id,
+        },
+      ];
+    } else if (itemFirst.type === 'category') {
+      selectedCategories.value = [
+        {
+          id: itemFirst.itemable_id,
+        },
+      ];
+    } else if (itemFirst.type === 'profession') {
+      selectedProfessions.value = [
+        {
+          id: itemFirst.itemable_id,
+        },
+      ];
+    } else if (itemFirst.type === 'teacher') {
+      selectedTeachers.value = [
+        {
+          id: itemFirst.itemable_id,
+        },
+      ];
+    } else if (itemFirst.type === 'skill') {
+      selectedSkills.value = [
+        {
+          id: itemFirst.itemable_id,
+        },
+      ];
+    } else if (itemFirst.type === 'tool') {
+      selectedTools.value = [
+        {
+          id: itemFirst.itemable_id,
         },
       ];
     }
-  }
 
-  if (section === 'category') {
-    if (itemLinkCategory.value?.id) {
-      selectedCategories.value[0] = {
-        id: itemLinkCategory.value?.id,
-      };
+    if (itemLinkSection.value?.items[1]?.itemable_id) {
+      if (itemSecond.type === 'school') {
+        selectedSchools.value = [
+          {
+            id: itemSecond.itemable_id,
+          },
+        ];
+      } else if (itemSecond.type === 'category') {
+        selectedCategories.value = [
+          {
+            id: itemSecond.itemable_id,
+          },
+        ];
+      } else if (itemSecond.type === 'profession') {
+        selectedProfessions.value = [
+          {
+            id: itemSecond.itemable_id,
+          },
+        ];
+      } else if (itemSecond.type === 'teacher') {
+        selectedTeachers.value = [
+          {
+            id: itemSecond.itemable_id,
+          },
+        ];
+      } else if (itemSecond.type === 'skill') {
+        selectedSkills.value = [
+          {
+            id: itemSecond.itemable_id,
+          },
+        ];
+      } else if (itemSecond.type === 'tool') {
+        selectedTools.value = [
+          {
+            id: itemSecond.itemable_id,
+          },
+        ];
+      }
     }
-  }
 
-  if (section === 'profession') {
-    if (itemLinkProfession.value?.id) {
-      selectedProfessions.value[0] = {
-        id: itemLinkProfession.value?.id,
-      };
+    if (itemLinkSection.value?.free) {
+      selectedFree.value = true;
     }
-  }
 
-  if (section === 'teacher') {
-    if (itemLinkTeacher.value?.id) {
-      selectedTeachers.value[0] = {
-        id: itemLinkTeacher.value?.id,
-      };
-    }
-  }
-
-  if (section === 'skill') {
-    if (itemLinkSkill.value?.id) {
-      selectedSkills.value[0] = {
-        id: itemLinkSkill.value?.id,
-      };
-    }
-  }
-
-  if (section === 'tool') {
-    if (itemLinkTool.value?.id) {
-      selectedTools.value[0] = {
-        id: itemLinkTool.value?.id,
-      };
+    if (itemLinkSection.value?.level) {
+      selectedLevels.value = [
+        {
+          value: itemLinkSection.value.level,
+          disabled: false,
+        },
+      ];
     }
   }
 
@@ -1160,10 +1254,12 @@ try {
     link as string,
   );
 
-  setCoursesAndFilters(result);
+  setCoursesAndFilters(result, true);
 
   if (result?.total) {
     stopScrollLoader.value = (currentPage.value * size.value) >= result.total;
+  } else {
+    stopScrollLoader.value = true;
   }
 } catch (error: any) {
   console.error(error.message);
@@ -1416,7 +1512,7 @@ const onLoadScrolling = async (): Promise<void> => {
   if (result) {
     courses.value = courses.value.concat(coursesStoreToCoursesComponent(result.courses));
     total.value = result.total || 0;
-    additional.value = result.description;
+    additional.value = result.description?.additional || null;
 
     if ((currentPage.value * size.value) >= total.value) {
       stopScrollLoader.value = true;
