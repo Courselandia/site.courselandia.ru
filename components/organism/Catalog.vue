@@ -1463,10 +1463,9 @@ const setUrlQuery = (
         url = getUrlWithQuery();
       }
     } else if (section) {
-      const sectionFilterName = convertSectionFilterToName(section);
-
-      if (sectionFilterName && link) {
-        const filterSection = getSectionFilter(section);
+      if (section === 'section') {
+        const { sectionType1 } = route.params;
+        const filterSection = getSectionFilter(sectionType1 as string);
 
         if (filterSection) {
           section = filterSection.name;
@@ -1476,6 +1475,22 @@ const setUrlQuery = (
           url = getUrlWithQuery();
           section = null;
           link = '';
+        }
+      } else {
+        const sectionFilterName = convertSectionFilterToName(section);
+
+        if (sectionFilterName && link) {
+          const filterSection = getSectionFilter(section);
+
+          if (filterSection) {
+            section = filterSection.name;
+            link = filterSection.link;
+            url = getUrlWithQuery(section || '', link);
+          } else {
+            url = getUrlWithQuery();
+            section = null;
+            link = '';
+          }
         }
       }
     }

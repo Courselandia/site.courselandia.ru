@@ -135,43 +135,43 @@ export default defineNuxtConfig({
     'pages:extend': (pages) => {
       pages.push({
         name: 'section-one-level',
-        path: '/courses/:sectionType1/:sectionLink1/level/:level',
+        path: '/courses/:sectionType1/:link/level/:level',
         file: '~/pages/courses/section.vue',
       });
 
       pages.push({
         name: 'section-one-free',
-        path: '/courses/:sectionType1/:sectionLink1/:free',
+        path: '/courses/:sectionType1/:link/:free',
         file: '~/pages/courses/section.vue',
       });
 
       pages.push({
         name: 'section-one-level-free',
-        path: '/courses/:sectionType1/:sectionLink1/level/:level/:free',
+        path: '/courses/:sectionType1/:link/level/:level/:free',
         file: '~/pages/courses/section.vue',
       });
 
       pages.push({
         name: 'section-two',
-        path: '/courses/:sectionType1/:sectionLink1/:sectionType2/:sectionLink2',
+        path: '/courses/:sectionType1/:link/:sectionType2/:sectionLink2',
         file: '~/pages/courses/section.vue',
       });
 
       pages.push({
         name: 'section-two-level',
-        path: '/courses/:sectionType1/:sectionLink1/:sectionType2/:sectionLink2/level/:level',
+        path: '/courses/:sectionType1/:link/:sectionType2/:sectionLink2/level/:level',
         file: '~/pages/courses/section.vue',
       });
 
       pages.push({
         name: 'section-two-free',
-        path: '/courses/:sectionType1/:sectionLink1/:sectionType2/:sectionLink2/:free',
+        path: '/courses/:sectionType1/:link/:sectionType2/:sectionLink2/:free',
         file: '~/pages/courses/section.vue',
       });
 
       pages.push({
         name: 'section-two-level-free',
-        path: '/courses/:sectionType1/:sectionLink1/:sectionType2/:sectionLink2/level/:level/:free',
+        path: '/courses/:sectionType1/:link/:sectionType2/:sectionLink2/level/:level/:free',
         file: '~/pages/courses/section.vue',
       });
     },

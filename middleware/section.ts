@@ -12,7 +12,7 @@ import tool from '@/stores/tool';
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const {
     sectionType1,
-    sectionLink1,
+    link,
     sectionType2,
     sectionLink2,
     level,
@@ -23,7 +23,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const result = await $fetch('/api/section/link', {
       params: {
         sectionType1: sectionType1 as string,
-        sectionLink1: sectionLink1 as string,
+        sectionLink1: link as string,
         sectionType2: sectionType2 as string,
         sectionLink2: sectionLink2 as string,
         level: level as string,
