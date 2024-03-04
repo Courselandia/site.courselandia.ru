@@ -18,10 +18,10 @@ export default defineEventHandler(async (event): Promise<ISectionLink | null> =>
     return cachedSection as ISectionLink;
   }
 
-  let pathToJson = `/storage/json/sections/${sectionType1}_${sectionType2}`;
+  let pathToJson = `/storage/json/sections/${sectionType1}_${sectionLink1}`;
 
   if (sectionType2 && sectionLink2) {
-    pathToJson += `_${sectionType2}_${sectionType2}`;
+    pathToJson += `_${sectionType2}_${sectionLink2}`;
   }
 
   if (level) {
@@ -47,7 +47,7 @@ export default defineEventHandler(async (event): Promise<ISectionLink | null> =>
     };
   }
 
-  const path = config.public.development ? '/api/private/site/section/link' : pathToJson;
+  const path = config.public.development ? '/api/private/site/sections' : pathToJson;
   const response = await axios.get<IResponseItem<ISectionLink>>(path, {
     baseURL: config.public.apiUrl,
     params: config.public.development ? {
