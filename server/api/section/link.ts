@@ -47,7 +47,7 @@ export default defineEventHandler(async (event): Promise<ISectionLink | null> =>
     };
   }
 
-  const path = config.public.development ? '/api/private/site/sections' : pathToJson;
+  const path = config.public.development ? '/api/private/site/section/link' : pathToJson;
   const response = await axios.get<IResponseItem<ISectionLink>>(path, {
     baseURL: config.public.apiUrl,
     params: config.public.development ? {
