@@ -10,7 +10,7 @@ export default defineEventHandler(async (event): Promise<ISectionLink | null> =>
   const sectionType2 = urlParams.get('sectionType2');
   const sectionLink2 = urlParams.get('sectionLink2');
   const level = urlParams.get('level');
-  const free = urlParams.get('free') ? 1 : 0;
+  const free = urlParams.get('free') === '1' ? 1 : 0;
   const key = `redis:section.link.${sectionType1}.${sectionLink1}.${sectionType2}.${sectionLink2}.${level}.${free}`;
   const cachedSection = await useStorage().getItem(key);
 
