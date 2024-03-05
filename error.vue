@@ -31,6 +31,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import {
   ref,
   toRefs,
@@ -40,6 +41,8 @@ import Error from '@/components/atoms/Error.vue';
 import Dropdowns from '@/components/organism/Dropdowns.vue';
 import Footer from '@/components/organism/Footer.vue';
 import Header from '@/components/organism/Header.vue';
+import direction from '@/stores/direction';
+import school from '@/stores/school';
 
 const props = defineProps({
   error: {
@@ -52,15 +55,26 @@ const menu = ref('');
 
 const { error } = toRefs(props);
 
+try {
+  const result = await $fetch('/api/direction/read');
+
+  const { directions } = storeToRefs(direction());
+  directions.value = result;
+} catch (err: any) {
+  console.error(err.message);
+}
+
+try {
+  const result = await $fetch('/api/school/read');
+
+  const { schools } = storeToRefs(school());
+  schools.value = result;
+} catch (err: any) {
+  console.error(err.message);
+}
+
 useHead({
   title: `Ошибка ${error.value.statusCode}`,
-});
-
-definePageMeta({
-  middleware: [
-    'preload-directions',
-    'preload-schools',
-  ],
 });
 </script>
 
