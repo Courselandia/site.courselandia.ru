@@ -1,29 +1,9 @@
 <template>
-  <div class="content mt-12 mb-24 mb-12-sm">
-    <h1 class="title title--1">
-      Избранное
-    </h1>
-    <Courses
-      :courses="courses"
-      :columns="4"
-    >
-      <template #empty>
-        В избранном пока нет курсов. Но вы всегда можете их добавить ;).
-      </template>
-    </Courses>
-  </div>
+  <Favorites />
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-} from 'vue';
-
-import { apiReadFavoritesCourses } from '@/api/course';
-import Courses from '@/components/molecules/Courses.vue';
-import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
-import type ICourse from '@/interfaces/components/molecules/course';
-import favorite from '@/stores/favorite';
+import Favorites from '@/components/modules/favorites/Index.vue';
 
 const title = 'Список Избранного';
 const description = 'Список избранных онлайн курсов разных направлений от программирования до маркетинга. Найди свой онлйн курс и прокачайся.';
@@ -45,20 +25,6 @@ useHead({
     },
   ],
 });
-
-const {
-  getFavorites,
-} = favorite();
-
-const courses = ref<Array<ICourse>>([]);
-
-try {
-  courses.value = coursesStoreToCoursesComponent(
-    await apiReadFavoritesCourses(getFavorites()),
-  );
-} catch (error: any) {
-  console.error(error.message);
-}
 
 definePageMeta({
   middleware: [
