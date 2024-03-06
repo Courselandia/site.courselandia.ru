@@ -43,6 +43,6 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/atoms/brand.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/home/atoms/brand";
 </style>

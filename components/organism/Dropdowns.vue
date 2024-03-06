@@ -205,9 +205,9 @@ import {
 
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
+import Direction from '@/components/modules/home/atoms/Direction.vue';
+import Directions from '@/components/modules/home/molecules/Directions.vue';
 import AlphabeticList from '@/components/molecules/AlphabeticList.vue';
-import Direction from '@/components/molecules/Direction.vue';
-import Directions from '@/components/molecules/Directions.vue';
 import ListSchoolReviews from '@/components/molecules/ListSchoolReviews.vue';
 import ListSchools from '@/components/molecules/ListSchools.vue';
 import directionsToMenu from '@/converts/directionsToMenu';

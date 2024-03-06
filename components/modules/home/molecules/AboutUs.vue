@@ -92,6 +92,6 @@
 import Reducer from '@/components/atoms/Reducer.vue';
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/atoms/aboutUs.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/home/molecules/aboutUs";
 </style>

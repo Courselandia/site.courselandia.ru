@@ -20,6 +20,6 @@
   </div>
 </template>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/hero.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/home/molecules/hero";
 </style>

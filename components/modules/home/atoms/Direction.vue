@@ -67,6 +67,6 @@ const onClick = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/direction.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/home/atoms/direction";
 </style>

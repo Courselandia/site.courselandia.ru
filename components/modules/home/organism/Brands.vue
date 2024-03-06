@@ -25,7 +25,7 @@ import {
   ref,
 } from 'vue';
 
-import Brand from '@/components/atoms/Brand.vue';
+import Brand from '@/components/modules/home/atoms/Brand.vue';
 import schoolsToBrand from '@/converts/schoolsToBrand';
 import type IBrand from '@/interfaces/components/organism/brands';
 import school from '@/stores/school';
@@ -34,6 +34,6 @@ const { schools } = storeToRefs(school());
 const brands = ref<Array<IBrand>>(schoolsToBrand(schools.value));
 </script>
 
-<style lang="scss">
-@import "assets/scss/components/organism/brands.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/home/organism/brands";
 </style>
