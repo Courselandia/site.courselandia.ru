@@ -1,35 +1,6 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
-.school-reviews {
-  &__directions {
-    margin-bottom: 3.5rem;
-
-    @media all and (max-width: 1200px) {
-      margin-bottom: 1.5rem;
-      overflow: scroll;
-
-      &::-webkit-scrollbar,
-      &::-webkit-scrollbar-thumb,
-      &::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
-
-      .tags {
-        flex-wrap: nowrap !important;
-
-        .tag {
-          &__label {
-            white-space: nowrap;
-          }
-        }
-      }
-    }
-
-    @media all and (max-width: 768px) {
-      margin-bottom: 0;
-    }
-  }
-
+.reviews {
   &__header {
     display: flex;
     border-bottom: 1px solid $grey2;
@@ -39,7 +10,7 @@
       display: none;
     }
 
-    .school-reviews {
+    .reviews {
       &__th {
         font-weight: 700;
         font-size: 0.875rem;

@@ -1,94 +1,13 @@
 <template>
-  <div class="school-reviews">
-    <div class="school-reviews__directions">
-      <Tags>
-        <Tag
-          bck="white"
-          :border="direction === null ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(null)"
-        >
-          Все направления
-        </Tag>
-        <Tag
-          bck="white"
-          :border="direction === EDirection.PROGRAMMING ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(EDirection.PROGRAMMING)"
-        >
-          Программирование
-        </Tag>
-        <Tag
-          bck="white"
-          :border="direction === EDirection.MARKETING ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(EDirection.MARKETING)"
-        >
-          Маркетинг
-        </Tag>
-        <Tag
-          bck="white"
-          :border="direction === EDirection.DESIGN ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(EDirection.DESIGN)"
-        >
-          Дизайн
-        </Tag>
-        <Tag
-          bck="white"
-          :border="direction === EDirection.BUSINESS ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(EDirection.BUSINESS)"
-        >
-          Бизнес и управление
-        </Tag>
-        <Tag
-          bck="white"
-          :border="direction === EDirection.ANALYTICS ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(EDirection.ANALYTICS)"
-        >
-          Аналитика
-        </Tag>
-        <Tag
-          bck="white"
-          :border="direction === EDirection.GAMES ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(EDirection.GAMES)"
-        >
-          Игры
-        </Tag>
-        <Tag
-          bck="white"
-          :border="direction === EDirection.OTHER ? 'blue2' : 'grey2'"
-          border-hover="blue2"
-          color="black"
-          cursor
-          @click="onSelectDirection(EDirection.OTHER)"
-        >
-          Другие профессии
-        </Tag>
-      </Tags>
-    </div>
-    <div class="school-reviews__items">
-      <div class="school-reviews__header">
-        <div class="school-reviews__th school-reviews__th--school">
+  <div class="reviews">
+    <Directions
+      v-model:direction="direction"
+    />
+    <div class="reviews__items">
+      <div class="reviews__header">
+        <div class="reviews__th reviews__th--school">
           <span
-            class="school-reviews__sortable"
+            class="reviews__sortable"
             @click="onClickSort('label')"
             @keyup="onClickSort('label')"
           >
@@ -100,15 +19,15 @@
             :sort-order="sort.sortOrder as TSortOrder"
           />
         </div>
-        <div class="school-reviews__th school-reviews__th--description">
+        <div class="reviews__th reviews__th--description">
           Описание
         </div>
-        <div class="school-reviews__th school-reviews__th--courses">
+        <div class="reviews__th reviews__th--courses">
           Курсы
         </div>
-        <div class="school-reviews__th school-reviews__th--rating">
+        <div class="reviews__th reviews__th--rating">
           <span
-            class="school-reviews__sortable"
+            class="reviews__sortable"
             @click="onClickSort('rating')"
             @keyup="onClickSort('rating')"
           >
@@ -123,7 +42,7 @@
       </div>
       <div
         v-if="listSchoolReviews"
-        class="school-reviews__body"
+        class="reviews__body"
       >
         <template
           v-for="(school, key) in listSchoolReviews"
@@ -131,16 +50,16 @@
           <div
             v-if="school.reviews"
             :key="key"
-            class="school-reviews__item"
+            class="reviews__item"
           >
-            <div class="school-reviews__group">
-              <div class="school-reviews__td school-reviews__td--school">
+            <div class="reviews__group">
+              <div class="reviews__td reviews__td--school">
                 <LazyImage
                   v-if="school.image"
                   :src="school.image"
                   :alt="school.label"
                   :title="school.label"
-                  class="school-reviews__logo"
+                  class="reviews__logo"
                 />
                 <template
                   v-else
@@ -148,15 +67,15 @@
                   {{ school.label }}
                 </template>
               </div>
-              <div class="school-reviews__td school-reviews__td--description">
+              <div class="reviews__td reviews__td--description">
                 <div
-                  class="school-reviews__text"
+                  class="reviews__text"
                   v-html="school.text"
                 />
                 <a
                   v-if="school.site"
                   :href="school.site"
-                  class="link school-reviews__site"
+                  class="link reviews__site"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -164,8 +83,8 @@
                 </a>
               </div>
             </div>
-            <div class="school-reviews__group">
-              <div class="school-reviews__td school-reviews__td--courses">
+            <div class="reviews__group">
+              <div class="reviews__td reviews__td--courses">
                 <Tags
                   v-if="school.amount_courses.all"
                 >
@@ -275,24 +194,24 @@
                   </Tag>
                 </Tags>
               </div>
-              <div class="school-reviews__td school-reviews__td--rating">
-                <div class="school-reviews__reviews">
-                  <div class="school-reviews__content-rating">
-                    <div class="school-reviews__rating">
-                      <div class="school-reviews__rating-value">
+              <div class="reviews__td reviews__td--rating">
+                <div class="reviews__reviews">
+                  <div class="reviews__content-rating">
+                    <div class="reviews__rating">
+                      <div class="reviews__rating-value">
                         {{ Math.round(school.rating * 100) / 100 }}
                       </div>
-                      <div class="school-reviews__rating-star">
+                      <div class="reviews__rating-star">
                         <Icon
                           name="star"
                           color="blue2"
                           :size="[30, 30]"
-                          class="school-reviews__rating-star-icon"
+                          class="reviews__rating-star-icon"
                         />
                       </div>
                     </div>
                   </div>
-                  <div class="school-reviews__to-reviews">
+                  <div class="reviews__to-reviews">
                     <Button
                       :to="`/reviews/${school.link}`"
                     >
@@ -335,14 +254,15 @@ import LazyImage from '@/components/atoms/LazyImage.vue';
 import Plural from '@/components/atoms/Plural.vue';
 import SortDirection from '@/components/atoms/SortDirection.vue';
 import Tag from '@/components/atoms/Tag.vue';
+import Directions from '@/components/modules/reviews/organism/Directions.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import EDirection from '@/enums/direction';
-import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 import type ISort from '@/interfaces/sort';
 import school from '@/stores/school';
 import type { TOrder } from '@/types/order';
 import type TSortOrder from '@/types/sortOrder';
+import type IListSchoolReview from '~/interfaces/components/molecules/listSchoolReview';
 
 const sortDefault: ISort = {
   sortBy: 'rating',
@@ -351,14 +271,13 @@ const sortDefault: ISort = {
 const route = useRoute();
 const sortByCurrent = route.query.sortBy as string;
 const sortOrderCurrent = route.query.sortOrder as string;
-const directionCurrent = route.query.direction as string;
 
 const sort = ref<ISort>({
   sortBy: sortByCurrent || sortDefault.sortBy,
   sortOrder: sortOrderCurrent as TOrder || sortDefault.sortOrder,
 });
 const { schools } = storeToRefs(school());
-const direction = ref<EDirection | null>(Number(directionCurrent) as unknown as EDirection || null);
+const direction = ref<EDirection | null>();
 
 const toHistory = (): void => {
   let url = '/reviews';
@@ -503,12 +422,8 @@ const onClickSort = (field: string): void => {
     };
   }
 };
-
-const onSelectDirection = (directionSelected: EDirection | null): void => {
-  direction.value = directionSelected;
-};
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/organism/schoolReviews.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/reviews/organism/reviews";
 </style>

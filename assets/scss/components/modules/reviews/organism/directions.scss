@@ -1,0 +1,28 @@
+.directions {
+  margin-bottom: 3.5rem;
+
+  @media all and (max-width: 1200px) {
+    margin-bottom: 1.5rem;
+    overflow: scroll;
+
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    .tags {
+      flex-wrap: nowrap !important;
+
+      .tag {
+        &__label {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    margin-bottom: 0;
+  }
+}

@@ -1,19 +1,15 @@
 <template>
-  <div class="content pt-12 pb-40 pt-12-sm pb-12-sm">
-    <h1 class="title title--1">
-      Отзывы об онлайн школах
-    </h1>
-
-    <SchoolReviews />
-  </div>
+  <Reviews />
 </template>
 
 <script lang="ts" setup>
-import SchoolReviews from '@/components/organism/SchoolReviews.vue';
+import Reviews from '@/components/modules/reviews/Index.vue';
 
+/*
 useRouteCache((helper: any) => {
   helper.setMaxAge(3600 * 24).setCacheable().addTags(['reviews']);
 });
+ */
 
 const config = useRuntimeConfig();
 const title = 'Реальные отзывы об онлайн-школах и их курсах';
