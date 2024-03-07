@@ -61,46 +61,4 @@
       }
     }
   }
-
-  &__menus {
-    display: flex;
-    justify-content: flex-end;
-
-    @media all and (max-width: 900px) {
-      flex-direction: column;
-      text-align: center;
-      margin-bottom: 4.25rem;
-    }
-  }
-
-  &__menu {
-    width: 25%;
-    padding-right: 1.5rem;
-
-    @media all and (max-width: 1200px) {
-      width: 33.33%;
-    }
-
-    @media all and (max-width: 900px) {
-      width: 100%;
-      padding-right: 0;
-      margin-bottom: 2.5rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-
-  &__section {
-    font-weight: 800;
-    font-size: 1.25rem;
-    line-height: 1.563rem;
-    color: $white;
-    margin-bottom: 1.9rem;
-
-    @media all and (max-width: 900px) {
-      margin-bottom: 1.5rem;
-    }
-  }
 }

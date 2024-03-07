@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
 import Icon from '@/components/atoms/Icon.vue';
-import type IListSchoolReview from '~/interfaces/components/molecules/listSchoolReview';
+import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
 
 const props = defineProps({
   schools: {

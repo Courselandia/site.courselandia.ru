@@ -14,13 +14,13 @@
               <div class="dropdowns__bck" />
               <div class="dropdowns__directions">
                 <div
-                  v-for="(direction, indexDirection) in menuCourses"
+                  v-for="(itm, indexDirection) in menuCourses"
                   :key="indexDirection"
                   :class="`dropdowns__direction ${index === indexDirection ? 'dropdowns__direction--current' : ''}`"
                   @click="onClickDirection(indexDirection)"
                   @keyup="onClickDirection(indexDirection)"
                 >
-                  {{ direction.label }}
+                  {{ itm.label }}
                 </div>
               </div>
             </div>

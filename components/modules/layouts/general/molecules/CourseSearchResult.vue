@@ -82,9 +82,9 @@ const props = defineProps({
   },
 });
 
-const holder = await import('@/assets/images/holder.svg');
+const holder = await import('assets/images/holder.svg');
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/molecules/courseSearchResult.scss";
+@import "@/assets/scss/components/modules/layouts/general/molecules/courseSearchResult";
 </style>

@@ -109,7 +109,7 @@ import {
 import { apiReadSearchedCourses } from '@/api/course';
 import Icon from '@/components/atoms/Icon.vue';
 import Loader from '@/components/atoms/Loader.vue';
-import CourseSearchResult from '@/components/molecules/CourseSearchResult.vue';
+import CourseSearchResult from '@/components/modules/layouts/general/molecules/CourseSearchResult.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import ECourseSort from '@/enums/components/molecules/courseSort';
 import type ICourse from '@/interfaces/components/molecules/course';
