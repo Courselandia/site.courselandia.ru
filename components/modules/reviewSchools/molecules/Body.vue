@@ -48,6 +48,7 @@ const {
 const { schools } = storeToRefs(school());
 
 const listSchools = computed<IListSchoolReview[] | null>(() => {
+  console.dir(sort.value);
   if (!schools.value) {
     return null;
   }

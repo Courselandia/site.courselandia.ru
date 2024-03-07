@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <Header
-      v-model:sort="sort"
+      v-model:sort="sortValue"
     />
     <Body
       :direction="direction"
@@ -45,14 +45,18 @@ const {
   sort,
 } = toRefs(props);
 
-const sortValue = ref<ISort | null>(null);
+const sortValue = ref<ISort | null>(sort.value);
 
 watch(sortValue, () => {
   emit('update:sort', sortValue.value);
+}, {
+  deep: true,
 });
 
 watch(sort, () => {
   sortValue.value = sort.value;
+}, {
+  deep: true,
 });
 </script>
 

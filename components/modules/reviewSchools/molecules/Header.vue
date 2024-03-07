@@ -83,20 +83,28 @@ const sortValue = ref<ISort>({
 
 watch(sortValue, () => {
   emit('update:sort', sortValue.value);
+}, {
+  deep: true,
 });
 
 watch(sort, () => {
   sortValue.value = sort.value;
+}, {
+  deep: true,
 });
 
 const onClick = (field: string): void => {
   if (sortValue.value?.sortBy === field) {
     if (sortValue.value?.sortOrder === 'ASC') {
-      sortValue.value.sortOrder = 'DESC';
-      sortValue.value.sortBy = field;
+      sortValue.value = {
+        sortOrder: 'DESC',
+        sortBy: field,
+      };
     } else {
-      sortValue.value.sortOrder = 'ASC';
-      sortValue.value.sortBy = field;
+      sortValue.value = {
+        sortOrder: 'ASC',
+        sortBy: field,
+      };
     }
   } else {
     sortValue.value = {
