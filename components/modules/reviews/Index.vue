@@ -153,7 +153,7 @@ const {
   rating,
 } = route.query;
 
-const getDefaultSort = (sortQuery: string | null): ISort => {
+const getDefaultSort = (sortQuery: string | null): ISorts => {
   if (sortQuery === 'date_asc') {
     return {
       sortBy: 'created_at',

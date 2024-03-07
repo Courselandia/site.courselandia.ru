@@ -1,12 +1,13 @@
 <template>
   <div class="sort">
     <div
-      :class="`sort__item ${sortValue.sortBy === 'created_at' ? 'sort__item--active' : ''}`"
-      @click="onSort('created_at')"
-      @keyup="onSort('created_at')"
+      :class="`sort__item ${sorts.created_at ? 'sort__item--active' : ''}`"
+      @click="onSort('created_at', sorts.created_at === 'ASC' ? 'DESC' : 'ASC')"
+      @keyup="onSort('created_at', sorts.created_at === 'ASC' ? 'DESC' : 'ASC')"
     >
       <Icon
-        :name="sortValue.sortOrder === 'ASC' ? 'sort-asc' : 'sort-desc'"
+        v-if="sorts.created_at"
+        :name="sorts.created_at === 'ASC' ? 'sort-asc' : 'sort-desc'"
         :size="[16, 16]"
         color="black"
         class="sort__icon"
@@ -16,12 +17,13 @@
       </div>
     </div>
     <div
-      :class="`sort__item ${sortValue.sortBy === 'rating' ? 'sort__item--active' : ''}`"
-      @click="onClick('rating')"
-      @keyup="onClick('rating')"
+      :class="`sort__item ${sorts.rating ? 'sort__item--active' : ''}`"
+      @click="onSort('rating', sorts.rating === 'ASC' ? 'DESC' : 'ASC')"
+      @keyup="onSort('rating', sorts.rating === 'ASC' ? 'DESC' : 'ASC')"
     >
       <Icon
-        :name="sortValue.sortOrder === 'ASC' ? 'sort-asc' : 'sort-desc'"
+        v-if="sorts.rating"
+        :name="sorts.rating === 'ASC' ? 'sort-asc' : 'sort-desc'"
         :size="[16, 16]"
         color="black"
         class="sort__icon"
@@ -43,9 +45,10 @@ import {
 
 import Icon from '@/components/atoms/Icon.vue';
 import type ISorts from '@/interfaces/sorts';
+import type { TOrder } from '@/types/order';
 
 const props = defineProps({
-  sort: {
+  sorts: {
     type: Object as PropType<ISorts>,
     required: false,
     default: null,
@@ -73,4 +76,9 @@ watch(sort, () => {
 }, {
   deep: true,
 });
+
+const onSort = async (field: string, order: TOrder): Promise<void> => {
+  sortValue.value = {};
+  sortValue.value[field] = order;
+};
 </script>
