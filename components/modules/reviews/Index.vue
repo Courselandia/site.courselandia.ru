@@ -156,28 +156,24 @@ const {
 const getDefaultSort = (sortQuery: string | null): ISorts => {
   if (sortQuery === 'date_asc') {
     return {
-      sortBy: 'created_at',
-      sortOrder: 'ASC',
+      created_at: 'ASC',
     };
   }
 
   if (sortQuery === 'rating_asc') {
     return {
-      sortBy: 'rating',
-      sortOrder: 'ASC',
+      rating: 'ASC',
     };
   }
 
   if (sortQuery === 'rating_desc') {
     return {
-      sortBy: 'rating',
-      sortOrder: 'DESC',
+      rating: 'DESC',
     };
   }
 
   return {
-    sortBy: 'created_at',
-    sortOrder: 'DESC',
+    created_at: 'DESC',
   };
 };
 
