@@ -71,6 +71,6 @@ const props = defineProps({
 const config = useRuntimeConfig();
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/error.scss";
 </style>

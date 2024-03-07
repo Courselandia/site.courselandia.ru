@@ -47,6 +47,6 @@ const nameClass = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/avatar.scss";
 </style>

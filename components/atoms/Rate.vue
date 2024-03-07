@@ -34,6 +34,6 @@ const goldenStars = computed(() => Math.round(value.value));
 const greyStars = computed(() => 5 - goldenStars.value);
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/rate.scss";
 </style>

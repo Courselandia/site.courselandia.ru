@@ -155,6 +155,6 @@ const slots = useSlots();
 const hasSlot = (name: string) => !!slots[name];
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/tag.scss";
 </style>

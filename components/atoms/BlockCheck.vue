@@ -20,6 +20,6 @@
 import Icon from '@/components/atoms/Icon.vue';
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/blockCheck.scss";
 </style>

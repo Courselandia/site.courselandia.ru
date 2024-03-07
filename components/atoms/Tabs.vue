@@ -33,7 +33,7 @@ const {
 } = toRefs(props);
 
 const emit = defineEmits({
-  'update:value': (_: string) => true,
+  'update:value': (_: TValue) => true,
 });
 
 const input = ref(value?.value);
@@ -51,6 +51,6 @@ const onChangeTab = (val: string): void => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/tabs.scss";
 </style>

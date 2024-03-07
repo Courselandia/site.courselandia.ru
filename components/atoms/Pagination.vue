@@ -35,8 +35,8 @@
           v-else
           :key="`item_${key}`"
           :class="`pagination__item ${pageCurrent === num ? 'pagination__item--current' : ''}`"
-          @click="onClickPagination(num)"
-          @keyup="onClickPagination(num)"
+          @click="onClickPagination(num as number)"
+          @keyup="onClickPagination(num as number)"
         >
           {{ num }}
         </div>
@@ -121,11 +121,11 @@ const pages = computed<Array<number | string>>((): Array<number | string> => {
   return pgs;
 });
 
-const onClickPagination = (pagination: number | string) => {
+const onClickPagination = (pagination: number) => {
   emit('click', pagination);
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/pagination.scss";
 </style>
