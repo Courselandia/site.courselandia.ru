@@ -55,7 +55,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits({
-  'update:sort': (_: ISorts) => true,
+  'update:sorts': (_: ISorts) => true,
 });
 
 const {
@@ -65,7 +65,7 @@ const {
 const sortsValue = ref<ISorts>(sorts.value);
 
 watch(sortsValue, () => {
-  emit('update:sort', sortsValue.value);
+  emit('update:sorts', sortsValue.value);
 }, {
   deep: true,
 });
@@ -81,3 +81,7 @@ const onSort = async (field: string, order: TOrder): Promise<void> => {
   sortsValue.value[field] = order;
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/reviews/molecules/sort";
+</style>

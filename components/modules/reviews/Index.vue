@@ -18,10 +18,9 @@
     >
       <div ref="cardRef">
         <Card
+          v-model:rating="rating"
           :school="schoolItem"
           :scroll="scroll"
-          :rating="ratingCurrent || 0"
-          @filter="onFilter"
         />
       </div>
       <div class="reviews__info">
@@ -149,10 +148,6 @@ import type IReview from '@/interfaces/stores/review/review';
 
 const route = useRoute();
 
-const {
-  rating,
-} = route.query;
-
 const getDefaultSort = (sortQuery: string | null): ISorts => {
   if (sortQuery === 'date_asc') {
     return {
@@ -179,8 +174,8 @@ const getDefaultSort = (sortQuery: string | null): ISorts => {
 
 let ratingQuery: number | null = null;
 
-if (rating && Number(rating)) {
-  ratingQuery = Number(rating);
+if (route.query.rating && Number(route.query.rating)) {
+  ratingQuery = Number(route.query.rating);
 }
 
 const scroll = ref(true);
@@ -191,7 +186,7 @@ const currentPage = ref(1);
 const total = ref<number>();
 const reviews = ref<Array<IReview>>();
 const loading = ref(false);
-const ratingCurrent = ref(ratingQuery || null);
+const rating = ref(ratingQuery || null);
 const stopScrollLoader = ref(false);
 const sorts = ref<ISorts>(getDefaultSort(route.query.sort as string));
 
@@ -216,8 +211,8 @@ const setUrlQuery = (): void => {
     }
   }
 
-  if (ratingCurrent.value) {
-    queries.push(`rating=${ratingCurrent.value}`);
+  if (rating.value) {
+    queries.push(`rating=${rating.value}`);
   }
 
   const query = queries.join('&');
@@ -260,7 +255,7 @@ const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | nu
       (currentPage.value - 1) * limit,
       limit,
       sorts.value,
-      ratingCurrent.value,
+      rating.value,
     );
   } catch (error: any) {
     console.error(error.message);
@@ -299,34 +294,15 @@ const reloadReviews = async (): Promise<void> => {
 
 watch(sorts, async () => {
   await reloadReviews();
+}, {
+  deep: true,
 });
 
-/*
-const onFilter = async (rtng: number | null): Promise<void> => {
-  ratingCurrent.value = rtng;
+watch(rating, async () => {
   currentPage.value = 1;
 
-  loading.value = true;
-  const res = await loadReviews(false);
-  reviews.value = res?.data;
-  total.value = res?.total;
-  stopScrollLoader.value = false;
-  setUrlQuery();
-  loading.value = false;
-};
-
-const onSort = async (field: string, order: TOrder): Promise<void> => {
-  sorts.value = {};
-  sorts.value[field] = order;
-
-  loading.value = true;
-  const res = await loadReviews(false);
-  reviews.value = res?.data;
-  total.value = res?.total;
-  setUrlQuery();
-  loading.value = false;
-};
- */
+  await reloadReviews();
+});
 
 const onLoadScrolling = async (): Promise<void> => {
   currentPage.value++;

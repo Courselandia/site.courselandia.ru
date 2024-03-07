@@ -389,6 +389,10 @@ const onClickFilter = (rtg: number): void => {
   }
 };
 
+const onClickCancelFilter = (): void => {
+  ratingValue.value = null;
+};
+
 const getWidthStatsBar = (
   total: number,
   forParticularStars: number,

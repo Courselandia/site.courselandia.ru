@@ -28,31 +28,6 @@
     }
   }
 
-  &__sorts {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2.5rem;
-  }
-
-  &__sort {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-right: 2rem;
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    &--active {
-      font-weight: 700;
-    }
-  }
-
-  &__sort-icon {
-    margin-right: 0.75rem;
-  }
-
   &__review {
     background-color: $white;
     padding: 1.5rem;
