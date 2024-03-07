@@ -40,7 +40,7 @@
             </div>
             <div class="card__statistic-item">
               <div
-                v-if="ratingCurrent === 5 || !ratingCurrent"
+                v-if="ratingValue === 5 || !ratingValue"
                 class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_5_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_5_stars_count}`"
@@ -58,7 +58,7 @@
             </div>
             <div class="card__statistic-cancel">
               <Icon
-                v-if="ratingCurrent === 5"
+                v-if="ratingValue === 5"
                 name="close"
                 color="black"
                 :size="[16, 16]"
@@ -73,7 +73,7 @@
             </div>
             <div class="card__statistic-item">
               <div
-                v-if="ratingCurrent === 4 || !ratingCurrent"
+                v-if="ratingValue === 4 || !ratingValue"
                 class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_4_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_4_stars_count}`"
@@ -91,7 +91,7 @@
             </div>
             <div class="card__statistic-cancel">
               <Icon
-                v-if="ratingCurrent === 4"
+                v-if="ratingValue === 4"
                 name="close"
                 color="black"
                 :size="[16, 16]"
@@ -106,7 +106,7 @@
             </div>
             <div class="card__statistic-item">
               <div
-                v-if="ratingCurrent === 3 || !ratingCurrent"
+                v-if="ratingValue === 3 || !ratingValue"
                 class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_3_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_3_stars_count}`"
@@ -124,7 +124,7 @@
             </div>
             <div class="card__statistic-cancel">
               <Icon
-                v-if="ratingCurrent === 3"
+                v-if="ratingValue === 3"
                 name="close"
                 color="black"
                 :size="[16, 16]"
@@ -139,7 +139,7 @@
             </div>
             <div class="card__statistic-item">
               <div
-                v-if="ratingCurrent === 2 || !ratingCurrent"
+                v-if="ratingValue === 2 || !ratingValue"
                 class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_2_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_2_stars_count}`"
@@ -157,7 +157,7 @@
             </div>
             <div class="card__statistic-cancel">
               <Icon
-                v-if="ratingCurrent === 2"
+                v-if="ratingValue === 2"
                 name="close"
                 color="black"
                 :size="[16, 16]"
@@ -172,7 +172,7 @@
             </div>
             <div class="card__statistic-item">
               <div
-                v-if="ratingCurrent === 1 || !ratingCurrent"
+                v-if="ratingValue === 1 || !ratingValue"
                 class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_1_star_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_1_star_count}`"
@@ -192,7 +192,7 @@
               class="card__statistic-cancel"
             >
               <Icon
-                v-if="ratingCurrent === 1"
+                v-if="ratingValue === 1"
                 name="close"
                 color="black"
                 :size="[16, 16]"
@@ -315,6 +315,11 @@ import type ISchool from '@/interfaces/stores/school/school';
 import schoolStore from '@/stores/school';
 
 const props = defineProps({
+  rating: {
+    type: Number,
+    required: false,
+    default: null,
+  },
   school: {
     type: Object as PropType<ISchoolLink>,
     required: true,
@@ -324,11 +329,6 @@ const props = defineProps({
     required: false,
     default: true,
   },
-  rating: {
-    type: Number,
-    required: false,
-    default: null,
-  },
 });
 
 const {
@@ -336,7 +336,17 @@ const {
 } = toRefs(props);
 
 const emit = defineEmits({
-  filter: (_: number | null) => true,
+  'update:rating': (_: number | null) => true,
+});
+
+const ratingValue = ref<number | null>(rating.value);
+
+watch(ratingValue, () => {
+  emit('update:rating', ratingValue.value);
+});
+
+watch(rating, () => {
+  ratingValue.value = rating.value;
 });
 
 const conditions = {
@@ -371,25 +381,12 @@ const otherSchools = ref<Array<ISchool> | null>(
   )?.slice(0, 4) || null,
 );
 
-const ratingCurrent = ref<number | null>(rating.value);
-
-watch(rating, () => {
-  ratingCurrent.value = rating.value;
-});
-
 const onClickFilter = (rtg: number): void => {
-  if (rtg !== ratingCurrent.value) {
-    ratingCurrent.value = rtg;
+  if (rtg !== ratingValue.value) {
+    ratingValue.value = rtg;
   } else {
-    ratingCurrent.value = null;
+    ratingValue.value = null;
   }
-
-  emit('filter', ratingCurrent.value);
-};
-
-const onClickCancelFilter = (): void => {
-  ratingCurrent.value = null;
-  emit('filter', null);
 };
 
 const getWidthStatsBar = (

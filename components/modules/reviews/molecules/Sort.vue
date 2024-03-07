@@ -1,13 +1,13 @@
 <template>
   <div class="sort">
     <div
-      :class="`sort__item ${sorts.created_at ? 'sort__item--active' : ''}`"
-      @click="onSort('created_at', sorts.created_at === 'ASC' ? 'DESC' : 'ASC')"
-      @keyup="onSort('created_at', sorts.created_at === 'ASC' ? 'DESC' : 'ASC')"
+      :class="`sort__item ${sortsValue.created_at ? 'sort__item--active' : ''}`"
+      @click="onSort('created_at', sortsValue.created_at === 'ASC' ? 'DESC' : 'ASC')"
+      @keyup="onSort('created_at', sortsValue.created_at === 'ASC' ? 'DESC' : 'ASC')"
     >
       <Icon
-        v-if="sorts.created_at"
-        :name="sorts.created_at === 'ASC' ? 'sort-asc' : 'sort-desc'"
+        v-if="sortsValue.created_at"
+        :name="sortsValue.created_at === 'ASC' ? 'sort-asc' : 'sort-desc'"
         :size="[16, 16]"
         color="black"
         class="sort__icon"
@@ -17,13 +17,13 @@
       </div>
     </div>
     <div
-      :class="`sort__item ${sorts.rating ? 'sort__item--active' : ''}`"
-      @click="onSort('rating', sorts.rating === 'ASC' ? 'DESC' : 'ASC')"
-      @keyup="onSort('rating', sorts.rating === 'ASC' ? 'DESC' : 'ASC')"
+      :class="`sort__item ${sortsValue.rating ? 'sort__item--active' : ''}`"
+      @click="onSort('rating', sortsValue.rating === 'ASC' ? 'DESC' : 'ASC')"
+      @keyup="onSort('rating', sortsValue.rating === 'ASC' ? 'DESC' : 'ASC')"
     >
       <Icon
-        v-if="sorts.rating"
-        :name="sorts.rating === 'ASC' ? 'sort-asc' : 'sort-desc'"
+        v-if="sortsValue.rating"
+        :name="sortsValue.rating === 'ASC' ? 'sort-asc' : 'sort-desc'"
         :size="[16, 16]"
         color="black"
         class="sort__icon"
@@ -50,35 +50,34 @@ import type { TOrder } from '@/types/order';
 const props = defineProps({
   sorts: {
     type: Object as PropType<ISorts>,
-    required: false,
-    default: null,
+    required: true,
   },
 });
 
 const emit = defineEmits({
-  'update:sort': (_: ISorts | null) => true,
+  'update:sort': (_: ISorts) => true,
 });
 
 const {
-  sort,
+  sorts,
 } = toRefs(props);
 
-const sortValue = ref<ISorts | null>(sort.value);
+const sortsValue = ref<ISorts>(sorts.value);
 
-watch(sortValue, () => {
-  emit('update:sort', sortValue.value);
+watch(sortsValue, () => {
+  emit('update:sort', sortsValue.value);
 }, {
   deep: true,
 });
 
-watch(sort, () => {
-  sortValue.value = sort.value;
+watch(sorts, () => {
+  sortsValue.value = sorts.value;
 }, {
   deep: true,
 });
 
 const onSort = async (field: string, order: TOrder): Promise<void> => {
-  sortValue.value = {};
-  sortValue.value[field] = order;
+  sortsValue.value = {};
+  sortsValue.value[field] = order;
 };
 </script>

@@ -193,7 +193,7 @@ const reviews = ref<Array<IReview>>();
 const loading = ref(false);
 const ratingCurrent = ref(ratingQuery || null);
 const stopScrollLoader = ref(false);
-const sort = ref<ISort>(getDefaultSort(route.query.sort as string));
+const sorts = ref<ISorts>(getDefaultSort(route.query.sort as string));
 
 const {
   link,
@@ -206,12 +206,12 @@ const setUrlQuery = (): void => {
     queries.push(`page=${currentPage.value}`);
   }
 
-  if (sort.value) {
-    if (sort.value.sortBy === 'created_at' && sort.value.sortOrder === 'ASC') {
+  if (sorts.value) {
+    if (sorts.value.created_at && sorts.value.created_at === 'ASC') {
       queries.push('sort=date_asc');
-    } else if (sort.value.sortBy === 'rating' && sort.value.sortOrder === 'ASC') {
+    } else if (sorts.value.rating && sorts.value.rating === 'ASC') {
       queries.push('sort=rating_asc');
-    } else if (sort.value.sortBy === 'rating' && sort.value.sortOrder === 'DESC') {
+    } else if (sorts.value.rating && sorts.value.rating === 'DESC') {
       queries.push('sort=rating_desc');
     }
   }
@@ -259,7 +259,7 @@ const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | nu
       link as string,
       (currentPage.value - 1) * limit,
       limit,
-      sort.value,
+      sorts.value,
       ratingCurrent.value,
     );
   } catch (error: any) {
@@ -297,7 +297,7 @@ const reloadReviews = async (): Promise<void> => {
   loading.value = false;
 };
 
-watch(sort, async () => {
+watch(sorts, async () => {
   await reloadReviews();
 });
 
@@ -393,59 +393,57 @@ useHead({
   ],
 });
 
-const reviewsJsonld = computed<any>((): any => {
-  return Object.values(reviews.value || []).map<any>(
-    (review: IReview): any => {
-      let desc = '';
+const reviewsJsonld = computed<any>((): any => Object.values(reviews.value || []).map<any>(
+  (review: IReview): any => {
+    let desc = '';
 
-      if (review.review) {
-        desc += review.review;
+    if (review.review) {
+      desc += review.review;
+    }
+
+    if (review.advantages) {
+      if (desc) {
+        desc += '\n';
       }
 
-      if (review.advantages) {
-        if (desc) {
-          desc += '\n';
-        }
+      desc += `Достоинства: ${review.advantages}`;
+    }
 
-        desc += `Достоинства: ${review.advantages}`;
+    if (review.disadvantages) {
+      if (desc) {
+        desc += '\n';
       }
 
-      if (review.disadvantages) {
-        if (desc) {
-          desc += '\n';
-        }
+      desc += `Недостатки: ${review.disadvantages}`;
+    }
 
-        desc += `Недостатки: ${review.disadvantages}`;
-      }
+    const result: any = {
+      '@context': 'https://schema.org',
+      '@type': 'Review',
+      name: review.title,
+      description: desc,
+      itemReviewed: {
+        '@type': 'MediaObject',
+        name: schoolItem.value?.name,
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    };
 
-      const result: any = {
-        '@context': 'https://schema.org',
-        '@type': 'Review',
-        name: review.title,
-        description: desc,
-        itemReviewed: {
-          '@type': 'MediaObject',
-          name: schoolItem.value?.name,
-        },
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: review.rating,
-          bestRating: 5,
-          worstRating: 1,
-        },
+    if (review.name) {
+      result.author = {
+        '@type': 'Person',
+        name: review.name,
       };
+    }
 
-      if (review.name) {
-        result.author = {
-          '@type': 'Person',
-          name: review.name,
-        };
-      }
-
-      return result;
-    },
-  );
-});
+    return result;
+  },
+));
 
 reviewsJsonld.value.forEach((reviewJsonld: any) => {
   useJsonld(reviewJsonld);
