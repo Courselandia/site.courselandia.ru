@@ -1,0 +1,19 @@
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  @media all and (max-width: 768px) {
+    margin-bottom: 0;
+  }
+
+  &__value {
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 2.9rem;
+  }
+
+  &__star {
+    margin-left: 0.5rem;
+  }
+}
