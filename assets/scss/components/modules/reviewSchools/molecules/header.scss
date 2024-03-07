@@ -1,0 +1,21 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.header {
+  display: flex;
+  border-bottom: 1px solid $grey2;
+  padding-bottom: 0.5rem;
+
+  @media all and (max-width: 1200px) {
+    display: none;
+  }
+
+  &__th {
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  &__sortable {
+    cursor: pointer;
+    margin-right: 0.25rem;
+  }
+}

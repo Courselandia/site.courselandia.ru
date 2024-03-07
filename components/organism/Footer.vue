@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer">
-    <div class="content">
+  <div class="footer">
+    <footer class="content">
       <div class="footer__sides">
         <div class="footer__side footer__side--left">
           <div class="footer__logo">
@@ -45,8 +45,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -97,6 +97,6 @@ const menuInfo = ref<IMenu[]>([
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/organism/footer.scss";
 </style>

@@ -1,23 +1,6 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
-.reviews {
-  &__header {
-    display: flex;
-    border-bottom: 1px solid $grey2;
-    padding-bottom: 0.5rem;
-
-    @media all and (max-width: 1200px) {
-      display: none;
-    }
-
-    .reviews {
-      &__th {
-        font-weight: 700;
-        font-size: 0.875rem;
-      }
-    }
-  }
-
+.school {
   &__group {
     display: flex;
     width: 50%;
@@ -123,11 +106,6 @@
   &__th {
     display: flex;
     align-items: center;
-  }
-
-  &__sortable {
-    cursor: pointer;
-    margin-right: 0.25rem;
   }
 
   &__item {

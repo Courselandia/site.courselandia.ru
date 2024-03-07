@@ -99,6 +99,6 @@ const onClickFavorite = (): void => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/organism/header.scss";
 </style>

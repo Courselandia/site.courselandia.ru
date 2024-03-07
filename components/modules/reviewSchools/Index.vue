@@ -4,10 +4,10 @@
       Отзывы об онлайн школах
     </h1>
 
-    <Reviews />
+    <ReviewSchools />
   </div>
 </template>
 
 <script setup lang="ts">
-import Reviews from '@/components/modules/reviews/organism/Reviews.vue';
+import ReviewSchools from '@/components/modules/reviewSchools/organism/ReviewSchools.vue';
 </script>

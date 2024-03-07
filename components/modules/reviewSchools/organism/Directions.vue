@@ -62,7 +62,7 @@ import {
 } from 'vue';
 import { useRoute } from 'vue-router';
 
-import Direction from '@/components/modules/reviews/atoms/Direction.vue';
+import Direction from '@/components/modules/reviewSchools/atoms/Direction.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import EDirection from '@/enums/direction';
 
@@ -102,5 +102,5 @@ const onClick = (selected: EDirection | null): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/modules/reviews/organism/directions";
+@import "@/assets/scss/components/modules/reviewSchools/organism/directions";
 </style>

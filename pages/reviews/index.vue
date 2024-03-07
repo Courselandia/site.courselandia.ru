@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import Reviews from '@/components/modules/reviews/Index.vue';
+import Reviews from '@/components/modules/reviewSchools/Index.vue';
 
 /*
 useRouteCache((helper: any) => {
