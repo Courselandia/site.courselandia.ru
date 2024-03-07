@@ -1,9 +1,9 @@
 <template>
-  <SchoolReview />
+  <Reviews />
 </template>
 
 <script lang="ts" setup>
-import SchoolReview from '@/components/organism/SchoolReview.vue';
+import Reviews from '@/components/modules/reviews/Index.vue';
 
 definePageMeta({
   middleware: [

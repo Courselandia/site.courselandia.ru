@@ -1,29 +1,29 @@
 <template>
   <div
-    :class="`school-review-card ${scroll ? 'school-review-card--scroll' : ''}`"
+    :class="`card ${scroll ? 'card--scroll' : ''}`"
   >
     <div
-      id="school-review-card"
-      :class="`school-review-card__box ${scroll ? 'school-review-card__box--scroll' : ''}`"
+      id="card"
+      :class="`card__box ${scroll ? 'card__box--scroll' : ''}`"
     >
-      <div class="school-review-card__row school-review-card__row--horizontal school-review-card__row--line">
-        <div class="school-review-card__content-logo">
+      <div class="card__row card__row--horizontal card__row--line">
+        <div class="card__content-logo">
           <LazyImage
             v-if="school.image_logo_id"
             :src="school.image_logo_id.path"
             :alt="school.name"
             :title="school.name"
-            class="school-review-card__logo"
+            class="card__logo"
           />
         </div>
-        <div class="school-review-card__amount-review">
+        <div class="card__amount-review">
           <Icon
             name="message"
             :size="[26, 26]"
             color="black"
-            class="school-review-card__amount-review-icon"
+            class="card__amount-review-icon"
           />
-          <div class="school-review-card__amount-review-label">
+          <div class="card__amount-review-label">
             <Plural
               v-if="school.reviews_count"
               :number="school.reviews_count"
@@ -32,16 +32,16 @@
           </div>
         </div>
       </div>
-      <div class="school-review-card__row school-review-card__row--horizontal school-review-card__row--line">
-        <div class="school-review-card__content-statistic">
-          <div class="school-review-card__statistic">
-            <div class="school-review-card__statistic-amount">
+      <div class="card__row card__row--horizontal card__row--line">
+        <div class="card__content-statistic">
+          <div class="card__statistic">
+            <div class="card__statistic-amount">
               5
             </div>
-            <div class="school-review-card__statistic-item">
+            <div class="card__statistic-item">
               <div
                 v-if="ratingCurrent === 5 || !ratingCurrent"
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_5_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_5_stars_count}`"
                 @click="onClickFilter(5)"
@@ -49,32 +49,32 @@
               />
               <div
                 v-else
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
+                class="card__statistic-bar card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_5_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_5_stars_count}`"
                 @click="onClickFilter(5)"
                 @keyup="onClickFilter(5)"
               />
             </div>
-            <div class="school-review-card__statistic-cancel">
+            <div class="card__statistic-cancel">
               <Icon
                 v-if="ratingCurrent === 5"
                 name="close"
                 color="black"
                 :size="[16, 16]"
-                class="school-review-card__statistic-cancel-icon"
+                class="card__statistic-cancel-icon"
                 @click="onClickCancelFilter"
               />
             </div>
           </div>
-          <div class="school-review-card__statistic">
-            <div class="school-review-card__statistic-amount">
+          <div class="card__statistic">
+            <div class="card__statistic-amount">
               4
             </div>
-            <div class="school-review-card__statistic-item">
+            <div class="card__statistic-item">
               <div
                 v-if="ratingCurrent === 4 || !ratingCurrent"
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_4_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_4_stars_count}`"
                 @click="onClickFilter(4)"
@@ -82,32 +82,32 @@
               />
               <div
                 v-else
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
+                class="card__statistic-bar card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_4_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_4_stars_count}`"
                 @click="onClickFilter(4)"
                 @keyup="onClickFilter(4)"
               />
             </div>
-            <div class="school-review-card__statistic-cancel">
+            <div class="card__statistic-cancel">
               <Icon
                 v-if="ratingCurrent === 4"
                 name="close"
                 color="black"
                 :size="[16, 16]"
-                class="school-review-card__statistic-cancel-icon"
+                class="card__statistic-cancel-icon"
                 @click="onClickCancelFilter"
               />
             </div>
           </div>
-          <div class="school-review-card__statistic">
-            <div class="school-review-card__statistic-amount">
+          <div class="card__statistic">
+            <div class="card__statistic-amount">
               3
             </div>
-            <div class="school-review-card__statistic-item">
+            <div class="card__statistic-item">
               <div
                 v-if="ratingCurrent === 3 || !ratingCurrent"
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_3_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_3_stars_count}`"
                 @click="onClickFilter(3)"
@@ -115,32 +115,32 @@
               />
               <div
                 v-else
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
+                class="card__statistic-bar card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_3_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_3_stars_count}`"
                 @click="onClickFilter(3)"
                 @keyup="onClickFilter(3)"
               />
             </div>
-            <div class="school-review-card__statistic-cancel">
+            <div class="card__statistic-cancel">
               <Icon
                 v-if="ratingCurrent === 3"
                 name="close"
                 color="black"
                 :size="[16, 16]"
-                class="school-review-card__statistic-cancel-icon"
+                class="card__statistic-cancel-icon"
                 @click="onClickCancelFilter"
               />
             </div>
           </div>
-          <div class="school-review-card__statistic">
-            <div class="school-review-card__statistic-amount">
+          <div class="card__statistic">
+            <div class="card__statistic-amount">
               2
             </div>
-            <div class="school-review-card__statistic-item">
+            <div class="card__statistic-item">
               <div
                 v-if="ratingCurrent === 2 || !ratingCurrent"
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_2_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_2_stars_count}`"
                 @click="onClickFilter(2)"
@@ -148,32 +148,32 @@
               />
               <div
                 v-else
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
+                class="card__statistic-bar card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_2_stars_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_2_stars_count}`"
                 @click="onClickFilter(2)"
                 @keyup="onClickFilter(2)"
               />
             </div>
-            <div class="school-review-card__statistic-cancel">
+            <div class="card__statistic-cancel">
               <Icon
                 v-if="ratingCurrent === 2"
                 name="close"
                 color="black"
                 :size="[16, 16]"
-                class="school-review-card__statistic-cancel-icon"
+                class="card__statistic-cancel-icon"
                 @click="onClickCancelFilter"
               />
             </div>
           </div>
-          <div class="school-review-card__statistic">
-            <div class="school-review-card__statistic-amount">
+          <div class="card__statistic">
+            <div class="card__statistic-amount">
               1
             </div>
-            <div class="school-review-card__statistic-item">
+            <div class="card__statistic-item">
               <div
                 v-if="ratingCurrent === 1 || !ratingCurrent"
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--full"
+                class="card__statistic-bar card__statistic-bar--full"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_1_star_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_1_star_count}`"
                 @click="onClickFilter(1)"
@@ -181,7 +181,7 @@
               />
               <div
                 v-else
-                class="school-review-card__statistic-bar school-review-card__statistic-bar--empty"
+                class="card__statistic-bar card__statistic-bar--empty"
                 :style="{ width: getWidthStatsBar(school.reviews_count, school.reviews_1_star_count) + 'px' }"
                 :title="`Отзывов: ${school.reviews_1_star_count}`"
                 @click="onClickFilter(1)"
@@ -189,49 +189,49 @@
               />
             </div>
             <div
-              class="school-review-card__statistic-cancel"
+              class="card__statistic-cancel"
             >
               <Icon
                 v-if="ratingCurrent === 1"
                 name="close"
                 color="black"
                 :size="[16, 16]"
-                class="school-review-card__statistic-cancel-icon"
+                class="card__statistic-cancel-icon"
                 @click="onClickCancelFilter"
               />
             </div>
           </div>
         </div>
-        <div class="school-review-card__content-rating">
-          <div class="school-review-card__content-rating-number">
+        <div class="card__content-rating">
+          <div class="card__content-rating-number">
             {{ Math.round(school.rating * 100) / 100 }}
           </div>
           <Icon
-            class="school-review-card__content-rating-icon"
+            class="card__content-rating-icon"
             name="star"
             :size="[32, 32]"
             color="blue2"
           />
         </div>
       </div>
-      <div class="school-review-card__row school-review-card__row--line">
-        <div class="school-review-card__block-statistics">
-          <div class="school-review-card__block-statistic">
+      <div class="card__row card__row--line">
+        <div class="card__block-statistics">
+          <div class="card__block-statistic">
             <Icon
               name="video"
               :size="[24, 24]"
               color="black"
-              class="school-review-card__block-statistic-icon"
+              class="card__block-statistic-icon"
             />
-            <div class="school-review-card__block-statistic-label">
+            <div class="card__block-statistic-label">
               Курсов: <b>{{ school.amount_courses.all }}</b>
             </div>
           </div>
         </div>
       </div>
-      <div class="school-review-card__row">
-        <div class="school-review-card__actions">
-          <div class="school-review-card__action">
+      <div class="card__row">
+        <div class="card__actions">
+          <div class="card__action">
             <Button
               :to="school.site as string"
               link="link"
@@ -242,7 +242,7 @@
               Перейти на сайт
             </Button>
           </div>
-          <div class="school-review-card__action">
+          <div class="card__action">
             <Button
               :to="`/courses/school/${school.link}`"
               wide
@@ -255,30 +255,30 @@
       </div>
       <div
         v-if="otherSchools?.length"
-        class="school-review-card__others">
-        <div class="school-review-card__others-label">
+        class="card__others">
+        <div class="card__others-label">
           Отзывы о других школах
         </div>
-        <div class="school-review-card__others-schools">
+        <div class="card__others-schools">
           <div
             v-for="(otherSchool, index) in otherSchools"
             :key="index"
-            class="school-review-card__others-school"
+            class="card__others-school"
           >
-            <div class="school-review-card__others-school-rating">
+            <div class="card__others-school-rating">
               {{ Math.round(school.rating * 100) / 100 }}
             </div>
-            <div class="school-review-card__others-school-icon">
+            <div class="card__others-school-icon">
               <Icon
                 name="star"
                 :size="[22, 22]"
                 color="blue2"
               />
             </div>
-            <div class="school-review-card__others-school-name">
+            <div class="card__others-school-name">
               {{ otherSchool.name }}
             </div>
-            <div class="school-review-card__others-school-reviews">
+            <div class="card__others-school-reviews">
               <nuxt-link
                 :to="`/reviews/${otherSchool.link}`"
                 class="link link--no-line"
@@ -398,6 +398,6 @@ const getWidthStatsBar = (
 ): number => Math.round((forParticularStars * 100) / total);
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/schoolReviewCard.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/reviews/molecules/card";
 </style>

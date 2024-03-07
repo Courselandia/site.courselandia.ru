@@ -52,13 +52,12 @@ import type TSortOrder from '@/types/sortOrder';
 const props = defineProps({
   sort: {
     type: Object as PropType<ISort>,
-    required: false,
-    default: null,
+    required: true,
   },
 });
 
 const emit = defineEmits({
-  'update:sort': (_: ISort | null) => true,
+  'update:sort': (_: ISort) => true,
 });
 
 const {

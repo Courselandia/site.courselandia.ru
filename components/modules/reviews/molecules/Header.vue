@@ -1,13 +1,13 @@
 <template>
-  <div class="school-review-header">
-    <div class="school-review-header__side school-review-header__side--left">
+  <div class="header">
+    <div class="header__side header__side--left">
       <h1 class="title title--1">
         Отзывы о школе {{ school.name }}
       </h1>
 
       <Reducer
         v-if="school.text"
-        class="school-review-header__description"
+        class="header__description"
       >
         <span
           v-html="school.text"
@@ -31,6 +31,6 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/schoolReviewHeader.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/reviews/molecules/header";
 </style>
