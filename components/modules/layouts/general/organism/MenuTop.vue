@@ -128,6 +128,6 @@ const onMouseLeave = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/organism/menuTop.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/layouts/general/organism/menuTop";
 </style>

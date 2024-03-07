@@ -19,5 +19,5 @@ import TheBest from '@/components/modules/home/organism/TheBest.vue';
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/modules/index";
+@import "@/assets/scss/components/modules/home/index";
 </style>

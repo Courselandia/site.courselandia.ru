@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
-import type IMenu from '@/interfaces/menu';
+import type IMenu from '~/interfaces/menu';
 
 const props = defineProps({
   items: {
@@ -29,5 +29,5 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/menuBottom.scss";
+@import "@/assets/scss/components/modules/layouts/general/atoms/menuBottom";
 </style>

@@ -39,9 +39,9 @@ import {
 } from 'vue';
 import { useRoute } from 'vue-router';
 
-import Dropdowns from '@/components/organism/Dropdowns.vue';
-import Footer from '@/components/organism/Footer.vue';
-import Header from '@/components/organism/Header.vue';
+import Dropdowns from '@/components/modules/layouts/general/organism/Dropdowns.vue';
+import Footer from '@/components/modules/layouts/general/organism/Footer.vue';
+import Header from '@/components/modules/layouts/general/organism/Header.vue';
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -76,6 +76,10 @@ watch(route, () => {
 
 setActive();
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/components/organism/page";
+</style>
 
 <style lang="scss">
 @import "@/assets/scss/layouts/default.scss";

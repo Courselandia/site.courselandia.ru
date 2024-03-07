@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import type IMenu from '@/interfaces/menu';
+import type IMenu from '~/interfaces/menu';
 
 const props = defineProps({
   schools: {
@@ -36,5 +36,5 @@ const onClick = (): void => {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/molecules/listSchools.scss";
+@import "@/assets/scss/components/modules/layouts/general/molecules/listSchools";
 </style>

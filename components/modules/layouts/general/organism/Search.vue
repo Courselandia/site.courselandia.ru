@@ -201,6 +201,6 @@ const onClickResult = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/organism/search.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/layouts/general/organism/search";
 </style>

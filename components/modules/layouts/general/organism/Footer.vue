@@ -55,8 +55,8 @@ import {
   ref,
 } from 'vue';
 
-import Logo from '@/components/atoms/Logo.vue';
-import MenuBottom from '@/components/atoms/MenuBottom.vue';
+import Logo from '@/components/modules/layouts/general/atoms/Logo.vue';
+import MenuBottom from '@/components/modules/layouts/general/atoms/MenuBottom.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import type IMenu from '@/interfaces/menu';
@@ -98,5 +98,5 @@ const menuInfo = ref<IMenu[]>([
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/organism/footer.scss";
+@import "@/assets/scss/components/modules/layouts/general/organism/footer";
 </style>

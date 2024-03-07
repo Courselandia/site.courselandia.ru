@@ -207,9 +207,9 @@ import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Direction from '@/components/modules/home/atoms/Direction.vue';
 import Directions from '@/components/modules/home/molecules/Directions.vue';
-import AlphabeticList from '@/components/molecules/AlphabeticList.vue';
-import ListSchoolReviews from '@/components/molecules/ListSchoolReviews.vue';
-import ListSchools from '@/components/molecules/ListSchools.vue';
+import AlphabeticList from '@/components/modules/layouts/general/molecules/AlphabeticList.vue';
+import ListSchoolReviews from '@/components/modules/layouts/general/molecules/ListSchoolReviews.vue';
+import ListSchools from '@/components/modules/layouts/general/molecules/ListSchools.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
@@ -280,5 +280,5 @@ const onClick = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/organism/dropdowns.scss";
+@import "@/assets/scss/components/modules/layouts/general/organism/dropdowns";
 </style>

@@ -45,13 +45,13 @@ import {
   watch,
 } from 'vue';
 
-import Logo from '@/components/atoms/Logo.vue';
-import SlideMenu from '@/components/molecules/SlideMenu.vue';
-import Favorite from '@/components/organism/Favorite.vue';
-import MenuTop from '@/components/organism/MenuTop.vue';
-import MenuTopMobile from '@/components/organism/MenuTopMobile.vue';
-import Search from '@/components/organism/Search.vue';
-import SearchMobile from '@/components/organism/SearchMobile.vue';
+import Logo from '@/components/modules/layouts/general/atoms/Logo.vue';
+import SlideMenu from '@/components/modules/layouts/general/molecules/SlideMenu.vue';
+import Favorite from '@/components/modules/layouts/general/organism/Favorite.vue';
+import MenuTop from '@/components/modules/layouts/general/organism/MenuTop.vue';
+import MenuTopMobile from '@/components/modules/layouts/general/organism/MenuTopMobile.vue';
+import Search from '@/components/modules/layouts/general/organism/Search.vue';
+import SearchMobile from '@/components/modules/layouts/general/organism/SearchMobile.vue';
 
 const props = defineProps({
   menu: {
@@ -100,5 +100,5 @@ const onClickFavorite = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/organism/header.scss";
+@import "@/assets/scss/components/modules/layouts/general/organism/header";
 </style>

@@ -38,9 +38,9 @@ import {
 } from 'vue';
 
 import Error from '@/components/atoms/Error.vue';
-import Dropdowns from '@/components/organism/Dropdowns.vue';
-import Footer from '@/components/organism/Footer.vue';
-import Header from '@/components/organism/Header.vue';
+import Dropdowns from '~/components/modules/layouts/general/organism/Dropdowns.vue';
+import Footer from '~/components/modules/layouts/general/organism/Footer.vue';
+import Header from '~/components/modules/layouts/general/organism/Header.vue';
 import direction from '@/stores/direction';
 import school from '@/stores/school';
 

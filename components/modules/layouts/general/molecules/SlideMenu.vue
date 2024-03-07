@@ -76,6 +76,6 @@ onDeactivated(() => {
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/slideMenu.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/layouts/general/molecules/slideMenu";
 </style>

@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
 import Icon from '@/components/atoms/Icon.vue';
-import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type IListSchoolReview from '~/interfaces/components/molecules/listSchoolReview';
 
 const props = defineProps({
   schools: {
@@ -61,6 +61,6 @@ const onClick = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/listSchoolReviews.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/layouts/general/molecules/listSchoolReviews";
 </style>

@@ -45,6 +45,6 @@ const onMouseLeave = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/organism/favorite.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/layouts/general/organism/favorite";
 </style>

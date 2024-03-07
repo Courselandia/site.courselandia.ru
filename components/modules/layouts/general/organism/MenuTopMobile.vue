@@ -283,6 +283,6 @@ const onClickLink = (link: string): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/organism/menuTopMobile.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/layouts/general/organism/menuTopMobile";
 </style>

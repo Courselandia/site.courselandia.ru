@@ -30,5 +30,5 @@ const nameClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/logo.scss";
+@import "@/assets/scss/components/modules/layouts/general/atoms/logo";
 </style>

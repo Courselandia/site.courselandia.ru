@@ -5,11 +5,9 @@
 <script lang="ts" setup>
 import Reviews from '@/components/modules/reviewSchools/Index.vue';
 
-/*
 useRouteCache((helper: any) => {
   helper.setMaxAge(3600 * 24).setCacheable().addTags(['reviews']);
 });
- */
 
 const config = useRuntimeConfig();
 const title = 'Реальные отзывы об онлайн-школах и их курсах';

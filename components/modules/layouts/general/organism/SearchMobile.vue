@@ -197,6 +197,6 @@ onDeactivated(() => {
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/organism/searchMobile.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/layouts/general/organism/searchMobile";
 </style>

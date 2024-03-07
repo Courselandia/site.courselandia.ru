@@ -187,13 +187,13 @@ export default defineNuxtConfig({
   },
   multiCache: {
     component: {
-      enabled: true,
+      enabled: process.env.NODE_ENV !== 'development',
     },
     route: {
-      enabled: true,
+      enabled: process.env.NODE_ENV !== 'development',
     },
     api: {
-      enabled: true,
+      enabled: process.env.NODE_ENV !== 'development',
       prefix: '/__nuxt_multi_cache',
       authorization: process.env.CACHE_TOKEN || '',
       cacheTagInvalidationDelay: 60000,
