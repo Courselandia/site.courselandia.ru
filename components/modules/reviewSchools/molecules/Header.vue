@@ -44,11 +44,9 @@ import {
   toRefs,
   watch,
 } from 'vue';
-import { useRoute } from 'vue-router';
 
 import SortDirection from '@/components/atoms/SortDirection.vue';
 import type ISort from '@/interfaces/sort';
-import type { TOrder } from '@/types/order';
 import type TSortOrder from '@/types/sortOrder';
 
 const props = defineProps({
@@ -67,19 +65,7 @@ const {
   sort,
 } = toRefs(props);
 
-const sortDefault: ISort = {
-  sortBy: 'rating',
-  sortOrder: 'DESC',
-};
-
-const route = useRoute();
-const sortByCurrent = route.query.sortBy as string;
-const sortOrderCurrent = route.query.sortOrder as string;
-
-const sortValue = ref<ISort>({
-  sortBy: sortByCurrent || sortDefault.sortBy,
-  sortOrder: sortOrderCurrent as TOrder || sortDefault.sortOrder,
-});
+const sortValue = ref<ISort>(sort.value);
 
 watch(sortValue, () => {
   emit('update:sort', sortValue.value);

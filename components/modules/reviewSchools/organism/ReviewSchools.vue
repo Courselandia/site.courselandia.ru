@@ -15,19 +15,29 @@ import {
   ref,
   watch,
 } from 'vue';
+import { useRoute } from 'vue-router';
 
 import Directions from '@/components/modules/reviewSchools/organism/Directions.vue';
 import List from '@/components/modules/reviewSchools/organism/List.vue';
 import EDirection from '@/enums/direction';
 import type ISort from '@/interfaces/sort';
+import type { TOrder } from '@/types/order';
 
-const direction = ref<EDirection | null>();
-const sort = ref<ISort>();
+const route = useRoute();
+const directionCurrent = route.query.direction as string;
+const sortByCurrent = route.query.sortBy as string;
+const sortOrderCurrent = route.query.sortOrder as string;
 
 const sortDefault: ISort = {
   sortBy: 'rating',
   sortOrder: 'DESC',
 };
+
+const direction = ref<EDirection | null>(Number(directionCurrent) as unknown as EDirection || null);
+const sort = ref<ISort>({
+  sortBy: sortByCurrent || sortDefault.sortBy,
+  sortOrder: sortOrderCurrent as TOrder || sortDefault.sortOrder,
+});
 
 const toHistory = (): void => {
   let url = '/reviews';

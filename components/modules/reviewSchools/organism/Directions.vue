@@ -60,7 +60,6 @@ import {
   toRefs,
   watch,
 } from 'vue';
-import { useRoute } from 'vue-router';
 
 import Direction from '@/components/modules/reviewSchools/atoms/Direction.vue';
 import Tags from '@/components/molecules/Tags.vue';
@@ -82,11 +81,7 @@ const {
   direction,
 } = toRefs(props);
 
-const route = useRoute();
-const directionCurrent = route.query.direction as string;
-const directionValue = ref<EDirection | null>(
-  Number(directionCurrent) as unknown as EDirection || null,
-);
+const directionValue = ref<EDirection | null>(direction.value);
 
 watch(directionValue, () => {
   emit('update:direction', directionValue.value);
