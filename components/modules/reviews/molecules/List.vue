@@ -188,7 +188,7 @@ const setScroll = (): void => {
     const screenHeight = window.screen.availHeight;
     const lineBottom = height + top - screenHeight + gapHeight;
 
-    scroll.value = window.scrollY <= lineBottom;
+    scrollValue.value = window.scrollY <= lineBottom;
   }
 };
 
