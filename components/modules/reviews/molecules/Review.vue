@@ -1,5 +1,7 @@
 <template>
-  <div class="review"
+  <div
+    v-if="review"
+    class="review"
   >
     <Rate
       :value="review.rating"
@@ -71,8 +73,32 @@
 
 <script setup lang="ts">
 import dayjs from 'dayjs';
+import {
+  type PropType,
+  toRefs,
+} from 'vue';
 
 import Animal from '@/components/atoms/Animal.vue';
 import Rate from '@/components/atoms/Rate.vue';
 import { rnToBr } from '@/helpers/format';
+import type IReview from '@/interfaces/stores/review/review';
+
+const props = defineProps({
+  review: {
+    type: Object as PropType<IReview>,
+    required: true,
+  },
+});
+
+const { review } = toRefs(props);
+
+const getDomain = (url: string): string => {
+  const urlObj = new URL(url);
+
+  return urlObj.host;
+};
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/reviews/molecules/review";
+</style>

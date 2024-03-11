@@ -12,11 +12,8 @@
         </div>
       </Bubbles>
     </div>
-    <div
-      ref="contentRef"
-      class="reviews__content content"
-    >
-      <div ref="cardRef">
+    <div class="reviews__content content">
+      <div>
         <Card
           v-model:rating="rating"
           :school="schoolItem"
@@ -27,18 +24,14 @@
         <Sort
           v-model:sorts="sorts"
         />
-        <ScrollLoader
-          :stop="stopScrollLoader"
-          :distance="1000"
-          @load="onLoadScrolling"
-        >
-          <Loader
-            :active="loading"
-            color="white-transparency"
-          >
-            <List />
-          </Loader>
-        </ScrollLoader>
+        <List
+          v-model:page="page"
+          v-model:scroll="scroll"
+          :link="link"
+          :school-name="schoolItem.name"
+          :sorts="sorts"
+          :rating="rating"
+        />
       </div>
     </div>
   </div>
@@ -46,17 +39,12 @@
 
 <script lang="ts" setup>
 import {
-  computed,
-  onMounted,
   ref,
   watch,
 } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { apiReadReviews } from '@/api/review';
 import Bubbles from '@/components/atoms/Bubbles.vue';
-import Loader from '@/components/atoms/Loader.vue';
-import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Card from '@/components/modules/reviews/molecules/Card.vue';
 import Header from '@/components/modules/reviews/molecules/Header.vue';
 import List from '@/components/modules/reviews/molecules/List.vue';
@@ -66,10 +54,8 @@ import {
   stripTags,
 } from '@/helpers/format';
 import plural from '@/helpers/plural';
-import type { IResponseItems } from '@/interfaces/response';
 import type ISorts from '@/interfaces/sorts';
 import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
-import type IReview from '@/interfaces/stores/review/review';
 
 const route = useRoute();
 
@@ -96,23 +82,21 @@ const getDefaultSort = (sortQuery: string | null): ISorts => {
     created_at: 'DESC',
   };
 };
-
 let ratingQuery: number | null = null;
 
 if (route.query.rating && Number(route.query.rating)) {
   ratingQuery = Number(route.query.rating);
 }
 
+const page = ref(1);
+
+if (route.query.page && Number(route.query.page)) {
+  page.value = Number(route.query.page);
+}
+
 const scroll = ref(true);
-const contentRef = ref<HTMLElement | null>(null);
 const config = useRuntimeConfig();
-const limit = 20;
-const currentPage = ref(1);
-const total = ref<number>();
-const reviews = ref<Array<IReview>>();
-const loading = ref(false);
 const rating = ref(ratingQuery || null);
-const stopScrollLoader = ref(false);
 const sorts = ref<ISorts>(getDefaultSort(route.query.sort as string));
 
 const {
@@ -122,8 +106,8 @@ const {
 const setUrlQuery = (): void => {
   const queries: Array<string> = [];
 
-  if (currentPage.value && currentPage.value !== 1) {
-    queries.push(`page=${currentPage.value}`);
+  if (page.value && page.value !== 1) {
+    queries.push(`page=${page.value}`);
   }
 
   if (sorts.value) {
@@ -158,40 +142,19 @@ const setUrlQuery = (): void => {
   );
 };
 
-const setScroll = (): void => {
-  const card = document.querySelector('#reviews-card');
+watch(sorts, () => {
+  setUrlQuery();
+}, {
+  deep: true,
+});
 
-  if (contentRef.value && card) {
-    const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 150;
-    const height = contentRef.value.offsetHeight;
-    const top = contentRef.value.offsetTop;
-    const screenHeight = window.screen.availHeight;
-    const lineBottom = height + top - screenHeight + gapHeight;
+watch(page, () => {
+  setUrlQuery();
+});
 
-    scroll.value = window.scrollY <= lineBottom;
-  }
-};
-
-const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | null> => {
-  try {
-    return await apiReadReviews(
-      fetch,
-      link as string,
-      (currentPage.value - 1) * limit,
-      limit,
-      sorts.value,
-      rating.value,
-    );
-  } catch (error: any) {
-    console.error(error.message);
-  }
-
-  return null;
-};
-
-const response = await loadReviews(!Object.keys(route.query).length);
-reviews.value = response?.data;
-total.value = response?.total;
+watch(rating, () => {
+  setUrlQuery();
+});
 
 const loadSchool = async (): Promise<ISchoolLink | null> => {
   try {
@@ -207,59 +170,7 @@ const loadSchool = async (): Promise<ISchoolLink | null> => {
   return null;
 };
 
-const reloadReviews = async (): Promise<void> => {
-  loading.value = true;
-  const res = await loadReviews(false);
-  reviews.value = res?.data;
-  total.value = res?.total;
-  stopScrollLoader.value = false;
-  setUrlQuery();
-  loading.value = false;
-};
-
-watch(sorts, async () => {
-  await reloadReviews();
-}, {
-  deep: true,
-});
-
-watch(rating, async () => {
-  currentPage.value = 1;
-
-  await reloadReviews();
-});
-
-const onLoadScrolling = async (): Promise<void> => {
-  currentPage.value++;
-
-  const res = await loadReviews(false);
-
-  if (res?.data && reviews.value) {
-    reviews.value = reviews.value.concat(res.data);
-  }
-
-  setUrlQuery();
-
-  if ((currentPage.value * limit) >= (total.value || 0)) {
-    stopScrollLoader.value = true;
-  }
-};
-
-const getDomain = (url: string): string => {
-  const urlObj = new URL(url);
-
-  return urlObj.host;
-};
-
 const schoolItem = ref<ISchoolLink | null>(await loadSchool());
-
-onMounted(async () => {
-  window.addEventListener('scroll', () => {
-    setScroll();
-  });
-
-  setScroll();
-});
 
 const conditions = {
   0: 'отзывов',
@@ -292,62 +203,6 @@ useHead({
       href: `${config.public.siteUrl}/reviews/${link}`,
     },
   ],
-});
-
-const reviewsJsonld = computed<any>((): any => Object.values(reviews.value || []).map<any>(
-  (review: IReview): any => {
-    let desc = '';
-
-    if (review.review) {
-      desc += review.review;
-    }
-
-    if (review.advantages) {
-      if (desc) {
-        desc += '\n';
-      }
-
-      desc += `Достоинства: ${review.advantages}`;
-    }
-
-    if (review.disadvantages) {
-      if (desc) {
-        desc += '\n';
-      }
-
-      desc += `Недостатки: ${review.disadvantages}`;
-    }
-
-    const result: any = {
-      '@context': 'https://schema.org',
-      '@type': 'Review',
-      name: review.title,
-      description: desc,
-      itemReviewed: {
-        '@type': 'MediaObject',
-        name: schoolItem.value?.name,
-      },
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: review.rating,
-        bestRating: 5,
-        worstRating: 1,
-      },
-    };
-
-    if (review.name) {
-      result.author = {
-        '@type': 'Person',
-        name: review.name,
-      };
-    }
-
-    return result;
-  },
-));
-
-reviewsJsonld.value.forEach((reviewJsonld: any) => {
-  useJsonld(reviewJsonld);
 });
 
 useJsonld({

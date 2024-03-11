@@ -1,13 +1,254 @@
 <template>
-  <div class="list">
-    <Review
-      v-for="(review, index) in reviews"
-      :key="index"
-      :review="review"
-    />
+  <div
+    ref="contentRef"
+    class="list"
+  >
+    <ScrollLoader
+      :stop="stopScrollLoader"
+      :distance="1000"
+      @load="onLoadScrolling"
+    >
+      <Loader
+        :active="loading"
+        color="white-transparency"
+      >
+        <Review
+          v-for="(review, index) in reviews"
+          :key="index"
+          :review="review"
+        />
+      </Loader>
+    </ScrollLoader>
   </div>
 </template>
 
 <script setup lang="ts">
+import {
+  computed,
+  onMounted,
+  type PropType,
+  ref,
+  toRefs,
+  watch,
+} from 'vue';
+import { useRoute } from 'vue-router';
+
+import { apiReadReviews } from '@/api/review';
+import Loader from '@/components/atoms/Loader.vue';
+import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Review from '@/components/modules/reviews/molecules/Review.vue';
+import type { IResponseItems } from '@/interfaces/response';
+import type ISorts from '@/interfaces/sorts';
+import type IReview from '@/interfaces/stores/review/review';
+
+const props = defineProps({
+  link: {
+    type: String,
+    required: true,
+  },
+  schoolName: {
+    type: String,
+    required: true,
+  },
+  sorts: {
+    type: Object as PropType<ISorts>,
+    required: false,
+    default: null,
+  },
+  rating: {
+    type: Number,
+    required: false,
+    default: null,
+  },
+  page: {
+    type: Number,
+    required: false,
+    default: 1,
+  },
+  scroll: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+});
+
+const emit = defineEmits({
+  'update:page': (_: number) => true,
+  'update:scroll': (_: boolean) => true,
+});
+
+const {
+  sorts,
+  rating,
+  link,
+  schoolName,
+  page,
+  scroll,
+} = toRefs(props);
+
+const pageValue = ref(page.value);
+
+watch(pageValue, () => {
+  emit('update:page', pageValue.value);
+});
+
+watch(page, () => {
+  pageValue.value = page.value;
+});
+
+const scrollValue = ref(scroll.value);
+
+watch(scrollValue, () => {
+  emit('update:scroll', scrollValue.value);
+});
+
+watch(scroll, () => {
+  scrollValue.value = scroll.value;
+});
+
+const limit = 20;
+const reviews = ref<Array<IReview>>();
+const route = useRoute();
+const total = ref<number>();
+const contentRef = ref<HTMLElement | null>(null);
+const stopScrollLoader = ref(false);
+const loading = ref(false);
+
+const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | null> => {
+  try {
+    return await apiReadReviews(
+      fetch,
+      link.value,
+      (pageValue.value - 1) * limit,
+      limit,
+      sorts.value,
+      rating.value,
+    );
+  } catch (error: any) {
+    console.error(error.message);
+  }
+
+  return null;
+};
+
+const response = await loadReviews(!Object.keys(route.query).length);
+reviews.value = response?.data;
+total.value = response?.total;
+
+const reloadReviews = async (): Promise<void> => {
+  loading.value = true;
+  const res = await loadReviews(false);
+  reviews.value = res?.data;
+  total.value = res?.total;
+  stopScrollLoader.value = false;
+  loading.value = false;
+};
+
+watch(sorts, async () => {
+  await reloadReviews();
+}, {
+  deep: true,
+});
+
+watch(rating, async () => {
+  pageValue.value = 1;
+
+  await reloadReviews();
+});
+
+const onLoadScrolling = async (): Promise<void> => {
+  pageValue.value++;
+
+  const res = await loadReviews(false);
+
+  if (res?.data && reviews.value) {
+    reviews.value = reviews.value.concat(res.data);
+  }
+
+  if ((pageValue.value * limit) >= (total.value || 0)) {
+    stopScrollLoader.value = true;
+  }
+};
+
+const setScroll = (): void => {
+  const card = document.querySelector('#reviews-card');
+
+  if (contentRef.value && card) {
+    const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 150;
+    const height = contentRef.value.offsetHeight;
+    const top = contentRef.value.offsetTop;
+    const screenHeight = window.screen.availHeight;
+    const lineBottom = height + top - screenHeight + gapHeight;
+
+    scroll.value = window.scrollY <= lineBottom;
+  }
+};
+
+onMounted(async () => {
+  window.addEventListener('scroll', () => {
+    setScroll();
+  });
+
+  setScroll();
+});
+
+const reviewsJsonld = computed<any>((): any => Object.values(reviews.value || []).map<any>(
+  (review: IReview): any => {
+    let desc = '';
+
+    if (review.review) {
+      desc += review.review;
+    }
+
+    if (review.advantages) {
+      if (desc) {
+        desc += '\n';
+      }
+
+      desc += `Достоинства: ${review.advantages}`;
+    }
+
+    if (review.disadvantages) {
+      if (desc) {
+        desc += '\n';
+      }
+
+      desc += `Недостатки: ${review.disadvantages}`;
+    }
+
+    const result: any = {
+      '@context': 'https://schema.org',
+      '@type': 'Review',
+      name: review.title,
+      description: desc,
+      itemReviewed: {
+        '@type': 'MediaObject',
+        name: schoolName,
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    };
+
+    if (review.name) {
+      result.author = {
+        '@type': 'Person',
+        name: review.name,
+      };
+    }
+
+    return result;
+  },
+));
+
+reviewsJsonld.value.forEach((reviewJsonld: any) => {
+  useJsonld(reviewJsonld);
+});
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/reviews/molecules/list";
+</style>

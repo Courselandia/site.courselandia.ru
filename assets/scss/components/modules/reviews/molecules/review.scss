@@ -1,0 +1,82 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.review {
+  background-color: $white;
+  padding: 1.5rem;
+  box-shadow: 0 16px 54px rgba(0, 0, 0, 0.064);
+  border-radius: 0.625rem;
+  max-width: 800px;
+  margin-bottom: 2.5rem;
+
+  @media all and (max-width: 1370px) {
+    max-width: 670px;
+  }
+
+  @media all and (max-width: 1250px) {
+    max-width: 640px;
+  }
+
+  @media all and (max-width: 1200px) {
+    max-width: none;
+  }
+
+  @media all and (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__rate {
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+  }
+
+  &__sub-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  &__text {
+    line-height: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+
+  &__avatar {
+    padding-right: 1.5rem;
+  }
+
+  &__name-and-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__date {
+    color: $grey4;
+    font-size: 0.875rem;
+  }
+
+  &__source {
+    color: $grey4;
+    font-size: 0.875rem;
+    flex-grow: 1;
+    text-align: right;
+    align-self: flex-end;
+  }
+}
