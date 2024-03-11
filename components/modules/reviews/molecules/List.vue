@@ -1,8 +1,5 @@
 <template>
-  <div
-    ref="contentRef"
-    class="list"
-  >
+  <div class="list">
     <ScrollLoader
       :stop="stopScrollLoader"
       :distance="1000"
@@ -110,7 +107,6 @@ const limit = 20;
 const reviews = ref<Array<IReview>>();
 const route = useRoute();
 const total = ref<number>();
-const contentRef = ref<HTMLElement | null>(null);
 const stopScrollLoader = ref(false);
 const loading = ref(false);
 
@@ -179,12 +175,13 @@ const onLoadScrolling = async (): Promise<void> => {
 };
 
 const setScroll = (): void => {
-  const card = document.querySelector('#school-reviews-card');
+  const card = document.getElementById('school-reviews-card');
+  const content = document.getElementById('school-reviews-content');
 
-  if (contentRef.value && card) {
+  if (content && card) {
     const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 150;
-    const height = contentRef.value.offsetHeight;
-    const top = contentRef.value.offsetTop;
+    const height = content.offsetHeight;
+    const top = content.offsetTop;
     const screenHeight = window.screen.availHeight;
     const lineBottom = height + top - screenHeight + gapHeight;
 

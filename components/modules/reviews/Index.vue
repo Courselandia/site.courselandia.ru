@@ -12,7 +12,10 @@
         </div>
       </Bubbles>
     </div>
-    <div class="reviews__content content">
+    <div
+      id="school-reviews-content"
+      class="reviews__content content"
+    >
       <div>
         <Card
           v-model:rating="rating"
