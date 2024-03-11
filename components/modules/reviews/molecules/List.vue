@@ -114,13 +114,17 @@ const contentRef = ref<HTMLElement | null>(null);
 const stopScrollLoader = ref(false);
 const loading = ref(false);
 
-const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | null> => {
+const loadReviews = async (
+  fetch: boolean,
+  offset: number,
+  limitParam: number,
+): Promise<IResponseItems<IReview> | null> => {
   try {
     return await apiReadReviews(
       fetch,
       link.value,
-      (pageValue.value - 1) * limit,
-      limit,
+      offset,
+      limitParam,
       sorts.value,
       rating.value,
     );
@@ -131,13 +135,17 @@ const loadReviews = async (fetch: boolean): Promise<IResponseItems<IReview> | nu
   return null;
 };
 
-const response = await loadReviews(!Object.keys(route.query).length);
+const response = await loadReviews(
+  !Object.keys(route.query).length,
+  0,
+  pageValue.value * limit,
+);
 reviews.value = response?.data;
 total.value = response?.total;
 
 const reloadReviews = async (): Promise<void> => {
   loading.value = true;
-  const res = await loadReviews(false);
+  const res = await loadReviews(false, (pageValue.value - 1) * limit, limit);
   reviews.value = res?.data;
   total.value = res?.total;
   stopScrollLoader.value = false;
@@ -159,7 +167,7 @@ watch(rating, async () => {
 const onLoadScrolling = async (): Promise<void> => {
   pageValue.value++;
 
-  const res = await loadReviews(false);
+  const res = await loadReviews(false, (pageValue.value - 1) * limit, limit);
 
   if (res?.data && reviews.value) {
     reviews.value = reviews.value.concat(res.data);
