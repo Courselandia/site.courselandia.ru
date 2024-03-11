@@ -36,79 +36,7 @@
             :active="loading"
             color="white-transparency"
           >
-            <div class="reviews__reviews">
-              <div
-                v-for="(review, index) in reviews"
-                :key="index"
-                class="reviews__review"
-              >
-                <Rate
-                  :value="review.rating"
-                  class="reviews__review-rate"
-                />
-                <div
-                  v-if="review.title"
-                  class="reviews__review-title"
-                >
-                  {{ review.title }}
-                </div>
-                <div
-                  v-if="review.review"
-                  class="reviews__review-text"
-                  v-html="rnToBr(review.review)"
-                />
-                <template
-                  v-if="review.advantages"
-                >
-                  <div class="reviews__review-sub-title">
-                    Достоинства
-                  </div>
-                  <div
-                    class="reviews__review-text"
-                    v-html="rnToBr(review.advantages)"
-                  />
-                </template>
-                <template
-                  v-if="review.disadvantages"
-                >
-                  <div class="reviews__review-sub-title">
-                    Недостатки
-                  </div>
-                  <div
-                    class="reviews__review-text"
-                    v-html="rnToBr(review.disadvantages)"
-                  />
-                </template>
-                <div
-                  v-if="review.name || review.created_at || review.source"
-                  class="reviews__review-info"
-                >
-                  <div class="reviews__review-avatar">
-                    <Animal />
-                  </div>
-                  <div class="reviews__review-name-and-date">
-                    <div
-                      v-if="review.name"
-                      class="reviews__review-name"
-                    >
-                      {{ review.name }}
-                    </div>
-                    <div
-                      v-if="review.created_at"
-                      class="reviews__review-date"
-                    >
-                      {{ dayjs.utc(review.created_at).tz(dayjs.tz.guess()).format('D MMMM YYYY') }}
-                    </div>
-                  </div>
-                  <div
-                    v-if="review.source"
-                    class="reviews__review-source"
-                  >
-                    {{ getDomain(review.source) }}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <List />
           </Loader>
         </ScrollLoader>
       </div>
@@ -117,7 +45,6 @@
 </template>
 
 <script lang="ts" setup>
-import dayjs from 'dayjs';
 import {
   computed,
   onMounted,
@@ -127,17 +54,15 @@ import {
 import { useRoute } from 'vue-router';
 
 import { apiReadReviews } from '@/api/review';
-import Animal from '@/components/atoms/Animal.vue';
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import Loader from '@/components/atoms/Loader.vue';
-import Rate from '@/components/atoms/Rate.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Card from '@/components/modules/reviews/molecules/Card.vue';
 import Header from '@/components/modules/reviews/molecules/Header.vue';
+import List from '@/components/modules/reviews/molecules/List.vue';
 import Sort from '@/components/modules/reviews/molecules/Sort.vue';
 import {
   brToRn,
-  rnToBr,
   stripTags,
 } from '@/helpers/format';
 import plural from '@/helpers/plural';
