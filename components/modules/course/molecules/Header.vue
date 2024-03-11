@@ -1,13 +1,13 @@
 <template>
-  <div class="course-view-header">
-    <div class="course-view-header__side course-view-header__side--left">
+  <div class="header">
+    <div class="header__side header__side--left">
       <h1 class="title title--1">
         {{ course.header }}
       </h1>
 
       <Reducer
         v-if="course.text"
-        class="course-view-header__description"
+        class="header__description"
       >
         <span
           v-html="course.text"
@@ -107,6 +107,6 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewHeader.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/header";
 </style>

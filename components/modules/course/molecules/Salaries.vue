@@ -1,14 +1,14 @@
 <template>
-  <div class="course-view-salaries">
-    <div class="course-view-salaries__header">
-      <div class="course-view-salaries__side">
-        <div class="course-view-salaries__title">
+  <div class="salaries">
+    <div class="salaries__header">
+      <div class="salaries__side">
+        <div class="salaries__title">
           Как быстро окупится обучение
         </div>
-        <div class="course-view-salaries__separator course-view-salaries__separator--top" />
+        <div class="salaries__separator salaries__separator--top" />
       </div>
-      <div class="course-view-salaries__info">
-        <div class="course-view-salaries__explanation">
+      <div class="salaries__info">
+        <div class="salaries__explanation">
           На позиции
           <template v-if="professionLevel === ELevel.JUNIOR">
             Junior
@@ -22,7 +22,7 @@
           {{ professionName }}
           вы заработаете столько же, сколько стоит курс,
         </div>
-        <div class="course-view-salaries__duration">
+        <div class="salaries__duration">
           <template v-if="months">
             за {{ months }}
             <template v-if="months === 1">
@@ -38,13 +38,13 @@
         </div>
       </div>
     </div>
-    <div class="course-view-salaries__professions">
+    <div class="salaries__professions">
       <template
         v-for="(profession, keyProfession) in activeProfessions"
         :key="keyProfession"
       >
         <div
-          :class="`course-view-salaries__profession ${index === keyProfession ? 'course-view-salaries__profession--active' : ''}`"
+          :class="`salaries__profession ${index === keyProfession ? 'salaries__profession--active' : ''}`"
           @mouseenter="onMouseEnter(keyProfession)"
           @mouseleave="onMouseLeave(keyProfession)"
           @focusin="onMouseEnter(keyProfession)"
@@ -52,13 +52,14 @@
           @click="onMouseEnter(keyProfession)"
           @keyup="onMouseEnter(keyProfession)"
         >
-          <div class="course-view-salaries__name">
+          <div class="salaries__name">
             {{ profession.label }}:
             {{ money(getSalary(profession.salaries, ELevel.JUNIOR)) }} ₽ —
             {{ money(getSalary(profession.salaries, ELevel.SENIOR)) }} ₽
           </div>
-          <div class="course-view-salaries__slider">
+          <div class="salaries__slider">
             <SliderSalary
+              v-if="profession.salaries"
               v-model:value="salaries[index]"
               :junior="getSalary(profession.salaries, ELevel.JUNIOR)"
               :middle="getSalary(profession.salaries, ELevel.MIDDLE)"
@@ -69,7 +70,7 @@
         </div>
         <div
           v-if="keyProfession !== (activeProfessions.length - 1)"
-          class="course-view-salaries__separator course-view-salaries__separator--middle"
+          class="salaries__separator salaries__separator--middle"
         />
       </template>
     </div>
@@ -190,8 +191,8 @@ const onMouseLeave = (inx: number): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewSalaries.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/salaries";
 </style>
 
 <style lang="css">

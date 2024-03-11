@@ -1,48 +1,48 @@
 <template>
   <div
-    :class="`course-view-card ${props.scroll ? 'course-view-card--scroll' : ''}`"
+    :class="`card ${props.scroll ? 'card--scroll' : ''}`"
   >
     <div
-      id="course-view-card"
-      :class="`course-view-card__box ${props.scroll ? 'course-view-card__box--scroll' : ''}`"
+      id="card"
+      :class="`card__box ${props.scroll ? 'card__box--scroll' : ''}`"
     >
-      <div class="course-view-card__image" :style="`background-image: url('${course.image ? course.image.path : holder?.default}')`">
+      <div class="card__image" :style="`background-image: url('${course.image ? course.image.path : holder?.default}')`">
         <div
           v-if="course.rating"
-          class="course-view-card__rating"
+          class="card__rating"
         >
-          <div class="course-view-card__rating_star">
+          <div class="card__rating_star">
             <Icon
               name="star"
               color="blue2"
               :size="[16, 16]"
             />
           </div>
-          <div class="course-view-card__rating_amount">
+          <div class="card__rating_amount">
             {{ course.rating }}
           </div>
         </div>
         <div
           v-if="course.school?.image"
-          class="course-view-card__brand"
+          class="card__brand"
         >
           <LazyImage
             :src="course.school.image"
-            class="course-view-card__logo"
+            class="card__logo"
             :alt="course.school.name"
             :title="course.school.name"
           />
         </div>
       </div>
-      <div class="course-view-card__content">
-        <div class="course-view-card__name">
+      <div class="card__content">
+        <div class="card__name">
           {{ course.name }}
         </div>
 
-        <div class="course-view-card__prices">
+        <div class="card__prices">
           <div
             v-if="course.price || course.price_recurrent"
-            class="course-view-card__price"
+            class="card__price"
           >
             {{ course.price_recurrent
               ? money(course.price_recurrent)
@@ -55,32 +55,32 @@
           </div>
           <div
             v-if="(course.price_recurrent && course.price) || course.price_old"
-            class="course-view-card__price_additional"
+            class="card__price_additional"
           >
             <div
               v-if="course.price_recurrent && course.price"
-              class="course-view-card__price_current"
+              class="card__price_current"
             >
               {{ money(course.price) }} {{ currency(course.currency) }}
             </div>
             <div
               v-if="course.price_old"
-              class="course-view-card__price_old"
+              class="card__price_old"
             >
               {{ money(course.price_old) }} {{ currency(course.currency) }}
             </div>
           </div>
           <div
             v-if="!course.price && !course.price_recurrent && !course.price_old"
-            class="course-view-card__price"
+            class="card__price"
           >
             Бесплатно
           </div>
         </div>
       </div>
-      <div class="course-view-card__footer">
-        <div class="course-view-card__actions">
-          <div class="course-view-card__action course-view-card__action--button">
+      <div class="card__footer">
+        <div class="card__actions">
+          <div class="card__action card__action--button">
             <Button
               :to="course.url"
               link="link"
@@ -92,7 +92,7 @@
               На сайт курса
             </Button>
           </div>
-          <div class="course-view-card__action course-view-card__action--favorite">
+          <div class="card__action card__action--favorite">
             <FavoriteCourse
               :id="course.id"
             />
@@ -100,28 +100,28 @@
         </div>
         <div
           v-if="course.features?.length"
-          class="course-view-card__feature"
+          class="card__feature"
         >
-          <div class="course-view-card__feature-header">
-            <div class="course-view-card__feature-header-label">
+          <div class="card__feature-header">
+            <div class="card__feature-header-label">
               Кратко о курсе
             </div>
-            <div class="course-view-card__feature-header-line" />
+            <div class="card__feature-header-line" />
           </div>
-          <div class="course-view-card__feature-items">
+          <div class="card__feature-items">
             <div
               v-for="(feature, key) in course.features"
               :key="key"
-              class="course-view-card__feature-item"
+              class="card__feature-item"
             >
-              <div class="course-view-card__feature-icon">
+              <div class="card__feature-icon">
                 <Icon
                   :name="feature.icon as TIcon"
                   color="black"
                   :size="[22, 22]"
                 />
               </div>
-              <div class="course-view-card__feature-value">
+              <div class="card__feature-value">
                 {{ feature.text }}
               </div>
             </div>
@@ -162,13 +162,13 @@ const props = defineProps({
   },
 });
 
-const holder = await import('@/assets/images/holder.svg');
+const holder = await import('assets/images/holder.svg');
 
 const nameClass = computed(() => {
   const classes = [];
 
   if (props.scroll) {
-    classes.push('course-view-card--scroll');
+    classes.push('card--scroll');
   }
 
   return classes.join(' ');
@@ -179,6 +179,6 @@ const onClick = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewCard.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/card";
 </style>

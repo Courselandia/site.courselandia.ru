@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="course.processes"
-    class="course-view-processes"
+    class="processes"
   >
     <BlockCheck
       v-for="(process, key) in course.processes"
@@ -31,6 +31,6 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewProcesses.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/processes";
 </style>

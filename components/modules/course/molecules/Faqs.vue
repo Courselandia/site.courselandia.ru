@@ -1,5 +1,5 @@
 <template>
-  <div class="course-view-faqs">
+  <div class="faqs">
     <Faqs>
       <Faq
         v-for="(faq, key) in faqs"
@@ -27,7 +27,7 @@ import {
 
 import Faq from '@/components/atoms/Faq.vue';
 import Faqs from '@/components/molecules/Faqs.vue';
-import type IFaqComponent from '@/interfaces/components/molecules/faq';
+import type IFaqComponent from '~/interfaces/components/molecules/faq';
 
 const props = defineProps({
   faqs: {
@@ -58,6 +58,6 @@ const faqsJsonLd = computed<any>(() => {
 useJsonld(faqsJsonLd.value);
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewFaqs.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/faqs";
 </style>

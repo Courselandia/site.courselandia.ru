@@ -1,6 +1,6 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
-.course-view-teachers {
+.teachers {
   margin-bottom: -2rem;
 
   &__items {
@@ -37,7 +37,7 @@
     }
 
     &:hover {
-      .course-view-teachers {
+      .teachers {
         &__name {
           color: $blue3;
         }

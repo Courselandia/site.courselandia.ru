@@ -1,34 +1,34 @@
 <template>
-  <div class="course-view-info">
+  <div class="info">
     <div
       v-if="course.online === true || course.online === false"
-      class="course-view-info__block"
+      class="info__block"
     >
-      <div class="course-view-info__title">
+      <div class="info__title">
         Формат обучения
       </div>
-      <div class="course-view-info__value">
+      <div class="info__value">
         {{ course.online ? 'Онлайн' : 'Оффлайн' }}
       </div>
     </div>
 
-    <div class="course-view-info__block">
-      <div class="course-view-info__title">
+    <div class="info__block">
+      <div class="info__title">
         Длительность
       </div>
-      <div class="course-view-info__value">
+      <div class="info__value">
         {{ duration(course.duration, course.duration_unit) }}
       </div>
     </div>
 
     <div
       v-if="course.tools?.length"
-      class="course-view-info__block"
+      class="info__block"
     >
-      <div class="course-view-info__title">
+      <div class="info__title">
         Инструменты
       </div>
-      <div class="course-view-info__value">
+      <div class="info__value">
         <template
           v-for="(tool, key) in course.tools"
           :key="key"
@@ -45,12 +45,12 @@
 
     <div
       v-if="course.levels?.length"
-      class="course-view-info__block"
+      class="info__block"
     >
-      <div class="course-view-info__title">
+      <div class="info__title">
         Уровень
       </div>
-      <div class="course-view-info__value">
+      <div class="info__value">
         <template
           v-for="(level, key) in course.levels"
           :key="key"
@@ -62,12 +62,12 @@
 
     <div
       v-if="course.skills?.length"
-      class="course-view-info__block"
+      class="info__block"
     >
-      <div class="course-view-info__title">
+      <div class="info__title">
         Навыки
       </div>
-      <div class="course-view-info__value">
+      <div class="info__value">
         <template
           v-for="(skill, key) in course.skills"
           :key="key"
@@ -84,12 +84,12 @@
 
     <div
       v-if="course.teachers?.length"
-      class="course-view-info__block"
+      class="info__block"
     >
-      <div class="course-view-info__title">
+      <div class="info__title">
         Авторы
       </div>
-      <div class="course-view-info__value">
+      <div class="info__value">
         <template
           v-for="(teacher, key) in course.teachers"
           :key="key"
@@ -104,11 +104,11 @@
       </div>
     </div>
 
-    <div class="course-view-info__block">
-      <div class="course-view-info__title">
+    <div class="info__block">
+      <div class="info__title">
         Идентификатор
       </div>
-      <div class="course-view-info__value">
+      <div class="info__value">
         #{{ course.id }}
       </div>
     </div>
@@ -119,7 +119,7 @@
 import type { PropType } from 'vue';
 
 import duration from '@/helpers/duration';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '~/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {
@@ -129,6 +129,6 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewInfo.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/info";
 </style>

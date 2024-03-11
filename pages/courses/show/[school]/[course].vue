@@ -1,9 +1,9 @@
 <template>
-  <CourseView class="mb-24 mb-12-sm" />
+  <Course />
 </template>
 
 <script lang="ts" setup>
-import CourseView from '@/components/organism/CourseView.vue';
+import Course from '@/components/modules/course/Index.vue';
 
 definePageMeta({
   middleware: [

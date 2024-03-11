@@ -101,5 +101,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/reducer.scss";
+@import "@/assets/scss/components/atoms/reducer";
 </style>

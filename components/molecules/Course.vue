@@ -190,6 +190,6 @@ const onClickGoSchool = (): void => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/molecules/course.scss";
 </style>

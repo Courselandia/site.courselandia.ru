@@ -1,27 +1,27 @@
 <template>
   <div
     v-if="course.program"
-    class="course-view-program"
+    class="program"
   >
-    <h2 class="title title--1 course-view-program--title">
+    <h2 class="title title--1 program--title">
       Программа курса
     </h2>
 
     <div
       v-if="description"
-      class="course-view-program__top"
+      class="program__top"
     >
-      <div class="course-view-program__description">
+      <div class="program__description">
         {{ description }}
       </div>
       <div
         v-if="course.modules_amount"
-        class="course-view-program__modules"
+        class="program__modules"
       >
-        <div class="course-view-program__amount">
+        <div class="program__amount">
           {{ course.modules_amount }}
         </div>
-        <div class="course-view-program__unit">
+        <div class="program__unit">
           <template
             v-if="course.modules_amount === 1"
           >
@@ -39,12 +39,12 @@
       </div>
       <div
         v-if="course.lessons_amount"
-        class="course-view-program__lessons"
+        class="program__lessons"
       >
-        <div class="course-view-program__amount">
+        <div class="program__amount">
           {{ course.lessons_amount }}
         </div>
-        <div class="course-view-program__unit">
+        <div class="program__unit">
           <template
             v-if="course.lessons_amount === 1"
           >
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div class="course-view-program__bottom">
+    <div class="program__bottom">
       <Program
         :program="course.program"
       />
@@ -148,6 +148,6 @@ const description = computed(() => {
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewProgram.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/program";
 </style>

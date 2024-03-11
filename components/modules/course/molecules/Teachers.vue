@@ -1,20 +1,20 @@
 <template>
   <div
     v-if="course.teachers"
-    class="course-view-teachers"
+    class="teachers"
   >
-    <div class="course-view-teachers__items">
+    <div class="teachers__items">
       <nuxt-link
         v-for="(teacher, key) in course.teachers"
         :key="key"
         :to="teacher.link"
-        class="course-view-teachers__item"
+        class="teachers__item"
       >
-        <div class="course-view-teachers__picture">
+        <div class="teachers__picture">
           <LazyImage
             v-if="teacher.image?.path"
             :src="teacher.image.path"
-            class="course-view-teachers__image"
+            class="teachers__image"
             :alt="teacher.label"
             :title="teacher.label"
           />
@@ -22,14 +22,14 @@
             v-else
           />
         </div>
-        <div class="course-view-teachers__info">
-          <div class="course-view-teachers__name">
+        <div class="teachers__info">
+          <div class="teachers__name">
             {{ teacher.label }}
           </div>
           <ClientOnly>
             <div
               v-if="teacher.extra"
-              class="course-view-teachers__position"
+              class="teachers__position"
             >
               {{ teacher.extra }}
             </div>
@@ -55,6 +55,6 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/courseViewTeachers.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/teachers";
 </style>

@@ -1,154 +1,56 @@
 <template>
   <div>
-    <div class="course-view">
-      <Bubbles>
-        <div class="content">
-          <CourseViewHeader
-            v-if="courseItem"
-            :course="courseItem"
-          />
-        </div>
-      </Bubbles>
+    <div class="course">
+      <Header
+        :course="courseItem"
+      />
       <div
         ref="contentRef"
-        class="course-view__content content"
+        class="course__content content"
       >
         <div ref="cardRef">
-          <CourseViewCard
+          <Card
             v-if="courseItem"
             :course="courseItem"
             :scroll="scroll"
           />
         </div>
-
-        <div class="course-view__info">
-          <div
-            v-if="courseItem?.learns?.length"
-            class="mb-40 mb-12-md"
-          >
-            <h2 class="title title--1">
-              Чему вы научитесь
-            </h2>
-
-            <CourseViewLearn
-              v-if="courseItem"
-              :course="courseItem"
-            />
-          </div>
-
-          <div
-            v-if="hasSalaries"
-            class="mb-40 mb-12-md"
-          >
-            <CourseViewSalaries
-              v-if="courseItem"
-              :course="courseItem"
-            />
-          </div>
-
-          <div
-            v-if="courseItem?.processes?.length"
-            class="mb-40 mb-12-md"
-          >
-            <h2 class="title title--1">
-              Как проходит обучение
-            </h2>
-
-            <CourseViewProcesses
-              :course="courseItem"
-            />
-          </div>
-
-          <ClientOnly>
-            <!--noindex-->
-            <div
-              v-if="courseItem?.program?.length"
-              class="mb-40 mb-12-md"
-            >
-              <CourseViewProgram
-                :course="courseItem"
-              />
-            </div>
-            <!--/noindex-->
-          </ClientOnly>
-
-          <div
-            v-if="courseItem?.teachers?.length"
-            class="mb-40 mb-12-md"
-          >
-            <h2 class="title title--1">
-              Преподаватели
-            </h2>
-
-            <CourseViewTeachers
-              :course="courseItem"
-            />
-          </div>
-
-          <div
-            v-if="courseItem?.employments?.length"
-            class="mb-40 mb-12-md"
-          >
-            <h2 class="title title--1">
-              Помощь с трудоустройством
-            </h2>
-
-            <CourseViewEmployments
-              v-if="courseItem"
-              :course="courseItem"
-            />
-          </div>
-
-          <div class="mb-40 mb-12-md">
-            <h2 class="title title--1">
-              Информация
-            </h2>
-
-            <CourseViewInfo
-              v-if="courseItem"
-              :course="courseItem"
-            />
-          </div>
-
-          <div
-            v-if="faqItems?.length"
-            class="mb-40 mb-12-md"
-          >
-            <h2 class="title title--1">
-              Часто задаваемые вопросы
-            </h2>
-
-            <CourseViewFaqs
-              :faqs="faqItems"
-            />
-          </div>
+        <div class="course__info">
+          <Learn
+            :course="courseItem"
+          />
+          <Salaries
+            :course="courseItem"
+          />
+          <Processes
+            :course="courseItem"
+          />
+          <Program
+            :course="courseItem"
+          />
+          <Teachers
+            :course="courseItem"
+          />
+          <Employments
+            :course="courseItem"
+          />
+          <Info
+            :course="courseItem"
+          />
+          <Faqs
+            :school="school"
+          />
         </div>
       </div>
 
-      <LazyClientOnly>
-        <teleport to=".page">
-          <CourseViewFollow
-            v-if="courseItem"
-            :course="courseItem"
-          />
-        </teleport>
-      </LazyClientOnly>
+      <Follow
+        :course="courseItem"
+      />
     </div>
 
-    <template
-      v-if="courseSimilarities?.length"
-    >
-      <div class="content">
-        <h2 class="title title--1">
-          Похожие курсы
-        </h2>
-
-        <Courses
-          :courses="courseSimilarities"
-          class="mb-8"
-        />
-      </div>
-    </template>
+    <Similarities
+      :courses="courseSimilarities"
+    />
   </div>
 </template>
 
@@ -161,27 +63,23 @@ import {
 import { useRoute } from 'vue-router';
 
 import { apiGetCourse } from '@/api/course';
-import { apiReadFaqs } from '@/api/faq';
-import Bubbles from '@/components/atoms/Bubbles.vue';
-import Courses from '@/components/molecules/Courses.vue';
-import CourseViewCard from '@/components/molecules/CourseViewCard.vue';
-import CourseViewEmployments from '@/components/molecules/CourseViewEmployments.vue';
-import CourseViewFaqs from '@/components/molecules/CourseViewFaqs.vue';
-import CourseViewFollow from '@/components/molecules/CourseViewFollow.vue';
-import CourseViewHeader from '@/components/molecules/CourseViewHeader.vue';
-import CourseViewInfo from '@/components/molecules/CourseViewInfo.vue';
-import CourseViewLearn from '@/components/molecules/CourseViewLearn.vue';
-import CourseViewProcesses from '@/components/molecules/CourseViewProcesses.vue';
-import CourseViewProgram from '@/components/molecules/CourseViewProgram.vue';
-import CourseViewSalaries from '@/components/molecules/CourseViewSalaries.vue';
-import CourseViewTeachers from '@/components/molecules/CourseViewTeachers.vue';
+import Card from '@/components/modules/course/molecules/Card.vue';
+import Employments from '@/components/modules/course/organism/Employments.vue';
+import Faqs from '@/components/modules/course/organism/Faqs.vue';
+import Follow from '@/components/modules/course/organism/Follow.vue';
+import Header from '@/components/modules/course/organism/Header.vue';
+import Info from '@/components/modules/course/organism/Info.vue';
+import Learn from '@/components/modules/course/organism/Learn.vue';
+import Processes from '@/components/modules/course/organism/Processes.vue';
+import Program from '@/components/modules/course/organism/Program.vue';
+import Salaries from '@/components/modules/course/organism/Salaries.vue';
+import Similarities from '@/components/modules/course/organism/Similarities.vue';
+import Teachers from '@/components/modules/course/organism/Teachers.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
-import faqsStoreToFaqsComponent from '@/converts/faqsStoreToFaqsComponent';
 import EDuration from '@/enums/components/molecules/duration';
 import { brToRn, stripTags } from '@/helpers/format';
 import type ICourse from '@/interfaces/components/molecules/course';
-import type IFaqComponent from '@/interfaces/components/molecules/faq';
 import type ITeacher from '@/interfaces/components/molecules/teacher';
 
 const config = useRuntimeConfig();
@@ -189,7 +87,7 @@ const scroll = ref(true);
 const contentRef = ref<HTMLElement | null>(null);
 
 const setScroll = (): void => {
-  const card = document.querySelector('#course-view-card');
+  const card = document.querySelector('#course-card');
 
   if (contentRef.value && card) {
     const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 150;
@@ -239,34 +137,6 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
-
-const faqItems = ref<Array<IFaqComponent>>([]);
-
-try {
-  const faqsStore = await apiReadFaqs(
-    school as string,
-  );
-
-  if (faqsStore) {
-    faqItems.value = faqsStoreToFaqsComponent(faqsStore);
-  }
-} catch (error: any) {
-  console.error(error.message);
-}
-
-const hasSalaries = computed((): boolean => {
-  let has = false;
-
-  if (courseItem.value?.professions) {
-    courseItem.value?.professions.forEach((profession) => {
-      if (profession.salaries?.length) {
-        has = true;
-      }
-    });
-  }
-
-  return has;
-});
 
 useHead({
   title,
@@ -454,6 +324,6 @@ const breadcrumbsJsonLd = computed<any>(() => {
 useJsonld(breadcrumbsJsonLd.value);
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/organism/courseView.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/organism/course";
 </style>
