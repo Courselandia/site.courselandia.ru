@@ -39,88 +39,29 @@
         </div>
       </div>
       <div class="card__row card__row--line">
-        <div class="card__block-statistics">
-          <div class="card__block-statistic">
-            <Icon
-              name="video"
-              :size="[24, 24]"
-              color="black"
-              class="card__block-statistic-icon"
-            />
-            <div class="card__block-statistic-label">
-              Курсов: <b>{{ school.amount_courses.all }}</b>
-            </div>
-          </div>
+        <div class="card__amounts">
+          <AmountCourses
+            :count="school.amount_courses.all"
+          />
         </div>
       </div>
       <div class="card__row">
         <div class="card__actions">
-          <div class="card__action">
-            <Button
-              :to="school.site as string"
-              link="link"
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              wide
-            >
-              Перейти на сайт
-            </Button>
-          </div>
-          <div class="card__action">
-            <Button
-              :to="`/courses/school/${school.link}`"
-              wide
-              type="secondary"
-            >
-              Все курсы Skillbox
-            </Button>
-          </div>
+          <Actions
+            :link="school.link"
+            :site="school.site"
+            :name="school.name"
+          />
         </div>
       </div>
-      <div
-        v-if="otherSchools?.length"
-        class="card__others"
-      >
-        <div class="card__others-label">
-          Отзывы о других школах
-        </div>
-        <div class="card__others-schools">
-          <div
-            v-for="(otherSchool, index) in otherSchools"
-            :key="index"
-            class="card__others-school"
-          >
-            <div class="card__others-school-rating">
-              {{ Math.round(school.rating * 100) / 100 }}
-            </div>
-            <div class="card__others-school-icon">
-              <Icon
-                name="star"
-                :size="[22, 22]"
-                color="blue2"
-              />
-            </div>
-            <div class="card__others-school-name">
-              {{ otherSchool.name }}
-            </div>
-            <div class="card__others-school-reviews">
-              <nuxt-link
-                :to="`/reviews/${otherSchool.link}`"
-                class="link link--no-line"
-              >
-                {{ otherSchool.reviews_count }}
-                {{ plural(otherSchool.reviews_count, conditions) }}
-              </nuxt-link>
-            </div>
-          </div>
-        </div>
+      <div class="card__other-schools">
+        <OtherSchools />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import type {
   PropType,
 } from 'vue';
@@ -130,16 +71,14 @@ import {
   watch,
 } from 'vue';
 
-import Button from '@/components/atoms/Button.vue';
-import Icon from '@/components/atoms/Icon.vue';
+import AmountCourses from '@/components/modules/reviews/atoms/AmountCourses.vue';
 import AmountReviews from '@/components/modules/reviews/atoms/AmountReviews.vue';
 import Logo from '@/components/modules/reviews/atoms/Logo.vue';
 import Rating from '@/components/modules/reviews/atoms/Rating.vue';
+import Actions from '@/components/modules/reviews/molecules/Actions.vue';
+import OtherSchools from '@/components/modules/reviews/molecules/OtherSchools.vue';
 import Statistic from '@/components/modules/reviews/molecules/Statistic.vue';
-import plural from '@/helpers/plural';
 import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
-import type ISchool from '@/interfaces/stores/school/school';
-import schoolStore from '@/stores/school';
 
 const props = defineProps({
   rating: {
@@ -175,38 +114,6 @@ watch(ratingValue, () => {
 watch(rating, () => {
   ratingValue.value = rating.value;
 });
-
-const conditions = {
-  0: 'отзывов',
-  1: 'отзыв',
-  '2+': 'отзыва',
-  '5+': 'отзывов',
-};
-
-const sortSchools = (items: Array<ISchool> | null): Array<ISchool> | null => {
-  if (items) {
-    return items.sort((first: ISchool, second: ISchool) => {
-      if (first.rating > second.rating) {
-        return -1;
-      }
-
-      if (first.rating < second.rating) {
-        return 1;
-      }
-
-      return 0;
-    });
-  }
-
-  return null;
-};
-
-const { schools } = storeToRefs(schoolStore());
-const otherSchools = ref<Array<ISchool> | null>(
-  sortSchools(
-    schools.value?.filter((item: ISchool) => !!item.reviews_count) || null,
-  )?.slice(0, 4) || null,
-);
 </script>
 
 <style lang="scss" scoped>

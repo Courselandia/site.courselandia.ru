@@ -73,10 +73,6 @@
     flex-grow: 1;
   }
 
-  &__amount-review-icon {
-    margin-right: 0.5rem;
-  }
-
   &__statistic,
   &__rating {
     width: 50%;
@@ -88,81 +84,5 @@
 
   &__rating {
     padding-left: 1rem;
-  }
-
-  &__statistics {
-    display: flex;
-    align-items: center;
-  }
-
-  &__block-statistic {
-    width: 50%;
-    display: flex;
-    align-items: center;
-  }
-
-  &__block-statistic-icon {
-    margin-right: 0.75rem;
-  }
-
-  &__block-statistic-label {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  &__action {
-    margin-bottom: 1rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  &__others-label {
-    font-size: 0.875rem;
-    line-height: 1.3125rem;
-    color: $grey4;
-    margin-bottom: 1rem;
-  }
-
-  &__others-school {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  &__others-school-rating {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    padding-right: 0.25rem;
-    width: 30px;
-    min-width: 40px;
-  }
-
-  &__others-school-icon {
-    padding-right: 1rem;
-    margin-bottom: 2px;
-    line-height: 0;
-    width: calc(24px + 1rem);
-    min-width: calc(24px + 1rem);
-  }
-
-  &__others-school-name {
-    font-size: 1rem;
-    line-height: 1.3rem;
-    font-weight: 700;
-  }
-
-  &__others-school-reviews {
-    flex-grow: 1;
-    text-align: right;
-
-    .link {
-      white-space: nowrap
-    }
   }
 }

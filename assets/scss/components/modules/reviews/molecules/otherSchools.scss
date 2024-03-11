@@ -1,0 +1,51 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.other-schools {
+  &__label {
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $grey4;
+    margin-bottom: 1rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__rating {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding-right: 0.25rem;
+    width: 30px;
+    min-width: 40px;
+  }
+
+  &__icon {
+    padding-right: 1rem;
+    margin-bottom: 2px;
+    line-height: 0;
+    width: calc(24px + 1rem);
+    min-width: calc(24px + 1rem);
+  }
+
+  &__name {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    font-weight: 700;
+  }
+
+  &__reviews {
+    flex-grow: 1;
+    text-align: right;
+
+    .link {
+      white-space: nowrap
+    }
+  }
+}
