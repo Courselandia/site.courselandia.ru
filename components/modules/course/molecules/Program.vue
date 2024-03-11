@@ -63,7 +63,7 @@
     </div>
 
     <div class="program__bottom">
-      <Program
+      <ProgramList
         :program="course.program"
       />
     </div>
@@ -78,7 +78,7 @@ import {
   computed,
 } from 'vue';
 
-import Program from '@/components/molecules/Program.vue';
+import ProgramList from '@/components/modules/course/molecules/ProgramList.vue';
 import duration from '@/helpers/duration';
 import type ICourse from '@/interfaces/components/molecules/course';
 

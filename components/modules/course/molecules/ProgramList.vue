@@ -1,6 +1,6 @@
 <template>
-  <div class="program">
-    <div class="program__items">
+  <div class="program-list">
+    <div class="program-list__items">
       <ProgramItem
         v-for="(item, key) in program"
         :key="key"
@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
-import ProgramItem from '@/components/atoms/ProgramItem.vue';
+import ProgramItem from '@/components/modules/course/atoms/ProgramItem.vue';
 import type IProgram from '@/interfaces/components/molecules/program';
 
 const props = defineProps({
@@ -24,6 +24,6 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/program.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/course/molecules/programList";
 </style>
