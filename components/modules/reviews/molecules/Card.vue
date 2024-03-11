@@ -23,7 +23,7 @@
       <div class="card__row card__row--horizontal card__row--line">
         <div class="card__statistic">
           <Statistic
-            :rating="ratingValue"
+            v-model:rating="ratingValue"
             :count="school.reviews_count"
             :count5="school.reviews_5_stars_count"
             :count4="school.reviews_4_stars_count"

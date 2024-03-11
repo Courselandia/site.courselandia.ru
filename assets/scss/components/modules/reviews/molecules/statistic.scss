@@ -27,10 +27,13 @@
     background-color: $blue2;
     border-radius: 0.75rem;
     height: 24px;
-    cursor: pointer;
 
     &--empty {
       background-color: transparent;
+    }
+
+    &--cursor {
+      cursor: pointer;
     }
   }
 
