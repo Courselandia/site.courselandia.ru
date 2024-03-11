@@ -38,5 +38,5 @@ const onClick = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/faq.scss";
+@import "@/assets/scss/components/modules/course/atoms/faq";
 </style>

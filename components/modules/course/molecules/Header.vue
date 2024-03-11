@@ -93,9 +93,9 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
-import Fact from '@/components/atoms/Fact.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
-import Facts from '@/components/molecules/Facts.vue';
+import Fact from '@/components/modules/course/atoms/Fact.vue';
+import Facts from '@/components/modules/course/molecules/Facts.vue';
 import language from '@/helpers/language';
 import type ICourse from '@/interfaces/components/molecules/course';
 

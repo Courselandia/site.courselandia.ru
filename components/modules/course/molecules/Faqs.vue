@@ -25,8 +25,8 @@ import {
   toRefs,
 } from 'vue';
 
-import Faq from '@/components/atoms/Faq.vue';
-import Faqs from '@/components/molecules/Faqs.vue';
+import Faq from '@/components/modules/course/atoms/Faq.vue';
+import Faqs from '@/components/modules/course/atoms/Faqs.vue';
 import type IFaqComponent from '~/interfaces/components/molecules/faq';
 
 const props = defineProps({

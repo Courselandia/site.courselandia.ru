@@ -5,5 +5,5 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/scss/components/molecules/faqs.scss";
+@import "@/assets/scss/components/modules/course/atoms/faqs";
 </style>

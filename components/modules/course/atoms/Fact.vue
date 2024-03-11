@@ -10,5 +10,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/fact.scss";
+@import "@/assets/scss/components/modules/course/atoms/fact";
 </style>
