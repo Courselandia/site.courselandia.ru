@@ -69,99 +69,25 @@
     }
   }
 
-  &__content-logo {
-    flex-grow: 1;
-  }
-
   &__logo {
-    width: 100%;
-    max-width: 120px;
-    height: auto;
-    line-height: 0;
-  }
-
-  &__amount-review {
-    display: flex;
-    flex-grow: 0;
-    text-align: right;
+    flex-grow: 1;
   }
 
   &__amount-review-icon {
     margin-right: 0.5rem;
   }
 
-  &__content-statistic,
-  &__content-rating {
+  &__statistic,
+  &__rating {
     width: 50%;
   }
 
-  &__content-statistic {
+  &__statistic {
     padding-right: 1rem;
   }
 
-  &__content-rating {
+  &__rating {
     padding-left: 1rem;
-    display: flex;
-    align-items: center;
-  }
-
-  &__content-rating-number {
-    font-weight: 800;
-    font-size: 3.5rem;
-    line-height: 3.5rem;
-
-    @media all and (max-width: 768px) {
-      font-size: 3rem;
-      line-height: 3rem;
-    }
-
-    @media all and (max-width: 420px) {
-      font-size: 2.7rem;
-      line-height: 2.7rem;
-    }
-  }
-
-  &__content-rating-icon {
-    margin-left: 0.6875rem;
-  }
-
-  &__statistic {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.25rem;
-  }
-
-  &__statistic-amount {
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    width: 20px;
-  }
-
-  &__statistic-item {
-    flex-grow: 1;
-  }
-
-  &__statistic-bar {
-    border: 1px solid $blue2;
-    background-color: $blue2;
-    border-radius: 0.75rem;
-    height: 24px;
-    cursor: pointer;
-
-    &--empty {
-      background-color: transparent;
-    }
-  }
-
-  &__statistic-cancel {
-    line-height: 0;
-    padding-left: 0.5rem;
-    width: 25px;
-  }
-
-  &__statistic-cancel-icon {
-    cursor: pointer;
   }
 
   &__statistics {

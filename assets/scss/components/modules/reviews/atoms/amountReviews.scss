@@ -1,0 +1,10 @@
+.amount-reviews {
+  display: flex;
+  flex-grow: 0;
+  text-align: right;
+  align-items: center;
+
+  &__icon {
+    margin-right: 0.5rem;
+  }
+}

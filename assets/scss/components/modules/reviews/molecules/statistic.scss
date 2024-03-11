@@ -1,0 +1,46 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.statistic {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+  }
+
+  &__amount {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    width: 20px;
+  }
+
+  &__item {
+    flex-grow: 1;
+  }
+
+  &__bar {
+    border: 1px solid $blue2;
+    background-color: $blue2;
+    border-radius: 0.75rem;
+    height: 24px;
+    cursor: pointer;
+
+    &--empty {
+      background-color: transparent;
+    }
+  }
+
+  &__cancel {
+    line-height: 0;
+    padding-left: 0.5rem;
+    width: 25px;
+  }
+
+  &__icon {
+    cursor: pointer;
+  }
+}
