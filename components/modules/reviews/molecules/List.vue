@@ -179,7 +179,7 @@ const onLoadScrolling = async (): Promise<void> => {
 };
 
 const setScroll = (): void => {
-  const card = document.querySelector('#reviews-card');
+  const card = document.querySelector('#school-reviews-card');
 
   if (contentRef.value && card) {
     const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 150;

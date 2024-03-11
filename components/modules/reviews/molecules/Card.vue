@@ -3,7 +3,7 @@
     :class="`card ${scroll ? 'card--scroll' : ''}`"
   >
     <div
-      id="card"
+      id="school-reviews-card"
       :class="`card__box ${scroll ? 'card__box--scroll' : ''}`"
     >
       <div class="card__row card__row--horizontal card__row--line">
