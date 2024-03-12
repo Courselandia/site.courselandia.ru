@@ -38,7 +38,7 @@
             Фильтры
           </div>
           <div class="filters-mobile__filters">
-            <div id="filters-mobile" />
+            <div id="catalog-filters-mobile" />
 
             <div class="filters-mobile__action">
               <Button

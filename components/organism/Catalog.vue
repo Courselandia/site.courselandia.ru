@@ -268,7 +268,7 @@ import Reducer from '@/components/atoms/Reducer.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Filters from '@/components/modules/catalog/molecules/Filters.vue';
 import FiltersMobile from '@/components/modules/catalog/molecules/FiltersMobile.vue';
-import Header from '@/components/modules/catalog/molecules/Header.vue';
+import Header from '@/components/modules/catalog/organism/Header.vue';
 import Tags from '@/components/modules/catalog/molecules/Tags.vue';
 import Tools from '@/components/modules/catalog/molecules/Tools.vue';
 import Courses from '@/components/molecules/Courses.vue';

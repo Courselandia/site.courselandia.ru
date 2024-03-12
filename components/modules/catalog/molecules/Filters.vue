@@ -45,7 +45,7 @@
     </div>
     <div
       v-if="mobile"
-      id="filters-mobile-tags"
+      id="catalog-filters-mobile-tags"
       class="filters__tags"
     />
     <div class="filters__panel">

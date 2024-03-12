@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CatalogHeader
+    <Header
       v-if="itemLinkCategory"
     >
       <template #title>
@@ -18,8 +18,8 @@
         v-if="itemLinkCategory.directions"
         #section
       >
-        <div class="catalog-header__fire" />
-        <div class="catalog-header__label">
+        <div class="header__fire" />
+        <div class="header__label">
           Сейчас в тренде
         </div>
       </template>
@@ -39,8 +39,8 @@
           </Tag>
         </Tags>
       </template>
-    </CatalogHeader>
-    <CatalogHeader
+    </Header>
+    <Header
       v-else-if="itemLinkDirection"
     >
       <template #title>
@@ -58,8 +58,8 @@
         v-if="itemLinkDirection?.categories"
         #section
       >
-        <div class="catalog-header__fire" />
-        <div class="catalog-header__label">
+        <div class="header__fire" />
+        <div class="header__label">
           Сейчас в тренде
         </div>
       </template>
@@ -67,7 +67,7 @@
         v-if="itemLinkDirection?.categories"
         #tags
       >
-        <div class="catalog-header__desktop">
+        <div class="header__desktop">
           <Carousel
             snap-align="end"
             wrap-around
@@ -95,7 +95,7 @@
         </div>
         <!--noindex-->
         <ClientOnly>
-          <div class="catalog-header__mobile">
+          <div class="header__mobile">
             <Carousel
               snap-align="end"
               wrap-around
@@ -124,11 +124,11 @@
         </ClientOnly>
         <!--/noindex-->
       </template>
-    </CatalogHeader>
+    </Header>
     <template
       v-else-if="itemLinkProfession"
     >
-      <CatalogHeader
+      <Header
         v-if="itemLinkProfession?.text"
       >
         <template #title>
@@ -142,7 +142,7 @@
             <span v-html="itemLinkProfession.text" />
           </Reducer>
         </template>
-      </CatalogHeader>
+      </Header>
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
@@ -151,7 +151,7 @@
         </div>
       </div>
     </template>
-    <CatalogHeader
+    <Header
       v-else-if="itemLinkSchool"
     >
       <template #title>
@@ -206,11 +206,11 @@
           Перейти на сайт
         </Button>
       </template>
-    </CatalogHeader>
+    </Header>
     <template
       v-else-if="itemLinkSkill"
     >
-      <CatalogHeader
+      <Header
         v-if="itemLinkSkill?.text"
       >
         <template #title>
@@ -224,7 +224,7 @@
             <span v-html="itemLinkSkill.text" />
           </Reducer>
         </template>
-      </CatalogHeader>
+      </Header>
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
@@ -240,7 +240,7 @@
     <template
       v-else-if="itemLinkTool"
     >
-      <CatalogHeader
+      <Header
         v-if="itemLinkTool?.text"
       >
         <template #title>
@@ -254,7 +254,7 @@
             <span v-html="itemLinkTool.text" />
           </Reducer>
         </template>
-      </CatalogHeader>
+      </Header>
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
@@ -266,7 +266,7 @@
     <template
       v-else-if="itemLinkSection"
     >
-      <CatalogHeader
+      <Header
         v-if="itemLinkSection?.text"
       >
         <template #title>
@@ -280,7 +280,7 @@
             <span v-html="itemLinkSection.text" />
           </Reducer>
         </template>
-      </CatalogHeader>
+      </Header>
       <div v-else>
         <div class="content mt-12">
           <h1 class="title title--1">
@@ -289,7 +289,7 @@
         </div>
       </div>
     </template>
-    <CatalogHeader
+    <Header
       v-else
     >
       <template #title>
@@ -319,13 +319,13 @@
         </Reducer>
       </template>
       <template #section>
-        <div class="catalog-header__fire" />
-        <div class="catalog-header__label">
+        <div class="header__fire" />
+        <div class="header__label">
           Сейчас в тренде
         </div>
       </template>
       <template #tags>
-        <div class="catalog-header__desktop">
+        <div class="header__desktop">
           <Carousel
             snap-align="end"
             wrap-around
@@ -353,7 +353,7 @@
         </div>
         <!--noindex-->
         <ClientOnly>
-          <div class="catalog-header__mobile">
+          <div class="header__mobile">
             <Carousel
               snap-align="end"
               wrap-around
@@ -382,7 +382,7 @@
         </ClientOnly>
         <!--/noindex-->
       </template>
-    </CatalogHeader>
+    </Header>
   </div>
 </template>
 
@@ -404,7 +404,7 @@ import {
 import Button from '@/components/atoms/Button.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import Tag from '@/components/atoms/Tag.vue';
-import CatalogHeader from '~/components/modules/catalog/molecules/CatalogHeader.vue';
+import Header from '@/components/modules/catalog/molecules/Header.vue';
 import CatalogHeaderTeacher from '@/components/molecules/CatalogHeaderTeacher.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import type ITag from '@/interfaces/components/atoms/tag';
@@ -535,5 +535,5 @@ const popularTags = ref<Array<ITag>>([
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/molecules/carousel.scss";
+@import "assets/scss/components/molecules/carousel";
 </style>
