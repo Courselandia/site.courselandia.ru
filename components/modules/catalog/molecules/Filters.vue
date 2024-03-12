@@ -255,7 +255,7 @@
           </div>
         </transition>
         <div class="filters__selection">
-          <CatalogFilterSelect
+          <FilterSelect
             v-model:value="selectedSchoolsValue"
             :items="schools"
             :simple="schools?.length < 11"
@@ -288,7 +288,7 @@
           </div>
         </transition>
         <div class="filters__selection">
-          <CatalogFilterSelect
+          <FilterSelect
             v-model:value="selectedCategoriesValue"
             :items="categories"
             :simple="categories?.length < 11"
@@ -321,7 +321,7 @@
           </div>
         </transition>
         <div class="filters__selection">
-          <CatalogFilterSelect
+          <FilterSelect
             v-model:value="selectedProfessionsValue"
             :items="professions"
             :simple="professions?.length < 11"
@@ -354,7 +354,7 @@
           </div>
         </transition>
         <div class="filters__selection">
-          <CatalogFilterSelect
+          <FilterSelect
             v-model:value="selectedTeachersValue"
             :items="teachers"
             :simple="teachers?.length < 11"
@@ -387,7 +387,7 @@
           </div>
         </transition>
         <div class="filters__selection">
-          <CatalogFilterSelect
+          <FilterSelect
             v-model:value="selectedSkillsValue"
             :items="skills"
             :simple="skills?.length < 11"
@@ -420,7 +420,7 @@
           </div>
         </transition>
         <div class="filters__selection">
-          <CatalogFilterSelect
+          <FilterSelect
             v-model:value="selectedToolsValue"
             :items="tools"
             :simple="tools?.length < 11"
@@ -534,7 +534,7 @@ import RangeSlider from '@/components/atoms/form/RangeSlider.vue';
 import Switch from '@/components/atoms/form/Switch.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
-import CatalogFilterSelect from '@/components/molecules/CatalogFilterSelect.vue';
+import FilterSelect from '@/components/modules/catalog/molecules/FilterSelect.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import ELevel from '@/enums/components/molecules/level';
 import {

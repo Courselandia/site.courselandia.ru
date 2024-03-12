@@ -233,7 +233,7 @@
         </div>
       </div>
     </template>
-    <CatalogHeaderTeacher
+    <HeaderTeacher
       v-else-if="itemLinkTeacher"
       :teacher="itemLinkTeacher"
     />
@@ -405,7 +405,7 @@ import Button from '@/components/atoms/Button.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import Header from '@/components/modules/catalog/molecules/Header.vue';
-import CatalogHeaderTeacher from '@/components/molecules/CatalogHeaderTeacher.vue';
+import HeaderTeacher from '@/components/modules/catalog/molecules/HeaderTeacher.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import type ITag from '@/interfaces/components/atoms/tag';
 import type ICategoryLink from '@/interfaces/stores/course/categoryLink';

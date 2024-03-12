@@ -109,5 +109,5 @@ const nameClass = computed(() => {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/atoms/form/checkbox.scss";
+@import "assets/scss/components/atoms/form/checkbox";
 </style>

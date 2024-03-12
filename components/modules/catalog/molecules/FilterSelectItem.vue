@@ -1,5 +1,5 @@
 <template>
-  <CatalogFilterSelectItemCheckbox
+  <FilterSelectItemCheckbox
     :value="source.id"
     :label="source.label || ''"
     :disabled="source.disabled && selects?.indexOf(source.id) === -1"
@@ -16,7 +16,7 @@ import {
   toRefs,
 } from 'vue';
 
-import CatalogFilterSelectItemCheckbox from '@/components/molecules/CatalogFilterSelectItemCheckbox.vue';
+import FilterSelectItemCheckbox from '@/components/modules/catalog/molecules/FilterSelectItemCheckbox.vue';
 import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
 const props = defineProps({

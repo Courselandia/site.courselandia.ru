@@ -1,10 +1,8 @@
 <template>
   <div
-    :class="`catalog-filter-select ${nameClass}`"
+    :class="`filter-select ${nameClass}`"
   >
-    <div
-      class="catalog-filter-select__search"
-    >
+    <div class="filter-select__search">
       <Item>
         <Input
           v-model:value="search"
@@ -24,7 +22,7 @@
               name="close"
               color="grey3"
               :size="[16, 16]"
-              class="catalog-filter-select__close"
+              class="filter-select__close"
               @click="onCLickClean"
             />
           </template>
@@ -35,14 +33,14 @@
       <ClientOnly>
         <Group
           v-model:value="selects"
-          class="catalog-filter-select__group"
+          class="filter-select__group"
         >
           <VirtualList
             ref="itemsRef"
-            class="catalog-filter-select__items"
+            class="filter-select__items"
             :data-key="'id'"
             :data-sources="activeItems"
-            :data-component="CatalogFilterSelectItem"
+            :data-component="FilterSelectItem"
             :extra-props="{ selects: selects, onClickItem: clickItem }"
           />
         </Group>
@@ -51,7 +49,7 @@
     <div
       v-if="!simple"
       :style="{ visibility: activeItems.length >= 10 ? 'visible' : 'hidden' }"
-      class="catalog-filter-select__more"
+      class="filter-select__more"
       @click="onClickMore"
       @keyup="onClickMore"
     >
@@ -85,7 +83,7 @@ import Group from '@/components/atoms/form/Group.vue';
 import Input from '@/components/atoms/form/Input.vue';
 import Item from '@/components/atoms/form/Item.vue';
 import Icon from '@/components/atoms/Icon.vue';
-import CatalogFilterSelectItem from '@/components/molecules/CatalogFilterSelectItem.vue';
+import FilterSelectItem from '@/components/modules/catalog/molecules/FilterSelectItem.vue';
 import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
 
 const props = defineProps({
@@ -120,11 +118,11 @@ const nameClass = computed(() => {
   const classes = [];
 
   if (more.value) {
-    classes.push('catalog-filter-select--all');
+    classes.push('filter-select--all');
   }
 
   if (props.simple) {
-    classes.push('catalog-filter-select--simple');
+    classes.push('filter-select--simple');
   }
 
   return classes.join(' ');
@@ -177,6 +175,6 @@ const onCLickClean = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "assets/scss/components/molecules/catalogFilterSelect.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/catalog/molecules/filterSelect";
 </style>
