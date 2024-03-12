@@ -1,0 +1,9 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.card-name {
+  color: $black;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+}

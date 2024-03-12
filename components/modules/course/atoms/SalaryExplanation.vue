@@ -22,7 +22,7 @@ import ELevel from '@/enums/stores/course/level';
 
 const props = defineProps({
   level: {
-    type: Object as PropType<ELevel>,
+    type: String as PropType<ELevel>,
     required: true,
   },
   name: {

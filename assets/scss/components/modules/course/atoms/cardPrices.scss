@@ -1,0 +1,32 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.card-prices {
+  &__price {
+    color: $black;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    font-size: 1.375rem;
+    line-height: 1.375rem;
+  }
+
+  &__additional {
+    display: flex;
+    align-items: center;
+  }
+
+  &__current {
+    margin-right: 0.625rem;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $black;
+  }
+
+  &__old {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $grey4;
+    text-decoration: line-through;
+  }
+}

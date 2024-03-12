@@ -1,0 +1,20 @@
+.card-feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.3125rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    line-height: 0;
+    margin-right: 0.75rem;
+  }
+
+  &__value {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+  }
+}

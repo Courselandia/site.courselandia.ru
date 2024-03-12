@@ -1,0 +1,29 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.card-features {
+  &__header {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  &__label {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $grey4;
+    padding-right: 0.5rem;
+    position: relative;
+    z-index: 2;
+    background-color: $white;
+    display: inline-block;
+  }
+
+  &__line {
+    position: absolute;
+    border-top: 1px solid $grey2;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+}
