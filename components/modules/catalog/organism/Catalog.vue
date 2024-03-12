@@ -21,24 +21,9 @@
                   />
                 </template>
               </Tools>
-              <div class="catalog__total">
-                <template v-if="total === 1">
-                  Найден
-                </template>
-                <template v-if="total >= 2">
-                  Найдено
-                </template>
-                {{ total }}
-                <template v-if="total === 1">
-                  курс
-                </template>
-                <template v-if="total >= 2 && total <= 4">
-                  курса
-                </template>
-                <template v-else>
-                  курсов
-                </template>
-              </div>
+              <Total
+                :total="total"
+              />
             </div>
             <div class="catalog__tags">
               <ClientOnly>
@@ -266,6 +251,7 @@ import Loader from '@/components/atoms/Loader.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
+import Total from '@/components/modules/catalog/atoms/Total.vue';
 import Filters from '@/components/modules/catalog/molecules/Filters.vue';
 import FiltersMobile from '@/components/modules/catalog/molecules/FiltersMobile.vue';
 import Tags from '@/components/modules/catalog/molecules/Tags.vue';
@@ -1614,5 +1600,5 @@ useJsonld(teacherJsonLd.value);
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/organism/catalog";
+@import "@/assets/scss/components/modules/catalog/organism/catalog";
 </style>
