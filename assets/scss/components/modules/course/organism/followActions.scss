@@ -1,0 +1,15 @@
+.follow-actions {
+  display: flex;
+  align-items: center;
+
+  &__item {
+    &--button {
+      flex-grow: 1;
+    }
+
+    &--favorite {
+      line-height: 0;
+      padding-left: 1rem;
+    }
+  }
+}

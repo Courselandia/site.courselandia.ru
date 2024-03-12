@@ -73,5 +73,5 @@ const onClick = (): void => {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/organism/favoriteCourse.scss";
+@import "@/assets/scss/components/modules/course/organism/favoriteCourse";
 </style>

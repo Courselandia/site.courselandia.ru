@@ -1,20 +1,20 @@
 <template>
-  <div class="card-actions">
-    <div class="card-actions__item card-actions__item--button">
+  <div class="follow-actions">
+    <div class="follow-actions__item follow-actions__item--button">
       <Button
         :to="url"
         link="link"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        wide
         @click="onClick"
       >
-        На сайт курса
+        Перейти
       </Button>
     </div>
-    <div class="card-actions__item card-actions__item--favorite">
+    <div class="follow-actions__item follow-actions__item--favorite">
       <FavoriteCourse
         :id="id"
+        :mobile="false"
       />
     </div>
   </div>
@@ -42,5 +42,5 @@ const onClick = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/modules/course/atoms/cardActions";
+@import "@/assets/scss/components/modules/course/organism/followActions";
 </style>

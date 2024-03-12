@@ -150,7 +150,7 @@ import {
 import Icon from '@/components/atoms/Icon.vue';
 import LazyBackground from '@/components/atoms/LazyBackground.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
-import FavoriteCourse from '@/components/organism/FavoriteCourse.vue';
+import FavoriteCourse from '~/components/modules/course/organism/FavoriteCourse.vue';
 import currency from '@/helpers/currency';
 import duration from '@/helpers/duration';
 import { money } from '@/helpers/number';

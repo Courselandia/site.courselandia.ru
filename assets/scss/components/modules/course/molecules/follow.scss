@@ -33,17 +33,6 @@
     }
   }
 
-  &__action {
-    &--button {
-      flex-grow: 1;
-    }
-
-    &--favorite {
-      line-height: 0;
-      padding-left: 1rem;
-    }
-  }
-
   &__content {
     display: flex;
     align-items: center;
