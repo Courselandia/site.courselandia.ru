@@ -3,6 +3,10 @@
 .program-info {
   display: flex;
 
+  @media all and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+
   &__description {
     font-size: 1rem;
     line-height: 1.5rem;

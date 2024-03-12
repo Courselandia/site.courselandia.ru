@@ -1,0 +1,25 @@
+.follow-prices {
+  &__price {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+  }
+
+  &__additional {
+    display: flex;
+    align-items: center;
+  }
+
+  &__currency,
+  &__old {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
+
+  &__currency {
+    margin-right: 0.5rem;
+  }
+
+  &__old {
+    text-decoration: line-through;
+  }
+}
