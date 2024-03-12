@@ -166,22 +166,6 @@
     }
   }
 
-  &__fire {
-    background-image: url("@/assets/images/fire.svg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 24px;
-    height: 24px;
-    line-height: 0;
-    margin-right: 0.5rem;
-  }
-
-  &__label {
-    font-weight: 800;
-    font-size: 1.25rem;
-    line-height: 1.5625rem;
-  }
-
   &__tags {
     &:empty {
       display: none;
@@ -239,21 +223,5 @@
 
   &__empty {
     display: none;
-  }
-
-  &__desktop {
-    display: block;
-
-    @media all and (max-width: 576px) {
-      display: none;
-    }
-  }
-
-  &__mobile {
-    display: none;
-
-    @media all and (max-width: 576px) {
-      display: block;
-    }
   }
 }

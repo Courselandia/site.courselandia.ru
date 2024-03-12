@@ -534,6 +534,10 @@ const popularTags = ref<Array<ITag>>([
 ]);
 </script>
 
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/catalog/organism/header";
+</style>
+
 <style lang="scss">
-@import "assets/scss/components/molecules/carousel";
+@import "@/assets/scss/components/molecules/carousel";
 </style>
