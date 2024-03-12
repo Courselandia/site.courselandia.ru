@@ -16,7 +16,7 @@
     width: 100%;
   }
 
-  &__block {
+  :deep(.info-block) {
     width: calc(50% - 2.6rem);
     margin-bottom: 2.6rem;
     margin-left: 1.3rem;
@@ -32,27 +32,5 @@
         margin-bottom: 0;
       }
     }
-  }
-
-  &__title {
-    font-weight: 800;
-    font-size: 1.25rem;
-    line-height: 1.5625rem;
-    margin-bottom: 0.5rem;
-
-    &::before {
-      content: "—";
-      font-weight: 800;
-      font-size: 1.25rem;
-      line-height: 1.5625rem;
-      margin-right: 0.5rem;
-    }
-  }
-
-  &__value {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    margin-left: 2.1rem;
   }
 }
