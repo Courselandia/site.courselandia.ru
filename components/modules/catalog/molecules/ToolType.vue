@@ -1,7 +1,7 @@
 <template>
-  <div class="catalog-tool-type">
+  <div class="tool-type">
     <div
-      class="catalog-tool-type__item"
+      class="tool-type__item"
       @click="onCLick(ECourseType.TILE)"
       @keyup="onCLick(ECourseType.TILE)"
     >
@@ -12,7 +12,7 @@
       />
     </div>
     <div
-      class="catalog-tool-type__item"
+      class="tool-type__item"
       @click="onCLick(ECourseType.ROW)"
       @keyup="onCLick(ECourseType.ROW)"
     >
@@ -23,7 +23,7 @@
       />
     </div>
     <div
-      class="catalog-tool-type__item"
+      class="tool-type__item"
       @click="onCLick(ECourseType.BOX)"
       @keyup="onCLick(ECourseType.BOX)"
     >
@@ -80,5 +80,5 @@ const onCLick = (val: ECourseType): void => {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/molecules/catalogToolType.scss";
+@import "@/assets/scss/components/modules/catalog/molecules/toolType";
 </style>
