@@ -19,5 +19,5 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/numeric.scss";
+@import "@/assets/scss/components/modules/course/atoms/numeric";
 </style>

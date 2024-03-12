@@ -59,23 +59,6 @@
     }
   }
 
-  &__explanation {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    margin-bottom: 1rem;
-
-    @media all and (max-width: 576px) {
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  &__duration {
-    font-weight: 800;
-    font-size: 1.25rem;
-    line-height: 1.5625rem;
-  }
-
   &__separator {
     line-height: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.2);

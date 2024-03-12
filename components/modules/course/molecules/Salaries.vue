@@ -8,34 +8,13 @@
         <div class="salaries__separator salaries__separator--top" />
       </div>
       <div class="salaries__info">
-        <div class="salaries__explanation">
-          На позиции
-          <template v-if="professionLevel === ELevel.JUNIOR">
-            Junior
-          </template>
-          <template v-else-if="professionLevel === ELevel.MIDDLE">
-            Middle
-          </template>
-          <template v-else-if="professionLevel === ELevel.SENIOR">
-            Senior
-          </template>
-          {{ professionName }}
-          вы заработаете столько же, сколько стоит курс,
-        </div>
-        <div class="salaries__duration">
-          <template v-if="months">
-            за {{ months }}
-            <template v-if="months === 1">
-              месяц
-            </template>
-            <template v-else-if="months >= 2 && months <= 4">
-              месяца
-            </template>
-            <template v-else-if="months >= 5">
-              месяцев
-            </template>
-          </template>
-        </div>
+        <SalaryExplanation
+          :level="professionLevel"
+          :name="professionName"
+        />
+        <SalaryDuration
+          :months="months"
+        />
       </div>
     </div>
     <div class="salaries__professions">
@@ -86,7 +65,9 @@ import {
   ref,
 } from 'vue';
 
-import SliderSalary from '@/components/molecules/SliderSalary.vue';
+import SalaryDuration from '@/components/modules/course/atoms/SalaryDuration.vue';
+import SalaryExplanation from '@/components/modules/course/atoms/SalaryExplanation.vue';
+import SliderSalary from '@/components/modules/course/molecules/SliderSalary.vue';
 import ELevel from '@/enums/stores/course/level';
 import { money } from '@/helpers/number';
 import type ICourse from '@/interfaces/components/molecules/course';

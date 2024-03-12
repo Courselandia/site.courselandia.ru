@@ -130,5 +130,5 @@ const format = (val: number): string => `${money(salary(val))} ₽`;
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/molecules/sliderSalary.scss";
+@import "@/assets/scss/components/modules/course/molecules/sliderSalary";
 </style>
