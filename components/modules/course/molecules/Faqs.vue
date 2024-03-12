@@ -27,7 +27,7 @@ import {
 
 import Faq from '@/components/modules/course/atoms/Faq.vue';
 import Faqs from '@/components/modules/course/atoms/Faqs.vue';
-import type IFaqComponent from '~/interfaces/components/molecules/faq';
+import type IFaqComponent from '@/interfaces/components/molecules/faq';
 
 const props = defineProps({
   faqs: {
