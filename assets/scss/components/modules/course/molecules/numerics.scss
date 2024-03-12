@@ -9,7 +9,7 @@
     margin-right: 0;
   }
 
-  .numeric {
+  :deep(.numeric) {
     width: calc(50% - 1.8rem);
     margin-left: 0.9rem;
     margin-right: 0.9rem;

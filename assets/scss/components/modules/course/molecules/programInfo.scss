@@ -1,0 +1,51 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.program-info {
+  display: flex;
+
+  &__description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $grey4;
+    width: calc(100% - 160px * 2);
+    padding-right: 3rem;
+
+    @media all and (max-width: 768px) {
+      width: 100%;
+      padding-right: 0;
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  &__modules,
+  &__lessons {
+    text-align: center;
+    width: 160px;
+
+    @media all and (max-width: 576px) {
+      width: auto;
+      margin-right: 2rem;
+    }
+  }
+
+  &__amount {
+    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 3.5rem;
+
+    @media all and (max-width: 576px) {
+      font-size: 2.5rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  &__unit {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+
+    @media all and (max-width: 576px) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+}

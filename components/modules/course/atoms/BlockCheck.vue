@@ -21,5 +21,5 @@ import Icon from '@/components/atoms/Icon.vue';
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/blockCheck.scss";
+@import "@/assets/scss/components/modules/course/atoms/blockCheck";
 </style>

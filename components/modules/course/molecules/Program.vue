@@ -11,55 +11,11 @@
       v-if="description"
       class="program__top"
     >
-      <div class="program__description">
-        {{ description }}
-      </div>
-      <div
-        v-if="course.modules_amount"
-        class="program__modules"
-      >
-        <div class="program__amount">
-          {{ course.modules_amount }}
-        </div>
-        <div class="program__unit">
-          <template
-            v-if="course.modules_amount === 1"
-          >
-            Модуль
-          </template>
-          <template
-            v-else-if="course.modules_amount >= 2 && course.modules_amount <= 4"
-          >
-            Модуля
-          </template>
-          <template v-else>
-            Модулей
-          </template>
-        </div>
-      </div>
-      <div
-        v-if="course.lessons_amount"
-        class="program__lessons"
-      >
-        <div class="program__amount">
-          {{ course.lessons_amount }}
-        </div>
-        <div class="program__unit">
-          <template
-            v-if="course.lessons_amount === 1"
-          >
-            Онлайн-курс
-          </template>
-          <template
-            v-else-if="course.lessons_amount >= 2 && course.lessons_amount <= 4"
-          >
-            Онлайн-курса
-          </template>
-          <template v-else>
-            Онлайн-курсов
-          </template>
-        </div>
-      </div>
+      <ProgramInfo
+        :description="description"
+        :modules-amount="course.modules_amount"
+        :lessons-amount="course.lessons_amount"
+      />
     </div>
 
     <div class="program__bottom">
@@ -78,6 +34,7 @@ import {
   computed,
 } from 'vue';
 
+import ProgramInfo from '@/components/modules/course/molecules/ProgramInfo.vue';
 import ProgramList from '@/components/modules/course/molecules/ProgramList.vue';
 import duration from '@/helpers/duration';
 import type ICourse from '@/interfaces/components/molecules/course';

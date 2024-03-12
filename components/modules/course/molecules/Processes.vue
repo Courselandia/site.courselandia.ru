@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
-import BlockCheck from '@/components/atoms/BlockCheck.vue';
+import BlockCheck from '@/components/modules/course/atoms/BlockCheck.vue';
 import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
