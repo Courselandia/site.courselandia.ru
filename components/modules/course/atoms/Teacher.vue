@@ -11,9 +11,11 @@
         :alt="teacher.label"
         :title="teacher.label"
       />
-      <Animal
+      <ClientOnly
         v-else
-      />
+      >
+        <Animal />
+      </ClientOnly>
     </div>
     <div class="teacher__info">
       <div class="teacher__name">
