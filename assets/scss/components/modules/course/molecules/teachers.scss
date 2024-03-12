@@ -10,15 +10,13 @@
     flex-wrap: wrap;
   }
 
-  &__item {
+  :deep(.teacher) {
     width: calc(33.33% - 2rem);
     display: flex;
     align-items: center;
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 2rem;
-    color: $primary;
-    text-decoration: none;
 
     @media all and (max-width: 1200px) {
       width: calc(25% - 2rem);
@@ -34,48 +32,6 @@
 
     @media all and (max-width: 576px) {
       flex-direction: column;
-    }
-
-    &:hover {
-      .teachers {
-        &__name {
-          color: $blue3;
-        }
-      }
-    }
-  }
-
-  &__picture {
-    margin-right: 1.5rem;
-
-    @media all and (max-width: 576px) {
-      margin-right: 0;
-    }
-  }
-
-  &__image {
-    width: 80px;
-    height: auto;
-    border-radius: 100%;
-  }
-
-  &__name {
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.5rem;
-
-    @media all and (max-width: 576px) {
-      text-align: center;
-    }
-  }
-
-  &__position {
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.3125rem;
-
-    @media all and (max-width: 576px) {
-      text-align: center;
     }
   }
 }

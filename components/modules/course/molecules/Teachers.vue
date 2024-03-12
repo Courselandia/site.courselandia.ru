@@ -4,38 +4,11 @@
     class="teachers"
   >
     <div class="teachers__items">
-      <nuxt-link
+      <Teacher
         v-for="(teacher, key) in course.teachers"
         :key="key"
-        :to="teacher.link"
-        class="teachers__item"
-      >
-        <div class="teachers__picture">
-          <LazyImage
-            v-if="teacher.image?.path"
-            :src="teacher.image.path"
-            class="teachers__image"
-            :alt="teacher.label"
-            :title="teacher.label"
-          />
-          <Animal
-            v-else
-          />
-        </div>
-        <div class="teachers__info">
-          <div class="teachers__name">
-            {{ teacher.label }}
-          </div>
-          <ClientOnly>
-            <div
-              v-if="teacher.extra"
-              class="teachers__position"
-            >
-              {{ teacher.extra }}
-            </div>
-          </ClientOnly>
-        </div>
-      </nuxt-link>
+        :teacher="teacher"
+      />
     </div>
   </div>
 </template>
@@ -43,8 +16,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
-import Animal from '@/components/atoms/Animal.vue';
-import LazyImage from '@/components/atoms/LazyImage.vue';
+import Teacher from '@/components/modules/course/atoms/Teacher.vue';
 import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
