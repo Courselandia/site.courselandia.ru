@@ -1,12 +1,11 @@
 <template>
   <Catalog
-    class="mb-24 mb-12-sm"
     section="school"
   />
 </template>
 
 <script lang="ts" setup>
-import Catalog from '~/components/modules/catalog/organism/Catalog.vue';
+import Catalog from '@/components/modules/catalog/Index.vue';
 
 definePageMeta({
   middleware: [
