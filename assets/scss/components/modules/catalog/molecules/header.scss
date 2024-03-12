@@ -1,10 +1,10 @@
 @import "@/assets/scss/vars/modifiers/colors";
 @import "@/assets/scss/vars/animations/transition";
 
-.catalog-header {
+.header {
   &--image {
     @media all and (max-width: 1000px) {
-      .catalog-header {
+      .header {
         &__side {
           &--left {
             order: 2;

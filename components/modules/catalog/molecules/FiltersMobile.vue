@@ -1,7 +1,7 @@
 <template>
-  <div class="catalog-filters-mobile">
+  <div class="filters-mobile">
     <div
-      :class="`catalog-filters-mobile__icon ${totalFilters > 0 ? 'catalog-filters-mobile__icon--active' : ''}`"
+      :class="`filters-mobile__icon ${totalFilters > 0 ? 'filters-mobile__icon--active' : ''}`"
       @click="onClickShow"
       @keyup="onClickShow"
     >
@@ -12,7 +12,7 @@
       />
       <div
         v-if="totalFilters"
-        class="catalog-filters-mobile__total"
+        class="filters-mobile__total"
       >
         {{ totalFilters }}
       </div>
@@ -20,11 +20,11 @@
     <transition name="slide-right">
       <div
         v-show="show"
-        class="catalog-filters-mobile__content"
+        class="filters-mobile__content"
       >
-        <div class="catalog-filters-mobile__elements">
+        <div class="filters-mobile__elements">
           <div
-            class="catalog-filters-mobile__close"
+            class="filters-mobile__close"
             @click="onClickClose"
             @keyup="onClickClose"
           >
@@ -34,13 +34,13 @@
               :size="[24, 24]"
             />
           </div>
-          <div class="catalog-filters-mobile__header">
+          <div class="filters-mobile__header">
             Фильтры
           </div>
-          <div class="catalog-filters-mobile__filters">
-            <div id="catalog-filters-mobile" />
+          <div class="filters-mobile__filters">
+            <div id="filters-mobile" />
 
-            <div class="catalog-filters-mobile__action">
+            <div class="filters-mobile__action">
               <Button
                 :loading="loading"
                 @click="onClickApply"
@@ -69,9 +69,7 @@
 
 <script lang="ts" setup>
 import {
-  onDeactivated,
   ref,
-  watch,
 } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
@@ -110,6 +108,6 @@ const onClickApply = (): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/catalogFiltersMobile.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/catalog/molecules/filtersMobile";
 </style>

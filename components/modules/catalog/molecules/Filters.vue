@@ -1,11 +1,11 @@
 <template>
   <div
-    :class="`catalog-filters ${nameClass}`"
+    :class="`filters ${nameClass}`"
   >
     <div
       v-if="directions?.length && !mobile"
       key="directions"
-      class="catalog-filters__directions"
+      class="filters__directions"
     >
       <Tags>
         <Tag
@@ -45,14 +45,14 @@
     </div>
     <div
       v-if="mobile"
-      id="catalog-filters-mobile-tags"
-      class="catalog-filters__tags"
+      id="filters-mobile-tags"
+      class="filters__tags"
     />
-    <div class="catalog-filters__panel">
+    <div class="filters__panel">
       <div
         v-if="directions?.length"
         :key="directions"
-        class="catalog-filters__block catalog-filters__block--directions"
+        class="filters__block filters__block--directions"
       >
         <Tags>
           <Tag
@@ -90,15 +90,15 @@
       <div
         v-if="ratings?.length"
         key="ratings"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Рейтинг
         </div>
         <transition name="fade">
           <div
             v-if="ratings && hasRating(ratings, selectedRatingValue || null)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetRating"
             @keyup="onClickResetRating"
           >
@@ -109,7 +109,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <Group v-model:value="selectedRatingValue">
             <template
               v-if="ratings"
@@ -130,15 +130,15 @@
 
       <div
         key="price"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Цена
         </div>
         <transition name="fade">
           <div
             v-if="selectedPricesValue[0] !== priceMin || selectedPricesValue[1] !== priceMax"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetPrices"
             @keyup="onClickResetPrices"
           >
@@ -149,7 +149,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <RangeSlider
             v-model:value="selectedPricesValue"
             :min="priceMin"
@@ -165,7 +165,7 @@
 
       <div
         key="credit"
-        class="catalog-filters__block"
+        class="filters__block"
       >
         <Item
           label="Рассрочка"
@@ -182,7 +182,7 @@
 
       <div
         key="free"
-        class="catalog-filters__block"
+        class="filters__block"
       >
         <Item
           label="Только бесплатные"
@@ -199,16 +199,16 @@
 
       <div
         key="duration"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Длительность
         </div>
         <transition name="fade">
           <div
             v-if="selectedDurationsValue[0] !== durationMin
               || selectedDurationsValue[1] !== durationMax"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetDurations"
             @keyup="onClickResetDurations"
           >
@@ -219,7 +219,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <RangeSlider
             v-model:value="selectedDurationsValue"
             :min="durationMin"
@@ -235,15 +235,15 @@
       <div
         v-if="schools?.length"
         key="schools"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Школы
         </div>
         <transition name="fade">
           <div
             v-if="hasSchools(schools, selectedSchoolsValue)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetSchools"
             @keyup="onClickResetSchools"
           >
@@ -254,7 +254,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <CatalogFilterSelect
             v-model:value="selectedSchoolsValue"
             :items="schools"
@@ -268,15 +268,15 @@
       <div
         v-if="categories?.length"
         key="categories"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Категории
         </div>
         <transition name="fade">
           <div
             v-if="hasCategories(categories, selectedCategoriesValue)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetCategories"
             @keyup="onClickResetCategories"
           >
@@ -287,7 +287,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <CatalogFilterSelect
             v-model:value="selectedCategoriesValue"
             :items="categories"
@@ -301,15 +301,15 @@
       <div
         v-if="professions?.length"
         key="professions"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Профессии
         </div>
         <transition name="fade">
           <div
             v-if="hasProfessions(professions, selectedProfessionsValue)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetProfessions"
             @keyup="onClickResetProfessions"
           >
@@ -320,7 +320,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <CatalogFilterSelect
             v-model:value="selectedProfessionsValue"
             :items="professions"
@@ -334,15 +334,15 @@
       <div
         v-if="teachers?.length"
         key="teachers"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Учителя
         </div>
         <transition name="fade">
           <div
             v-if="hasTeachers(teachers, selectedTeachersValue)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetTeachers"
             @keyup="onClickResetTeachers"
           >
@@ -353,7 +353,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <CatalogFilterSelect
             v-model:value="selectedTeachersValue"
             :items="teachers"
@@ -367,15 +367,15 @@
       <div
         v-if="skills?.length"
         key="skills"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Навыки
         </div>
         <transition name="fade">
           <div
             v-if="hasSkills(skills, selectedSkillsValue)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetSkills"
             @keyup="onClickResetSkills"
           >
@@ -386,7 +386,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <CatalogFilterSelect
             v-model:value="selectedSkillsValue"
             :items="skills"
@@ -400,15 +400,15 @@
       <div
         v-if="tools?.length"
         key="tools"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Инструменты
         </div>
         <transition name="fade">
           <div
             v-if="hasTools(tools, selectedToolsValue)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetTools"
             @keyup="onClickResetTools"
           >
@@ -419,7 +419,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <CatalogFilterSelect
             v-model:value="selectedToolsValue"
             :items="tools"
@@ -433,15 +433,15 @@
       <div
         v-if="formats?.length"
         key="formats"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Форма обучения
         </div>
         <transition name="fade">
           <div
             v-if="selectedFormatValue"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetFormat"
             @keyup="onClickResetFormat"
           >
@@ -452,7 +452,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <Group v-model:value="selectedFormatValue">
             <template
               v-if="formats"
@@ -473,16 +473,16 @@
       <div
         v-if="levels?.length"
         key="levels"
-        class="catalog-filters__block"
+        class="filters__block"
       >
-        <div class="catalog-filters__title">
+        <div class="filters__title">
           Уровни курса
         </div>
 
         <transition name="fade">
           <div
             v-if="hasLevels(levels, selectedLevelsValue || null)"
-            class="catalog-filters__reset"
+            class="filters__reset"
             @click="onClickResetLevels"
             @keyup="onClickResetLevels"
           >
@@ -493,7 +493,7 @@
             />
           </div>
         </transition>
-        <div class="catalog-filters__selection">
+        <div class="filters__selection">
           <Group v-model:value="selectedLevelsValue">
             <template
               v-if="levels"
@@ -774,7 +774,7 @@ const nameClass = computed(() => {
   const classes = [];
 
   if (props.mobile) {
-    classes.push('catalog-filters--mobile');
+    classes.push('filters--mobile');
   }
 
   return classes.join(' ');
@@ -1122,6 +1122,6 @@ const onClickLevels = (): void => {
 
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/catalogFilters.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/catalog/molecules/filters";
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="catalog-tools">
-    <div class="catalog-tools__side catalog-tools__side--left">
-      <div class="catalog-tools__field catalog-tools__field--sort">
+  <div class="tools">
+    <div class="tools__side tools__side--left">
+      <div class="tools__field tools__field--sort">
         <Item>
           <Select
             v-model:value="sortValue"
@@ -13,17 +13,8 @@
         </Item>
       </div>
     </div>
-    <div class="catalog-tools__side catalog-tools__side--right">
-      <!--
-      <div class="catalog-tools__field">
-        <Item>
-          <CatalogToolType
-            v-model:value="typeValue"
-          />
-        </Item>
-      </div>
-      -->
-      <div class="catalog-tools__field catalog-tools__field--filters-mobile">
+    <div class="tools__side tools__side--right">
+      <div class="tools__field tools__field--filters-mobile">
         <slot name="filtersMobile" />
       </div>
     </div>
@@ -122,6 +113,6 @@ const onChangeSort = (val: TValue): void => {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/catalogTools.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/catalog/molecules/tools";
 </style>

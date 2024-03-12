@@ -1,9 +1,9 @@
 @import "@/assets/scss/vars/modifiers/colors";
 @import "@/assets/scss/vars/animations/transition";
 
-.catalog-filters {
+.filters {
   &--mobile {
-    .catalog-filters {
+    .filters {
       &__panel {
         box-shadow: none;
       }

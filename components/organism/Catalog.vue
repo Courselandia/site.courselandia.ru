@@ -1,25 +1,26 @@
 <template>
   <div>
-    <CatalogHeader />
-
     <div class="catalog">
+      <div class="catalog__header">
+        <Header />
+      </div>
       <div class="content">
         <div class="catalog__content">
           <div class="catalog__items">
             <div class="catalog__tools">
-              <CatalogTools
+              <Tools
                 v-model:sort="sort"
                 v-model:type="type"
                 @change-sort="onChangeSort"
               >
                 <template #filtersMobile>
-                  <CatalogFiltersMobile
+                  <FiltersMobile
                     :total="total"
                     :total-filters="totalFilters"
                     :loading="loading"
                   />
                 </template>
-              </CatalogTools>
+              </Tools>
               <div class="catalog__total">
                 <template v-if="total === 1">
                   Найден
@@ -41,7 +42,7 @@
             </div>
             <div class="catalog__tags">
               <ClientOnly>
-                <CatalogTags
+                <Tags
                   v-model:selected-direction="selectedDirection"
                   v-model:selected-rating="selectedRating"
                   v-model:selected-schools="selectedSchools"
@@ -116,7 +117,7 @@
             </div>
           </div>
           <div class="catalog__filter">
-            <CatalogFilters
+            <Filters
               v-model:selected-direction="selectedDirection"
               v-model:selected-rating="selectedRating"
               v-model:selected-schools="selectedSchools"
@@ -161,7 +162,7 @@
 
     <LazyClientOnly>
       <teleport to="#catalog-filters-mobile">
-        <CatalogFilters
+        <Filters
           v-model:selected-direction="selectedDirection"
           v-model:selected-rating="selectedRating"
           v-model:selected-schools="selectedSchools"
@@ -203,7 +204,7 @@
       </teleport>
 
       <teleport to="#catalog-filters-mobile-tags">
-        <CatalogTags
+        <Tags
           v-model:selected-direction="selectedDirection"
           v-model:selected-rating="selectedRating"
           v-model:selected-schools="selectedSchools"
@@ -265,12 +266,12 @@ import Loader from '@/components/atoms/Loader.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
-import CatalogFilters from '@/components/molecules/CatalogFilters.vue';
-import CatalogFiltersMobile from '@/components/molecules/CatalogFiltersMobile.vue';
-import CatalogTags from '@/components/molecules/CatalogTags.vue';
-import CatalogTools from '@/components/molecules/CatalogTools.vue';
+import Filters from '@/components/modules/catalog/molecules/Filters.vue';
+import FiltersMobile from '@/components/modules/catalog/molecules/FiltersMobile.vue';
+import Header from '@/components/modules/catalog/molecules/Header.vue';
+import Tags from '@/components/modules/catalog/molecules/Tags.vue';
+import Tools from '@/components/modules/catalog/molecules/Tools.vue';
 import Courses from '@/components/molecules/Courses.vue';
-import CatalogHeader from '@/components/organism/CatalogHeader.vue';
 import {
   courseFilterStoreCategoriesToComponentCategories,
 } from '@/converts/courseFilterStoreCategoriesToComponentCategories';
@@ -1613,5 +1614,5 @@ useJsonld(teacherJsonLd.value);
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/organism/catalog.scss";
+@import "@/assets/scss/components/organism/catalog";
 </style>

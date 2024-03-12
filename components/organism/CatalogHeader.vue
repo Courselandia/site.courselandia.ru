@@ -404,7 +404,7 @@ import {
 import Button from '@/components/atoms/Button.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import Tag from '@/components/atoms/Tag.vue';
-import CatalogHeader from '@/components/molecules/CatalogHeader.vue';
+import CatalogHeader from '~/components/modules/catalog/molecules/CatalogHeader.vue';
 import CatalogHeaderTeacher from '@/components/molecules/CatalogHeaderTeacher.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import type ITag from '@/interfaces/components/atoms/tag';

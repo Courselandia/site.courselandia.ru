@@ -1,17 +1,17 @@
 <template>
   <div
     v-if="hasFilters"
-    class="catalog-tags"
+    class="tags"
   >
     <transition name="fade">
       <div
         v-if="!resetAll && totalFilters"
-        class="catalog-tags__header"
+        class="tags__header"
       >
-        <div class="catalog-tags__total">
+        <div class="tags__total">
           Активные фильтры ({{ totalFilters }})
         </div>
-        <div class="catalog-tags__reset">
+        <div class="tags__reset">
           <Tag
             bck="black"
             color="white"
@@ -24,7 +24,7 @@
       </div>
     </transition>
 
-    <div class="catalog-tags__items">
+    <div class="tags__items">
       <Tags>
         <transition-group name="fade">
           <Tag
@@ -253,8 +253,8 @@
                     )"
                 bck="blue1"
               >
-                <template v-if="profession.name">
-                  {{ profession.name }}
+                <template v-if="profession.label">
+                  {{ profession.label }}
                 </template>
                 <template v-else>
                   {{ getProfessionLabel(professions, profession) }}
@@ -282,8 +282,8 @@
                 v-if="teacher.label || (teachers && getTeacherLabel(teachers, teacher))"
                 bck="blue1"
               >
-                <template v-if="teacher.name">
-                  {{ teacher.name }}
+                <template v-if="teacher.label">
+                  {{ teacher.label }}
                 </template>
                 <template v-else>
                   {{ getTeacherLabel(teachers, teacher) }}
@@ -311,8 +311,8 @@
                 v-if="skill.label || (skills && getSkillLabel(skills, skill))"
                 bck="blue1"
               >
-                <template v-if="skill.name">
-                  {{ skill.name }}
+                <template v-if="skill.label">
+                  {{ skill.label }}
                 </template>
                 <template v-else>
                   {{ getSkillLabel(skills, skill) }}
@@ -340,8 +340,8 @@
                 v-if="tool.label || (tools && getToolLabel(tools, tool))"
                 bck="blue1"
               >
-                <template v-if="tool.name">
-                  {{ tool.name }}
+                <template v-if="tool.label">
+                  {{ tool.label }}
                 </template>
                 <template v-else>
                   {{ getToolLabel(tools, tool) }}
@@ -823,7 +823,7 @@ const getLabelDuration = (val: number) => {
 
 //
 
-const selectedSchoolsValue = ref(selectedSchools.value);
+const selectedSchoolsValue = ref<Array<ISchool>>(selectedSchools.value);
 
 watch(selectedSchoolsValue, () => {
   emit('update:selected-schools', selectedSchoolsValue.value);
@@ -842,7 +842,7 @@ const onClickResetSchool = (index: number): void => {
 
 //
 
-const selectedCategoriesValue = ref(selectedCategories.value);
+const selectedCategoriesValue = ref<Array<ICategory>>(selectedCategories.value);
 
 watch(selectedCategoriesValue, () => {
   emit('update:selected-categories', selectedCategoriesValue.value);
@@ -861,7 +861,7 @@ const onClickResetCategory = (index: number): void => {
 
 //
 
-const selectedProfessionsValue = ref(selectedProfessions.value);
+const selectedProfessionsValue = ref<Array<IProfession>>(selectedProfessions.value);
 
 watch(selectedProfessionsValue, () => {
   emit('update:selected-professions', selectedProfessionsValue.value);
@@ -880,7 +880,7 @@ const onClickResetProfession = (index: number): void => {
 
 //
 
-const selectedTeachersValue = ref(selectedTeachers.value);
+const selectedTeachersValue = ref<Array<ITeacher>>(selectedTeachers.value);
 
 watch(selectedTeachersValue, () => {
   emit('update:selected-teachers', selectedTeachersValue.value);
@@ -899,7 +899,7 @@ const onClickResetTeacher = (index: number): void => {
 
 //
 
-const selectedSkillsValue = ref(selectedSkills.value);
+const selectedSkillsValue = ref<Array<ISkill>>(selectedSkills.value);
 
 watch(selectedSkillsValue, () => {
   emit('update:selected-skills', selectedSkillsValue.value);
@@ -918,7 +918,7 @@ const onClickResetSkill = (index: number): void => {
 
 //
 
-const selectedToolsValue = ref(selectedTools.value);
+const selectedToolsValue = ref<Array<ITool>>(selectedTools.value);
 
 watch(selectedToolsValue, () => {
   emit('update:selected-tools', selectedToolsValue.value);
@@ -1057,6 +1057,6 @@ const hasFilters = computed(
 );
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/components/molecules/catalogTags.scss";
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/catalog/molecules/tags";
 </style>
