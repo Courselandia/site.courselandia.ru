@@ -4,8 +4,8 @@
   >
     <CourseTile
       v-if="type === ECourseType.TILE"
+      v-model:active="active"
       :course="course"
-      :active="active"
     />
   </div>
 </template>

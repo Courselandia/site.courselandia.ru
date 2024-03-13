@@ -47,8 +47,8 @@
     </nuxt-link>
     <div class="course-tile__footer">
       <CourseTitleButtonGo
+        v-model:active="activeValue"
         :url="course.url"
-        :active="activeValue"
       />
       <CourseTitleFavorite
         :id="course.id"
