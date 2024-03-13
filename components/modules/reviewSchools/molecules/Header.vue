@@ -8,7 +8,7 @@
       >
         Школа
       </span>
-      <SortDirection
+      <Sort
         field="label"
         :sort-by="sortValue.sortBy"
         :sort-order="sortValue.sortOrder as TSortOrder"
@@ -28,7 +28,7 @@
       >
         Рейтинг
       </span>
-      <SortDirection
+      <Sort
         field="rating"
         :sort-by="sortValue.sortBy"
         :sort-order="sortValue.sortOrder as TSortOrder"
@@ -45,7 +45,7 @@ import {
   watch,
 } from 'vue';
 
-import SortDirection from '@/components/atoms/SortDirection.vue';
+import Sort from '@/components/modules/reviewSchools/atoms/Sort.vue';
 import type ISort from '@/interfaces/sort';
 import type TSortOrder from '@/types/sortOrder';
 

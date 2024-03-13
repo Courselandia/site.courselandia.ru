@@ -1,0 +1,41 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.course-tile {
+  text-decoration: none;
+  display: block;
+
+  &__box {
+    display: block;
+    text-decoration: none;
+  }
+
+  &__content {
+    background-color: $white;
+    padding: 1.5rem;
+    border-bottom: 1px solid #DFE0E6;
+    cursor: pointer;
+
+    @media all and (max-width: 600px) {
+      padding: 0.5rem;
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.25rem;
+    height: 21px;
+
+    @media all and (max-width: 600px) {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  &__footer {
+    background-color: $white;
+    display: flex;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+}

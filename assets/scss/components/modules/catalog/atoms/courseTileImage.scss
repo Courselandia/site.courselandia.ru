@@ -1,0 +1,15 @@
+.course-tile-image {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  cursor: pointer;
+
+  @media all and (max-width: 600px) {
+    height: 88px;
+  }
+}

@@ -36,7 +36,7 @@ import type TId from '@/types/id';
 
 const props = defineProps({
   id: {
-    type: Number as PropType<TId>,
+    type: [String, Number] as PropType<TId>,
     required: true,
   },
   mobile: {

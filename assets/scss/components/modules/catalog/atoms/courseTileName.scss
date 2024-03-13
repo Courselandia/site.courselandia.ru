@@ -1,0 +1,23 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.course-tile-name {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.45rem;
+  color: $black;
+  margin-bottom: 0.5rem;
+  height: 3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+
+  @media all and (max-width: 600px) {
+    font-size: 0.8125rem;
+    line-height: 1.2rem;
+    margin-bottom: 0.25rem;
+    height: 2.5rem;
+  }
+}

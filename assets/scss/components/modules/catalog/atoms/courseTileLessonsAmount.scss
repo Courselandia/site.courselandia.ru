@@ -1,0 +1,13 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.course-tile-lessons-amount {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.3rem;
+  color: $grey4;
+
+  @media all and (max-width: 600px) {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+}

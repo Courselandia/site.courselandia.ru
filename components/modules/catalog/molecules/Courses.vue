@@ -29,7 +29,7 @@ import {
   useSlots,
 } from 'vue';
 
-import Course from '@/components/modules/catalog/atoms/Course.vue';
+import Course from '@/components/modules/catalog/molecules/Course.vue';
 import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({

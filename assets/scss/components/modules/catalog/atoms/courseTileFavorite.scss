@@ -1,0 +1,20 @@
+.course-tile-favorite {
+  text-align: center;
+  width: 70px;
+  line-height: 0;
+  display: table;
+
+  @media all and (max-width: 600px) {
+    width: 40px;
+  }
+
+  &__heart {
+    line-height: 0;
+    display: table-row;
+  }
+
+  &__to-center {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}

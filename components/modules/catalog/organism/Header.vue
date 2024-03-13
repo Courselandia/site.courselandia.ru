@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header">
     <Header
       v-if="itemLinkCategory"
     >

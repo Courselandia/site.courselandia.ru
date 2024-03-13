@@ -1,0 +1,54 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.course-tile-prices {
+  height: 50px;
+
+  @media all and (max-width: 600px) {
+    height: 35px;
+  }
+
+  &__price {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    color: $black;
+    margin-bottom: 0.5rem;
+
+    @media all and (max-width: 600px) {
+      font-size: 0.8125rem;
+      line-height: 0.8125rem;
+      margin-bottom: 0.1875rem;
+    }
+  }
+
+  &__additional {
+    display: flex;
+    align-items: center;
+  }
+
+  &__currency {
+    margin-right: 0.625rem;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $black;
+
+    @media all and (max-width: 600px) {
+      font-size: 0.6875rem;
+      line-height: 1rem;
+    }
+  }
+
+  &__old {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $grey4;
+    text-decoration: line-through;
+
+    @media all and (max-width: 600px) {
+      font-size: 0.6875rem;
+      line-height: 1rem;
+    }
+  }
+}

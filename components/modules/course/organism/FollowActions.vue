@@ -21,13 +21,16 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
+
 import Button from '@/components/atoms/Button.vue';
 import FavoriteCourse from '@/components/modules/course/organism/FavoriteCourse.vue';
 import track from '@/helpers/track';
+import type TId from '@/types/id';
 
 const props = defineProps({
   id: {
-    type: Number,
+    type: [String, Number] as PropType<TId>,
     required: true,
   },
   url: {

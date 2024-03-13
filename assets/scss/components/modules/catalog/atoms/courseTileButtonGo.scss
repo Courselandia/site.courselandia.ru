@@ -1,0 +1,28 @@
+@import "@/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.course-tile-button-go {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.5625rem;
+  color: $blue2;
+  border-right: 1px solid #DFE0E6;
+  flex-grow: 1;
+  border-bottom-left-radius: 1rem;
+  transition: all $speedPrimary $functionPrimary;
+  text-decoration: none;
+
+  &:hover {
+    color: $white;
+    background-color: $blue2;
+  }
+
+  @media all and (max-width: 600px) {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding: 0.75rem 0.5625rem;
+  }
+}

@@ -252,12 +252,12 @@ import Pagination from '@/components/atoms/Pagination.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Total from '@/components/modules/catalog/atoms/Total.vue';
+import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import Filters from '@/components/modules/catalog/molecules/Filters.vue';
 import FiltersMobile from '@/components/modules/catalog/molecules/FiltersMobile.vue';
 import Tags from '@/components/modules/catalog/molecules/Tags.vue';
 import Tools from '@/components/modules/catalog/molecules/Tools.vue';
 import Header from '@/components/modules/catalog/organism/Header.vue';
-import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import {
   courseFilterStoreCategoriesToComponentCategories,
 } from '@/converts/courseFilterStoreCategoriesToComponentCategories';
