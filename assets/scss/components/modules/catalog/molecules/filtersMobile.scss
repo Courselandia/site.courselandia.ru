@@ -65,10 +65,8 @@
     left: 50%;
     transform: translate(-50%);
 
-    .button {
-      &__label {
-        white-space: nowrap;
-      }
+    :deep(.button__label) {
+      white-space: nowrap;
     }
   }
 

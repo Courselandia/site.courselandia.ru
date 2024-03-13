@@ -1,11 +1,11 @@
 <template>
-  <div
-    :class="`button ${nameClass}`"
+  <Loader
+    :active="loading"
+    color="white-transparency"
+    class="button__loader"
   >
-    <Loader
-      :active="loading"
-      color="white-transparency"
-      class="button__loader"
+    <div
+      :class="`button ${nameClass}`"
     >
       <template v-if="link === 'nuxt-link'">
         <nuxt-link
@@ -58,8 +58,8 @@
           </template>
         </button>
       </template>
-    </Loader>
-  </div>
+    </div>
+  </Loader>
 </template>
 
 <script lang="ts" setup>
