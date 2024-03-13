@@ -17,7 +17,7 @@
 import { ref } from 'vue';
 
 import { apiReadFavoritesCourses } from '@/api/course';
-import Courses from '@/components/molecules/Courses.vue';
+import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import type ICourse from '@/interfaces/components/molecules/course';
 import favorite from '@/stores/favorite';

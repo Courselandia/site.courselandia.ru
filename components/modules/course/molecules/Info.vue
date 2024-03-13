@@ -115,7 +115,7 @@ import type { PropType } from 'vue';
 
 import InfoBlock from '@/components/modules/course/atoms/InfoBlock.vue';
 import duration from '@/helpers/duration';
-import type ICourse from '~/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
   course: {

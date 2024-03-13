@@ -83,5 +83,5 @@ const otherSchools = ref<Array<ISchool> | null>(
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/components/modules/reviews/molecules/otherSchools";
+@import "@/assets/scss/components/modules/reviews/molecules/otherSchools";
 </style>

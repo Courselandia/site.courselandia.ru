@@ -52,5 +52,5 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/components/modules/reviews/molecules/actions";
+@import "@/assets/scss/components/modules/reviews/molecules/actions";
 </style>

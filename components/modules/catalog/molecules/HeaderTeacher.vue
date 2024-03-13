@@ -175,7 +175,7 @@ import type { PropType } from 'vue';
 
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
-import type ITeacherLink from '~/interfaces/stores/course/teacherLink';
+import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
 
 const props = defineProps({
   teacher: {

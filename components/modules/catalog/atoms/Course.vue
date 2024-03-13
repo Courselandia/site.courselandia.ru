@@ -165,7 +165,7 @@ const props = defineProps({
 });
 
 const active = ref(false);
-const holder = await import('@/assets/images/holder.svg');
+const holder = await import('assets/images/holder.svg');
 
 const nameClass = computed(() => {
   const classes = [];
@@ -191,5 +191,5 @@ const onClickGoSchool = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/molecules/course.scss";
+@import "@/assets/scss/components/modules/catalog/atoms/course";
 </style>

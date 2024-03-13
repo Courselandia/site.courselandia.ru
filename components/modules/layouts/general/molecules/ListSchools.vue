@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import type IMenu from '~/interfaces/menu';
+import type IMenu from '@/interfaces/menu';
 
 const props = defineProps({
   schools: {

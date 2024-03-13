@@ -226,5 +226,5 @@ useJsonld({
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/components/modules/reviews/index";
+@import "@/assets/scss/components/modules/reviews/index";
 </style>

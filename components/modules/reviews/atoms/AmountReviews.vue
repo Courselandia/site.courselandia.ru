@@ -36,5 +36,5 @@ const conditions = {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/components/modules/reviews/atoms/amountReviews";
+@import "@/assets/scss/components/modules/reviews/atoms/amountReviews";
 </style>

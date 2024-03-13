@@ -23,5 +23,5 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/components/modules/reviews/atoms/amountCourses";
+@import "@/assets/scss/components/modules/reviews/atoms/amountCourses";
 </style>

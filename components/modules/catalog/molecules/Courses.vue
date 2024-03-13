@@ -29,7 +29,7 @@ import {
   useSlots,
 } from 'vue';
 
-import Course from '@/components/molecules/Course.vue';
+import Course from '@/components/modules/catalog/atoms/Course.vue';
 import type ICourse from '@/interfaces/components/molecules/course';
 
 const props = defineProps({
@@ -79,5 +79,5 @@ useJsonld({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/molecules/courses.scss";
+@import "@/assets/scss/components/modules/catalog/molecules/courses";
 </style>

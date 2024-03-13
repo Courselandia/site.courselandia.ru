@@ -257,7 +257,7 @@ import FiltersMobile from '@/components/modules/catalog/molecules/FiltersMobile.
 import Tags from '@/components/modules/catalog/molecules/Tags.vue';
 import Tools from '@/components/modules/catalog/molecules/Tools.vue';
 import Header from '@/components/modules/catalog/organism/Header.vue';
-import Courses from '@/components/molecules/Courses.vue';
+import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import {
   courseFilterStoreCategoriesToComponentCategories,
 } from '@/converts/courseFilterStoreCategoriesToComponentCategories';
