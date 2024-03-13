@@ -64,13 +64,13 @@
       border-radius: 9px;
     }
 
-    .checkbox__label {
+    :deep(.checkbox__label) {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
 
-    .wrap {
+    :deep(.wrap) {
       & > DIV {
         margin-bottom: 1rem;
         line-height: 0;
