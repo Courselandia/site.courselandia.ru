@@ -7,7 +7,7 @@
       :class="`card__box ${props.scroll ? 'card__box--scroll' : ''}`"
     >
       <CardImage
-        :image="course.image?.path"
+        :path="course.image?.path"
       >
         <CardRating
           v-if="course.rating"
