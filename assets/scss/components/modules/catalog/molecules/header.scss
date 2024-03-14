@@ -168,6 +168,7 @@
 
   &__image {
     line-height: 0;
+    border: 1px solid #ff0000;
 
     :deep(IMG) {
       width: 100%;
