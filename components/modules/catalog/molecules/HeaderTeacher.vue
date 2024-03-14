@@ -46,10 +46,12 @@
             />
           </div>
         </div>
-        <HeaderTeacherExperiences
-          v-if="teacher.experiences.length"
-          :experiences="teacher.experiences"
-        />
+        <div class="header-teacher__item header-teacher__item--experiences">
+          <HeaderTeacherExperiences
+            v-if="teacher.experiences.length"
+            :experiences="teacher.experiences"
+          />
+        </div>
       </div>
     </div>
     <div
