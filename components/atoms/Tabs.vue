@@ -48,5 +48,5 @@ watch(value, () => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/tabs.scss";
+@import "@/assets/scss/components/atoms/tabs";
 </style>

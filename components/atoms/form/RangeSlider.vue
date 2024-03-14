@@ -119,7 +119,7 @@ const onChange = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/form/rangeSlider.scss";
+@import "@/assets/scss/components/atoms/form/rangeSlider";
 </style>
 
 <style lang="css">

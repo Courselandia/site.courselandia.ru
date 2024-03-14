@@ -80,9 +80,9 @@ setActive();
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/organism/page";
+@import "@/assets/scss/components/modules/layouts/general/organism/page";
 </style>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/scss/layouts/default.scss";
 </style>

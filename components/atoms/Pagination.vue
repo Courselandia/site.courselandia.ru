@@ -126,5 +126,5 @@ const onClickPagination = (pagination: number) => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/pagination.scss";
+@import "@/assets/scss/components/atoms/pagination";
 </style>

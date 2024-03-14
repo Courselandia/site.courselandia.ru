@@ -26,5 +26,5 @@ const active = computed((): boolean => instance?.parent?.setupState?.input === p
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/tabPanel.scss";
+@import "@/assets/scss/components/atoms/tabPanel";
 </style>

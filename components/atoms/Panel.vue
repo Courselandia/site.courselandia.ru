@@ -5,5 +5,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/panel.scss";
+@import "@/assets/scss/components/atoms/panel";
 </style>

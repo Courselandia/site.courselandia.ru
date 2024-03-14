@@ -81,5 +81,5 @@ const nameClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/form/radio.scss";
+@import "@/assets/scss/components/atoms/form/radio";
 </style>

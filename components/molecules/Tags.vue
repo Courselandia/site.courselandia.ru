@@ -5,5 +5,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/molecules/tags.scss";
+@import "@/assets/scss/components/molecules/tags";
 </style>

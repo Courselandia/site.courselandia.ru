@@ -74,5 +74,5 @@ const onClick = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/form/switch.scss";
+@import "@/assets/scss/components/atoms/form/switch";
 </style>

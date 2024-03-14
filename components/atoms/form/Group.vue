@@ -60,5 +60,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/form/group.scss";
+@import "@/assets/scss/components/atoms/form/group";
 </style>

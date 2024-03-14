@@ -5,5 +5,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/bubbles.scss";
+@import "@/assets/scss/components/atoms/bubbles";
 </style>

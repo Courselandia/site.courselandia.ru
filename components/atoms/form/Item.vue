@@ -45,5 +45,5 @@ const nameClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/form/formItem.scss";
+@import "@/assets/scss/components/atoms/form/formItem";
 </style>

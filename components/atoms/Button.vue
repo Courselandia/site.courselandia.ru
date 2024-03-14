@@ -176,5 +176,5 @@ const onClick = (): boolean => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/button.scss";
+@import "@/assets/scss/components/atoms/button";
 </style>

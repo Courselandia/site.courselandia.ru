@@ -28,5 +28,5 @@ const onClick = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/tab.scss";
+@import "@/assets/scss/components/atoms/tab";
 </style>

@@ -70,5 +70,5 @@ const size = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/icon.scss";
+@import "@/assets/scss/components/atoms/icon";
 </style>

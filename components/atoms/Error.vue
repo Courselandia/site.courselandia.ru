@@ -72,5 +72,5 @@ const config = useRuntimeConfig();
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/error.scss";
+@import "@/assets/scss/components/atoms/error";
 </style>

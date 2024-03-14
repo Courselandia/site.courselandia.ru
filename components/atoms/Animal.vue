@@ -27,5 +27,5 @@ const nameClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/animal.scss";
+@import "@/assets/scss/components/atoms/animal";
 </style>

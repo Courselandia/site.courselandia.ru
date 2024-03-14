@@ -32,5 +32,5 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/molecules/breadcrumbs.scss";
+@import "@/assets/scss/components/molecules/breadcrumbs";
 </style>

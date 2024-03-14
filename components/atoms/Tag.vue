@@ -156,5 +156,5 @@ const hasSlot = (name: string) => !!slots[name];
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/atoms/tag.scss";
+@import "@/assets/scss/components/atoms/tag";
 </style>
