@@ -31,7 +31,5 @@ const {
   conditions,
 } = toRefs(props);
 
-const word = computed<string | null>(() => {
-  return plural(number?.value, conditions.value);
-});
+const word = computed<string | null>(() => plural(number?.value, conditions.value));
 </script>

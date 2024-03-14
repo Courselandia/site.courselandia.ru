@@ -108,7 +108,7 @@ watch(type, () => {
   typeValue.value = type.value;
 });
 
-const onChangeSort = (val: TValue): void => {
+const onChangeSort = (): void => {
   emit('change-sort', sortValue.value);
 };
 </script>

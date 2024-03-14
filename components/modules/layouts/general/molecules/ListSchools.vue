@@ -35,6 +35,6 @@ const onClick = (): void => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/modules/layouts/general/molecules/listSchools";
 </style>

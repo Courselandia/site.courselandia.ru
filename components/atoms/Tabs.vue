@@ -45,10 +45,6 @@ watch(input, () => {
 watch(value, () => {
   input.value = value.value;
 });
-
-const onChangeTab = (val: string): void => {
-  input.value = val;
-};
 </script>
 
 <style lang="scss" scoped>

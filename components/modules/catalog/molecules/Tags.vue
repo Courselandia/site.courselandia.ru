@@ -467,12 +467,12 @@ import type ICategory from '@/interfaces/components/modules/catalog/category';
 import type IDirection from '@/interfaces/components/modules/catalog/direction';
 import type IFormat from '@/interfaces/components/modules/catalog/format';
 import type ILevel from '@/interfaces/components/modules/catalog/level';
-import type IProfession from '@/interfaces/components/modules/profession';
-import type IRating from '@/interfaces/components/modules/rating';
 import type ISchool from '@/interfaces/components/modules/catalog/schoolFilter';
 import type ISkill from '@/interfaces/components/modules/catalog/skill';
 import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
 import type ITool from '@/interfaces/components/modules/catalog/tool';
+import type IProfession from '@/interfaces/components/modules/profession';
+import type IRating from '@/interfaces/components/modules/rating';
 import type TId from '@/types/id';
 
 const props = defineProps({

@@ -29,7 +29,6 @@
 import {
   computed,
   getCurrentInstance,
-  inject,
 } from 'vue';
 
 const props = defineProps({
@@ -78,6 +77,6 @@ const nameClass = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/form/checkbox.scss";
 </style>

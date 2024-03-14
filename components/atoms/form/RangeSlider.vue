@@ -38,7 +38,7 @@ import {
   watch,
 } from 'vue';
 
-import { money } from '@/helpers/number';
+import { money as getMoney } from '@/helpers/number';
 
 const props = defineProps({
   value: {
@@ -101,7 +101,7 @@ watch(value, () => {
   input.value = value.value;
 });
 
-const toMoney = (val: number): string => money(val);
+const toMoney = (val: number): string => getMoney(val);
 
 const getLabel = (val: number): string => props.label(val);
 
@@ -118,7 +118,7 @@ const onChange = (): void => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/form/rangeSlider.scss";
 </style>
 

@@ -48,8 +48,7 @@
 <script lang="ts" setup>
 import {
   computed,
-  ref,
-  toRef, toRefs,
+  toRefs,
 } from 'vue';
 
 const props = defineProps({

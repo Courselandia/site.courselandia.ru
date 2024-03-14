@@ -71,8 +71,8 @@ import SliderSalary from '@/components/modules/course/molecules/SliderSalary.vue
 import ELevel from '@/enums/stores/course/level';
 import { money } from '@/helpers/number';
 import type ICourse from '@/interfaces/components/modules/course';
-import type IProfession from '@/interfaces/components/modules/profession';
 import type ISalary from '@/interfaces/components/modules/course/salary';
+import type IProfession from '@/interfaces/components/modules/profession';
 
 const props = defineProps({
   course: {

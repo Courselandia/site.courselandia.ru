@@ -31,8 +31,6 @@ import {
   getCurrentInstance,
 } from 'vue';
 
-import Icon from '@/components/atoms/Icon.vue';
-
 const props = defineProps({
   name: {
     type: String,
@@ -82,6 +80,6 @@ const nameClass = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/atoms/form/radio.scss";
 </style>

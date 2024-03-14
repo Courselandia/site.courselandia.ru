@@ -25,7 +25,7 @@ const props = defineProps({
     required: true,
   },
   source: {
-    type: Object as PropType<ICatalogFilterSelectItem>,
+    type: Object as PropType<IFilterSelectItem>,
     required: true,
   },
   selects: {

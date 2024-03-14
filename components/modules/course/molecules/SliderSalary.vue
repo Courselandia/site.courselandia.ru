@@ -129,6 +129,6 @@ const onSlide = (val: number): void => {
 const format = (val: number): string => `${money(salary(val))} ₽`;
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/modules/course/molecules/sliderSalary";
 </style>

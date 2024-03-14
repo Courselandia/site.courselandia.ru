@@ -83,6 +83,6 @@ setActive();
 @import "@/assets/scss/components/organism/page";
 </style>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/layouts/default.scss";
 </style>

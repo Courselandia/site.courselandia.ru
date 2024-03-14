@@ -289,18 +289,18 @@ import {
   hasRating,
 } from '@/helpers/chekFilter';
 import type IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
-import type IFilterSelectItem from '@/interfaces/components/modules/catalog/filterSelectItem';
 import type ICategory from '@/interfaces/components/modules/catalog/category';
-import type ICourse from '@/interfaces/components/modules/course';
 import type IDirection from '@/interfaces/components/modules/catalog/direction';
+import type IFilterSelectItem from '@/interfaces/components/modules/catalog/filterSelectItem';
 import type IFormat from '@/interfaces/components/modules/catalog/format';
 import type ILevel from '@/interfaces/components/modules/catalog/level';
-import type IProfession from '@/interfaces/components/modules/profession';
-import type IRating from '@/interfaces/components/modules/rating';
 import type ISchool from '@/interfaces/components/modules/catalog/schoolFilter';
 import type ISkill from '@/interfaces/components/modules/catalog/skill';
 import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
 import type ITool from '@/interfaces/components/modules/catalog/tool';
+import type ICourse from '@/interfaces/components/modules/course';
+import type IProfession from '@/interfaces/components/modules/profession';
+import type IRating from '@/interfaces/components/modules/rating';
 import type IFilters from '@/interfaces/filters';
 import type ISorts from '@/interfaces/sorts';
 import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
@@ -1599,6 +1599,6 @@ const teacherJsonLd = computed<any>(() => {
 useJsonld(teacherJsonLd.value);
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/modules/catalog/organism/catalog";
 </style>

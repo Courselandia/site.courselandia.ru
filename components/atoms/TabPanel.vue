@@ -22,9 +22,7 @@ const props = defineProps({
   },
 });
 
-const active = computed((): boolean => {
-  return instance?.parent?.setupState?.input === props.value;
-});
+const active = computed((): boolean => instance?.parent?.setupState?.input === props.value);
 </script>
 
 <style lang="scss" scoped>

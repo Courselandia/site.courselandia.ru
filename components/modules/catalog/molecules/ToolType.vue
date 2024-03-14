@@ -79,6 +79,6 @@ const onCLick = (val: ECourseType): void => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/modules/catalog/molecules/toolType";
 </style>

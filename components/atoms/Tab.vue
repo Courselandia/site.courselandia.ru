@@ -20,9 +20,7 @@ const props = defineProps({
   },
 });
 
-const active = computed((): boolean => {
-  return instance?.parent?.setupState?.input === props.value;
-});
+const active = computed((): boolean => instance?.parent?.setupState?.input === props.value);
 
 const onClick = (): void => {
   instance?.parent?.setupState?.onChangeTab(props.value);
