@@ -2,7 +2,7 @@
   <div class="card-brand-logo">
     <LazyImage
       :src="path"
-      class="card-brand__logo"
+      class="card-brand-logo__image"
       :alt="name"
       :title="name"
     />
