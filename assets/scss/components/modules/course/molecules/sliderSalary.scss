@@ -8,15 +8,15 @@
     padding-bottom: 1rem;
   }
 
-  .slider-horizontal {
+  :deep(.slider-horizontal) {
     --slider-height: 1px;
   }
 
-  .slider-base {
+  :deep(.slider-base) {
     --slider-bg: #999999;
   }
 
-  .slider-handle {
+  :deep(.slider-handle) {
     --slider-handle-width: 32px;
     --slider-handle-height: 32px;
     --slider-handle-radius: 10px;
@@ -27,11 +27,11 @@
     background-size: 100% auto;
   }
 
-  .slider-connect {
+  :deep(.slider-connect) {
     --slider-connect-bg: #ffffff;
   }
 
-  .slider-tooltip {
+  :deep(.slider-tooltip) {
     --slider-tooltip-bg: #ffffff;
     --slider-tooltip-color: #000000;
     --slider-tooltip-font-weight: 400;
