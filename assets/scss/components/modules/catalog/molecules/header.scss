@@ -169,7 +169,7 @@
   &__image {
     line-height: 0;
 
-    IMG {
+    :deep(IMG) {
       width: 100%;
       max-width: 680px;
       height: auto;
