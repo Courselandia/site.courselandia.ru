@@ -20,6 +20,7 @@
     >
       <Button
         :to="`/courses/school/${link}`"
+        link="link"
         wide
         type="secondary"
       >

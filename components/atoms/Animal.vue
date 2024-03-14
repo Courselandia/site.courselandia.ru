@@ -1,7 +1,9 @@
 <template>
-  <div
-    :class="`animal ${nameClass}`"
-  />
+  <ClientOnly>
+    <div
+      :class="`animal ${nameClass}`"
+    />
+  </ClientOnly>
 </template>
 
 <script lang="ts" setup>

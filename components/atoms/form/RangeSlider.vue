@@ -5,10 +5,19 @@
       class="range-slider__values"
     >
       <template v-if="typeof input === 'object'">
-        <template v-if="convertToMoney">
+        <template
+          v-if="convertToMoney"
+        >
           {{ toMoney(input[0]) }} {{ getLabel(input[0]) }}
           –
           {{ toMoney(input[1]) }} {{ getLabel(input[1]) }}
+        </template>
+        <template
+          v-else
+        >
+          {{ input[0] }} {{ getLabel(input[0]) }}
+          –
+          {{ input[1] }} {{ getLabel(input[1]) }}
         </template>
       </template>
       <template v-else>

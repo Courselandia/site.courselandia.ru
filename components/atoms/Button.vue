@@ -2,7 +2,7 @@
   <Loader
     :active="loading"
     color="white-transparency"
-    class="button__loader"
+    :class="`button__loader ${wide ? 'button__loader--wide' : ''}`"
   >
     <div
       :class="`button ${nameClass}`"

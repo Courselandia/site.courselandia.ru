@@ -22,19 +22,17 @@
   &__search {
     margin-bottom: 1rem;
 
-    .input {
-      &__place {
-        padding: 0.625rem 1rem;
-      }
+    :deep(.input__place) {
+      padding: 0.625rem 1rem;
+    }
 
-      &__element {
-        font-size: 0.875rem;
-        line-height: 1.3125rem;
-      }
+    :deep(.input__element) {
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
+    }
 
-      &__before {
-        padding-left: 1rem;
-      }
+    :deep(.input__before) {
+      padding-left: 1rem;
     }
   }
 
