@@ -73,7 +73,7 @@ import type { PropType } from 'vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
 import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

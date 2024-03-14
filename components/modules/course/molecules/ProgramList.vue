@@ -14,7 +14,7 @@
 import type { PropType } from 'vue';
 
 import ProgramItem from '@/components/modules/course/atoms/ProgramItem.vue';
-import type IProgram from '@/interfaces/components/molecules/program';
+import type IProgram from '@/interfaces/components/modules/course/program';
 
 const props = defineProps({
   program: {

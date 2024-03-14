@@ -21,7 +21,7 @@
 import type { PropType } from 'vue';
 
 import BlockCheck from '@/components/modules/course/atoms/BlockCheck.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

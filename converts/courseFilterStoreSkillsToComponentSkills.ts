@@ -1,4 +1,4 @@
-import type ISkill from '@/interfaces/components/molecules/skill';
+import type ISkill from '@/interfaces/components/modules/catalog/skill';
 import type IFilterSkill from '@/interfaces/stores/course/filterSkill';
 
 export const courseFilterStoreSkillsToComponentSkills = (

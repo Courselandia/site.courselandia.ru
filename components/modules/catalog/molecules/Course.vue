@@ -21,7 +21,7 @@ import {
 
 import CourseTile from '@/components/modules/catalog/molecules/CourseTile.vue';
 import ECourseType from '@/enums/components/molecules/courseType';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

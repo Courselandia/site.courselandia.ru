@@ -13,7 +13,7 @@ import type { PropType } from 'vue';
 
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import Header from '@/components/modules/course/molecules/Header.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

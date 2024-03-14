@@ -1,4 +1,4 @@
-import type ICategory from '@/interfaces/components/molecules/category';
+import type ICategory from '@/interfaces/components/modules/catalog/category';
 import type IFilterCategory from '@/interfaces/stores/course/filterCategory';
 
 export const courseFilterStoreCategoriesToComponentCategories = (

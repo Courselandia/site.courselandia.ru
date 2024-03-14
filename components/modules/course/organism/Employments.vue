@@ -17,7 +17,7 @@
 import type { PropType } from 'vue';
 
 import Employments from '@/components/modules/course/molecules/Employments.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

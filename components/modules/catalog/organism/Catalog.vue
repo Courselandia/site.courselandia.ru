@@ -289,18 +289,18 @@ import {
   hasRating,
 } from '@/helpers/chekFilter';
 import type IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
-import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
-import type ICategory from '@/interfaces/components/molecules/category';
-import type ICourse from '@/interfaces/components/molecules/course';
-import type IDirection from '@/interfaces/components/molecules/direction';
-import type IFormat from '@/interfaces/components/molecules/format';
-import type ILevel from '@/interfaces/components/molecules/level';
-import type IProfession from '@/interfaces/components/molecules/profession';
-import type IRating from '@/interfaces/components/molecules/rating';
-import type ISchool from '@/interfaces/components/molecules/schoolFilter';
-import type ISkill from '@/interfaces/components/molecules/skill';
-import type ITeacher from '@/interfaces/components/molecules/teacher';
-import type ITool from '@/interfaces/components/molecules/tool';
+import type IFilterSelectItem from '@/interfaces/components/modules/catalog/filterSelectItem';
+import type ICategory from '@/interfaces/components/modules/catalog/category';
+import type ICourse from '@/interfaces/components/modules/course';
+import type IDirection from '@/interfaces/components/modules/catalog/direction';
+import type IFormat from '@/interfaces/components/modules/catalog/format';
+import type ILevel from '@/interfaces/components/modules/catalog/level';
+import type IProfession from '@/interfaces/components/modules/profession';
+import type IRating from '@/interfaces/components/modules/rating';
+import type ISchool from '@/interfaces/components/modules/catalog/schoolFilter';
+import type ISkill from '@/interfaces/components/modules/catalog/skill';
+import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
+import type ITool from '@/interfaces/components/modules/catalog/tool';
 import type IFilters from '@/interfaces/filters';
 import type ISorts from '@/interfaces/sorts';
 import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
@@ -1351,7 +1351,7 @@ const setUrlQuery = (
     return url;
   };
 
-  const filterSectionNames: Record<string, Array<ICatalogFilterSelectItem | IDirection>> = {
+  const filterSectionNames: Record<string, Array<IFilterSelectItem | IDirection>> = {
     'directions-id': directions.value,
     'school-id': schools.value,
     'categories-id': categories.value,

@@ -1,4 +1,4 @@
-import type IDirection from '@/interfaces/components/molecules/direction';
+import type IDirection from '@/interfaces/components/modules/catalog/direction';
 import type IFilterDirection from '@/interfaces/stores/course/filterDirection';
 
 export const courseFilterStoreDirectionsToComponentDirections = (

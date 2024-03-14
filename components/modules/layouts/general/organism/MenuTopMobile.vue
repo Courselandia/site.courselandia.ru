@@ -200,7 +200,7 @@ import Icon from '@/components/atoms/Icon.vue';
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
-import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type IListSchoolReview from '@/interfaces/components/modules/reviewSchools/listSchoolReview';
 import type IMenu from '@/interfaces/menu';
 import directionStore from '@/stores/direction';
 import school from '@/stores/school';

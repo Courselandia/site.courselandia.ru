@@ -1,4 +1,4 @@
-import type IBrand from '@/interfaces/components/organism/brands';
+import type IBrand from '@/interfaces/components/modules/home/brands';
 import type ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToBrand = (

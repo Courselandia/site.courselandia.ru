@@ -33,7 +33,7 @@ import {
   watch,
 } from 'vue';
 
-import type IAlphabetic from '@/interfaces/components/molecules/alphabetic';
+import type IAlphabetic from '@/interfaces/components/modules/layouts/general/molecules/alphabetic';
 import type IMenu from '@/interfaces/menu';
 
 const props = defineProps({

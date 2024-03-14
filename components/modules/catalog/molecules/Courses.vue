@@ -30,7 +30,7 @@ import {
 } from 'vue';
 
 import Course from '@/components/modules/catalog/molecules/Course.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   courses: {

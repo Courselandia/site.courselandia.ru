@@ -79,8 +79,8 @@ import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCourses
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
 import EDuration from '@/enums/components/molecules/duration';
 import { brToRn, stripTags } from '@/helpers/format';
-import type ICourse from '@/interfaces/components/molecules/course';
-import type ITeacher from '@/interfaces/components/molecules/teacher';
+import type ICourse from '@/interfaces/components/modules/course';
+import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
 
 const config = useRuntimeConfig();
 const scroll = ref(true);

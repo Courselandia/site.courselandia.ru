@@ -1,15 +1,15 @@
 import ELevel from '@/enums/components/molecules/level';
-import type ICategory from '@/interfaces/components/molecules/category';
-import type IDirection from '@/interfaces/components/molecules/direction';
-import type IFormat from '@/interfaces/components/molecules/format';
-import type ILevel from '@/interfaces/components/molecules/level';
-import type IProfession from '@/interfaces/components/molecules/profession';
-import type IRating from '@/interfaces/components/molecules/rating';
-import type ISchool from '@/interfaces/components/molecules/schoolFilter';
-import type ISkill from '@/interfaces/components/molecules/skill';
-import type ITeacher from '@/interfaces/components/molecules/teacher';
-import type ITool from '@/interfaces/components/molecules/tool';
+import type ICategory from '@/interfaces/components/modules/catalog/category';
+import type IDirection from '@/interfaces/components/modules/catalog/direction';
+import type IFormat from '@/interfaces/components/modules/catalog/format';
+import type ILevel from '@/interfaces/components/modules/catalog/level';
+import type ISchool from '@/interfaces/components/modules/catalog/schoolFilter';
+import type ISkill from '@/interfaces/components/modules/catalog/skill';
+import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
+import type IProfession from '@/interfaces/components/modules/profession';
+import type IRating from '@/interfaces/components/modules/rating';
 import type TId from '@/types/id';
+import type ITool from '@/interfaces/components/modules/catalog/tool';
 
 export const getDirectionLabel = (
   directions: Array<IDirection>,

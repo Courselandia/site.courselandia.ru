@@ -70,9 +70,9 @@ import SalaryExplanation from '@/components/modules/course/atoms/SalaryExplanati
 import SliderSalary from '@/components/modules/course/molecules/SliderSalary.vue';
 import ELevel from '@/enums/stores/course/level';
 import { money } from '@/helpers/number';
-import type ICourse from '@/interfaces/components/molecules/course';
-import type IProfession from '@/interfaces/components/molecules/profession';
-import type ISalary from '@/interfaces/components/molecules/salary';
+import type ICourse from '@/interfaces/components/modules/course';
+import type IProfession from '@/interfaces/components/modules/profession';
+import type ISalary from '@/interfaces/components/modules/course/salary';
 
 const props = defineProps({
   course: {

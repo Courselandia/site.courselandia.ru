@@ -17,7 +17,7 @@ import {
 } from 'vue';
 
 import Salaries from '@/components/modules/course/molecules/Salaries.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

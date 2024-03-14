@@ -38,7 +38,7 @@ import type { PropType } from 'vue';
 
 import Animal from '@/components/atoms/Animal.vue';
 import LazyImage from '@/components/atoms/LazyImage.vue';
-import type ITeacher from '@/interfaces/components/molecules/teacher';
+import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
 
 const props = defineProps({
   teacher: {

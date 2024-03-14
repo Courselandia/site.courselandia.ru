@@ -1,4 +1,4 @@
-import type ISchool from '@/interfaces/components/molecules/schoolFilter';
+import type ISchool from '@/interfaces/components/modules/catalog/schoolFilter';
 import type IFilterSchool from '@/interfaces/stores/course/filterSchool';
 
 export const courseFilterStoreSchoolsToComponentSchools = (

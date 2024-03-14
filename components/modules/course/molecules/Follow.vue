@@ -30,7 +30,7 @@ import type { PropType } from 'vue';
 import FollowName from '@/components/modules/course/atoms/FollowName.vue';
 import FollowPrices from '@/components/modules/course/atoms/FollowPrices.vue';
 import FollowActions from '@/components/modules/course/organism/FollowActions.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

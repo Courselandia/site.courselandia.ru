@@ -21,7 +21,7 @@
 import type { PropType } from 'vue';
 
 import CardFeature from '@/components/modules/course/atoms/CardFeature.vue';
-import type IFeature from '@/interfaces/components/molecules/feature';
+import type IFeature from '@/interfaces/components/modules/course/feature';
 
 const props = defineProps({
   features: {

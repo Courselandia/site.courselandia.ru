@@ -1,5 +1,5 @@
 import level from '@/helpers/level';
-import type ICourseComponent from '@/interfaces/components/molecules/course';
+import type ICourseComponent from '@/interfaces/components/modules/course';
 import type ICourseStore from '@/interfaces/stores/course/course';
 
 export const courseStoreToCourseComponent = (

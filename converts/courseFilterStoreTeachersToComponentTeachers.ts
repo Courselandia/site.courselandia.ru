@@ -1,4 +1,4 @@
-import type ITeacher from '@/interfaces/components/molecules/teacher';
+import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
 import type IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 
 export const courseFilterStoreTeachersToComponentTeachers = (

@@ -1,4 +1,4 @@
-import type IFaqComponent from '@/interfaces/components/molecules/faq';
+import type IFaqComponent from '@/interfaces/components/modules/course/faq';
 import type IFaqStore from '@/interfaces/stores/faq/faq';
 
 const faqsStoreToFaqsComponent = (

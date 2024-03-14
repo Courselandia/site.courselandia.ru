@@ -1,4 +1,4 @@
-import type ITool from '@/interfaces/components/molecules/tool';
+import type ITool from '@/interfaces/components/modules/catalog/tool';
 import type IFilterTool from '@/interfaces/stores/course/filterTool';
 
 export const courseFilterStoreToolsToComponentTools = (

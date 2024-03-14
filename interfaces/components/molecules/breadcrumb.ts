@@ -1,4 +1,4 @@
-export default interface ICategory {
+export default interface IBreadcrumb {
   to: string,
   name: string,
 }

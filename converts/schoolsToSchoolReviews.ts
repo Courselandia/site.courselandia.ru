@@ -1,4 +1,4 @@
-import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type IListSchoolReview from '@/interfaces/components/modules/reviewSchools/listSchoolReview';
 import type ISchool from '@/interfaces/stores/school/school';
 
 const schoolsToSchoolReviews = (

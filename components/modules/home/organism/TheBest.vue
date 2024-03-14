@@ -28,7 +28,7 @@ import { ref } from 'vue';
 import Button from '@/components/atoms/Button.vue';
 import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const courses = ref<ICourse[]>();
 

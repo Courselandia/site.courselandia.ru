@@ -17,7 +17,7 @@ import type { PropType } from 'vue';
 
 import Numeric from '@/components/modules/course/atoms/Numeric.vue';
 import Numerics from '@/components/modules/course/molecules/Numerics.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

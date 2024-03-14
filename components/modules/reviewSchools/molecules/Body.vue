@@ -23,7 +23,7 @@ import {
 import School from '@/components/modules/reviewSchools/molecules/School.vue';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import EDirection from '@/enums/direction';
-import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type IListSchoolReview from '@/interfaces/components/modules/reviewSchools/listSchoolReview';
 import type ISort from '@/interfaces/sort';
 import school from '@/stores/school';
 

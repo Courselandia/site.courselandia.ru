@@ -84,16 +84,16 @@ import Input from '@/components/atoms/form/Input.vue';
 import Item from '@/components/atoms/form/Item.vue';
 import Icon from '@/components/atoms/Icon.vue';
 import FilterSelectItem from '@/components/modules/catalog/molecules/FilterSelectItem.vue';
-import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
+import type IFilterSelectItem from '@/interfaces/components/modules/catalog/filterSelectItem';
 
 const props = defineProps({
   items: {
-    type: Object as PropType<Array<ICatalogFilterSelectItem>>,
+    type: Object as PropType<Array<IFilterSelectItem>>,
     required: false,
     default: null,
   },
   value: {
-    type: Object as PropType<Array<ICatalogFilterSelectItem>>,
+    type: Object as PropType<Array<IFilterSelectItem>>,
     required: false,
     default: null,
   },
@@ -129,14 +129,14 @@ const nameClass = computed(() => {
 });
 
 const emit = defineEmits({
-  'update:value': (_: Array<ICatalogFilterSelectItem>) => true,
+  'update:value': (_: Array<IFilterSelectItem>) => true,
   'load-items': (callback?: Function) => true,
-  click: (_: Array<ICatalogFilterSelectItem>) => true,
+  click: (_: Array<IFilterSelectItem>) => true,
 });
 
 const selects = ref<Array<String | Number | Boolean>>(value.value?.map((item) => item.id) || []);
 
-const activeItems = computed((): Array<ICatalogFilterSelectItem> => props.items?.filter(
+const activeItems = computed((): Array<IFilterSelectItem> => props.items?.filter(
   (itm) => itm.label?.toLowerCase().indexOf(search.value.toLowerCase().trim()) !== -1 || search.value.trim() === '',
 ));
 

@@ -47,7 +47,7 @@ import {
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
-import type IProgram from '@/interfaces/components/molecules/program';
+import type IProgram from '@/interfaces/components/modules/course/program';
 
 const props = defineProps({
   item: {

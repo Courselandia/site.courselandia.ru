@@ -97,7 +97,7 @@ import Reducer from '@/components/atoms/Reducer.vue';
 import Fact from '@/components/modules/course/atoms/Fact.vue';
 import Facts from '@/components/modules/course/molecules/Facts.vue';
 import language from '@/helpers/language';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

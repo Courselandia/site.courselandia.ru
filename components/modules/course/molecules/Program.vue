@@ -37,7 +37,7 @@ import {
 import ProgramInfo from '@/components/modules/course/molecules/ProgramInfo.vue';
 import ProgramList from '@/components/modules/course/molecules/ProgramList.vue';
 import duration from '@/helpers/duration';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

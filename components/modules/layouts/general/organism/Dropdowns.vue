@@ -213,7 +213,7 @@ import ListSchools from '@/components/modules/layouts/general/molecules/ListScho
 import directionsToMenu from '@/converts/directionsToMenu';
 import schoolsToMenu from '@/converts/schoolsToMenu';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
-import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type IListSchoolReview from '@/interfaces/components/modules/reviewSchools/listSchoolReview';
 import type IMenu from '@/interfaces/menu';
 import direction from '@/stores/direction';
 import school from '@/stores/school';

@@ -56,7 +56,7 @@ import CardName from '@/components/modules/course/atoms/CardName.vue';
 import CardPrices from '@/components/modules/course/atoms/CardPrices.vue';
 import CardRating from '@/components/modules/course/atoms/CardRating.vue';
 import CardFeatures from '@/components/modules/course/molecules/CardFeatures.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {

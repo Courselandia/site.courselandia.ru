@@ -18,7 +18,7 @@ import { ref } from 'vue';
 import { apiReadFaqs } from '@/api/faq';
 import Faqs from '@/components/modules/course/molecules/Faqs.vue';
 import faqsStoreToFaqsComponent from '@/converts/faqsStoreToFaqsComponent';
-import type IFaqComponent from '@/interfaces/components/molecules/faq';
+import type IFaqComponent from '@/interfaces/components/modules/course/faq';
 
 const props = defineProps({
   school: {

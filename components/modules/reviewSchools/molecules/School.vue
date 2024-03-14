@@ -57,7 +57,7 @@ import Logo from '@/components/modules/reviewSchools/atoms/Logo.vue';
 import Rating from '@/components/modules/reviewSchools/atoms/Rating.vue';
 import Text from '@/components/modules/reviewSchools/atoms/Text.vue';
 import Tags from '@/components/modules/reviewSchools/molecules/Tags.vue';
-import type IListSchoolReview from '@/interfaces/components/molecules/listSchoolReview';
+import type IListSchoolReview from '@/interfaces/components/modules/reviewSchools/listSchoolReview';
 
 const props = defineProps({
   school: {

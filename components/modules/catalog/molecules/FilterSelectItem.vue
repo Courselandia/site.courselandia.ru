@@ -17,7 +17,7 @@ import {
 } from 'vue';
 
 import FilterSelectItemCheckbox from '@/components/modules/catalog/molecules/FilterSelectItemCheckbox.vue';
-import type ICatalogFilterSelectItem from '@/interfaces/components/molecules/catalogFilterSelectItem';
+import type IFilterSelectItem from '@/interfaces/components/modules/catalog/filterSelectItem';
 
 const props = defineProps({
   index: {

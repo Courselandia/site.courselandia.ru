@@ -74,7 +74,7 @@ import CourseTilePrices from '@/components/modules/catalog/atoms/CourseTilePrice
 import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRating.vue';
 import CourseTitleButtonGo from '@/components/modules/catalog/atoms/CourseTitleButtonGo.vue';
 import CourseTitleFavorite from '@/components/modules/catalog/atoms/CourseTitleFavorite.vue';
-import type ICourse from '@/interfaces/components/molecules/course';
+import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
   course: {
