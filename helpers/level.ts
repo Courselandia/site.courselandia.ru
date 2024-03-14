@@ -1,4 +1,4 @@
-import ELevel from '@/enums/components/molecules/level';
+import ELevel from '@/enums/components/modules/catalog/level';
 
 const level = (value: ELevel): string | null => {
   if (value === ELevel.JUNIOR) {

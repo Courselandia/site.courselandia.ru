@@ -111,7 +111,7 @@ import Icon from '@/components/atoms/Icon.vue';
 import Loader from '@/components/atoms/Loader.vue';
 import CourseSearchResult from '@/components/modules/layouts/general/molecules/CourseSearchResult.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
-import ECourseSort from '@/enums/components/molecules/courseSort';
+import ECourseSort from '@/enums/components/modules/catalog/courseSort';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const courses = ref<ICourse[]>([]);

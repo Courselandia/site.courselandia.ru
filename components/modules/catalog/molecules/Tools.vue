@@ -33,7 +33,7 @@ import {
 
 import Item from '@/components/atoms/form/Item.vue';
 import Select from '@/components/atoms/form/Select.vue';
-import ECourseSort from '@/enums/components/molecules/courseSort';
+import ECourseSort from '@/enums/components/modules/catalog/courseSort';
 import type IOption from '@/interfaces/components/atoms/option';
 import type TValue from '@/types/value';
 

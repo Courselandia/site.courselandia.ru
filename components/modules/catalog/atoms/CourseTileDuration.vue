@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 
-import EDuration from '@/enums/components/molecules/duration';
+import EDuration from '@/enums/components/modules/catalog/duration';
 import getDuration from '@/helpers/duration';
 
 const props = defineProps({

@@ -1,4 +1,4 @@
-import ELanguage from '@/enums/components/molecules/language';
+import ELanguage from '@/enums/components/modules/catalog/language';
 
 const language = (value: ELanguage): string | null => {
   if (value === ELanguage.RU) {

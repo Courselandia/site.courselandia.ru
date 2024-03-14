@@ -20,7 +20,7 @@ import {
 } from 'vue';
 
 import CourseTile from '@/components/modules/catalog/molecules/CourseTile.vue';
-import ECourseType from '@/enums/components/molecules/courseType';
+import ECourseType from '@/enums/components/modules/catalog/courseType';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({

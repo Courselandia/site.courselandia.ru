@@ -1,4 +1,4 @@
-import ELevel from '@/enums/components/molecules/level';
+import ELevel from '@/enums/components/modules/catalog/level';
 import type ICategory from '@/interfaces/components/modules/catalog/category';
 import type IDirection from '@/interfaces/components/modules/catalog/direction';
 import type IFormat from '@/interfaces/components/modules/catalog/format';

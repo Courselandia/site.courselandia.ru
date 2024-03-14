@@ -77,7 +77,7 @@ import Similarities from '@/components/modules/course/organism/Similarities.vue'
 import Teachers from '@/components/modules/course/organism/Teachers.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
 import { courseStoreToCourseComponent } from '@/converts/courseStoreToCourseComponent';
-import EDuration from '@/enums/components/molecules/duration';
+import EDuration from '@/enums/components/modules/catalog/duration';
 import { brToRn, stripTags } from '@/helpers/format';
 import type ITeacher from '@/interfaces/components/modules/catalog/teacher';
 import type ICourse from '@/interfaces/components/modules/course';

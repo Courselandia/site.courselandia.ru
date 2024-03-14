@@ -272,9 +272,9 @@ import { courseFilterStoreSkillsToComponentSkills } from '@/converts/courseFilte
 import { courseFilterStoreTeachersToComponentTeachers } from '@/converts/courseFilterStoreTeachersToComponentTeachers';
 import { courseFilterStoreToolsToComponentTools } from '@/converts/courseFilterStoreToolsToComponentTools';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
-import ECourseSort from '@/enums/components/molecules/courseSort';
-import ECourseType from '@/enums/components/molecules/courseType';
-import ELevel from '@/enums/components/molecules/level';
+import ECourseSort from '@/enums/components/modules/catalog/courseSort';
+import ECourseType from '@/enums/components/modules/catalog/courseType';
+import ELevel from '@/enums/components/modules/catalog/level';
 import EFormat from '@/enums/stores/course/format';
 import {
   countCategories,

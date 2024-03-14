@@ -47,7 +47,7 @@ import {
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
-import ECourseType from '@/enums/components/molecules/courseType';
+import ECourseType from '@/enums/components/modules/catalog/courseType';
 
 const props = defineProps({
   value: {

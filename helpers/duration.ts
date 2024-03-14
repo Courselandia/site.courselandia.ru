@@ -1,4 +1,4 @@
-import EDuration from '@/enums/components/molecules/duration';
+import EDuration from '@/enums/components/modules/catalog/duration';
 
 const duration = (value: number, unit: EDuration): string => {
   if (unit === EDuration.DAY) {

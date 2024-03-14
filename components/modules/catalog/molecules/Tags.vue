@@ -440,7 +440,7 @@ import {
 import Icon from '@/components/atoms/Icon.vue';
 import Tag from '@/components/atoms/Tag.vue';
 import Tags from '@/components/molecules/Tags.vue';
-import ELevel from '@/enums/components/molecules/level';
+import ELevel from '@/enums/components/modules/catalog/level';
 import {
   getCategoryLabel,
   getDirectionLabel,

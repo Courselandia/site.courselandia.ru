@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 
-import ECurrency from '@/enums/components/molecules/currency';
+import ECurrency from '@/enums/components/modules/catalog/currency';
 import getCurrency from '@/helpers/currency';
 import { money } from '@/helpers/number';
 
