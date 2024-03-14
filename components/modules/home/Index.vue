@@ -18,6 +18,6 @@ import Hero from '@/components/modules/home/organism/Hero.vue';
 import TheBest from '@/components/modules/home/organism/TheBest.vue';
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/scss/components/modules/home/index";
 </style>

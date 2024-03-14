@@ -2,8 +2,7 @@
   display: inline-flex;
   flex-direction: column;
 
-  .radio,
-  .checkbox {
+  :deep(.radio, .checkbox) {
     margin-bottom: 1rem;
 
     &:last-child {

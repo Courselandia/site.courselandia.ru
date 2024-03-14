@@ -157,7 +157,7 @@
             :step="priceStep"
             :label="getLabelPrice"
             :disabled="!(priceMax && priceMin !== priceMax)"
-            money
+            convert-to-money
             @change="onChangePrices"
           />
         </div>

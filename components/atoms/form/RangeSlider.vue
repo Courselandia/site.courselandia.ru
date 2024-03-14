@@ -5,14 +5,14 @@
       class="range-slider__values"
     >
       <template v-if="typeof input === 'object'">
-        <template v-if="money">
+        <template v-if="convertToMoney">
           {{ toMoney(input[0]) }} {{ getLabel(input[0]) }}
           –
           {{ toMoney(input[1]) }} {{ getLabel(input[1]) }}
         </template>
       </template>
       <template v-else>
-        {{ money ? toMoney(input as number) : input }} ₽
+        {{ convertToMoney ? toMoney(input as number) : input }} ₽
       </template>
     </div>
     <div class="range-slider__slider">
@@ -38,7 +38,7 @@ import {
   watch,
 } from 'vue';
 
-import { money as getMoney } from '@/helpers/number';
+import { money } from '@/helpers/number';
 
 const props = defineProps({
   value: {
@@ -60,7 +60,7 @@ const props = defineProps({
     required: false,
     default: 1,
   },
-  money: {
+  convertToMoney: {
     type: Boolean,
     required: false,
     default: false,
@@ -101,12 +101,12 @@ watch(value, () => {
   input.value = value.value;
 });
 
-const toMoney = (val: number): string => getMoney(val);
+const toMoney = (val: number): string => money(val);
 
 const getLabel = (val: number): string => props.label(val);
 
 const format = (val: number): string => {
-  if (props.money) {
+  if (props.convertToMoney) {
     return `${toMoney(val)} ${getLabel(val)}`;
   }
 

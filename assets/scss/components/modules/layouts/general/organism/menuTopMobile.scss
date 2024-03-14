@@ -2,12 +2,13 @@
 
 .menu-top-mobile {
   &__item {
-    padding: 1rem 1rem 1rem 5.3rem;
+    padding: 0.8rem 1rem 0.8rem 5.3rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     text-decoration: none;
     color: $black;
+    line-height: 1.4rem;
 
     .icon {
       flex-grow: 0;
@@ -40,5 +41,6 @@
 
   &__rating {
     width: 45px;
+    min-width: 45px;
   }
 }
