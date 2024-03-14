@@ -1,0 +1,15 @@
+.header-teacher-text {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.875rem;
+  margin-bottom: 2rem;
+
+  :deep(.reducer__content--hide::after) {
+    background: linear-gradient(0deg, rgba(239, 246, 251, 1) 0%, rgba(239, 246, 251, 0) 50%);
+  }
+
+  :deep(.reducer__action) {
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
+}

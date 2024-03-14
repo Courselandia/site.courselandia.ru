@@ -1,0 +1,14 @@
+.header-teacher-photo {
+  line-height: 0;
+  margin-bottom: 1rem;
+
+  &__image {
+    width: 270px;
+    height: 100%;
+    border-radius: 0.625rem;
+
+    @media all and (max-width: 1000px) {
+      width: 200px;
+    }
+  }
+}

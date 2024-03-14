@@ -1,0 +1,17 @@
+.header-teacher-experiences {
+  &__label {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+
+    @media all and (max-width: 1150px) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__items {
+    @media all and (max-width: 1150px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}

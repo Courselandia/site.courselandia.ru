@@ -1,0 +1,29 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.header-teacher-experience {
+  font-size: 1rem;
+  line-height: 1.4rem;
+  margin-bottom: 1.25rem;
+
+  @media all and (max-width: 1150px) {
+    margin-right: 3rem;
+  }
+
+  &__place {
+    font-weight: 700;
+    margin-bottom: 0.1rem;
+  }
+
+  &__position {
+    font-weight: 400;
+    margin-bottom: 0.15rem;
+    font-size: 0.9rem;
+  }
+
+  &__period {
+    font-weight: 400;
+    color: $grey3;
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+  }
+}

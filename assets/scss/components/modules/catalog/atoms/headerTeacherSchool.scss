@@ -1,0 +1,16 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.header-teacher-school {
+  &__label {
+    margin-right: 2rem;
+  }
+
+  &__link {
+    color: $blue2;
+    margin-right: 1.5rem;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
