@@ -16,7 +16,9 @@
       <RenderCacheable
         :cache-tags="['dropdown']"
       >
-        <Dropdowns v-model:menu="menu" />
+        <Dropdowns
+          v-model:menu="menu"
+        />
       </RenderCacheable>
     </div>
     <div class="page__body">
