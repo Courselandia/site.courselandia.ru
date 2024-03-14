@@ -1,6 +1,10 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .header-teacher-school {
+  align-items: center;
+  display: flex;
+  margin-bottom: 0.75rem;
+
   &__label {
     margin-right: 2rem;
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="header-teacher-school">
     <div class="header-teacher-school__label">
-      Направление:
+      Школа:
     </div>
     <div class="header-teacher-school__value">
       <nuxt-link
