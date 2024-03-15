@@ -46,6 +46,10 @@ const publications = ref<Array<IPublication>>();
 const stopScrollLoader = ref(false);
 const loading = ref(false);
 
+if (route.query.page && Number(route.query.page)) {
+  page.value = Number(route.query.page);
+}
+
 const loadPublications = async (
   fetch: boolean,
   offset: number,
@@ -90,13 +94,11 @@ const setUrlQuery = (): void => {
     current: url,
   };
 
-  /*
   window.history.pushState(
     newState,
     '',
     url,
   );
-   */
 };
 
 watch(page, () => {
