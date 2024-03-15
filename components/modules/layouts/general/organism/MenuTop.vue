@@ -65,7 +65,7 @@
     <div class="menu-top__item">
       <nuxt-link
         to="/blog"
-        class="menu-top__link"
+        :class="`menu-top__link ${(menuValue === 'blog' || active === 'blog') ? 'link--active' : ''}`"
       >
         Блог
       </nuxt-link>

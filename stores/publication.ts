@@ -6,10 +6,12 @@ import type {
   IResponseItem,
 } from '@/interfaces/response';
 import type IList from '@/interfaces/stores/publication/list';
+import type IPublication from '@/interfaces/stores/publication/publication';
 
 export default defineStore('publication', {
   state: () => ({
     list: null as IList | null,
+    itemLinkPublication: null as IPublication | null,
   }),
   actions: {
     async readPublications(

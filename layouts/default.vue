@@ -57,6 +57,8 @@ const setActive = (): void => {
     active.value = 'courses';
   } else if (route.path.indexOf('/reviews') !== -1) {
     active.value = 'reviews';
+  } else if (route.path.indexOf('/blog') !== -1) {
+    active.value = 'blog';
   } else {
     active.value = undefined;
   }
