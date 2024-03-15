@@ -62,9 +62,9 @@
         />
       </div>
     </div>
-    <div class="menu-top__item" style="display: none">
+    <div class="menu-top__item">
       <nuxt-link
-        to="/"
+        to="/blog"
         class="menu-top__link"
       >
         Блог

@@ -1,0 +1,11 @@
+.image {
+  line-height: 0;
+  margin-bottom: 1.5rem;
+
+  &__element {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 0.625rem;
+  }
+}
