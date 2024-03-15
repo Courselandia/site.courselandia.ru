@@ -24,7 +24,7 @@ import type { PropType } from 'vue';
 import Header from '@/components/modules/publications/atoms/Header.vue';
 import Image from '@/components/modules/publications/atoms/Image.vue';
 import Anons from '@/components/modules/publications/atoms/Anons.vue';
-import type IPublication from '~/interfaces/stores/publication/publication';
+import type IPublication from '@/interfaces/stores/publication/publication';
 
 const props = defineProps({
   publication: {
