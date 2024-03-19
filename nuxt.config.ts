@@ -1,4 +1,4 @@
-//*** eslint-disable-next-line no-undef
+// eslint-disable-next-line no-undef
 export default defineNuxtConfig({
   ssr: true,
   dev: process.env.NODE_ENV !== 'production',
