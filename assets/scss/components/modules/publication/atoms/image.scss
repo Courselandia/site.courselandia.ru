@@ -1,0 +1,16 @@
+.image {
+  line-height: 0;
+
+  &__element {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    border-radius: 2rem;
+    margin-bottom: 3.5rem;
+
+    @media all and (max-width: 576px) {
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+    }
+  }
+}

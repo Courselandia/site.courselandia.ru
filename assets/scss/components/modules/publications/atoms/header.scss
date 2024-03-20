@@ -1,0 +1,18 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.header {
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1.5625rem;
+  color: $black;
+  margin-bottom: 0.75rem;
+
+  @media all and (max-width: 576px) {
+    margin-bottom: 0;
+  }
+
+  @media all and (max-width: 450px) {
+    font-size: 0.875rem;
+    line-height: 1.09375rem;
+  }
+}

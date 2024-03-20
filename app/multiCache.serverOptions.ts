@@ -30,6 +30,16 @@ export default defineMultiCacheOptions({
         }
       }
 
+      if (path.startsWith('/blog')) {
+        const {
+          page,
+        } = getQuery(event);
+
+        if (page) {
+          return `blog_${page}`;
+        }
+      }
+
       return path.split('?')[0];
     },
   },

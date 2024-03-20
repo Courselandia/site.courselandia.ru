@@ -43,15 +43,13 @@
           :size="[7, 13]"
         />
       </div>
-      <!--
-      <nuxt-link
-        style="display: none"
+      <div
         class="menu-top-mobile__item"
-        to="/blog"
+        @click="onClickLink('blog')"
+        @keydown="onClickLink('blog')"
       >
         Блог
-      </nuxt-link>
-      -->
+      </div>
     </template>
     <template v-else-if="menu === 'courses'">
       <template v-if="direction === null">

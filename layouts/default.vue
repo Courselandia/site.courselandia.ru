@@ -57,6 +57,8 @@ const setActive = (): void => {
     active.value = 'courses';
   } else if (route.path.indexOf('/reviews') !== -1) {
     active.value = 'reviews';
+  } else if (route.path.indexOf('/blog') !== -1) {
+    active.value = 'blog';
   } else {
     active.value = undefined;
   }
@@ -67,8 +69,8 @@ useJsonld({
   '@type': 'Organization',
   name: 'Courselandia',
   description: 'Courselandia — это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментам. Найдите свой курс быстро и легко.',
-  image: 'https://api.courselandia.ru/storage/uploaded/images/prev.webp',
-  logo: 'https://api.courselandia.ru/storage/uploaded/images/logo.webp',
+  image: `${config.public.apiUrl}/storage/uploaded/images/prev.webp`,
+  logo: `${config.public.apiUrl}/storage/uploaded/images/logo.webp`,
   url: config.public.siteUrl,
 });
 
