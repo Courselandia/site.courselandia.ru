@@ -1,10 +1,12 @@
 @import "/assets/scss/vars/modifiers/images";
+@import "@/assets/scss/vars/modifiers/colors";
 
 .image {
   width: 100%;
   height: auto;
   border: none;
   outline: none;
+  border-radius: 10px;
 
   @each $image in $images {
     &--#{$image} {
@@ -23,12 +25,15 @@
     float: left;
     margin-right: 1.5rem;
     margin-bottom: 1.5rem;
+    max-width: 400px;
+    height: auto;
 
-    @media all and (max-width: 600px) {
+    @media all and (max-width: 700px) {
       float: none;
       margin-left: 0;
       margin-right: 0;
       clear: both;
+      max-width: none;
     }
   }
 
@@ -36,12 +41,15 @@
     float: right;
     margin-left: 1.5rem;
     margin-bottom: 1.5rem;
+    max-width: 400px;
+    height: auto;
 
     @media all and (max-width: 600px) {
       float: none;
       margin-left: 0;
       margin-right: 0;
       clear: both;
+      max-width: none;
     }
   }
 
