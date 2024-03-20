@@ -69,8 +69,8 @@ useJsonld({
   '@type': 'Organization',
   name: 'Courselandia',
   description: 'Courselandia — это огромный каталог онлайн курсов по разным направлениям с умным поиском по навыкам, направлениям, профессиям и инструментам. Найдите свой курс быстро и легко.',
-  image: 'https://api.courselandia.ru/storage/uploaded/images/prev.webp',
-  logo: 'https://api.courselandia.ru/storage/uploaded/images/logo.webp',
+  image: `${config.public.apiUrl}/storage/uploaded/images/prev.webp`,
+  logo: `${config.public.apiUrl}/storage/uploaded/images/logo.webp`,
   url: config.public.siteUrl,
 });
 
