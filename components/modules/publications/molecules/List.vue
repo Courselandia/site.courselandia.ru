@@ -80,7 +80,7 @@ const setUrlQuery = (): void => {
   const queries: Array<string> = [];
 
   if (page.value && page.value !== 1) {
-    queries.push(`page=${page.value}`);
+    // queries.push(`page=${page.value}`);
   }
 
   const query = queries.join('&');
