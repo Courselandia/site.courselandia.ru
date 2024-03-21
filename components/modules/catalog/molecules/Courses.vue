@@ -7,6 +7,7 @@
         v-for="(course, key) in courses"
         :key="key"
         :course="course"
+        :type="type"
       />
     </template>
     <div
@@ -30,6 +31,7 @@ import {
 } from 'vue';
 
 import Course from '@/components/modules/catalog/molecules/Course.vue';
+import ECourseType from '@/enums/components/modules/catalog/courseType';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
@@ -41,6 +43,11 @@ const props = defineProps({
     type: Number,
     required: false,
     default: 4,
+  },
+  type: {
+    type: String as PropType<ECourseType>,
+    required: false,
+    default: ECourseType.TILE,
   },
 });
 

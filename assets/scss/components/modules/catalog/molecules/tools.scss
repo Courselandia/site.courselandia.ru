@@ -18,7 +18,15 @@
 
   &__field {
     &--sort {
-      width: 240px;
+      flex-grow: 1;
+
+      :deep(.form-item) {
+        width: 240px;
+      }
+    }
+
+    &--type {
+      flex-grow: 0;
     }
 
     &--filters-mobile {

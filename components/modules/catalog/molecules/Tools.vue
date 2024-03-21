@@ -12,6 +12,11 @@
           />
         </Item>
       </div>
+      <div class="tools__field tools__field--type">
+        <ToolType
+          v-model:value="typeValue"
+        />
+      </div>
     </div>
     <div class="tools__side tools__side--right">
       <div class="tools__field tools__field--filters-mobile">
@@ -33,6 +38,7 @@ import {
 
 import Item from '@/components/atoms/form/Item.vue';
 import Select from '@/components/atoms/form/Select.vue';
+import ToolType from '@/components/modules/catalog/molecules/ToolType.vue';
 import ECourseSort from '@/enums/components/modules/catalog/courseSort';
 import type IOption from '@/interfaces/components/atoms/option';
 import type TValue from '@/types/value';
