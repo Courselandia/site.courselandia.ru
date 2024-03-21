@@ -246,7 +246,7 @@ const courseJsonLd = computed<any>(() => {
       courseWorkload: (
         courseItem.value?.duration
         && courseItem.value?.duration_unit
-      ) ? getCourseWorkload(courseItem.value.duration, courseItem.value.duration_unit) : null,
+      ) ? getCourseWorkload(courseItem.value.duration, courseItem.value.duration_unit) : 'P1M',
     },
   };
 });
