@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="itemLinkPublication"
-    class="publication content content--small mt-12 mb-24 mb-12-sm"
+    class="publication content content--small mt-12 mb-24 mb-12-sm titles"
   >
     <Image
       v-if="itemLinkPublication.image_big_id?.path"
