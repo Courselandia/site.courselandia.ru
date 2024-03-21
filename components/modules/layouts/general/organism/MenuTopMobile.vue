@@ -45,8 +45,8 @@
       </div>
       <div
         class="menu-top-mobile__item"
-        @click="onClickLink('blog')"
-        @keydown="onClickLink('blog')"
+        @click="onClickLink('/blog')"
+        @keydown="onClickLink('/blog')"
       >
         Блог
       </div>
