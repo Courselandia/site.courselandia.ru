@@ -1,11 +1,15 @@
 <template>
   <div class="header-teacher-socials">
-    <HeaderTeacherSocial
+    <template
       v-for="(social, key) in socialMedias"
-      :key="key"
-      :name="social.name"
-      :url="social.value"
-    />
+    >
+      <HeaderTeacherSocial
+        v-if="social.name !== ESocialMedia.FACEBOOK && social.name !== ESocialMedia.INSTAGRAM"
+        :key="key"
+        :name="social.name"
+        :url="social.value"
+      />
+    </template>
   </div>
 </template>
 
@@ -13,6 +17,7 @@
 import type { PropType } from 'vue';
 
 import HeaderTeacherSocial from '@/components/modules/catalog/atoms/HeaderTeacherSocial.vue';
+import ESocialMedia from '@/enums/socialMedia';
 import type ISocialMedia from '@/interfaces/stores/socialMedia';
 
 const props = defineProps({
