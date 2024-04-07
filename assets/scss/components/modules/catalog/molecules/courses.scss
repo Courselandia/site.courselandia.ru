@@ -23,40 +23,53 @@
   &--columns {
     &-4 {
       .course {
-        width: calc(25% - 2.5rem);
+        &--type-tile {
+          width: calc(25% - 2.5rem);
 
-        @media all and (max-width: 1300px) {
-          width: calc(33.333% - 2.5rem);
-        }
+          @media all and (max-width: 1300px) {
+            width: calc(33.333% - 2.5rem);
+          }
 
-        @media all and (max-width: 1000px) {
-          width: calc(50% - 2.5rem);
-        }
+          @media all and (max-width: 1000px) {
+            width: calc(50% - 2.5rem);
+          }
 
-        @media all and (max-width: 768px) {
-          width: calc(50% - 2rem);
-        }
+          @media all and (max-width: 768px) {
+            width: calc(50% - 2rem);
+          }
 
-        @media all and (max-width: 600px) {
-          width: calc(50% - 1rem);
+          @media all and (max-width: 600px) {
+            width: calc(50% - 1rem);
+          }
         }
       }
     }
 
     &-3 {
       .course {
-        width: calc(33.333% - 2.5rem);
+        &--type-tile {
+          width: calc(33.333% - 2.5rem);
 
-        @media all and (max-width: 1350px) {
-          width: calc(50% - 2.5rem);
+          @media all and (max-width: 1350px) {
+            width: calc(50% - 2.5rem);
+          }
+
+          @media all and (max-width: 768px) {
+            width: calc(50% - 2rem);
+          }
+
+          @media all and (max-width: 600px) {
+            width: calc(50% - 1rem);
+          }
         }
+      }
+    }
 
-        @media all and (max-width: 768px) {
-          width: calc(50% - 2rem);
-        }
-
-        @media all and (max-width: 600px) {
-          width: calc(50% - 1rem);
+    &-3,
+    &-4 {
+      .course {
+        &--type-row {
+          width: 100%;
         }
       }
     }

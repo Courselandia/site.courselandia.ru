@@ -20,7 +20,19 @@
     margin-bottom: 1rem;
   }
 
-  &--active {
-    transform: scale(0.97);
+  &--type-tile {
+    &.course {
+      &--active {
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  &--type-row {
+    &.course {
+      &--active {
+        transform: scale(0.99);
+      }
+    }
   }
 }

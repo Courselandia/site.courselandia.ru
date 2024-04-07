@@ -7,6 +7,11 @@
       v-model:active="active"
       :course="course"
     />
+    <CourseRow
+      v-else-if="type === ECourseType.ROW"
+      v-model:active="active"
+      :course="course"
+    />
   </div>
 </template>
 
@@ -17,8 +22,10 @@ import type {
 import {
   computed,
   ref,
+  toRefs,
 } from 'vue';
 
+import CourseRow from '@/components/modules/catalog/molecules/CourseRow.vue';
 import CourseTile from '@/components/modules/catalog/molecules/CourseTile.vue';
 import ECourseType from '@/enums/components/modules/catalog/courseType';
 import type ICourse from '@/interfaces/components/modules/course';
@@ -36,9 +43,12 @@ const props = defineProps({
 });
 
 const active = ref(false);
+const { type } = toRefs(props);
 
 const nameClass = computed(() => {
   const classes = [];
+
+  classes.push(`course--type-${type.value}`);
 
   if (active.value) {
     classes.push('course--active');

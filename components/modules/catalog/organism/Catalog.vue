@@ -76,7 +76,7 @@
                   <Courses
                     :courses="courses"
                     :columns="3"
-                    :type="type"
+                    :type="ECourseType.ROW"
                   >
                     <template #empty>
                       К сожалению мы не нашли подходящих курсов под ваш запрос.
