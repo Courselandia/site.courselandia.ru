@@ -7,7 +7,7 @@
   margin: 0 auto;
 
   &--small {
-    max-width: 800px;
+    max-width: calc(800px + 3rem * 2);
   }
 
   &__flex {
