@@ -1,20 +1,20 @@
 <template>
   <div
     :class="`favorite-course ${nameClass}`"
-    @click="onClick"
-    @keyup="onClick"
+    @click.stop="onClick"
+    @keyup.stop="onClick"
   >
     <transition name="fade-fast" mode="out-in">
       <Icon
         v-if="hasFavorite(id)"
         name="heart-full"
-        :size="[25, 23]"
+        :size="[25, 24]"
         color="blue2"
       />
       <Icon
         v-else
         name="heart"
-        :size="[25, 23]"
+        :size="[25, 24]"
         color="blue2"
       />
     </transition>
@@ -46,6 +46,10 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits({
+  click: () => true,
+});
+
 const {
   addFavorite,
   removeFavorite,
@@ -62,7 +66,7 @@ const nameClass = computed(() => {
   return classes.join(' ');
 });
 
-const onClick = (): void => {
+const onClick = (event: any): void => {
   if (hasFavorite(props.id)) {
     removeFavorite(props.id);
   } else {

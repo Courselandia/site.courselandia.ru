@@ -7,10 +7,14 @@
     height: 100%;
   }
 
-  &__box {
+  &__box,
+  &__link {
     display: flex;
-    align-items: flex-start;
+  }
+
+  &__link {
     text-decoration: none;
+    align-items: flex-start;
   }
 
   &__side {
@@ -19,9 +23,38 @@
       padding: 1.5rem 1.75rem;
     }
 
-    &--right {
-      min-width: 250px;
-      max-width: 250px;
+    &--center {
+      display: flex;
+      flex-direction: column;
     }
+
+    &--right {
+      min-width: 265px;
+      max-width: 265px;
+      text-align: center;
+
+      &:deep(.course-tile-prices) {
+        margin-bottom: 1.5rem;
+      }
+
+      &:deep(.course-tile-prices__additional) {
+        justify-content: center;
+      }
+    }
+  }
+
+  &__middle {
+    flex-grow: 1;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
   }
 }

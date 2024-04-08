@@ -1,40 +1,71 @@
 <template>
   <div class="course-row">
-    <nuxt-link
-      :to="course.link"
-      class="course-row__box"
-      @mousedown="onClickActive"
-      @mouseup="onClickDisable"
-      @mouseleave="onClickDisable"
-      @focusout="onClickDisable"
-    >
-      <div class="course-row__side course-row__side--left">
-        <CourseRowImage
-          :path="course.image?.path"
-        >
-          <CourseTileRating
-            v-if="course.rating"
-            :rating="course.rating"
+    <div class="course-row__box">
+      <nuxt-link
+        :to="course.link"
+        class="course-row__link"
+        @mousedown="onClickActive"
+        @mouseup="onClickDisable"
+        @mouseleave="onClickDisable"
+        @focusout="onClickDisable"
+      >
+        <div class="course-row__side course-row__side--left">
+          <CourseRowImage
+            :path="course.image?.path"
+          >
+            <CourseTileRating
+              v-if="course.rating"
+              :rating="course.rating"
+            />
+            <CourseTileBrandLogo
+              v-if="course.school?.image"
+              :path="course.school.image"
+              :name="course.school.name"
+            />
+          </CourseRowImage>
+        </div>
+        <div class="course-row__side course-row__side--center">
+          <CourseTileName
+            :name="course.name"
           />
-          <CourseTileBrandLogo
-            v-if="course.school?.image"
-            :path="course.school.image"
-            :name="course.school.name"
-          />
-        </CourseRowImage>
-      </div>
-      <div class="course-row__side course-row__side--center">
-        <CourseTileName
-          :name="course.name"
-        />
-        <CourseRowText
-          v-if="course.text"
-          :text="course.text"
-        />
-      </div>
+          <div class="course-row__middle">
+            <CourseRowText
+              v-if="course.text"
+              :text="course.text"
+            />
+          </div>
+          <div class="course-row__bottom">
+            <CourseTileDuration
+              v-if="course.duration && course.duration_unit"
+              :duration="course.duration"
+              :unit="course.duration_unit"
+              :point="!!course.lessons_amount"
+            />
+            <CourseTileLessonsAmount
+              v-if="course.lessons_amount"
+              :amount="course.lessons_amount"
+            />
+          </div>
+        </div>
+      </nuxt-link>
       <div class="course-row__side course-row__side--right">
+        <CourseTilePrices
+          :price="course.price"
+          :price-recurrent="course.price_recurrent"
+          :price-old="course.price_old"
+          :currency="course.currency"
+        />
+        <div class="course-row__actions">
+          <CourseRowButtonGo
+            v-model:active="activeValue"
+            :url="course.url"
+          />
+          <CourseRowFavorite
+            :id="course.id"
+          />
+        </div>
       </div>
-    </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -46,10 +77,15 @@ import {
   watch,
 } from 'vue';
 
+import CourseRowButtonGo from '@/components/modules/catalog/atoms/CourseRowButtonGo.vue';
+import CourseRowFavorite from '@/components/modules/catalog/atoms/CourseRowFavorite.vue';
 import CourseRowImage from '@/components/modules/catalog/atoms/CourseRowImage.vue';
 import CourseRowText from '@/components/modules/catalog/atoms/CourseRowText.vue';
 import CourseTileBrandLogo from '@/components/modules/catalog/atoms/CourseTileBrandLogo.vue';
+import CourseTileDuration from '@/components/modules/catalog/atoms/CourseTileDuration.vue';
+import CourseTileLessonsAmount from '@/components/modules/catalog/atoms/CourseTileLessonsAmount.vue';
 import CourseTileName from '@/components/modules/catalog/atoms/CourseTileName.vue';
+import CourseTilePrices from '@/components/modules/catalog/atoms/CourseTilePrices.vue';
 import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRating.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
