@@ -5,6 +5,10 @@
     target="_blank"
     rel="nofollow noopener noreferrer"
     class="course-row-button-go"
+    @mousedown="onClickActive"
+    @mouseup="onClickDisable"
+    @mouseleave="onClickDisable"
+    @focusout="onClickDisable"
     @click="onClickGoSchool"
   >
     Перейти
