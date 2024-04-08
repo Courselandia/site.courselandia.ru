@@ -1,6 +1,11 @@
 .course-row-image {
   height: 240px;
 
+  @media all and (max-width: 850px) {
+    height: 110px;
+    margin-bottom: 0.5rem;
+  }
+
   &__element {
     width: 240px;
     height: 240px;

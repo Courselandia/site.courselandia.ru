@@ -3,10 +3,11 @@
   width: 20px;
   line-height: 0;
   display: table;
-  margin-left: 20px;
+  margin-left: 1.5rem;
 
   @media all and (max-width: 600px) {
-    width: 40px;
+    width: 30px;
+    margin-left: 1rem;
   }
 
   &__heart {

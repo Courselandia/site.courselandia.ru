@@ -12,11 +12,13 @@
           />
         </Item>
       </div>
+      <!--
       <div class="tools__field tools__field--type">
         <ToolType
           v-model:value="typeValue"
         />
       </div>
+      -->
     </div>
     <div class="tools__side tools__side--right">
       <div class="tools__field tools__field--filters-mobile">

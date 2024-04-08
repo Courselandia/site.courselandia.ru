@@ -3,7 +3,11 @@
   height: 240px;
 
   @media all and (max-width: 850px) {
-    height: 500px;
+    height: 365px;
+  }
+
+  @media all and (max-width: 600px) {
+    height: 285px;
   }
 
   &__box,
@@ -19,18 +23,31 @@
   &__box {
     @media all and (max-width: 850px) {
       flex-wrap: wrap;
+      height: auto;
     }
   }
 
   &__link {
     text-decoration: none;
     align-items: flex-start;
+
+    @media all and (max-width: 850px) {
+      flex-wrap: wrap;
+    }
   }
 
   &__side {
+    @media all and (max-width: 850px) {
+      height: auto;
+    }
+
     &--right,
     &--center {
       padding: 1.5rem 1.75rem;
+
+      @media all and (max-width: 600px) {
+        padding: 1rem 1rem;
+      }
     }
 
     &--left {
@@ -57,20 +74,46 @@
       text-align: center;
 
       @media all and (max-width: 850px) {
-        text-align: left;
-        padding: 0 0 0 calc(110px + 1.75rem);
         min-width: auto;
         max-width: none;
         width: 100%;
+        padding-left: calc(110px + 1.75rem);
+      }
+
+      @media all and (max-width: 600px) {
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: calc(110px + 1rem);
       }
 
       &:deep(.course-tile-prices) {
         margin-bottom: 1.5rem;
+
+        @media all and (max-width: 850px) {
+          display: none;
+        }
       }
 
       &:deep(.course-tile-prices__additional) {
         justify-content: center;
+      }
+    }
 
+    &--price-mobile {
+      display: none;
+
+      @media all and (max-width: 850px) {
+        display: block;
+        padding: 0 0 0 calc(110px + 1.75rem);
+        width: 100%;
+      }
+
+      @media all and (max-width: 600px) {
+        padding: 0 0 0 calc(110px + 1rem);
+        margin-bottom: 0.5rem;
+      }
+
+      &:deep(.course-tile-prices__additional) {
         @media all and (max-width: 850px) {
           justify-content: flex-start;
         }
@@ -86,11 +129,28 @@
     display: flex;
     align-items: center;
     flex-grow: 0;
+
+    @media all and (max-width: 850px) {
+      display: none;
+    }
   }
 
   &__actions {
     display: flex;
     align-items: center;
+
+    &:deep(.button__label) {
+      @media all and (max-width: 600px) {
+        padding: 0.7rem 2rem;
+      }
+    }
+
+    &:deep(.favorite-course--mobile .icon) {
+      @media all and (max-width: 600px) {
+        width: 20px !important;
+        height: 20px !important;
+      }
+    }
   }
 
   &__rating-and-logo-mobile {
@@ -114,6 +174,25 @@
     &:deep(.course-tile-brand-logo) {
       height: auto;
       flex-grow: 1;
+    }
+  }
+
+  &__duration-and-lessons-amount-mobile {
+    display: none;
+    text-align: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    @media all and (max-width: 850px) {
+      display: block;
+    }
+
+    &:deep(.course-tile-duration--point) {
+      @media all and (max-width: 850px) {
+        background-image: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
     }
   }
 }

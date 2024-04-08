@@ -23,12 +23,25 @@
               :name="course.school.name"
             />
           </CourseRowImage>
+          <div class="course-row__duration-and-lessons-amount-mobile">
+            <CourseTileDuration
+              v-if="course.duration && course.duration_unit"
+              :duration="course.duration"
+              :unit="course.duration_unit"
+              :point="!!course.lessons_amount"
+            />
+            <CourseTileLessonsAmount
+              v-if="course.lessons_amount"
+              :amount="course.lessons_amount"
+            />
+          </div>
         </div>
         <div class="course-row__side course-row__side--center">
           <div class="course-row__top">
             <div class="course-row__rating-and-logo-mobile">
               <CourseTileBrandLogo
-                path="https://api.courselandia.ru/storage/images/schools/6410c538e36d31d8df053d44.webp?1678820664"
+                v-if="course.school?.image"
+                :path="course.school.image"
                 :name="course.school.name"
               />
               <CourseTileRating
@@ -58,6 +71,14 @@
               :amount="course.lessons_amount"
             />
           </div>
+        </div>
+        <div class="course-row__side course-row__side--price-mobile">
+          <CourseTilePrices
+            :price="course.price"
+            :price-recurrent="course.price_recurrent"
+            :price-old="course.price_old"
+            :currency="course.currency"
+          />
         </div>
       </nuxt-link>
       <div class="course-row__side course-row__side--right">

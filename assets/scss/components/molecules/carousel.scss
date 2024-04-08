@@ -1,24 +1,24 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .carousel {
-  &__pagination-button {
-    &:after {
-      width: 6px;
-      height: 6px;
-      border-radius: 100%;
-      background-color: $white;
-    }
-
-    &:hover,
-    &--active {
-      &:after {
-        background-color: $blue3;
-      }
-    }
+  &:deep(.carousel__pagination-button:after) {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background-color: $white;
   }
 
-  &__slide {
+  &:deep(.carousel__pagination-button:hover:after),
+  &:deep(.carousel__pagination-button--active:after) {
+    background-color: $blue3;
+  }
+
+  &:deep(.carousel__slide) {
     justify-content: start;
     align-items: start;
+  }
+
+  &:deep(.tag__label) {
+    text-align: left;
   }
 }
