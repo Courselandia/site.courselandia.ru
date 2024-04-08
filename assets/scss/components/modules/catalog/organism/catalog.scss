@@ -7,9 +7,9 @@
 
   &__items {
     order: 2;
-    width: calc(100% - 350px - 2.5rem);
+    width: calc(100% - 320px - 2.5rem);
 
-    @media all and (max-width: 1050px) {
+    @media all and (max-width: 1250px) {
       width: 100%;
     }
   }
@@ -21,7 +21,7 @@
     padding-right: 2.5rem;
     box-sizing: content-box;
 
-    @media all and (max-width: 1050px) {
+    @media all and (max-width: 1250px) {
       display: none;
     }
 
@@ -44,7 +44,7 @@
   }
 
   &__tags {
-    @media all and (max-width: 1050px) {
+    @media all and (max-width: 1250px) {
       display: none;
     }
   }

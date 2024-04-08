@@ -25,9 +25,21 @@
           </CourseRowImage>
         </div>
         <div class="course-row__side course-row__side--center">
-          <CourseTileName
-            :name="course.name"
-          />
+          <div class="course-row__top">
+            <div class="course-row__rating-and-logo-mobile">
+              <CourseTileBrandLogo
+                path="https://api.courselandia.ru/storage/images/schools/6410c538e36d31d8df053d44.webp?1678820664"
+                :name="course.school.name"
+              />
+              <CourseTileRating
+                v-if="course.rating"
+                :rating="course.rating"
+              />
+            </div>
+            <CourseTileName
+              :name="course.name"
+            />
+          </div>
           <div class="course-row__middle">
             <CourseRowText
               v-if="course.text"
