@@ -120,6 +120,17 @@
             :course="course"
           />
         </div>
+        <div
+          v-if="course.teachers?.length"
+          class="course-box__teachers"
+        >
+          <div class="course-box__title">
+            Преподаватели
+          </div>
+          <Teachers
+            :course="course"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -146,6 +157,7 @@ import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRatin
 import CourseBoxProgram from '@/components/modules/catalog/molecules/CourseBoxProgram.vue';
 import CourseBoxTools from '@/components/modules/catalog/molecules/CourseBoxTools.vue';
 import Learn from '@/components/modules/course/molecules/Learn.vue';
+import Teachers from '@/components/modules/course/molecules/Teachers.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 import programDescription from '@/lib/programDescription';
 
