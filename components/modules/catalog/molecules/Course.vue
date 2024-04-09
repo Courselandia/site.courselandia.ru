@@ -12,6 +12,11 @@
       v-model:active="active"
       :course="course"
     />
+    <CourseBox
+      v-else-if="type === ECourseType.BOX"
+      v-model:active="active"
+      :course="course"
+    />
   </div>
 </template>
 
@@ -25,6 +30,7 @@ import {
   toRefs,
 } from 'vue';
 
+import CourseBox from '@/components/modules/catalog/molecules/CourseBox.vue';
 import CourseRow from '@/components/modules/catalog/molecules/CourseRow.vue';
 import CourseTile from '@/components/modules/catalog/molecules/CourseTile.vue';
 import ECourseType from '@/enums/components/modules/catalog/courseType';

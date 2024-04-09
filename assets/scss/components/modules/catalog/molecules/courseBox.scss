@@ -1,77 +1,36 @@
-.course-row {
+@import "@/assets/scss/vars/modifiers/colors";
+
+.course-box {
   width: 100%;
-  height: 240px;
-
-  @media all and (max-width: 850px) {
-    height: 365px;
-  }
-
-  @media all and (max-width: 600px) {
-    height: 285px;
-  }
-
-  &__content,
-  &__side {
-    height: 100%;
-  }
-
-  &__content,
-  &__link {
-    display: flex;
-  }
 
   &__content {
-    @media all and (max-width: 850px) {
-      flex-wrap: wrap;
-      height: auto;
-    }
+    padding: 1.5rem;
   }
 
-  &__link {
-    text-decoration: none;
-    align-items: flex-start;
+  &__header {
+    display: flex;
+    align-items: stretch;
+  }
 
-    @media all and (max-width: 850px) {
-      flex-wrap: wrap;
-    }
+  &__body {
+    border-top: 1px solid $grey2;
+    margin-top: 2rem;
+    padding-top: 2rem;
   }
 
   &__side {
-    @media all and (max-width: 850px) {
-      height: auto;
-    }
-
-    &--right,
-    &--center {
-      padding: 1.5rem 1.75rem;
-
-      @media all and (max-width: 600px) {
-        padding: 1rem 1rem;
-      }
-    }
-
-    &--left {
-      &:deep(.course-row-image__element .course-tile-rating),
-      &:deep(.course-row-image__element .course-tile-brand-logo){
-        @media all and (max-width: 850px) {
-          display: none;
-        }
-      }
-    }
-
     &--center {
       display: flex;
       flex-direction: column;
-
-      @media all and (max-width: 850px) {
-        width: calc(100% - 110px);
-      }
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
 
     &--right {
-      min-width: 265px;
-      max-width: 265px;
+      min-width: 235px;
+      max-width: 235px;
       text-align: center;
+      padding-left: 1.5rem;
 
       @media all and (max-width: 850px) {
         min-width: auto;
@@ -96,27 +55,6 @@
 
       &:deep(.course-tile-prices__additional) {
         justify-content: center;
-      }
-    }
-
-    &--price-mobile {
-      display: none;
-
-      @media all and (max-width: 850px) {
-        display: block;
-        padding: 0 0 0 calc(110px + 1.75rem);
-        width: 100%;
-      }
-
-      @media all and (max-width: 600px) {
-        padding: 0 0 0 calc(110px + 1rem);
-        margin-bottom: 0.5rem;
-      }
-
-      &:deep(.course-tile-prices__additional) {
-        @media all and (max-width: 850px) {
-          justify-content: flex-start;
-        }
       }
     }
   }
@@ -153,22 +91,15 @@
     }
   }
 
-  &__rating-and-logo-mobile {
-    display: none;
+  &__rating-and-logo {
     margin-bottom: 1rem;
-
-    @media all and (max-width: 850px) {
-      display: flex;
-    }
+    display: flex;
 
     &:deep(.course-tile-rating),
     &:deep(.course-tile-brand-logo) {
       padding: 0;
       box-shadow: none;
-
-      @media all and (max-width: 850px) {
-        position: static;
-      }
+      position: static;
     }
 
     &:deep(.course-tile-brand-logo) {
@@ -194,5 +125,37 @@
         margin-right: 0;
       }
     }
+  }
+
+  &__info {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  &__learns,
+  &__program {
+    width: 50%;
+  }
+
+  &__learns {
+    padding-right: 1rem;
+  }
+
+  &__program {
+    padding-left: 1rem;
+  }
+
+  &__program-description {
+    font-size: 0.875rem;
+    line-height: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
   }
 }

@@ -1,24 +1,35 @@
 .numerics {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -0.9rem;
-  margin-right: -0.9rem;
+
+  &--columns {
+    &-1 {
+      :deep(.numeric) {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+    }
+
+    &-2 {
+      margin-left: -0.9rem;
+      margin-right: -0.9rem;
+
+      :deep(.numeric) {
+        width: calc(50% - 1.8rem);
+        margin-left: 0.9rem;
+        margin-right: 0.9rem;
+
+        @media all and (max-width: 576px) {
+          width: calc(100%);
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+  }
 
   @media all and (max-width: 576px) {
     margin-left: 0;
     margin-right: 0;
-  }
-
-  :deep(.numeric) {
-    width: calc(50% - 1.8rem);
-    margin-left: 0.9rem;
-    margin-right: 0.9rem;
-    margin-bottom: 1.8rem;
-
-    @media all and (max-width: 576px) {
-      width: calc(100%);
-      margin-left: 0;
-      margin-right: 0;
-    }
   }
 }

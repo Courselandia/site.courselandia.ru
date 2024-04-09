@@ -1,6 +1,7 @@
 <template>
   <Numerics
     v-if="course.learns"
+    :columns="columns"
   >
     <Numeric
       v-for="(learn, key) in course.learns"
@@ -23,6 +24,11 @@ const props = defineProps({
   course: {
     type: Object as PropType<ICourse>,
     required: true,
+  },
+  columns: {
+    type: Number,
+    required: false,
+    default: 2,
   },
 });
 </script>

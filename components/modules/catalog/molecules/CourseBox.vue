@@ -1,29 +1,12 @@
 <template>
-  <div class="course-row">
-    <div class="course-row__content">
-      <nuxt-link
-        :to="course.link"
-        class="course-row__link"
-        @mousedown="onClickActive"
-        @mouseup="onClickDisable"
-        @mouseleave="onClickDisable"
-        @focusout="onClickDisable"
-      >
-        <div class="course-row__side course-row__side--left">
-          <CourseRowImage
+  <div class="course-box">
+    <div class="course-box__content">
+      <div class="course-box__header">
+        <div class="course-box__side course-box__side--left">
+          <CourseBoxImage
             :path="course.image?.path"
-          >
-            <CourseTileRating
-              v-if="course.rating"
-              :rating="course.rating"
-            />
-            <CourseTileBrandLogo
-              v-if="course.school?.image"
-              :path="course.school.image"
-              :name="course.school.name"
-            />
-          </CourseRowImage>
-          <div class="course-row__duration-and-lessons-amount-mobile">
+          />
+          <div class="course-box__duration-and-lessons-amount-mobile">
             <CourseTileDuration
               v-if="course.duration && course.duration_unit"
               :duration="course.duration"
@@ -36,12 +19,12 @@
             />
           </div>
         </div>
-        <div class="course-row__side course-row__side--center">
-          <div class="course-row__top">
-            <div class="course-row__rating-and-logo-mobile">
+        <div class="course-box__side course-box__side--center">
+          <div class="course-box__top">
+            <div class="course-box__rating-and-logo">
               <CourseTileBrandLogo
                 v-if="course.school?.image"
-                :path="course.school.image"
+                :path="course.school?.image"
                 :name="course.school.name"
               />
               <CourseTileRating
@@ -53,13 +36,13 @@
               :name="course.name"
             />
           </div>
-          <div class="course-row__middle">
+          <div class="course-box__middle">
             <CourseRowText
               v-if="course.text"
               :text="course.text"
             />
           </div>
-          <div class="course-row__bottom">
+          <div class="course-box__bottom">
             <CourseTileDuration
               v-if="course.duration && course.duration_unit"
               :duration="course.duration"
@@ -72,30 +55,59 @@
             />
           </div>
         </div>
-        <div class="course-row__side course-row__side--price-mobile">
+        <div class="course-box__side course-box__side--right">
           <CourseTilePrices
             :price="course.price"
             :price-recurrent="course.price_recurrent"
             :price-old="course.price_old"
             :currency="course.currency"
           />
+          <div class="course-box__actions">
+            <CourseRowButtonGo
+              v-model:active="activeValue"
+              :url="course.url"
+            />
+            <CourseRowFavorite
+              :id="course.id"
+            />
+          </div>
         </div>
-      </nuxt-link>
-      <div class="course-row__side course-row__side--right">
-        <CourseTilePrices
-          :price="course.price"
-          :price-recurrent="course.price_recurrent"
-          :price-old="course.price_old"
-          :currency="course.currency"
-        />
-        <div class="course-row__actions">
-          <CourseRowButtonGo
-            v-model:active="activeValue"
-            :url="course.url"
-          />
-          <CourseRowFavorite
-            :id="course.id"
-          />
+      </div>
+      <div class="course-box__body">
+        <div class="course-box__info">
+          <div
+            v-if="course.learns?.length"
+            class="course-box__learns"
+          >
+            <div class="course-box__title">
+              Чему вы научитесь
+            </div>
+            <Learn
+              :course="course"
+              :columns="1"
+            />
+          </div>
+          <div
+            v-if="course.program?.length"
+            class="course-box__program"
+          >
+            <div class="course-box__title">
+              Программа курса
+            </div>
+            <ClientOnly>
+              <!--noindex-->
+              <div
+                v-if="programDescription(course)"
+                class="course-box__program-description"
+              >
+                {{ programDescription(course) }}
+              </div>
+              <CourseBoxProgram
+                :course="course"
+              />
+              <!--/noindex-->
+            </ClientOnly>
+          </div>
         </div>
       </div>
     </div>
@@ -110,9 +122,9 @@ import {
   watch,
 } from 'vue';
 
+import CourseBoxImage from '@/components/modules/catalog/atoms/CourseBoxImage.vue';
 import CourseRowButtonGo from '@/components/modules/catalog/atoms/CourseRowButtonGo.vue';
 import CourseRowFavorite from '@/components/modules/catalog/atoms/CourseRowFavorite.vue';
-import CourseRowImage from '@/components/modules/catalog/atoms/CourseRowImage.vue';
 import CourseRowText from '@/components/modules/catalog/atoms/CourseRowText.vue';
 import CourseTileBrandLogo from '@/components/modules/catalog/atoms/CourseTileBrandLogo.vue';
 import CourseTileDuration from '@/components/modules/catalog/atoms/CourseTileDuration.vue';
@@ -120,7 +132,10 @@ import CourseTileLessonsAmount from '@/components/modules/catalog/atoms/CourseTi
 import CourseTileName from '@/components/modules/catalog/atoms/CourseTileName.vue';
 import CourseTilePrices from '@/components/modules/catalog/atoms/CourseTilePrices.vue';
 import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRating.vue';
+import CourseBoxProgram from '@/components/modules/catalog/molecules/CourseBoxProgram.vue';
+import Learn from '@/components/modules/course/molecules/Learn.vue';
 import type ICourse from '@/interfaces/components/modules/course';
+import programDescription from '@/lib/programDescription';
 
 const props = defineProps({
   course: {
@@ -162,5 +177,5 @@ const onClickDisable = (): void => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/modules/catalog/molecules/courseRow";
+@import "@/assets/scss/components/modules/catalog/molecules/courseBox";
 </style>
