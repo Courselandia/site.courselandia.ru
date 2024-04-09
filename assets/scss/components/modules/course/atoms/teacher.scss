@@ -12,12 +12,30 @@
     }
   }
 
+  &--mobile {
+    .teacher {
+      &__picture {
+        @media all and (max-width: 576px) {
+          margin-right: 0;
+        }
+      }
+
+      &__name {
+        @media all and (max-width: 576px) {
+          text-align: center;
+        }
+      }
+
+      &__position {
+        @media all and (max-width: 576px) {
+          text-align: center;
+        }
+      }
+    }
+  }
+
   &__picture {
     margin-right: 1.5rem;
-
-    @media all and (max-width: 576px) {
-      margin-right: 0;
-    }
   }
 
   &__image {
@@ -30,19 +48,11 @@
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.5rem;
-
-    @media all and (max-width: 576px) {
-      text-align: center;
-    }
   }
 
   &__position {
     font-weight: 400;
     font-size: 0.875rem;
     line-height: 1.3125rem;
-
-    @media all and (max-width: 576px) {
-      text-align: center;
-    }
   }
 }

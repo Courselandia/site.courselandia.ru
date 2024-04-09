@@ -1,0 +1,37 @@
+.course-row-favorite {
+  margin-bottom: -2rem;
+
+  @media all and (max-width: 850px) {
+    margin-bottom: 0;
+  }
+
+  &__items {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media all and (max-width: 850px) {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: 100%;
+      scrollbar-width: none;
+    }
+  }
+
+  :deep(.teacher) {
+    width: calc(33.33% - 2rem);
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 2rem;
+
+    @media all and (max-width: 850px) {
+      min-width: 210px;
+      max-width: 210px;
+      margin-bottom: 0;
+    }
+  }
+}

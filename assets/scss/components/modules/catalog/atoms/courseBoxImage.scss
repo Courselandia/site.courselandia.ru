@@ -2,6 +2,13 @@
   width: 180px;
   height: 180px;
 
+  @media all and (max-width: 850px) {
+    margin-bottom: 0.5rem;
+
+    width: 112px;
+    height: 112px;
+  }
+
   &__element {
     width: 180px;
     height: 180px;
@@ -11,5 +18,11 @@
     background-size: 100% auto;
     border-radius: 1rem;
     line-height: 0;
+
+    @media all and (max-width: 850px) {
+      width: 112px;
+      height: 112px;
+      border-radius: 1rem 0 0.5rem 0;
+    }
   }
 }

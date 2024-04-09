@@ -28,11 +28,18 @@
     }
   }
 
-  &--type-row {
+  &--type-row,
+  &--type-box {
     &.course {
       &--active {
         transform: scale(0.99);
       }
+    }
+  }
+
+  &--type-box {
+    @media all and (max-width: 850px) {
+      width: calc(100vw - 1.25rem * 2);
     }
   }
 }

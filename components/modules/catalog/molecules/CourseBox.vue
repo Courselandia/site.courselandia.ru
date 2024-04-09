@@ -63,10 +63,16 @@
             :currency="course.currency"
           />
           <div class="course-box__actions">
-            <CourseRowButtonGo
-              v-model:active="activeValue"
-              :url="course.url"
-            />
+            <div class="course-box__buttons">
+              <CourseRowButtonGo
+                v-model:active="activeValue"
+                :url="course.url"
+              />
+              <CourseBoxButtonView
+                v-model:active="activeValue"
+                :link="course.link"
+              />
+            </div>
             <CourseRowFavorite
               :id="course.id"
             />
@@ -127,7 +133,7 @@
           <div class="course-box__title">
             Преподаватели
           </div>
-          <Teachers
+          <CourseBoxTeachers
             :course="course"
           />
         </div>
@@ -144,6 +150,7 @@ import {
   watch,
 } from 'vue';
 
+import CourseBoxButtonView from '@/components/modules/catalog/atoms/CourseBoxButtonView.vue';
 import CourseBoxImage from '@/components/modules/catalog/atoms/CourseBoxImage.vue';
 import CourseRowButtonGo from '@/components/modules/catalog/atoms/CourseRowButtonGo.vue';
 import CourseRowFavorite from '@/components/modules/catalog/atoms/CourseRowFavorite.vue';
@@ -155,9 +162,9 @@ import CourseTileName from '@/components/modules/catalog/atoms/CourseTileName.vu
 import CourseTilePrices from '@/components/modules/catalog/atoms/CourseTilePrices.vue';
 import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRating.vue';
 import CourseBoxProgram from '@/components/modules/catalog/molecules/CourseBoxProgram.vue';
+import CourseBoxTeachers from '@/components/modules/catalog/molecules/CourseBoxTeachers.vue';
 import CourseBoxTools from '@/components/modules/catalog/molecules/CourseBoxTools.vue';
 import Learn from '@/components/modules/course/molecules/Learn.vue';
-import Teachers from '@/components/modules/course/molecules/Teachers.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 import programDescription from '@/lib/programDescription';
 
@@ -190,14 +197,6 @@ watch(activeValue, () => {
 watch(active, () => {
   activeValue.value = active.value;
 });
-
-const onClickActive = (): void => {
-  activeValue.value = true;
-};
-
-const onClickDisable = (): void => {
-  activeValue.value = false;
-};
 </script>
 
 <style lang="scss" scoped>

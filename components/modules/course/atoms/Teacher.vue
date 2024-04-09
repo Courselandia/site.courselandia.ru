@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     :to="teacher.link"
-    class="teacher"
+    :class="`teacher ${mobile ? 'teacher--mobile' : ''}`"
   >
     <div class="teacher__picture">
       <LazyImage
@@ -44,6 +44,11 @@ const props = defineProps({
   teacher: {
     type: Object as PropType<ITeacher>,
     required: true,
+  },
+  mobile: {
+    type: Boolean,
+    required: false,
+    default: true,
   },
 });
 </script>

@@ -1,13 +1,14 @@
 <template>
   <div
     v-if="course.teachers?.length"
-    class="teachers"
+    class="course-row-favorite"
   >
-    <div class="teachers__items">
+    <div class="course-row-favorite__items">
       <Teacher
         v-for="(teacher, key) in course.teachers"
         :key="key"
         :teacher="teacher"
+        :mobile="false"
       />
     </div>
   </div>
@@ -28,5 +29,5 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/modules/course/molecules/teachers";
+@import "@/assets/scss/components/modules/catalog/molecules/courseRowFavorite";
 </style>

@@ -5,17 +5,30 @@
 
   &__content {
     padding: 1.5rem;
+
+    @media all and (max-width: 850px) {
+      padding: 0;
+    }
   }
 
   &__header {
     display: flex;
     align-items: stretch;
+
+    @media all and (max-width: 850px) {
+      flex-wrap: wrap;
+    }
   }
 
   &__body {
     border-top: 1px solid $grey2;
     margin-top: 2rem;
     padding-top: 2rem;
+
+    @media all and (max-width: 850px) {
+      padding: 1rem;
+      margin-top: 1rem;
+    }
   }
 
   &__side {
@@ -24,6 +37,12 @@
       flex-direction: column;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
+
+      @media all and (max-width: 850px) {
+        padding: 1rem 1rem 0 1rem;
+        width: calc(100% - 112px);
+        margin-bottom: 1rem;
+      }
     }
 
     &--right {
@@ -36,7 +55,8 @@
         min-width: auto;
         max-width: none;
         width: 100%;
-        padding-left: calc(110px + 1.75rem);
+        padding-left: calc(112px + 1rem);
+        text-align: left;
       }
 
       @media all and (max-width: 600px) {
@@ -47,14 +67,14 @@
 
       &:deep(.course-tile-prices) {
         margin-bottom: 1.5rem;
-
-        @media all and (max-width: 850px) {
-          display: none;
-        }
       }
 
       &:deep(.course-tile-prices__additional) {
         justify-content: center;
+
+        @media all and (max-width: 850px) {
+          justify-content: flex-start;
+        }
       }
     }
   }
@@ -75,7 +95,15 @@
 
   &__actions {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+
+    &:deep(.course-row-favorite) {
+      margin-top: 19px;
+
+      @media all and (max-width: 600px) {
+        margin-top: 15px;
+      }
+    }
 
     &:deep(.button__label) {
       @media all and (max-width: 600px) {
@@ -131,6 +159,10 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 2rem;
+
+    @media all and (max-width: 850px) {
+      flex-wrap: wrap;
+    }
   }
 
   &__title {
@@ -143,14 +175,27 @@
   &__learns,
   &__program {
     width: 50%;
+
+    @media all and (max-width: 850px) {
+      width: 100%;
+    }
   }
 
   &__learns {
     padding-right: 1rem;
+
+    @media all and (max-width: 850px) {
+      padding-right: 0;
+      margin-bottom: 2rem;
+    }
   }
 
   &__program {
     padding-left: 1rem;
+
+    @media all and (max-width: 850px) {
+      padding-left: 0;
+    }
   }
 
   &__program-description {
