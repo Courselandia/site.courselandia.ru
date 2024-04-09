@@ -109,6 +109,17 @@
             </ClientOnly>
           </div>
         </div>
+        <div
+          v-if="course.tools?.length"
+          class="course-box__tools"
+        >
+          <div class="course-box__title">
+            Инструменты
+          </div>
+          <CourseBoxTools
+            :course="course"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -133,6 +144,7 @@ import CourseTileName from '@/components/modules/catalog/atoms/CourseTileName.vu
 import CourseTilePrices from '@/components/modules/catalog/atoms/CourseTilePrices.vue';
 import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRating.vue';
 import CourseBoxProgram from '@/components/modules/catalog/molecules/CourseBoxProgram.vue';
+import CourseBoxTools from '@/components/modules/catalog/molecules/CourseBoxTools.vue';
 import Learn from '@/components/modules/course/molecules/Learn.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 import programDescription from '@/lib/programDescription';
