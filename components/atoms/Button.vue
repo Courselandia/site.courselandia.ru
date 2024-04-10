@@ -1,8 +1,71 @@
 <template>
-  <Loader
-    :active="loading"
-    color="white-transparency"
-    :class="`button__loader ${wide ? 'button__loader--wide' : ''}`"
+  <div
+    v-if="!noLoader"
+  >
+    <Loader
+      :active="loading"
+      color="white-transparency"
+      :class="`button__loader ${wide ? 'button__loader--wide' : ''}`"
+    >
+      <div
+        :class="`button ${nameClass}`"
+      >
+        <template v-if="link === 'nuxt-link'">
+          <nuxt-link
+            class="button__box"
+            :to="to"
+            :disabled="disabled"
+          >
+            <div class="button__label">
+              <slot />
+            </div>
+            <template v-if="hasSlot('icon')">
+              <div class="button__icon">
+                <slot name="icon" />
+              </div>
+            </template>
+          </nuxt-link>
+        </template>
+        <template v-else-if="link === 'link'">
+          <a
+            class="button__box"
+            :href="to"
+            :disabled="disabled"
+            :target="target"
+            :rel="rel"
+          >
+            <div class="button__label">
+              <slot />
+            </div>
+            <template v-if="hasSlot('icon')">
+              <div class="button__icon">
+                <slot name="icon" />
+              </div>
+            </template>
+          </a>
+        </template>
+        <template v-else-if="link === 'button'">
+          <button
+            class="button__box"
+            :disabled="disabled"
+            @click.prevent="onClick"
+            @keydown.prevent="onClick"
+          >
+            <div class="button__label">
+              <slot />
+            </div>
+            <template v-if="hasSlot('icon')">
+              <div class="button__icon">
+                <slot name="icon" />
+              </div>
+            </template>
+          </button>
+        </template>
+      </div>
+    </Loader>
+  </div>
+  <div
+    v-else
   >
     <div
       :class="`button ${nameClass}`"
@@ -59,7 +122,7 @@
         </button>
       </template>
     </div>
-  </Loader>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -116,6 +179,11 @@ const props = defineProps({
     default: null,
   },
   loading: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  noLoader: {
     type: Boolean,
     required: false,
     default: false,

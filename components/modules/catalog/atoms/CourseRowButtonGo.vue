@@ -1,6 +1,7 @@
 <template>
   <Button
     :to="url"
+    :no-loader="true"
     link="link"
     target="_blank"
     rel="nofollow noopener noreferrer"

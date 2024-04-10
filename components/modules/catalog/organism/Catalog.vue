@@ -957,6 +957,8 @@ const reload = async (
 ): Promise<void> => {
   loading.value = true;
 
+  //return;
+
   try {
     const result = await load(
       pageValue,

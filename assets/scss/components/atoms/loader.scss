@@ -2,9 +2,9 @@
 
 .loader
 {
-  &--active {
-    position: relative;
+  position: relative;
 
+  &--active {
     .loader__scrim,
     .loader__item {
       display: block !important
