@@ -32,6 +32,11 @@
   }
 
   &__side {
+    &--left {
+      min-width: 180px;
+      max-width: 180px;
+    }
+
     &--center {
       display: flex;
       flex-direction: column;
@@ -98,7 +103,7 @@
     align-items: flex-start;
 
     &:deep(.course-row-favorite) {
-      margin-top: 19px;
+      margin-top: 18px;
 
       @media all and (max-width: 600px) {
         margin-top: 15px;

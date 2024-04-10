@@ -10,6 +10,11 @@
     text-decoration: none;
   }
 
+  &__image {
+    min-height: 180px;
+    max-height: 180px;
+  }
+
   &__content {
     background-color: $white;
     padding: 1.5rem;

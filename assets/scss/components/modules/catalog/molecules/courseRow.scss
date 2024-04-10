@@ -43,7 +43,7 @@
 
     &--right,
     &--center {
-      padding: 1.5rem 1.75rem;
+      padding: 1.5rem;
 
       @media all and (max-width: 600px) {
         padding: 1rem 1rem;
@@ -51,6 +51,14 @@
     }
 
     &--left {
+      min-width: 240px;
+      max-width: 240px;
+
+      @media all and (max-width: 850px) {
+        min-width: 110px;
+        max-width: 110px;
+      }
+
       &:deep(.course-row-image__element .course-tile-rating),
       &:deep(.course-row-image__element .course-tile-brand-logo){
         @media all and (max-width: 850px) {
@@ -69,8 +77,8 @@
     }
 
     &--right {
-      min-width: 265px;
-      max-width: 265px;
+      min-width: 259px;
+      max-width: 259px;
       text-align: center;
 
       @media all and (max-width: 850px) {
