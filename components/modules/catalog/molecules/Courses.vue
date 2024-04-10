@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ListItem } from 'schema-dts';
+import { type ListItem } from 'schema-dts';
 import type {
   PropType,
 } from 'vue';

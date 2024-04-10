@@ -12,13 +12,11 @@
           />
         </Item>
       </div>
-      <!--
       <div class="tools__field tools__field--type">
         <ToolType
           v-model:value="typeValue"
         />
       </div>
-      -->
     </div>
     <div class="tools__side tools__side--right">
       <div class="tools__field tools__field--filters-mobile">
@@ -42,6 +40,7 @@ import Item from '@/components/atoms/form/Item.vue';
 import Select from '@/components/atoms/form/Select.vue';
 import ToolType from '@/components/modules/catalog/molecules/ToolType.vue';
 import ECourseSort from '@/enums/components/modules/catalog/courseSort';
+import ECourseType from '@/enums/components/modules/catalog/courseType';
 import type IOption from '@/interfaces/components/atoms/option';
 import type TValue from '@/types/value';
 
@@ -51,7 +50,7 @@ const props = defineProps({
     required: true,
   },
   type: {
-    type: String as PropType<TValue>,
+    type: String as PropType<ECourseType>,
     required: true,
   },
 });
@@ -106,7 +105,7 @@ const sorts: Array<IOption> = [
 
 //
 
-const typeValue = ref<TValue>(type.value);
+const typeValue = ref<ECourseType>(type.value);
 
 watch(typeValue, () => {
   emit('update:type', typeValue.value);

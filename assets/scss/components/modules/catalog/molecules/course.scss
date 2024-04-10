@@ -1,12 +1,9 @@
-@import "@/assets/scss/vars/animations/transition";
-
 .course {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
   margin-bottom: 2.5rem;
   border-radius: 1rem;
   box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
-  transition: all $speedPrimary $functionPrimary;
 
   @media all and (max-width: 768px) {
     margin-left: 1rem;

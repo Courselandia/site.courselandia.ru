@@ -76,7 +76,7 @@
                   <Courses
                     :courses="courses"
                     :columns="3"
-                    :type="ECourseType.BOX"
+                    :type="type"
                   >
                     <template #empty>
                       К сожалению мы не нашли подходящих курсов под ваш запрос.
@@ -230,7 +230,7 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
-import { ListItem } from 'schema-dts';
+import { type ListItem } from 'schema-dts';
 import {
   computed,
   ref,
@@ -405,7 +405,7 @@ if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)
   sort.value = valueQuery;
 }
 
-const type = ref<TValue>(ECourseType.TILE);
+const type = ref<ECourseType>(ECourseType.TILE);
 
 const courses = ref<ICourse[]>([]);
 const additional = ref<string | null>(null);
@@ -956,8 +956,6 @@ const reload = async (
   filterCurrent: IFilters | null = null,
 ): Promise<void> => {
   loading.value = true;
-
-  //return;
 
   try {
     const result = await load(
