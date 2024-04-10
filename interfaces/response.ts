@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { type AxiosResponse } from 'axios';
 
 export interface IResponseItem<T> extends AxiosResponse {
   success: boolean

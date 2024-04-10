@@ -7,7 +7,10 @@
     <Directions
       v-model:direction="direction"
     />
-    <List />
+    <List
+      v-model:page="page"
+      :direction="direction"
+    />
   </div>
 </template>
 
@@ -22,6 +25,7 @@ import EDirection from '@/enums/direction';
 
 const route = useRoute();
 const directionCurrent = route.query.direction as string;
+const page = ref<number>(Number(route.query.page || 1));
 const direction = ref<EDirection | null>(Number(directionCurrent) as unknown as EDirection || null);
 
 const toHistory = (): void => {
@@ -30,6 +34,10 @@ const toHistory = (): void => {
 
   if (direction.value) {
     queries[queries.length] = `direction=${direction.value}`;
+  }
+
+  if (page.value) {
+    queries[queries.length] = `page=${page.value}`;
   }
 
   if (queries.length) {
@@ -48,6 +56,10 @@ const toHistory = (): void => {
 };
 
 watch(direction, () => {
+  toHistory();
+});
+
+watch(page, () => {
   toHistory();
 });
 </script>

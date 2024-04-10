@@ -41,7 +41,6 @@ const route = useRoute();
 const limit = 20;
 const page = ref(1);
 const total = ref<number>();
-const scroll = ref(true);
 const publications = ref<Array<IPublication>>();
 const stopScrollLoader = ref(false);
 const loading = ref(false);

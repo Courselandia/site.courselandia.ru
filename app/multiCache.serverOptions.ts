@@ -15,7 +15,7 @@ export default defineMultiCacheOptions({
     },
   },
   route: {
-    buildCacheKey(event) {
+    buildCacheKey(event: any) {
       const { path } = event;
 
       if (path.startsWith('/reviews')) {
@@ -27,6 +27,17 @@ export default defineMultiCacheOptions({
 
         if (sortBy || sortOrder || direction) {
           return `reviews_${sortBy}_${sortOrder}_${direction}`;
+        }
+      }
+
+      if (path.startsWith('/collections')) {
+        const {
+          direction,
+          page,
+        } = getQuery(event);
+
+        if (direction || page) {
+          return `reviews_${direction}_${page}`;
         }
       }
 

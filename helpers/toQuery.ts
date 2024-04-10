@@ -59,7 +59,7 @@ export default function toQuery(
 
       if (typeof additional[field] === 'boolean') {
         queryFilters += `${field}=${additional[field] ? 1 : 0}`;
-      } else {
+      } else if (additional[field]) {
         queryFilters += `${field}=${encodeURIComponent(String(additional[field]))}`;
       }
     });
