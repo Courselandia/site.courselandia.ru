@@ -1,7 +1,22 @@
 .tool-type {
   border: 1px solid #DFE0E6;
   border-radius: 10px;
-  display: inline-flex;
+
+  &__desktop {
+    display: inline-flex;
+
+    @media all and (max-width: 550px) {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    display: none;
+
+    @media all and (max-width: 550px) {
+      display: block;
+    }
+  }
 
   &__item {
     line-height: 0;

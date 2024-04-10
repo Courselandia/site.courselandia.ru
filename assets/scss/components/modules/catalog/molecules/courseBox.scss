@@ -35,6 +35,11 @@
     &--left {
       min-width: 180px;
       max-width: 180px;
+
+      @media all and (max-width: 850px) {
+        min-width: 112px;
+        max-width: 112px;
+      }
     }
 
     &--center {

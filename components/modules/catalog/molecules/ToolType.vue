@@ -1,37 +1,65 @@
 <template>
   <div class="tool-type">
-    <div
-      class="tool-type__item"
-      @click="onCLick(ECourseType.TILE)"
-      @keyup="onCLick(ECourseType.TILE)"
-    >
-      <Icon
-        name="tile"
-        :color="input === ECourseType.TILE ? 'blue2' : 'black'"
-        :size="[16, 16]"
-      />
+    <div class="tool-type__desktop">
+      <div
+        :class="`tool-type__item ${input === ECourseType.TILE ? 'tool-type__item--active' : ''}`"
+        @click="onClick(ECourseType.TILE)"
+        @keyup="onClick(ECourseType.TILE)"
+      >
+        <Icon
+          name="tile"
+          :color="input === ECourseType.TILE ? 'blue2' : 'black'"
+          :size="[16, 16]"
+        />
+      </div>
+      <div
+        :class="`tool-type__item ${input === ECourseType.ROW ? 'tool-type__item--active' : ''}`"
+        @click="onClick(ECourseType.ROW)"
+        @keyup="onClick(ECourseType.ROW)"
+      >
+        <Icon
+          name="row"
+          :color="input === ECourseType.ROW ? 'blue2' : 'black'"
+          :size="[16, 16]"
+        />
+      </div>
+      <div
+        :class="`tool-type__item ${input === ECourseType.BOX ? 'tool-type__item--active' : ''}`"
+        @click="onClick(ECourseType.BOX)"
+        @keyup="onClick(ECourseType.BOX)"
+      >
+        <Icon
+          name="box"
+          :color="input === ECourseType.BOX ? 'blue2' : 'black'"
+          :size="[16, 16]"
+        />
+      </div>
     </div>
-    <div
-      class="tool-type__item"
-      @click="onCLick(ECourseType.ROW)"
-      @keyup="onCLick(ECourseType.ROW)"
-    >
-      <Icon
-        name="row"
-        :color="input === ECourseType.ROW ? 'blue2' : 'black'"
-        :size="[16, 16]"
-      />
-    </div>
-    <div
-      class="tool-type__item"
-      @click="onCLick(ECourseType.BOX)"
-      @keyup="onCLick(ECourseType.BOX)"
-    >
-      <Icon
-        name="box"
-        :color="input === ECourseType.BOX ? 'blue2' : 'black'"
-        :size="[16, 16]"
-      />
+    <div class="tool-type__mobile">
+      <div
+        class="tool-type__item"
+        @click="onClickNext"
+        @keyup="onClickNext"
+      >
+        <Icon
+          v-if="input === ECourseType.TILE"
+          name="tile"
+          color="blue2"
+          :size="[16, 16]"
+        />
+        <Icon
+          v-else-if="input === ECourseType.ROW"
+          name="row"
+          color="blue2"
+          :size="[16, 16]"
+        />
+        <Icon
+          v-else-if="input === ECourseType.BOX"
+          name="box"
+          color="blue2"
+          :size="[16, 16]"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -65,6 +93,7 @@ const emit = defineEmits({
 });
 
 const input = ref(value.value);
+const typeCookie = useCookie<ECourseType>('catalogTypeCourses');
 
 watch(input, () => {
   emit('update:value', input.value);
@@ -74,8 +103,22 @@ watch(value, () => {
   input.value = value.value;
 });
 
-const onCLick = (val: ECourseType): void => {
+const onClick = (val: ECourseType): void => {
   input.value = val;
+  typeCookie.value = val;
+};
+
+const onClickNext = (): void => {
+  if (input.value === ECourseType.TILE) {
+    input.value = ECourseType.ROW;
+    typeCookie.value = ECourseType.ROW;
+  } else if (input.value === ECourseType.ROW) {
+    input.value = ECourseType.BOX;
+    typeCookie.value = ECourseType.BOX;
+  } else if (input.value === ECourseType.BOX) {
+    input.value = ECourseType.TILE;
+    typeCookie.value = ECourseType.TILE;
+  }
 };
 </script>
 

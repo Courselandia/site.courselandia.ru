@@ -405,7 +405,14 @@ if (valueQuery && Object.values(ECourseSort).includes(valueQuery as ECourseSort)
   sort.value = valueQuery;
 }
 
-const type = ref<ECourseType>(ECourseType.TILE);
+const expires = new Date(new Date().setFullYear(new Date().getFullYear() + 30));
+const type = useCookie<ECourseType>(
+  'catalogTypeCourses',
+  {
+    expires,
+    default: () => ECourseType.TILE,
+  },
+);
 
 const courses = ref<ICourse[]>([]);
 const additional = ref<string | null>(null);
