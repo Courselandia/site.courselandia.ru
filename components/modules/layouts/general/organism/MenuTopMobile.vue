@@ -35,13 +35,20 @@
         @keydown="onClick('reviews')"
       >
         <div class="menu-top-mobile__label">
-          Отзывы о школах
+          Отзывы
         </div>
         <Icon
           name="arrow-thin-right"
           color="grey3"
           :size="[7, 13]"
         />
+      </div>
+      <div
+        class="menu-top-mobile__item"
+        @click="onClickLink('/collections')"
+        @keydown="onClickLink('/collections')"
+      >
+        Подборки
       </div>
       <div
         class="menu-top-mobile__item"

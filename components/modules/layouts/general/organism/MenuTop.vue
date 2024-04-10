@@ -53,7 +53,7 @@
         @focusout="onMouseLeave()"
       >
         <div>
-          Отзывы о школах
+          Отзывы
         </div>
         <Icon
           :name="menuValue === 'reviews' ? 'arrow-up' : 'arrow-down'"
@@ -61,6 +61,14 @@
           :size="[8, 8]"
         />
       </div>
+    </div>
+    <div class="menu-top__item">
+      <nuxt-link
+        to="/collections"
+        :class="`menu-top__link ${(menuValue === 'collections' || active === 'collections') ? 'link--active' : ''}`"
+      >
+        Подборки
+      </nuxt-link>
     </div>
     <div class="menu-top__item">
       <nuxt-link
