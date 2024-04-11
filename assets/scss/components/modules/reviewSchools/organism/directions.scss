@@ -11,7 +11,7 @@
       background-color: transparent;
     }
 
-    .tags {
+    &:deep(.tags) {
       flex-wrap: nowrap !important;
 
       .tag {

@@ -2,4 +2,25 @@
   width: 100%;
   max-width: 800px;
   margin-bottom: 4rem;
+
+  @media all and (max-width: 576px) {
+    overflow: scroll;
+    margin-bottom: 2.125rem;
+
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    &:deep(.tags) {
+      flex-wrap: nowrap !important;
+
+      .tag {
+        &__label {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
 }

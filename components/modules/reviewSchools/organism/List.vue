@@ -5,7 +5,7 @@
     />
     <Body
       :direction="direction"
-      :sort="sortValue"
+      :sort="sortValue || undefined"
     />
   </div>
 </template>
@@ -37,7 +37,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits({
-  'update:sort': (_: ISort | null) => true,
+  'update:sort': (_: ISort) => true,
 });
 
 const {
@@ -45,7 +45,7 @@ const {
   sort,
 } = toRefs(props);
 
-const sortValue = ref<ISort | null>(sort.value);
+const sortValue = ref<ISort>(sort.value);
 
 watch(sortValue, () => {
   emit('update:sort', sortValue.value);

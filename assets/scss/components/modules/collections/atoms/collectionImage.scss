@@ -2,4 +2,9 @@
   width: 100px;
   height: 100px;
   border-radius: 1rem;
+
+  @media all and (max-width: 576px) {
+    width: 75px;
+    height: 75px;
+  }
 }

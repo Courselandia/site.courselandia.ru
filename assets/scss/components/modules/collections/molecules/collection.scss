@@ -10,6 +10,10 @@
   box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
   border-radius: 1rem;
 
+  @media all and (max-width: 576px) {
+    padding: 0.7rem;
+  }
+
   &:hover {
     .collection {
       &__name {
@@ -20,7 +24,7 @@
 
   &__image {
     line-height: 0;
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
 
   &__info {
@@ -32,6 +36,11 @@
     line-height: 1.5rem;
     color: $grey3;
     margin-bottom: 0.5rem;
+
+    @media all and (max-width: 576px) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
   }
 
   &__name {
@@ -46,5 +55,11 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     display: -webkit-box;
+
+    @media all and (max-width: 576px) {
+      font-size: 1rem;
+      line-height: 1.15rem;
+      height: 38px;
+    }
   }
 }

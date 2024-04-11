@@ -1,0 +1,22 @@
+.collection {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  &__side {
+    &--title {
+      width: 100%;
+      padding-right: calc(200px + 10rem);
+    }
+
+    &--left {
+      width: calc(100% - 200px - 10rem);
+    }
+
+    &--right {
+      width: 200px;
+      margin-left: 10rem;
+    }
+  }
+}

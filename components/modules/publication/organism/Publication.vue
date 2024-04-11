@@ -12,6 +12,7 @@
       :header="itemLinkPublication.header"
     />
     <Article
+      v-if="itemLinkPublication.article"
       :article="itemLinkPublication.article"
     />
   </div>
