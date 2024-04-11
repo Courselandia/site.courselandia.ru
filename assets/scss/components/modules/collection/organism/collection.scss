@@ -8,15 +8,32 @@
     &--title {
       width: 100%;
       padding-right: calc(200px + 10rem);
+
+      @media all and (max-width: 1200px) {
+        order: 1;
+        padding-right: 0;
+      }
     }
 
     &--left {
       width: calc(100% - 200px - 10rem);
+
+      @media all and (max-width: 1200px) {
+        order: 3;
+        width: 100%;
+      }
     }
 
     &--right {
       width: 200px;
       margin-left: 10rem;
+
+      @media all and (max-width: 1200px) {
+        order: 2;
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 1rem;
+      }
     }
   }
 }

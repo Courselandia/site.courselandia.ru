@@ -1,11 +1,26 @@
 .collection-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 1rem;
+  &__desktop,
+  &__mobile {
+    border-radius: 1rem;
+  }
 
-  @media all and (max-width: 576px) {
+  &__desktop {
+    width: 200px;
+    height: 200px;
+
+    @media all and (max-width: 1200px) {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    display: none;
     width: 100%;
+    max-width: 600px;
     height: auto;
-    max-width: 250px;
+
+    @media all and (max-width: 1200px) {
+      display: block;
+    }
   }
 }

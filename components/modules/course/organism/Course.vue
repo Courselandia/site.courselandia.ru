@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div
+    v-if="courseItem"
+  >
     <div class="course">
       <Header
         :course="courseItem"
@@ -38,7 +40,8 @@
             :course="courseItem"
           />
           <Faqs
-            :school="school"
+            v-if="school"
+            :school="school as string"
           />
         </div>
       </div>

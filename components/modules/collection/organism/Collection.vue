@@ -19,10 +19,15 @@
         :courses="courses"
         :type="ECourseType.BOX"
       />
+      <Additional
+        v-if="itemLinkCollection.additional"
+        :text="itemLinkCollection.additional"
+      />
     </div>
     <div class="collection__side collection__side--right">
       <CollectionImage
-        :path="itemLinkCollection.image_small_id?.path"
+        :path-box="itemLinkCollection.image_small_id?.path"
+        :path-horizontal="itemLinkCollection.image_middle_id?.path"
         :name="collection.name"
       />
     </div>
@@ -34,6 +39,7 @@ import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 import Courses from '@/components/modules/catalog/molecules/Courses.vue';
+import Additional from '@/components/modules/collection/atoms/Additional.vue';
 import Back from '@/components/modules/collection/atoms/Back.vue';
 import CollectionImage from '@/components/modules/collection/atoms/CollectionImage.vue';
 import Description from '@/components/modules/collection/atoms/Description.vue';
