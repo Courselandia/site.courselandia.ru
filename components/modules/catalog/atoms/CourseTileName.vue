@@ -1,5 +1,8 @@
 <template>
-  <div class="course-tile-name">
+  <div
+    :title="name"
+    class="course-tile-name"
+  >
     {{ name }}
   </div>
 </template>

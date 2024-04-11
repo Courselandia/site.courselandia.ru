@@ -1,0 +1,50 @@
+@import "/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.collection {
+  padding: 1rem;
+  display: flex;
+  background-color: $white;
+  text-decoration: none;
+  align-items: center;
+  box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+
+  &:hover {
+    .collection {
+      &__name {
+        color: $blue2;
+      }
+    }
+  }
+
+  &__image {
+    line-height: 0;
+    margin-right: 2rem;
+  }
+
+  &__info {
+
+  }
+
+  &__direction {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $grey3;
+    margin-bottom: 0.5rem;
+  }
+
+  &__name {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    font-weight: 800;
+    color: $black;
+    transition: all $speedFast $functionPrimary;
+    height: 50px;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+  }
+}

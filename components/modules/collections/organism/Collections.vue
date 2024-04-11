@@ -1,5 +1,5 @@
 <template>
-  <div class="publications content mt-12 mb-24 mb-12-sm">
+  <div class="collections content mt-12 mb-24 mb-12-sm">
     <h1 class="title title--1">
       Подборки курсов
     </h1>
@@ -7,7 +7,7 @@
     <Directions
       v-model:direction="direction"
     />
-    <List
+    <CollectionList
       v-model:page="page"
       :direction="direction"
     />
@@ -19,8 +19,8 @@ import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import Description from '@/components/modules/collections/atoms/Description.vue';
+import CollectionList from '@/components/modules/collections/molecules/CollectionList.vue';
 import Directions from '@/components/modules/collections/molecules/Directions.vue';
-import List from '@/components/modules/collections/molecules/List.vue';
 import EDirection from '@/enums/direction';
 
 const route = useRoute();

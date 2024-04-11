@@ -1,10 +1,10 @@
 <template>
   <div class="card-brand-logo">
     <LazyImage
-      :src="path"
+      `:src="path"
       class="card-brand-logo__image"
       :alt="name"
-      :title="name"
+      :title="name"`
     />
   </div>
 </template>

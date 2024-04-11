@@ -1,0 +1,15 @@
+.collection-list {
+  &:deep(.loader__content) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+  }
+
+  &:deep(.collection) {
+    width: calc(33% - 1.25rem * 2);
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+}

@@ -15,5 +15,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/modules/collections/atmos/description";
+@import "@/assets/scss/components/modules/collections/atoms/description";
 </style>

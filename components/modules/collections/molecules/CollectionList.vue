@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="collections?.length"
-    class="list"
+    class="collection-list"
   >
     <ScrollLoader
       :stop="stopScrollLoader"
@@ -122,3 +122,7 @@ const onLoadScrolling = async (): Promise<void> => {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/collections/molecules/collectionList";
+</style>
