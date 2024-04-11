@@ -1,3 +1,4 @@
+import type ICourseStore from '@/interfaces/stores/course/course';
 import type IDirection from '@/interfaces/stores/course/directionLink';
 import type IImage from '@/interfaces/stores/image/image';
 import type IMetatag from '@/interfaces/stores/metatag/metatag';
@@ -23,4 +24,5 @@ export default interface ICollection {
   created_at: string,
   updated_at: string,
   deleted_at: string | null,
+  courses: Array<ICourseStore>,
 }
