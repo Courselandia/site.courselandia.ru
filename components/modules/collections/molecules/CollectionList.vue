@@ -5,7 +5,7 @@
   >
     <ScrollLoader
       :stop="stopScrollLoader"
-      :distance="1000"
+      :distance="400"
       @load="onLoadScrolling"
     >
       <Loader
@@ -57,7 +57,7 @@ const emit = defineEmits({
 });
 
 const route = useRoute();
-const limit = 20;
+const limit = 30;
 const total = ref<number>();
 const collections = ref<Array<ICollection>>();
 const stopScrollLoader = ref(false);
@@ -107,6 +107,7 @@ const response = await loadCollections(
 
 collections.value = response?.data;
 total.value = response?.total;
+stopScrollLoader.value = (pageValue.value * limit) >= (total.value || 0);
 
 const onLoadScrolling = async (): Promise<void> => {
   pageValue.value++;
@@ -121,6 +122,23 @@ const onLoadScrolling = async (): Promise<void> => {
     stopScrollLoader.value = true;
   }
 };
+
+const onLoadDirection = async (): Promise<void> => {
+  stopScrollLoader.value = true;
+  pageValue.value = 1;
+  const res = await loadCollections(false, (pageValue.value - 1) * limit, limit, direction.value);
+
+  if (res?.data && collections.value) {
+    collections.value = res.data;
+    total.value = res?.total;
+  }
+
+  stopScrollLoader.value = (pageValue.value * limit) >= (total.value || 0);
+};
+
+watch(direction, async () => {
+  await onLoadDirection();
+});
 </script>
 
 <style lang="scss" scoped>

@@ -36,7 +36,7 @@ const toHistory = (): void => {
     queries[queries.length] = `direction=${direction.value}`;
   }
 
-  if (page.value) {
+  if (page.value && page.value !== 1) {
     queries[queries.length] = `page=${page.value}`;
   }
 

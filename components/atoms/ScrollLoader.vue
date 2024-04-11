@@ -9,6 +9,7 @@
 import {
   onMounted,
   ref,
+  toRefs,
 } from 'vue';
 
 const intersectRef = ref<HTMLElement | null>(null);
@@ -26,13 +27,15 @@ const props = defineProps({
   },
 });
 
+const { stop } = toRefs(props);
+
 const emit = defineEmits({
   load: () => true,
 });
 
 onMounted(() => {
   observer = new IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting && !props.stop) {
+    if (entry.isIntersecting && !stop.value) {
       emit('load');
     }
   }, {

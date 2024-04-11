@@ -5,7 +5,7 @@
   >
     <ScrollLoader
       :stop="stopScrollLoader"
-      :distance="1000"
+      :distance="400"
       @load="onLoadScrolling"
     >
       <Loader
