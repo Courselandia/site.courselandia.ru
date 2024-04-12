@@ -62,7 +62,7 @@
         />
       </div>
     </div>
-    <div class="menu-top__item">
+    <div class="menu-top__item" style="display: none">
       <nuxt-link
         to="/collections"
         :class="`menu-top__link ${(menuValue === 'collections' || active === 'collections') ? 'link--active' : ''}`"
