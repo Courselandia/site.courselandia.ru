@@ -41,6 +41,7 @@ import Error from '@/components/atoms/Error.vue';
 import Dropdowns from '@/components/modules/layouts/general/organism/Dropdowns.vue';
 import Footer from '@/components/modules/layouts/general/organism/Footer.vue';
 import Header from '@/components/modules/layouts/general/organism/Header.vue';
+import { cacheDate } from '@/helpers/cache';
 import direction from '@/stores/direction';
 import school from '@/stores/school';
 
@@ -56,7 +57,11 @@ const menu = ref('');
 const { error } = toRefs(props);
 
 try {
-  const result = await $fetch('/api/direction/read');
+  const result = await $fetch('/api/direction/read', {
+    params: {
+      dateCache: cacheDate(),
+    },
+  });
 
   const { directions } = storeToRefs(direction());
   directions.value = result;
@@ -65,7 +70,11 @@ try {
 }
 
 try {
-  const result = await $fetch('/api/school/read');
+  const result = await $fetch('/api/school/read', {
+    params: {
+      dateCache: cacheDate(),
+    },
+  });
 
   const { schools } = storeToRefs(school());
   schools.value = result;

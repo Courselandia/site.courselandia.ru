@@ -1,5 +1,6 @@
 import { storeToRefs } from 'pinia';
 
+import { cacheDate } from '@/helpers/cache';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -18,6 +19,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const result = await $fetch('/api/profession/link', {
       params: {
         link: link as string,
+        dateCache: cacheDate(),
       },
     });
 

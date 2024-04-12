@@ -28,13 +28,18 @@ import { ref } from 'vue';
 import Button from '@/components/atoms/Button.vue';
 import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import { coursesStoreToCoursesComponent } from '@/converts/coursesStoreToCoursesComponent';
+import { cacheDate } from '@/helpers/cache';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const courses = ref<ICourse[]>();
 
 try {
   courses.value = coursesStoreToCoursesComponent(
-    await $fetch('/api/course/readRated'),
+    await $fetch('/api/course/readRated', {
+      params: {
+        dateCache: cacheDate(),
+      },
+    }),
   );
 } catch (error: any) {
   console.error(error.message);

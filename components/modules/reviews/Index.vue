@@ -30,10 +30,10 @@
         <List
           v-model:page="page"
           v-model:scroll="scroll"
-          :link="link"
+          :link="link as string"
           :school-name="schoolItem.name"
           :sorts="sorts"
-          :rating="rating"
+          :rating="rating || undefined"
         />
       </div>
     </div>
@@ -52,6 +52,7 @@ import Card from '@/components/modules/reviews/molecules/Card.vue';
 import Header from '@/components/modules/reviews/molecules/Header.vue';
 import List from '@/components/modules/reviews/molecules/List.vue';
 import Sort from '@/components/modules/reviews/molecules/Sort.vue';
+import { cacheDate } from '@/helpers/cache';
 import {
   brToRn,
   stripTags,
@@ -164,6 +165,7 @@ const loadSchool = async (): Promise<ISchoolLink | null> => {
     return await $fetch('/api/school/link', {
       params: {
         link: link as string,
+        dateCache: cacheDate(),
       },
     });
   } catch (error: any) {

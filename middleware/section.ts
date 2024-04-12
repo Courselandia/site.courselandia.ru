@@ -1,5 +1,6 @@
 import { storeToRefs } from 'pinia';
 
+import { cacheDate } from '@/helpers/cache';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -28,6 +29,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
         sectionLink2: sectionLink2 as string,
         level: level as string,
         free: free === 'free' ? 1 : 0,
+        dateCache: cacheDate(),
       },
     });
 

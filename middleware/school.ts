@@ -1,5 +1,6 @@
 import { storeToRefs } from 'pinia';
 
+import { cacheDate } from '@/helpers/cache';
 import school from '@/stores/school';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
@@ -11,6 +12,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const result = await $fetch('/api/school/link', {
       params: {
         link: link as string,
+        dateCache: cacheDate(),
       },
     });
 
