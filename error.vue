@@ -59,7 +59,7 @@ const { error } = toRefs(props);
 try {
   const result = await $fetch('/api/direction/read', {
     params: {
-      dateCache: cacheDate(),
+      cacheDate: cacheDate(),
     },
   });
 
@@ -72,7 +72,7 @@ try {
 try {
   const result = await $fetch('/api/school/read', {
     params: {
-      dateCache: cacheDate(),
+      cacheDate: cacheDate(),
     },
   });
 

@@ -4,7 +4,10 @@ import type ICourse from '@/interfaces/stores/course/course';
 
 export default defineEventHandler(async (event): Promise<ICourse[]> => {
   const config = useRuntimeConfig();
-  const cachedRatedCourses = await useStorage().getItem('redis:ratedCourses');
+  const urlParams = new URLSearchParams(event.node.req.url?.split('?')[1]);
+  const cacheDate = urlParams.get('cacheDate');
+  const cacheIndex = `redis:ratedCourses.${cacheDate}`;
+  const cachedRatedCourses = await useStorage().getItem(cacheIndex);
 
   if (cachedRatedCourses) {
     return cachedRatedCourses as ICourse[];
@@ -15,7 +18,7 @@ export default defineEventHandler(async (event): Promise<ICourse[]> => {
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem('redis:ratedCourses', response.data.data);
+  await useStorage().setItem(cacheIndex, response.data.data);
 
   return response.data.data;
 });

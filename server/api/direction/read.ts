@@ -4,7 +4,10 @@ import type IDirection from '@/interfaces/stores/course/direction';
 
 export default defineEventHandler(async (event): Promise<IDirection[]> => {
   const config = useRuntimeConfig();
-  const cachedDirections = await useStorage().getItem('redis:directions');
+  const urlParams = new URLSearchParams(event.node.req.url?.split('?')[1]);
+  const cacheDate = urlParams.get('cacheDate');
+  const cacheIndex = `redis:directions.${cacheDate}`;
+  const cachedDirections = await useStorage().getItem(cacheIndex);
 
   if (cachedDirections) {
     return cachedDirections as IDirection[];
@@ -20,7 +23,7 @@ export default defineEventHandler(async (event): Promise<IDirection[]> => {
     },
   });
 
-  await useStorage().setItem('redis:directions', response.data.data);
+  await useStorage().setItem(cacheIndex, response.data.data);
 
   return response.data.data;
 });

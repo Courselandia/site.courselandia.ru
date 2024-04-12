@@ -4,7 +4,10 @@ import type ISchool from '@/interfaces/stores/school/school';
 
 export default defineEventHandler(async (event): Promise<ISchool[]> => {
   const config = useRuntimeConfig();
-  const cachedSchools = await useStorage().getItem('redis:schools');
+  const urlParams = new URLSearchParams(event.node.req.url?.split('?')[1]);
+  const cacheDate = urlParams.get('cacheDate');
+  const cacheIndex = `redis:schools.${cacheDate}`;
+  const cachedSchools = await useStorage().getItem(cacheIndex);
 
   if (cachedSchools) {
     return cachedSchools as ISchool[];
@@ -15,7 +18,7 @@ export default defineEventHandler(async (event): Promise<ISchool[]> => {
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem('redis:schools', response.data.data);
+  await useStorage().setItem(cacheIndex, response.data.data);
 
   return response.data.data;
 });

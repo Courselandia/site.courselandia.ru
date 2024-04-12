@@ -19,7 +19,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const result = await $fetch('/api/teacher/link', {
       params: {
         link: link as string,
-        dateCache: cacheDate(),
+        cacheDate: cacheDate(),
       },
     });
 

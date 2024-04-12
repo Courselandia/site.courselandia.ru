@@ -6,7 +6,9 @@ export default defineEventHandler(async (event): Promise<ICategoryLink | null> =
   const config = useRuntimeConfig();
   const urlParams = new URLSearchParams(event.node.req.url?.split('?')[1]);
   const link = urlParams.get('link');
-  const cachedCategories = await useStorage().getItem(`redis:category.link.${link}`);
+  const cacheDate = urlParams.get('cacheDate');
+  const cacheIndex = `redis:category.link.${link}.${cacheDate}`;
+  const cachedCategories = await useStorage().getItem(cacheIndex);
 
   if (cachedCategories) {
     return cachedCategories as ICategoryLink;
@@ -17,7 +19,7 @@ export default defineEventHandler(async (event): Promise<ICategoryLink | null> =
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(`redis:category.link.${link}`, response.data.data);
+  await useStorage().setItem(cacheIndex, response.data.data);
 
   return response.data.data;
 });

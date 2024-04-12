@@ -6,7 +6,9 @@ export default defineEventHandler(async (event): Promise<IDirectionLink | null> 
   const config = useRuntimeConfig();
   const urlParams = new URLSearchParams(event.node.req.url?.split('?')[1]);
   const link = urlParams.get('link');
-  const cachedDirections = await useStorage().getItem(`redis:direction.link.${link}`);
+  const cacheDate = urlParams.get('cacheDate');
+  const cacheIndex = `redis:direction.link.${link}.${cacheDate}`;
+  const cachedDirections = await useStorage().getItem(cacheIndex);
 
   if (cachedDirections) {
     return cachedDirections as IDirectionLink;
@@ -17,7 +19,7 @@ export default defineEventHandler(async (event): Promise<IDirectionLink | null> 
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(`redis:direction.link.${link}`, response.data.data);
+  await useStorage().setItem(cacheIndex, response.data.data);
 
   return response.data.data;
 });

@@ -6,7 +6,9 @@ export default defineEventHandler(async (event): Promise<IPublication | null> =>
   const config = useRuntimeConfig();
   const urlParams = new URLSearchParams(event.node.req.url?.split('?')[1]);
   const link = urlParams.get('link');
-  const cachedPublication = await useStorage().getItem(`redis:publication.link.${link}`);
+  const cacheDate = urlParams.get('cacheDate');
+  const cacheIndex = `redis:publication.link.${link}.${cacheDate}`;
+  const cachedPublication = await useStorage().getItem(cacheIndex);
 
   if (cachedPublication) {
     return cachedPublication as IPublication;
@@ -18,7 +20,7 @@ export default defineEventHandler(async (event): Promise<IPublication | null> =>
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(`redis:publication.link.${link}`, response.data.data);
+  await useStorage().setItem(cacheIndex, response.data.data);
 
   return response.data.data;
 });

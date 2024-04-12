@@ -37,7 +37,7 @@ try {
   courses.value = coursesStoreToCoursesComponent(
     await $fetch('/api/course/readRated', {
       params: {
-        dateCache: cacheDate(),
+        cacheDate: cacheDate(),
       },
     }),
   );

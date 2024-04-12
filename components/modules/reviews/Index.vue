@@ -165,7 +165,7 @@ const loadSchool = async (): Promise<ISchoolLink | null> => {
     return await $fetch('/api/school/link', {
       params: {
         link: link as string,
-        dateCache: cacheDate(),
+        cacheDate: cacheDate(),
       },
     });
   } catch (error: any) {

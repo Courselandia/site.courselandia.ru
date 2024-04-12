@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<void> => {
   try {
     const result = await $fetch('/api/direction/read', {
       params: {
-        dateCache: cacheDate(),
+        cacheDate: cacheDate(),
       },
     });
 

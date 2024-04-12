@@ -29,7 +29,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
         sectionLink2: sectionLink2 as string,
         level: level as string,
         free: free === 'free' ? 1 : 0,
-        dateCache: cacheDate(),
+        cacheDate: cacheDate(),
       },
     });
 

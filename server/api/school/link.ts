@@ -6,7 +6,9 @@ export default defineEventHandler(async (event): Promise<ISchoolLink | null> => 
   const config = useRuntimeConfig();
   const urlParams = new URLSearchParams(event.node.req.url?.split('?')[1]);
   const link = urlParams.get('link');
-  const cachedSchools = await useStorage().getItem(`redis:school.link.${link}`);
+  const cacheDate = urlParams.get('cacheDate');
+  const cacheIndex = `redis:school.link.${link}.${cacheDate}`;
+  const cachedSchools = await useStorage().getItem(cacheIndex);
 
   if (cachedSchools) {
     return cachedSchools as ISchoolLink;
@@ -18,7 +20,7 @@ export default defineEventHandler(async (event): Promise<ISchoolLink | null> => 
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(`redis:school.link.${link}`, response.data.data);
+  await useStorage().setItem(cacheIndex, response.data.data);
 
   return response.data.data;
 });
