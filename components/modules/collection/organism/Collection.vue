@@ -28,7 +28,7 @@
       <CollectionImage
         :path-box="itemLinkCollection.image_small_id?.path"
         :path-horizontal="itemLinkCollection.image_middle_id?.path"
-        :name="collection.name"
+        :name="itemLinkCollection.name"
       />
     </div>
   </div>
