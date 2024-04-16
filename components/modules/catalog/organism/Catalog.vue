@@ -1494,11 +1494,16 @@ const setUrlQuery = (
       current: url,
     };
 
+    console.warn(newState);
+    console.warn(url);
+
+    /*
     window.history.pushState(
       newState,
       '',
       url,
     );
+     */
   }
 };
 
