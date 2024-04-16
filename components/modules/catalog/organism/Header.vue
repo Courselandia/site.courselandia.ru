@@ -39,11 +39,6 @@
             snap-align="end"
             wrap-around
           >
-            <Slide
-              v-for="(handful, key) in getHandfulTags(popularTags, 15)"
-              :key="key"
-            >
-            </Slide>
           </Carousel>
         </div>
       </template>
