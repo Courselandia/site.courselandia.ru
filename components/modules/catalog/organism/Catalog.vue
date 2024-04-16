@@ -149,42 +149,6 @@
           @change="onChangeFilter"
         />
       </teleport>
-
-      <teleport to="#catalog-filters-mobile-tags">
-        <Tags
-          v-model:selected-direction="selectedDirection"
-          v-model:selected-rating="selectedRating"
-          v-model:selected-schools="selectedSchools"
-          v-model:selected-categories="selectedCategories"
-          v-model:selected-professions="selectedProfessions"
-          v-model:selected-teachers="selectedTeachers"
-          v-model:selected-skills="selectedSkills"
-          v-model:selected-tools="selectedTools"
-          v-model:selected-format="selectedFormat"
-          v-model:selected-levels="selectedLevels"
-          v-model:selected-prices="selectedPrices"
-          v-model:selected-durations="selectedDurations"
-          v-model:selected-credit="selectedCredit"
-          v-model:selected-free="selectedFree"
-          v-model:search="search"
-          :price-min="priceMin"
-          :price-max="priceMax"
-          :duration-min="durationMin"
-          :duration-max="durationMax"
-          :directions="directions"
-          :schools="schools"
-          :categories="categories"
-          :professions="professions"
-          :teachers="teachers"
-          :skills="skills"
-          :tools="tools"
-          :ratings="ratings"
-          :formats="formats"
-          :levels="levels"
-          :total-filters="totalFilters"
-          @remove="onChangeFilter"
-        />
-      </teleport>
     </LazyClientOnly>
   </div>
 </template>
