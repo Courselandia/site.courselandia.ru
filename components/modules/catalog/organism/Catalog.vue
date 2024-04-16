@@ -2,7 +2,6 @@
   <div>
     <div class="catalog">
       <div class="catalog__header">
-        <Header />
       </div>
       <div class="content">
         <div class="catalog__content">
