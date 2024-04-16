@@ -81,15 +81,6 @@ export default defineStore('course', {
           return false;
         };
 
-        console.warn(!config.public.development);
-        console.warn(offset);
-        console.warn(limit);
-        console.warn(sorts?.name);
-        console.warn(section);
-        console.warn(sectionLink);
-        console.warn(!hasFilter);
-        console.warn('----');
-
         if (
           !config.public.development
           && offset === 0

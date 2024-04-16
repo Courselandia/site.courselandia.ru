@@ -23,7 +23,7 @@ export default function toQuery(
 
   if (filters) {
     Object.keys(filters).forEach((field) => {
-      if (queryFilters !== '') {
+      if (queryFilters !== '' && queryFilters !== null && queryFilters !== undefined) {
         queryFilters += '&';
       }
 
@@ -34,7 +34,7 @@ export default function toQuery(
           let i = 0;
 
           Object.values(value).forEach((item) => {
-            if (queryFilters !== '') {
+            if (queryFilters !== '' && queryFilters !== null && queryFilters !== undefined) {
               queryFilters += '&';
             }
 
