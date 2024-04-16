@@ -1,6 +1,214 @@
 <template>
   <div>
-    HERE!
+    <div class="catalog">
+      <div class="catalog__header">
+        <Header />
+      </div>
+      <div class="content">
+        <div class="catalog__content">
+          <div class="catalog__items">
+            <div class="catalog__tools">
+            </div>
+            <div class="catalog__tags">
+              <ClientOnly>
+                <Tags
+                  v-model:selected-direction="selectedDirection"
+                  v-model:selected-rating="selectedRating"
+                  v-model:selected-schools="selectedSchools"
+                  v-model:selected-categories="selectedCategories"
+                  v-model:selected-professions="selectedProfessions"
+                  v-model:selected-teachers="selectedTeachers"
+                  v-model:selected-skills="selectedSkills"
+                  v-model:selected-tools="selectedTools"
+                  v-model:selected-format="selectedFormat"
+                  v-model:selected-levels="selectedLevels"
+                  v-model:selected-prices="selectedPrices"
+                  v-model:selected-durations="selectedDurations"
+                  v-model:selected-credit="selectedCredit"
+                  v-model:selected-free="selectedFree"
+                  v-model:search="search"
+                  :price-min="priceMin"
+                  :price-max="priceMax"
+                  :duration-min="durationMin"
+                  :duration-max="durationMax"
+                  :directions="directions"
+                  :schools="schools"
+                  :categories="categories"
+                  :professions="professions"
+                  :teachers="teachers"
+                  :skills="skills"
+                  :tools="tools"
+                  :ratings="ratings"
+                  :formats="formats"
+                  :levels="levels"
+                  :total-filters="totalFilters"
+                  reset-all
+                  @remove="onChangeFilter"
+                />
+              </ClientOnly>
+            </div>
+            <div class="catalog__courses">
+              <ScrollLoader
+                :stop="stopScrollLoader"
+                :distance="1000"
+                @load="onLoadScrolling"
+              >
+                <Loader
+                  :active="loading"
+                  color="white-transparency"
+                >
+                  <Courses
+                    :courses="courses"
+                    :columns="3"
+                    :type="type"
+                  >
+                    <template #empty>
+                      К сожалению мы не нашли подходящих курсов под ваш запрос.
+                    </template>
+                  </Courses>
+                </Loader>
+              </ScrollLoader>
+            </div>
+            <div class="catalog__pagination">
+              <Pagination
+                :total="total"
+                :size="size"
+                :page="currentPage"
+                :link="getLinkPagination"
+              />
+            </div>
+            <div
+              v-if="additional"
+              class="catalog__additional"
+            >
+              <Reducer class="lists links titles">
+                <div v-html="additional" />
+              </Reducer>
+            </div>
+          </div>
+          <div class="catalog__filter">
+            <Filters
+              v-model:selected-direction="selectedDirection"
+              v-model:selected-rating="selectedRating"
+              v-model:selected-schools="selectedSchools"
+              v-model:selected-categories="selectedCategories"
+              v-model:selected-professions="selectedProfessions"
+              v-model:selected-teachers="selectedTeachers"
+              v-model:selected-skills="selectedSkills"
+              v-model:selected-tools="selectedTools"
+              v-model:selected-format="selectedFormat"
+              v-model:selected-levels="selectedLevels"
+              v-model:selected-prices="selectedPrices"
+              v-model:selected-durations="selectedDurations"
+              v-model:selected-credit="selectedCredit"
+              v-model:selected-free="selectedFree"
+              :price-min="priceMin"
+              :price-max="priceMax"
+              :price-step="priceStep"
+              :duration-min="durationMin"
+              :duration-max="durationMax"
+              :duration-step="durationStep"
+              :directions="directions"
+              :ratings="ratings"
+              :schools="schools"
+              :categories="categories"
+              :professions="professions"
+              :teachers="teachers"
+              :skills="skills"
+              :tools="tools"
+              :formats="formats"
+              :levels="levels"
+              :available-credit="availableCredit"
+              :available-free="availableFree"
+              @load-items="onLoadItems"
+              @change-prices="onChangePrices"
+              @change-durations="onChangeDurations"
+              @change="onChangeFilter"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <LazyClientOnly>
+      <teleport to="#catalog-filters-mobile">
+        <Filters
+          v-model:selected-direction="selectedDirection"
+          v-model:selected-rating="selectedRating"
+          v-model:selected-schools="selectedSchools"
+          v-model:selected-categories="selectedCategories"
+          v-model:selected-professions="selectedProfessions"
+          v-model:selected-teachers="selectedTeachers"
+          v-model:selected-skills="selectedSkills"
+          v-model:selected-tools="selectedTools"
+          v-model:selected-format="selectedFormat"
+          v-model:selected-levels="selectedLevels"
+          v-model:selected-prices="selectedPrices"
+          v-model:selected-durations="selectedDurations"
+          v-model:selected-credit="selectedCredit"
+          v-model:selected-free="selectedFree"
+          :price-min="priceMin"
+          :price-max="priceMax"
+          :price-step="priceStep"
+          :duration-min="durationMin"
+          :duration-max="durationMax"
+          :duration-step="durationStep"
+          :directions="directions"
+          :ratings="ratings"
+          :schools="schools"
+          :categories="categories"
+          :professions="professions"
+          :teachers="teachers"
+          :skills="skills"
+          :tools="tools"
+          :formats="formats"
+          :levels="levels"
+          :available-credit="availableCredit"
+          :available-free="availableFree"
+          mobile
+          @load-items="onLoadItems"
+          @change-prices="onChangePrices"
+          @change-durations="onChangeDurations"
+          @change="onChangeFilter"
+        />
+      </teleport>
+
+      <teleport to="#catalog-filters-mobile-tags">
+        <Tags
+          v-model:selected-direction="selectedDirection"
+          v-model:selected-rating="selectedRating"
+          v-model:selected-schools="selectedSchools"
+          v-model:selected-categories="selectedCategories"
+          v-model:selected-professions="selectedProfessions"
+          v-model:selected-teachers="selectedTeachers"
+          v-model:selected-skills="selectedSkills"
+          v-model:selected-tools="selectedTools"
+          v-model:selected-format="selectedFormat"
+          v-model:selected-levels="selectedLevels"
+          v-model:selected-prices="selectedPrices"
+          v-model:selected-durations="selectedDurations"
+          v-model:selected-credit="selectedCredit"
+          v-model:selected-free="selectedFree"
+          v-model:search="search"
+          :price-min="priceMin"
+          :price-max="priceMax"
+          :duration-min="durationMin"
+          :duration-max="durationMax"
+          :directions="directions"
+          :schools="schools"
+          :categories="categories"
+          :professions="professions"
+          :teachers="teachers"
+          :skills="skills"
+          :tools="tools"
+          :ratings="ratings"
+          :formats="formats"
+          :levels="levels"
+          :total-filters="totalFilters"
+          @remove="onChangeFilter"
+        />
+      </teleport>
+    </LazyClientOnly>
   </div>
 </template>
 
@@ -1012,7 +1220,6 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
   }
 };
 
-/*
 try {
   setSelectedFiltersByQuery();
 
@@ -1036,7 +1243,6 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
- */
 
 //
 
@@ -1272,17 +1478,11 @@ const setUrlQuery = (
       current: url,
     };
 
-    console.dir(newState);
-    console.log(url);
-    console.log('-----');
-
-    /*
     window.history.pushState(
       newState,
       '',
       url,
     );
-     */
   }
 };
 
@@ -1358,7 +1558,6 @@ const itemListElements = computed<ListItem[]>(
   })),
 );
 
-/*
 useServerHead({
   link: [
     {
@@ -1390,7 +1589,6 @@ const teacherJsonLd = computed<any>(() => {
 });
 
 useJsonld(teacherJsonLd.value);
- */
 </script>
 
 <style lang="scss" scoped>
