@@ -18,7 +18,7 @@ export default interface ISchoolLink {
   deleted_at: string | null,
   image_logo_id: IImage | null;
   image_site_id: IImage | null;
-  site: number | null,
+  site: string | null,
   rating: number | null,
   reviews_count: number;
   reviews_1_star_count: number;

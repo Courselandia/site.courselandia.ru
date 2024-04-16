@@ -40,91 +40,6 @@
         </Tags>
       </template>
     </Header>
-    <Header
-      v-else-if="itemLinkDirection"
-    >
-      <template #title>
-        {{ itemLinkDirection.header || itemLinkDirection.name }}
-      </template>
-      <template
-        v-if="itemLinkDirection.text"
-        #description
-      >
-        <Reducer>
-          <span v-html="itemLinkDirection.text" />
-        </Reducer>
-      </template>
-      <template
-        v-if="itemLinkDirection?.categories"
-        #section
-      >
-        <div class="header__fire" />
-        <div class="header__label">
-          Сейчас в тренде
-        </div>
-      </template>
-      <template
-        v-if="itemLinkDirection?.categories"
-        #tags
-      >
-        <div class="header__desktop">
-          <Carousel
-            snap-align="end"
-            wrap-around
-          >
-            <Slide
-              v-for="(handful, key) in getHandfulTags(itemLinkDirection.categories, 20)"
-              :key="key"
-            >
-              <Tags>
-                <Tag
-                  v-for="(item, handfulLey) in handful"
-                  :key="handfulLey"
-                  :to="`/courses/category/${item.link}`"
-                  bck="white"
-                >
-                  {{ item.name }}
-                </Tag>
-              </Tags>
-            </Slide>
-
-            <template #addons>
-              <Pagination />
-            </template>
-          </Carousel>
-        </div>
-        <!--noindex-->
-        <ClientOnly>
-          <div class="header__mobile">
-            <Carousel
-              snap-align="end"
-              wrap-around
-            >
-              <Slide
-                v-for="(handful, key) in getHandfulTags(itemLinkDirection.categories, 5)"
-                :key="key"
-              >
-                <Tags>
-                  <Tag
-                    v-for="(item, handfulLey) in handful"
-                    :key="handfulLey"
-                    :to="`/courses/category/${item.link}`"
-                    bck="white"
-                  >
-                    {{ item.name }}
-                  </Tag>
-                </Tags>
-              </Slide>
-
-              <template #addons>
-                <Pagination />
-              </template>
-            </Carousel>
-          </div>
-        </ClientOnly>
-        <!--/noindex-->
-      </template>
-    </Header>
     <template
       v-else-if="itemLinkProfession"
     >
@@ -198,7 +113,8 @@
         #action
       >
         <Button
-          :to="itemLinkSchool.site as string"
+          v-if="itemLinkSchool.site"
+          :to="itemLinkSchool.site"
           link="link"
           target="_blank"
           rel="nofollow noopener noreferrer"
