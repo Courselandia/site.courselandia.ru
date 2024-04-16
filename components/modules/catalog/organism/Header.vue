@@ -346,10 +346,6 @@
                 </Tag>
               </Tags>
             </Slide>
-
-            <template #addons>
-              <Pagination />
-            </template>
           </Carousel>
         </div>
         <!--noindex-->
@@ -374,10 +370,6 @@
                   </Tag>
                 </Tags>
               </Slide>
-
-              <template #addons>
-                <Pagination />
-              </template>
             </Carousel>
           </div>
         </ClientOnly>
@@ -398,7 +390,6 @@ import {
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Carousel,
-  Pagination,
   Slide,
 } from 'vue3-carousel';
 
