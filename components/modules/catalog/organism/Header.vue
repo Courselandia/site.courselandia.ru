@@ -1,6 +1,41 @@
 <template>
   <div class="header">
-    <Header />
+    <Header>
+      <template #title>
+        Курсы онлайн от Courselandia
+      </template>
+      <template #description>
+        <Reducer>
+          <p>
+            IT курсы с нуля давно доказали свою эффективность.
+            Хорошо зная рынок услуг онлайн-образования в нашей стране,
+            проводя его систематический мониторинг и изучение, мы подобрали
+            для вас перечень IT курсов онлайн, которые обеспечивают учащимся
+            наилучший результат. Многие люди уже успешно прошли их и в
+            настоящее время стали успешными специалистами с отличными
+            перспективами карьерного роста.
+          </p>
+          <p>
+            <nuxt-link to="/courses/direction/programmirovanie" class="link">
+              Все онлайн-курсы</nuxt-link> рассортированы по категориям.
+            Это позволяет быстро найти нужное направление обучения. Подбор
+            курсов можно осуществить по профессии, например, курсы бизнес
+            аналитика или
+            <nuxt-link to="/courses/profession/fullstackdizayner" class="link">
+              Fullstack дизайнер</nuxt-link>, стоимости обучения,
+            уровню, рейтингу и т. д.
+          </p>
+        </Reducer>
+      </template>
+      <template #section>
+        <div class="header__fire" />
+        <div class="header__label">
+          Сейчас в тренде
+        </div>
+      </template>
+      <template #tags>
+      </template>
+    </Header>
   </div>
 </template>
 
