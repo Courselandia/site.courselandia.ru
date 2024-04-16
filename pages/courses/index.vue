@@ -1,11 +1,9 @@
 <template>
-  <div>
-    HERE 2!
-  </div>
+  <Catalog />
 </template>
 
 <script lang="ts" setup>
-// import Catalog from '@/components/modules/catalog/Index.vue';
+import Catalog from '@/components/modules/catalog/Index.vue';
 
 definePageMeta({
   middleware: [
