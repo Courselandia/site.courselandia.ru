@@ -1496,11 +1496,13 @@ const setUrlQuery = (
       current: url,
     };
 
+    /*
     window.history.pushState(
       newState,
       '',
       url,
     );
+     */
   }
 };
 
