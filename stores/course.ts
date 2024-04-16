@@ -81,10 +81,8 @@ export default defineStore('course', {
           return false;
         };
 
-        const dev = false; // config.public.development;
-
         if (
-          !dev
+          !config.public.development
           && offset === 0
           && limit === 36
           && sorts?.name === 'ASC'
@@ -95,7 +93,7 @@ export default defineStore('course', {
         ) {
           path = `/storage/json/courses/${section}/${sectionLink}.json`;
         } else if (
-          !dev
+          !config.public.development
           && offset === 0
           && limit === 36
           && sorts?.name === 'ASC'
