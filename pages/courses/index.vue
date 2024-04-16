@@ -1,6 +1,6 @@
 <template>
   <div>
-    HERE!
+    HERE 2!
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 
 definePageMeta({
   middleware: [
-    // 'course-section',
+    'course-section',
     'preload-directions',
     'preload-schools',
   ],
