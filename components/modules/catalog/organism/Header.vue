@@ -87,10 +87,6 @@
                 </Tag>
               </Tags>
             </Slide>
-
-            <template #addons>
-              <Pagination />
-            </template>
           </Carousel>
         </div>
         <!--noindex-->
@@ -115,10 +111,6 @@
                   </Tag>
                 </Tags>
               </Slide>
-
-              <template #addons>
-                <Pagination />
-              </template>
             </Carousel>
           </div>
         </ClientOnly>
