@@ -28,11 +28,13 @@
   }
 
   &__link {
+    width: calc(100% - 259px);
     text-decoration: none;
     align-items: flex-start;
 
     @media all and (max-width: 850px) {
       flex-wrap: wrap;
+      width: 100%;
     }
   }
 

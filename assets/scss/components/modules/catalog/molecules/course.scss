@@ -28,6 +28,8 @@
   &--type-row,
   &--type-box {
     &.course {
+      width: 100%;
+
       &--active {
         transform: scale(0.99);
       }

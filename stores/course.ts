@@ -66,6 +66,7 @@ export default defineStore('course', {
         const hasInitFilter = (
           flts: IFilters | null = null,
         ): boolean => Object.keys(flts || {}).length === 1 || Object.keys(flts || {}).length === 0;
+        const hasFilter = Object.keys(filters || {}).length !== 0;
 
         const hasOpenedItem = (itms: Record<string, string | boolean | null> | null): boolean => {
           if (itms) {
@@ -80,8 +81,10 @@ export default defineStore('course', {
           return false;
         };
 
+        const dev = false; // config.public.development;
+
         if (
-          !config.public.development
+          !dev
           && offset === 0
           && limit === 36
           && sorts?.name === 'ASC'
@@ -92,12 +95,13 @@ export default defineStore('course', {
         ) {
           path = `/storage/json/courses/${section}/${sectionLink}.json`;
         } else if (
-          !config.public.development
+          !dev
           && offset === 0
           && limit === 36
           && sorts?.name === 'ASC'
           && section === null
           && sectionLink === null
+          && !hasFilter
         ) {
           path = '/storage/json/courses.json';
         }
