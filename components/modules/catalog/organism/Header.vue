@@ -34,6 +34,32 @@
         </div>
       </template>
       <template #tags>
+        <div class="header__desktop">
+          <Carousel
+            snap-align="end"
+            wrap-around
+          >
+            <Slide
+              v-for="(handful, key) in getHandfulTags(popularTags, 15)"
+              :key="key"
+            >
+              <Tags>
+                <Tag
+                  v-for="(item, handfulLey) in handful"
+                  :key="handfulLey"
+                  :to="item.link"
+                  bck="white"
+                >
+                  {{ item.name }}
+                </Tag>
+              </Tags>
+            </Slide>
+
+            <template #addons>
+              <Pagination />
+            </template>
+          </Carousel>
+        </div>
       </template>
     </Header>
   </div>
