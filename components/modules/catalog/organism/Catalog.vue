@@ -50,12 +50,6 @@
             <div class="catalog__courses">
             </div>
             <div class="catalog__pagination">
-              <Pagination
-                :total="total"
-                :size="size"
-                :page="currentPage"
-                :link="getLinkPagination"
-              />
             </div>
             <div
               v-if="additional"
