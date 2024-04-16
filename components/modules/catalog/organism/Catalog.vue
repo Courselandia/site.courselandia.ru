@@ -1236,6 +1236,7 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
   }
 };
 
+/*
 try {
   setSelectedFiltersByQuery();
 
@@ -1259,6 +1260,7 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
+ */
 
 //
 
@@ -1494,16 +1496,11 @@ const setUrlQuery = (
       current: url,
     };
 
-    console.warn(newState);
-    console.warn(url);
-
-    /*
     window.history.pushState(
       newState,
       '',
       url,
     );
-     */
   }
 };
 
