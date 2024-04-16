@@ -86,7 +86,7 @@
               </ScrollLoader>
             </div>
             <div class="catalog__pagination">
-              <PaginationCourses
+              <Pagination
                 :total="total"
                 :size="size"
                 :page="currentPage"
@@ -249,7 +249,7 @@ import { apiReadSkills } from '@/api/skill';
 import { apiReadTeachers } from '@/api/teacher';
 import { apiReadTools } from '@/api/tool';
 import Loader from '@/components/atoms/Loader.vue';
-import PaginationCourses from '@/components/atoms/Pagination.vue';
+import Pagination from '@/components/atoms/Pagination.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Total from '@/components/modules/catalog/atoms/Total.vue';
