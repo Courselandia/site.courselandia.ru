@@ -43,16 +43,6 @@
               v-for="(handful, key) in getHandfulTags(popularTags, 15)"
               :key="key"
             >
-              <Tags>
-                <Tag
-                  v-for="(item, handfulLey) in handful"
-                  :key="handfulLey"
-                  :to="item.link"
-                  bck="white"
-                >
-                  {{ item.name }}
-                </Tag>
-              </Tags>
             </Slide>
           </Carousel>
         </div>
