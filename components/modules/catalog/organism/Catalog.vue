@@ -61,9 +61,6 @@
               v-if="additional"
               class="catalog__additional"
             >
-              <Reducer class="lists links titles">
-                <div v-html="additional" />
-              </Reducer>
             </div>
           </div>
           <div class="catalog__filter">
