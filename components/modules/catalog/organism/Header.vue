@@ -35,11 +35,6 @@
       </template>
       <template #tags>
         <div class="header__desktop">
-          <Carousel
-            snap-align="end"
-            wrap-around
-          >
-          </Carousel>
         </div>
       </template>
     </Header>
