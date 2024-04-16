@@ -1,13 +1,15 @@
 <template>
-  <Catalog />
+  <div>
+    HERE!
+  </div>
 </template>
 
 <script lang="ts" setup>
-import Catalog from '@/components/modules/catalog/Index.vue';
+// import Catalog from '@/components/modules/catalog/Index.vue';
 
 definePageMeta({
   middleware: [
-    'course-section',
+    // 'course-section',
     'preload-directions',
     'preload-schools',
   ],
