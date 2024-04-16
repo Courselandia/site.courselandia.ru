@@ -48,26 +48,6 @@
               </ClientOnly>
             </div>
             <div class="catalog__courses">
-              <ScrollLoader
-                :stop="stopScrollLoader"
-                :distance="1000"
-                @load="onLoadScrolling"
-              >
-                <Loader
-                  :active="loading"
-                  color="white-transparency"
-                >
-                  <Courses
-                    :courses="courses"
-                    :columns="3"
-                    :type="type"
-                  >
-                    <template #empty>
-                      К сожалению мы не нашли подходящих курсов под ваш запрос.
-                    </template>
-                  </Courses>
-                </Loader>
-              </ScrollLoader>
             </div>
             <div class="catalog__pagination">
               <Pagination
