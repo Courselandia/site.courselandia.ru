@@ -1576,6 +1576,7 @@ const itemListElements = computed<ListItem[]>(
   })),
 );
 
+/*
 useServerHead({
   link: [
     {
@@ -1607,6 +1608,7 @@ const teacherJsonLd = computed<any>(() => {
 });
 
 useJsonld(teacherJsonLd.value);
+ */
 </script>
 
 <style lang="scss" scoped>
