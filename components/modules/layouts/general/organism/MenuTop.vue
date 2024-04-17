@@ -65,7 +65,11 @@
     <div class="menu-top__item" style="display: none">
       <nuxt-link
         to="/collections"
-        :class="`menu-top__link ${(menuValue === 'collections' || active === 'collections') ? 'link--active' : ''}`"
+        :class="`menu-top__link ${hover === 'collections' ? 'menu-top__link--hover' : ''} ${(menuValue === 'collections' || active === 'collections') ? 'link--active' : ''}`"
+        @mouseenter="onMouseEnter('collections')"
+        @focusin="onMouseEnter('collections')"
+        @mouseleave="onMouseLeave()"
+        @focusout="onMouseLeave()"
       >
         Подборки
       </nuxt-link>
@@ -73,7 +77,11 @@
     <div class="menu-top__item">
       <nuxt-link
         to="/blog"
-        :class="`menu-top__link ${(menuValue === 'blog' || active === 'blog') ? 'link--active' : ''}`"
+        :class="`menu-top__link ${hover === 'blog' ? 'menu-top__link--hover' : ''} ${(menuValue === 'blog' || active === 'blog') ? 'link--active' : ''}`"
+        @mouseenter="onMouseEnter('blog')"
+        @focusin="onMouseEnter('blog')"
+        @mouseleave="onMouseLeave()"
+        @focusout="onMouseLeave()"
       >
         Блог
       </nuxt-link>
