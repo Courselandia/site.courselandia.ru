@@ -1,4 +1,4 @@
-FROM node:18.15.0
+FROM node:20.12.2
 ENV NODE_ENV production
 
 WORKDIR /var/www
