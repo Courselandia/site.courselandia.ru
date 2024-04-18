@@ -9,7 +9,7 @@ export default defineEventHandler(async (event): Promise<ICourse[]> => {
   const cacheIndex = `redis:ratedCourses.${cacheDate}`;
   const cachedRatedCourses = await useStorage().getItem(cacheIndex);
 
-  if (cachedRatedCourses) {
+  if (cachedRatedCourses && !config.public.development) {
     return cachedRatedCourses as ICourse[];
   }
 
@@ -18,7 +18,9 @@ export default defineEventHandler(async (event): Promise<ICourse[]> => {
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(cacheIndex, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(cacheIndex, response.data.data);
+  }
 
   return response.data.data;
 });

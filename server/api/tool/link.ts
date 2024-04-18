@@ -10,7 +10,7 @@ export default defineEventHandler(async (event): Promise<IToolLink | null> => {
   const cacheIndex = `redis:tool.link.${link}.${cacheDate}`;
   const cachedTools = await useStorage().getItem(cacheIndex);
 
-  if (cachedTools) {
+  if (cachedTools && !config.public.development) {
     return cachedTools as IToolLink;
   }
 
@@ -19,7 +19,9 @@ export default defineEventHandler(async (event): Promise<IToolLink | null> => {
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(cacheIndex, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(cacheIndex, response.data.data);
+  }
 
   return response.data.data;
 });

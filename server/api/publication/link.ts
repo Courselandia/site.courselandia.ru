@@ -10,7 +10,7 @@ export default defineEventHandler(async (event): Promise<IPublication | null> =>
   const cacheIndex = `redis:publication.link.${link}.${cacheDate}`;
   const cachedPublication = await useStorage().getItem(cacheIndex);
 
-  if (cachedPublication) {
+  if (cachedPublication && !config.public.development) {
     return cachedPublication as IPublication;
   }
 
@@ -20,7 +20,9 @@ export default defineEventHandler(async (event): Promise<IPublication | null> =>
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(cacheIndex, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(cacheIndex, response.data.data);
+  }
 
   return response.data.data;
 });
