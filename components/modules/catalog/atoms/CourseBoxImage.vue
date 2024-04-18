@@ -15,7 +15,7 @@ import LazyBackground from '@/components/atoms/LazyBackground.vue';
 
 const holder = await import('assets/images/holder.svg');
 
-const props = defineProps({
+defineProps({
   path: {
     type: String,
     required: false,

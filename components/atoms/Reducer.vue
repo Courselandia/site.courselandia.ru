@@ -64,7 +64,7 @@ import {
   useSlots,
 } from 'vue';
 
-const props = defineProps({
+defineProps({
   height: {
     type: Number,
     required: false,

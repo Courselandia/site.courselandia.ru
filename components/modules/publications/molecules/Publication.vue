@@ -21,12 +21,12 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
+import Anons from '@/components/modules/publications/atoms/Anons.vue';
 import Header from '@/components/modules/publications/atoms/Header.vue';
 import Image from '@/components/modules/publications/atoms/Image.vue';
-import Anons from '@/components/modules/publications/atoms/Anons.vue';
 import type IPublication from '@/interfaces/stores/publication/publication';
 
-const props = defineProps({
+defineProps({
   publication: {
     type: Object as PropType<IPublication>,
     required: true,

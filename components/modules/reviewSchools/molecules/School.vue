@@ -59,7 +59,7 @@ import Text from '@/components/modules/reviewSchools/atoms/Text.vue';
 import Tags from '@/components/modules/reviewSchools/molecules/Tags.vue';
 import type IListSchoolReview from '@/interfaces/components/modules/reviewSchools/listSchoolReview';
 
-const props = defineProps({
+defineProps({
   school: {
     type: Object as PropType<IListSchoolReview>,
     required: true,

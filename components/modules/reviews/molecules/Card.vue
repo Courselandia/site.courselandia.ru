@@ -58,7 +58,9 @@
         </div>
       </div>
       <div class="card__other-schools">
-        <OtherSchools />
+        <OtherSchools
+          :school="school"
+        />
       </div>
     </div>
   </div>

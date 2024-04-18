@@ -23,7 +23,7 @@ import type { PropType } from 'vue';
 import Reducer from '@/components/atoms/Reducer.vue';
 import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
 
-const props = defineProps({
+defineProps({
   school: {
     type: Object as PropType<ISchoolLink>,
     required: true,

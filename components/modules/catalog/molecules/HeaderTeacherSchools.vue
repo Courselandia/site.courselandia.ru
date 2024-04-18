@@ -15,7 +15,7 @@ import type { PropType } from 'vue';
 import HeaderTeacherSchool from '@/components/modules/catalog/atoms/HeaderTeacherSchool.vue';
 import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
 
-const props = defineProps({
+defineProps({
   schools: {
     type: Array as PropType<Array<ISchoolLink>>,
     required: true,

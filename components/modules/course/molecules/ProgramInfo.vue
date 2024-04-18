@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
+defineProps({
   description: {
     type: String,
     required: true,

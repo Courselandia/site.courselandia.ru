@@ -28,7 +28,7 @@ import FavoriteCourse from '@/components/modules/course/organism/FavoriteCourse.
 import track from '@/helpers/track';
 import type TId from '@/types/id';
 
-const props = defineProps({
+defineProps({
   id: {
     type: [String, Number] as PropType<TId>,
     required: true,

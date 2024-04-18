@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import Tag from '@/components/atoms/Tag.vue';
 
-const props = defineProps({
+defineProps({
   to: {
     type: String,
     required: true,

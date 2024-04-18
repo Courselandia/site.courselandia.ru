@@ -20,7 +20,7 @@ import HeaderTeacherSocial from '@/components/modules/catalog/atoms/HeaderTeache
 import ESocialMedia from '@/enums/socialMedia';
 import type ISocialMedia from '@/interfaces/stores/socialMedia';
 
-const props = defineProps({
+defineProps({
   socialMedias: {
     type: Object as PropType<Array<ISocialMedia>>,
     required: true,

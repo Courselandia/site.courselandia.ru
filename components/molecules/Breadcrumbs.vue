@@ -23,7 +23,7 @@ import type { PropType } from 'vue';
 
 import type IBreadcrumb from '@/interfaces/components/molecules/breadcrumb';
 
-const props = defineProps({
+defineProps({
   breadcrumbs: {
     type: Array as PropType<Array<IBreadcrumb>>,
     required: true,

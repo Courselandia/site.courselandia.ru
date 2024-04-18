@@ -75,7 +75,7 @@ import {
 import Button from '@/components/atoms/Button.vue';
 import Icon from '@/components/atoms/Icon.vue';
 
-const props = defineProps({
+defineProps({
   total: {
     type: Number,
     required: false,

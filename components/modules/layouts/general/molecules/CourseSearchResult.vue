@@ -89,7 +89,7 @@ import currency from '@/helpers/currency';
 import { money } from '@/helpers/number';
 import type ICourse from '@/interfaces/components/modules/course';
 
-const props = defineProps({
+defineProps({
   course: {
     type: Object as PropType<ICourse>,
     required: true,

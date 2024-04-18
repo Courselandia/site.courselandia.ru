@@ -23,7 +23,7 @@ import type { PropType } from 'vue';
 import CardFeature from '@/components/modules/course/atoms/CardFeature.vue';
 import type IFeature from '@/interfaces/components/modules/course/feature';
 
-const props = defineProps({
+defineProps({
   features: {
     type: Object as PropType<Array<IFeature>>,
     required: true,

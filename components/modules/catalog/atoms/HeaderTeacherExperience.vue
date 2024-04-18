@@ -41,7 +41,7 @@ import type { PropType } from 'vue';
 
 import type ITeacherExperience from '@/interfaces/stores/course/teacherExperience';
 
-const props = defineProps({
+defineProps({
   experience: {
     type: Object as PropType<ITeacherExperience>,
     required: true,

@@ -100,7 +100,7 @@ import Tags from '@/components/molecules/Tags.vue';
 import EDirection from '@/enums/direction';
 import type ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
 
-const props = defineProps({
+defineProps({
   amountCourses: {
     type: Object as PropType<ISchoolAmountCourses>,
     required: true,

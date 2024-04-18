@@ -20,7 +20,7 @@
 import Icon from '@/components/atoms/Icon.vue';
 import Plural from '@/components/atoms/Plural.vue';
 
-const props = defineProps({
+defineProps({
   count: {
     type: Number,
     required: true,

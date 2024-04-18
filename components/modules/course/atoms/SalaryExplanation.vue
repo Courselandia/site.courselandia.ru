@@ -20,7 +20,7 @@ import type { PropType } from 'vue';
 
 import ELevel from '@/enums/stores/course/level';
 
-const props = defineProps({
+defineProps({
   level: {
     type: String as PropType<ELevel>,
     required: true,

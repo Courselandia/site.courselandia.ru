@@ -15,7 +15,7 @@ import type { PropType } from 'vue';
 import HeaderTeacherDirection from '@/components/modules/catalog/atoms/HeaderTeacherDirection.vue';
 import type IDirectionLink from '@/interfaces/stores/course/directionLink';
 
-const props = defineProps({
+defineProps({
   directions: {
     type: Array as PropType<Array<IDirectionLink>>,
     required: true,

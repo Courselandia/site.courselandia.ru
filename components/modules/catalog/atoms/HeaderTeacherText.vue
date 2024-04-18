@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import Reducer from '@/components/atoms/Reducer.vue';
 
-const props = defineProps({
+defineProps({
   text: {
     type: String,
     required: true,

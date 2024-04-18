@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import LazyImage from '@/components/atoms/LazyImage.vue';
 
-const props = defineProps({
+defineProps({
   label: {
     type: String,
     required: true,

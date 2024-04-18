@@ -81,7 +81,7 @@ import HeaderTeacherSchools from '@/components/modules/catalog/molecules/HeaderT
 import HeaderTeacherSocials from '@/components/modules/catalog/molecules/HeaderTeacherSocials.vue';
 import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
 
-const props = defineProps({
+defineProps({
   teacher: {
     type: Object as PropType<ITeacherLink>,
     required: true,

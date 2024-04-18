@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   months: {
     type: Number,
     required: true,
