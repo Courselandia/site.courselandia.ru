@@ -16,7 +16,7 @@ import type { PropType } from 'vue';
 import ProgramItem from '@/components/modules/course/atoms/ProgramItem.vue';
 import type IProgram from '@/interfaces/components/modules/course/program';
 
-const props = defineProps({
+defineProps({
   program: {
     type: Array as PropType<Array<IProgram>>,
     required: true,

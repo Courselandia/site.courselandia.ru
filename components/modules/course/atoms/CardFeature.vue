@@ -19,7 +19,7 @@ import type { PropType } from 'vue';
 import Icon from '@/components/atoms/Icon.vue';
 import type TIcon from '@/types/icon';
 
-const props = defineProps({
+defineProps({
   icon: {
     type: String as PropType<TIcon>,
     required: true,

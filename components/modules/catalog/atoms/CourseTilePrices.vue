@@ -46,7 +46,7 @@ import ECurrency from '@/enums/components/modules/catalog/currency';
 import getCurrency from '@/helpers/currency';
 import { money } from '@/helpers/number';
 
-const props = defineProps({
+defineProps({
   price: {
     type: Number,
     required: false,

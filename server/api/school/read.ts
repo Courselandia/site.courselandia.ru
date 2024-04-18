@@ -9,7 +9,7 @@ export default defineEventHandler(async (event): Promise<ISchool[]> => {
   const cacheIndex = `redis:schools.${cacheDate}`;
   const cachedSchools = await useStorage().getItem(cacheIndex);
 
-  if (cachedSchools) {
+  if (cachedSchools && !config.public.development) {
     return cachedSchools as ISchool[];
   }
 
@@ -18,7 +18,9 @@ export default defineEventHandler(async (event): Promise<ISchool[]> => {
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(cacheIndex, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(cacheIndex, response.data.data);
+  }
 
   return response.data.data;
 });

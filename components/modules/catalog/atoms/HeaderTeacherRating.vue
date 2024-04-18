@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
+defineProps({
   rating: {
     type: Number,
     required: true,

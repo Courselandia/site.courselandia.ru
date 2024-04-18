@@ -9,7 +9,7 @@ export default defineEventHandler(async (event): Promise<IDirection[]> => {
   const cacheIndex = `redis:directions.${cacheDate}`;
   const cachedDirections = await useStorage().getItem(cacheIndex);
 
-  if (cachedDirections) {
+  if (cachedDirections && !config.public.development) {
     return cachedDirections as IDirection[];
   }
 
@@ -23,7 +23,9 @@ export default defineEventHandler(async (event): Promise<IDirection[]> => {
     },
   });
 
-  await useStorage().setItem(cacheIndex, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(cacheIndex, response.data.data);
+  }
 
   return response.data.data;
 });

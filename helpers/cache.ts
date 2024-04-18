@@ -3,6 +3,12 @@ import dayjs from 'dayjs';
 import ECacheDate from '@/enums/cache';
 
 export const cacheDate = (date?: ECacheDate): string => {
+  const config = useRuntimeConfig();
+
+  if (config.public.development) {
+    return String(dayjs().unix());
+  }
+
   if (date === ECacheDate.MONTH) {
     return dayjs().format('01-MM-YYYY');
   }

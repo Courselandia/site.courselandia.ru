@@ -10,7 +10,7 @@ export default defineEventHandler(async (event): Promise<IProfessionLink | null>
   const cacheIndex = `redis:profession.link.${link}.${cacheDate}`;
   const cachedProfessions = await useStorage().getItem(cacheIndex);
 
-  if (cachedProfessions) {
+  if (cachedProfessions && !config.public.development) {
     return cachedProfessions as IProfessionLink;
   }
 
@@ -19,7 +19,9 @@ export default defineEventHandler(async (event): Promise<IProfessionLink | null>
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(cacheIndex, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(cacheIndex, response.data.data);
+  }
 
   return response.data.data;
 });

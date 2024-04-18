@@ -15,7 +15,7 @@ import Bubbles from '@/components/atoms/Bubbles.vue';
 import Header from '@/components/modules/course/molecules/Header.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
-const props = defineProps({
+defineProps({
   course: {
     type: Object as PropType<ICourse>,
     required: true,

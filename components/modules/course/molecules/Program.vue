@@ -13,8 +13,8 @@
     >
       <ProgramInfo
         :description="description"
-        :modules-amount="course.modules_amount"
-        :lessons-amount="course.lessons_amount"
+        :modules-amount="course.modules_amount || undefined"
+        :lessons-amount="course.lessons_amount || undefined"
       />
     </div>
 

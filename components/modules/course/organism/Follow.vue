@@ -14,7 +14,7 @@ import type { PropType } from 'vue';
 import Follow from '@/components/modules/course/molecules/Follow.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
-const props = defineProps({
+defineProps({
   course: {
     type: Object as PropType<ICourse>,
     required: true,

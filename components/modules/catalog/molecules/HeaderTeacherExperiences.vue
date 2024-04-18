@@ -19,7 +19,7 @@ import type { PropType } from 'vue';
 import HeaderTeacherExperience from '@/components/modules/catalog/atoms/HeaderTeacherExperience.vue';
 import type ITeacherExperience from '@/interfaces/stores/course/teacherExperience';
 
-const props = defineProps({
+defineProps({
   experiences: {
     type: Array as PropType<Array<ITeacherExperience>>,
     required: true,

@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import LazyImage from '@/components/atoms/LazyImage.vue';
 
-const props = defineProps({
+defineProps({
   path: {
     type: String,
     required: false,

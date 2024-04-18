@@ -20,7 +20,7 @@ import type { PropType } from 'vue';
 
 import type IMenu from '@/interfaces/menu';
 
-const props = defineProps({
+defineProps({
   items: {
     type: Array as PropType<Array<IMenu>>,
     required: true,

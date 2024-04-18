@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   amount: {
     type: Number,
     required: true,

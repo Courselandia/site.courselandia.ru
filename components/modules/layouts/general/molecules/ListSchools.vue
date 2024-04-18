@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import type IMenu from '@/interfaces/menu';
 
-const props = defineProps({
+defineProps({
   schools: {
     type: Array<IMenu>,
     required: true,

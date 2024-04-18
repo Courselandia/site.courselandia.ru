@@ -40,10 +40,10 @@
           />
         </div>
         <CourseTilePrices
-          :price="course.price"
-          :price-recurrent="course.price_recurrent"
-          :price-old="course.price_old"
-          :currency="course.currency"
+          :price="course.price || undefined"
+          :price-recurrent="course.price_recurrent || undefined"
+          :price-old="course.price_old || undefined"
+          :currency="course.currency || undefined"
         />
       </div>
     </nuxt-link>
@@ -91,14 +91,14 @@ const props = defineProps({
 });
 
 const emit = defineEmits({
-  'update:active': (_: Boolean) => true,
+  'update:active': (_: boolean) => true,
 });
 
 const {
   active,
 } = toRefs(props);
 
-const activeValue = ref<Boolean>(active.value);
+const activeValue = ref<boolean>(active.value);
 
 watch(activeValue, () => {
   emit('update:active', activeValue.value);

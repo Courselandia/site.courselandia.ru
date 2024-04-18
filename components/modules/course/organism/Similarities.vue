@@ -19,7 +19,7 @@ import { type PropType } from 'vue';
 import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
-const props = defineProps({
+defineProps({
   courses: {
     type: Array as PropType<Array<ICourse>>,
     required: false,

@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 import Button from '@/components/atoms/Button.vue';
 
-const props = defineProps({
+defineProps({
   code: {
     type: [Number, String],
     required: true,

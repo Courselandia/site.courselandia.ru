@@ -15,7 +15,10 @@
       <template #title>
         Длительность
       </template>
-      <template #value>
+      <template
+        v-if="course.duration && course.duration_unit"
+        #value
+      >
         {{ duration(course.duration, course.duration_unit) }}
       </template>
     </InfoBlock>
@@ -117,7 +120,7 @@ import InfoBlock from '@/components/modules/course/atoms/InfoBlock.vue';
 import duration from '@/helpers/duration';
 import type ICourse from '@/interfaces/components/modules/course';
 
-const props = defineProps({
+defineProps({
   course: {
     type: Object as PropType<ICourse>,
     required: true,

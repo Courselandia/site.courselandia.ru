@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import Icon from '@/components/atoms/Icon.vue';
 
-const props = defineProps({
+defineProps({
   count: {
     type: Number,
     required: true,

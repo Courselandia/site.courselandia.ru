@@ -7,10 +7,10 @@
             :name="course.name"
           />
           <FollowPrices
-            :price="course.price"
-            :price-recurrent="course.price_recurrent"
-            :price-old=" course.price_old"
-            :currency="course.currency"
+            :price="course.price || undefined"
+            :price-recurrent="course.price_recurrent || undefined"
+            :price-old=" course.price_old || undefined"
+            :currency="course.currency || undefined"
           />
         </div>
         <div class="follow__side follow__side--right">
@@ -32,7 +32,7 @@ import FollowPrices from '@/components/modules/course/atoms/FollowPrices.vue';
 import FollowActions from '@/components/modules/course/organism/FollowActions.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
-const props = defineProps({
+defineProps({
   course: {
     type: Object as PropType<ICourse>,
     required: true,

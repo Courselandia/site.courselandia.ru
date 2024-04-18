@@ -41,12 +41,26 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import {
+  type PropType,
+  ref,
+  toRefs,
+} from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
 import plural from '@/helpers/plural';
+import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import type ISchool from '@/interfaces/stores/school/school';
 import schoolStore from '@/stores/school';
+
+const props = defineProps({
+  school: {
+    type: Object as PropType<ISchoolLink>,
+    required: true,
+  },
+});
+
+const { school } = toRefs(props);
 
 const conditions = {
   0: 'отзывов',
@@ -77,7 +91,9 @@ const { schools } = storeToRefs(schoolStore());
 
 const otherSchools = ref<Array<ISchool> | null>(
   sortSchools(
-    schools.value?.filter((item: ISchool) => !!item.reviews_count) || null,
+    schools.value?.filter(
+      (item: ISchool) => !!item.reviews_count && school.value.id !== item.id,
+    ) || null,
   )?.slice(0, 4) || null,
 );
 </script>

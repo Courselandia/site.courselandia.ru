@@ -49,7 +49,7 @@ import {
 import Icon from '@/components/atoms/Icon.vue';
 import type IProgram from '@/interfaces/components/modules/course/program';
 
-const props = defineProps({
+defineProps({
   item: {
     type: Object as PropType<IProgram>,
     required: true,

@@ -10,7 +10,7 @@ export default defineEventHandler(async (event): Promise<ICategoryLink | null> =
   const cacheIndex = `redis:category.link.${link}.${cacheDate}`;
   const cachedCategories = await useStorage().getItem(cacheIndex);
 
-  if (cachedCategories) {
+  if (cachedCategories && !config.public.development) {
     return cachedCategories as ICategoryLink;
   }
 
@@ -19,7 +19,9 @@ export default defineEventHandler(async (event): Promise<ICategoryLink | null> =
     baseURL: config.public.apiUrl,
   });
 
-  await useStorage().setItem(cacheIndex, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(cacheIndex, response.data.data);
+  }
 
   return response.data.data;
 });

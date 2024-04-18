@@ -15,7 +15,7 @@ export default defineEventHandler(async (event): Promise<ISectionLink | null> =>
   const key = `redis:section.link.${sectionType1}.${sectionLink1}.${sectionType2}.${sectionLink2}.${level}.${free}.${cacheDate}`;
   const cachedSection = await useStorage().getItem(key);
 
-  if (cachedSection) {
+  if (cachedSection && !config.public.development) {
     return cachedSection as ISectionLink;
   }
 
@@ -58,7 +58,9 @@ export default defineEventHandler(async (event): Promise<ISectionLink | null> =>
     } : undefined,
   });
 
-  await useStorage().setItem(key, response.data.data);
+  if (!config.public.development) {
+    await useStorage().setItem(key, response.data.data);
+  }
 
   return response.data.data;
 });

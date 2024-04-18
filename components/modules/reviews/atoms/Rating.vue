@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import Icon from '@/components/atoms/Icon.vue';
 
-const props = defineProps({
+defineProps({
   rating: {
     type: Number,
     required: false,

@@ -32,7 +32,10 @@
             :count1="school.reviews_1_star_count"
           />
         </div>
-        <div class="card__rating">
+        <div
+          v-if="school.rating"
+          class="card__rating"
+        >
           <Rating
             :rating="school.rating"
           />
@@ -49,13 +52,15 @@
         <div class="card__actions">
           <Actions
             :link="school.link"
-            :site="school.site"
+            :site="school.site || undefined"
             :name="school.name"
           />
         </div>
       </div>
       <div class="card__other-schools">
-        <OtherSchools />
+        <OtherSchools
+          :school="school"
+        />
       </div>
     </div>
   </div>
@@ -105,7 +110,7 @@ const emit = defineEmits({
   'update:rating': (_: number | null) => true,
 });
 
-const ratingValue = ref<number | null>(rating.value);
+const ratingValue = ref<number>(rating.value);
 
 watch(ratingValue, () => {
   emit('update:rating', ratingValue.value);

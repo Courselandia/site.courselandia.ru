@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { rnToBr } from '@/helpers/format';
 
-const props = defineProps({
+defineProps({
   anons: {
     type: String,
     required: true,

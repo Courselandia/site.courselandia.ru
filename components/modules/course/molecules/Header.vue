@@ -99,7 +99,7 @@ import Facts from '@/components/modules/course/molecules/Facts.vue';
 import language from '@/helpers/language';
 import type ICourse from '@/interfaces/components/modules/course';
 
-const props = defineProps({
+defineProps({
   course: {
     type: Object as PropType<ICourse>,
     required: true,

@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import Catalog from '@/components/modules/catalog/organism/Catalog.vue';
 
-const props = defineProps({
+defineProps({
   section: {
     type: String,
     required: false,
