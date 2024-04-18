@@ -11,7 +11,7 @@
     </div>
     <div class="collection__side collection__side--left">
       <Description
-        v-if="itemLinkCollection.text"
+        v-if="itemLinkCollection.text && !itemLinkCollection.copied"
         :text="itemLinkCollection.text"
       />
       <Courses

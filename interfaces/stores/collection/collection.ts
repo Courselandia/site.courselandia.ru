@@ -15,6 +15,7 @@ export default interface ICollection {
   amount: number,
   sort_field: string,
   sort_direction: string,
+  copied: boolean,
   image_small_id: IImage | null;
   image_middle_id: IImage | null;
   image_big_id: IImage | null;
