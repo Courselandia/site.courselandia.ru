@@ -7,10 +7,10 @@
             :name="course.name"
           />
           <FollowPrices
-            :price="course.price"
-            :price-recurrent="course.price_recurrent"
-            :price-old=" course.price_old"
-            :currency="course.currency"
+            :price="course.price || undefined"
+            :price-recurrent="course.price_recurrent || undefined"
+            :price-old=" course.price_old || undefined"
+            :currency="course.currency || undefined"
           />
         </div>
         <div class="follow__side follow__side--right">

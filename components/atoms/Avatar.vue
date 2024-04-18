@@ -7,8 +7,8 @@
     </template>
     <template v-else>
       <Icon
-        name="avatar"
-        color="blueGrey10"
+        name="close"
+        color="black"
       />
     </template>
   </div>

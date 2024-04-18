@@ -9,10 +9,12 @@
       </div>
       <div class="salaries__info">
         <SalaryExplanation
+          v-if="professionLevel && professionName"
           :level="professionLevel"
           :name="professionName"
         />
         <SalaryDuration
+          v-if="months"
           :months="months"
         />
       </div>
@@ -33,8 +35,8 @@
         >
           <div class="salaries__name">
             {{ profession.label }}:
-            {{ money(getSalary(profession.salaries, ELevel.JUNIOR)) }} ₽ —
-            {{ money(getSalary(profession.salaries, ELevel.SENIOR)) }} ₽
+            {{ money(getSalary(profession.salaries || [], ELevel.JUNIOR) || 0) }} ₽ —
+            {{ money(getSalary(profession.salaries || [], ELevel.SENIOR) || 0) }} ₽
           </div>
           <div class="salaries__slider">
             <SliderSalary

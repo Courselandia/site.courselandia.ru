@@ -38,9 +38,13 @@
         >
           {{ course.price_recurrent
             ? money(course.price_recurrent)
-            : money(course.price)
+            : money(course.price || 0)
           }}
-          {{ currency(course.currency) }}
+          <template
+            v-if="course.currency"
+          >
+            {{ currency(course.currency) }}
+          </template>
           <template v-if="course.price_recurrent">
             в месяц
           </template>
@@ -53,13 +57,23 @@
             v-if="course.price_recurrent && course.price"
             class="course-search-result__price_current"
           >
-            {{ money(course.price) }} {{ currency(course.currency) }}
+            {{ money(course.price) }}
+            <template
+              v-if="course.currency"
+            >
+              {{ currency(course.currency) }}
+            </template>
           </div>
           <div
             v-if="course.price_old"
             class="course-search-result__price_old"
           >
-            {{ money(course.price_old) }} {{ currency(course.currency) }}
+            {{ money(course.price_old) }}
+            <template
+              v-if="course.currency"
+            >
+              {{ currency(course.currency) }}
+            </template>
           </div>
         </div>
       </div>

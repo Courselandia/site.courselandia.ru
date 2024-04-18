@@ -3,7 +3,7 @@
     v-if="field === sortBy"
   >
     <template
-      v-if="sortOrder === 'ASC'"
+      v-if="sortOrder === 'asc'"
     >
       <Icon
         name="arrow-up"

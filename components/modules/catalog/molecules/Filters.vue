@@ -51,7 +51,6 @@
     <div class="filters__panel">
       <div
         v-if="directions?.length"
-        :key="directions"
         class="filters__block filters__block--directions"
       >
         <Tags>

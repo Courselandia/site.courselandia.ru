@@ -15,7 +15,10 @@
       <template #title>
         Длительность
       </template>
-      <template #value>
+      <template
+        v-if="course.duration && course.duration_unit"
+        #value
+      >
         {{ duration(course.duration, course.duration_unit) }}
       </template>
     </InfoBlock>

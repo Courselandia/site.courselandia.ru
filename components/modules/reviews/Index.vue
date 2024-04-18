@@ -100,7 +100,7 @@ if (route.query.page && Number(route.query.page)) {
 
 const scroll = ref(true);
 const config = useRuntimeConfig();
-const rating = ref(ratingQuery || null);
+const rating = ref(ratingQuery || undefined);
 const sorts = ref<ISorts>(getDefaultSort(route.query.sort as string));
 
 const {

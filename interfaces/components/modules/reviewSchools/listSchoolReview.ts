@@ -10,6 +10,6 @@ export default interface IListSchoolReview {
   rating: number,
   text: string | null;
   image: string | null,
-  site: string | null;
+  site: string;
   amount_courses: ISchoolAmountCourses;
 }

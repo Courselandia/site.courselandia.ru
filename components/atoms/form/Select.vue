@@ -37,7 +37,7 @@
           <div class="dropdown__list">
             <div
               v-for="(option) in options"
-              :key="option.value"
+              :key="option.value as string"
               :class="`dropdown__option ${option.value === value ? 'dropdown__option--selected' : ''}`"
               @keydown="onSelect(option.value)"
               @click="onSelect(option.value)"
@@ -136,7 +136,7 @@ const nameClassSelect = computed(() => {
     classes.push('select--hover');
   }
 
-  if (props.simple) {
+  if (simple.value) {
     classes.push('select--simple');
   }
 

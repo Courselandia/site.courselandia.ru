@@ -64,7 +64,7 @@
                 </div>
                 <div class="dropdowns__list">
                   <AlphabeticList
-                    :items="menuCourses[index].children"
+                    :items="menuCourses[index].children || []"
                     @click="onClick"
                   />
                 </div>
