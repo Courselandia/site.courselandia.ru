@@ -26,9 +26,10 @@
       >
         {{ course.directions[0].name }}
       </div>
-      <div class="course-search-result__name">
-        {{ course.name }}
-      </div>
+      <div
+        class="course-search-result__name"
+        v-html="course.name"
+      />
       <div
         class="course-search-result__prices"
       >

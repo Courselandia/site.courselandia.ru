@@ -20,4 +20,8 @@
     margin-bottom: 0.25rem;
     height: 2.5rem;
   }
+
+  &:deep(SPAN) {
+    background-color: rgb(24%, 24%, 99%, 0.3);
+  }
 }

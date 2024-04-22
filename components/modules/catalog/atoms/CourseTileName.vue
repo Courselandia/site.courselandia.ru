@@ -2,9 +2,8 @@
   <div
     :title="name"
     class="course-tile-name"
-  >
-    {{ name }}
-  </div>
+    v-html="name"
+  />
 </template>
 
 <script setup lang="ts">

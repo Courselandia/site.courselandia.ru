@@ -36,6 +36,10 @@
     line-height: 1.313rem;
     color: $black;
     margin-bottom: 0.25rem;
+
+    &:deep(SPAN) {
+      background-color: rgb(24%, 24%, 99%, 0.3);
+    }
   }
 
   &__price {
