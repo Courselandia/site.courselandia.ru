@@ -4,15 +4,15 @@
     class="collection content mt-12 mb-24 mb-12-sm"
   >
     <div class="collection__side collection__side--title">
-      <div>
-        HERE!
-      </div>
       <Back />
       <Header
         :header="itemLinkCollection.name"
       />
     </div>
     <div class="collection__side collection__side--left">
+      <div>
+        HERE: {{ itemLinkCollection.copied }}
+      </div>
       <Description
         v-if="itemLinkCollection.text && !itemLinkCollection.copied"
         :text="itemLinkCollection.text"
