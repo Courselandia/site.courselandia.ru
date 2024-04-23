@@ -87,8 +87,10 @@
                   Изучайте курсы онлайн-школ, сравнивайте их
                   и найдите тот, который лучше всего подходит для вас.
                 </div>
-                <!--
-                <div class="dropdowns__statistics">
+                <div
+                  v-if="stat"
+                  class="dropdowns__statistics"
+                >
                   <div class="dropdowns__statistics-item">
                     <div class="dropdowns__statistics-icon">
                       <Icon
@@ -101,11 +103,25 @@
                       Курсов
                     </div>
                     <div class="dropdowns__statistics-amount">
-                      {{ totalCourses }}
+                      {{ stat.amountCourses }}
+                    </div>
+                  </div>
+                  <div class="dropdowns__statistics-item">
+                    <div class="dropdowns__statistics-icon">
+                      <Icon
+                        name="rhombus"
+                        color="blue2"
+                        :size="[26, 9]"
+                      />
+                    </div>
+                    <div class="dropdowns__statistics-label">
+                      Преподавателей
+                    </div>
+                    <div class="dropdowns__statistics-amount">
+                      {{ stat.amountTeachers }}
                     </div>
                   </div>
                 </div>
-                -->
                 <div class="dropdowns__button">
                   <Button
                     to="/courses"
@@ -140,8 +156,10 @@
                   Изучите реальные отзывы тех, кто уже обучался в онлайн-школах,
                   сравнивайте курсы и найдите тот, что подходит вам лучше всего!
                 </div>
-                <!--
-                <div class="dropdowns__statistics">
+                <div
+                  v-if="stat"
+                  class="dropdowns__statistics"
+                >
                   <div class="dropdowns__statistics-item">
                     <div class="dropdowns__statistics-icon">
                       <Icon
@@ -153,7 +171,9 @@
                     <div class="dropdowns__statistics-label">
                       Отзывов
                     </div>
-                    <div class="dropdowns__statistics-amount" />
+                    <div class="dropdowns__statistics-amount">
+                      {{ stat.amountReviews }}
+                    </div>
                   </div>
                   <div class="dropdowns__statistics-item">
                     <div class="dropdowns__statistics-icon">
@@ -166,10 +186,11 @@
                     <div class="dropdowns__statistics-label">
                       Школ
                     </div>
-                    <div class="dropdowns__statistics-amount" />
+                    <div class="dropdowns__statistics-amount">
+                      {{ stat.amountSchools }}
+                    </div>
                   </div>
                 </div>
-                -->
                 <div class="dropdowns__button">
                   <Button
                     to="/reviews"
@@ -215,6 +236,7 @@ import schoolsToMenu from '@/converts/schoolsToMenu';
 import schoolsToSchoolReviews from '@/converts/schoolsToSchoolReviews';
 import type IListSchoolReview from '@/interfaces/components/modules/reviewSchools/listSchoolReview';
 import type IMenu from '@/interfaces/menu';
+import course from '@/stores/course';
 import direction from '@/stores/direction';
 import school from '@/stores/school';
 
@@ -247,6 +269,7 @@ watch(menu, () => {
 const index = ref(0);
 
 const { directions } = storeToRefs(direction());
+const { stat } = storeToRefs(course());
 const listDirections = ref<IMenu[]>();
 
 try {
