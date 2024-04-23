@@ -34,6 +34,7 @@ definePageMeta({
   middleware: [
     'preload-directions',
     'preload-schools',
+    'preload-stat',
   ],
 });
 </script>

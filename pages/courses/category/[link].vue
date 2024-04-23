@@ -12,6 +12,7 @@ definePageMeta({
     'course-section-category',
     'preload-directions',
     'preload-schools',
+    'preload-stat',
   ],
 });
 </script>

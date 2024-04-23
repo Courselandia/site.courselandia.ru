@@ -10,6 +10,7 @@ definePageMeta({
     'course',
     'preload-directions',
     'preload-schools',
+    'preload-stat',
   ],
 });
 </script>

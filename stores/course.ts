@@ -21,6 +21,7 @@ import type ISkillLink from '@/interfaces/stores/course/skillLink';
 import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
 import type IToolLink from '@/interfaces/stores/course/toolLink';
 import type TId from '@/types/id';
+import type IStat from "~/interfaces/stores/course/stat";
 
 export default defineStore('course', {
   state: () => ({
@@ -42,6 +43,7 @@ export default defineStore('course', {
       | ITeacherLink
       | IToolLink
       | null,
+    stat: null as IStat | null,
   }),
   actions: {
     async readCourses(

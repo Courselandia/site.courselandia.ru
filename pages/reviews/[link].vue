@@ -10,6 +10,7 @@ definePageMeta({
     'school-reviews',
     'preload-directions',
     'preload-schools',
+    'preload-stat',
   ],
 });
 </script>

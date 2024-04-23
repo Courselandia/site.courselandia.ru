@@ -13,6 +13,7 @@ definePageMeta({
     'section',
     'preload-directions',
     'preload-schools',
+    'preload-stat',
   ],
   validate: async (route) => route.params.free === 'free' || !route.params.free,
 });
