@@ -45,7 +45,6 @@
       </div>
       <div
         class="menu-top-mobile__item"
-        style="display: none;"
         @click="onClickLink('/collections')"
         @keydown="onClickLink('/collections')"
       >
