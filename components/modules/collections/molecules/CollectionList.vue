@@ -126,6 +126,7 @@ const onLoadScrolling = async (): Promise<void> => {
 const onLoadDirection = async (): Promise<void> => {
   stopScrollLoader.value = true;
   pageValue.value = 1;
+  loading.value = true;
   const res = await loadCollections(false, (pageValue.value - 1) * limit, limit, direction.value);
 
   if (res?.data && collections.value) {
@@ -134,6 +135,7 @@ const onLoadDirection = async (): Promise<void> => {
   }
 
   stopScrollLoader.value = (pageValue.value * limit) >= (total.value || 0);
+  loading.value = false;
 };
 
 watch(direction, async () => {
