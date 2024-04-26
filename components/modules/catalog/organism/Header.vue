@@ -190,7 +190,10 @@
           :title="itemLinkSchool.name"
         />
       </template>
-      <template #teachers>
+      <template
+        v-if="itemLinkSchool.amount_teachers"
+        #teachers
+      >
         {{ itemLinkSchool.amount_teachers }}
       </template>
       <template

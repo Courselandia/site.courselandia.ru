@@ -47,6 +47,7 @@
             :count="school.amount_courses.all"
           />
           <AmountTeachers
+            v-if="school.amount_teachers"
             :count="school.amount_teachers"
           />
         </div>
