@@ -15,6 +15,7 @@
             class="button__box"
             :to="to"
             :disabled="disabled"
+            prefetch
           >
             <div class="button__label">
               <slot />
@@ -75,6 +76,7 @@
           class="button__box"
           :to="to"
           :disabled="disabled"
+          prefetch
         >
           <div class="button__label">
             <slot />

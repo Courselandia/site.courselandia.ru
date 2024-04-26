@@ -110,7 +110,7 @@
     <p>
       Политикой компании в отношении обработки персональных данных, доступной в сети
       Интернет
-      <nuxt-link class="link" to="/privacy-policy">
+      <nuxt-link class="link" to="/privacy-policy" prefetch>
         по сетевому адресу
       </nuxt-link>.
     </p>
@@ -713,7 +713,7 @@
       соответствии с Политикой Владельца Сайта в отношении
       обработки персональных данных, размещённой на
       Сайте
-      <nuxt-link class="link" to="/privacy-policy">
+      <nuxt-link class="link" to="/privacy-policy" prefetch>
         по адресу
       </nuxt-link>.
     </p>

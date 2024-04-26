@@ -50,6 +50,7 @@
                   <nuxt-link
                     :to="menuCourses[index].path"
                     class="dropdowns__action"
+                    prefetch
                     @click="onClick"
                   >
                     <div>

@@ -8,6 +8,7 @@
       <nuxt-link
         :to="item.path"
         class="menu-bottom__link"
+        prefetch
       >
         {{ item.label }}
       </nuxt-link>

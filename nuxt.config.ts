@@ -126,7 +126,7 @@ export default defineNuxtConfig({
     extractCSS: true,
   },
   experimental: {
-    inlineSSRStyles: false,
+    crossOriginPrefetch: true,
   },
   hooks: {
     'vite:extend': ({ nuxt, config }) => {

@@ -2,6 +2,7 @@
   <nuxt-link
     :to="course.link"
     class="course-search-result"
+    prefetch
   >
     <div class="course-search-result__media">
       <LazyImage

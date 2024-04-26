@@ -29,6 +29,7 @@
           <nuxt-link
             :to="`/reviews/${otherSchool.link}`"
             class="link link--no-line"
+            prefetch
           >
             {{ otherSchool.reviews_count }}
             {{ plural(otherSchool.reviews_count, conditions) }}
