@@ -7,6 +7,7 @@
       <nuxt-link
         :to="`/courses/school/${link}`"
         class="header-teacher-school__link"
+        prefetch
       >
         {{ name }}
       </nuxt-link>

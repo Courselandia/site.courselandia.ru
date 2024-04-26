@@ -128,6 +128,9 @@ export default defineNuxtConfig({
   features: {
     inlineStyles: false,
   },
+  experimental: {
+    crossOriginPrefetch: true,
+  },
   hooks: {
     'vite:extend': ({ nuxt, config }) => {
       return config.build.assetsInlineLimit = 0;

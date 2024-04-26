@@ -4,6 +4,7 @@
       <nuxt-link
         :to="course.link"
         class="course-row__link"
+        prefetch
         @mousedown="onClickActive"
         @mouseup="onClickDisable"
         @mouseleave="onClickDisable"

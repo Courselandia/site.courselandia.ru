@@ -8,6 +8,7 @@
       <nuxt-link
         :to="`/courses/school/${school.link}`"
         class="list-schools__link"
+        prefetch
         @click="onClick"
       >
         {{ school.label }}

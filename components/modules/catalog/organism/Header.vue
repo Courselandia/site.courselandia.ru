@@ -175,6 +175,7 @@
         <nuxt-link
           v-if="itemLinkSchool.amount_reviews"
           :to="`/reviews/${itemLinkSchool.link}`"
+          prefetch
         >
           {{ itemLinkSchool.amount_reviews}}
           {{ plural(itemLinkSchool.amount_reviews, conditions) }}
@@ -311,12 +312,12 @@
             перспективами карьерного роста.
           </p>
           <p>
-            <nuxt-link to="/courses/direction/programmirovanie" class="link">
+            <nuxt-link to="/courses/direction/programmirovanie" class="link" prefetch>
               Все онлайн-курсы</nuxt-link> рассортированы по категориям.
             Это позволяет быстро найти нужное направление обучения. Подбор
             курсов можно осуществить по профессии, например, курсы бизнес
             аналитика или
-            <nuxt-link to="/courses/profession/fullstackdizayner" class="link">
+            <nuxt-link to="/courses/profession/fullstackdizayner" class="link" prefetch>
               Fullstack дизайнер</nuxt-link>, стоимости обучения,
             уровню, рейтингу и т. д.
           </p>

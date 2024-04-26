@@ -10,6 +10,7 @@
         class="course-search-result__image"
         :alt="course.name"
         :title="course.name"
+        prefetch
       />
       <LazyImage
         v-else-if="holder.default"
