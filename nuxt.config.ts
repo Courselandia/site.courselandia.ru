@@ -125,9 +125,6 @@ export default defineNuxtConfig({
   webpack: {
     extractCSS: true,
   },
-  experimental: {
-    crossOriginPrefetch: true,
-  },
   hooks: {
     'vite:extend': ({ nuxt, config }) => {
       return config.build.assetsInlineLimit = 0;
