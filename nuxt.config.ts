@@ -125,6 +125,9 @@ export default defineNuxtConfig({
   webpack: {
     extractCSS: true,
   },
+  features: {
+    inlineStyles: false,
+  },
   hooks: {
     'vite:extend': ({ nuxt, config }) => {
       return config.build.assetsInlineLimit = 0;
