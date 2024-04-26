@@ -171,13 +171,15 @@
       >
         {{ Math.round(itemLinkSchool.rating * 100) / 100 }}
       </template>
-      <!--
       <template #reviews>
-        <nuxt-link to="/">
-          1236 отзывов
+        <nuxt-link
+          v-if="itemLinkSchool.amount_reviews"
+          :to="`/reviews/${itemLinkSchool.link}`"
+        >
+          {{ itemLinkSchool.amount_reviews}}
+          {{ plural(itemLinkSchool.amount_reviews, conditions) }}
         </nuxt-link>
       </template>
-      -->
       <template
         v-if="itemLinkSchool?.image_site_id?.path"
         #image
@@ -188,11 +190,9 @@
           :title="itemLinkSchool.name"
         />
       </template>
-      <!--
       <template #teachers>
-        2300
+        {{ itemLinkSchool.amount_teachers }}
       </template>
-      -->
       <template
         v-if="itemLinkSchool?.image_site_id?.path"
         #action
@@ -408,6 +408,7 @@ import Tag from '@/components/atoms/Tag.vue';
 import Header from '@/components/modules/catalog/molecules/Header.vue';
 import HeaderTeacher from '@/components/modules/catalog/molecules/HeaderTeacher.vue';
 import Tags from '@/components/molecules/Tags.vue';
+import plural from '@/helpers/plural';
 import type ITag from '@/interfaces/components/atoms/tag';
 import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import category from '@/stores/category';
@@ -533,6 +534,13 @@ const popularTags = ref<Array<ITag>>([
     link: '/courses/category/testirovanie-po',
   },
 ]);
+
+const conditions = {
+  0: 'отзывов',
+  1: 'отзыв',
+  '2+': 'отзыва',
+  '5+': 'отзывов',
+};
 </script>
 
 <style lang="scss" scoped>

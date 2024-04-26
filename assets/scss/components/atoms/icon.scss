@@ -136,6 +136,10 @@
         transform: rotate(180deg);
       }
     }
+
+    &-hat {
+      mask-image: url("@/assets/images/icons/hat.svg");
+    }
   }
 
   &--color {

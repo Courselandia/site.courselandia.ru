@@ -46,6 +46,9 @@
           <AmountCourses
             :count="school.amount_courses.all"
           />
+          <AmountTeachers
+            :count="school.amount_teachers"
+          />
         </div>
       </div>
       <div class="card__row">
@@ -78,6 +81,7 @@ import {
 
 import AmountCourses from '@/components/modules/reviews/atoms/AmountCourses.vue';
 import AmountReviews from '@/components/modules/reviews/atoms/AmountReviews.vue';
+import AmountTeachers from '@/components/modules/reviews/atoms/AmountTeachers.vue';
 import Logo from '@/components/modules/reviews/atoms/Logo.vue';
 import Rating from '@/components/modules/reviews/atoms/Rating.vue';
 import Actions from '@/components/modules/reviews/molecules/Actions.vue';

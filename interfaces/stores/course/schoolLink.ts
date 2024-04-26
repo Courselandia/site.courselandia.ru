@@ -27,4 +27,6 @@ export default interface ISchoolLink {
   reviews_4_stars_count: number;
   reviews_5_stars_count: number;
   amount_courses: ISchoolAmountCourses;
+  amount_teachers: number;
+  amount_reviews: number;
 }

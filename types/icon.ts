@@ -29,6 +29,7 @@ type TIcon =
   'note' |
   'message' |
   'sort-asc' |
-  'sort-desc';
+  'sort-desc' |
+  'hat';
 
 export default TIcon;
