@@ -11,7 +11,6 @@
         <nuxt-link
           :to="`/reviews/${school.link}`"
           class="list-school-reviews__link"
-          prefetch
           @click="onClick"
         >
           <div class="list-school-reviews__icon">

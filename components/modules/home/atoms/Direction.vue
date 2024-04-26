@@ -2,7 +2,6 @@
   <nuxt-link
     :to="link"
     class="direction"
-    prefetch
     @click="onClick"
   >
     <div class="direction__info">

@@ -4,7 +4,6 @@
     to="/"
     alt="courselandia.ru"
     title="courselandia.ru"
-    prefetch
   />
 </template>
 

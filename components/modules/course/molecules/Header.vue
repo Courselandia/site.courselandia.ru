@@ -29,7 +29,6 @@
               <nuxt-link
                 :to="direction.link"
                 class="link"
-                prefetch
               >
                 {{ direction.name }}
               </nuxt-link>{{ key !== (course.directions.length - 1) ? ', ' : '' }}
@@ -50,7 +49,6 @@
               <nuxt-link
                 :to="profession.link"
                 class="link"
-                prefetch
               >
                 {{ profession.label }}
               </nuxt-link>{{ key !== (course.professions.length - 1) ? ', ' : '' }}
@@ -71,7 +69,6 @@
               <nuxt-link
                 :to="category.link"
                 class="link"
-                prefetch
               >
                 {{ category.label }}
               </nuxt-link>{{ key !== (course.categories.length - 1) ? ', ' : '' }}

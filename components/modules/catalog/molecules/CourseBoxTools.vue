@@ -8,7 +8,6 @@
       <nuxt-link
         :to="tool.link"
         class="link"
-        prefetch
       >
         {{ tool.label }}
       </nuxt-link>

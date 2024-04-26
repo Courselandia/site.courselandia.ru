@@ -2,7 +2,6 @@
   <nuxt-link
     :to="url"
     class="brand"
-    prefetch
   >
     <LazyImage
       :src="image"

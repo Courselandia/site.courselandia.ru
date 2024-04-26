@@ -3,7 +3,6 @@
     <nuxt-link
       :to="to"
       :class="`tag ${nameClass}`"
-      prefetch
     >
       <div
         v-if="hasSlot('before')"

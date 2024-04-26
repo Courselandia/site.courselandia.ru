@@ -7,7 +7,6 @@
       <nuxt-link
         :to="breadcrumb.to"
         class="breadcrumbs__item"
-        prefetch
       >
         {{ breadcrumb.name }}
       </nuxt-link>

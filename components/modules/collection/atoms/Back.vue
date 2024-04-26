@@ -2,7 +2,6 @@
   <nuxt-link
     to="/collections"
     class="back"
-    prefetch
   >
     <div class="back__icon">
       <Icon

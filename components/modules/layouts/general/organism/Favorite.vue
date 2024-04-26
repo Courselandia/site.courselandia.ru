@@ -2,7 +2,6 @@
   <nuxt-link
     to="/favorites"
     class="favorite"
-    prefetch
     @mouseenter="onMouseOver"
     @mouseleave="onMouseLeave"
     @focusin="onMouseOver"

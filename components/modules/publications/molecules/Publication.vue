@@ -3,7 +3,6 @@
     <nuxt-link
       :to="`/blog/${publication.link}`"
       class="publication__link"
-      prefetch
     >
       <Image
         :path="publication.image_middle_id?.path"

@@ -17,7 +17,6 @@
           :key="`item_${key}`"
           :class="`pagination__item ${pageCurrent === num ? 'pagination__item--current' : ''}`"
           :to="link(key + 1)"
-          prefetch
         >
           {{ num }}
         </nuxt-link>

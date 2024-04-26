@@ -79,7 +79,6 @@
                 <nuxt-link
                   :to="`/courses?search=${encodeURIComponent(query as string)}&sort=${ECourseSort.RELEVANCY}`"
                   class="search-mobile__link"
-                  prefetch
                   @click="onClickResult"
                 >
                   <div>

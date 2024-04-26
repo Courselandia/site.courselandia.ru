@@ -3,7 +3,6 @@
     <nuxt-link
       :to="course.link"
       class="course-tile__box"
-      prefetch
       @mousedown="onClickActive"
       @mouseup="onClickDisable"
       @mouseleave="onClickDisable"

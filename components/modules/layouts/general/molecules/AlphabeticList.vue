@@ -14,7 +14,6 @@
           :key="key"
           :to="item.path"
           class="alphabetic-list__item"
-          prefetch
           @click="onClick"
         >
           {{ item.label }}

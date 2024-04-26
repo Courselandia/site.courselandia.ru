@@ -2,7 +2,6 @@
   <nuxt-link
     :to="teacher.link"
     :class="`teacher ${mobile ? 'teacher--mobile' : ''}`"
-    prefetch
   >
     <div class="teacher__picture">
       <LazyImage

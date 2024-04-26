@@ -37,7 +37,6 @@
           <nuxt-link
             :to="tool.link"
             class="link"
-            prefetch
           >
             {{ tool.label }}
           </nuxt-link>{{ key !== (course.tools.length - 1) ? ', ' : '' }}
@@ -75,7 +74,6 @@
           <nuxt-link
             :to="skill.link"
             class="link"
-            prefetch
           >
             {{ skill.label }}
           </nuxt-link>{{ key !== (course.skills.length - 1) ? ', ' : '' }}
@@ -97,7 +95,6 @@
           <nuxt-link
             :to="teacher.link"
             class="link"
-            prefetch
           >
             {{ teacher.label }}
           </nuxt-link>{{ key !== (course.teachers.length - 1) ? ', ' : '' }}

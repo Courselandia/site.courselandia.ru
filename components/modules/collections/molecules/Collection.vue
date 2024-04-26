@@ -2,7 +2,6 @@
   <nuxt-link
     :to="`/collections/${collection.link}`"
     class="collection"
-    prefetch
   >
     <div class="collection__image">
       <CollectionImage
