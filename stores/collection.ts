@@ -16,7 +16,7 @@ export default defineStore('collection', {
   actions: {
     async readCollections(
       offset: number = 0,
-      limit: number = 20,
+      limit: number = 30,
       direction: EDirection | null = null,
     ): Promise<IResponseItems<ICollection>> {
       try {
@@ -25,7 +25,7 @@ export default defineStore('collection', {
         const query = toQuery(offset, limit, null, null, { direction_id: direction });
         let path = `/api/private/site/collection/read?${query}`;
 
-        if (!config.public.development && offset === 0 && limit === 20) {
+        if (!config.public.development && offset === 0 && limit === 30) {
           if (direction) {
             path = `/storage/json/collections/${direction}.json`;
           } else {
