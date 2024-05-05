@@ -79,8 +79,8 @@ useJsonld({
     width: String(width) || '1200',
     height: String(height) || '630',
   },
-  datePublished: dayjs(itemLinkPublication.value?.created_at).toISOString(),
-  dateModified: dayjs(itemLinkPublication.value?.updated_at).toISOString(),
+  datePublished: dayjs(itemLinkPublication.value?.published_at).toISOString(),
+  dateModified: dayjs(itemLinkPublication.value?.published_at).toISOString(),
   publisher: {
     '@type': 'Organization',
     name: 'Courselandia',
