@@ -9,7 +9,7 @@ export const apiReadReviews = async (
   fetch: boolean,
   school: string,
   offset: number = 0,
-  limit: number = 36,
+  limit: number = 20,
   sorts: ISorts | null = null,
   rating: number | null = null,
 ): Promise<IResponseItems<IReview> | null> => {

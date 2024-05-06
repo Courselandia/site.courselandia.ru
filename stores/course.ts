@@ -48,7 +48,7 @@ export default defineStore('course', {
   actions: {
     async readCourses(
       offset: number = 0,
-      limit: number = 36,
+      limit: number = 18,
       sorts: ISorts | null = null,
       filters: IFilters | null = null,
       openedItems: Record<string, boolean> | null = null,
@@ -86,7 +86,7 @@ export default defineStore('course', {
         if (
           !config.public.development
           && offset === 0
-          && limit === 36
+          && limit === 18
           && sorts?.name === 'ASC'
           && hasInitFilter(filters)
           && !hasOpenedItem(openedItems)
@@ -97,7 +97,7 @@ export default defineStore('course', {
         } else if (
           !config.public.development
           && offset === 0
-          && limit === 36
+          && limit === 18
           && sorts?.name === 'ASC'
           && section === null
           && sectionLink === null

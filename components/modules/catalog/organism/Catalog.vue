@@ -419,7 +419,7 @@ const additional = ref<string | null>(null);
 
 const total = ref(0);
 const currentPage = ref(Number(getUrlQuery('page')) || 1);
-const size = ref(36);
+const size = ref(18);
 
 //
 
@@ -933,7 +933,7 @@ const setSelectedFiltersByQuery = (): void => {
 
 const load = async (
   pageValue: number = 0,
-  sizeValue: number = 36,
+  sizeValue: number = 18,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
 ): Promise<IApiReadCourses | null> => {
@@ -958,7 +958,7 @@ const load = async (
 
 const reload = async (
   pageValue: number = 0,
-  sizeValue: number = 36,
+  sizeValue: number = 18,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
 ): Promise<void> => {

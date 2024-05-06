@@ -16,7 +16,7 @@ import type TId from '@/types/id';
 
 export const apiReadCourses = async (
   offset: number = 0,
-  limit: number = 36,
+  limit: number = 18,
   sorts: ISorts | null = null,
   filters: IFilters | null = null,
   openedItems: Record<string, boolean> | null = null,
