@@ -202,8 +202,8 @@
         #action
       >
         <Button
-          v-if="itemLinkSchool.site"
-          :to="itemLinkSchool.site"
+          v-if="itemLinkSchool.referral || itemLinkSchool.site"
+          :to="itemLinkSchool.referral || itemLinkSchool.site"
           link="link"
           target="_blank"
           rel="nofollow noopener noreferrer"

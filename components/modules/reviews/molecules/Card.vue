@@ -56,7 +56,7 @@
         <div class="card__actions">
           <Actions
             :link="school.link"
-            :site="school.site || undefined"
+            :site="school.referral || school.site || undefined"
             :name="school.name"
           />
         </div>

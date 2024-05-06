@@ -18,10 +18,10 @@ import type IFilter from '@/interfaces/stores/course/filter';
 import type IProfessionLink from '@/interfaces/stores/course/professionLink';
 import type IDirectionLink from '@/interfaces/stores/course/schoolLink';
 import type ISkillLink from '@/interfaces/stores/course/skillLink';
+import type IStat from '@/interfaces/stores/course/stat';
 import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
 import type IToolLink from '@/interfaces/stores/course/toolLink';
 import type TId from '@/types/id';
-import type IStat from "~/interfaces/stores/course/stat";
 
 export default defineStore('course', {
   state: () => ({
