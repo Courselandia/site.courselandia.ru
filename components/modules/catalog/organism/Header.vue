@@ -177,7 +177,7 @@
           :to="`/reviews/${itemLinkSchool.link}`"
           prefetch
         >
-          {{ itemLinkSchool.amount_reviews}}
+          {{ itemLinkSchool.amount_reviews }}
           {{ plural(itemLinkSchool.amount_reviews, conditions) }}
         </nuxt-link>
       </template>

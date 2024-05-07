@@ -1,13 +1,13 @@
 <template>
   <div class="header-teacher-photo">
-    <LazyImage
+    <img
       v-if="path"
       :src="path"
       class="header-teacher-photo__image"
       :alt="name"
       :title="name"
     />
-    <LazyImage
+    <img
       v-else-if="holder.default"
       :src="holder.default"
       class="header-teacher-photo__image"
