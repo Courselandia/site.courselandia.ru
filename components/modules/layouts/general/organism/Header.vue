@@ -13,7 +13,9 @@
         />
       </div>
       <div class="header__search">
-        <Search />
+        <Search
+          @click="onClickSearch"
+        />
       </div>
       <div class="header__loop">
         <SearchMobile />
@@ -89,15 +91,19 @@ watch(menu, () => {
 const show = ref(false);
 
 const onClick = (): void => {
-  show.value = false;
+  menuValue.value = undefined;
 };
 
 const onClickLogo = (): void => {
-  show.value = false;
+  menuValue.value = undefined;
 };
 
 const onClickFavorite = (): void => {
-  show.value = false;
+  menuValue.value = undefined;
+};
+
+const onClickSearch = (): void => {
+  menuValue.value = undefined;
 };
 </script>
 

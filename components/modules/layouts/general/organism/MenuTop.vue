@@ -71,6 +71,7 @@
         @focusin="onMouseEnter('collections')"
         @mouseleave="onMouseLeave()"
         @focusout="onMouseLeave()"
+        @click="onClickHide"
       >
         Подборки
       </nuxt-link>
@@ -84,6 +85,7 @@
         @focusin="onMouseEnter('blog')"
         @mouseleave="onMouseLeave()"
         @focusout="onMouseLeave()"
+        @click="onClickHide"
       >
         Блог
       </nuxt-link>
@@ -143,6 +145,10 @@ const onMouseEnter = (name: string): void => {
 
 const onMouseLeave = (): void => {
   hover.value = null;
+};
+
+const onClickHide = (): void => {
+  menuValue.value = null;
 };
 </script>
 
