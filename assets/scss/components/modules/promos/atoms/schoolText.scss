@@ -1,0 +1,10 @@
+.school-text {
+  &:deep(.reducer__action) {
+    font-size: 0.9rem;
+  }
+
+  &__content {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}

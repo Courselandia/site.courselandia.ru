@@ -1,0 +1,34 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.school {
+  background-color: $white;
+  padding: 0 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 3.375rem 0 #00000014;
+  display: flex;
+  align-items: stretch;
+
+  &__logo,
+  &__info,
+  &__action {
+    padding: 1.5rem 0;
+  }
+
+  &__logo {
+
+  }
+
+  &__info {
+    padding: 1.5rem 2.5rem;
+  }
+
+  &__action {
+    width: 276px;
+    min-width: 276px;
+    border-left: 1px dashed $grey2;
+  }
+
+  &__stats {
+    margin-top: 1rem;
+  }
+}

@@ -19,6 +19,7 @@ const schoolsToSchoolReviews = (
         text: school.text,
         image: school.image_logo_id?.path || null,
         site: school.site,
+        referral: school.referral,
         amount_courses: school.amount_courses,
       };
     });

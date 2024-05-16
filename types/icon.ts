@@ -30,6 +30,9 @@ type TIcon =
   'message' |
   'sort-asc' |
   'sort-desc' |
-  'hat';
+  'hat' |
+  'promotion' |
+  'gift' |
+  'promocode';
 
 export default TIcon;

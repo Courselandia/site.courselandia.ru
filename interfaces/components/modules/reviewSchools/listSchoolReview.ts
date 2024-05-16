@@ -11,5 +11,6 @@ export default interface IListSchoolReview {
   text: string | null;
   image: string | null,
   site: string;
+  referral: string;
   amount_courses: ISchoolAmountCourses;
 }

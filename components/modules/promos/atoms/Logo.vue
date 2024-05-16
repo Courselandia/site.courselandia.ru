@@ -3,7 +3,7 @@
     :href="site"
     class="logo link"
     target="_blank"
-    rel="noopener noreferrer"
+    rel="noopener noreferrer nofollow"
   >
     <LazyImage
       v-if="image"
@@ -12,11 +12,12 @@
       :title="label"
       class="logo__image"
     />
-    <template
+    <div
       v-else
+      class="logo__label"
     >
       {{ label }}
-    </template>
+    </div>
   </a>
 </template>
 
@@ -26,7 +27,8 @@ import LazyImage from '@/components/atoms/LazyImage.vue';
 defineProps({
   image: {
     type: String,
-    required: true,
+    required: false,
+    default: null,
   },
   label: {
     type: String,
@@ -40,5 +42,5 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/modules/reviewSchools/atoms/logo";
+@import "@/assets/scss/components/modules/promos/atoms/logo";
 </style>

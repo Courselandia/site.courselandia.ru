@@ -1,0 +1,22 @@
+.stats {
+  display: flex;
+  align-items: center;
+
+  &__item {
+    margin-right: 0.625rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:deep(.tag) {
+      padding: 0.5rem 0.75rem;
+    }
+
+    &:deep(.tag__label) {
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
+    }
+  }
+}

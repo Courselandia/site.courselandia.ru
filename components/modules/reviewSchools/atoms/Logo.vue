@@ -3,7 +3,7 @@
     :href="site"
     class="logo link"
     target="_blank"
-    rel="noopener noreferrer"
+    rel="noopener noreferrer nofollow"
   >
     <LazyImage
       v-if="image"

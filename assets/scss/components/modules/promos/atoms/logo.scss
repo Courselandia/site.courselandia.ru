@@ -1,0 +1,26 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.logo {
+  text-decoration: none;
+  color: $black;
+  display: flex;
+  min-width: 176px;
+  width: 176px;
+  height: 176px;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  border: 1px solid $grey2;
+  border-radius: 1rem;
+
+  &__image {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+  }
+
+  &__label {
+    padding: 1rem;
+  }
+}
