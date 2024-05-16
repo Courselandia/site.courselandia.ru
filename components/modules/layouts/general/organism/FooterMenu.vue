@@ -57,6 +57,10 @@ const menuInfo = ref<IMenu[]>([
   },
   */
   {
+    label: 'Блог',
+    path: '/blog',
+  },
+  {
     label: 'Пользовательское соглашение',
     path: '/agreement',
   },

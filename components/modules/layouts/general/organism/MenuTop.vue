@@ -64,6 +64,20 @@
     </div>
     <div class="menu-top__item">
       <nuxt-link
+        to="/promos"
+        :class="`menu-top__link ${hover === 'promos' ? 'menu-top__link--hover' : ''} ${(menuValue === 'promos' || active === 'promos') ? 'link--active' : ''}`"
+        prefetch
+        @mouseenter="onMouseEnter('promos')"
+        @focusin="onMouseEnter('promos')"
+        @mouseleave="onMouseLeave()"
+        @focusout="onMouseLeave()"
+        @click="onClickHide"
+      >
+        Промокоды
+      </nuxt-link>
+    </div>
+    <div class="menu-top__item">
+      <nuxt-link
         to="/collections"
         :class="`menu-top__link ${hover === 'collections' ? 'menu-top__link--hover' : ''} ${(menuValue === 'collections' || active === 'collections') ? 'link--active' : ''}`"
         prefetch
@@ -74,20 +88,6 @@
         @click="onClickHide"
       >
         Подборки
-      </nuxt-link>
-    </div>
-    <div class="menu-top__item">
-      <nuxt-link
-        to="/blog"
-        :class="`menu-top__link ${hover === 'blog' ? 'menu-top__link--hover' : ''} ${(menuValue === 'blog' || active === 'blog') ? 'link--active' : ''}`"
-        prefetch
-        @mouseenter="onMouseEnter('blog')"
-        @focusin="onMouseEnter('blog')"
-        @mouseleave="onMouseLeave()"
-        @focusout="onMouseLeave()"
-        @click="onClickHide"
-      >
-        Блог
       </nuxt-link>
     </div>
   </div>

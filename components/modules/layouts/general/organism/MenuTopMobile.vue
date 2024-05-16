@@ -52,6 +52,13 @@
       </div>
       <div
         class="menu-top-mobile__item"
+        @click="onClickLink('/promos')"
+        @keydown="onClickLink('/promos')"
+      >
+        Подборки
+      </div>
+      <div
+        class="menu-top-mobile__item"
         @click="onClickLink('/blog')"
         @keydown="onClickLink('/blog')"
       >
