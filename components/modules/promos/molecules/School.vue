@@ -12,7 +12,7 @@
         v-if="school.text"
         :text="school.text"
       />
-      <Stats
+      <Tags
         class="school__stats"
         :school="school"
       />
@@ -31,7 +31,7 @@ import type { PropType } from 'vue';
 import Action from '@/components/modules/promos/atoms/Action.vue';
 import Logo from '@/components/modules/promos/atoms/Logo.vue';
 import SchoolText from '@/components/modules/promos/atoms/SchoolText.vue';
-import Stats from '@/components/modules/promos/molecules/Stats.vue';
+import Tags from '@/components/modules/promos/molecules/Tags.vue';
 import type ISchool from '@/interfaces/stores/promo/school';
 
 defineProps({

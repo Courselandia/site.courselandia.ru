@@ -1,61 +1,63 @@
 <template>
   <div class="stats">
-    <div
-      v-if="amountPromocodes"
-      class="stats__item"
-    >
-      <Tag
-        bck="blue1"
-        color="black"
-      >
-        <template #before>
-          <Icon
-            name="promocode"
-            color="blue2"
-            :size="[25, 25]"
-          />
-        </template>
-        {{ amountPromocodes }}
-        {{ plural(amountPromocodes, promocodeConditions) }}
-      </Tag>
+    <div class="stats__title">
+      Доступно предложений {{ amount }}
     </div>
-    <div
-      v-if="amountGifts"
-      class="stats__item"
-    >
-      <Tag
-        bck="blue1"
-        color="black"
+    <div class="stats__items">
+      <div
+        v-if="amountPromocodes"
+        class="stats__item"
       >
-        <template #before>
-          <Icon
-            name="gift"
-            color="blue2"
-            :size="[25, 25]"
-          />
-        </template>
-        {{ amountGifts }}
-        {{ plural(amountGifts, giftConditions) }}
-      </Tag>
-    </div>
-    <div
-      v-if="amountPromotions"
-      class="stats__item"
-    >
-      <Tag
-        bck="blue1"
-        color="black"
+        <Stat>
+          <template #icon>
+            <Icon
+              name="promocode"
+              color="blue2"
+              :size="[25, 25]"
+            />
+          </template>
+          <template #amount>
+            {{ amountPromocodes }}
+          </template>
+          {{ plural(amountPromocodes, promocodeConditions) }}
+        </Stat>
+      </div>
+      <div
+        v-if="amountGifts"
+        class="stats__item"
       >
-        <template #before>
-          <Icon
-            name="promotion"
-            color="blue2"
-            :size="[25, 25]"
-          />
-        </template>
-        {{ amountPromotions }}
-        {{ plural(amountPromotions, promotionConditions) }}
-      </Tag>
+        <Stat>
+          <template #icon>
+            <Icon
+              name="gift"
+              color="blue2"
+              :size="[25, 25]"
+            />
+          </template>
+          <template #amount>
+            {{ amountGifts }}
+          </template>
+          {{ plural(amountGifts, giftConditions) }}
+        </Stat>
+      </div>
+      <div
+        v-if="amountPromotions"
+        class="stats__item"
+      >
+        <Stat>
+          <template #icon>
+            <Icon
+              name="promotion"
+              color="blue2"
+              :size="[25, 25]"
+            />
+          </template>
+          <template #amount>
+            {{ amountPromotions }}
+          </template>
+          {{ plural(amountPromotions, promotionConditions) }}
+        </Stat>
+      </div>
     </div>
   </div>
 </template>
@@ -68,27 +70,45 @@ import {
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
-import Tag from '@/components/atoms/Tag';
+import Stat from '@/components/modules/promos/atoms/Stat.vue';
 import EType from '@/enums/stores/promo/type';
 import plural from '@/helpers/plural';
 import type ISchool from '@/interfaces/stores/promo/school';
 
 const props = defineProps({
-  school: {
-    type: Object as PropType<ISchool>,
+  schools: {
+    type: Array as PropType<Array<ISchool>>,
     required: true,
   },
 });
 
-const { school } = toRefs(props);
+const { schools } = toRefs(props);
+
+const amount = computed(() => {
+  let count = 0;
+
+  schools?.value?.forEach((school) => {
+    if (school.promocodes?.length) {
+      count += school.promocodes.length;
+    }
+
+    if (school.promotions?.length) {
+      count += school.promotions.length;
+    }
+  });
+
+  return count;
+});
 
 const amountPromocodes = computed(() => {
   let count = 0;
 
-  school.value.promocodes.forEach((promocode) => {
-    if (promocode.type === EType.DISCOUNT) {
-      count++;
-    }
+  schools?.value?.forEach((school) => {
+    school.promocodes.forEach((promocode) => {
+      if (promocode.type === EType.DISCOUNT) {
+        count++;
+      }
+    });
   });
 
   return count;
@@ -97,16 +117,26 @@ const amountPromocodes = computed(() => {
 const amountGifts = computed(() => {
   let count = 0;
 
-  school.value.promocodes.forEach((promocode) => {
-    if (promocode.type === EType.PRESENT) {
-      count++;
-    }
+  schools?.value?.forEach((school) => {
+    school.promocodes.forEach((promocode) => {
+      if (promocode.type === EType.PRESENT) {
+        count++;
+      }
+    });
   });
 
   return count;
 });
 
-const amountPromotions = computed(() => school.value.promotions.length);
+const amountPromotions = computed(() => {
+  let count = 0;
+
+  schools?.value?.forEach((school) => {
+    count += school.promotions.length;
+  });
+
+  return count;
+});
 
 const promocodeConditions = {
   0: 'промокодов',

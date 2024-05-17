@@ -1,22 +1,33 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
 .stats {
-  display: flex;
-  align-items: center;
+  box-shadow: 0 1rem 3.375rem 0 #00000014;
+  background-color: $white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 320px;
+
+  &--scroll {
+    top: 0;
+    bottom: auto;
+
+    @media all and (max-width: 1200px) {
+      display: none;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.4375rem;
+    margin-bottom: 1.25rem;
+  }
 
   &__item {
-    margin-right: 0.625rem;
+    margin-bottom: 0.625rem;
 
     &:last-child {
-      margin-right: 0;
-    }
-
-    &:deep(.tag) {
-      padding: 0.5rem 0.75rem;
-    }
-
-    &:deep(.tag__label) {
-      font-weight: 400;
-      font-size: 0.875rem;
-      line-height: 1.3125rem;
+      margin-bottom: 0;
     }
   }
 }

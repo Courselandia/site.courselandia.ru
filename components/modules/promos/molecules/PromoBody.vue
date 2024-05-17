@@ -1,13 +1,29 @@
 <template>
   <div
     v-if="filteredSchools?.length"
-    class="promo-list"
+    class="promo-body"
   >
-    <School
-      v-for="(school, key) in filteredSchools"
-      :key="key"
-      :school="school"
-    />
+    <div class="promo-body__content">
+      <div class="promo-body__schools">
+        <School
+          v-for="(school, key) in filteredSchools"
+          :key="key"
+          :school="school"
+        />
+      </div>
+    </div>
+    <div
+      :class="`promo-body__track ${scroll ? 'promo-body__track--scroll' : ''}`"
+    >
+      <div
+        id="promo-stats"
+        :class="`promo-body__stats ${scroll ? 'promo-body__stats--scroll' : ''}`"
+      >
+        <Stats
+          :schools="filteredSchools"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,6 +39,7 @@ import {
 
 import { apiReadPromos } from '@/api/promo';
 import School from '@/components/modules/promos/molecules/School.vue';
+import Stats from '@/components/modules/promos/molecules/Stats.vue';
 import EDirection from '@/enums/direction';
 import type ISchool from '@/interfaces/stores/promo/school';
 
@@ -31,6 +48,11 @@ const props = defineProps({
     type: [String, Number] as PropType<EDirection>,
     required: false,
     default: null,
+  },
+  scroll: {
+    type: Boolean,
+    required: false,
+    default: true,
   },
 });
 
@@ -92,5 +114,5 @@ watch(direction, () => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/modules/promos/molecules/promoList";
+@import "@/assets/scss/components/modules/promos/molecules/promoBody";
 </style>
