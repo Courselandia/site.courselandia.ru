@@ -2,11 +2,13 @@
   <div class="promos content mt-12 mb-24 mb-12-sm">
     <div
       ref="contentRef"
+      class="promos__content"
     >
       <h1 class="title title--1">
         Скидки в онлайн школах
       </h1>
       <Description />
+      <div id="promos-stats" class="promos__stats" />
       <Directions
         v-model:direction="direction"
       />

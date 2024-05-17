@@ -24,6 +24,13 @@
         />
       </div>
     </div>
+    <ClientOnly>
+      <teleport to="#promos-stats">
+        <Stats
+          :schools="filteredSchools"
+        />
+      </teleport>
+    </ClientOnly>
   </div>
 </template>
 
@@ -67,8 +74,8 @@ const filterByDirection = (
   items: Array<ISchool> | undefined,
   dir: EDirection | null,
 ): Array<ISchool> | undefined => {
-  if (items) {
-    items.filter((itm: ISchool) => {
+  if (items && dir) {
+    return items.filter((itm: ISchool) => {
       if (dir === EDirection.PROGRAMMING) {
         return !!itm.amount_courses.direction_programming;
       }

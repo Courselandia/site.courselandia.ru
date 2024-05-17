@@ -16,6 +16,10 @@
     z-index: 3;
     width: 320px;
 
+    @media all and (max-width: 1450px) {
+      display: none;
+    }
+
     &--scroll {
       top: 0;
       bottom: auto;

@@ -1,3 +1,22 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
 .promos {
-  position: relative;
+  &__content {
+    position: relative;
+  }
+
+  &__stats {
+    display: none;
+    margin-bottom: 3rem;
+
+    @media all and (max-width: 1450px) {
+      display: block;
+    }
+
+    &:deep(.stats) {
+      box-shadow: none;
+      border: 1px solid $grey1;
+      border-radius: 1rem;
+    }
+  }
 }
