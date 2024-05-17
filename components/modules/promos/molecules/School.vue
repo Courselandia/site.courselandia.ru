@@ -18,7 +18,9 @@
       />
     </div>
     <div class="school__action">
-      HERE!
+      <Action
+        :school="school"
+      />
     </div>
   </div>
 </template>
@@ -26,6 +28,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
+import Action from '@/components/modules/promos/atoms/Action.vue';
 import Logo from '@/components/modules/promos/atoms/Logo.vue';
 import SchoolText from '@/components/modules/promos/atoms/SchoolText.vue';
 import Stats from '@/components/modules/promos/molecules/Stats.vue';

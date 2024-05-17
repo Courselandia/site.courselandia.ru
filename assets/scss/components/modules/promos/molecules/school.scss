@@ -14,8 +14,10 @@
     padding: 1.5rem 0;
   }
 
-  &__logo {
-
+  &__action {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
   }
 
   &__info {
@@ -23,8 +25,8 @@
   }
 
   &__action {
-    width: 276px;
-    min-width: 276px;
+    width: 290px;
+    min-width: 290px;
     border-left: 1px dashed $grey2;
   }
 

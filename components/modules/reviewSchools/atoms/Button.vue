@@ -1,6 +1,7 @@
 <template>
   <Button
     :to="`/reviews/${link}`"
+    link="nuxt-link"
   >
     {{ reviews }}
     <template v-if="reviews === 0 || reviews >= 5">
