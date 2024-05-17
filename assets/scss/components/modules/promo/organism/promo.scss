@@ -1,0 +1,15 @@
+.promo {
+  display: flex;
+  align-items: flex-start;
+
+  &__side {
+    &--left {
+      width: calc(100% - 350px - 2.5rem);
+    }
+
+    &--right {
+      width: 320px;
+      margin-left: 2.5rem;
+    }
+  }
+}

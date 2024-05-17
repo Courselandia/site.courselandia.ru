@@ -1,0 +1,11 @@
+.header {
+  font-size: 4rem;
+  line-height: 4rem;
+  margin-bottom: 1.875rem;
+
+  @media all and (max-width: 576px) {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+  }
+}
