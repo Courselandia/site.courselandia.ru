@@ -20,7 +20,7 @@
     >
       <Button
         :to="`/courses/school/${link}`"
-        link="link"
+        link="nuxt-link"
         wide
         type="secondary"
       >
