@@ -6,6 +6,10 @@
   &__schools {
     &:deep(.school) {
       margin-bottom: 3.125rem;
+
+      @media all and (max-width: 768px) {
+        margin-bottom: 1.25rem;
+      }
     }
   }
 

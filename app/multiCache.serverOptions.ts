@@ -51,6 +51,16 @@ export default defineMultiCacheOptions({
         }
       }
 
+      if (path.startsWith('/promos')) {
+        const {
+          direction,
+        } = getQuery(event);
+
+        if (direction) {
+          return `promos_${direction}`;
+        }
+      }
+
       return path.split('?')[0];
     },
   },

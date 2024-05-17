@@ -5,9 +5,12 @@
   font-size: 1.25rem;
   line-height: 1.875rem;
 
+  @media all and (max-width: 768px) {
+    margin-bottom: 2.125rem;
+  }
+
   @media all and (max-width: 576px) {
     font-size: 1rem;
     line-height: 1.5rem;
-    margin-bottom: 2.125rem;
   }
 }

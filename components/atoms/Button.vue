@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="!noLoader"
+    class="button__wrapper"
   >
     <Loader
       :active="loading"
@@ -67,6 +68,7 @@
   </div>
   <div
     v-else
+    class="button__wrapper"
   >
     <div
       :class="`button ${nameClass}`"

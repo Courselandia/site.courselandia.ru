@@ -9,10 +9,15 @@
   height: 176px;
   justify-content: center;
   align-items: center;
-
   text-align: center;
   border: 1px solid $grey2;
   border-radius: 1rem;
+
+  @media all and (max-width: 1100px) {
+    width: 100%;
+    min-width: auto;
+    height: 100px;
+  }
 
   &__image {
     width: 100%;

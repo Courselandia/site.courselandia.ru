@@ -55,7 +55,7 @@
         @click="onClickLink('/promos')"
         @keydown="onClickLink('/promos')"
       >
-        Подборки
+        Промокоды
       </div>
       <div
         class="menu-top-mobile__item"

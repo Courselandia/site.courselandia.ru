@@ -2,6 +2,7 @@
   <Button
     link="nuxt-link"
     :to="`/promos/${school.link}`"
+    no-loader
   >
     {{ amount }} {{ plural(amount, conditions) }}
   </Button>
