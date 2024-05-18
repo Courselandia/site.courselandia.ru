@@ -1,0 +1,22 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.promo-label {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: $white;
+  font-size: 1rem;
+  font-weight: 600;
+
+  &--discount {
+    background-color: #FF8617;
+  }
+
+  &--present {
+    background-color: #D622A4;
+  }
+
+  &--promotion {
+    background-color: #51D622;
+  }
+}
