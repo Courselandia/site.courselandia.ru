@@ -1,0 +1,18 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.populars {
+  background-color: $blue1;
+  border-radius: 1rem;
+  padding: 1.25rem;
+
+  &__title {
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.5625rem;
+    margin-bottom: 1.25rem;
+  }
+
+  &__schools {
+    margin-bottom: 1.25rem;
+  }
+}

@@ -1,6 +1,8 @@
 .promo {
-  display: flex;
-  align-items: flex-start;
+  &__sides {
+    display: flex;
+    align-items: flex-start;
+  }
 
   &__side {
     &--left {

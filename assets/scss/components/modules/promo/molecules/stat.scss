@@ -1,0 +1,26 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.stat {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  &__icon {
+    margin-right: 0.75rem;
+    line-height: 0;
+  }
+
+  &__amount {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-right: 0.5rem;
+    color: $black;
+  }
+
+  &__label {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $grey4;
+  }
+}

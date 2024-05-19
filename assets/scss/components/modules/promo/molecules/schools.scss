@@ -1,0 +1,9 @@
+.schools {
+  &:deep(.school) {
+    margin-bottom: 1.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

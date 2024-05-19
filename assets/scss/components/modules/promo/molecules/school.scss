@@ -1,0 +1,17 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.school {
+  background-color: $white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  display: block;
+  text-decoration: none;
+
+  &__title {
+    font-size: 1.25rem;
+    line-height: 1.4375rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: $black;
+  }
+}
