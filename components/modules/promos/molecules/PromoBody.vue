@@ -74,8 +74,20 @@ const filterByDirection = (
   items: Array<ISchool> | undefined,
   dir: EDirection | null,
 ): Array<ISchool> | undefined => {
-  if (items && dir) {
-    return items.filter((itm: ISchool) => {
+  const result = items?.sort((first: ISchool, second: ISchool) => {
+    if (first.name < second.name) {
+      return -1;
+    }
+
+    if (first.name > second.name) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  if (result && dir) {
+    return result.filter((itm: ISchool) => {
       if (dir === EDirection.PROGRAMMING) {
         return !!itm.amount_courses.direction_programming;
       }
@@ -108,7 +120,7 @@ const filterByDirection = (
     });
   }
 
-  return items;
+  return result;
 };
 
 const response = await apiReadPromos(true);
