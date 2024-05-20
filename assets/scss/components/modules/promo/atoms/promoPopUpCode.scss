@@ -1,0 +1,26 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.promo-pop-up-code {
+  &__box {
+    display: flex;
+    align-items: center;
+    border: 1px solid $grey2;
+    border-radius: 0.625rem;
+    width: 100%;
+    padding: 1rem 1.18rem;
+    cursor: pointer;
+  }
+
+  &__code {
+    flex-grow: 1;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    color: $grey4;
+    font-weight: 600;
+  }
+
+  &__copy {
+    flex-grow: 0;
+    line-height: 0;
+  }
+}

@@ -15,6 +15,28 @@
           :school="school"
         />
       </div>
+      <div
+        v-if="promocode.date_end"
+        class="promo-pop-up__period"
+      >
+        <PromoPopUpPeriod
+          :date-end="promocode.date_end"
+        />
+      </div>
+      <div class="promo-pop-up__code">
+        <PromoPopUpCode
+          v-model:copied="copied"
+          :code="promocode.code"
+          :url="promocode.url"
+        />
+      </div>
+      <div class="promo-pop-up__action">
+        <PromoPopUpAction
+          v-model:copied="copied"
+          :code="promocode.code"
+          :url="promocode.url"
+        />
+      </div>
     </PopUp>
   </div>
 </template>
@@ -29,7 +51,10 @@ import {
 
 import PopUp from '@/components/atoms/PopUp.vue';
 import PromocodePopUpTitle from '@/components/modules/promo/atoms/PromocodePopUpTitle.vue';
+import PromoPopUpAction from '@/components/modules/promo/atoms/PromoPopUpAction.vue';
+import PromoPopUpCode from '@/components/modules/promo/atoms/PromoPopUpCode.vue';
 import PromoPopUpLogo from '@/components/modules/promo/atoms/PromoPopUpLogo.vue';
+import PromoPopUpPeriod from '@/components/modules/promo/atoms/PromoPopUpPeriod.vue';
 import type IPromocode from '@/interfaces/stores/promo/promocode';
 
 const props = defineProps({
@@ -60,6 +85,7 @@ const emit = defineEmits({
 const { active } = toRefs(props);
 
 const activeValue = ref<boolean>(active.value);
+const copied = ref(false);
 
 watch(activeValue, () => {
   emit('update:active', activeValue.value);

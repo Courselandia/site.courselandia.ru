@@ -33,6 +33,7 @@ type TIcon =
   'hat' |
   'promotion' |
   'gift' |
-  'promocode';
+  'promocode' |
+  'copy';
 
 export default TIcon;

@@ -13,6 +13,7 @@
     "axios": "^1.6.4",
     "click-outside-vue3": "^4.0.1",
     "consola": "^3.2.3",
+    "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.10",
     "floating-vue": "^5.2.2",
     "h3": "^1.11.1",
