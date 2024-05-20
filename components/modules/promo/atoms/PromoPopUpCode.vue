@@ -59,6 +59,12 @@ const copiedValue = ref<boolean>(copied.value);
 
 watch(copiedValue, () => {
   emit('update:copied', copiedValue.value);
+
+  if (copiedValue.value) {
+    window.setTimeout(() => {
+      copiedValue.value = false;
+    }, 3000);
+  }
 });
 
 watch(copied, () => {

@@ -23,4 +23,10 @@
     flex-grow: 0;
     line-height: 0;
   }
+
+  &__copied {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: $grey4;
+  }
 }
