@@ -2,9 +2,13 @@
   <div class="promos">
     <Promocodes
       :promocodes="school.promocodes"
+      :school="school.name"
+      :logo="school.image_logo_id?.path"
     />
     <Promotions
       :promotions="school.promotions"
+      :school="school.name"
+      :logo="school.image_logo_id?.path"
     />
   </div>
 </template>

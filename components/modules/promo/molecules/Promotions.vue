@@ -6,6 +6,8 @@
       v-for="(promotion, key) in promotions"
       :key="key"
       :promotion="promotion"
+      :school="school"
+      :logo="logo"
     />
   </div>
 </template>
@@ -20,6 +22,15 @@ defineProps({
   promotions: {
     type: Array as PropType<Array<IPromotion>>,
     required: true,
+  },
+  school: {
+    type: String,
+    required: true,
+  },
+  logo: {
+    type: String,
+    required: false,
+    default: null,
   },
 });
 </script>

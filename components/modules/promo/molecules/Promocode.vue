@@ -24,6 +24,8 @@
       />
       <PromocodeAction
         :promocode="promocode"
+        :school="school"
+        :logo="logo"
       />
     </div>
   </div>
@@ -44,6 +46,15 @@ defineProps({
   promocode: {
     type: Object as PropType<IPromocode>,
     required: true,
+  },
+  school: {
+    type: String,
+    required: true,
+  },
+  logo: {
+    type: String,
+    required: false,
+    default: null,
   },
 });
 </script>

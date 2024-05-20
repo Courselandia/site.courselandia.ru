@@ -19,6 +19,15 @@ defineProps({
     type: Object as PropType<IPromotion>,
     required: true,
   },
+  school: {
+    type: String,
+    required: true,
+  },
+  logo: {
+    type: String,
+    required: false,
+    default: null,
+  },
 });
 </script>
 

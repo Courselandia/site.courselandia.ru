@@ -19,6 +19,8 @@
       />
       <PromotionAction
         :promotion="promotion"
+        :school="school"
+        :logo="logo"
       />
     </div>
   </div>
@@ -27,10 +29,10 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 
-import PromotionAction from '@/components/modules/promo/atoms/PromotionAction.vue';
 import PromoDescription from '@/components/modules/promo/atoms/PromoDescription.vue';
 import PromoLabel from '@/components/modules/promo/atoms/PromoLabel.vue';
 import PromoPeriod from '@/components/modules/promo/atoms/PromoPeriod.vue';
+import PromotionAction from '@/components/modules/promo/atoms/PromotionAction.vue';
 import PromoTitle from '@/components/modules/promo/atoms/PromoTitle.vue';
 import type IPromotion from '@/interfaces/stores/promo/promotion';
 
@@ -38,6 +40,15 @@ defineProps({
   promotion: {
     type: Object as PropType<IPromotion>,
     required: true,
+  },
+  school: {
+    type: String,
+    required: true,
+  },
+  logo: {
+    type: String,
+    required: false,
+    default: null,
   },
 });
 </script>
