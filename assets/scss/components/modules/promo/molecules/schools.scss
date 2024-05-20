@@ -1,6 +1,28 @@
 .schools {
+  @media all and (max-width: 576px) {
+    display: flex;
+    overflow: scroll;
+
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
+
   &:deep(.school) {
     margin-bottom: 1.25rem;
+
+    @media all and (max-width: 576px) {
+      width: 240px;
+      min-width: 240px;
+      margin-bottom: 0;
+      margin-right: 0.625rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
 
     &:last-child {
       margin-bottom: 0;

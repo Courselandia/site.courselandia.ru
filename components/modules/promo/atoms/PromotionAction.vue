@@ -1,6 +1,8 @@
 <template>
   <div class="promotion-action">
-    <Button>
+    <Button
+      no-loader
+    >
       Открыть акцию
     </Button>
   </div>
@@ -19,3 +21,7 @@ defineProps({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/promo/atoms/promotionAction";
+</style>

@@ -1,0 +1,9 @@
+.promotion-action {
+  @media all and (max-width: 576px) {
+    &:deep(.button__wrapper),
+    &:deep(.button__wrapper .button),
+    &:deep(.button__wrapper .button .button__box) {
+      width: 100%;
+    }
+  }
+}
