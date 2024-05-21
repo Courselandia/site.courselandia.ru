@@ -8,6 +8,10 @@
     width: 100%;
     max-width: 150px;
     height: auto;
+
+    @media all and (max-width: 600px) {
+      max-width: 100px;
+    }
   }
 
   &__label {

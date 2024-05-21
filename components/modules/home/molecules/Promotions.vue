@@ -65,7 +65,7 @@ const getTheBesPromocodes = (
       }
 
       return 0;
-    }).slice(0, 11);
+    }).slice(0, 12);
   }
 
   return undefined;

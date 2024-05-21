@@ -4,9 +4,7 @@
   font-weight: 800;
   margin-bottom: 0.625rem;
 
-  @media all and (max-width: 576px) {
-    margin-bottom: 0;
-    margin-right: 0.625rem;
-    justify-content: flex-start;
+  @media all and (max-width: 600px) {
+    margin-bottom: 0.625rem;
   }
 }

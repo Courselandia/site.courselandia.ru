@@ -9,6 +9,10 @@
   font-weight: 600;
   margin-bottom: 2.25rem;
 
+  @media all and (max-width: 600px) {
+    margin-bottom: 1.5rem;
+  }
+
   &--discount {
     background-color: #FF8617;
   }
