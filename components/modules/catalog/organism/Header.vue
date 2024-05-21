@@ -207,6 +207,7 @@
           link="link"
           target="_blank"
           rel="nofollow noopener noreferrer"
+          @click="onClickToSchool"
         >
           Перейти на сайт
         </Button>
@@ -413,6 +414,7 @@ import Header from '@/components/modules/catalog/molecules/Header.vue';
 import HeaderTeacher from '@/components/modules/catalog/molecules/HeaderTeacher.vue';
 import Tags from '@/components/molecules/Tags.vue';
 import plural from '@/helpers/plural';
+import track from '@/helpers/track';
 import type ITag from '@/interfaces/components/atoms/tag';
 import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import category from '@/stores/category';
@@ -544,6 +546,10 @@ const conditions = {
   1: 'отзыв',
   '2+': 'отзыва',
   '5+': 'отзывов',
+};
+
+const onClickToSchool = (): void => {
+  track('school');
 };
 </script>
 

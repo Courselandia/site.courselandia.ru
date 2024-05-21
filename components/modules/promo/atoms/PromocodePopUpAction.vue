@@ -16,6 +16,7 @@ import {
 } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
+import track from '@/helpers/track';
 
 const props = defineProps({
   copied: {
@@ -52,5 +53,6 @@ const onClick = (): void => {
   copiedValue.value = true;
 
   window.open(props.url, '_blank')?.focus();
+  track('promo');
 };
 </script>

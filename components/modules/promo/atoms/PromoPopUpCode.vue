@@ -34,6 +34,7 @@ import {
 } from 'vue';
 
 import Icon from '@/components/atoms/Icon.vue';
+import track from '@/helpers/track';
 
 const props = defineProps({
   copied: {
@@ -77,6 +78,7 @@ const onClickCopy = (): void => {
 
   window.setTimeout(() => {
     window.open(props.url, '_blank')?.focus();
+    track('promo');
   }, 1000);
 };
 </script>

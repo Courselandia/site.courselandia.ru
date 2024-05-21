@@ -10,6 +10,7 @@
         target="_blank"
         rel="nofollow noopener noreferrer"
         wide
+        @click="onClickToSchool"
       >
         Перейти на сайт
       </Button>
@@ -32,6 +33,7 @@
 
 <script setup lang="ts">
 import Button from '@/components/atoms/Button.vue';
+import track from '@/helpers/track';
 
 defineProps({
   site: {
@@ -50,6 +52,10 @@ defineProps({
     default: null,
   },
 });
+
+const onClickToSchool = (): void => {
+  track('school');
+};
 </script>
 
 <style lang="scss" scoped>

@@ -54,9 +54,9 @@ import {
 
 import PopUp from '@/components/atoms/PopUp.vue';
 import PromocodePopUpAction from '@/components/modules/promo/atoms/PromocodePopUpAction.vue';
+import PromocodePopUpDisclaimer from '@/components/modules/promo/atoms/PromocodePopUpDisclaimer.vue';
 import PromocodePopUpTitle from '@/components/modules/promo/atoms/PromocodePopUpTitle.vue';
 import PromoPopUpCode from '@/components/modules/promo/atoms/PromoPopUpCode.vue';
-import PromocodePopUpDisclaimer from '@/components/modules/promo/atoms/PromocodePopUpDisclaimer.vue';
 import PromoPopUpLogo from '@/components/modules/promo/atoms/PromoPopUpLogo.vue';
 import PromoPopUpPeriod from '@/components/modules/promo/atoms/PromoPopUpPeriod.vue';
 import type IPromocode from '@/interfaces/stores/promo/promocode';

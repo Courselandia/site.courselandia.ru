@@ -1,10 +1,5 @@
 <template>
-  <a
-    :href="site"
-    class="logo link"
-    target="_blank"
-    rel="noopener noreferrer nofollow"
-  >
+  <div class="logo">
     <LazyImage
       v-if="image"
       :src="image"
@@ -17,7 +12,7 @@
     >
       {{ label }}
     </template>
-  </a>
+  </div>
 </template>
 
 <script setup lang="ts">
