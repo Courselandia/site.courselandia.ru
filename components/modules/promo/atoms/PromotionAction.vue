@@ -2,16 +2,27 @@
   <div class="promotion-action">
     <Button
       no-loader
+      @click="onClick"
     >
       Открыть акцию
     </Button>
+    <PromotionPopUp
+      v-model:active="active"
+      :promotion="promotion"
+      :school="school"
+      :logo="logo"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { PropType } from 'vue';
+import {
+  type PropType,
+  ref,
+} from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
+import PromotionPopUp from '@/components/modules/promo/molecules/PromotionPopUp.vue';
 import type IPromotion from '@/interfaces/stores/promo/promotion';
 
 defineProps({
@@ -29,6 +40,12 @@ defineProps({
     default: null,
   },
 });
+
+const active = ref(false);
+
+const onClick = () => {
+  active.value = true;
+};
 </script>
 
 <style lang="scss" scoped>

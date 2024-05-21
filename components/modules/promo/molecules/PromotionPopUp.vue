@@ -10,35 +10,26 @@
         />
       </div>
       <div class="promo-pop-up__title">
-        <PromocodePopUpTitle
-          :promocode="promocode"
+        <PromotionPopUpTitle
+          :promotion="promotion"
           :school="school"
         />
       </div>
       <div
-        v-if="promocode.date_end"
+        v-if="promotion.date_end"
         class="promo-pop-up__period"
       >
         <PromoPopUpPeriod
-          :date-end="promocode.date_end"
-        />
-      </div>
-      <div class="promo-pop-up__code">
-        <PromoPopUpCode
-          v-model:copied="copied"
-          :code="promocode.code"
-          :url="promocode.url"
+          :date-end="promotion.date_end"
         />
       </div>
       <div class="promo-pop-up__action">
-        <PromocodePopUpAction
-          v-model:copied="copied"
-          :code="promocode.code"
-          :url="promocode.url"
+        <PromotionPopUpAction
+          :url="promotion.url"
         />
       </div>
       <div class="promo-pop-up__disclaimer">
-        <PromocodePopUpDisclaimer />
+        <PromotionPopUpDisclaimer />
       </div>
     </PopUp>
   </div>
@@ -53,17 +44,16 @@ import {
 } from 'vue';
 
 import PopUp from '@/components/atoms/PopUp.vue';
-import PromocodePopUpAction from '@/components/modules/promo/atoms/PromocodePopUpAction.vue';
-import PromocodePopUpTitle from '@/components/modules/promo/atoms/PromocodePopUpTitle.vue';
-import PromoPopUpCode from '@/components/modules/promo/atoms/PromoPopUpCode.vue';
-import PromocodePopUpDisclaimer from '@/components/modules/promo/atoms/PromocodePopUpDisclaimer.vue';
 import PromoPopUpLogo from '@/components/modules/promo/atoms/PromoPopUpLogo.vue';
 import PromoPopUpPeriod from '@/components/modules/promo/atoms/PromoPopUpPeriod.vue';
-import type IPromocode from '@/interfaces/stores/promo/promocode';
+import PromotionPopUpAction from '@/components/modules/promo/atoms/PromotionPopUpAction.vue';
+import PromotionPopUpDisclaimer from '@/components/modules/promo/atoms/PromotionPopUpDisclaimer.vue';
+import PromotionPopUpTitle from '@/components/modules/promo/atoms/PromotionPopUpTitle.vue';
+import type IPromotion from '@/interfaces/stores/promo/promotion';
 
 const props = defineProps({
-  promocode: {
-    type: Object as PropType<IPromocode>,
+  promotion: {
+    type: Object as PropType<IPromotion>,
     required: true,
   },
   school: {

@@ -5,7 +5,10 @@
         v-if="activeValue"
         class="pop-up"
       >
-        <div class="pop-up__window">
+        <div
+          class="pop-up__window"
+          :style="{ height: `${height}px` }"
+        >
           <div class="pop-up__box">
             <div
               class="pop-up__close"
@@ -41,6 +44,11 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  height: {
+    type: Number,
+    required: false,
+    default: null,
   },
 });
 
