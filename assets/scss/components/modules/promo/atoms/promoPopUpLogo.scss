@@ -10,12 +10,22 @@
     border-radius: 100%;
     width: 140px;
     height: 140px;
+
+    @media all and (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   &__content {
     display: flex;
     width: 140px;
     height: 140px;
+
+    @media all and (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   &__image {
@@ -23,6 +33,10 @@
     max-width: 80px;
     height: auto;
     margin: auto;
+
+    @media all and (max-width: 768px) {
+      max-width: 60px;
+    }
   }
 
   &__name {

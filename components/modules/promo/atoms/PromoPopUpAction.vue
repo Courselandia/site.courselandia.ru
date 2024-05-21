@@ -50,5 +50,7 @@ watch(copied, () => {
 const onClick = (): void => {
   copy(props.code);
   copiedValue.value = true;
+
+  window.open(props.url, '_blank')?.focus();
 };
 </script>

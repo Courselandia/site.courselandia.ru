@@ -10,7 +10,7 @@
       </div>
       <div class="promo-pop-up-code__copy">
         <Icon
-          name="copy"
+          :name="copied ? 'checked' : 'copy'"
           color="blue2"
           :size="[26, 26]"
         />
@@ -74,6 +74,10 @@ watch(copied, () => {
 const onClickCopy = (): void => {
   copy(props.code);
   copiedValue.value = true;
+
+  window.setTimeout(() => {
+    window.open(props.url, '_blank')?.focus();
+  }, 1000);
 };
 </script>
 

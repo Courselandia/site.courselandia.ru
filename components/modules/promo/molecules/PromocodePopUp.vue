@@ -37,6 +37,9 @@
           :url="promocode.url"
         />
       </div>
+      <div class="promo-pop-up__disclaimer">
+        <PromoPopUpDisclaimer />
+      </div>
     </PopUp>
   </div>
 </template>
@@ -53,6 +56,7 @@ import PopUp from '@/components/atoms/PopUp.vue';
 import PromocodePopUpTitle from '@/components/modules/promo/atoms/PromocodePopUpTitle.vue';
 import PromoPopUpAction from '@/components/modules/promo/atoms/PromoPopUpAction.vue';
 import PromoPopUpCode from '@/components/modules/promo/atoms/PromoPopUpCode.vue';
+import PromoPopUpDisclaimer from '@/components/modules/promo/atoms/PromoPopUpDisclaimer.vue';
 import PromoPopUpLogo from '@/components/modules/promo/atoms/PromoPopUpLogo.vue';
 import PromoPopUpPeriod from '@/components/modules/promo/atoms/PromoPopUpPeriod.vue';
 import type IPromocode from '@/interfaces/stores/promo/promocode';
