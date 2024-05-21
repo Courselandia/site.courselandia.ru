@@ -1,0 +1,19 @@
+@import "/assets/scss/vars/modifiers/colors";
+@import "@/assets/scss/vars/animations/transition";
+
+.promocode {
+  border: 1px solid $blue2;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  width: 320px;
+  height: 230px;
+  margin: 0 1.21875rem 2.4375rem 1.21875rem;
+  text-align: center;
+  cursor: pointer;
+  background-color: $white;
+  transition: all $speedPrimary $functionPrimary;
+
+  &:hover {
+    box-shadow: 0 1rem 3.1875rem rgba(0, 0, 0, 0.12);
+  }
+}

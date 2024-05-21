@@ -1,0 +1,18 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.promocode-logo {
+  text-decoration: none;
+  color: $black;
+
+  &__image {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    font-weight: 800;
+  }
+}

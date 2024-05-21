@@ -1,12 +1,13 @@
 @import "/assets/scss/vars/modifiers/colors";
 
-.promo-label {
+.promocode-label {
   display: inline-block;
   padding: 0.5rem;
   border-radius: 0.5rem;
   color: $white;
   font-size: 1rem;
   font-weight: 600;
+  margin-bottom: 2.25rem;
 
   &--discount {
     background-color: #FF8617;

@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="pt-24 pb-40 pt-12-sm pb-12-sm">
+    <div class="pt-24 pb-24 pt-12-sm pb-12-sm">
       <Promotions />
     </div>
   </div>

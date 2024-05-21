@@ -1,0 +1,12 @@
+.promocode-discount {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.625rem;
+
+  @media all and (max-width: 576px) {
+    margin-bottom: 0;
+    margin-right: 0.625rem;
+    justify-content: flex-start;
+  }
+}

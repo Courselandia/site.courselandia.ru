@@ -10,6 +10,7 @@
     <div class="promotions__promocodes">
       <Promocodes
         :promocodes="promocodes"
+        :amount="amount"
       />
     </div>
   </div>
@@ -31,43 +32,69 @@ const getTheBesPromocodes = (
 
     schools.forEach((school: ISchool) => {
       if (school.promocodes) {
-        result = result.concat(school.promocodes);
+        const items: Array<IPromocode> = [];
+
+        school.promocodes.forEach((value, index) => {
+          items[index] = school.promocodes[index];
+          items[index].school = school;
+        });
+
+        result = result.concat(items);
       }
     });
 
-    result.sort((first: IPromocode, second: IPromocode) => {
+    return result.sort((first: IPromocode, second: IPromocode) => {
       if (!first.discount && !second.discount) {
         return 0;
       }
 
       if (!first.discount) {
-        return -1;
+        return 1;
       }
 
       if (!second.discount) {
-        return 1;
-      }
-
-      if (first.discount < second.discount) {
         return -1;
       }
 
-      if (first.discount > second.discount) {
+      if (first.discount < second.discount) {
         return 1;
+      }
+
+      if (first.discount > second.discount) {
+        return -1;
       }
 
       return 0;
     }).slice(0, 11);
-
-    return result;
   }
 
   return undefined;
 };
 
+const getAmount = (schools: Array<ISchool> | undefined): number => {
+  if (schools) {
+    let count = 0;
+
+    schools.forEach((school) => {
+      if (school.promocodes?.length) {
+        count += school.promocodes.length;
+      }
+
+      if (school.promotions?.length) {
+        count += school.promotions.length;
+      }
+    });
+
+    return count;
+  }
+
+  return 0;
+};
+
 const promocodes = ref<Array<IPromocode>>();
 const response = await apiReadPromos(true);
 promocodes.value = getTheBesPromocodes(response?.data);
+const amount = getAmount(response?.data);
 </script>
 
 <style lang="scss" scoped>

@@ -1,0 +1,18 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.link-all-promocodes {
+  border: 1px solid $blue2;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  width: 320px;
+  height: 230px;
+  margin: 0 1.21875rem 2.4375rem 1.21875rem;
+  text-align: center;
+
+  &__label {
+    font-size: 1.25rem;
+    line-height: 1.705rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+  }
+}

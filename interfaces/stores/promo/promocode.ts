@@ -1,5 +1,6 @@
 import EDiscountType from '@/enums/stores/promo/discountType';
 import EType from '@/enums/stores/promo/type';
+import type ISchool from '@/interfaces/stores/school/school';
 import type TId from '@/types/id';
 
 export default interface IPromocode {
@@ -20,4 +21,5 @@ export default interface IPromocode {
   created_at: string,
   updated_at: string,
   deleted_at: number | null,
+  school?: ISchool;
 }
