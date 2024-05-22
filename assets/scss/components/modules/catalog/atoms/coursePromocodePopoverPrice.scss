@@ -1,0 +1,46 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.course-promocode-popover-price {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__name,
+  &__value {
+    color: $white;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  &__name {
+    flex-grow: 1;
+  }
+
+  &__value {
+    flex-grow: 0;
+  }
+
+  &--yellow {
+    .course-promocode-popover-price {
+      &__name,
+      &__value {
+        color: #EEE718;
+      }
+    }
+  }
+
+  &--big {
+    .course-promocode-popover-price {
+      &__name,
+      &__value {
+        font-size: 1.25rem;
+        line-height: 1.5625rem;
+        font-weight: 800;
+      }
+    }
+  }
+}

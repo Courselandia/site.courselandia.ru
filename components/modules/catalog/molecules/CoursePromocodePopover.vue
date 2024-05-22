@@ -1,8 +1,12 @@
 <template>
   <Popover
+    v-if="course.currency"
     v-model:active="activeValue"
   >
-    HERE!
+    <CoursePromocodePopoverTitle />
+    <CoursePromocodePopoverPrices
+      :course="course"
+    />
   </Popover>
 </template>
 
@@ -15,6 +19,8 @@ import {
 } from 'vue';
 
 import Popover from '@/components/atoms/Popover.vue';
+import CoursePromocodePopoverTitle from '@/components/modules/catalog/atoms/CoursePromocodePopoverTitle.vue';
+import CoursePromocodePopoverPrices from '@/components/modules/catalog/molecules/CoursePromocodePopoverPrices.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({

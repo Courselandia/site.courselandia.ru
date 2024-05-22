@@ -24,7 +24,7 @@
         {{ money(price) }} {{ getCurrency(currency) }}
       </div>
       <div
-        v-if="priceOld"
+        v-if="priceOld && priceOld !== price"
         class="course-tile-prices__old"
       >
         {{ money(priceOld) }} {{ getCurrency(currency) }}

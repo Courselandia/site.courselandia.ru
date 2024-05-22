@@ -48,6 +48,7 @@
         />
         <div class="course-tile__promocode">
           <CoursePromocode
+            v-if="course.price || course.price_recurrent || course.price_old"
             :course="course"
           />
         </div>
