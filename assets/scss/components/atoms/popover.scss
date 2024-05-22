@@ -18,15 +18,11 @@
   }
 
   &__window {
-    transition: none !important;
     width: 520px;
     z-index: 105;
     background-color: $black;
     border-radius: 1rem;
     padding: 1.5rem;
-    position: absolute;
-    top: 0;
-    left: 0;
 
     @media all and (max-width: 768px) {
       width: 100%;

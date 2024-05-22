@@ -1,32 +1,31 @@
 <template>
   <ClientOnly>
-    <div
-      v-if="activeValue"
-      class="popover"
-    >
+    <transition name="fade">
       <div
-        class="popover__window"
-        :style="{ left: `${left}px` }"
+        v-if="activeValue"
+        class="popover"
       >
-        <div class="popover__box">
-          <div
-            class="popover__close"
-            @click="onClickClose"
-            @keyup="onClickClose"
-          >
-            <div class="popover__close-icon" />
-          </div>
-          <div class="popover__content">
-            <slot />
+        <div class="popover__window">
+          <div class="popover__box">
+            <div
+              class="popover__close"
+              @click="onClickClose"
+              @keyup="onClickClose"
+            >
+              <div class="popover__close-icon" />
+            </div>
+            <div class="popover__content">
+              <slot />
+            </div>
           </div>
         </div>
+        <div
+          class="popover__dim"
+          @click="onClickClose"
+          @keyup="onClickClose"
+        />
       </div>
-      <div
-        class="popover__dim"
-        @click="onClickClose"
-        @keyup="onClickClose"
-      />
-    </div>
+    </transition>
   </ClientOnly>
 </template>
 
@@ -42,11 +41,6 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false,
-  },
-  left: {
-    type: Number,
-    required: false,
-    default: 0,
   },
 });
 

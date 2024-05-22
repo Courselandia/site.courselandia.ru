@@ -46,11 +46,11 @@
           :price-old="course.price_old || undefined"
           :currency="course.currency || undefined"
         />
-        <CoursePromocode
-          v-if="course.school?.promocode?.discount"
-          class="course-tile__promocode"
-          :course="course"
-        />
+        <div class="course-tile__promocode">
+          <CoursePromocode
+            :course="course"
+          />
+        </div>
       </div>
     </nuxt-link>
     <div class="course-tile__footer">

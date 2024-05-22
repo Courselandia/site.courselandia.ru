@@ -4,10 +4,11 @@
   position: relative;
 
   &__popover {
-    &:deep(.popover__window) {
-      top: auto;
-      bottom: 45px;
+    position: absolute;
+    bottom: 45px;
+    z-index: 100;
 
+    &:deep(.popover__window) {
       &:after {
         content: "";
         border: 10px solid transparent;

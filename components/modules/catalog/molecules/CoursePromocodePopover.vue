@@ -1,7 +1,6 @@
 <template>
   <Popover
     v-model:active="activeValue"
-    :left="left"
   >
     HERE!
   </Popover>
@@ -27,11 +26,6 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false,
-  },
-  left: {
-    type: Number,
-    required: false,
-    default: 0,
   },
 });
 
