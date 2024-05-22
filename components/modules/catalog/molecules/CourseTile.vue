@@ -46,6 +46,11 @@
           :price-old="course.price_old || undefined"
           :currency="course.currency || undefined"
         />
+        <CoursePromocode
+          v-if="course.school?.promocode?.discount"
+          class="course-tile__promocode"
+          :course="course"
+        />
       </div>
     </nuxt-link>
     <div class="course-tile__footer">
@@ -77,6 +82,7 @@ import CourseTilePrices from '@/components/modules/catalog/atoms/CourseTilePrice
 import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRating.vue';
 import CourseTitleButtonGo from '@/components/modules/catalog/atoms/CourseTitleButtonGo.vue';
 import CourseTitleFavorite from '@/components/modules/catalog/atoms/CourseTitleFavorite.vue';
+import CoursePromocode from '@/components/modules/catalog/molecules/CoursePromocode.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({

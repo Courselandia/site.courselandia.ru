@@ -1,5 +1,6 @@
 import type IImage from '@/interfaces/stores/image/image';
 import type IMetatag from '@/interfaces/stores/metatag/metatag';
+import type IPromocode from '@/interfaces/stores/promo/promocode';
 import type ISchoolAmountCourses from '@/interfaces/stores/school/schoolAmountCourses';
 import type TId from '@/types/id';
 
@@ -20,5 +21,6 @@ export default interface ISchool {
   updated_at: string,
   deleted_at: string | null,
   reviews_count: number;
-  amount_courses: ISchoolAmountCourses;
+  amount_courses: ISchoolAmountCourses,
+  promocode: IPromocode | null,
 }

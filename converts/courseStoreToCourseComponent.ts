@@ -29,6 +29,7 @@ export const courseStoreToCourseComponent = (
     name: course.school.name,
     image: course.school.image_logo_id?.path || null,
     link: `/courses/school/${course.school?.link}`,
+    promocode: course.school.promocode,
   } : null,
   metatag: course.metatag ? {
     description: course.metatag.description,

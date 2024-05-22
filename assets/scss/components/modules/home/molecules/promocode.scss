@@ -39,4 +39,8 @@
   &:hover {
     box-shadow: 0 1rem 3.1875rem rgba(0, 0, 0, 0.12);
   }
+
+  &:active {
+    transform: scale(0.97);
+  }
 }
