@@ -2,6 +2,22 @@
 @import "@/assets/scss/animations/fade";
 
 .popover {
+  &__desktop {
+    display: block;
+
+    @media all and (max-width: 1250px) {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    display: none;
+
+    @media all and (max-width: 1250px) {
+      display: block;
+    }
+  }
+
   &__content {
     z-index: 105;
     width: 520px;
@@ -15,11 +31,16 @@
     background-color: $black;
     border-radius: 1rem;
     padding: 1.5rem 2.5rem;
+    position: relative;
 
-    @media all and (max-width: 768px) {
+    @media all and (max-width: 1250px) {
       width: 100%;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+    }
+
+    @media all and (max-width: 768px) {
+      padding: 1.875rem 1rem;
     }
   }
 
@@ -34,8 +55,15 @@
     bottom: 7px;
   }
 
+  &__sticker {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 105;
+    width: 100%;
+  }
+
   &__dim {
-    display: none;
     top: 0;
     left: 0;
     width: 100%;
@@ -43,27 +71,28 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
     position: fixed;
+    display: none;
 
-    @media all and (max-width: 768px) {
+    @media all and (max-width: 1250px) {
       display: block;
     }
   }
 
   &__close {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     background-color: #282E52;
     border-radius: 100%;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0.7rem;
+    right: 0.7rem;
     cursor: pointer;
-    display: none;
+    display: flex;
 
     &:active {
-      transform: scale(0.97);
+      transform: scale(0.92);
     }
   }
 
@@ -71,12 +100,8 @@
     mask-image: url("@/assets/images/icons/close.svg");
     mask-position: center center;
     mask-repeat: no-repeat;
-    width: 14px;
-    height: 14px;
+    width: 11px;
+    height: 11px;
     background-color: $grey3;
-  }
-
-  &__content {
-    /* padding-top: 45px; */
   }
 }

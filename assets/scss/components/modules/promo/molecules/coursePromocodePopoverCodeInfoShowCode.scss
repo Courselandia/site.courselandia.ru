@@ -4,7 +4,7 @@
   &__box {
     display: flex;
     align-items: center;
-    border: 1px solid $white;
+    outline: 1px solid $grey2;
     background-color: $white;
     border-radius: 0.625rem;
     width: 100%;
@@ -16,7 +16,7 @@
     flex-grow: 1;
     font-size: 1rem;
     line-height: 1.2rem;
-    color: $grey4;
+    color: $blue2;
     font-weight: 600;
   }
 
