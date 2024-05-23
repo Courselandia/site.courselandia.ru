@@ -9,10 +9,26 @@
 
   &__label {
     color: $blue2;
+    flex-grow: 1;
+  }
+
+  &__more,
+  &__discount,
+  &__by-promocode {
+    font-weight: 800;
     font-size: 0.875rem;
     line-height: 1.3125rem;
-    font-weight: 800;
-    flex-grow: 1;
+
+    @media all and (max-width: 550px) {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+    }
+  }
+
+  &__more {
+    @media all and (max-width: 550px) {
+      font-weight: 400;
+    }
   }
 
   &__icon {
@@ -30,5 +46,11 @@
     justify-content: center;
     align-items: center;
     padding-top: 2px;
+  }
+
+  &__by-promocode {
+    @media all and (max-width: 550px) {
+      display: none;
+    }
   }
 }

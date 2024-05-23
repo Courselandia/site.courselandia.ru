@@ -1,18 +1,24 @@
 <template>
   <div class="course-promocode-info">
     <div class="course-promocode-info__label">
-      Ещё
-      <template
-        v-if="type === EDiscountType.PERCENT"
-      >
-        -{{ discount }}%
-      </template>
-      <template
-        v-else
-      >
-        -{{ money(discount) }} ₽
-      </template>
-      по промокоду
+      <span class="course-promocode-info__more">
+        Ещё
+      </span>
+      <span class="course-promocode-info__discount">
+        <template
+          v-if="type === EDiscountType.PERCENT"
+        >
+          -{{ discount }}%
+        </template>
+        <template
+          v-else
+        >
+          -{{ money(discount) }} ₽
+        </template>
+      </span>
+      <span class="course-promocode-info__by-promocode">
+        по промокоду
+      </span>
     </div>
     <div class="course-promocode-info__icon">
       ?
