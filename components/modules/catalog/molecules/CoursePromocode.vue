@@ -71,7 +71,7 @@ const onMouseLeave = (): void => {
   }
 
   timer = window.setTimeout(() => {
-    // active.value = false;
+    active.value = false;
   }, 150);
 };
 </script>

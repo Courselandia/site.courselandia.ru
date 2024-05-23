@@ -1,8 +1,14 @@
 <template>
   <div class="course-promocode-popover-code-info-action">
     <div class="course-promocode-popover-code-info-action__button">
+      <a
+        @click.stop="onClick"
+      >
+        HERE 1!
+      </a>
       <Button
         wide
+        @click.stop="onClick"
       >
         Показать промокод
       </Button>
@@ -23,6 +29,10 @@ defineProps({
     required: true,
   },
 });
+
+const onClick = (): void => {
+  console.log('HERE 1!');
+};
 </script>
 
 <style lang="scss" scoped>
