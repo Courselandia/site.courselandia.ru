@@ -6,6 +6,7 @@ type TColor =
   'blue2' |
   'grey1' |
   'grey2' |
-  'grey3';
+  'grey3' |
+  'yellow';
 
 export default TColor;

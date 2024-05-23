@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="course.currency"
-    class="course-promocode"
+    class="course-promocode-popover-prices"
   >
     <CoursePromocodePopoverPrice
       v-if="course.price_old"
@@ -98,3 +98,7 @@ defineProps({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/components/modules/catalog/molecules/coursePromocodePopoverPrices";
+</style>

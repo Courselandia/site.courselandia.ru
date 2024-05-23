@@ -7,6 +7,13 @@
     <CoursePromocodePopoverPrices
       :course="course"
     />
+    <CoursePromocodePopoverCodeInfo
+      v-if="course.school?.promocode"
+      :promocode="course.school.promocode"
+    />
+    <CoursePromocodePopoverButtonGo
+      :link="course.link"
+    />
   </Popover>
 </template>
 
@@ -19,7 +26,9 @@ import {
 } from 'vue';
 
 import Popover from '@/components/atoms/Popover.vue';
+import CoursePromocodePopoverButtonGo from '@/components/modules/catalog/atoms/CoursePromocodePopoverButtonGo.vue';
 import CoursePromocodePopoverTitle from '@/components/modules/catalog/atoms/CoursePromocodePopoverTitle.vue';
+import CoursePromocodePopoverCodeInfo from '@/components/modules/catalog/molecules/CoursePromocodePopoverCodeInfo.vue';
 import CoursePromocodePopoverPrices from '@/components/modules/catalog/molecules/CoursePromocodePopoverPrices.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
