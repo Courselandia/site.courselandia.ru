@@ -1,16 +1,16 @@
 <template>
-  <ClientOnly>
-    <div class="popover">
-      <div
-        ref="reference"
-        class="popover__action"
-        @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
-        @focusin="onMouseEnter"
-        @focusout="onMouseLeave"
-      >
-        <slot />
-      </div>
+  <div class="popover">
+    <div
+      ref="reference"
+      class="popover__action"
+      @mouseenter="onMouseEnter"
+      @mouseleave="onMouseLeave"
+      @focusin="onMouseEnter"
+      @focusout="onMouseLeave"
+    >
+      <slot />
+    </div>
+    <ClientOnly>
       <teleport to="body">
         <transition name="fade">
           <div
@@ -23,29 +23,31 @@
             @focusin="onMouseEnter"
             @focusout="onMouseLeave"
           >
-            <div class="popover__box">
-              <slot name="content" />
+            <div class="popover__wrapper">
+              <div class="popover__box">
+                <slot name="content" />
+              </div>
+              <div
+                ref="floatingArrow"
+                class="popover__arrow"
+                :style="{
+                  position: 'absolute',
+                  left:
+                    middlewareData.arrow?.x != null
+                      ? `${middlewareData.arrow.x}px`
+                      : '',
+                  top:
+                    middlewareData.arrow?.y != null
+                      ? `${middlewareData.arrow.y}px`
+                      : '',
+                }"
+              />
             </div>
-            <div
-              ref="floatingArrow"
-              class="popover__arrow"
-              :style="{
-                position: 'absolute',
-                left:
-                  middlewareData.arrow?.x != null
-                    ? `${middlewareData.arrow.x}px`
-                    : '',
-                top:
-                  middlewareData.arrow?.y != null
-                    ? `${middlewareData.arrow.y}px`
-                    : '',
-              }"
-            />
           </div>
         </transition>
       </teleport>
-    </div>
-  </ClientOnly>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -61,17 +63,31 @@ const { floatingStyles, middlewareData } = useFloating(
   reference,
   floating,
   {
-    middleware: [arrow({ element: floatingArrow }), offset(13)],
+    middleware: [arrow({ element: floatingArrow }), offset(0)],
     placement: 'top',
   },
 );
 
+let timer: number | null = null;
+
 const onMouseEnter = (): void => {
+  if (timer) {
+    window.clearTimeout(timer);
+    timer = null;
+  }
+
   active.value = true;
 };
 
 const onMouseLeave = (): void => {
-  active.value = false;
+  if (timer) {
+    window.clearTimeout(timer);
+    timer = null;
+  }
+
+  timer = window.setTimeout(() => {
+    active.value = false;
+  }, 100);
 };
 </script>
 
