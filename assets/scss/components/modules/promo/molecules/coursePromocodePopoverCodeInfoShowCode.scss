@@ -1,0 +1,33 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.course-promocode-popover-code-info-show-code {
+  &__box {
+    display: flex;
+    align-items: center;
+    border: 1px solid $white;
+    background-color: $white;
+    border-radius: 0.625rem;
+    width: 100%;
+    padding: 1rem 1.18rem;
+    cursor: pointer;
+  }
+
+  &__code {
+    flex-grow: 1;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    color: $grey4;
+    font-weight: 600;
+  }
+
+  &__copy {
+    flex-grow: 0;
+    line-height: 0;
+  }
+
+  &__copied {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: $white;
+  }
+}

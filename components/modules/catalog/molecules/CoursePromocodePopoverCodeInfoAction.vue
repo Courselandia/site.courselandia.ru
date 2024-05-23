@@ -1,11 +1,9 @@
 <template>
   <div class="course-promocode-popover-code-info-action">
-    <div class="course-promocode-popover-code-info-action__button">
-      <a
-        @click.stop="onClick"
-      >
-        HERE 1!
-      </a>
+    <div
+      v-if="!showCode"
+      class="course-promocode-popover-code-info-action__button"
+    >
       <Button
         wide
         @click.stop="onClick"
@@ -13,11 +11,25 @@
         Показать промокод
       </Button>
     </div>
+    <div
+      v-else
+      class="course-promocode-popover-code-info-action__code"
+    >
+      <CoursePromocodePopoverCodeInfoShowCode
+        :code="code"
+        :url="url"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {
+  ref,
+} from 'vue';
+
 import Button from '@/components/atoms/Button.vue';
+import CoursePromocodePopoverCodeInfoShowCode from '@/components/modules/catalog/molecules/CoursePromocodePopoverCodeInfoShowCode.vue';
 
 defineProps({
   code: {
@@ -30,8 +42,10 @@ defineProps({
   },
 });
 
+const showCode = ref(false);
+
 const onClick = (): void => {
-  console.log('HERE 1!');
+  showCode.value = true;
 };
 </script>
 
