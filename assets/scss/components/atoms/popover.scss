@@ -17,23 +17,32 @@
     }
   }
 
-  &__window {
-    width: 520px;
+  &__content {
     z-index: 105;
+    width: 520px;
+  }
+
+  &__box {
     background-color: $black;
     border-radius: 1rem;
     padding: 1.5rem 2.5rem;
 
     @media all and (max-width: 768px) {
       width: 100%;
-
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
   }
 
-  &__box {
-    position: relative;
+  &__arrow {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: $black;
+    z-index: -1;
+    pointer-events: none;
+    transform: rotate(45deg);
+    bottom: -8px;
   }
 
   &__close {

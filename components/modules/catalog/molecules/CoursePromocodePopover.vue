@@ -1,28 +1,27 @@
 <template>
   <Popover
     v-if="course.currency"
-    v-model:active="activeValue"
   >
-    <CoursePromocodePopoverTitle />
-    <CoursePromocodePopoverPrices
-      :course="course"
-    />
-    <CoursePromocodePopoverCodeInfo
-      v-if="course.school?.promocode"
-      :promocode="course.school.promocode"
-    />
-    <CoursePromocodePopoverButtonGo
-      :link="course.link"
-    />
+    <slot />
+    <template #content>
+      <CoursePromocodePopoverTitle />
+      <CoursePromocodePopoverPrices
+        :course="course"
+      />
+      <CoursePromocodePopoverCodeInfo
+        v-if="course.school?.promocode"
+        :promocode="course.school.promocode"
+      />
+      <CoursePromocodePopoverButtonGo
+        :link="course.link"
+      />
+    </template>
   </Popover>
 </template>
 
 <script setup lang="ts">
 import {
   type PropType,
-  ref,
-  toRefs,
-  watch,
 } from 'vue';
 
 import Popover from '@/components/atoms/Popover.vue';
@@ -37,26 +36,5 @@ const props = defineProps({
     type: Object as PropType<ICourse>,
     required: true,
   },
-  active: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-});
-
-const emit = defineEmits({
-  'update:active': (_: boolean) => true,
-});
-
-const { active } = toRefs(props);
-
-const activeValue = ref<boolean>(active.value);
-
-watch(activeValue, () => {
-  emit('update:active', activeValue.value);
-});
-
-watch(active, () => {
-  activeValue.value = active.value;
 });
 </script>
