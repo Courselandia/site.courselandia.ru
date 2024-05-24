@@ -19,6 +19,11 @@
       <CardPromocodePrices
         :course="course"
       />
+      <CardPromocodeCodeInfo
+        v-if="course.school?.promocode"
+        :code="course.school.promocode.code"
+        :url="course.school.promocode.url"
+      />
     </div>
   </div>
 </template>
@@ -27,6 +32,7 @@
 import { type PropType, ref } from 'vue';
 
 import Button from '@/components/atoms/Button.vue';
+import CardPromocodeCodeInfo from '@/components/modules/course/molecules/CardPromocodeCodeInfo.vue';
 import CardPromocodePrices from '@/components/modules/course/molecules/CardPromocodePrices.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 

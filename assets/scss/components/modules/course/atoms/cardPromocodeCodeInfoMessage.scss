@@ -1,0 +1,18 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.card-promocode-code-info-message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.625rem;
+
+  &__icon {
+    line-height: 0;
+    padding-right: 0.3125rem;
+  }
+
+  &__text {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+    color: $white;
+  }
+}

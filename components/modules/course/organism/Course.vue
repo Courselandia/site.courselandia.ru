@@ -93,7 +93,7 @@ const setScroll = (): void => {
   const card = document.querySelector('#course-card');
 
   if (contentRef.value && card) {
-    const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 150;
+    const gapHeight = window.screen.availHeight - card.getBoundingClientRect().height - 110;
     const height = contentRef.value.offsetHeight;
     const top = contentRef.value.offsetTop;
     const screenHeight = window.screen.availHeight;
