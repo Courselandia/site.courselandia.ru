@@ -3,11 +3,11 @@
   height: 240px;
 
   @media all and (max-width: 850px) {
-    height: 365px;
+    height: 420px;
   }
 
   @media all and (max-width: 600px) {
-    height: 285px;
+    height: 340px;
   }
 
   &__content,
@@ -79,9 +79,17 @@
     }
 
     &--right {
-      min-width: 259px;
-      max-width: 259px;
+      min-width: 275px;
+      max-width: 275px;
       text-align: center;
+
+      .course-row {
+        &__promocode {
+          @media all and (max-width: 850px) {
+            display: none;
+          }
+        }
+      }
 
       @media all and (max-width: 850px) {
         min-width: auto;
@@ -97,7 +105,7 @@
       }
 
       &:deep(.course-tile-prices) {
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
 
         @media all and (max-width: 850px) {
           display: none;
@@ -116,6 +124,12 @@
         display: block;
         padding: 0 0 0 calc(110px + 1.75rem);
         width: 100%;
+
+        .course-row {
+          &__promocode {
+            margin-top: 0.7rem;
+          }
+        }
       }
 
       @media all and (max-width: 600px) {
@@ -204,5 +218,9 @@
         margin-right: 0;
       }
     }
+  }
+
+  &__promocode {
+    margin-bottom: 1rem;
   }
 }

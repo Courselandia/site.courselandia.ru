@@ -80,6 +80,14 @@
             :price-old="course.price_old || undefined"
             :currency="course.currency || undefined"
           />
+          <div
+            v-if="course.price || course.price_recurrent || course.price_old"
+            class="course-row__promocode"
+          >
+            <CoursePromocode
+              :course="course"
+            />
+          </div>
         </div>
       </nuxt-link>
       <div class="course-row__side course-row__side--right">
@@ -89,6 +97,14 @@
           :price-old="course.price_old || undefined"
           :currency="course.currency || undefined"
         />
+        <div
+          v-if="course.price || course.price_recurrent || course.price_old"
+          class="course-row__promocode"
+        >
+          <CoursePromocode
+            :course="course"
+          />
+        </div>
         <div class="course-row__actions">
           <CourseRowButtonGo
             v-model:active="activeValue"
@@ -121,6 +137,7 @@ import CourseTileLessonsAmount from '@/components/modules/catalog/atoms/CourseTi
 import CourseTileName from '@/components/modules/catalog/atoms/CourseTileName.vue';
 import CourseTilePrices from '@/components/modules/catalog/atoms/CourseTilePrices.vue';
 import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRating.vue';
+import CoursePromocode from '@/components/modules/catalog/molecules/CoursePromocode.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({
