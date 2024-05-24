@@ -62,6 +62,14 @@
             :price-old="course.price_old || undefined"
             :currency="course.currency || undefined"
           />
+          <div
+            v-if="course.price || course.price_recurrent || course.price_old"
+            class="course-box__promocode"
+          >
+            <CoursePromocode
+              :course="course"
+            />
+          </div>
           <div class="course-box__actions">
             <div class="course-box__buttons">
               <CourseRowButtonGo
@@ -164,6 +172,7 @@ import CourseTileRating from '@/components/modules/catalog/atoms/CourseTileRatin
 import CourseBoxProgram from '@/components/modules/catalog/molecules/CourseBoxProgram.vue';
 import CourseBoxTeachers from '@/components/modules/catalog/molecules/CourseBoxTeachers.vue';
 import CourseBoxTools from '@/components/modules/catalog/molecules/CourseBoxTools.vue';
+import CoursePromocode from '@/components/modules/catalog/molecules/CoursePromocode.vue';
 import Learn from '@/components/modules/course/molecules/Learn.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 import programDescription from '@/lib/programDescription';

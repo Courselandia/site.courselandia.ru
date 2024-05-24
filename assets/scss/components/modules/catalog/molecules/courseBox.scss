@@ -43,7 +43,7 @@
     }
 
     &--center {
-      width: calc(100% - 180px - 235px);
+      width: calc(100% - 180px - 250px);
       display: flex;
       flex-direction: column;
       padding-left: 1.5rem;
@@ -57,8 +57,8 @@
     }
 
     &--right {
-      min-width: 235px;
-      max-width: 235px;
+      min-width: 250px;
+      max-width: 250px;
       text-align: center;
       padding-left: 1.5rem;
 
@@ -77,7 +77,7 @@
       }
 
       &:deep(.course-tile-prices) {
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
       }
 
       &:deep(.course-tile-prices__additional) {
@@ -218,5 +218,9 @@
 
   &__tools {
     margin-bottom: 2rem;
+  }
+
+  &__promocode {
+    margin-bottom: 1rem;
   }
 }
