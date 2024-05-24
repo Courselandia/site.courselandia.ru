@@ -28,7 +28,13 @@
   &--type-row,
   &--type-box {
     &.course {
-      width: 100%;
+      @media all and (max-width: 768px) {
+        width: calc(100% - 2rem);
+      }
+
+      @media all and (max-width: 600px) {
+        width: calc(100% - 1rem);
+      }
 
       &--active {
         transform: scale(0.99);
@@ -38,7 +44,7 @@
 
   &--type-box {
     @media all and (max-width: 850px) {
-      width: calc(100vw - 1.25rem * 2);
+      width: calc(100% - 1.25rem * 2);
     }
   }
 }
