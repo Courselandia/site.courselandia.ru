@@ -29,6 +29,16 @@
           :price-old="course.price_old || undefined"
           :currency="course.currency || undefined"
         />
+        <CardPromocode
+          v-if="
+            course.school?.promocode
+              && (
+                course.price
+                || course.price_recurrent
+                || course.price_old
+              )"
+          :course="course"
+        />
       </div>
       <div class="card__footer">
         <CardActions
@@ -56,6 +66,7 @@ import CardName from '@/components/modules/course/atoms/CardName.vue';
 import CardPrices from '@/components/modules/course/atoms/CardPrices.vue';
 import CardRating from '@/components/modules/course/atoms/CardRating.vue';
 import CardFeatures from '@/components/modules/course/molecules/CardFeatures.vue';
+import CardPromocode from '@/components/modules/course/molecules/CardPromocode.vue';
 import type ICourse from '@/interfaces/components/modules/course';
 
 const props = defineProps({

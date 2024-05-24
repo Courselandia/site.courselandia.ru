@@ -1,6 +1,6 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
-.course-promocode-popover-price {
+.card-promocode-price {
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
@@ -11,8 +11,8 @@
 
   &__name,
   &__value {
-    color: $white;
-    font-size: 1rem;
+    color: $black;
+    font-size: 0.9rem;
     line-height: 1.5rem;
   }
 
@@ -26,21 +26,21 @@
     white-space: nowrap;
   }
 
-  &--yellow {
-    .course-promocode-popover-price {
+  &--blue {
+    .card-promocode-price {
       &__name,
       &__value {
-        color: #EEE718;
+        color: $blue2;
       }
     }
   }
 
   &--big {
-    .course-promocode-popover-price {
+    .card-promocode-price {
       &__name,
       &__value {
-        font-size: 1.25rem;
-        line-height: 1.5625rem;
+        font-size: 1.1rem;
+        line-height: 1.3rem;
         font-weight: 800;
       }
     }
