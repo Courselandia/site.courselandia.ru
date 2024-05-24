@@ -1,0 +1,20 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.follow-course-promocode {
+  &__popover {
+    &:deep(.popover__window) {
+      &:after {
+        content: "";
+        border: 10px solid transparent;
+        border-top: 10px solid $black;
+        width: 10px;
+        height: 10px;
+        line-height: 0;
+        display: block;
+        position: absolute;
+        bottom: -20px;
+        left: calc(100% - 50% - 5px);
+      }
+    }
+  }
+}

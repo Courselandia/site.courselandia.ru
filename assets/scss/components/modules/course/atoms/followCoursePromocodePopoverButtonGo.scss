@@ -1,0 +1,19 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.follow-course-promocode-popover-button-go {
+  &:deep(.button.button--secondary) {
+    border: 2px solid $white;
+
+    &:hover {
+      border: 2px solid $grey2;
+    }
+  }
+
+  &:deep(.button__label) {
+    color: $white;
+
+    &:hover {
+      color: $grey2;
+    }
+  }
+}

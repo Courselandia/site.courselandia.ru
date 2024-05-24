@@ -1,0 +1,47 @@
+@import "/assets/scss/vars/modifiers/colors";
+
+.follow-course-promocode-info {
+  background-color: $blue2;
+  border-radius: 0.375rem;
+  padding: 0.1875rem 0.3125rem;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.5rem;
+
+  &__label {
+    color: $white;
+    flex-grow: 1;
+    padding-right: 1rem;
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+
+  &__discount {
+    font-weight: 800;
+  }
+
+  &__icon {
+    flex-grow: 0;
+    color: $white;
+    background-color: $blue3;
+    border-radius: 100%;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2px;
+
+    @media all and (max-width: 550px) {
+      width: 15px;
+      height: 15px;
+      font-size: 0.7rem;
+      line-height: 0.7rem;
+      padding-top: 1px;
+    }
+  }
+}
