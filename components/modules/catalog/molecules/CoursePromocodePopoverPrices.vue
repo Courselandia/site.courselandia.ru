@@ -40,7 +40,7 @@
       <template
         v-else
       >
-        -{{ course.school.promocode.discount }} {{ getCurrency(course.currency) }}
+        -{{ money(course.school.promocode.discount) }} {{ getCurrency(course.currency) }}
       </template>
       <template #value>
         <template
