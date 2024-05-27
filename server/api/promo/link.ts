@@ -14,7 +14,7 @@ export default defineEventHandler(async (event): Promise<ISchoolPromo | null> =>
     return cachedPromo as ISchoolPromo;
   }
 
-  const path = config.public.development ? `/api/private/site/promo/link/${link}` : `/storage/json/promos/link/${link}.json`;
+  const path = config.public.development ? `/api/private/site/promo/link/${link}` : `/storage/json/promos/${link}.json`;
 
   const response = await axios.get<IResponseItem<ISchoolPromo>>(path, {
     baseURL: config.public.apiUrl,
