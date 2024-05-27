@@ -124,6 +124,14 @@ export default defineNuxtConfig({
   },
   webpack: {
     extractCSS: true,
+    filenames: {
+      app: ({ isDev }) => (isDev ? '[path][name].js' : '[path][name].js?[contenthash]'),
+      chunk: ({ isDev }) => (isDev ? '[path][name].js' : '[path][name].js?[contenthash]'),
+      css: ({ isDev }) => (isDev ? '[path][name].css' : '[contenthash].css?[contenthash]'),
+      img: ({ isDev }) => (isDev ? '[path][name].[ext]' : 'img/[path][name].[ext]?[contenthash]'),
+      font: ({ isDev }) => (isDev ? '[path][name].[ext]' : 'fonts/[path][name].[ext]?[contenthash]'),
+      video: ({ isDev }) => (isDev ? '[path][name].[ext]' : 'videos/[path][name].[ext]?[contenthash]'),
+    },
   },
   features: {
     inlineStyles: false,
