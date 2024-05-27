@@ -45,17 +45,17 @@
       </div>
       <div
         class="menu-top-mobile__item"
-        @click="onClickLink('/collections')"
-        @keydown="onClickLink('/collections')"
-      >
-        Подборки
-      </div>
-      <div
-        class="menu-top-mobile__item"
         @click="onClickLink('/promos')"
         @keydown="onClickLink('/promos')"
       >
         Промокоды
+      </div>
+      <div
+        class="menu-top-mobile__item"
+        @click="onClickLink('/collections')"
+        @keydown="onClickLink('/collections')"
+      >
+        Подборки
       </div>
       <div
         class="menu-top-mobile__item"
