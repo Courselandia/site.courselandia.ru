@@ -2,10 +2,10 @@
   <div class="promocode-logo">
     <LazyImage
       v-if="image"
-      :src="image"
+      :src="image.path"
       :alt="label"
       :title="label"
-      class="promocode-logo__image"
+      :class="`promocode-logo__image ${image.width === image.height ? 'promocode-logo__image--box' : ''}`"
     />
     <div
       v-else
@@ -17,11 +17,14 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
+
 import LazyImage from '@/components/atoms/LazyImage.vue';
+import type IImage from '@/interfaces/stores/image/image';
 
 defineProps({
   image: {
-    type: String,
+    type: Object as PropType<IImage>,
     required: false,
     default: null,
   },

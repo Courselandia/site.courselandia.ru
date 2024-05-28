@@ -12,6 +12,11 @@
     @media all and (max-width: 600px) {
       max-width: 100px;
     }
+
+    &--box {
+      width: 65px;
+      height: 65px;
+    }
   }
 
   &__label {

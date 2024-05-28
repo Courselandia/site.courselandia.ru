@@ -13,8 +13,8 @@
       :type="promocode.type"
     />
     <PromocodeLogo
-      v-if="promocode.school"
-      :image="promocode.school.image_logo_id?.path"
+      v-if="promocode.school?.image_logo_id"
+      :image="promocode.school.image_logo_id"
       :label="promocode.school.name"
       :site="promocode.school.site"
     />
