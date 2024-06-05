@@ -1,0 +1,61 @@
+@import "@/assets/scss/vars/modifiers/colors";
+
+.publication-also {
+  background-color: $white;
+  padding: 2rem;
+  box-shadow: 0 16px 54px rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+
+  @media all and (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media all and (max-width: 768px) {
+    display: block;
+  }
+
+  &__media {
+    line-height: 0;
+    padding-right: 1.5rem;
+
+    @media all and (max-width: 768px) {
+      padding-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    max-width: 230px;
+    min-width: 230px;
+    border-radius: 1rem;
+
+    @media all and (max-width: 768px) {
+      max-width: none;
+      min-width: auto;
+    }
+  }
+
+  &__call {
+    color: $grey4;
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  &__link {
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    color: $black !important;
+
+    @media all and (max-width: 576px) {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+  }
+}

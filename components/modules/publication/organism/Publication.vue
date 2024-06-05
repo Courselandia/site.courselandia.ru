@@ -98,3 +98,7 @@ useJsonld({
 <style lang="scss" scoped>
 @import "@/assets/scss/components/modules/publication/organism/publication";
 </style>
+
+<style lang="scss">
+@import "@/assets/scss/components/modules/publication/organism/publicationAlso";
+</style>
