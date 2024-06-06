@@ -101,4 +101,5 @@ useJsonld({
 
 <style lang="scss">
 @import "@/assets/scss/components/modules/publication/organism/publicationAlso";
+@import "@/assets/scss/components/modules/collection/organism/collectionAlso";
 </style>
