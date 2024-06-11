@@ -23,12 +23,14 @@ import { apiReadPromos } from '@/api/promo';
 import Promocodes from '@/components/modules/home/molecules/Promocodes.vue';
 import type IPromocode from '@/interfaces/stores/promo/promocode';
 import type ISchool from '@/interfaces/stores/promo/school';
+import type TId from '@/types/id';
 
 const getTheBesPromocodes = (
   schools: Array<ISchool> | undefined,
 ): Array<IPromocode> | undefined => {
   if (schools) {
-    let result: Array<IPromocode> = [];
+    let promocodes: Array<IPromocode> = [];
+    const limit = 11;
 
     schools.forEach((school: ISchool) => {
       if (school.promocodes) {
@@ -39,11 +41,11 @@ const getTheBesPromocodes = (
           items[index].school = school;
         });
 
-        result = result.concat(items);
+        promocodes = promocodes.concat(items);
       }
     });
 
-    return result.sort((first: IPromocode, second: IPromocode) => {
+    promocodes = promocodes.sort((first: IPromocode, second: IPromocode) => {
       if (!first.discount && !second.discount) {
         return 0;
       }
@@ -65,7 +67,40 @@ const getTheBesPromocodes = (
       }
 
       return 0;
-    }).slice(0, 12);
+    });
+
+    let result: Array<IPromocode> = [];
+
+    const getPortion = (
+      items: Array<IPromocode>,
+      excludes?: Array<IPromocode>,
+    ): Array<IPromocode> => {
+      const took: Array<TId> = [];
+
+      return items.filter((item: IPromocode) => {
+        const isExist = (
+          itm: IPromocode,
+        ): boolean => !!excludes?.find((exclude: IPromocode) => exclude.id === itm.id);
+
+        if (took.indexOf(item.school_id) === -1 && !isExist(item)) {
+          took[took.length] = item.school_id;
+
+          return true;
+        }
+
+        return false;
+      });
+    };
+
+    if (promocodes.length <= limit) {
+      return [...result, ...getPortion(promocodes, result)];
+    }
+
+    do {
+      result = [...result, ...getPortion(promocodes, result)];
+    } while (result.length < limit);
+
+    return result.slice(0, limit);
   }
 
   return undefined;
