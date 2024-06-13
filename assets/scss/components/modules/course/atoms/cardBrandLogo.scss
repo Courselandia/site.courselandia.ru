@@ -10,5 +10,6 @@
   &__image {
     width: auto;
     height: calc(45px - 1rem);
+    max-height: 18px;
   }
 }
