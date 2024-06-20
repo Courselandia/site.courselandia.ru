@@ -1,6 +1,6 @@
 import { storeToRefs } from 'pinia';
 
-import { cacheDate } from '@/helpers/cache';
+import { apiLinkCollection } from '@/api/collection';
 import collection from '@/stores/collection';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
@@ -9,16 +9,10 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   } = to.params;
 
   try {
-    const result = await $fetch('/api/collection/link', {
-      params: {
-        link: link as string,
-        cacheDate: cacheDate(),
-      },
-    });
-
+    const result = await apiLinkCollection(false, link as string);
     const { itemLinkCollection } = storeToRefs(collection());
 
-    itemLinkCollection.value = result;
+    itemLinkCollection.value = result?.data || null;
 
     return !!result;
   } catch (error: any) {

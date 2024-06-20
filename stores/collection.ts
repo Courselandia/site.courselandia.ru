@@ -4,6 +4,7 @@ import EDirection from '@/enums/direction';
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import type {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import type ICollection from '@/interfaces/stores/collection/collection';
@@ -38,6 +39,24 @@ export default defineStore('collection', {
         });
 
         this.list = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.list = null;
+
+        throw error;
+      }
+    },
+    async linkCollection(link: string): Promise<IResponseItem<ICollection>> {
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development
+          ? `/api/private/site/collection/link/${link}`
+          : `/storage/json/collections/link/${link}.json`;
+
+        const response = await axios.get<IResponseItem<ICollection>>(path, {
+          baseURL: config.public.apiUrl,
+        });
 
         return response.data;
       } catch (error) {

@@ -1,5 +1,6 @@
 import EDirection from '@/enums/direction';
 import type {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import type ICollection from '@/interfaces/stores/collection/collection';
@@ -29,4 +30,24 @@ export const apiReadCollections = async (
   }
 
   return await loadCollections();
+};
+
+export const apiLinkCollection = async (
+  fetch: boolean,
+  link: string,
+): Promise<IResponseItem<ICollection> | null> => {
+  const {
+    linkCollection,
+  } = collection();
+
+  const loadCollection = async ():
+    Promise<IResponseItem<ICollection>> => linkCollection(link);
+
+  if (fetch) {
+    const resultCollection = await useAsyncData('collection', async () => loadCollection());
+
+    return resultCollection.data.value || null;
+  }
+
+  return await loadCollection();
 };
