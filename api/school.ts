@@ -31,7 +31,7 @@ export const apiLinkSchool = async (
   const loadSchool = async ():
     Promise<IResponseItem<ISchoolLink>> => linkSchool(link as string);
 
-  const resultSchools = await useAsyncData('school', async () => loadSchool());
+  const resultSchool = await useAsyncData('school', async () => loadSchool());
 
-  return resultSchools.data.value?.data || null;
+  return resultSchool.data.value?.data || null;
 };

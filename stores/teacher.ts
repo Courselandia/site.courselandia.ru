@@ -5,6 +5,7 @@ import toQuery from '@/helpers/toQuery';
 import type IFilters from '@/interfaces/filters';
 import type {
   IResponseItems,
+  IResponseItem,
 } from '@/interfaces/response';
 import type IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
@@ -35,6 +36,17 @@ export default defineStore('teacher', {
 
         throw error;
       }
+    },
+    async linkTeacher(
+      link: string,
+    ): Promise<IResponseItem<ITeacherLink>> {
+      const config = useRuntimeConfig();
+      const path = config.public.development ? `/api/private/site/teacher/link/${link}` : `/storage/json/teachers/${link}.json`;
+      const response = await axios.get<IResponseItem<ITeacherLink>>(path, {
+        baseURL: config.public.apiUrl,
+      });
+
+      return response.data;
     },
   },
 });
