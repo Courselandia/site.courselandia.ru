@@ -12,7 +12,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const result = await apiLinkCollection(false, link as string);
     const { itemLinkCollection } = storeToRefs(collection());
 
-    itemLinkCollection.value = result?.data || null;
+    itemLinkCollection.value = result;
 
     return !!result;
   } catch (error: any) {

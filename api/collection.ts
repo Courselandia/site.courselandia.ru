@@ -35,7 +35,7 @@ export const apiReadCollections = async (
 export const apiLinkCollection = async (
   fetch: boolean,
   link: string,
-): Promise<IResponseItem<ICollection> | null> => {
+): Promise<ICollection | null> => {
   const {
     linkCollection,
   } = collection();
@@ -46,8 +46,10 @@ export const apiLinkCollection = async (
   if (fetch) {
     const resultCollection = await useAsyncData('collection', async () => loadCollection());
 
-    return resultCollection.data.value || null;
+    return resultCollection.data.value?.data || null;
   }
 
-  return await loadCollection();
+  const result = await loadCollection();
+
+  return result.data;
 };

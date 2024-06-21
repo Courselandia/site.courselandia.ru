@@ -1,6 +1,6 @@
 import { storeToRefs } from 'pinia';
 
-import { cacheDate } from '@/helpers/cache';
+import { apiLinkSkill } from '@/api/skill';
 import category from '@/stores/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
@@ -16,12 +16,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   } = to.params;
 
   try {
-    const result = await $fetch('/api/skill/link', {
-      params: {
-        link: link as string,
-        cacheDate: cacheDate(),
-      },
-    });
+    const result = await apiLinkSkill(link as string);
 
     const title = result?.metatag?.title || '';
     const description = result?.metatag?.description || '';

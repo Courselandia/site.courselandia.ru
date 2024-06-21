@@ -4,6 +4,7 @@ import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import type IFilters from '@/interfaces/filters';
 import type {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import type IFilterSkill from '@/interfaces/stores/course/filterSkill';
@@ -35,6 +36,18 @@ export default defineStore('skill', {
 
         throw error;
       }
+    },
+    async linkSkill(
+      link: string,
+    ): Promise<IResponseItem<ISkillLink>> {
+      const config = useRuntimeConfig();
+      const path = config.public.development ? `/api/private/site/skill/link/${link}` : `/storage/json/skills/${link}.json`;
+
+      const response = await axios.get<IResponseItem<ISkillLink>>(path, {
+        baseURL: config.public.apiUrl,
+      });
+
+      return response.data;
     },
   },
 });
