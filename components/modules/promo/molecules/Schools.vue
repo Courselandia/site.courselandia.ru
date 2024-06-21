@@ -42,8 +42,8 @@ const filterSchools = (
 
 const schools = ref<Array<ISchool>>();
 
-const response = await apiReadPromos(true);
-schools.value = filterSchools(response?.data || []);
+const promos = await apiReadPromos(true);
+schools.value = filterSchools(promos);
 </script>
 
 <style lang="scss" scoped>

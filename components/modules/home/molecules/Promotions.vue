@@ -127,9 +127,9 @@ const getAmount = (schools: Array<ISchool> | undefined): number => {
 };
 
 const promocodes = ref<Array<IPromocode>>();
-const response = await apiReadPromos(true);
-promocodes.value = getTheBesPromocodes(response?.data);
-const amount = getAmount(response?.data);
+const promos = await apiReadPromos(true);
+promocodes.value = getTheBesPromocodes(promos);
+const amount = getAmount(promos);
 </script>
 
 <style lang="scss" scoped>

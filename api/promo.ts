@@ -1,4 +1,5 @@
 import type {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import type ISchool from '@/interfaces/stores/promo/school';
@@ -6,7 +7,7 @@ import promo from '@/stores/promo';
 
 export const apiReadPromos = async (
   fetch: boolean,
-): Promise<IResponseItems<ISchool> | null> => {
+): Promise<Array<ISchool>> => {
   const {
     readPromos,
   } = promo();
@@ -16,8 +17,24 @@ export const apiReadPromos = async (
   if (fetch) {
     const resultPromos = await useAsyncData('promos', async () => loadPromos());
 
-    return resultPromos.data.value || null;
+    return resultPromos.data.value?.data || [];
   }
 
-  return await loadPromos();
+  const result = await loadPromos();
+
+  return result.data;
+};
+
+export const apiLinkPromo = async (
+  link: string,
+): Promise<ISchool | null> => {
+  const {
+    linkPromo,
+  } = promo();
+
+  const loadPromo = async (): Promise<IResponseItem<ISchool>> => linkPromo(link);
+
+  const resultPromo = await useAsyncData('promo', async () => loadPromo());
+
+  return resultPromo.data.value?.data || null;
 };

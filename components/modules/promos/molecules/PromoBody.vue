@@ -123,8 +123,7 @@ const filterByDirection = (
   return result;
 };
 
-const response = await apiReadPromos(true);
-schools = response?.data;
+schools = await apiReadPromos(true);
 filteredSchools.value = filterByDirection(schools, direction.value);
 
 watch(direction, () => {

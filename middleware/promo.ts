@@ -1,6 +1,6 @@
 import { storeToRefs } from 'pinia';
 
-import { cacheDate } from '@/helpers/cache';
+import { apiLinkPromo } from '@/api/promo';
 import promo from '@/stores/promo';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
@@ -9,12 +9,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   } = to.params;
 
   try {
-    const result = await $fetch('/api/promo/link', {
-      params: {
-        link: link as string,
-        cacheDate: cacheDate(),
-      },
-    });
+    const result = await apiLinkPromo(link as string);
 
     const { itemLinkPromo } = storeToRefs(promo());
 
