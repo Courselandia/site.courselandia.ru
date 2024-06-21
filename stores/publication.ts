@@ -41,5 +41,17 @@ export default defineStore('publication', {
         throw error;
       }
     },
+    async linkPublication(
+      link: string,
+    ): Promise<IResponseItem<IPublication>> {
+      const config = useRuntimeConfig();
+      const path = config.public.development ? `/api/private/site/publication/link/${link}` : `/storage/json/publications/${link}.json`;
+
+      const response = await axios.get<IResponseItem<IPublication>>(path, {
+        baseURL: config.public.apiUrl,
+      });
+
+      return response.data;
+    },
   },
 });

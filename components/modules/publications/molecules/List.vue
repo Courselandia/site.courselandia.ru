@@ -33,7 +33,6 @@ import { apiReadPublications } from '@/api/publication';
 import Loader from '@/components/atoms/Loader.vue';
 import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Publication from '@/components/modules/publications/molecules/Publication.vue';
-import type { IResponseItem } from '@/interfaces/response';
 import type IList from '@/interfaces/stores/publication/list';
 import type IPublication from '@/interfaces/stores/publication/publication';
 
@@ -53,7 +52,7 @@ const loadPublications = async (
   fetch: boolean,
   offset: number,
   limitParam: number,
-): Promise<IResponseItem<IList> | null> => {
+): Promise<IList | null> => {
   try {
     return await apiReadPublications(
       fetch,
@@ -67,13 +66,13 @@ const loadPublications = async (
   return null;
 };
 
-const response = await loadPublications(
+const list = await loadPublications(
   !Object.keys(route.query).length,
   0,
   page.value * limit,
 );
-publications.value = response?.data?.publications;
-total.value = response?.data?.total;
+publications.value = list?.publications;
+total.value = list?.total;
 
 const setUrlQuery = (): void => {
   const queries: Array<string> = [];
@@ -107,10 +106,10 @@ watch(page, () => {
 const onLoadScrolling = async (): Promise<void> => {
   page.value++;
 
-  const res = await loadPublications(false, (page.value - 1) * limit, limit);
+  const listAdditional = await loadPublications(false, (page.value - 1) * limit, limit);
 
-  if (res?.data && publications.value) {
-    publications.value = publications.value.concat(res.data.publications);
+  if (listAdditional && publications.value) {
+    publications.value = publications.value.concat(listAdditional.publications);
   }
 
   if ((page.value * limit) >= (total.value || 0)) {
