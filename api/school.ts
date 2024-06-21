@@ -1,5 +1,6 @@
 import type IFilters from '@/interfaces/filters';
-import type { IResponseItems } from '@/interfaces/response';
+import type { IResponseItem, IResponseItems } from '@/interfaces/response';
+import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import type ISchool from '@/interfaces/stores/school/school';
 import school from '@/stores/school';
 
@@ -18,4 +19,19 @@ export const apiReadSchools = async (
   const resultSchools = await useAsyncData('schools', async () => loadSchools());
 
   return resultSchools.data.value?.data || [];
+};
+
+export const apiLinkSchool = async (
+  link: string,
+): Promise<ISchoolLink | null> => {
+  const {
+    linkSchool,
+  } = school();
+
+  const loadSchool = async ():
+    Promise<IResponseItem<ISchoolLink>> => linkSchool(link as string);
+
+  const resultSchools = await useAsyncData('school', async () => loadSchool());
+
+  return resultSchools.data.value?.data || null;
 };

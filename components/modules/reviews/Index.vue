@@ -47,12 +47,12 @@ import {
 } from 'vue';
 import { useRoute } from 'vue-router';
 
+import { apiLinkSchool } from '@/api/school';
 import Bubbles from '@/components/atoms/Bubbles.vue';
 import Card from '@/components/modules/reviews/molecules/Card.vue';
 import Header from '@/components/modules/reviews/molecules/Header.vue';
 import List from '@/components/modules/reviews/molecules/List.vue';
 import Sort from '@/components/modules/reviews/molecules/Sort.vue';
-import { cacheDate } from '@/helpers/cache';
 import {
   brToRn,
   stripTags,
@@ -162,12 +162,7 @@ watch(rating, () => {
 
 const loadSchool = async (): Promise<ISchoolLink | null> => {
   try {
-    return await $fetch('/api/school/link', {
-      params: {
-        link: link as string,
-        cacheDate: cacheDate(),
-      },
-    });
+    return await apiLinkSchool(link as string);
   } catch (error: any) {
     console.error(error.message);
   }

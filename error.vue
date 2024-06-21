@@ -37,6 +37,7 @@ import {
   toRefs,
 } from 'vue';
 
+import { apiReadSchools } from '@/api/school';
 import Error from '@/components/atoms/Error.vue';
 import Dropdowns from '@/components/modules/layouts/general/organism/Dropdowns.vue';
 import Footer from '@/components/modules/layouts/general/organism/Footer.vue';
@@ -70,11 +71,7 @@ try {
 }
 
 try {
-  const result = await $fetch('/api/school/read', {
-    params: {
-      cacheDate: cacheDate(),
-    },
-  });
+  const result = await apiReadSchools();
 
   const { schools } = storeToRefs(school());
   schools.value = result;

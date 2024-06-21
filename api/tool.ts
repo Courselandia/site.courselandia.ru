@@ -1,6 +1,7 @@
 import type IFilters from '@/interfaces/filters';
-import type { IResponseItems } from '@/interfaces/response';
+import type { IResponseItem, IResponseItems } from '@/interfaces/response';
 import type IFilterTool from '@/interfaces/stores/course/filterTool';
+import type IToolLink from '@/interfaces/stores/course/toolLink';
 import tool from '@/stores/tool';
 
 export const apiReadTools = async (
@@ -18,4 +19,19 @@ export const apiReadTools = async (
   const resultTools = await useAsyncData('tools', async () => loadTools());
 
   return resultTools.data.value?.data || [];
+};
+
+export const apiLinkTool = async (
+  link: string,
+): Promise<IToolLink | null> => {
+  const {
+    linkTool,
+  } = tool();
+
+  const loadTool = async ():
+    Promise<IResponseItem<IToolLink>> => linkTool(link);
+
+  const resultTools = await useAsyncData('tool', async () => loadTool());
+
+  return resultTools.data.value?.data || null;
 };

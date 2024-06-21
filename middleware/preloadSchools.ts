@@ -1,15 +1,11 @@
 import { storeToRefs } from 'pinia';
 
-import { cacheDate } from '@/helpers/cache';
+import { apiReadSchools } from '@/api/school';
 import school from '@/stores/school';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<void> => {
   try {
-    const result = await $fetch('/api/school/read', {
-      params: {
-        cacheDate: cacheDate(),
-      },
-    });
+    const result = await apiReadSchools();
 
     const { schools } = storeToRefs(school());
     schools.value = result;

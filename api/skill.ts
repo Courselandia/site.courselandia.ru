@@ -37,7 +37,7 @@ export const apiLinkSkill = async (
     link,
   );
 
-  const resultSkills = await useAsyncData('skills', async () => loadSkill());
+  const resultSkills = await useAsyncData('skill', async () => loadSkill());
 
   return resultSkills.data.value?.data || null;
 };
