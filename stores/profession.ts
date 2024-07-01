@@ -4,6 +4,7 @@ import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import type IFilters from '@/interfaces/filters';
 import type {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import type IFilterProfession from '@/interfaces/stores/course/filterProfession';
@@ -32,6 +33,26 @@ export default defineStore('profession', {
         return response.data;
       } catch (error) {
         this.professions = null;
+
+        throw error;
+      }
+    },
+    async linkProfession(
+      link: string,
+    ): Promise<IResponseItem<IProfessionLink>> {
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/profession/link/${link}` : `/storage/json/professions/${link}.json`;
+
+        const response = await axios.get<IResponseItem<IProfessionLink>>(path, {
+          baseURL: config.public.apiUrl,
+        });
+
+        this.itemLinkProfession = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkProfession = null;
 
         throw error;
       }

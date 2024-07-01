@@ -1,5 +1,6 @@
 import type IFilters from '@/interfaces/filters';
-import type { IResponseItems } from '@/interfaces/response';
+import type { IResponseItem, IResponseItems } from '@/interfaces/response';
+import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
 import type IFilterCategory from '@/interfaces/stores/course/filterCategory';
 import category from '@/stores/category';
 
@@ -22,4 +23,21 @@ export const apiReadCategories = async (
   const resultCategories = await useAsyncData('categories', async () => loadCategories());
 
   return resultCategories.data.value?.data || [];
+};
+
+export const apiLinkCategory = async (
+  link: string,
+): Promise<ICategoryLink | null> => {
+  const {
+    linkCategory,
+  } = category();
+
+  const loadCategories = async ():
+    Promise<IResponseItem<ICategoryLink>> => linkCategory(
+    link,
+  );
+
+  const resultCategory = await useAsyncData('category', async () => loadCategories());
+
+  return resultCategory.data.value?.data || null;
 };

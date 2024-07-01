@@ -36,14 +36,22 @@ export default defineStore('promo', {
       }
     },
     async linkPromo(link: string): Promise<IResponseItem<ISchool>> {
-      const config = useRuntimeConfig();
-      const path = config.public.development ? `/api/private/site/promo/link/${link}` : `/storage/json/promos/${link}.json`;
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/promo/link/${link}` : `/storage/json/promos/${link}.json`;
 
-      const response = await axios.get<IResponseItem<ISchool>>(path, {
-        baseURL: config.public.apiUrl,
-      });
+        const response = await axios.get<IResponseItem<ISchool>>(path, {
+          baseURL: config.public.apiUrl,
+        });
 
-      return response.data;
+        this.itemLinkPromo = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkPromo = null;
+
+        throw error;
+      }
     },
   },
 });

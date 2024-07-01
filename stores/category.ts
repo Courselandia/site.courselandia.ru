@@ -4,6 +4,7 @@ import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import type IFilters from '@/interfaces/filters';
 import type {
+  IResponseItem,
   IResponseItems,
 } from '@/interfaces/response';
 import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
@@ -32,6 +33,25 @@ export default defineStore('category', {
         return response.data;
       } catch (error) {
         this.categories = null;
+
+        throw error;
+      }
+    },
+    async linkCategory(
+      link: string,
+    ): Promise<IResponseItem<ICategoryLink>> {
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/category/link/${link}` : `/storage/json/categories/${link}.json`;
+        const response = await axios.get<IResponseItem<ICategoryLink>>(path, {
+          baseURL: config.public.apiUrl,
+        });
+
+        this.itemLinkCategory = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkCategory = null;
 
         throw error;
       }

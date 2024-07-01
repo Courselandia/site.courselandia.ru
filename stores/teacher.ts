@@ -40,13 +40,21 @@ export default defineStore('teacher', {
     async linkTeacher(
       link: string,
     ): Promise<IResponseItem<ITeacherLink>> {
-      const config = useRuntimeConfig();
-      const path = config.public.development ? `/api/private/site/teacher/link/${link}` : `/storage/json/teachers/${link}.json`;
-      const response = await axios.get<IResponseItem<ITeacherLink>>(path, {
-        baseURL: config.public.apiUrl,
-      });
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/teacher/link/${link}` : `/storage/json/teachers/${link}.json`;
+        const response = await axios.get<IResponseItem<ITeacherLink>>(path, {
+          baseURL: config.public.apiUrl,
+        });
 
-      return response.data;
+        this.itemLinkTeacher = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkTeacher = null;
+
+        throw error;
+      }
     },
   },
 });

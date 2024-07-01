@@ -37,13 +37,21 @@ export default defineStore('school', {
     async linkSchool(
       link: string,
     ): Promise<IResponseItem<ISchoolLink>> {
-      const config = useRuntimeConfig();
-      const path = config.public.development ? `/api/private/site/school/link/${link}` : `/storage/json/schools/${link}.json`;
-      const response = await axios.get<IResponseItem<ISchoolLink>>(path, {
-        baseURL: config.public.apiUrl,
-      });
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/school/link/${link}` : `/storage/json/schools/${link}.json`;
+        const response = await axios.get<IResponseItem<ISchoolLink>>(path, {
+          baseURL: config.public.apiUrl,
+        });
 
-      return response.data;
+        this.itemLinkSchool = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkSchool = null;
+
+        throw error;
+      }
     },
   },
 });

@@ -201,7 +201,43 @@ export default defineStore('course', {
 
         return response.data;
       } catch (error) {
-        this.searchedCourses = null;
+        this.favoriteCourses = null;
+
+        throw error;
+      }
+    },
+    async getStatCourses(): Promise<IResponseItem<IStat>> {
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? '/api/private/site/course/stat' : '/storage/json/stat.json';
+
+        const response = await axios.get<IResponseItem<IStat>>(path, {
+          baseURL: config.public.apiUrl,
+        });
+
+        this.stat = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.stat = null;
+
+        throw error;
+      }
+    },
+    async readRatedCourses(): Promise<IResponseItems<ICourse> | null> {
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? '/api/private/site/course/read/rated' : '/storage/json/courses/rated.json';
+
+        const response = await axios.get<IResponseItems<ICourse>>(path, {
+          baseURL: config.public.apiUrl,
+        });
+
+        this.ratedCourses = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.ratedCourses = null;
 
         throw error;
       }

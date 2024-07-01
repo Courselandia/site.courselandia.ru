@@ -13,6 +13,7 @@ import type ICourse from '@/interfaces/stores/course/course';
 import type ICourseResponse from '@/interfaces/stores/course/courseResponse';
 import course from '@/stores/course';
 import type TId from '@/types/id';
+import type IStat from "~/interfaces/stores/course/stat";
 
 export const apiReadCourses = async (
   offset: number = 0,
@@ -132,4 +133,30 @@ export const apiGetCourse = async (
   }
 
   return null;
+};
+
+export const apiGetStatCourses = async (): Promise<IStat | null> => {
+  const {
+    getStatCourses,
+  } = course();
+
+  const loadGetCourse = async ():
+    Promise<IResponseItem<IStat>> => await getStatCourses();
+
+  const resultCourse = await useAsyncData('statCourses', async () => loadGetCourse());
+
+  return resultCourse.data.value?.data || null;
+};
+
+export const apiReadRatedCourses = async (): Promise<Array<ICourse>> => {
+  const {
+    readRatedCourses,
+  } = course();
+
+  const loadReadRatedCourses = async ():
+    Promise<IResponseItems<ICourse> | null> => readRatedCourses();
+
+  const resultCourses = await useAsyncData('ratedCourses', async () => loadReadRatedCourses());
+
+  return resultCourses.data.value?.data || [];
 };

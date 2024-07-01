@@ -48,16 +48,24 @@ export default defineStore('collection', {
       }
     },
     async linkCollection(link: string): Promise<IResponseItem<ICollection>> {
-      const config = useRuntimeConfig();
-      const path = config.public.development
-        ? `/api/private/site/collection/link/${link}`
-        : `/storage/json/collections/link/${link}.json`;
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development
+          ? `/api/private/site/collection/link/${link}`
+          : `/storage/json/collections/link/${link}.json`;
 
-      const response = await axios.get<IResponseItem<ICollection>>(path, {
-        baseURL: config.public.apiUrl,
-      });
+        const response = await axios.get<IResponseItem<ICollection>>(path, {
+          baseURL: config.public.apiUrl,
+        });
 
-      return response.data;
+        this.itemLinkCollection = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkCollection = null;
+
+        throw error;
+      }
     },
   },
 });

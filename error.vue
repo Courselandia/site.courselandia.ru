@@ -45,6 +45,7 @@ import Header from '@/components/modules/layouts/general/organism/Header.vue';
 import { cacheDate } from '@/helpers/cache';
 import direction from '@/stores/direction';
 import school from '@/stores/school';
+import {apiReadDirections} from "~/api/direction";
 
 const props = defineProps({
   error: {
@@ -58,23 +59,13 @@ const menu = ref('');
 const { error } = toRefs(props);
 
 try {
-  const result = await $fetch('/api/direction/read', {
-    params: {
-      cacheDate: cacheDate(),
-    },
-  });
-
-  const { directions } = storeToRefs(direction());
-  directions.value = result;
+  await apiReadDirections();
 } catch (err: any) {
   console.error(err.message);
 }
 
 try {
-  const result = await apiReadSchools();
-
-  const { schools } = storeToRefs(school());
-  schools.value = result;
+  await apiReadSchools();
 } catch (err: any) {
   console.error(err.message);
 }

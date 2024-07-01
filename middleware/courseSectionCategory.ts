@@ -1,7 +1,6 @@
 import { storeToRefs } from 'pinia';
 
-import { cacheDate } from '@/helpers/cache';
-import category from '@/stores/category';
+import { apiLinkCategory } from '@/api/category';
 import direction from '@/stores/direction';
 import profession from '@/stores/profession';
 import school from '@/stores/school';
@@ -16,12 +15,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   } = to.params;
 
   try {
-    const result = await $fetch('/api/category/link', {
-      params: {
-        link: link as string,
-        cacheDate: cacheDate(),
-      },
-    });
+    const result = await apiLinkCategory(link as string);
 
     const title = result?.metatag?.title || '';
     const description = result?.metatag?.description || '';
@@ -44,7 +38,6 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
       ],
     });
 
-    const { itemLinkCategory } = storeToRefs(category());
     const { itemLinkDirection } = storeToRefs(direction());
     const { itemLinkProfession } = storeToRefs(profession());
     const { itemLinkSchool } = storeToRefs(school());
@@ -53,7 +46,6 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const { itemLinkTool } = storeToRefs(tool());
     const { itemLinkSection } = storeToRefs(section());
 
-    itemLinkCategory.value = result;
     itemLinkDirection.value = null;
     itemLinkProfession.value = null;
     itemLinkSchool.value = null;

@@ -40,14 +40,22 @@ export default defineStore('skill', {
     async linkSkill(
       link: string,
     ): Promise<IResponseItem<ISkillLink>> {
-      const config = useRuntimeConfig();
-      const path = config.public.development ? `/api/private/site/skill/link/${link}` : `/storage/json/skills/${link}.json`;
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/skill/link/${link}` : `/storage/json/skills/${link}.json`;
 
-      const response = await axios.get<IResponseItem<ISkillLink>>(path, {
-        baseURL: config.public.apiUrl,
-      });
+        const response = await axios.get<IResponseItem<ISkillLink>>(path, {
+          baseURL: config.public.apiUrl,
+        });
 
-      return response.data;
+        this.itemLinkSkill = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkSkill = null;
+
+        throw error;
+      }
     },
   },
 });

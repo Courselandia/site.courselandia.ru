@@ -40,14 +40,22 @@ export default defineStore('tool', {
     async linkTool(
       link: string,
     ): Promise<IResponseItem<IToolLink>> {
-      const config = useRuntimeConfig();
-      const path = config.public.development ? `/api/private/site/tool/link/${link}` : `/storage/json/tools/${link}.json`;
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? `/api/private/site/tool/link/${link}` : `/storage/json/tools/${link}.json`;
 
-      const response = await axios.get<IResponseItem<IToolLink>>(path, {
-        baseURL: config.public.apiUrl,
-      });
+        const response = await axios.get<IResponseItem<IToolLink>>(path, {
+          baseURL: config.public.apiUrl,
+        });
 
-      return response.data;
+        this.itemLinkTool = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.itemLinkTool = null;
+
+        throw error;
+      }
     },
   },
 });

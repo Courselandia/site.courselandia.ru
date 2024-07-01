@@ -7,7 +7,6 @@ import profession from '@/stores/profession';
 import school from '@/stores/school';
 import skill from '@/stores/skill';
 import teacher from '@/stores/teacher';
-import tool from '@/stores/tool';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => {
   const {
@@ -44,7 +43,6 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const { itemLinkSchool } = storeToRefs(school());
     const { itemLinkSkill } = storeToRefs(skill());
     const { itemLinkTeacher } = storeToRefs(teacher());
-    const { itemLinkTool } = storeToRefs(tool());
 
     itemLinkCategory.value = null;
     itemLinkDirection.value = null;
@@ -52,7 +50,6 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     itemLinkSchool.value = null;
     itemLinkSkill.value = null;
     itemLinkTeacher.value = null;
-    itemLinkTool.value = result;
 
     return !!result;
   } catch (error: any) {
