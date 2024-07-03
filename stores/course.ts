@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 
 import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
+import { cacheDate } from '@/helpers/cache';
 import toQuery from '@/helpers/toQuery';
 import type IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
 import type IFilters from '@/interfaces/filters';
@@ -55,7 +56,7 @@ export default defineStore('course', {
       openedItems: Record<string, boolean> | null = null,
       section: string | null = null,
       sectionLink: string | null = null,
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseData<IApiReadCourses>> {
       try {
         const config = useRuntimeConfig();
@@ -95,7 +96,7 @@ export default defineStore('course', {
           && section
           && sectionLink
         ) {
-          path = `/storage/json/courses/${section}/${sectionLink}.json?cacheDate=${cacheDate}`;
+          path = `/storage/json/courses/${section}/${sectionLink}.json?cd=${cacheDate(cd)}`;
         } else if (
           !config.public.development
           && offset === 0
@@ -105,7 +106,7 @@ export default defineStore('course', {
           && sectionLink === null
           && !hasFilter
         ) {
-          path = `/storage/json/courses.json?cacheDate=${cacheDate}`;
+          path = `/storage/json/courses.json?cd=${cacheDate(cd)}`;
         }
 
         const response = await axios.get<IResponseData<IApiReadCourses>>(path, {
@@ -160,14 +161,14 @@ export default defineStore('course', {
     async getCourse(
       school: string,
       course: string,
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<ICourseResponse | null>> {
       try {
         const config = useRuntimeConfig();
 
         const path = config.public.development
           ? `/api/private/site/course/get/${school}/${course}`
-          : `/storage/json/courses/show/${school}/${course}.json?cacheDate=${cacheDate}`;
+          : `/storage/json/courses/show/${school}/${course}.json?cd=${cacheDate(cd)}`;
         const response = await axios.get<IResponseItem<ICourseResponse>>(path, {
           baseURL: config.public.apiUrl,
         });
@@ -211,12 +212,12 @@ export default defineStore('course', {
         throw error;
       }
     },
-    async getStatCourses(cacheDate: ECacheDate = ECacheDate.DAY): Promise<IResponseItem<IStat>> {
+    async getStatCourses(cd: ECacheDate = ECacheDate.DAY): Promise<IResponseItem<IStat>> {
       try {
         const config = useRuntimeConfig();
         const path = config.public.development
           ? '/api/private/site/course/stat'
-          : `/storage/json/stat.json?cacheDate=${cacheDate}`;
+          : `/storage/json/stat.json?cd=${cacheDate(cd)}`;
 
         const response = await axios.get<IResponseItem<IStat>>(path, {
           baseURL: config.public.apiUrl,
@@ -232,13 +233,13 @@ export default defineStore('course', {
       }
     },
     async readRatedCourses(
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItems<ICourse> | null> {
       try {
         const config = useRuntimeConfig();
         const path = config.public.development
           ? '/api/private/site/course/read/rated'
-          : `/storage/json/courses/rated.json?cacheDate=${cacheDate}`;
+          : `/storage/json/courses/rated.json?cd=${cacheDate(cd)}`;
 
         const response = await axios.get<IResponseItems<ICourse>>(path, {
           baseURL: config.public.apiUrl,

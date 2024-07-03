@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 
 import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
+import { cacheDate } from '@/helpers/cache';
 import toQuery from '@/helpers/toQuery';
 import type IFilters from '@/interfaces/filters';
 import type { IResponseItem, IResponseItems } from '@/interfaces/response';
@@ -16,13 +17,13 @@ export default defineStore('school', {
   }),
   actions: {
     async readSchools(
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItems<ISchool>> {
       try {
         const config = useRuntimeConfig();
         const path = config.public.development
           ? '/api/private/site/school/read'
-          : `/storage/json/schools.json?cacheDate=${cacheDate}`;
+          : `/storage/json/schools.json?cd=${cacheDate(cd)}`;
         const response = await axios.get<IResponseItems<ISchool>>(path, {
           baseURL: config.public.apiUrl,
         });
@@ -59,13 +60,13 @@ export default defineStore('school', {
     },
     async linkSchool(
       link: string,
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<ISchoolLink>> {
       try {
         const config = useRuntimeConfig();
         const path = config.public.development
           ? `/api/private/site/school/link/${link}`
-          : `/storage/json/schools/${link}.json?cacheDate=${cacheDate}`;
+          : `/storage/json/schools/${link}.json?cd=${cacheDate(cd)}`;
         const response = await axios.get<IResponseItem<ISchoolLink>>(path, {
           baseURL: config.public.apiUrl,
         });

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 
 import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
+import { cacheDate } from '@/helpers/cache';
 import type { IResponseItem } from '@/interfaces/response';
 import type ISectionLink from '@/interfaces/stores/course/sectionLink';
 import type TLink from '@/types/link';
@@ -18,7 +19,7 @@ export default defineStore('section', {
       sectionLink2: string | null = null,
       level: TLink | null = null,
       free: boolean = false,
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<ISectionLink>> {
       try {
         const config = useRuntimeConfig();
@@ -37,7 +38,7 @@ export default defineStore('section', {
           pathToJson += '_free';
         }
 
-        pathToJson += `.json?cacheDate=${cacheDate}`;
+        pathToJson += `.json?cd=${cacheDate(cd)}`;
         const items = [
           {
             type: sectionType1,

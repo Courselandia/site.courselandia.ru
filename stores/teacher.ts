@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 
 import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
+import { cacheDate } from '@/helpers/cache';
 import toQuery from '@/helpers/toQuery';
 import type IFilters from '@/interfaces/filters';
 import type {
@@ -40,13 +41,13 @@ export default defineStore('teacher', {
     },
     async linkTeacher(
       link: string,
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<ITeacherLink>> {
       try {
         const config = useRuntimeConfig();
         const path = config.public.development
           ? `/api/private/site/teacher/link/${link}`
-          : `/storage/json/teachers/${link}.json?cacheDate=${cacheDate}`;
+          : `/storage/json/teachers/${link}.json?cd=${cacheDate(cd)}`;
         const response = await axios.get<IResponseItem<ITeacherLink>>(path, {
           baseURL: config.public.apiUrl,
         });

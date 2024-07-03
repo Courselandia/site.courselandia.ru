@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import ECacheDate from '@/enums/cache';
 import EDirection from '@/enums/direction';
 import axios from '@/helpers/axios';
+import { cacheDate } from '@/helpers/cache';
 import toQuery from '@/helpers/toQuery';
 import type {
   IResponseItem,
@@ -20,7 +21,7 @@ export default defineStore('collection', {
       offset: number = 0,
       limit: number = 30,
       direction: EDirection | null = null,
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItems<ICollection>> {
       try {
         const config = useRuntimeConfig();
@@ -30,9 +31,9 @@ export default defineStore('collection', {
 
         if (!config.public.development && offset === 0 && limit === 30) {
           if (direction) {
-            path = `/storage/json/collections/${direction}.json?cacheDate=${cacheDate}`;
+            path = `/storage/json/collections/${direction}.json?cd=${cacheDate(cd)}`;
           } else {
-            path = `/storage/json/collections/all.json?cacheDate=${cacheDate}`;
+            path = `/storage/json/collections/all.json?cd=${cacheDate(cd)}`;
           }
         }
 
@@ -51,13 +52,13 @@ export default defineStore('collection', {
     },
     async linkCollection(
       link: string,
-      cacheDate: ECacheDate = ECacheDate.DAY,
+      cd: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<ICollection>> {
       try {
         const config = useRuntimeConfig();
         const path = config.public.development
           ? `/api/private/site/collection/link/${link}`
-          : `/storage/json/collections/link/${link}.json?cacheDate=${cacheDate}`;
+          : `/storage/json/collections/link/${link}.json?cd=${cacheDate(cd)}`;
 
         const response = await axios.get<IResponseItem<ICollection>>(path, {
           baseURL: config.public.apiUrl,
