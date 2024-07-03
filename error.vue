@@ -37,7 +37,7 @@ import {
 } from 'vue';
 
 import { apiReadDirections } from '@/api/direction';
-import { apiReadCourseSchools } from '@/api/school';
+import { apiReadSchools } from '@/api/school';
 import Error from '@/components/atoms/Error.vue';
 import Dropdowns from '@/components/modules/layouts/general/organism/Dropdowns.vue';
 import Footer from '@/components/modules/layouts/general/organism/Footer.vue';
@@ -61,7 +61,7 @@ try {
 }
 
 try {
-  await apiReadCourseSchools();
+  await apiReadSchools();
 } catch (err: any) {
   console.error(err.message);
 }
