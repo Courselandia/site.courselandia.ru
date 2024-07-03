@@ -22,6 +22,10 @@ export default defineStore('direction', {
           : `/storage/json/directions.json?cacheDate=${cacheDate}`;
         const response = await axios.get<IResponseItems<IDirection>>(path, {
           baseURL: config.public.apiUrl,
+          params: {
+            withCategories: 1,
+            withCount: 1,
+          },
         });
 
         this.directions = response.data.data;
