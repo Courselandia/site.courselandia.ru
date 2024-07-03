@@ -7,6 +7,6 @@ export default interface IProperty {
   name: string,
   link?: string,
   disabled?: null,
-  image_middle_id?: IImage | null,
+  image_middle?: IImage | null,
   experiences?: ITeacherExperience[],
 }

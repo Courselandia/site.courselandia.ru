@@ -16,8 +16,8 @@ export default interface ISchoolLink {
   created_at: string;
   updated_at: string;
   deleted_at: string | null,
-  image_logo_id: IImage | null;
-  image_site_id: IImage | null;
+  image_logo: IImage | null;
+  image_site: IImage | null;
   site: string | null,
   referral: string | null,
   rating: number | null,

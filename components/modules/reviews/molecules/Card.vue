@@ -9,8 +9,8 @@
       <div class="card__row card__row--horizontal card__row--line">
         <div class="card__logo">
           <Logo
-            v-if="school.image_logo_id?.path"
-            :path="school.image_logo_id.path"
+            v-if="school.image_logo?.path"
+            :path="school.image_logo.path"
             :name="school.name"
           />
         </div>

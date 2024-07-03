@@ -11,7 +11,7 @@ export const courseStoreToCourseComponent = (
   link: `/courses/show/${course.school?.link}/${course.link}`,
   url: course.url,
   rating: course.rating,
-  image: course.image_middle_id || null,
+  image: course.image_middle || null,
   price: course.price,
   price_old: course.price_old,
   price_recurrent: course.price_recurrent,
@@ -27,7 +27,7 @@ export const courseStoreToCourseComponent = (
   school: course.school ? {
     id: course.school.id,
     name: course.school.name,
-    image: course.school.image_logo_id?.path || null,
+    image: course.school.image_logo?.path || null,
     link: `/courses/school/${course.school?.link}`,
     promocode: course.school.promocode,
   } : null,
@@ -65,7 +65,7 @@ export const courseStoreToCourseComponent = (
     id: teacher.id,
     label: teacher.name,
     link: `/courses/teacher/${teacher.link}`,
-    image: teacher.image_middle_id,
+    image: teacher.image_middle,
     extra: teacher.experiences?.length ? teacher.experiences[0].position : undefined,
   })) : null,
   tools: course.tools ? course.tools.map((tool) => ({

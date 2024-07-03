@@ -6,7 +6,7 @@
       prefetch
     >
       <Image
-        :path="publication.image_middle_id?.path"
+        :path="publication.image_middle?.path"
         :title="publication.header"
       />
       <Header

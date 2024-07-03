@@ -8,7 +8,7 @@
         <div class="header-teacher__item header-teacher__item--media">
           <HeaderTeacherPhoto
             :name="teacher.name"
-            :path="teacher.image_small_id?.path"
+            :path="teacher.image_small?.path"
           />
           <HeaderTeacherSocials
             :social-medias="teacher.social_medias"

@@ -13,9 +13,9 @@ const schoolsToBrand = (
       result[index] = {
         label: school.name,
         path: `/courses/school/${school.link}`,
-        image: school.image_logo_id?.path || null,
-        width: school.image_logo_id?.width || null,
-        height: school.image_logo_id?.height || null,
+        image: school.image_logo?.path || null,
+        width: school.image_logo?.width || null,
+        height: school.image_logo?.height || null,
       };
     });
   }

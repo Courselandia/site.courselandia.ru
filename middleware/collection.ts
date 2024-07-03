@@ -11,9 +11,9 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
     const config = useRuntimeConfig();
     const title = result?.metatag?.title;
     const description = result?.metatag?.description;
-    const image = result?.image_big_id?.path;
-    const width = result?.image_big_id?.width;
-    const height = result?.image_big_id?.height;
+    const image = result?.image_big?.path;
+    const width = result?.image_big?.width;
+    const height = result?.image_big?.height;
 
     useHead({
       title,

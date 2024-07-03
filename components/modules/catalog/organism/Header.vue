@@ -182,11 +182,11 @@
         </nuxt-link>
       </template>
       <template
-        v-if="itemLinkSchool?.image_site_id?.path"
+        v-if="itemLinkSchool?.image_site?.path"
         #image
       >
         <img
-          :src="itemLinkSchool.image_site_id.path"
+          :src="itemLinkSchool.image_site.path"
           :alt="itemLinkSchool.name"
           :title="itemLinkSchool.name"
         />
@@ -198,7 +198,7 @@
         {{ itemLinkSchool.amount_teachers }}
       </template>
       <template
-        v-if="itemLinkSchool?.image_site_id?.path"
+        v-if="itemLinkSchool?.image_site?.path"
         #action
       >
         <Button

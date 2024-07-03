@@ -19,9 +19,9 @@ export default interface ITeacherLink {
   updated_at: string;
   deleted_at: string | null,
   rating: number | null,
-  image_small_id: IImage | null,
-  image_middle_id: IImage | null,
-  image_big_id: IImage | null,
+  image_small: IImage | null,
+  image_middle: IImage | null,
+  image_big: IImage | null,
   directions: Array<IDirectionLink>,
   schools: Array<ISkillLink>,
   copied: boolean;

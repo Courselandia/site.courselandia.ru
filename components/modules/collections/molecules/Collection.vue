@@ -6,7 +6,7 @@
   >
     <div class="collection__image">
       <CollectionImage
-        :path="collection.image_small_id?.path"
+        :path="collection.image_small?.path"
         :name="collection.name"
       />
     </div>

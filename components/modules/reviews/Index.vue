@@ -210,7 +210,7 @@ useJsonld({
   '@type': 'Product',
   category: 'Онлайн курсы',
   name: schoolItem.value?.name,
-  image: schoolItem.value?.image_logo_id?.path,
+  image: schoolItem.value?.image_logo?.path,
   description: stripTags(brToRn(schoolItem.value?.text || '')),
   aggregateRating: {
     '@type': 'AggregateRating',

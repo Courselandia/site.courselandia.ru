@@ -10,9 +10,9 @@ export default interface IPublication {
   link: string,
   anons: string | null,
   article: string | null,
-  image_small_id: IImage | null;
-  image_middle_id: IImage | null;
-  image_big_id: IImage | null;
+  image_small: IImage | null;
+  image_middle: IImage | null;
+  image_big: IImage | null;
   metatag: IMetatag | null,
   created_at: string,
   updated_at: string,

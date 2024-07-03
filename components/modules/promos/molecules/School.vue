@@ -2,7 +2,7 @@
   <div class="school">
     <div class="school__logo">
       <Logo
-        :image="school.image_logo_id?.path"
+        :image="school.image_logo?.path"
         :label="school.name"
         :site="school.referral"
       />

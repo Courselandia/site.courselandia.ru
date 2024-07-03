@@ -16,9 +16,9 @@ export default interface ICollection {
   sort_field: string,
   sort_direction: string,
   copied: boolean,
-  image_small_id: IImage | null;
-  image_middle_id: IImage | null;
-  image_big_id: IImage | null;
+  image_small: IImage | null;
+  image_middle: IImage | null;
+  image_big: IImage | null;
   status: boolean,
   metatag: IMetatag | null,
   direction: IDirection,

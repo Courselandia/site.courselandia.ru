@@ -3,12 +3,12 @@
     <Promocodes
       :promocodes="school.promocodes"
       :school="school.name"
-      :logo="school.image_logo_id?.path"
+      :logo="school.image_logo_?.path"
     />
     <Promotions
       :promotions="school.promotions"
       :school="school.name"
-      :logo="school.image_logo_id?.path"
+      :logo="school.image_logo?.path"
     />
   </div>
 </template>

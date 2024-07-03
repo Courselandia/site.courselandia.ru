@@ -17,7 +17,7 @@ const schoolsToSchoolReviews = (
         reviews: school.reviews_count,
         rating: school.rating,
         text: school.text,
-        image: school.image_logo_id?.path || null,
+        image: school.image_logo?.path || null,
         site: school.site,
         referral: school.referral,
         amount_courses: school.amount_courses,

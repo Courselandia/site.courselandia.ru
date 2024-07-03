@@ -4,8 +4,8 @@
     class="publication content content--small mt-12 mb-24 mb-12-sm titles"
   >
     <Image
-      v-if="itemLinkPublication.image_big_id?.path"
-      :path="itemLinkPublication.image_big_id?.path"
+      v-if="itemLinkPublication.image_big?.path"
+      :path="itemLinkPublication.image_big?.path"
       :title="itemLinkPublication.header"
     />
     <Header
@@ -31,9 +31,9 @@ const { itemLinkPublication } = storeToRefs(publication());
 const config = useRuntimeConfig();
 const title = itemLinkPublication.value?.metatag?.title;
 const description = itemLinkPublication.value?.metatag?.description;
-const image = itemLinkPublication.value?.image_big_id?.path;
-const width = itemLinkPublication.value?.image_big_id?.width;
-const height = itemLinkPublication.value?.image_big_id?.height;
+const image = itemLinkPublication.value?.image_big?.path;
+const width = itemLinkPublication.value?.image_big?.width;
+const height = itemLinkPublication.value?.image_big?.height;
 
 useHead({
   title,

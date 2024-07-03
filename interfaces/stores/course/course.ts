@@ -19,9 +19,9 @@ export default interface ICourse {
   uuid: string;
   metatag_id: TId;
   school_id: TId;
-  image_big_id: IImage | null;
-  image_middle_id: IImage | null;
-  image_small_id: IImage | null;
+  image_big: IImage | null;
+  image_middle: IImage | null;
+  image_small: IImage | null;
   name: string;
   header: string;
   text: string | null;

@@ -26,8 +26,8 @@
     </div>
     <div class="collection__side collection__side--right">
       <CollectionImage
-        :path-box="itemLinkCollection.image_small_id?.path"
-        :path-horizontal="itemLinkCollection.image_middle_id?.path"
+        :path-box="itemLinkCollection.image_small?.path"
+        :path-horizontal="itemLinkCollection.image_middle?.path"
         :name="itemLinkCollection.name"
       />
     </div>
@@ -53,9 +53,9 @@ const { itemLinkCollection } = storeToRefs(collection());
 const config = useRuntimeConfig();
 const title = itemLinkCollection.value?.metatag?.title;
 const description = itemLinkCollection.value?.metatag?.description;
-const image = itemLinkCollection.value?.image_big_id?.path;
-const width = itemLinkCollection.value?.image_big_id?.width;
-const height = itemLinkCollection.value?.image_big_id?.height;
+const image = itemLinkCollection.value?.image_big?.path;
+const width = itemLinkCollection.value?.image_big?.width;
+const height = itemLinkCollection.value?.image_big?.height;
 const courses = ref<ICourse[]>(
   coursesStoreToCoursesComponent(itemLinkCollection.value?.courses || []),
 );
