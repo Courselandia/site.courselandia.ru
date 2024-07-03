@@ -31,21 +31,17 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import {
   ref,
   toRefs,
 } from 'vue';
 
-import { apiReadSchools } from '@/api/school';
+import { apiReadDirections } from '@/api/direction';
+import { apiReadCourseSchools } from '@/api/school';
 import Error from '@/components/atoms/Error.vue';
 import Dropdowns from '@/components/modules/layouts/general/organism/Dropdowns.vue';
 import Footer from '@/components/modules/layouts/general/organism/Footer.vue';
 import Header from '@/components/modules/layouts/general/organism/Header.vue';
-import { cacheDate } from '@/helpers/cache';
-import direction from '@/stores/direction';
-import school from '@/stores/school';
-import {apiReadDirections} from "~/api/direction";
 
 const props = defineProps({
   error: {
@@ -65,7 +61,7 @@ try {
 }
 
 try {
-  await apiReadSchools();
+  await apiReadCourseSchools();
 } catch (err: any) {
   console.error(err.message);
 }

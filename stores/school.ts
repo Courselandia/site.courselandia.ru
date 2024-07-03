@@ -10,10 +10,28 @@ import type ISchool from '@/interfaces/stores/school/school';
 export default defineStore('school', {
   state: () => ({
     schools: null as ISchool[] | null,
+    courseSchools: null as ISchool[] | null,
     itemLinkSchool: null as ISchoolLink | null,
   }),
   actions: {
-    async readSchools(
+    async readSchools(): Promise<IResponseItems<ISchool>> {
+      try {
+        const config = useRuntimeConfig();
+        const path = config.public.development ? '/api/private/site/school/read' : '/storage/json/schools.json';
+        const response = await axios.get<IResponseItems<ISchool>>(path, {
+          baseURL: config.public.apiUrl,
+        });
+
+        this.schools = response.data.data;
+
+        return response.data;
+      } catch (error) {
+        this.schools = null;
+
+        throw error;
+      }
+    },
+    async readCourseSchools(
       offset: number | null = null,
       limit: number | null = null,
       filters: IFilters | null = null,
@@ -25,11 +43,11 @@ export default defineStore('school', {
           baseURL: config.public.apiUrl,
         });
 
-        this.schools = response.data.data;
+        this.courseSchools = response.data.data;
 
         return response.data;
       } catch (error) {
-        this.schools = null;
+        this.courseSchools = null;
 
         throw error;
       }
