@@ -57,7 +57,7 @@ export default defineStore('section', {
           baseURL: config.public.apiUrl,
           params: config.public.development ? {
             level,
-            free,
+            free: free ? 1 : 0,
             items,
           } : undefined,
         });
