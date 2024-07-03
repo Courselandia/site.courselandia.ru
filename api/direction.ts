@@ -1,8 +1,8 @@
+import ECacheDate from '@/enums/cache';
 import type { IResponseItem, IResponseItems } from '@/interfaces/response';
 import type IDirection from '@/interfaces/stores/course/direction';
 import type IDirectionLink from '@/interfaces/stores/course/directionLink';
 import direction from '@/stores/direction';
-import ECacheDate from '@/enums/cache';
 
 export const apiReadDirections = async (
   cacheDate: ECacheDate = ECacheDate.DAY,
