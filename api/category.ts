@@ -1,3 +1,4 @@
+import ECacheDate from '@/enums/cache';
 import type IFilters from '@/interfaces/filters';
 import type { IResponseItem, IResponseItems } from '@/interfaces/response';
 import type ICategoryLink from '@/interfaces/stores/course/categoryLink';
@@ -27,6 +28,7 @@ export const apiReadCategories = async (
 
 export const apiLinkCategory = async (
   link: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<ICategoryLink | null> => {
   const {
     linkCategory,
@@ -35,6 +37,7 @@ export const apiLinkCategory = async (
   const loadCategories = async ():
     Promise<IResponseItem<ICategoryLink>> => linkCategory(
     link,
+    cacheDate,
   );
 
   const resultCategory = await useAsyncData('category', async () => loadCategories());

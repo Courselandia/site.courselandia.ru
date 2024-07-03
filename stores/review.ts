@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import type {
@@ -20,6 +21,7 @@ export default defineStore('review', {
       limit: number = 20,
       sorts: ISorts | null = null,
       rating: number | null = null,
+      cacheDate: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItems<IReview>> {
       try {
         const config = useRuntimeConfig();
@@ -35,7 +37,7 @@ export default defineStore('review', {
         let path = `/api/private/site/review/read?${query}`;
 
         if (!config.public.development && offset === 0 && limit === 20 && sorts?.created_at === 'DESC' && !rating) {
-          path = `/storage/json/reviews/${school}.json`;
+          path = `/storage/json/reviews/${school}.json?cacheDate=${cacheDate}`;
         }
 
         const response = await axios.get<IResponseItems<IReview>>(path, {

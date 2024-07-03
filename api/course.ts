@@ -1,5 +1,6 @@
 import { storeToRefs } from 'pinia';
 
+import ECacheDate from '@/enums/cache';
 import type IApiReadCourses from '@/interfaces/api/course/apiReadCourses';
 import type IApiReadSearchedCourses from '@/interfaces/api/course/apiReadSearchedCourses';
 import type IFilters from '@/interfaces/filters';
@@ -11,9 +12,9 @@ import type {
 import type ISorts from '@/interfaces/sorts';
 import type ICourse from '@/interfaces/stores/course/course';
 import type ICourseResponse from '@/interfaces/stores/course/courseResponse';
+import type IStat from '@/interfaces/stores/course/stat';
 import course from '@/stores/course';
 import type TId from '@/types/id';
-import type IStat from "~/interfaces/stores/course/stat";
 
 export const apiReadCourses = async (
   offset: number = 0,
@@ -23,6 +24,7 @@ export const apiReadCourses = async (
   openedItems: Record<string, boolean> | null = null,
   sectionValue: string | null = null,
   sectionLink: string | null = null,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<IApiReadCourses> => {
   const {
     readCourses,
@@ -37,6 +39,7 @@ export const apiReadCourses = async (
     openedItems,
     sectionValue,
     sectionLink,
+    cacheDate,
   );
 
   const {
@@ -107,6 +110,7 @@ const courseItems: Record<string, ICourseResponse> = {};
 export const apiGetCourse = async (
   schoolLink: string,
   courseLink: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<ICourseResponse | null> => {
   const {
     getCourse,
@@ -122,6 +126,7 @@ export const apiGetCourse = async (
     Promise<IResponseItem<ICourseResponse | null>> => await getCourse(
     schoolLink,
     courseLink,
+    cacheDate,
   );
 
   const resultCourse = await useAsyncData('course', async () => loadGetCourse());
@@ -135,26 +140,30 @@ export const apiGetCourse = async (
   return null;
 };
 
-export const apiGetStatCourses = async (): Promise<IStat | null> => {
+export const apiGetStatCourses = async (
+  cacheDate: ECacheDate = ECacheDate.DAY,
+): Promise<IStat | null> => {
   const {
     getStatCourses,
   } = course();
 
   const loadGetCourse = async ():
-    Promise<IResponseItem<IStat>> => await getStatCourses();
+    Promise<IResponseItem<IStat>> => await getStatCourses(cacheDate);
 
   const resultCourse = await useAsyncData('statCourses', async () => loadGetCourse());
 
   return resultCourse.data.value?.data || null;
 };
 
-export const apiReadRatedCourses = async (): Promise<Array<ICourse>> => {
+export const apiReadRatedCourses = async (
+  cacheDate: ECacheDate = ECacheDate.DAY,
+): Promise<Array<ICourse>> => {
   const {
     readRatedCourses,
   } = course();
 
   const loadReadRatedCourses = async ():
-    Promise<IResponseItems<ICourse> | null> => readRatedCourses();
+    Promise<IResponseItems<ICourse> | null> => readRatedCourses(cacheDate);
 
   const resultCourses = await useAsyncData('ratedCourses', async () => loadReadRatedCourses());
 

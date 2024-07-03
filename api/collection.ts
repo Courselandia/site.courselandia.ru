@@ -1,3 +1,4 @@
+import ECacheDate from '@/enums/cache';
 import EDirection from '@/enums/direction';
 import type {
   IResponseItem,
@@ -11,6 +12,7 @@ export const apiReadCollections = async (
   offset: number = 0,
   limit: number = 20,
   direction: EDirection | null = null,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<IResponseItems<ICollection> | null> => {
   const {
     readCollections,
@@ -21,6 +23,7 @@ export const apiReadCollections = async (
     offset,
     limit,
     direction,
+    cacheDate,
   );
 
   if (fetch) {
@@ -34,13 +37,14 @@ export const apiReadCollections = async (
 
 export const apiLinkCollection = async (
   link: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<ICollection | null> => {
   const {
     linkCollection,
   } = collection();
 
   const loadCollection = async ():
-    Promise<IResponseItem<ICollection>> => linkCollection(link);
+    Promise<IResponseItem<ICollection>> => linkCollection(link, cacheDate);
 
   const resultCollection = await useAsyncData('collection', async () => loadCollection());
 

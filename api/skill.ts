@@ -1,3 +1,4 @@
+import ECacheDate from '@/enums/cache';
 import type IFilters from '@/interfaces/filters';
 import type { IResponseItem, IResponseItems } from '@/interfaces/response';
 import type IFilterSkill from '@/interfaces/stores/course/filterSkill';
@@ -27,6 +28,7 @@ export const apiReadSkills = async (
 
 export const apiLinkSkill = async (
   link: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<ISkillLink | null> => {
   const {
     linkSkill,
@@ -35,6 +37,7 @@ export const apiLinkSkill = async (
   const loadSkill = async ():
     Promise<IResponseItem<ISkillLink>> => linkSkill(
     link,
+    cacheDate,
   );
 
   const resultSkill = await useAsyncData('skill', async () => loadSkill());

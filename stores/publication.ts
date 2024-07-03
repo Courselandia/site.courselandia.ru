@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import type {
@@ -17,6 +18,7 @@ export default defineStore('publication', {
     async readPublications(
       offset: number = 0,
       limit: number = 20,
+      cacheDate: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<IList>> {
       try {
         const config = useRuntimeConfig();
@@ -25,7 +27,7 @@ export default defineStore('publication', {
         let path = `/api/private/site/publication/read?${query}`;
 
         if (!config.public.development && offset === 0 && limit === 20) {
-          path = '/storage/json/publications.json';
+          path = `/storage/json/publications.json?cacheDate=${cacheDate}`;
         }
 
         const response = await axios.get<IResponseItem<IList>>(path, {
@@ -43,10 +45,13 @@ export default defineStore('publication', {
     },
     async linkPublication(
       link: string,
+      cacheDate: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<IPublication>> {
       try {
         const config = useRuntimeConfig();
-        const path = config.public.development ? `/api/private/site/publication/link/${link}` : `/storage/json/publications/${link}.json`;
+        const path = config.public.development
+          ? `/api/private/site/publication/link/${link}`
+          : `/storage/json/publications/${link}.json?cacheDate=${cacheDate}`;
 
         const response = await axios.get<IResponseItem<IPublication>>(path, {
           baseURL: config.public.apiUrl,

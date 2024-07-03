@@ -4,6 +4,7 @@ import axios from '@/helpers/axios';
 import type { IResponseItem } from '@/interfaces/response';
 import type ISectionLink from '@/interfaces/stores/course/sectionLink';
 import type TLink from '@/types/link';
+import ECacheDate from "~/enums/cache";
 
 export default defineStore('section', {
   state: () => ({
@@ -17,6 +18,7 @@ export default defineStore('section', {
       sectionLink2: string | null = null,
       level: TLink | null = null,
       free: boolean = false,
+      cacheDate: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<ISectionLink>> {
       try {
         const config = useRuntimeConfig();
@@ -35,7 +37,7 @@ export default defineStore('section', {
           pathToJson += '_free';
         }
 
-        pathToJson += '.json';
+        pathToJson += `.json?cacheDate=${cacheDate}`;
         const items = [
           {
             type: sectionType1,

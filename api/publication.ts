@@ -1,3 +1,4 @@
+import ECacheDate from '@/enums/cache';
 import type {
   IResponseItem,
 } from '@/interfaces/response';
@@ -9,6 +10,7 @@ export const apiReadPublications = async (
   fetch: boolean,
   offset: number = 0,
   limit: number = 20,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<IList | null> => {
   const {
     readPublications,
@@ -18,6 +20,7 @@ export const apiReadPublications = async (
     Promise<IResponseItem<IList>> => readPublications(
     offset,
     limit,
+    cacheDate,
   );
 
   if (fetch) {
@@ -33,6 +36,7 @@ export const apiReadPublications = async (
 
 export const apiLinkPublication = async (
   link: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<IPublication | null> => {
   const {
     linkPublication,
@@ -41,6 +45,7 @@ export const apiLinkPublication = async (
   const loadPublication = async ():
     Promise<IResponseItem<IPublication>> => linkPublication(
     link,
+    cacheDate,
   );
 
   const resultPublication = await useAsyncData('publication', async () => loadPublication());

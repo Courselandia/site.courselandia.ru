@@ -1,3 +1,4 @@
+import ECacheDate from '@/enums/cache';
 import type { IResponseItem } from '@/interfaces/response';
 import type ISectionLink from '@/interfaces/stores/course/sectionLink';
 import section from '@/stores/section';
@@ -10,6 +11,7 @@ export const apiLinkSection = async (
   sectionLink2: string | null = null,
   level: TLink | null = null,
   free: boolean = false,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<ISectionLink | null> => {
   const {
     linkSection,
@@ -23,6 +25,7 @@ export const apiLinkSection = async (
     sectionLink2,
     level,
     free,
+    cacheDate,
   );
 
   const resultSection = await useAsyncData('section', async () => loadSection());

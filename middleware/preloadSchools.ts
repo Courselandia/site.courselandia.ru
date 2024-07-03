@@ -1,8 +1,8 @@
-import { apiReadCourseSchools } from '@/api/school';
+import { apiReadSchools } from '@/api/school';
 
 export default defineNuxtRouteMiddleware(async (to): Promise<void> => {
   try {
-    await apiReadCourseSchools();
+    await apiReadSchools();
   } catch (error: any) {
     console.error(error.message);
   }

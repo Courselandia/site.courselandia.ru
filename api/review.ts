@@ -1,3 +1,4 @@
+import ECacheDate from '@/enums/cache';
 import type {
   IResponseItems,
 } from '@/interfaces/response';
@@ -12,6 +13,7 @@ export const apiReadReviews = async (
   limit: number = 20,
   sorts: ISorts | null = null,
   rating: number | null = null,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<IResponseItems<IReview> | null> => {
   const {
     readReviews,
@@ -24,6 +26,7 @@ export const apiReadReviews = async (
     limit,
     sorts,
     rating,
+    cacheDate,
   );
 
   if (fetch) {

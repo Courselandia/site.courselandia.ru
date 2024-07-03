@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
 import type {
   IResponseItem,
@@ -13,13 +14,15 @@ export default defineStore('promo', {
     itemLinkPromo: null as ISchool | null,
   }),
   actions: {
-    async readPromos(): Promise<IResponseItems<ISchool>> {
+    async readPromos(
+      cacheDate: ECacheDate = ECacheDate.DAY,
+    ): Promise<IResponseItems<ISchool>> {
       try {
         const config = useRuntimeConfig();
         let path = '/api/private/site/promo/read';
 
         if (!config.public.development) {
-          path = '/storage/json/promos.json';
+          path = `/storage/json/promos.json?cacheDate=${cacheDate}`;
         }
 
         const response = await axios.get<IResponseItems<ISchool>>(path, {
@@ -35,10 +38,15 @@ export default defineStore('promo', {
         throw error;
       }
     },
-    async linkPromo(link: string): Promise<IResponseItem<ISchool>> {
+    async linkPromo(
+      link: string,
+      cacheDate: ECacheDate = ECacheDate.DAY,
+    ): Promise<IResponseItem<ISchool>> {
       try {
         const config = useRuntimeConfig();
-        const path = config.public.development ? `/api/private/site/promo/link/${link}` : `/storage/json/promos/${link}.json`;
+        const path = config.public.development
+          ? `/api/private/site/promo/link/${link}`
+          : `/storage/json/promos/${link}.json?cacheDate=${cacheDate}`;
 
         const response = await axios.get<IResponseItem<ISchool>>(path, {
           baseURL: config.public.apiUrl,

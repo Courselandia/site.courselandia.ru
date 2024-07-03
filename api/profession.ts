@@ -1,3 +1,4 @@
+import ECacheDate from '@/enums/cache';
 import type IFilters from '@/interfaces/filters';
 import type { IResponseItem, IResponseItems } from '@/interfaces/response';
 import type IFilterProfession from '@/interfaces/stores/course/filterProfession';
@@ -27,6 +28,7 @@ export const apiReadProfessions = async (
 
 export const apiLinkProfession = async (
   link: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<IProfessionLink | null> => {
   const {
     linkProfession,
@@ -35,6 +37,7 @@ export const apiLinkProfession = async (
   const loadProfession = async ():
     Promise<IResponseItem<IProfessionLink>> => linkProfession(
     link,
+    cacheDate,
   );
 
   const resultProfession = await useAsyncData('profession', async () => loadProfession());

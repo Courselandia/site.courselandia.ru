@@ -3,6 +3,7 @@ import type { IResponseItem, IResponseItems } from '@/interfaces/response';
 import type IFilterTeacher from '@/interfaces/stores/course/filterTeacher';
 import type ITeacherLink from '@/interfaces/stores/course/teacherLink';
 import teacher from '@/stores/teacher';
+import ECacheDate from "~/enums/cache";
 
 export const apiReadTeachers = async (
   offset: number | null = null,
@@ -27,6 +28,7 @@ export const apiReadTeachers = async (
 
 export const apiLinkTeacher = async (
   link: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<ITeacherLink | null> => {
   const {
     linkTeacher,
@@ -35,6 +37,7 @@ export const apiLinkTeacher = async (
   const loadTeachers = async ():
     Promise<IResponseItem<ITeacherLink>> => linkTeacher(
     link,
+    cacheDate,
   );
 
   const resultTeacher = await useAsyncData('teacher', async () => loadTeachers());

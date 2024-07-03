@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
 import toQuery from '@/helpers/toQuery';
 import type IFilters from '@/interfaces/filters';
@@ -39,10 +40,11 @@ export default defineStore('category', {
     },
     async linkCategory(
       link: string,
+      cacheDate: ECacheDate = ECacheDate.DAY,
     ): Promise<IResponseItem<ICategoryLink>> {
       try {
         const config = useRuntimeConfig();
-        const path = config.public.development ? `/api/private/site/category/link/${link}` : `/storage/json/categories/${link}.json`;
+        const path = config.public.development ? `/api/private/site/category/link/${link}` : `/storage/json/categories/${link}.json?cacheDate=${cacheDate}`;
         const response = await axios.get<IResponseItem<ICategoryLink>>(path, {
           baseURL: config.public.apiUrl,
         });

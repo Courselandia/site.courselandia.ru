@@ -1,16 +1,19 @@
+import ECacheDate from '@/enums/cache';
 import type IFilters from '@/interfaces/filters';
 import type { IResponseItem, IResponseItems } from '@/interfaces/response';
 import type ISchoolLink from '@/interfaces/stores/course/schoolLink';
 import type ISchool from '@/interfaces/stores/school/school';
 import school from '@/stores/school';
 
-export const apiReadSchools = async (): Promise<Array<ISchool>> => {
+export const apiReadSchools = async (
+  cacheDate: ECacheDate = ECacheDate.DAY,
+): Promise<Array<ISchool>> => {
   const {
     readSchools,
   } = school();
 
   const loadSchools = async ():
-    Promise<IResponseItems<ISchool>> => readSchools();
+    Promise<IResponseItems<ISchool>> => readSchools(cacheDate);
 
   const resultSchools = await useAsyncData('schools', async () => loadSchools());
 
@@ -36,13 +39,14 @@ export const apiReadCourseSchools = async (
 
 export const apiLinkSchool = async (
   link: string,
+  cacheDate: ECacheDate = ECacheDate.DAY,
 ): Promise<ISchoolLink | null> => {
   const {
     linkSchool,
   } = school();
 
   const loadSchool = async ():
-    Promise<IResponseItem<ISchoolLink>> => linkSchool(link as string);
+    Promise<IResponseItem<ISchoolLink>> => linkSchool(link as string, cacheDate);
 
   const resultSchool = await useAsyncData('school', async () => loadSchool());
 
