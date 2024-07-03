@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 
+import ECacheDate from '@/enums/cache';
 import axios from '@/helpers/axios';
 import type { IResponseItem } from '@/interfaces/response';
 import type ISectionLink from '@/interfaces/stores/course/sectionLink';
 import type TLink from '@/types/link';
-import ECacheDate from "~/enums/cache";
 
 export default defineStore('section', {
   state: () => ({
