@@ -8,16 +8,16 @@
         v-if="course.image?.path"
         :src="course.image.path"
         class="course-search-result__image"
-        :alt="course.name"
-        :title="course.name"
+        :alt="removeTags(course.name)"
+        :title="removeTags(course.name)"
         prefetch
       />
       <LazyImage
         v-else-if="holder.default"
         :src="holder.default"
         class="course-search-result__image"
-        :alt="course.name"
-        :title="course.name"
+        :alt="removeTags(course.name)"
+        :title="removeTags(course.name)"
       />
     </div>
     <div class="course-search-result__info">
@@ -97,6 +97,8 @@ defineProps({
     required: true,
   },
 });
+
+const removeTags = (str: string): string => str.replace(/(<([^>]+)>)/ig, '');
 
 const holder = await import('assets/images/holder.svg');
 </script>
