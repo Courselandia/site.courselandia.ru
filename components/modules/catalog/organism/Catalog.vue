@@ -64,26 +64,20 @@
               </ClientOnly>
             </div>
             <div class="catalog__courses">
-              <ScrollLoader
-                :stop="stopScrollLoader"
-                :distance="1000"
-                @load="onLoadScrolling"
+              <Loader
+                :active="loading"
+                color="white-transparency"
               >
-                <Loader
-                  :active="loading"
-                  color="white-transparency"
+                <Courses
+                  :courses="courses"
+                  :columns="3"
+                  :type="type"
                 >
-                  <Courses
-                    :courses="courses"
-                    :columns="3"
-                    :type="type"
-                  >
-                    <template #empty>
-                      К сожалению мы не нашли подходящих курсов под ваш запрос.
-                    </template>
-                  </Courses>
-                </Loader>
-              </ScrollLoader>
+                  <template #empty>
+                    К сожалению мы не нашли подходящих курсов под ваш запрос.
+                  </template>
+                </Courses>
+              </Loader>
             </div>
             <div class="catalog__pagination">
               <Pagination
@@ -91,6 +85,7 @@
                 :size="size"
                 :page="currentPage"
                 :link="getLinkPagination"
+                @click="onClickPage"
               />
             </div>
             <div
@@ -244,14 +239,13 @@ import {
 import { apiReadCategories } from '@/api/category';
 import { apiReadCourses } from '@/api/course';
 import { apiReadProfessions } from '@/api/profession';
-import { apiReadSchools } from '@/api/school';
+import { apiReadCourseSchools } from '@/api/school';
 import { apiReadSkills } from '@/api/skill';
 import { apiReadTeachers } from '@/api/teacher';
 import { apiReadTools } from '@/api/tool';
 import Loader from '@/components/atoms/Loader.vue';
 import Pagination from '@/components/atoms/Pagination.vue';
 import Reducer from '@/components/atoms/Reducer.vue';
-import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
 import Total from '@/components/modules/catalog/atoms/Total.vue';
 import Courses from '@/components/modules/catalog/molecules/Courses.vue';
 import Filters from '@/components/modules/catalog/molecules/Filters.vue';
@@ -336,8 +330,6 @@ let { link } = route.params;
 let section = props.section || null;
 const loading = ref(false);
 
-const stopScrollLoader = ref(false);
-
 const { itemLinkCategory } = storeToRefs(category());
 const { itemLinkDirection } = storeToRefs(direction());
 const { itemLinkProfession } = storeToRefs(profession());
@@ -419,7 +411,7 @@ const additional = ref<string | null>(null);
 
 const total = ref(0);
 const currentPage = ref(Number(getUrlQuery('page')) || 1);
-const size = ref(18);
+const size = ref(21);
 
 //
 
@@ -933,7 +925,7 @@ const setSelectedFiltersByQuery = (): void => {
 
 const load = async (
   pageValue: number = 0,
-  sizeValue: number = 18,
+  sizeValue: number = 21,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
 ): Promise<IApiReadCourses | null> => {
@@ -958,7 +950,7 @@ const load = async (
 
 const reload = async (
   pageValue: number = 0,
-  sizeValue: number = 18,
+  sizeValue: number = 21,
   sorts: ISorts | null = null,
   filterCurrent: IFilters | null = null,
 ): Promise<void> => {
@@ -975,10 +967,6 @@ const reload = async (
     if (result) {
       setCoursesAndFilters(result);
       setHeader(result);
-
-      if (result.total) {
-        stopScrollLoader.value = (currentPage.value * size.value) >= result.total;
-      }
 
       if (result.description?.metatag?.title || result.description?.metatag?.description) {
         useHead({
@@ -1220,7 +1208,7 @@ const onLoadItems = async (name: string, callback?: Function): Promise<void> => 
     }
   } else if (name === 'schools') {
     if (schools.value.length <= 11) {
-      const result = await apiReadSchools(
+      const result = await apiReadCourseSchools(
         null,
         null,
         getFilters(),
@@ -1240,8 +1228,8 @@ try {
   setSelectedFiltersByQuery();
 
   const result = await apiReadCourses(
-    0,
-    size.value * currentPage.value,
+    size.value * (currentPage.value - 1),
+    size.value,
     getSort(sort.value),
     getFilters(),
     null,
@@ -1250,12 +1238,6 @@ try {
   );
 
   setCoursesAndFilters(result, true);
-
-  if (result?.total) {
-    stopScrollLoader.value = (currentPage.value * size.value) >= result.total;
-  } else {
-    stopScrollLoader.value = true;
-  }
 } catch (error: any) {
   console.error(error.message);
 }
@@ -1511,25 +1493,6 @@ const onFilterAndSort = async (): Promise<void> => {
   await reload(currentPage.value, size.value, getSort(sort.value), filters);
 };
 
-const onLoadScrolling = async (): Promise<void> => {
-  const filters: IFilters = getFilters();
-
-  currentPage.value++;
-
-  setUrlQuery(currentPage.value, getSort(sort.value), filters);
-  const result = await load(currentPage.value, size.value, getSort(sort.value), filters);
-
-  if (result) {
-    courses.value = courses.value.concat(coursesStoreToCoursesComponent(result.courses));
-    total.value = result.total || 0;
-    additional.value = result.description?.additional || null;
-
-    if ((currentPage.value * size.value) >= total.value) {
-      stopScrollLoader.value = true;
-    }
-  }
-};
-
 const onChangePrices = (): void => {
   window.setTimeout(() => {
     onFilterAndSort();
@@ -1552,6 +1515,14 @@ const onChangeSort = (): void => {
   window.setTimeout(() => {
     onFilterAndSort();
   }, 50);
+};
+
+const onClickPage = async (toPage: number): Promise<void> => {
+  const filters: IFilters = getFilters();
+  currentPage.value = toPage;
+  setUrlQuery(currentPage.value, getSort(sort.value), filters);
+
+  await reload(currentPage.value, size.value, getSort(sort.value), filters);
 };
 
 watch(route, async () => {

@@ -3,46 +3,47 @@
     v-if="total"
     class="pagination"
   >
-    <template v-if="link">
-      <template v-for="(num, key) in pages">
-        <div
-          v-if="num === '...'"
-          :key="`dots_${key}`"
-          class="pagination__item"
-        >
-          {{ num }}
-        </div>
-        <nuxt-link
-          v-else
-          :key="`item_${key}`"
-          :class="`pagination__item ${pageCurrent === num ? 'pagination__item--current' : ''}`"
-          :to="link(key + 1)"
-          prefetch
-        >
-          {{ num }}
-        </nuxt-link>
-      </template>
+    <a
+      v-if="pageCurrent !== 1"
+      :href="link(pageCurrent - 1)"
+      class="pagination__item pagination__item--back"
+      @click.prevent="onClickPage(pageCurrent - 1)"
+    >
+      Назад
+    </a>
+    <template v-for="(num, key) in pages">
+      <div
+        v-if="num === '...'"
+        :key="`dots_${key}`"
+        class="pagination__item"
+      >
+        {{ num }}
+      </div>
+      <div
+        v-if="pageCurrent === num"
+        :key="`item_current_${key}`"
+        class="pagination__item pagination__item--round pagination__item--current"
+      >
+        {{ num }}
+      </div>
+      <a
+        v-else
+        :key="`item_${key}`"
+        class="pagination__item pagination__item--round pagination__item--hover"
+        :href="link(key + 1)"
+        @click.prevent="onClickPage(num as number)"
+      >
+        {{ num }}
+      </a>
     </template>
-    <template v-else>
-      <template v-for="(num, key) in pages">
-        <div
-          v-if="num === '...'"
-          :key="`dots_${key}`"
-          class="pagination__item"
-        >
-          {{ num }}
-        </div>
-        <div
-          v-else
-          :key="`item_${key}`"
-          :class="`pagination__item ${pageCurrent === num ? 'pagination__item--current' : ''}`"
-          @click="onClickPagination(num as number)"
-          @keyup="onClickPagination(num as number)"
-        >
-          {{ num }}
-        </div>
-      </template>
-    </template>
+    <a
+      v-if="pageCurrent !== (pages.length - 1)"
+      :href="link(pageCurrent + 1)"
+      class="pagination__item pagination__item--next"
+      @click.prevent="onClickPage(pageCurrent - 1)"
+    >
+      Вперед
+    </a>
   </div>
 </template>
 
@@ -66,7 +67,7 @@ const props = defineProps({
   size: {
     type: Number,
     required: false,
-    default: 18,
+    default: 21,
   },
   link: {
     type: Function,
@@ -85,7 +86,7 @@ const emit = defineEmits({
   click: (_: number) => true,
 });
 
-const maxPages = 4;
+const maxPages = 2;
 
 const paginations = computed((): number => Math.ceil(total.value / size.value));
 
@@ -107,7 +108,11 @@ const pages = computed<Array<number | string>>((): Array<number | string> => {
   }
 
   if (startPages !== 1) {
-    pgs[pgs.length] = '...';
+    pgs[pgs.length] = 1;
+
+    if (startPages !== 2) {
+      pgs[pgs.length] = '...';
+    }
   }
 
   for (let i = startPages; i <= endPages; i++) {
@@ -115,14 +120,18 @@ const pages = computed<Array<number | string>>((): Array<number | string> => {
   }
 
   if (endPages !== paginations.value) {
-    pgs[pgs.length] = '...';
+    if ((endPages + 1) !== paginations.value) {
+      pgs[pgs.length] = '...';
+    }
+
+    pgs[pgs.length] = paginations.value;
   }
 
   return pgs;
 });
 
-const onClickPagination = (pagination: number) => {
-  emit('click', pagination);
+const onClickPage = (toPage: number): void => {
+  emit('click', toPage);
 };
 </script>
 
