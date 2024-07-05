@@ -1,14 +1,21 @@
 @import "@/assets/scss/vars/modifiers/colors";
 
 .menu-bottom {
-  display: flex;
-  flex-direction: column;
-
   &__item {
     margin-bottom: 1rem;
 
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  &__more {
+    cursor: pointer;
+    border-bottom: 1px $white dashed;
+    display: inline-block;
+
+    &:hover {
+      border-bottom: 1px transparent dashed;
     }
   }
 
