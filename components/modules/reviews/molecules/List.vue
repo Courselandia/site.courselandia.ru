@@ -1,6 +1,9 @@
 <template>
   <div class="list">
-    <div class="list__content">
+    <div
+      ref="contentRef"
+      class="list__content"
+    >
       <Loader
         :active="loading"
         color="white-transparency"
@@ -114,6 +117,7 @@ const reviews = ref<Array<IReview>>();
 const route = useRoute();
 const total = ref<number>();
 const loading = ref(false);
+const contentRef = ref<HTMLElement | null>(null);
 
 const loadReviews = async (
   fetch: boolean,
@@ -138,8 +142,8 @@ const loadReviews = async (
 
 const response = await loadReviews(
   !Object.keys(route.query).length,
-  0,
-  pageValue.value * limit,
+  (pageValue.value - 1) * limit,
+  limit,
 );
 reviews.value = response?.data;
 total.value = response?.total;
@@ -153,6 +157,8 @@ const reloadReviews = async (): Promise<void> => {
 };
 
 watch(sorts, async () => {
+  pageValue.value = 1;
+
   await reloadReviews();
 }, {
   deep: true,
@@ -177,6 +183,21 @@ const setScroll = (): void => {
 
     scrollValue.value = window.scrollY <= lineBottom;
   }
+};
+
+const onClickPage = async (toPage: number): Promise<void> => {
+  pageValue.value = toPage;
+
+  if (contentRef.value) {
+    const y = contentRef.value.getBoundingClientRect().top + window.scrollY - 200;
+
+    window.scroll({
+      top: y,
+      behavior: 'smooth',
+    });
+  }
+
+  await reloadReviews();
 };
 
 onMounted(async () => {
@@ -242,10 +263,6 @@ const reviewsJsonld = computed<any>((): any => Object.values(reviews.value || []
 reviewsJsonld.value.forEach((reviewJsonld: any) => {
   useJsonld(reviewJsonld);
 });
-
-const onClickPage = (): void => {
-
-};
 </script>
 
 <style lang="scss" scoped>
