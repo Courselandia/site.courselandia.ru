@@ -1,10 +1,6 @@
 <template>
   <div class="list">
-    <ScrollLoader
-      :stop="stopScrollLoader"
-      :distance="400"
-      @load="onLoadScrolling"
-    >
+    <div class="list__content">
       <Loader
         :active="loading"
         color="white-transparency"
@@ -15,7 +11,16 @@
           :review="review"
         />
       </Loader>
-    </ScrollLoader>
+    </div>
+    <div class="list__pagination">
+      <Pagination
+        :total="total"
+        :size="limit"
+        :page="pageValue"
+        :link="getLinkPagination"
+        @click="onClickPage"
+      />
+    </div>
   </div>
 </template>
 
@@ -32,7 +37,7 @@ import { useRoute } from 'vue-router';
 
 import { apiReadReviews } from '@/api/review';
 import Loader from '@/components/atoms/Loader.vue';
-import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
+import Pagination from '@/components/atoms/Pagination.vue';
 import Review from '@/components/modules/reviews/molecules/Review.vue';
 import type { IResponseItems } from '@/interfaces/response';
 import type ISorts from '@/interfaces/sorts';
@@ -84,6 +89,7 @@ const {
 } = toRefs(props);
 
 const pageValue = ref(page.value);
+const getLinkPagination = (pg: number): string => `/reviews/${link.value}?page=${pg}`;
 
 watch(pageValue, () => {
   emit('update:page', pageValue.value);
@@ -107,7 +113,6 @@ const limit = 20;
 const reviews = ref<Array<IReview>>();
 const route = useRoute();
 const total = ref<number>();
-const stopScrollLoader = ref(false);
 const loading = ref(false);
 
 const loadReviews = async (
@@ -144,7 +149,6 @@ const reloadReviews = async (): Promise<void> => {
   const res = await loadReviews(false, (pageValue.value - 1) * limit, limit);
   reviews.value = res?.data;
   total.value = res?.total;
-  stopScrollLoader.value = false;
   loading.value = false;
 };
 
@@ -159,20 +163,6 @@ watch(rating, async () => {
 
   await reloadReviews();
 });
-
-const onLoadScrolling = async (): Promise<void> => {
-  pageValue.value++;
-
-  const res = await loadReviews(false, (pageValue.value - 1) * limit, limit);
-
-  if (res?.data && reviews.value) {
-    reviews.value = reviews.value.concat(res.data);
-  }
-
-  if ((pageValue.value * limit) >= (total.value || 0)) {
-    stopScrollLoader.value = true;
-  }
-};
 
 const setScroll = (): void => {
   const card = document.getElementById('school-reviews-card');
@@ -252,6 +242,10 @@ const reviewsJsonld = computed<any>((): any => Object.values(reviews.value || []
 reviewsJsonld.value.forEach((reviewJsonld: any) => {
   useJsonld(reviewJsonld);
 });
+
+const onClickPage = (): void => {
+
+};
 </script>
 
 <style lang="scss" scoped>
