@@ -1,49 +1,60 @@
 <template>
   <div
-    v-if="total"
+    v-if="total && pages.length !== 1"
     class="pagination"
   >
-    <a
-      v-if="pageCurrent !== 1"
-      :href="link(pageCurrent - 1)"
-      class="pagination__item pagination__item--back"
-      @click.prevent="onClickPage(pageCurrent - 1)"
-    >
-      Назад
-    </a>
-    <template v-for="(num, key) in pages">
-      <div
-        v-if="num === '...'"
-        :key="`dots_${key}`"
-        class="pagination__item"
+    <div class="pagination__more">
+      <Button
+        v-if="pageCurrent !== paginations"
+        wide
+        @click="onClickMore"
       >
-        {{ num }}
-      </div>
-      <div
-        v-if="pageCurrent === num"
-        :key="`item_current_${key}`"
-        class="pagination__item pagination__item--round pagination__item--current"
-      >
-        {{ num }}
-      </div>
+        Показать еще
+      </Button>
+    </div>
+    <div class="pagination__pages">
       <a
-        v-else
-        :key="`item_${key}`"
-        class="pagination__item pagination__item--round pagination__item--hover"
-        :href="link(key + 1)"
-        @click.prevent="onClickPage(num as number)"
+        v-if="pageCurrent !== 1"
+        :href="link(pageCurrent - 1)"
+        class="pagination__item pagination__item--back"
+        @click.prevent="onClickPage(pageCurrent - 1)"
       >
-        {{ num }}
+        Назад
       </a>
-    </template>
-    <a
-      v-if="pageCurrent !== (pages.length - 1)"
-      :href="link(pageCurrent + 1)"
-      class="pagination__item pagination__item--next"
-      @click.prevent="onClickPage(pageCurrent - 1)"
-    >
-      Вперед
-    </a>
+      <template v-for="(num, key) in pages">
+        <div
+          v-if="num === '...'"
+          :key="`dots_${key}`"
+          class="pagination__item"
+        >
+          {{ num }}
+        </div>
+        <div
+          v-else-if="pageCurrent === num"
+          :key="`item_current_${key}`"
+          class="pagination__item pagination__item--round pagination__item--current"
+        >
+          {{ num }}
+        </div>
+        <a
+          v-else
+          :key="`item_${key}`"
+          class="pagination__item pagination__item--round pagination__item--hover"
+          :href="link(key + 1)"
+          @click.prevent="onClickPage(num as number)"
+        >
+          {{ num }}
+        </a>
+      </template>
+      <a
+        v-if="pageCurrent !== paginations"
+        :href="link(pageCurrent + 1)"
+        class="pagination__item pagination__item--next"
+        @click.prevent="onClickPage(pageCurrent + 1)"
+      >
+        Вперед
+      </a>
+    </div>
   </div>
 </template>
 
@@ -52,6 +63,8 @@ import {
   computed,
   toRefs,
 } from 'vue';
+
+import Button from '@/components/atoms/Button.vue';
 
 const props = defineProps({
   total: {
@@ -132,6 +145,10 @@ const pages = computed<Array<number | string>>((): Array<number | string> => {
 
 const onClickPage = (toPage: number): void => {
   emit('click', toPage);
+};
+
+const onClickMore = () : void => {
+  emit('click', pageCurrent.value + 1);
 };
 </script>
 

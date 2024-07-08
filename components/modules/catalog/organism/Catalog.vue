@@ -4,7 +4,10 @@
       <div class="catalog__header">
         <Header />
       </div>
-      <div class="content">
+      <div
+        ref="coursesRef"
+        class="content"
+      >
         <div class="catalog__content">
           <div class="catalog__items">
             <div class="catalog__tools">
@@ -329,6 +332,7 @@ const router = useRouter();
 let { link } = route.params;
 let section = props.section || null;
 const loading = ref(false);
+const coursesRef = ref<HTMLElement | null>(null);
 
 const { itemLinkCategory } = storeToRefs(category());
 const { itemLinkDirection } = storeToRefs(direction());
@@ -1521,6 +1525,15 @@ const onClickPage = async (toPage: number): Promise<void> => {
   const filters: IFilters = getFilters();
   currentPage.value = toPage;
   setUrlQuery(currentPage.value, getSort(sort.value), filters);
+
+  if (coursesRef.value) {
+    const y = coursesRef.value.getBoundingClientRect().top + window.scrollY - 100;
+
+    window.scroll({
+      top: y,
+      behavior: 'smooth',
+    });
+  }
 
   await reload(currentPage.value, size.value, getSort(sort.value), filters);
 };
