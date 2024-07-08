@@ -3,10 +3,9 @@
     v-if="collections?.length"
     class="collection-list"
   >
-    <ScrollLoader
-      :stop="stopScrollLoader"
-      :distance="400"
-      @load="onLoadScrolling"
+    <div
+      ref="contentRef"
+      class="collection-list__content"
     >
       <Loader
         :active="loading"
@@ -18,7 +17,16 @@
           :collection="collection"
         />
       </Loader>
-    </ScrollLoader>
+    </div>
+    <div class="collection-list__pagination">
+      <Pagination
+        :total="total"
+        :size="limit"
+        :page="pageValue"
+        :link="getLinkPagination"
+        @click="onClickPage"
+      />
+    </div>
   </div>
 </template>
 
@@ -33,7 +41,7 @@ import { useRoute } from 'vue-router';
 
 import { apiReadCollections } from '@/api/collection';
 import Loader from '@/components/atoms/Loader.vue';
-import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
+import Pagination from '@/components/atoms/Pagination.vue';
 import Collection from '@/components/modules/collections/molecules/Collection.vue';
 import EDirection from '@/enums/direction';
 import type { IResponseItems } from '@/interfaces/response';
@@ -60,8 +68,9 @@ const route = useRoute();
 const limit = 30;
 const total = ref<number>();
 const collections = ref<Array<ICollection>>();
-const stopScrollLoader = ref(false);
 const loading = ref(false);
+const getLinkPagination = (pg: number): string => `/collections?page=${pg}`;
+const contentRef = ref<HTMLElement | null>(null);
 
 const {
   page,
@@ -98,35 +107,9 @@ const loadCollections = async (
   return null;
 };
 
-const response = await loadCollections(
-  !Object.keys(route.query).length,
-  0,
-  pageValue.value * limit,
-  direction.value,
-);
-
-collections.value = response?.data;
-total.value = response?.total;
-stopScrollLoader.value = (pageValue.value * limit) >= (total.value || 0);
-
-const onLoadScrolling = async (): Promise<void> => {
-  pageValue.value++;
-
-  const res = await loadCollections(false, (pageValue.value - 1) * limit, limit, direction.value);
-
-  if (res?.data && collections.value) {
-    collections.value = collections.value.concat(res.data);
-  }
-
-  if ((pageValue.value * limit) >= (total.value || 0)) {
-    stopScrollLoader.value = true;
-  }
-};
-
-const onLoadDirection = async (): Promise<void> => {
-  stopScrollLoader.value = true;
-  pageValue.value = 1;
+const reloadCollections = async (): Promise<void> => {
   loading.value = true;
+
   const res = await loadCollections(false, (pageValue.value - 1) * limit, limit, direction.value);
 
   if (res?.data && collections.value) {
@@ -134,8 +117,38 @@ const onLoadDirection = async (): Promise<void> => {
     total.value = res?.total;
   }
 
-  stopScrollLoader.value = (pageValue.value * limit) >= (total.value || 0);
   loading.value = false;
+};
+
+const response = await loadCollections(
+  !Object.keys(route.query).length,
+  (pageValue.value - 1) * limit,
+  limit,
+  direction.value,
+);
+
+collections.value = response?.data;
+total.value = response?.total;
+
+const onLoadDirection = async (): Promise<void> => {
+  pageValue.value = 1;
+
+  await reloadCollections();
+};
+
+const onClickPage = async (toPage: number): Promise<void> => {
+  pageValue.value = toPage;
+
+  if (contentRef.value) {
+    const y = contentRef.value.getBoundingClientRect().top + window.scrollY - 300;
+
+    window.scroll({
+      top: y,
+      behavior: 'smooth',
+    });
+  }
+
+  await reloadCollections();
 };
 
 watch(direction, async () => {
