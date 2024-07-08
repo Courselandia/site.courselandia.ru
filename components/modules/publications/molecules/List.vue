@@ -45,7 +45,7 @@ import type IList from '@/interfaces/stores/publication/list';
 import type IPublication from '@/interfaces/stores/publication/publication';
 
 const route = useRoute();
-const limit = 4;
+const limit = 20;
 const page = ref(1);
 const total = ref<number>();
 const publications = ref<Array<IPublication>>();
