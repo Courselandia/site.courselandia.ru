@@ -9,4 +9,5 @@ export default interface IProperty {
   disabled?: null,
   image_middle?: IImage | null,
   experiences?: ITeacherExperience[],
+  experience?: ITeacherExperience,
 }
