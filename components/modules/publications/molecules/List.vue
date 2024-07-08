@@ -3,10 +3,9 @@
     v-if="publications?.length"
     class="list"
   >
-    <ScrollLoader
-      :stop="stopScrollLoader"
-      :distance="400"
-      @load="onLoadScrolling"
+    <div
+      ref="contentRef"
+      class="list__content"
     >
       <Loader
         :active="loading"
@@ -18,7 +17,16 @@
           :publication="publication"
         />
       </Loader>
-    </ScrollLoader>
+    </div>
+    <div class="list__pagination">
+      <Pagination
+        :total="total"
+        :size="limit"
+        :page="page"
+        :link="getLinkPagination"
+        @click="onClickPage"
+      />
+    </div>
   </div>
 </template>
 
@@ -31,18 +39,19 @@ import { useRoute } from 'vue-router';
 
 import { apiReadPublications } from '@/api/publication';
 import Loader from '@/components/atoms/Loader.vue';
-import ScrollLoader from '@/components/atoms/ScrollLoader.vue';
+import Pagination from '@/components/atoms/Pagination.vue';
 import Publication from '@/components/modules/publications/molecules/Publication.vue';
 import type IList from '@/interfaces/stores/publication/list';
 import type IPublication from '@/interfaces/stores/publication/publication';
 
 const route = useRoute();
-const limit = 20;
+const limit = 4;
 const page = ref(1);
 const total = ref<number>();
 const publications = ref<Array<IPublication>>();
-const stopScrollLoader = ref(false);
 const loading = ref(false);
+const getLinkPagination = (pg: number): string => `/blog?page=${pg}`;
+const contentRef = ref<HTMLElement | null>(null);
 
 if (route.query.page && Number(route.query.page)) {
   page.value = Number(route.query.page);
@@ -66,10 +75,20 @@ const loadPublications = async (
   return null;
 };
 
+const reloadPublications = async (): Promise<void> => {
+  const list = await loadPublications(
+    !Object.keys(route.query).length,
+    (page.value - 1) * limit,
+    limit,
+  );
+  publications.value = list?.publications;
+  total.value = list?.total;
+};
+
 const list = await loadPublications(
   !Object.keys(route.query).length,
-  0,
-  page.value * limit,
+  (page.value - 1) * limit,
+  limit,
 );
 publications.value = list?.publications;
 total.value = list?.total;
@@ -78,7 +97,7 @@ const setUrlQuery = (): void => {
   const queries: Array<string> = [];
 
   if (page.value && page.value !== 1) {
-    // queries.push(`page=${page.value}`);
+    queries.push(`page=${page.value}`);
   }
 
   const query = queries.join('&');
@@ -99,23 +118,24 @@ const setUrlQuery = (): void => {
   );
 };
 
+const onClickPage = async (toPage: number): Promise<void> => {
+  page.value = toPage;
+
+  if (contentRef.value) {
+    const y = contentRef.value.getBoundingClientRect().top + window.scrollY - 200;
+
+    window.scroll({
+      top: y,
+      behavior: 'smooth',
+    });
+  }
+
+  await reloadPublications();
+};
+
 watch(page, () => {
   setUrlQuery();
 });
-
-const onLoadScrolling = async (): Promise<void> => {
-  page.value++;
-
-  const listAdditional = await loadPublications(false, (page.value - 1) * limit, limit);
-
-  if (listAdditional && publications.value) {
-    publications.value = publications.value.concat(listAdditional.publications);
-  }
-
-  if ((page.value * limit) >= (total.value || 0)) {
-    stopScrollLoader.value = true;
-  }
-};
 </script>
 
 <style lang="scss" scoped>

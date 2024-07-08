@@ -1,4 +1,8 @@
 .list {
+  &__content {
+    margin-bottom: 3.5rem;
+  }
+
   :deep(.loader__content) {
     display: flex;
     align-items: flex-start;
