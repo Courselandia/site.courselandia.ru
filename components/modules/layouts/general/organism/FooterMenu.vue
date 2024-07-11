@@ -45,11 +45,11 @@ import school from '@/stores/school';
 
 const { schools } = storeToRefs(school());
 schools.value = schools.value?.sort((first: ISchool, second: ISchool) => {
-  if (first.amount_courses.all < second.amount_courses.all) {
+  if (first.amount_courses?.all < second.amount_courses?.all) {
     return 1;
   }
 
-  if (first.amount_courses.all > second.amount_courses.all) {
+  if (first.amount_courses?.all > second.amount_courses?.all) {
     return -1;
   }
 
