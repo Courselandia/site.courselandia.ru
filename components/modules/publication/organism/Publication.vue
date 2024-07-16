@@ -7,6 +7,8 @@
       v-if="itemLinkPublication.image_big?.path"
       :path="itemLinkPublication.image_big?.path"
       :title="itemLinkPublication.header"
+      :width="itemLinkPublication.image_big?.width"
+      :height="itemLinkPublication.image_big?.height"
     />
     <Header
       :header="itemLinkPublication.header"

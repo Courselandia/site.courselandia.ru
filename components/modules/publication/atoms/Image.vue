@@ -5,6 +5,8 @@
       class="image__element"
       :alt="title"
       :title="title"
+      :width="width"
+      :height="height"
     />
   </div>
 </template>
@@ -20,6 +22,16 @@ defineProps({
   title: {
     type: String,
     required: true,
+  },
+  width: {
+    type: Number,
+    required: false,
+    default: null,
+  },
+  height: {
+    type: Number,
+    required: false,
+    default: null,
   },
 });
 </script>
