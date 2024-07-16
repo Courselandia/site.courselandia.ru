@@ -8,6 +8,8 @@
       <Image
         :path="publication.image_middle?.path"
         :title="publication.header"
+        :width="publication.image_middle?.width"
+        :height="publication.image_middle?.height"
       />
       <Header
         :header="publication.header"

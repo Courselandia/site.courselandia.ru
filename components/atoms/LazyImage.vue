@@ -67,9 +67,6 @@ onMounted(() => {
     if (entry.isIntersecting && observer) {
       observer.disconnect();
       image.value = src.value;
-      console.warn('Intersected');
-    } else {
-      console.warn('No intersection');
     }
   });
 

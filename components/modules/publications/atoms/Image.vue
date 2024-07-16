@@ -6,6 +6,8 @@
       class="image__element"
       :alt="title"
       :title="title"
+      :width="width"
+      :height="height"
     />
     <LazyImage
       v-else-if="holder.default"
@@ -27,6 +29,16 @@ defineProps({
   title: {
     type: String,
     required: true,
+  },
+  width: {
+    type: Number,
+    required: false,
+    default: null,
+  },
+  height: {
+    type: Number,
+    required: false,
+    default: null,
   },
 });
 
