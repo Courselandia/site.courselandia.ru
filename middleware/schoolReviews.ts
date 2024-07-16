@@ -8,7 +8,7 @@ export default defineNuxtRouteMiddleware(async (to): Promise<boolean | void> => 
   try {
     const result = await apiLinkSchool(link as string);
 
-    if (!result?.reviews_count) {
+    if (!result?.amount_reviews) {
       return false;
     }
 

@@ -16,7 +16,7 @@
         </div>
         <div class="card__amount-review">
           <AmountReviews
-            :count="school.reviews_count"
+            :count="school.amount_reviews"
           />
         </div>
       </div>
@@ -24,7 +24,7 @@
         <div class="card__statistic">
           <Statistic
             v-model:rating="ratingValue"
-            :count="school.reviews_count"
+            :count="school.amount_reviews"
             :count5="school.reviews_5_stars_count"
             :count4="school.reviews_4_stars_count"
             :count3="school.reviews_3_stars_count"

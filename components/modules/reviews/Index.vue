@@ -215,7 +215,7 @@ useJsonld({
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: schoolItem.value?.rating || 0,
-    reviewCount: schoolItem.value?.reviews_count,
+    reviewCount: schoolItem.value?.amount_reviews,
     bestRating: '5',
     worstRating: '1',
   },

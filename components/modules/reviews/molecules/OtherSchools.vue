@@ -31,8 +31,8 @@
             class="link link--no-line"
             prefetch
           >
-            {{ otherSchool.reviews_count }}
-            {{ plural(otherSchool.reviews_count, conditions) }}
+            {{ otherSchool.amount_reviews }}
+            {{ plural(otherSchool.amount_reviews, conditions) }}
           </nuxt-link>
         </div>
       </div>
@@ -93,7 +93,7 @@ const { schools } = storeToRefs(schoolStore());
 const otherSchools = ref<Array<ISchool> | null>(
   sortSchools(
     schools.value?.filter(
-      (item: ISchool) => !!item.reviews_count && school.value.id !== item.id,
+      (item: ISchool) => !!item.amount_reviews && school.value.id !== item.id,
     ) || null,
   )?.slice(0, 4) || null,
 );

@@ -21,7 +21,6 @@ export default interface ISchoolLink {
   site: string | null,
   referral: string | null,
   rating: number | null,
-  reviews_count: number;
   reviews_1_star_count: number;
   reviews_2_stars_count: number;
   reviews_3_stars_count: number;

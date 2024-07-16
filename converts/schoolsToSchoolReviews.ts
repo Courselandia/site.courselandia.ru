@@ -14,7 +14,7 @@ const schoolsToSchoolReviews = (
         label: school.name,
         link: school.link,
         path: `/courses/school/${school.link}`,
-        reviews: school.reviews_count,
+        reviews: school.amount_reviews,
         rating: school.rating,
         text: school.text,
         image: school.image_logo?.path || null,
