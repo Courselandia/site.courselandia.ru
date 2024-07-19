@@ -4,6 +4,17 @@
   >
     <slot />
     <template #content>
+      <CoursePromocodePopoverTitle />
+      <CoursePromocodePopoverPrices
+        :course="course"
+      />
+      <CoursePromocodePopoverCodeInfo
+        v-if="course.school?.promocode"
+        :promocode="course.school.promocode"
+      />
+      <CoursePromocodePopoverButtonGo
+        :link="course.link"
+      />
     </template>
   </Popover>
 </template>

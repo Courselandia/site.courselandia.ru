@@ -11,43 +11,6 @@
       >
         <slot />
       </div>
-      <ClientOnly>
-        <teleport to="body">
-          <transition name="fade">
-            <div
-              v-if="active"
-              ref="floating"
-              :style="floatingStyles"
-              class="popover__content"
-              @mouseenter="onMouseEnter"
-              @mouseleave="onMouseLeave"
-              @focusin="onMouseEnter"
-              @focusout="onMouseLeave"
-            >
-              <div class="popover__wrapper">
-                <div class="popover__box">
-                  <slot name="content" />
-                </div>
-                <div
-                  ref="floatingArrow"
-                  class="popover__arrow"
-                  :style="{
-                    position: 'absolute',
-                    left:
-                      middlewareData.arrow?.x != null
-                        ? `${middlewareData.arrow.x}px`
-                        : '',
-                    top:
-                      middlewareData.arrow?.y != null
-                        ? `${middlewareData.arrow.y}px`
-                        : '',
-                  }"
-                />
-              </div>
-            </div>
-          </transition>
-        </teleport>
-      </ClientOnly>
     </div>
     <div class="popover__mobile">
       <div
@@ -87,8 +50,8 @@
 <script setup lang="ts">
 import {
   arrow,
-  useFloating,
   offset,
+  useFloating,
 } from '@floating-ui/vue';
 import { ref } from 'vue';
 
