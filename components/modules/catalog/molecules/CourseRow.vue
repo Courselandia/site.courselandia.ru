@@ -24,32 +24,36 @@
               :name="course.school.name"
             />
           </CourseRowImage>
-          <div class="course-row__duration-and-lessons-amount-mobile">
-            <CourseTileDuration
-              v-if="course.duration && course.duration_unit"
-              :duration="course.duration"
-              :unit="course.duration_unit"
-              :point="!!course.lessons_amount"
-            />
-            <CourseTileLessonsAmount
-              v-if="course.lessons_amount"
-              :amount="course.lessons_amount"
-            />
-          </div>
+          <ClientOnly>
+            <div class="course-row__duration-and-lessons-amount-mobile">
+              <CourseTileDuration
+                v-if="course.duration && course.duration_unit"
+                :duration="course.duration"
+                :unit="course.duration_unit"
+                :point="!!course.lessons_amount"
+              />
+              <CourseTileLessonsAmount
+                v-if="course.lessons_amount"
+                :amount="course.lessons_amount"
+              />
+            </div>
+          </ClientOnly>
         </div>
         <div class="course-row__side course-row__side--center">
           <div class="course-row__top">
-            <div class="course-row__rating-and-logo-mobile">
-              <CourseTileBrandLogo
-                v-if="course.school?.image"
-                :path="course.school.image"
-                :name="course.school.name"
-              />
-              <CourseTileRating
-                v-if="course.rating"
-                :rating="course.rating"
-              />
-            </div>
+            <ClientOnly>
+              <div class="course-row__rating-and-logo-mobile">
+                <CourseTileBrandLogo
+                  v-if="course.school?.image"
+                  :path="course.school.image"
+                  :name="course.school.name"
+                />
+                <CourseTileRating
+                  v-if="course.rating"
+                  :rating="course.rating"
+                />
+              </div>
+            </ClientOnly>
             <CourseTileName
               :name="course.name"
             />
@@ -73,22 +77,24 @@
             />
           </div>
         </div>
-        <div class="course-row__side course-row__side--price-mobile">
-          <CourseTilePrices
-            :price="course.price || undefined"
-            :price-recurrent="course.price_recurrent || undefined"
-            :price-old="course.price_old || undefined"
-            :currency="course.currency || undefined"
-          />
-          <div
-            v-if="course.price || course.price_recurrent || course.price_old"
-            class="course-row__promocode"
-          >
-            <CoursePromocode
-              :course="course"
+        <ClientOnly>
+          <div class="course-row__side course-row__side--price-mobile">
+            <CourseTilePrices
+              :price="course.price || undefined"
+              :price-recurrent="course.price_recurrent || undefined"
+              :price-old="course.price_old || undefined"
+              :currency="course.currency || undefined"
             />
+            <div
+              v-if="course.price || course.price_recurrent || course.price_old"
+              class="course-row__promocode"
+            >
+              <CoursePromocode
+                :course="course"
+              />
+            </div>
           </div>
-        </div>
+        </ClientOnly>
       </nuxt-link>
       <div class="course-row__side course-row__side--right">
         <CourseTilePrices
