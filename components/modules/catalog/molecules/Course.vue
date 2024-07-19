@@ -7,16 +7,6 @@
       v-model:active="active"
       :course="course"
     />
-    <CourseRow
-      v-else-if="type === ECourseType.ROW"
-      v-model:active="active"
-      :course="course"
-    />
-    <CourseBox
-      v-else-if="type === ECourseType.BOX"
-      v-model:active="active"
-      :course="course"
-    />
   </div>
 </template>
 

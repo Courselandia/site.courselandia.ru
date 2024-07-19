@@ -5,6 +5,7 @@
       <Brands class="mb-40 mb-12-sm" />
       <Directions />
     </div>
+    <TheBest />
     <Promotions />
     <AboutUs />
   </div>
