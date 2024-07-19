@@ -12,6 +12,27 @@
       <div class="course-tile__image">
       </div>
       <div class="course-tile__content">
+        <CourseTileName
+          :name="course.name"
+        />
+        <div class="course-tile__info">
+          <CourseTileDuration
+            v-if="course.duration && course.duration_unit"
+            :duration="course.duration"
+            :unit="course.duration_unit"
+            :point="!!course.lessons_amount"
+          />
+          <CourseTileLessonsAmount
+            v-if="course.lessons_amount"
+            :amount="course.lessons_amount"
+          />
+        </div>
+        <CourseTilePrices
+          :price="course.price || undefined"
+          :price-recurrent="course.price_recurrent || undefined"
+          :price-old="course.price_old || undefined"
+          :currency="course.currency || undefined"
+        />
       </div>
     </nuxt-link>
     <div class="course-tile__footer">
