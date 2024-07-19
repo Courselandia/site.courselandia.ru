@@ -10,6 +10,19 @@
       @focusout="onClickDisable"
     >
       <div class="course-tile__image">
+        <CourseTileImage
+          :path="course.image?.path"
+        >
+          <CourseTileRating
+            v-if="course.rating"
+            :rating="course.rating"
+          />
+          <CourseTileBrandLogo
+            v-if="course.school?.image"
+            :path="course.school.image"
+            :name="course.school.name"
+          />
+        </CourseTileImage>
       </div>
       <div class="course-tile__content">
         <CourseTileName
@@ -33,6 +46,12 @@
           :price-old="course.price_old || undefined"
           :currency="course.currency || undefined"
         />
+        <div class="course-tile__promocode">
+          <CoursePromocode
+            v-if="course.price || course.price_recurrent || course.price_old"
+            :course="course"
+          />
+        </div>
       </div>
     </nuxt-link>
     <div class="course-tile__footer">

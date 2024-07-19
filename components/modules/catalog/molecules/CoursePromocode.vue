@@ -7,11 +7,6 @@
       <CoursePromocodePopover
         :course="course"
       >
-        <CoursePromocodeInfo
-          class="course-promocode__info"
-          :discount="course.school.promocode.discount"
-          :type="course.school.promocode.discount_type"
-        />
       </CoursePromocodePopover>
     </div>
   </div>
