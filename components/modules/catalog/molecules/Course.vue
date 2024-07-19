@@ -2,6 +2,11 @@
   <div
     :class="`course ${nameClass}`"
   >
+    <CourseTile
+      v-if="type === ECourseType.TILE"
+      v-model:active="active"
+      :course="course"
+    />
   </div>
 </template>
 
