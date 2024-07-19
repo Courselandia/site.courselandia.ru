@@ -12,38 +12,6 @@
         <slot />
       </div>
     </div>
-    <div class="popover__mobile">
-      <div
-        class="popover__action"
-        @click.prevent="onMouseActiveClick"
-        @keyup.prevent="onMouseActiveClick"
-      >
-        <slot />
-      </div>
-      <teleport to="body">
-        <template
-          v-if="activeClick"
-        >
-          <div class="popover__sticker">
-            <div class="popover__box">
-              <div
-                class="popover__close"
-                @click="onMouseDeactivateClick"
-                @keyup="onMouseDeactivateClick"
-              >
-                <div class="popover__close-icon" />
-              </div>
-              <slot name="content" />
-            </div>
-          </div>
-          <div
-            class="popover__dim"
-            @click="onMouseDeactivateClick"
-            @keyup="onMouseDeactivateClick"
-          />
-        </template>
-      </teleport>
-    </div>
   </div>
 </template>
 
