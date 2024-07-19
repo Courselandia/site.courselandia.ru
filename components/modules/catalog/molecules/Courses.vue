@@ -77,12 +77,6 @@ const itemListElements = computed<ListItem[]>(
     url: `${config.public.siteUrl}${course.link}`,
   })),
 );
-
-useJsonld({
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  itemListElement: itemListElements.value,
-});
 </script>
 
 <style lang="scss" scoped>
