@@ -79,8 +79,7 @@ import directionsToMenu from '@/converts/directionsToMenu';
 import type IMenu from '@/interfaces/menu';
 import direction from '@/stores/direction';
 
-// const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));
-const heroImage = ref(1);
+const heroImage = ref(Math.round(Math.random() * (3 - 1) + 1));
 
 const { directions } = storeToRefs(direction());
 const listDirections = ref<IMenu[]>();
