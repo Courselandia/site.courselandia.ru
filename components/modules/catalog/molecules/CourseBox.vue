@@ -6,18 +6,20 @@
           <CourseBoxImage
             :path="course.image?.path"
           />
-          <div class="course-box__duration-and-lessons-amount-mobile">
-            <CourseTileDuration
-              v-if="course.duration && course.duration_unit"
-              :duration="course.duration"
-              :unit="course.duration_unit"
-              :point="!!course.lessons_amount"
-            />
-            <CourseTileLessonsAmount
-              v-if="course.lessons_amount"
-              :amount="course.lessons_amount"
-            />
-          </div>
+          <ClientOnly>
+            <div class="course-box__duration-and-lessons-amount-mobile">
+              <CourseTileDuration
+                v-if="course.duration && course.duration_unit"
+                :duration="course.duration"
+                :unit="course.duration_unit"
+                :point="!!course.lessons_amount"
+              />
+              <CourseTileLessonsAmount
+                v-if="course.lessons_amount"
+                :amount="course.lessons_amount"
+              />
+            </div>
+          </ClientOnly>
         </div>
         <div class="course-box__side course-box__side--center">
           <div class="course-box__top">
