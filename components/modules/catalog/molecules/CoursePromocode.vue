@@ -4,6 +4,15 @@
     class="course-promocode"
   >
     <div class="course-promocode__box">
+      <CoursePromocodePopover
+        :course="course"
+      >
+        <CoursePromocodeInfo
+          class="course-promocode__info"
+          :discount="course.school.promocode.discount"
+          :type="course.school.promocode.discount_type"
+        />
+      </CoursePromocodePopover>
     </div>
   </div>
 </template>
